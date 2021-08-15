@@ -1,5 +1,5 @@
 import { mount, route } from 'navi'
-import {Link, Router, View} from 'react-navi'
+import { Router, View } from 'react-navi'
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.css'

@@ -3,15 +3,10 @@ import TextareaAutosize from "react-textarea-autosize";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
-import home from "../icon/home.png";
 import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
-import notification from "../icon/notification.png";
-import about from "../icon/about.png";
-import Footer from "./Footer";
 import {Link} from "react-navi";
 import Centrifuge from "centrifuge";
-import Head from "./Header";
 import user from "../icon/user.png";
 
 const CONFIG = {
