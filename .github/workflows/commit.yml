@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: make build
+    - name: Make build
       run: |
         make
 

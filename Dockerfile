@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine
-COPY nginx_app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY build /usr/share/nginx/html
 
 EXPOSE 80
