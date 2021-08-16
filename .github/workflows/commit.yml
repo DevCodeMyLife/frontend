@@ -3,7 +3,7 @@ name: commit
 on:
   push:
     branches:
-      - "*"
+      - main
 
 jobs:
   build-and-push:
