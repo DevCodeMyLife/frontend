@@ -26,7 +26,7 @@ class MainUsers extends Component {
       result: null,
       mainFeed: null,
       textNews: "...",
-      heading: "Текст заголовка",
+      heading: "...",
       prevState: null,
       clicked_new_post: false,
       show_textarea: false,
