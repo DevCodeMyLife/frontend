@@ -618,6 +618,15 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px;
+}
+
+.like-item_footer {
+  transition: .2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /*padding: 2px;*/
 }
 

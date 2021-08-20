@@ -16,7 +16,7 @@ class Footer extends Component{
                         © {new Date().getFullYear()} DevCodeMyLife
                     </div>
                     <div className="nav-sub">
-                        <div className="like-item" onClick={()=> window.open("https://t.me/devcodemylife", "_blank")}>Наш телеграмм канал</div>
+                        <div className="like-item_footer" onClick={()=> window.open("https://t.me/devcodemylife", "_blank")}>Наш телеграмм канал</div>
                     </div>
                 </div>
             </div>
