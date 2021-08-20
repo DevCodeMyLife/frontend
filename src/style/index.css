@@ -618,7 +618,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  /*padding: 2px;*/
 }
 
 .like-item:active {
