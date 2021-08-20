@@ -618,7 +618,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  /*padding: 2px;*/
 }
 
 .like-item:active {
@@ -756,6 +756,17 @@ p {
 
 .right-view {
   flex-grow: 2;
+}
+
+.frame_footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-sub {
+  margin: 0 40px;
+  display: flex;
+  flex-direction: row;
 }
 
 .wrapper-logo {

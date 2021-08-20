@@ -13,6 +13,7 @@ import Centrifuge from "centrifuge";
 import Main from "./components/Main";
 import MainUser from "./components/MainUser";
 import Messages from "./components/Messages";
+import Footer from "./components/Footer";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -267,9 +268,10 @@ class App extends React.Component {
                                     } />
                                 </Switch>
                             </BrowserRouter>
-                            <div className="footer">
-                                © {new Date().getFullYear()} DevCodeMyLife
-                            </div>
+                            {/*<div className="footer">*/}
+                            {/*    © {new Date().getFullYear()} DevCodeMyLife*/}
+                            {/*</div>*/}
+                            <Footer />
                         </div>
                     </HelmetProvider>
                 );
@@ -278,9 +280,10 @@ class App extends React.Component {
                     <div>
                         <Head auth={false} load={true} />
                         <Main />
-                        <div className="footer">
-                            © {new Date().getFullYear()} DevCodeMyLife
-                        </div>
+                        <Footer />
+                        {/*<div className="footer">*/}
+                        {/*    © {new Date().getFullYear()} DevCodeMyLife*/}
+                        {/*</div>*/}
                     </div>
                 );
             }
