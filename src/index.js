@@ -278,6 +278,9 @@ class App extends React.Component {
                     <div>
                         <Head auth={false} load={true} />
                         <Main />
+                        <div className="footer">
+                            © {new Date().getFullYear()} DevCodeMyLife
+                        </div>
                     </div>
                 );
             }
