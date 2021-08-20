@@ -11,7 +11,14 @@ class Footer extends Component{
     render(){
         return (
             <div className="footer">
-                © {new Date().getFullYear()} DevCodeMyLife
+                <div className="frame_footer">
+                    <div>
+                        © {new Date().getFullYear()} DevCodeMyLife
+                    </div>
+                    <div>
+                        © {new Date().getFullYear()} DevCodeMyLife
+                    </div>
+                </div>
             </div>
         );
     }
