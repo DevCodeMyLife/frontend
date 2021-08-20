@@ -15,8 +15,8 @@ class Footer extends Component{
                     <div>
                         © {new Date().getFullYear()} DevCodeMyLife
                     </div>
-                    <div>
-                        © {new Date().getFullYear()} DevCodeMyLife
+                    <div className="nav-sub">
+                        <div className="like-item">asdsad</div>
                     </div>
                 </div>
             </div>

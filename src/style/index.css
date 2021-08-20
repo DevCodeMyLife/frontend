@@ -760,7 +760,13 @@ p {
 
 .frame_footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.nav-sub {
+  margin: 0 40px;
+  display: flex;
+  flex-direction: row;
 }
 
 .wrapper-logo {
