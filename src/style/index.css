@@ -1105,7 +1105,7 @@ p {
   flex-grow: 1;
 }
 
-.value-post > * {
+.value-post > p > img {
   max-width: 100%;
 }
 
