@@ -454,7 +454,7 @@ class Feed extends Component {
                                                                         e.preventDefault();
                                                                         window.location.href = `/post?uuid=${data?.ID}`
                                                                     }}>
-                                                                        {data?.value?.substring(0, 200) + "..."}
+                                                                        {data?.value?.substring(0, 900) + "..."}
                                                                     </ReactMarkdown>
                                                                 </div>
                                                             </div>
