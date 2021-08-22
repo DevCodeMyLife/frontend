@@ -19,7 +19,7 @@ class Messages extends Component{
         super(props);
         this.state = {
             auth: this.props.auth,
-            cent: {},
+            cent: null,
             _createMessage: false,
             chats: [],
             messages: [],
@@ -37,6 +37,10 @@ class Messages extends Component{
         }
 
         this.centrifuge = new Centrifuge(CONFIG.url);
+
+        this.setState({
+            cent: this.centrifuge
+        })
     }
 
     createMessage = (event) => {
