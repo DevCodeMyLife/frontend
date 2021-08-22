@@ -313,7 +313,7 @@ class Messages extends Component{
             cent: this.centrifuge,
             loadCent: true
         })
-
+        this.changerPage()
     }
 
     render() {
