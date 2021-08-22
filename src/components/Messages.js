@@ -286,6 +286,8 @@ class Messages extends Component{
                         console.log(message);
                     });
 
+                    this_.allMessage()
+
                     this.setState({
                         auth: true,
                         load: true,
@@ -313,7 +315,7 @@ class Messages extends Component{
             cent: this.centrifuge,
             loadCent: true
         })
-        this.changerPage()
+
     }
 
     render() {
