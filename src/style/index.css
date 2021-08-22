@@ -1105,6 +1105,9 @@ p {
   flex-grow: 1;
 }
 
+.value-post > * {
+  max-width: 100%;
+}
 
 .value-post > pre > * {
   border-radius:10px;
