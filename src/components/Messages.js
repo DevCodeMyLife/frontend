@@ -35,6 +35,8 @@ class Messages extends Component{
             load: false,
             data: null
         }
+
+        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
     createMessage = (event) => {
@@ -257,7 +259,7 @@ class Messages extends Component{
     }
 
     componentDidMount() {
-
+        let this_ = this
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -267,6 +269,22 @@ class Messages extends Component{
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 0){
+
+                    this_.centrifuge.setToken(res.token)
+                    this_.centrifuge.connect();
+
+                    this_.centrifuge.on('connect', function() {
+                        console.log("[ centrifuge connected ]")
+                    });
+                    this_.centrifuge.on('disconnect', function(){
+                        console.log("[ centrifuge disconnected ]")
+                    });
+
+
+
+                    this_.centrifuge.subscribe("public", function(message) {
+                        console.log(message);
+                    });
 
                     this.setState({
                         auth: true,
@@ -283,10 +301,6 @@ class Messages extends Component{
                     this.delete_cookie("access_token")
                 }
 
-
-
-
-
             })
             .catch(error => {
                 this.setState({
@@ -294,26 +308,6 @@ class Messages extends Component{
                     load: true
                 });
             });
-
-        this.centrifuge = new Centrifuge(CONFIG.url);
-        this.centrifuge.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM");
-
-
-        let _this = this
-        this.centrifuge.on('connect', function() {
-            _this.changerPage()
-            console.log("[ centrifuge connected ]")
-        });
-        this.centrifuge.on('disconnect', function(){
-            console.log("[ centrifuge disconnected ]")
-        });
-        this.centrifuge.connect();
-
-
-        this.centrifuge.subscribe("public", function(message) {
-            console.log(message);
-        });
-
 
         this.setState({
             cent: this.centrifuge,
