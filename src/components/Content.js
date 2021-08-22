@@ -68,18 +68,18 @@ class Content extends Component  {
     };
 
     sendLogs(message) {
-        fetch("/logs/gelf", {
-            method: "POST",
-            body: JSON.stringify({
-                "version": "1.1",
-                "host": document.location.host,
-                "short_message": message,
-                "level": 5, "_some_info": "foo"
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(_ => {})
+        // fetch("/logs/gelf", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         "version": "1.1",
+        //         "host": document.location.host,
+        //         "short_message": message,
+        //         "level": 5, "_some_info": "foo"
+        //     }),
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // }).then(_ => {})
     }
 
 
