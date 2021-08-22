@@ -1,13 +1,13 @@
 import React, { Component }  from "react";
 import ReactMarkdown from 'react-markdown'
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
 import user from "../icon/user.png";
-import {Link} from "react-navi";
+import { Link } from "react-navi";
 import Head from "./Header";
 const gfm = require('remark-gfm')
 

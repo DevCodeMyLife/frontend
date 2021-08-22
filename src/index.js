@@ -38,22 +38,22 @@ class App extends React.Component {
             messagesCount: 0,
             headComponent: null
         }
-
+        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
     sendLogs(message) {
-        fetch("/logs/gelf", {
-            method: "POST",
-            body: JSON.stringify({
-                "version": "1.1",
-                "host": document.location.host,
-                "short_message": message,
-                "level": 5, "_some_info": "foo"
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(_ => {})
+        // fetch("/logs/gelf", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         "version": "1.1",
+        //         "host": document.location.host,
+        //         "short_message": message,
+        //         "level": 5, "_some_info": "foo"
+        //     }),
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // }).then(_ => {})
     }
 
     checkCookie(cname) {
@@ -82,6 +82,7 @@ class App extends React.Component {
         })
 
         let check = true
+        let this_ = this
         if (check){
             fetch("/api/authentication", {
                 method: "POST",
@@ -94,6 +95,28 @@ class App extends React.Component {
                     if (res.status.code === 0){
                         auth = true
                         user = res.data
+
+                        this_.centrifuge.setToken(res.token)
+                        this_.centrifuge.connect();
+
+                        // this.centrifuge.setToken();
+                        //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM"
+
+                        this_.centrifuge.on('connect', function() {
+                            console.log("[ centrifuge connected ]")
+                        });
+                        this_.centrifuge.on('disconnect', function(){
+                            console.log("[ centrifuge disconnected ]")
+                        });
+
+
+
+                        this_.centrifuge.subscribe("public", function(message) {
+                            console.log(message);
+                        });
+
+
+
                         this.setState({
                             auth: true,
                             data: res.data,
@@ -153,21 +176,6 @@ class App extends React.Component {
             })
         }
 
-        this.centrifuge = new Centrifuge(CONFIG.url);
-        this.centrifuge.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM");
-
-        this.centrifuge.on('connect', function() {
-            console.log("[ centrifuge connected ]")
-        });
-        this.centrifuge.on('disconnect', function(){
-            console.log("[ centrifuge disconnected ]")
-        });
-        this.centrifuge.connect();
-
-
-        this.centrifuge.subscribe("public", function(message) {
-            console.log(message);
-        });
 
         if (!window.Notification || !Notification.requestPermission){
             console.log('...')

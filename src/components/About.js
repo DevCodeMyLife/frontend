@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import notes from "../icon/notes.png";
 import about from "../icon/about.png";
-import {Link} from "react-navi";
+import { Link } from "react-navi";
 
 class About extends Component{
     handleHoverOn = (event) => {
