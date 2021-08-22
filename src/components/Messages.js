@@ -290,7 +290,7 @@ class Messages extends Component{
                         console.log(message);
                     });
 
-                    this_.allMessage()
+                    this_.changerPage()
 
                     this.setState({
                         auth: true,
