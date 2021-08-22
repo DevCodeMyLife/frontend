@@ -5,7 +5,7 @@ import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
 import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
-import {Link} from "react-navi";
+import { Link } from "react-navi";
 import Centrifuge from "centrifuge";
 import user from "../icon/user.png";
 
