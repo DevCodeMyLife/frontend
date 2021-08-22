@@ -161,16 +161,16 @@ class App extends React.Component {
         // this.centrifuge.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2Mjk2NjA1MjAsImV4cCI6MTY2MTgwMTMyMCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiMTAwIn0.Ht52d2_Tm-TYWRGFZf_kpISToZ1gk2UPiyn2fbkE9HU");
         //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM"
 
-        this.centrifuge.on('connect', function() {
+        this.centrifuge?.on('connect', function() {
             console.log("[ centrifuge connected ]")
         });
-        this.centrifuge.on('disconnect', function(){
+        this.centrifuge?.on('disconnect', function(){
             console.log("[ centrifuge disconnected ]")
         });
-        this.centrifuge.connect();
+        this.centrifuge?.connect();
 
 
-        this.centrifuge.subscribe("public", function(message) {
+        this.centrifuge?.subscribe("public", function(message) {
             console.log(message);
         });
 
