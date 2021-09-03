@@ -122,8 +122,8 @@ code {
 }
 
 .auth-wrapper {
-  width: 200px;
-  padding: 20px 5px;
+  /*width: 200px;*/
+  padding: 20px;
 }
 
 .button-open-menu {
@@ -1515,6 +1515,8 @@ p {
 
   .content {
     width: auto;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .footer {
@@ -1583,6 +1585,8 @@ p {
   }
   .content {
     width: auto;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .footer {
