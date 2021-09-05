@@ -300,6 +300,11 @@ class Feed extends Component {
                                         Новости
                                     </div>
                                 </Link>
+                            </div>
+                            <div
+                                className="nav-item"
+
+                            >
                                 <Link className="nav-value" href="/feeds">
                                     <div  className="icon-image" >
                                         <img  src={noti} alt="Фриланс" />
