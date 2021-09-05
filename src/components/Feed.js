@@ -5,6 +5,8 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import notes from "../icon/notes.png";
+import noti from "../icon/notification.png";
+
 import messages from "../icon/messages.png";
 import user from "../icon/user.png";
 import { Link } from "react-navi";
@@ -296,6 +298,14 @@ class Feed extends Component {
                                     </div>
                                     <div className="nav-value">
                                         Новости
+                                    </div>
+                                </Link>
+                                <Link className="nav-value" href="/feeds">
+                                    <div  className="icon-image" >
+                                        <img  src={noti} alt="Фриланс" />
+                                    </div>
+                                    <div className="nav-value">
+                                        Фриланс
                                     </div>
                                 </Link>
                             </div>
