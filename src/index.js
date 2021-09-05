@@ -191,7 +191,7 @@ class App extends React.Component {
 
     routes = mount({
         '/': route({
-            title: 'DevCodeMyLife | Добро пожаловать',
+            title: 'Добро пожаловать | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Социальная сеть для разработчиков" />
                 <script>
@@ -201,7 +201,7 @@ class App extends React.Component {
             view: <Main />
         }),
         '/messages': route({
-            title: 'DevCodeMyLife | Мессенджер',
+            title: 'Мессенджер | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Мессенджер" />
                 <script>
@@ -221,7 +221,7 @@ class App extends React.Component {
             view: <MainUser />
         }),
         '/feeds': route({
-            title: 'DevCodeMyLife | Новости',
+            title: 'Новости | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Новости, у нас есть все, чего нет напиши сам." />
                 <script>
@@ -231,7 +231,7 @@ class App extends React.Component {
             view: <Feed/>
         }),
         '/post': route({
-            title: 'DevCodeMyLife | Заметка',
+            title: 'Заметка | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>
@@ -241,7 +241,7 @@ class App extends React.Component {
             view: <FeedOnePage/>
         }),
         '/about': route({
-            title: 'DevCodeMyLife | О нас',
+            title: 'О нас | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>
@@ -251,7 +251,7 @@ class App extends React.Component {
             view: <About/>
         }),
         '/settings': route({
-            title: 'DevCodeMyLife | Настройки',
+            title: 'Настройки | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>

@@ -393,7 +393,9 @@ class Settings extends Component{
                             </div>
                         </div>
                         <div className="content-wall-views">
-
+                            <div className="main-place-wrapper">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
