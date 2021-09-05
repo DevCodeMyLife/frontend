@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-import send from "../icon/send.png"
-import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
 import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
