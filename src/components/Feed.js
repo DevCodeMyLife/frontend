@@ -5,7 +5,7 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/hljs"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import notes from "../icon/notes.png";
-import noti from "../icon/notification.png";
+import code from "../icon/code.png";
 
 import messages from "../icon/messages.png";
 import user from "../icon/user.png";
@@ -307,7 +307,7 @@ class Feed extends Component {
                             >
                                 <Link className="nav-value" href="/feeds">
                                     <div  className="icon-image" >
-                                        <img  src={noti} alt="Фриланс" />
+                                        <img  src={code} alt="Фриланс" />
                                     </div>
                                     <div className="nav-value">
                                         Фриланс
