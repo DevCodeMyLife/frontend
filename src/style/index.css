@@ -249,6 +249,7 @@ code {
 
 .reviews-menu {
   padding-top: 10px;
+  position: fixed;
 }
 
 
@@ -701,6 +702,8 @@ p {
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  padding-left: 245px;
 }
 
 .chat-flex-row {
