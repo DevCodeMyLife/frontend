@@ -1,7 +1,7 @@
 import React, { Component }  from "react";
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs/docco"
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import notes from "../icon/notes.png";
