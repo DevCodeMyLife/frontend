@@ -305,7 +305,7 @@ class Feed extends Component {
                                 className="nav-item"
 
                             >
-                                <Link className="nav-value" href="/feeds">
+                                <Link className="nav-value" href="/freelances">
                                     <div  className="icon-image" >
                                         <img  src={code} alt="Фриланс" />
                                     </div>
