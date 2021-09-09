@@ -250,6 +250,7 @@ code {
 .reviews-menu {
   padding-top: 10px;
   position: fixed;
+  z-index: 3;
 }
 
 
@@ -260,6 +261,7 @@ code {
   position: relative;
   width: 550px;
   /*overflow: auto;*/
+  padding-left: 245px;
 }
 
 .button-default-tag {
