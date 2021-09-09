@@ -1,7 +1,7 @@
 import React, { Component }  from "react";
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/hljs/docco"
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs/docco"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import notes from "../icon/notes.png";
@@ -270,7 +270,7 @@ class Feed extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter style={tomorrow} language={match[1]} showLineNumbers={true} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+                <SyntaxHighlighter style={docco} language={match[1]} showLineNumbers={true} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
                     {children}
