@@ -270,7 +270,7 @@ class Feed extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter style={style} wrapLongLines={true} language={match[1]} showLineNumbers={false} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+                <SyntaxHighlighter style={style} wrapLongLines={false} language={match[1]} showLineNumbers={false} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
                     {children}
