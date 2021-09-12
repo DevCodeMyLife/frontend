@@ -261,7 +261,7 @@ code {
   position: relative;
   width: 550px;
   /*overflow: auto;*/
-  padding-left: 240px;
+  /*padding-left: 240px;*/
 }
 
 .button-default-tag {
