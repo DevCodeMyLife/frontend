@@ -71,11 +71,11 @@ class Header extends Component {
                             :
                                 null
                         }
-
-
                     </div>
                 </div>
-
+                <div className="to-top">
+                    Наверх
+                </div>
             </header>
         );
     }
