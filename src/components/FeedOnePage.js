@@ -9,6 +9,7 @@ import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
 import user from "../icon/user.png";
 import {Link} from "react-navi";
+import code from "../icon/code.png";
 const gfm = require('remark-gfm')
 
 
@@ -75,7 +76,7 @@ class FeedOnePage extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter style={tomorrow} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+                <SyntaxHighlighter style={tomorrow} wrapLongLines={false} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
                     {children}
@@ -202,6 +203,19 @@ class FeedOnePage extends Component {
                                     </div>
                                     <div className="nav-value">
                                         Новости
+                                    </div>
+                                </Link>
+                            </div>
+                            <div
+                                className="nav-item"
+
+                            >
+                                <Link className="nav-value" href="/freelances">
+                                    <div  className="icon-image" >
+                                        <img  src={code} alt="Фриланс" />
+                                    </div>
+                                    <div className="nav-value">
+                                        Фриланс
                                     </div>
                                 </Link>
                             </div>

@@ -54,6 +54,11 @@ class Header extends Component {
                                     }}>
                                         {this.state.user.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
                                     </div>
+                                    <div className="settings-user-item" onClick={() => {
+                                        window.location.href = `http://${window.location.host}/settings`
+                                    }}>
+                                        Настройки
+                                    </div>
                                     <div className="separator">
                                         <div className="line-separator" />
                                     </div>

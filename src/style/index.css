@@ -72,6 +72,19 @@ code {
   align-content: flex-end;
 }
 
+.key-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-settings {
+  flex-grow: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .flex-start {
   align-content: flex-start;
 }
@@ -249,8 +262,30 @@ code {
 
 .reviews-menu {
   padding-top: 10px;
+  position: fixed;
+  z-index: 3;
+
 }
 
+.button-switch {
+  width: 50px;
+  height: 30px;
+  background: #ff8585;
+  border-radius: 20px;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  transition: .100ms;
+}
+
+.bobble {
+  position: relative;
+  width: 30px;
+  height:30px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #fff;
+}
 
 
 .content-wall-views {
@@ -259,6 +294,7 @@ code {
   position: relative;
   width: 550px;
   /*overflow: auto;*/
+  padding-left: 240px;
 }
 
 .button-default-tag {
@@ -371,9 +407,27 @@ a {
   margin-bottom: 20px;
 }
 
+.block-settings {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-place-wrapper-settings {
+  padding: 20px;
+  background: #fff;
+  /* border: 1px solid var(--grey); */
+  border-radius: 5px;
+  box-shadow: 0 0 2px var(--grey);
+  margin-bottom: 20px;
+}
+
 .child + .child {
   margin-top: 0;
   margin-left: 20px;
+}
+
+.child_settings + .child_settings {
+  margin-top: 5px;
 }
 
 .main-place {
@@ -701,6 +755,8 @@ p {
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  /*padding-left: 245px;*/
 }
 
 .chat-flex-row {
@@ -992,7 +1048,7 @@ p {
   /*overflow: auto;*/
   height: 100%;
   box-sizing: border-box;
-  background: var(--hover);
+  /*background: var(--hover);*/
 }
 
 

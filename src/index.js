@@ -14,6 +14,8 @@ import Main from "./components/Main";
 import MainUser from "./components/MainUser";
 import Messages from "./components/Messages";
 import Footer from "./components/Footer";
+import Settings from "./components/Settings";
+import Freelances from "./components/Freelances";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -190,7 +192,7 @@ class App extends React.Component {
 
     routes = mount({
         '/': route({
-            title: 'DevCodeMyLife - Добро пожаловать',
+            title: 'Добро пожаловать | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Социальная сеть для разработчиков" />
                 <script>
@@ -200,7 +202,7 @@ class App extends React.Component {
             view: <Main />
         }),
         '/messages': route({
-            title: 'Мессенджер',
+            title: 'Мессенджер | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Мессенджер" />
                 <script>
@@ -220,7 +222,7 @@ class App extends React.Component {
             view: <MainUser />
         }),
         '/feeds': route({
-            title: 'Новости',
+            title: 'Новости | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Новости, у нас есть все, чего нет напиши сам." />
                 <script>
@@ -230,7 +232,7 @@ class App extends React.Component {
             view: <Feed/>
         }),
         '/post': route({
-            title: 'DevCodeMyLife',
+            title: 'Заметка | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>
@@ -240,7 +242,7 @@ class App extends React.Component {
             view: <FeedOnePage/>
         }),
         '/about': route({
-            title: 'DevCodeMyLife',
+            title: 'О нас | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>
@@ -248,6 +250,26 @@ class App extends React.Component {
                 </script>
             </>,
             view: <About/>
+        }),
+        '/settings': route({
+            title: 'Настройки | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <Settings/>
+        }),
+        '/freelances': route({
+            title: 'Фриланс | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <Freelances/>
         })
     })
 
