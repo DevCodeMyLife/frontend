@@ -393,8 +393,20 @@ class Settings extends Component{
                             </div>
                         </div>
                         <div className="content-wall-views">
-                            <div className="main-place-wrapper">
-                                
+                            <div className="feed-wrapper">
+                                <div className="main-place-wrapper">
+                                    <div className="key-settings">
+
+                                    </div>
+                                    <div className="value-settings">
+                                        <div className="button-switch">
+                                            <div className="bobble">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="separator" />
+                                </div>
                             </div>
                         </div>
                     </div>

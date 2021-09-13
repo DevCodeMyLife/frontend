@@ -251,8 +251,27 @@ code {
   padding-top: 10px;
   position: fixed;
   z-index: 3;
+
 }
 
+.button-switch {
+  width: 50px;
+  height: 30px;
+  background: #fafafa;
+  border-radius: 20px;
+  padding: 2px;
+  flex-direction: row;
+  transition: .100ms;
+}
+
+.bobble {
+  position: relative;
+  width: 30px;
+  height:30px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #fff;
+}
 
 
 .content-wall-views {
