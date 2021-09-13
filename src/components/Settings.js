@@ -328,6 +328,8 @@ class Settings extends Component{
             parent.style.flexDirection = "row"
         }
         // return undefined;
+
+        console.log(parent.style.background)
     }
 
     render() {
