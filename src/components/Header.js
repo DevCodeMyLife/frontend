@@ -75,7 +75,8 @@ class Header extends Component {
                 </div>
                 <div className="to-top" onClick={()=>{
                     let s = document.body.scrollTop||window.pageYOffset;
-                    setInterval(function(){if(s>0)window.scroll(0,s-=5);else clearInterval(1)},1);
+                    if(s > 0)
+                        window.scroll(0,0)
                 }}>
                     Наверх
                 </div>
