@@ -5,6 +5,7 @@ import messages from "../icon/messages.png";
 import { Link } from "react-navi";
 import Centrifuge from "centrifuge";
 import user from "../icon/user.png";
+import Switch from "./Switch";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -402,9 +403,7 @@ class Settings extends Component{
                                             Публиковать заметки приватно
                                         </div>
                                         <div className="value-settings">
-                                            <div className="button-switch">
-                                                <div className="bobble" onClick={(e) => this.switcher(e)} />
-                                            </div>
+                                            <Switch enable={false} callBack={null}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
@@ -413,9 +412,7 @@ class Settings extends Component{
                                             Экспортировать GitHub Gists
                                         </div>
                                         <div className="value-settings">
-                                            <div className="button-switch">
-                                                <div className="bobble" onClick={(e) => this.switcher(e)}  />
-                                            </div>
+                                            <Switch enable={false} callBack={null}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
@@ -424,9 +421,7 @@ class Settings extends Component{
                                             Участвовать в тестировании
                                         </div>
                                         <div className="value-settings">
-                                            <div className="button-switch">
-                                                <div className="bobble" onClick={(e) => this.switcher(e)}  />
-                                            </div>
+                                            <Switch enable={false} callBack={null}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>

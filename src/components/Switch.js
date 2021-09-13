@@ -7,7 +7,7 @@ class Switch extends Component{
 
         this.state = {
             callBack: this.props.callBack(),
-            enable: this.props.state
+            enable: this.props.enable
         };
     }
 
