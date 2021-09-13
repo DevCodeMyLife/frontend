@@ -393,6 +393,20 @@ a {
   margin-bottom: 20px;
 }
 
+.block-settings {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-place-wrapper-settings {
+  padding: 20px;
+  background: #fff;
+  /* border: 1px solid var(--grey); */
+  border-radius: 5px;
+  box-shadow: 0 0 2px var(--grey);
+  margin-bottom: 20px;
+}
+
 .child + .child {
   margin-top: 0;
   margin-left: 20px;
