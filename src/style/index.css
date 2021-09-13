@@ -1343,10 +1343,12 @@ p {
   width: 100px;
   padding: 10px;
   text-align: center;
+  color: #F5F6FA;
 }
 
 .to-top:hover {
   background: #eff1f5;
+  color: #000;
 }
 
 .info-notification-item {
