@@ -320,7 +320,7 @@ class Settings extends Component{
 
     switcher(e) {
         let parent = e.target.parentElement
-        if (parent.style.background !== "#38FC93"){
+        if (parent.style.background !== "rgb(56, 252, 147)"){
             parent.style.background = "#38FC93"
             parent.style.flexDirection = "row-reverse"
         }else{
