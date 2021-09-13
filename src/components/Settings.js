@@ -318,9 +318,16 @@ class Settings extends Component{
 
     }
 
-    switcher(target) {
-        console.log(target)
-        return undefined;
+    switcher(e) {
+        let parent = e.target.parentElement
+        if (parent.style.background !== "#38FC93"){
+            parent.style.background = "#38FC93"
+            parent.style.flexDirection = "row-reverse"
+        }else{
+            parent.style.background = "#ff8585"
+            parent.style.flexDirection = "row"
+        }
+        // return undefined;
     }
 
     render() {
