@@ -72,6 +72,16 @@ code {
   align-content: flex-end;
 }
 
+.key-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value-settings {
+  flex-grow: 10;
+}
+
 .flex-start {
   align-content: flex-start;
 }
