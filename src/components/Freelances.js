@@ -409,6 +409,14 @@ class Freelances extends Component{
                             </div>
                         </div>
                         <div className="content-wall-views">
+                            <div className="wrapper-search wrapper-inline-block unselectable">
+                                <div>
+                                    <input placeholder="Найдем что нибудь для Вас..." />
+                                </div>
+                                <div className="tags-wrapper">
+
+                                </div>
+                            </div>
                             <div className="feed-wrapper">
                                 <div className="not_news">
                                     Новых заданий пока нет... 🙁
