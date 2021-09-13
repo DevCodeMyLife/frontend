@@ -395,7 +395,7 @@ class Settings extends Component{
                         <div className="content-wall-views">
                             <div className="feed-wrapper">
                                 <div className="main-place-wrapper-settings">
-                                    <div className="block-settings">
+                                    <div className="block-settings child_settings">
                                         <div className="key-settings">
                                             Публиковать заметки приватно
                                         </div>
@@ -406,7 +406,7 @@ class Settings extends Component{
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
-                                    <div className="block-settings">
+                                    <div className="block-settings child_settings">
                                         <div className="key-settings">
                                             Публиковать заметки приватно
                                         </div>
@@ -417,7 +417,7 @@ class Settings extends Component{
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
-                                    <div className="block-settings">
+                                    <div className="block-settings child_settings">
                                         <div className="key-settings">
                                             Публиковать заметки приватно
                                         </div>

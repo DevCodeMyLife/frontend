@@ -425,6 +425,10 @@ a {
   margin-left: 20px;
 }
 
+.child_settings + .child_settings {
+  margin-top: 20px;
+}
+
 .main-place {
   padding: 5px;
 
