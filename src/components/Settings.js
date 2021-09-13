@@ -406,7 +406,7 @@ class Settings extends Component{
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
-                                                <div className="bobble" onClick={() => this.switcher()} />
+                                                <div className="bobble" onClick={(e) => this.switcher(e)} />
                                             </div>
                                         </div>
                                         {/*<div className="separator" />*/}
