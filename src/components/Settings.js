@@ -318,6 +318,11 @@ class Settings extends Component{
 
     }
 
+    switcher(target) {
+        console.log(target)
+        return undefined;
+    }
+
     render() {
 
         if (this.state.loadCent) {
@@ -401,7 +406,7 @@ class Settings extends Component{
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
-                                                <div className="bobble" />
+                                                <div className="bobble" onClick={() => this.switcher()} />
                                             </div>
                                         </div>
                                         {/*<div className="separator" />*/}
@@ -438,6 +443,7 @@ class Settings extends Component{
             return null
         }
     }
+
 }
 
 export default Settings;
