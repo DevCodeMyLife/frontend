@@ -15,6 +15,7 @@ import MainUser from "./components/MainUser";
 import Messages from "./components/Messages";
 import Footer from "./components/Footer";
 import Settings from "./components/Settings";
+import Freelances from "./components/Freelances";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -259,6 +260,16 @@ class App extends React.Component {
                 </script>
             </>,
             view: <Settings/>
+        }),
+        '/freelances': route({
+            title: 'Фриланс | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <Freelances/>
         })
     })
 
