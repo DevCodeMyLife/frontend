@@ -80,6 +80,9 @@ code {
 
 .value-settings {
   flex-grow: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .flex-start {
