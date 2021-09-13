@@ -1048,7 +1048,7 @@ p {
   /*overflow: auto;*/
   height: 100%;
   box-sizing: border-box;
-  background: var(--hover);
+  /*background: var(--hover);*/
 }
 
 
