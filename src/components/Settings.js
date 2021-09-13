@@ -406,6 +406,28 @@ class Settings extends Component{
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
+                                    <div className="block-settings">
+                                        <div className="key-settings">
+                                            Публиковать заметки приватно
+                                        </div>
+                                        <div className="value-settings">
+                                            <div className="button-switch">
+                                                <div className="bobble" />
+                                            </div>
+                                        </div>
+                                        {/*<div className="separator" />*/}
+                                    </div>
+                                    <div className="block-settings">
+                                        <div className="key-settings">
+                                            Публиковать заметки приватно
+                                        </div>
+                                        <div className="value-settings">
+                                            <div className="button-switch">
+                                                <div className="bobble" />
+                                            </div>
+                                        </div>
+                                        {/*<div className="separator" />*/}
+                                    </div>
                                 </div>
                             </div>
                         </div>
