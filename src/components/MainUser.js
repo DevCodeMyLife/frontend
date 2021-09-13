@@ -11,6 +11,7 @@ import notes from "../icon/notes.png";
 import messages from "../icon/messages.png";
 import {Link} from "react-navi";
 import user from "../icon/user.png";
+import code from "../icon/code.png";
 
 const gfm = require('remark-gfm')
 
@@ -299,6 +300,19 @@ class MainUsers extends Component {
                     </div>
                     <div className="nav-value">
                       Новости
+                    </div>
+                  </Link>
+                </div>
+                <div
+                    className="nav-item"
+
+                >
+                  <Link className="nav-value" href="/freelances">
+                    <div  className="icon-image" >
+                      <img  src={code} alt="Фриланс" />
+                    </div>
+                    <div className="nav-value">
+                      Фриланс
                     </div>
                   </Link>
                 </div>
