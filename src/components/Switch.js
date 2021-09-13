@@ -12,7 +12,7 @@ class Switch extends Component{
     }
 
     switcher() {
-        this.state.enable.toggle()
+        this.setState(({ enable }) => ({ enable: !enable }));
         this.state?.callBack(this.state.enable)
     }
 
