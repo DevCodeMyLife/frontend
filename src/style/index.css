@@ -273,6 +273,7 @@ code {
   background: #ff8585;
   border-radius: 20px;
   padding: 2px;
+  display: flex;
   flex-direction: row;
   transition: .100ms;
 }
