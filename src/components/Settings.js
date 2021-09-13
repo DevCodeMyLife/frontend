@@ -318,16 +318,7 @@ class Settings extends Component{
 
     }
 
-    switcher(e) {
-        let parent = e.target.parentElement
-        if (parent.style.background !== "rgb(56, 252, 147)"){
-            parent.style.background = "#38FC93"
-            parent.style.flexDirection = "row-reverse"
-        }else{
-            parent.style.background = "#ff8585"
-            parent.style.flexDirection = "row"
-        }
-    }
+
 
     render() {
 
@@ -419,7 +410,7 @@ class Settings extends Component{
                                     </div>
                                     <div className="block-settings child_settings">
                                         <div className="key-settings">
-                                            Публиковать заметки приватно
+                                            Экспортировать GitHub Gists
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
@@ -430,7 +421,7 @@ class Settings extends Component{
                                     </div>
                                     <div className="block-settings child_settings">
                                         <div className="key-settings">
-                                            Публиковать заметки приватно
+                                            Участвовать в тестировании
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
