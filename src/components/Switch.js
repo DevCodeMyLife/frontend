@@ -6,7 +6,7 @@ class Switch extends Component{
         super(props);
 
         this.state = {
-            callBack: this.props.callBack(),
+            callBack: this.props.callBack,
             enable: this.props.enable
         };
     }

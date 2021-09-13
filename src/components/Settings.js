@@ -403,7 +403,7 @@ class Settings extends Component{
                                             Публиковать заметки приватно
                                         </div>
                                         <div className="value-settings">
-                                            <Switch enable={false} callBack={null}/>
+                                            <Switch enable={false} callBack={()=> {}}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
@@ -412,7 +412,7 @@ class Settings extends Component{
                                             Экспортировать GitHub Gists
                                         </div>
                                         <div className="value-settings">
-                                            <Switch enable={false} callBack={null}/>
+                                            <Switch enable={false} callBack={()=> {}}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
@@ -421,7 +421,7 @@ class Settings extends Component{
                                             Участвовать в тестировании
                                         </div>
                                         <div className="value-settings">
-                                            <Switch enable={false} callBack={null}/>
+                                            <Switch enable={false} callBack={()=> {}}/>
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
