@@ -6,6 +6,7 @@ import { Link } from "react-navi";
 import Centrifuge from "centrifuge";
 import user from "../icon/user.png";
 import Switch from "./Switch";
+import code from "../icon/code.png";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -360,6 +361,19 @@ class Settings extends Component{
                                                         </div>
                                                         <div className="nav-value">
                                                             Ваша страница
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                                <div
+                                                    className="nav-item"
+
+                                                >
+                                                    <Link className="nav-value" href="/freelances">
+                                                        <div  className="icon-image" >
+                                                            <img  src={code} alt="Фриланс" />
+                                                        </div>
+                                                        <div className="nav-value">
+                                                            Фриланс
                                                         </div>
                                                     </Link>
                                                 </div>
