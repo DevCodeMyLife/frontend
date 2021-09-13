@@ -1335,6 +1335,22 @@ p {
   padding: 10px;
 }
 
+.to-top {
+  transition: .3s;
+  position: fixed;
+  top: 50px;
+  height: 100%;
+  width: 100px;
+  padding: 10px;
+  text-align: center;
+  color: #F5F6FA;
+}
+
+.to-top:hover {
+  background: #eff1f5;
+  color: #000;
+}
+
 .info-notification-item {
   display: flex;
   justify-content: center;
@@ -1498,6 +1514,10 @@ p {
     padding-left: 0px;
   }
 
+  .to-top {
+    display: none;
+  }
+
   .content {
     width: auto;
   }
@@ -1555,6 +1575,9 @@ p {
     width: 100%;
   }
 
+  .to-top {
+    display: none;
+  }
 
   .main-place-wrapper {
     flex-direction: column;
@@ -1633,6 +1656,9 @@ p {
     margin-left: 0;
   }
 
+  .to-top {
+    display: none;
+  }
 
   .left-view {
     width: 100%;

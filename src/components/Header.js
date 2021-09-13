@@ -71,11 +71,15 @@ class Header extends Component {
                             :
                                 null
                         }
-
-
                     </div>
                 </div>
-
+                <div className="to-top" onClick={()=>{
+                    let s = document.body.scrollTop||window.pageYOffset;
+                    if(s > 0)
+                        window.scroll(0,0)
+                }}>
+                    Наверх
+                </div>
             </header>
         );
     }
