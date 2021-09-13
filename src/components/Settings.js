@@ -327,9 +327,6 @@ class Settings extends Component{
             parent.style.background = "#ff8585"
             parent.style.flexDirection = "row"
         }
-        // return undefined;
-
-        console.log(parent.style.background)
     }
 
     render() {
@@ -426,7 +423,7 @@ class Settings extends Component{
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
-                                                <div className="bobble" />
+                                                <div className="bobble" onClick={(e) => this.switcher(e)}  />
                                             </div>
                                         </div>
                                         {/*<div className="separator" />*/}
@@ -437,7 +434,7 @@ class Settings extends Component{
                                         </div>
                                         <div className="value-settings">
                                             <div className="button-switch">
-                                                <div className="bobble" />
+                                                <div className="bobble" onClick={(e) => this.switcher(e)}  />
                                             </div>
                                         </div>
                                         {/*<div className="separator" />*/}
