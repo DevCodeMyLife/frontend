@@ -4,7 +4,6 @@ import notes from "../icon/notes.png";
 import code from "../icon/code.png";
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
-import Head from "./Header";
 
 
 class Nav extends Component{
