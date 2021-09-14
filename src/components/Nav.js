@@ -4,6 +4,7 @@ import notes from "../icon/notes.png";
 import code from "../icon/code.png";
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
+import Head from "./Header";
 
 
 class Nav extends Component{
@@ -11,10 +12,31 @@ class Nav extends Component{
         super(props);
 
         this.state = {
-            load: this.props.load,
-            auth: this.props.auth,
-            data: this.props.data
+            load: false,
+            auth: false,
+            data: null
         };
+    }
+
+    componentDidMount() {
+        fetch("/api/authentication", {
+            method: "POST",
+            body: JSON.stringify({
+                "finger": window.localStorage.getItem("finger")
+            })
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0) {
+                    this.setState({
+                        auth: true,
+                        data: res.data,
+                    });
+                }
+                this.setState({
+                    load: true,
+                });
+            })
     }
 
     render() {

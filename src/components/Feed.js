@@ -282,7 +282,7 @@ class Feed extends Component {
             <div className="wrapper-content">
                 <div className="content">
                     <div id="vertical_menu" className="reviews-menu">
-                        <Nav load={true} auth={this.state.auth} data={this.state.data} />
+                        <Nav />
                     </div>
                     <div className="content-wall-views">
                         <div className="wrapper-feed">
