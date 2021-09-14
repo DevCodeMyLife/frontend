@@ -1373,7 +1373,7 @@ p {
 .counter-notification {
   position: absolute;
   top: 5px;
-  right: 0;
+  right: 5px;
   padding: 5px;
   text-align: center;
   width: 13px;
