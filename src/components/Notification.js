@@ -1,4 +1,5 @@
 import React, { Component }  from "react";
+import Nav from "./Nav";
 
 class Notification extends Component {
     constructor(props) {
@@ -42,62 +43,49 @@ class Notification extends Component {
     render() {
         const { notifications } = this.state;
         return (
-
-            <div className="wrapper-feed">
-                <div className="title-page">
-                    Оповещения
-                </div>
-                <div className="feed-wrapper">
-                    {
-                        notifications?.length ?
-                            notifications?.map(notification =>
-                                notification?.is_look ?
-                                    null
-                                    // <div className="notifications-item background-white" style={{ background: "white"}}>
-                                    //     <div className="info-notification-item feed-item-datetime">
-                                    //         {this.unixToDateTime(notification?.date_time)}
-                                    //     </div>
-                                    //     <div className="info-notification-item">
-                                    //         {
-                                    //             notification?.types === "post" ?
-                                    //                 "Вашу заметку кто-то посмотрел"
-                                    //                 :
-                                    //                 null
-                                    //         }
-                                    //     </div>
-                                    //     <div className="info-notifications-item">
-                                    //         <div className="button-default"
-                                    //              onClick={() => this.checkNotification(
-                                    //                  notification.feeds_uuid, notification.addr)} style={{ background: "#fafafa"}}>Просмотренно</div>
-                                    //     </div>
-                                    // </div>
+            <div className="wrapper-content">
+                <div className="content">
+                    <div id="vertical_menu" className="reviews-menu">
+                        <Nav />
+                    </div>
+                    <div className="content-wall-views">
+                        <div className="wrapper-feed">
+                            <div className="feed-wrapper">
+                                {
+                                    notifications?.length ?
+                                        notifications?.map(notification =>
+                                            notification?.is_look ?
+                                                null
+                                            :
+                                                <div className="notifications-item background-white" style={{ background: "white"}}>
+                                                    <div className="info-notification-item feed-item-datetime">
+                                                        {this.unixToDateTime(notification?.date_time)}
+                                                    </div>
+                                                    <div className="info-notification-item">
+                                                        {
+                                                            notification?.types === "post" ?
+                                                                "Вашу заметку кто-то посмотрел"
+                                                                :
+                                                                null
+                                                        }
+                                                    </div>
+                                                    <div className="info-notifications-item">
+                                                        <div className="button-default" onClick={() => this.checkNotification(
+                                                            notification.feeds_uuid, notification.addr)}>Перейти к заметке</div>
+                                                    </div>
+                                                </div>
+                                        )
                                     :
-                                    <div className="notifications-item background-white" style={{ background: "white"}}>
-                                        <div className="info-notification-item feed-item-datetime">
-                                            {this.unixToDateTime(notification?.date_time)}
+                                        <div className="error-wrapper">
+                                            <div className="error-page">
+                                                Новых событий пока нет.
+                                            </div>
                                         </div>
-                                        <div className="info-notification-item">
-                                            {
-                                                notification?.types === "post" ?
-                                                    "Вашу заметку кто-то посмотрел"
-                                                    :
-                                                    null
-                                            }
-                                        </div>
-                                        <div className="info-notifications-item">
-                                            <div className="button-default" onClick={() => this.checkNotification(
-                                                notification.feeds_uuid, notification.addr)}>Перейти к заметке</div>
-                                        </div>
-                                    </div>
-                            )
-                        :
-                            <div className="error-wrapper">
-                                <div className="error-page">
-                                    Новых оповещений пока нет.
-                                </div>
+                                }
                             </div>
-                    }
+                        </div>
 
+                    </div>
                 </div>
             </div>
         )

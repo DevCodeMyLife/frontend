@@ -4,6 +4,9 @@ import notes from "../icon/notes.png";
 import code from "../icon/code.png";
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
+import team from "../icon/team.png"
+import notification from "../icon/notification.png"
+
 
 
 class Nav extends Component{
@@ -70,16 +73,6 @@ class Nav extends Component{
                                         </div>
                                     </Link>
                                 </div>
-                                <div className="nav-item">
-                                    <Link className="nav-value" href="/freelances">
-                                        <div  className="icon-image" >
-                                            <img  src={code} alt="Фриланс" />
-                                        </div>
-                                        <div className="nav-value">
-                                            Задачи
-                                        </div>
-                                    </Link>
-                                </div>
                                 <div className="nav-item" >
                                     {
                                         this.state.messagesCount ?
@@ -100,6 +93,49 @@ class Nav extends Component{
                                         </div>
                                         <div className="nav-value">
                                             Мессенджер
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item" >
+                                    {
+                                        this.state.messagesCount ?
+                                            <div className="counter-notification" id="counter_notification" path="/messages" >
+                                                {
+                                                    this.state.messagesCount > 10 ?
+                                                        "10+"
+                                                        :
+                                                        this.state.messagesCount
+                                                }
+                                            </div>
+                                                :
+                                            null
+                                    }
+                                    <Link className="nav-value" href="/notification">
+                                        <div  className="icon-image" >
+                                            <img src={notification} alt="События" />
+                                        </div>
+                                        <div className="nav-value">
+                                            События
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/freelances">
+                                        <div  className="icon-image" >
+                                            <img  src={code} alt="Задачи" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Задачи
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/teams">
+                                        <div  className="icon-image" >
+                                            <img  src={team} alt="Команды" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Команды
                                         </div>
                                     </Link>
                                 </div>

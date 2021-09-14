@@ -23,7 +23,6 @@
 }
 
 html {
-
   /*height: 100%;*/
   box-sizing: border-box;
 }
@@ -287,13 +286,11 @@ code {
   background: #fff;
 }
 
-
 .content-wall-views {
   flex-grow: 10;
-  /*background: var(--hover);*/
   position: relative;
   width: 550px;
-  /*overflow: auto;*/
+  min-height: 500px;
   padding-left: 240px;
 }
 
