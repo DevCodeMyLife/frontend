@@ -4,6 +4,7 @@ import notes from "../icon/notes.png";
 import code from "../icon/code.png";
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
+import team from "../icon/team.png"
 
 
 class Nav extends Component{
@@ -73,10 +74,20 @@ class Nav extends Component{
                                 <div className="nav-item">
                                     <Link className="nav-value" href="/freelances">
                                         <div  className="icon-image" >
-                                            <img  src={code} alt="Фриланс" />
+                                            <img  src={code} alt="Задачи" />
                                         </div>
                                         <div className="nav-value">
                                             Задачи
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/teams">
+                                        <div  className="icon-image" >
+                                            <img  src={team} alt="Команды" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Команды
                                         </div>
                                     </Link>
                                 </div>
