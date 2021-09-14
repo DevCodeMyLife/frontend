@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import Settings from "./components/Settings";
 import Freelances from "./components/Freelances";
 import Notification from "./components/Notification";
+import Teams from "./components/Teams";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -281,6 +282,17 @@ class App extends React.Component {
                 </script>
             </>,
             view: <Notification/>
+        })
+        ,
+        '/teams': route({
+            title: 'Команды | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <Teams/>
         })
     })
 
