@@ -5,10 +5,6 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png"
 import TextareaAutosize from "react-textarea-autosize";
-import notes from "../icon/notes.png";
-import messages from "../icon/messages.png";
-import user from "../icon/user.png";
-import {Link} from "react-navi";
 import code from "../icon/code.png";
 import Nav from "./Nav";
 const gfm = require('remark-gfm')

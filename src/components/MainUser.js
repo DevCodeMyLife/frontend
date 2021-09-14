@@ -7,10 +7,6 @@ import like from "../icon/like.png";
 import look from "../icon/look.png";
 import open from "../icon/open.png"
 import close from "../icon/close.png"
-import notes from "../icon/notes.png";
-import messages from "../icon/messages.png";
-import {Link} from "react-navi";
-import user from "../icon/user.png";
 import code from "../icon/code.png";
 import Nav from "./Nav";
 
