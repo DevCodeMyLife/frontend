@@ -5,11 +5,8 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png"
 import TextareaAutosize from "react-textarea-autosize";
-import notes from "../icon/notes.png";
-import messages from "../icon/messages.png";
-import user from "../icon/user.png";
-import {Link} from "react-navi";
 import code from "../icon/code.png";
+import Nav from "./Nav";
 const gfm = require('remark-gfm')
 
 
@@ -192,99 +189,7 @@ class FeedOnePage extends Component {
             <div className="wrapper-content">
                 <div className="content">
                     <div id="vertical_menu" className="reviews-menu">
-                        <div className="wrapper-vertical-nav" >
-                            <div
-                                className="nav-item"
-
-                            >
-                                <Link className="nav-value" href="/feeds">
-                                    <div  className="icon-image" >
-                                        <img  src={notes} alt="Новости" />
-                                    </div>
-                                    <div className="nav-value">
-                                        Новости
-                                    </div>
-                                </Link>
-                            </div>
-                            <div
-                                className="nav-item"
-
-                            >
-                                <Link className="nav-value" href="/freelances">
-                                    <div  className="icon-image" >
-                                        <img  src={code} alt="Фриланс" />
-                                    </div>
-                                    <div className="nav-value">
-                                        Фриланс
-                                    </div>
-                                </Link>
-                            </div>
-                            {
-                                !this.state.load ?
-                                    <div className="loader-flex">
-                                        <div className="loader-small" />
-                                    </div>
-                                    :
-                                    this.state.auth ?
-                                        <div>
-                                            <div
-                                                className="nav-item"
-
-                                            >
-                                                <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
-                                                    <div  className="icon-image" >
-                                                        <img src={user} alt="messages" />
-                                                    </div>
-                                                    <div className="nav-value">
-                                                        Ваша страница
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                            <div
-                                                className="nav-item"
-
-                                            >
-                                                {
-                                                    this.state.messagesCount ?
-                                                        <div className="counter-notification" id="counter_notification" path="/messages" >
-                                                            {
-                                                                this.state.messagesCount > 10 ?
-                                                                    "10+"
-                                                                    :
-                                                                    this.state.messagesCount
-                                                            }
-                                                        </div>
-                                                        :
-                                                        null
-                                                }
-                                                <Link className="nav-value" href="/messages">
-                                                    <div  className="icon-image" >
-                                                        <img src={messages} alt="messages" />
-                                                    </div>
-                                                    <div className="nav-value">
-                                                        Мессенджер
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        : null
-                            }
-                            {/*<div*/}
-                            {/*    className="nav-item"*/}
-
-
-                            {/*>*/}
-                            {/*    <Link href="/about" className="nav-value">*/}
-                            {/*        <div  className="icon-image">*/}
-                            {/*            <img path="/about" src={about}/>*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Поддержка*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-
-                            {/*</div>*/}
-                        </div>
+                        <Nav />
                     </div>
                     <div className="content-wall-views">
                         {
