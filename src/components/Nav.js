@@ -42,26 +42,6 @@ class Nav extends Component{
     render() {
         return (
             <div className="wrapper-vertical-nav" >
-                <div className="nav-item">
-                    <Link className="nav-value" href="/feeds">
-                        <div  className="icon-image" >
-                            <img  src={notes} alt="Новости" />
-                        </div>
-                        <div className="nav-value">
-                            Новости
-                        </div>
-                    </Link>
-                </div>
-                <div className="nav-item">
-                    <Link className="nav-value" href="/freelances">
-                        <div  className="icon-image" >
-                            <img  src={code} alt="Фриланс" />
-                        </div>
-                        <div className="nav-value">
-                            Фриланс
-                        </div>
-                    </Link>
-                </div>
                 {
                     !this.state.load ?
                         <div className="loader-flex">
@@ -70,10 +50,7 @@ class Nav extends Component{
                         :
                         this.state.auth ?
                             <div>
-                                <div
-                                    className="nav-item"
-
-                                >
+                                <div className="nav-item">
                                     <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
                                         <div  className="icon-image" >
                                             <img src={user} alt="messages" />
@@ -83,10 +60,27 @@ class Nav extends Component{
                                         </div>
                                     </Link>
                                 </div>
-                                <div
-                                    className="nav-item"
-
-                                >
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/feeds">
+                                        <div  className="icon-image" >
+                                            <img  src={notes} alt="Новости" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Новости
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/freelances">
+                                        <div  className="icon-image" >
+                                            <img  src={code} alt="Фриланс" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Фриланс
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div className="nav-item" >
                                     {
                                         this.state.messagesCount ?
                                             <div className="counter-notification" id="counter_notification" path="/messages" >
