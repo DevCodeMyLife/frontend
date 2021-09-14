@@ -62,39 +62,57 @@ class Nav extends Component{
                         </div>
                     </Link>
                 </div>
-                <div className="nav-item">
-                    <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
-                        <div  className="icon-image" >
-                            <img src={user} alt="messages" />
+                {
+                    !this.state.load ?
+                        <div className="loader-flex">
+                            <div className="loader-small" />
                         </div>
-                        <div className="nav-value">
-                            Ваша страница
-                        </div>
-                    </Link>
-                </div>
-                <div className="nav-item">
-                    {
-                        this.state.messagesCount ?
-                            <div className="counter-notification" id="counter_notification" path="/messages" >
-                                {
-                                    this.state.messagesCount > 10 ?
-                                        "10+"
-                                        :
-                                        this.state.messagesCount
-                                }
+                        :
+                        this.state.auth ?
+                            <div>
+                                <div
+                                    className="nav-item"
+
+                                >
+                                    <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
+                                        <div  className="icon-image" >
+                                            <img src={user} alt="messages" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Ваша страница
+                                        </div>
+                                    </Link>
+                                </div>
+                                <div
+                                    className="nav-item"
+
+                                >
+                                    {
+                                        this.state.messagesCount ?
+                                            <div className="counter-notification" id="counter_notification" path="/messages" >
+                                                {
+                                                    this.state.messagesCount > 10 ?
+                                                        "10+"
+                                                        :
+                                                        this.state.messagesCount
+                                                }
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                    <Link className="nav-value" href="/messages">
+                                        <div  className="icon-image" >
+                                            <img src={messages} alt="messages" />
+                                        </div>
+                                        <div className="nav-value">
+                                            Мессенджер
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                             :
-                            null
-                    }
-                    <Link className="nav-value" href="/messages">
-                        <div  className="icon-image" >
-                            <img src={messages} alt="messages" />
-                        </div>
-                        <div className="nav-value">
-                            Мессенджер
-                        </div>
-                    </Link>
-                </div>
+                        null
+                }
             </div>
         )
     }
