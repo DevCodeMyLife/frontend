@@ -20,7 +20,9 @@ class Teams extends Component {
                         <div className="wrapper-feed">
                             <div className="feed-wrapper">
                                 <div className="main-place-wrapper">
-                                    Скоро здесь что то будет
+                                    <p>
+                                        <b>Команды - </b> это раздел где можно присоеденится к уже соществующей команде единомышленников или создать свою.
+                                    </p>
                                 </div>
                             </div>
                         </div>
