@@ -107,7 +107,7 @@ class Nav extends Component{
                                                         this.state.messagesCount
                                                 }
                                             </div>
-                                            :
+                                                :
                                             null
                                     }
                                     <Link className="nav-value" href="/notification">
