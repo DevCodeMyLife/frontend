@@ -56,25 +56,7 @@ class Notification extends Component {
                                         notifications?.map(notification =>
                                             notification?.is_look ?
                                                 null
-                                                // <div className="notifications-item background-white" style={{ background: "white"}}>
-                                                //     <div className="info-notification-item feed-item-datetime">
-                                                //         {this.unixToDateTime(notification?.date_time)}
-                                                //     </div>
-                                                //     <div className="info-notification-item">
-                                                //         {
-                                                //             notification?.types === "post" ?
-                                                //                 "Вашу заметку кто-то посмотрел"
-                                                //                 :
-                                                //                 null
-                                                //         }
-                                                //     </div>
-                                                //     <div className="info-notifications-item">
-                                                //         <div className="button-default"
-                                                //              onClick={() => this.checkNotification(
-                                                //                  notification.feeds_uuid, notification.addr)} style={{ background: "#fafafa"}}>Просмотренно</div>
-                                                //     </div>
-                                                // </div>
-                                                :
+                                            :
                                                 <div className="notifications-item background-white" style={{ background: "white"}}>
                                                     <div className="info-notification-item feed-item-datetime">
                                                         {this.unixToDateTime(notification?.date_time)}
@@ -96,11 +78,10 @@ class Notification extends Component {
                                     :
                                         <div className="error-wrapper">
                                             <div className="error-page">
-                                                Новых оповещений пока нет.
+                                                Новых событий пока нет.
                                             </div>
                                         </div>
                                 }
-
                             </div>
                         </div>
 

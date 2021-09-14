@@ -19,7 +19,9 @@ class Teams extends Component {
                     <div className="content-wall-views">
                         <div className="wrapper-feed">
                             <div className="feed-wrapper">
-                                Скоро здесь что то будет
+                                <div className="main-place-wrapper">
+                                    Скоро здесь что то будет
+                                </div>
                             </div>
                         </div>
                     </div>
