@@ -40,34 +40,34 @@ class Nav extends Component{
                         notification_count: res.notification_count
                     });
 
-                    if (this.auth){
-                        this.centrifuge.setToken(res.token)
-                        this.centrifuge.connect();
 
-                        let this_ = this
-                        this.centrifuge.subscribe(`${user[0].id}`, function(message) {
-                            console.log("[ private channel connect ]")
+                    this.centrifuge.setToken(res.token)
+                    this.centrifuge.connect();
 
-                            let event = message.data
-                            if (Array.isArray(event)){
-                                switch (event?.type){
-                                    case "event":
-                                        this_.setState({notification_count: this_.state.notification_count + 1 })
-                                        break;
-                                    case "message":
-                                        this_.setState({messagesCount: this_.state.messagesCount + 1 })
-                                        break;
-                                    default:
-                                        console.log("[ unidentified event ]")
-                                }
+                    let this_ = this
+                    this.centrifuge.subscribe(`${user[0].id}`, function(message) {
+                        console.log("[ private channel connect ]")
 
-                                this_.state.context.resume().then(() => {
-                                    this_.state.audio.play();
-                                    console.log('Playback resumed successfully');
-                                });
+                        let event = message.data
+                        if (Array.isArray(event)){
+                            switch (event?.type){
+                                case "event":
+                                    this_.setState({notification_count: this_.state.notification_count + 1 })
+                                    break;
+                                case "message":
+                                    this_.setState({messagesCount: this_.state.messagesCount + 1 })
+                                    break;
+                                default:
+                                    console.log("[ unidentified event ]")
                             }
-                        });
-                    }
+
+                            this_.state.context.resume().then(() => {
+                                this_.state.audio.play();
+                                console.log('Playback resumed successfully');
+                            });
+                        }
+                    });
+
                 }
                 this.setState({
                     load: true,
