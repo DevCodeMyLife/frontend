@@ -94,9 +94,12 @@ class Notification extends Component {
                                                     <div className="info-notification-item">
                                                         {
                                                             notification?.types === "post" ?
-                                                                "Вашу заметку кто-то посмотрел"
+                                                                "Вашу заметку посмотрели"
                                                                 :
-                                                                null
+                                                                notification?.types === "comment" ?
+                                                                    "У Вас новый комментарий"
+                                                                    :
+                                                                        null
                                                         }
                                                     </div>
                                                     <div className="info-notifications-item">
