@@ -53,23 +53,25 @@ class Nav extends Component{
                         console.log("[ private channel connect ]")
 
                         let event = message.data
-                        if (Array.isArray(event)){
-                            switch (event?.type){
-                                case "event":
-                                    this_.setState({notification_count: this_.state.notification_count + 1 })
-                                    break;
-                                case "message":
-                                    this_.setState({messagesCount: this_.state.messagesCount + 1 })
-                                    break;
-                                default:
-                                    console.log("[ unidentified event ]")
-                            }
 
-                            this_.state.context.resume().then(() => {
-                                this_.state.audio.play();
-                                console.log('Playback resumed successfully');
-                            });
+                        console.log(event)
+
+                        switch (event.type){
+                            case "event":
+                                this_.setState({notification_count: this_.state.notification_count + 1 })
+                                break;
+                            case "message":
+                                this_.setState({messagesCount: this_.state.messagesCount + 1 })
+                                break;
+                            default:
+                                console.log("[ unidentified event ]")
                         }
+
+                        this_.state.context.resume().then(() => {
+                            this_.state.audio.play();
+                            console.log('Playback resumed successfully');
+                        });
+
                     });
 
                 }
