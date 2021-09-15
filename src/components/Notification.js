@@ -9,8 +9,39 @@ class Notification extends Component {
             isLoaded: "load",
             result: [],
             auth: false,
-            notifications: this.props.notification
+            notifications: null
         };
+    }
+
+    componentDidMount() {
+        fetch("/api/authentication", {
+            method: "POST",
+            body: JSON.stringify({
+                "finger": window.localStorage.getItem("finger")
+            })
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0){
+                    this.setState({
+                        auth: true,
+                        notification_count: res.notification_count,
+                        notification: res.notification,
+                    });
+                }
+                this.setState({
+                    load: true
+                });
+
+            })
+            .catch(error => {
+                // console.log(error)
+                this.setState({
+                    auth: false,
+                    load: true,
+                    token: 'asd'
+                });
+            });
     }
 
     checkNotification(uuid, addr){

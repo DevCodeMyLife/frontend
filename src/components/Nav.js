@@ -33,7 +33,8 @@ class Nav extends Component{
                     this.setState({
                         auth: true,
                         data: res.data,
-                        messagesCount: res.count_message
+                        messagesCount: res.count_message,
+                        notification_count: res.notification_count
                     });
                 }
                 this.setState({
@@ -98,13 +99,13 @@ class Nav extends Component{
                                 </div>
                                 <div className="nav-item" >
                                     {
-                                        this.state.messagesCount ?
+                                        this.state.notification_count ?
                                             <div className="counter-notification" id="counter_notification" path="/messages" >
                                                 {
-                                                    this.state.messagesCount > 10 ?
+                                                    this.state.notification_count > 10 ?
                                                         "10+"
                                                         :
-                                                        this.state.messagesCount
+                                                        this.state.notification_count
                                                 }
                                             </div>
                                                 :
