@@ -59,6 +59,10 @@ class Nav extends Component{
                         switch (event.type){
                             case "event":
                                 this_.setState({notification_count: this_.state.notification_count + 1 })
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                    console.log('Playback resumed successfully');
+                                });
                                 break;
                             case "message":
                                 this_.setState({messagesCount: this_.state.messagesCount + 1 })
@@ -66,12 +70,6 @@ class Nav extends Component{
                             default:
                                 console.log("[ unidentified event ]")
                         }
-
-                        this_.state.context.resume().then(() => {
-                            this_.state.audio.play();
-                            console.log('Playback resumed successfully');
-                        });
-
                     });
 
                 }
