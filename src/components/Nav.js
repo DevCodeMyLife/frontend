@@ -7,7 +7,11 @@ import messages from "../icon/messages.png";
 import team from "../icon/team.png"
 import notification from "../icon/notification.png"
 import song from "../sound/pop.mp3";
+import Centrifuge from "centrifuge";
 
+const CONFIG = {
+    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
+};
 
 
 class Nav extends Component{
@@ -21,6 +25,7 @@ class Nav extends Component{
             context: new AudioContext(),
             audio: new Audio(song)
         };
+        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
     componentDidMount() {
