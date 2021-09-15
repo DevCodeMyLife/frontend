@@ -49,7 +49,7 @@ class Nav extends Component{
                     this.centrifuge.connect();
 
                     let this_ = this
-                    this.centrifuge.subscribe(`${data[0].id}`, function(message) {
+                    this.centrifuge.subscribe(`${this_.state.data[0].id}`, function(message) {
                         console.log("[ private channel connect ]")
 
                         let event = message.data
