@@ -119,7 +119,11 @@ class App extends React.Component {
                             console.log(message);
                         });
 
-
+                        if (auth){
+                            this_.centrifuge.subscribe(`${user[0].id}`, function(message) {
+                                console.log(message);
+                            });
+                        }
 
                         this.setState({
                             auth: true,
