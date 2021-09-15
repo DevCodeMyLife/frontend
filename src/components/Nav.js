@@ -13,6 +13,7 @@ const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
 };
 
+let user = null
 
 class Nav extends Component{
     constructor(props) {
@@ -50,7 +51,7 @@ class Nav extends Component{
                     this.centrifuge.connect();
 
                     let this_ = this
-                    this.centrifuge.subscribe(`${user[0].id}`, function(message) {
+                    this.centrifuge.subscribe(`${data[0].id}`, function(message) {
                         console.log("[ private channel connect ]")
 
                         let event = message.data
