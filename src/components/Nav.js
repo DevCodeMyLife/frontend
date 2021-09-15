@@ -6,7 +6,7 @@ import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import team from "../icon/team.png"
 import notification from "../icon/notification.png"
-import {object} from "prop-types";
+import song from "../sound/pop.mp3";
 
 
 
@@ -17,7 +17,9 @@ class Nav extends Component{
         this.state = {
             load: false,
             auth: false,
-            data: null
+            data: null,
+            context: new AudioContext(),
+            audio: new Audio(song)
         };
     }
 
@@ -56,6 +58,11 @@ class Nav extends Component{
                                         this_.setState({messagesCount: this_.state.messagesCount + 1 })
                                         break;
                                 }
+
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                    console.log('Playback resumed successfully');
+                                });
                             }
                         });
                     }
