@@ -41,8 +41,11 @@ class Nav extends Component{
                     if (this.auth){
                         this.centrifuge.setToken(res.token)
                         this.centrifuge.connect();
+
                         let this_ = this
                         this.centrifuge.subscribe(`${user[0].id}`, function(message) {
+                            console.log("[ private channel connect ]")
+
                             let event = message.data
                             if (Array.isArray(event)){
                                 switch (event?.type){
