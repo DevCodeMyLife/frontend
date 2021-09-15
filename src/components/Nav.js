@@ -57,7 +57,7 @@ class Nav extends Component{
                                     case "message":
                                         this_.setState({messagesCount: this_.state.messagesCount + 1 })
                                         break;
-                                    case default:
+                                    default:
                                         console.log("[ unidentified event ]")
                                 }
 
