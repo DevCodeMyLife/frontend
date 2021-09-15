@@ -25,8 +25,7 @@ class Notification extends Component {
                 if (res.status.code === 0){
                     this.setState({
                         auth: true,
-                        notification_count: res.notification_count,
-                        notification: res.notification,
+                        notifications: res.notification,
                     });
                 }
                 this.setState({
