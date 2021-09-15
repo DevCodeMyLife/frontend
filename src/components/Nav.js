@@ -6,6 +6,7 @@ import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import team from "../icon/team.png"
 import notification from "../icon/notification.png"
+import {object} from "prop-types";
 
 
 
@@ -36,11 +37,32 @@ class Nav extends Component{
                         messagesCount: res.count_message,
                         notification_count: res.notification_count
                     });
+
+                    if (this.auth){
+                        this.centrifuge.setToken(res.token)
+                        this.centrifuge.connect();
+                        let this_ = this
+                        this.centrifuge.subscribe(`${user[0].id}`, function(message) {
+                            let event = message.data
+                            if (Array.isArray(event)){
+                                switch (event?.type){
+                                    case "event":
+                                        this_.setState({notification_count: this_.state.notification_count + 1 })
+                                        break;
+                                    case "message":
+                                        this_.setState({messagesCount: this_.state.messagesCount + 1 })
+                                        break;
+                                }
+                            }
+                        });
+                    }
                 }
                 this.setState({
                     load: true,
                 });
             })
+
+
     }
 
     render() {
