@@ -22,7 +22,7 @@ export class Socket extends Component{
 
                     this.centrifuge.setToken(res.token)
 
-                    let this_ = this
+                    // let this_ = this
                     this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
                             console.log("[ private channel connect ]")
 
