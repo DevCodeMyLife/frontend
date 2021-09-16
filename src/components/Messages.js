@@ -432,6 +432,7 @@ class Messages extends Component{
                                                                     <div className="message-item flex-end" style={{
                                                                         // display: "flex",
                                                                         boxShadow: "none",
+                                                                        background: !message.read ? "rgb(215, 228, 252)" : "#fff",
                                                                         // flexFlow: "column wrap"
                                                                     }}>
                                                                         <div className="wrapper-data" style={{
