@@ -60,7 +60,7 @@ class Nav extends Component{
 
                         switch (event.type){
                             case "event":
-                                this_.setState({notification_count: this_.state.notification_count + 1 })
+                                this_.setState({notification_count: event.count })
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
                                     console.log('Playback resumed successfully');
@@ -76,7 +76,7 @@ class Nav extends Component{
                                 });
                                 break;
                             case "comment":
-                                this_.setState({notification_count: this_.state.notification_count + 1 })
+                                this_.setState({notification_count: event.count })
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
                                     console.log('Playback resumed successfully');
@@ -92,7 +92,7 @@ class Nav extends Component{
                                 });
                                 break;
                             case "message":
-                                this_.setState({messagesCount: this_.state.messagesCount + 1 })
+                                this_.setState({messagesCount: event.count })
                                 toast.info('Вам пришло новое сообщение.', {
                                     position: "top-center",
                                     autoClose: 5000,
