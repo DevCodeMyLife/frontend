@@ -93,9 +93,25 @@ class Messages extends Component{
             c_id: this.state.cid
         }
 
+        let value = document.getElementById("message_chat").value
+
         _this.clearInput(document.getElementById("message_chat"))
 
         if (data.value.length > 0) {
+            let mes = {
+                c_id: this.state.cid,
+                value: value,
+                avatar_url: this.state.user[0].avatar_url,
+                uid: this.state.user[0].id,
+                date_time: new Date().getTime(),
+                login: this.state.user[0].login
+            }
+
+            this.state.messages.push(mes)
+
+            this.setState({
+                messages: this.state.messages
+            })
             fetch("/api/messages", {
                 method: "POST",
                 body: JSON.stringify(data)
@@ -136,6 +152,20 @@ class Messages extends Component{
         }
 
         if (event.keyCode===13){
+            let mes = {
+                c_id: this.state.cid,
+                value: value,
+                avatar_url: this.state.user[0].avatar_url,
+                uid: this.state.user[0].id,
+                date_time: new Date().getTime(),
+                login: this.state.user[0].login
+            }
+
+            this.state.messages.push(mes)
+
+            this.setState({
+                messages: this.state.messages
+            })
             event.preventDefault();
             _this.clearInput(event.target)
 
@@ -148,22 +178,7 @@ class Messages extends Component{
                     .then(res => {
                         _this.clearInput(event.target)
 
-                        let mes = {
-                            c_id: this.state.cid,
-                            value: value,
-                            avatar_url: this.state.user[0].avatar_url,
-                            uid: this.state.user[0].id,
-                            date_time: new Date().getTime(),
-                            login: this.state.user[0].login
-                        }
 
-                        console.log(mes)
-
-                        this.state.messages.push(mes)
-
-                        this.setState({
-                            messages: this.state.messages
-                        })
 
                         if (document.getElementById('messages'))
                             document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
