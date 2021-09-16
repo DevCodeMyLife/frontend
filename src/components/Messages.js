@@ -276,10 +276,10 @@ class Messages extends Component{
                                 cid: cid
                             })
 
-                            document.getElementById(
-                                'messages').scrollTo(
-                                {top: document.getElementById(
-                                        'messages').scrollHeight, left: 0, behavior: 'smooth' });
+                            // document.getElementById(
+                            //     'messages').scrollTo(
+                            //     {top: document.getElementById(
+                            //             'messages').scrollHeight, left: 0, behavior: 'smooth' });
 
                         }
                     })
