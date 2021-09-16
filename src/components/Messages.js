@@ -481,11 +481,12 @@ class Messages extends Component{
                                                 :
                                                 <div className="wrapper-chats-main">
                                                     {
+                                                        // onClick={() => this.openDialog(chat.c_id)}
                                                         this.state.chats.map(chat =>
                                                             chat.no_read_count ?
                                                                 <div className="feed-wrapper-item-chat chat-flex-row"
                                                                      style={{marginBottom: 0, background: "#d7e4fc"}}
-                                                                     onClick={() => this.openDialog(chat.c_id)}>
+                                                                     onClick={() =>  window.location.href = `/messages?cid=${chat.c_id}`}>
                                                                     <div className="photo-wrapper-chat">
                                                                         <img src={chat.avatar_url} alt={chat.avatar_url}/>
                                                                     </div>
