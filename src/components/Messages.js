@@ -254,6 +254,8 @@ class Messages extends Component{
         let pathMessages = `/api/messages/${cid}`
         let pathReadMessages = `/api/read_messages/${cid}`
 
+
+        console.log(pathMessages, pathReadMessages)
         fetch(pathReadMessages, {
             method: "POST",
             body: JSON.stringify({})
@@ -261,6 +263,7 @@ class Messages extends Component{
             .then(response => response.json())
             .then(res => {
                 console.log(res)
+
                 fetch(pathMessages, {
                     method: "GET"
                 })
@@ -280,7 +283,19 @@ class Messages extends Component{
 
                         }
                     })
+                    .catch(error => {
+                        this.setState({
+                            auth: false,
+                            load: true
+                        });
+                    });
             })
+            .catch(error => {
+                this.setState({
+                    auth: false,
+                    load: true
+                });
+            });
     }
 
 
