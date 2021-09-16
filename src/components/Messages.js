@@ -258,6 +258,25 @@ class Messages extends Component{
             .then(response => response.json())
             .then(res => {
                 console.log(res)
+                fetch(path, {
+                    method: "GET"
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        if (res?.status?.code === 0){
+                            this.setState({
+                                messages: res?.data,
+                                dialog: true,
+                                cid: cid
+                            })
+
+                            document.getElementById(
+                                'messages').scrollTo(
+                                {top: document.getElementById(
+                                        'messages').scrollHeight, left: 0, behavior: 'smooth' });
+
+                        }
+                    })
             })
     }
 
