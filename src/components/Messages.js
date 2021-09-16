@@ -116,6 +116,8 @@ class Messages extends Component{
             c_id: this.state.cid
         }
 
+        let value = event.target.value
+
 
 
         if (this.state.cent_channel){
@@ -148,7 +150,7 @@ class Messages extends Component{
 
                         let mes = {
                             c_id: this.state.cid,
-                            value: event.target.value,
+                            value: value,
                             avatar_url: this.state.user[0].avatar_url,
                             uid: this.state.user[0].id
                         }
