@@ -152,7 +152,9 @@ class Messages extends Component{
                             c_id: this.state.cid,
                             value: value,
                             avatar_url: this.state.user[0].avatar_url,
-                            uid: this.state.user[0].id
+                            uid: this.state.user[0].id,
+                            date_time: new Date().getTime(),
+                            login: this.state.user[0].login
                         }
 
                         console.log(mes)
