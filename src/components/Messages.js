@@ -118,7 +118,7 @@ class Messages extends Component{
 
         let value = event.target.value
 
-
+        this.read(this.state.cid)
 
         if (this.state.cent_channel){
             this.state.cent_channel.publish(
