@@ -87,7 +87,17 @@ class Nav extends Component{
         const notify = () => toast("Wow so easy!");
         return (
             <div className="wrapper-vertical-nav" >
-                <ToastContainer />
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 {
                     !this.state.load ?
                         <div className="loader-flex">
