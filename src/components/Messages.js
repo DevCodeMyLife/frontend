@@ -146,6 +146,20 @@ class Messages extends Component{
                     .then(res => {
                         _this.clearInput(event.target)
 
+                        let mes = {
+                            c_id: this.state.cid,
+                            value: event.target.value,
+                            avatar_url: this.state.user[0].avatar_url,
+                            uid: this.state.user[0].id
+                        }
+
+                        this.setState({
+                            messages: this.state.messages.push(mes)
+                        })
+
+                        if (document.getElementById('messages'))
+                            document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+
                     })
                     .catch(error => {
                         console.log(error)
@@ -207,10 +221,12 @@ class Messages extends Component{
                         console.log('Playback resumed successfully');
                     });
                 }
-                data.push(message?.data)
-                _this.setState({messages: data})
-                if (document.getElementById('messages'))
-                    document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                if (message.data.uid !== _this.state.user[0].id){
+                    data.push(message?.data)
+                    _this.setState({messages: data})
+                    if (document.getElementById('messages'))
+                        document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                }
             }
 
 
