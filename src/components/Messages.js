@@ -251,14 +251,16 @@ class Messages extends Component{
     }
 
     read = (cid) => {
-        fetch(`/api/messages/${cid}`, {
+        let pathMessages = `/api/messages/${cid}`
+        let pathReadMessages = `/api/read_messages/${cid}`
+        fetch(pathReadMessages, {
             method: "POST",
             body: JSON.stringify({})
         })
             .then(response => response.json())
             .then(res => {
                 console.log(res)
-                fetch(path, {
+                fetch(pathMessages, {
                     method: "GET"
                 })
                     .then(response => response.json())
