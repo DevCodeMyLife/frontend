@@ -65,7 +65,23 @@ class Nav extends Component{
                                     this_.state.audio.play();
                                     console.log('Playback resumed successfully');
                                 });
-                                toast.info('Новое событие!', {
+                                toast.info('Вашу заметку посмотрели.', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                break;
+                            case "comment":
+                                this_.setState({notification_count: this_.state.notification_count + 1 })
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                    console.log('Playback resumed successfully');
+                                });
+                                toast.info('Вашу заметку прокомментировали.', {
                                     position: "top-center",
                                     autoClose: 5000,
                                     hideProgressBar: true,
@@ -77,7 +93,7 @@ class Nav extends Component{
                                 break;
                             case "message":
                                 this_.setState({messagesCount: this_.state.messagesCount + 1 })
-                                toast.info('Новое сообщение!', {
+                                toast.info('Вам пришло новое сообщение.', {
                                     position: "top-center",
                                     autoClose: 5000,
                                     hideProgressBar: true,
