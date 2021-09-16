@@ -103,6 +103,26 @@ class Nav extends Component{
                                     progress: undefined,
                                 });
                                 break;
+                            case "update":
+                                fetch("/api/authentication", {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        "finger": window.localStorage.getItem("finger")
+                                    })
+                                })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res.status.code === 0) {
+                                            this.setState({
+                                                auth: true,
+                                                data: res.data,
+                                                messagesCount: res.count_message,
+                                                notification_count: res.notification_count
+                                            });
+                                        }
+                                    })
+
+                                break;
                             default:
                                 console.log("[ unidentified event ]")
                         }
