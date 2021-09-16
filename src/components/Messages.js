@@ -184,11 +184,6 @@ class Messages extends Component{
                     .then(res => {
                         _this.clearInput(event.target)
 
-
-
-                        if (document.getElementById('messages'))
-                            document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
-
                     })
                     .catch(error => {
                         console.log(error)
@@ -296,6 +291,8 @@ class Messages extends Component{
                                 dialog: true,
                                 cid: cid
                             })
+
+
 
                             // document.getElementById(
                             //     'messages').scrollTo(
