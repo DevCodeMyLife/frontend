@@ -92,16 +92,18 @@ class Nav extends Component{
                                 });
                                 break;
                             case "message":
-                                this_.setState({messagesCount: event.count })
-                                toast.info('Вам пришло новое сообщение.', {
-                                    position: "top-center",
-                                    autoClose: 5000,
-                                    hideProgressBar: true,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                });
+                                if (window.location.pathname.match(/messages/) === null) {
+                                    this_.setState({messagesCount: event.count })
+                                    toast.info('Вам пришло новое сообщение.', {
+                                        position: "top-center",
+                                        autoClose: 5000,
+                                        hideProgressBar: true,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                    });
+                                }
                                 break;
                             case "update":
                                 fetch("/api/authentication", {
