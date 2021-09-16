@@ -415,6 +415,7 @@ class Messages extends Component{
                                                                     :
                                                                     <div className="message-item flex-start" style={{
                                                                         // display: "flex",
+                                                                        background: "rgb(215, 228, 252)",
                                                                         boxShadow: "none",
                                                                         // flexFlow: "column wrap"
                                                                     }}>
