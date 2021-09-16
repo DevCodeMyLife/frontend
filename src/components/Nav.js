@@ -65,9 +65,27 @@ class Nav extends Component{
                                     this_.state.audio.play();
                                     console.log('Playback resumed successfully');
                                 });
+                                toast.info('Новое событие!', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
                                 break;
                             case "message":
                                 this_.setState({messagesCount: this_.state.messagesCount + 1 })
+                                toast.info('Новое сообщение!', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
                                 break;
                             default:
                                 console.log("[ unidentified event ]")
@@ -84,12 +102,11 @@ class Nav extends Component{
     }
 
     render() {
-        const notify = () => toast("Wow so easy!");
         return (
             <div className="wrapper-vertical-nav" >
                 <ToastContainer
                     position="top-center"
-                    autoClose={5000}
+                    autoClose={2000}
                     hideProgressBar={false}
                     newestOnTop={false}
                     closeOnClick
@@ -106,7 +123,6 @@ class Nav extends Component{
                         :
                         this.state.auth ?
                             <div>
-                                <button onClick={notify}>Notify!</button>
                                 <div className="nav-item">
                                     <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
                                         <div  className="icon-image" >
