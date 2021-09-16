@@ -153,9 +153,11 @@ class Messages extends Component{
                             uid: this.state.user[0].id
                         }
 
-                        this.setState({
-                            messages: this.state.messages.push(mes)
-                        })
+                        console.log(mes)
+
+                        // this.setState({
+                        //     messages: this.state.messages.push(mes)
+                        // })
 
                         if (document.getElementById('messages'))
                             document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
