@@ -155,9 +155,11 @@ class Messages extends Component{
 
                         console.log(mes)
 
-                        // this.setState({
-                        //     messages: this.state.messages.push(mes)
-                        // })
+                        this.state.messages.push(mes)
+
+                        this.setState({
+                            messages: this.state.messages
+                        })
 
                         if (document.getElementById('messages'))
                             document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
