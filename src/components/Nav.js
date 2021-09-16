@@ -113,7 +113,7 @@ class Nav extends Component{
                                     .then(response => response.json())
                                     .then(res => {
                                         if (res.status.code === 0) {
-                                            this.setState({
+                                            this_.setState({
                                                 auth: true,
                                                 data: res.data,
                                                 messagesCount: res.count_message,
