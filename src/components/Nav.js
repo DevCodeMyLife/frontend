@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
 import code from "../icon/code.png";
@@ -82,8 +84,10 @@ class Nav extends Component{
     }
 
     render() {
+        const notify = () => toast("Wow so easy!");
         return (
             <div className="wrapper-vertical-nav" >
+                <ToastContainer />
                 {
                     !this.state.load ?
                         <div className="loader-flex">
@@ -92,6 +96,7 @@ class Nav extends Component{
                         :
                         this.state.auth ?
                             <div>
+                                <button onClick={notify}>Notify!</button>
                                 <div className="nav-item">
                                     <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
                                         <div  className="icon-image" >

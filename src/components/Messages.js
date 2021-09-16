@@ -445,7 +445,11 @@ class Messages extends Component{
                                                                         background: !message.read ? "rgb(215, 228, 252)" : "#fff",
                                                                         boxShadow: "none",
                                                                         // flexFlow: "column wrap"
-                                                                    }}>
+                                                                    }}
+                                                                    onMouseEnter={()=>{
+                                                                        this.read()
+                                                                    }}
+                                                                    >
                                                                         <div className="wrapper-data" style={{
                                                                             flexDirection: "row",
                                                                             borderRadius: "10px"
