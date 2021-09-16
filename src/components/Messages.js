@@ -190,23 +190,7 @@ class Messages extends Component{
         window.history.pushState({urlPath:`/messages?cid=${cid}`},"",`/messages?cid=${cid}`)
 
         let cent_channel = _this.state.cent.subscribe(cid, function (message) {
-            console.log("sub :" + cid)
             let data = _this.state.messages
-
-            // console.log(message?.data.login, _this.state.user[0].login)
-            // if (message?.data.login !== _this.state.user[0].login){
-            //     // let notification = new Notification(message.data.login,
-            //     //     { body: message.data.value.substring(0, 40) + "...", dir: 'auto', icon: message.data.avatar_url}
-            //     // );
-            //     // console.log(notification)
-            //     _this.state.context.resume().then(() => {
-            //         _this.state.audio.play();
-            //         console.log('Playback resumed successfully');
-            //     });
-            //
-            //
-            // }
-
 
             if (message.data?.input?.typing !== _this.state.user[0].login){
                 if (message.data?.input?.typing){
@@ -236,10 +220,6 @@ class Messages extends Component{
                         document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
                 }
             }
-
-
-
-            // document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
         });
 
         this.setState({
@@ -269,6 +249,18 @@ class Messages extends Component{
                 console.log(error)
             });
     }
+
+    read = (cid) => {
+        fetch(`/api/messages/${cid}`, {
+            method: "POST",
+            body: JSON.stringify({})
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+            })
+    }
+
 
     changerPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -307,8 +299,6 @@ class Messages extends Component{
                     this_.centrifuge.on('disconnect', function(){
                         console.log("[ centrifuge disconnected ]")
                     });
-
-
 
                     this_.centrifuge.subscribe("public", function(message) {
                         console.log(message);
@@ -362,9 +352,6 @@ class Messages extends Component{
                                         <div className="button-default" onClick={this.allMessage}>
                                             Все диалоги
                                         </div>
-                                        {/*<div className="button-default" onClick={this.createMessage}>*/}
-                                        {/*    Написать*/}
-                                        {/*</div>*/}
                                     </div>
                                 </div>
                                 {
@@ -447,7 +434,7 @@ class Messages extends Component{
                                                                         // flexFlow: "column wrap"
                                                                     }}
                                                                     onMouseEnter={()=>{
-                                                                        this.read()
+                                                                        this.read(message.c_id)
                                                                     }}
                                                                     >
                                                                         <div className="wrapper-data" style={{
