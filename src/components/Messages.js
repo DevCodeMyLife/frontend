@@ -258,10 +258,10 @@ class Messages extends Component{
                         cid: cid
                     })
 
-                    console.log(this.state.messages)
-
-                    document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
-
+                    document.getElementById(
+                        'messages').scrollTo(
+                            {top: document.getElementById(
+                                'messages').scrollHeight, left: 0, behavior: 'smooth' });
 
                 }
             })
@@ -556,20 +556,10 @@ class Messages extends Component{
                                                                             {chat.last_message?.substring(0, 40) + "..."}
                                                                         </div>
                                                                     </div>
-                                                                    {/*<div className="feed-item-title" style={{*/}
-                                                                    {/*    textAlign: "center",*/}
-                                                                    {/*    padding: "5px",*/}
-                                                                    {/*    width: "170px"*/}
-                                                                    {/*}}>*/}
-                                                                    {/*    <div className="last-message">*/}
-                                                                    {/*        {chat.last_message?.substring(0, 40) + "..."}*/}
-                                                                    {/*    </div>*/}
-                                                                    {/*</div>*/}
                                                                 </div>
                                                         )
                                                     }
                                                 </div>
-
 
                                 }
 
