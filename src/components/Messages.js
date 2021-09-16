@@ -112,6 +112,9 @@ class Messages extends Component{
             this.setState({
                 messages: this.state.messages
             })
+
+            if (document.getElementById('messages'))
+                document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
             fetch("/api/messages", {
                 method: "POST",
                 body: JSON.stringify(data)
@@ -166,6 +169,9 @@ class Messages extends Component{
             this.setState({
                 messages: this.state.messages
             })
+
+            if (document.getElementById('messages'))
+                document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
             event.preventDefault();
             _this.clearInput(event.target)
 
