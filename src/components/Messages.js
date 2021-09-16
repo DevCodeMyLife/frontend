@@ -145,6 +145,7 @@ class Messages extends Component{
                     .then(response => response.json())
                     .then(res => {
                         _this.clearInput(event.target)
+
                     })
                     .catch(error => {
                         console.log(error)
@@ -232,6 +233,8 @@ class Messages extends Component{
                         dialog: true,
                         cid: cid
                     })
+
+                    console.log(this.state.messages)
 
                     document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
 
