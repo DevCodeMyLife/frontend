@@ -49,7 +49,9 @@ class Nav extends Component{
 
 
                     this.centrifuge.setToken(res.token)
+                    this.centrifuge.disconnect()
                     this.centrifuge.connect();
+
 
                     if (this.state.channel)
                         this.state.channel.unsubscribe(`${this.state.data[0].id}`)
