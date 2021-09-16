@@ -23,7 +23,7 @@ export class Socket extends Component{
                     this.centrifuge.setToken(res.token)
 
                     let this_ = this
-                    this.centrifuge.subscribe(`${this_.state.data[0].id}`, function(message) {
+                    this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
                             console.log("[ private channel connect ]")
 
                             let event = message.data
@@ -32,11 +32,11 @@ export class Socket extends Component{
 
                             switch (event.type){
                                 case "event":
-                                    this_.setState({notification_count: event.count })
-                                    this_.state.context.resume().then(() => {
-                                        this_.state.audio.play();
-                                        console.log('Playback resumed successfully');
-                                    });
+                                    // this_.setState({notification_count: event.count })
+                                    // this_.state.context.resume().then(() => {
+                                    //     this_.state.audio.play();
+                                    //     console.log('Playback resumed successfully');
+                                    // });
                                     toast.info('Вашу заметку посмотрели.', {
                                         position: "top-center",
                                         autoClose: 5000,
@@ -48,11 +48,11 @@ export class Socket extends Component{
                                     });
                                     break;
                                 case "comment":
-                                    this_.setState({notification_count: event.count })
-                                    this_.state.context.resume().then(() => {
-                                        this_.state.audio.play();
-                                        console.log('Playback resumed successfully');
-                                    });
+                                    // this_.setState({notification_count: event.count })
+                                    // this_.state.context.resume().then(() => {
+                                    //     this_.state.audio.play();
+                                    //     console.log('Playback resumed successfully');
+                                    // });
                                     toast.info('Вашу заметку прокомментировали.', {
                                         position: "top-center",
                                         autoClose: 5000,
@@ -65,7 +65,7 @@ export class Socket extends Component{
                                     break;
                                 case "message":
                                     if (window.location.pathname.match(/messages/) === null) {
-                                        this_.setState({messagesCount: event.count })
+                                        // this_.setState({messagesCount: event.count })
                                         toast.info('Вам пришло новое сообщение.', {
                                             position: "top-center",
                                             autoClose: 5000,
