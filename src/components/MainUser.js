@@ -32,6 +32,7 @@ class MainUsers extends Component {
       notUser: false,
       close: true,
       load: false,
+      currentDateTime: new Date().getTime()
     }
   }
 
@@ -439,6 +440,12 @@ class MainUsers extends Component {
                             <div className="feed-item-value">
                               <div key="asldk" className="wrapper-data">
                                 <div key="aksdlkasd"  className="photo-wrapper">
+                                  {
+                                    (this.state.currentDateTime - new Date(data?.last_active_at).getTime()) > 3600 ?
+                                        null
+                                        :
+                                        <div className="online_user" />
+                                  }
                                   <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
                                        onClick={(e) => {
                                          e.preventDefault();
