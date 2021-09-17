@@ -585,8 +585,8 @@ a {
   border: 1px solid #fafafa;
 
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
 }
 
 .button-auth:active {
