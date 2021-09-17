@@ -5,7 +5,6 @@ import { tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import Head from "./Header";
-import Nav from "./Nav";
 const gfm = require('remark-gfm')
 
 
@@ -279,142 +278,135 @@ class Feed extends Component {
     render() {
         let { isLoaded, result } = this.state;
         return (
-            <div className="wrapper-content">
-                <div className="content">
-                    <div id="vertical_menu" className="reviews-menu">
-                        <Nav />
+
+            <div className="content-wall-views">
+                <div className="wrapper-feed">
+                    <div className="wrapper-search wrapper-inline-block unselectable">
+                        <div>
+                            <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress} onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
+                        </div>
+                        <div className="tags-wrapper">
+                            <div className="button-default-tag tags-item unselectable button-select" id="all" action="all" onClick={this.handleClickTag}>
+                                Все
+                            </div>
+                            <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
+                                Топ 10 недели
+                            </div>
+                        </div>
                     </div>
-                    <div className="content-wall-views">
-                        <div className="wrapper-feed">
-                            <div className="wrapper-search wrapper-inline-block unselectable">
-                                <div>
-                                    <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress} onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
-                                </div>
-                                <div className="tags-wrapper">
-                                    <div className="button-default-tag tags-item unselectable button-select" id="all" action="all" onClick={this.handleClickTag}>
-                                        Все
-                                    </div>
-                                    <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
-                                        Топ 10 недели
-                                    </div>
+
+                    {
+                        isLoaded === "load" ?
+                            <div className="loader-wrapper feed-wrapper">
+                                <div className="loader">
+
                                 </div>
                             </div>
-
-                            {
-                                isLoaded === "load" ?
-                                    <div className="loader-wrapper feed-wrapper">
-                                        <div className="loader">
-
+                            :
+                            isLoaded === "error" ?
+                                <div>
+                                    <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                </div>
+                                :
+                                isLoaded === "OnFocusSearch" ?
+                                    <div className="feed-wrapper">
+                                        <div className="not_news">
+                                            Начните вводить и мы начнем искать...
                                         </div>
                                     </div>
                                     :
-                                    isLoaded === "error" ?
-                                        <div>
-                                            <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                    result.length === 0 ?
+                                        <div className="feed-wrapper">
+                                            <div className="not_news">
+                                                К сожалению показать нечего 🙁
+                                            </div>
                                         </div>
                                         :
-                                        isLoaded === "OnFocusSearch" ?
-                                            <div className="feed-wrapper">
-                                                <div className="not_news">
-                                                    Начните вводить и мы начнем искать...
-                                                </div>
-                                            </div>
-                                            :
-                                            result.length === 0 ?
-                                                <div className="feed-wrapper">
-                                                    <div className="not_news">
-                                                        К сожалению показать нечего 🙁
-                                                    </div>
-                                                </div>
-                                                :
 
-                                                <div className="feed-wrapper">
-                                                    {result.map(data =>
-                                                        <div key={data?.ID}  className="feed-wrapper-item">
-                                                            {/*<div className="feed-item-title">*/}
-                                                            {/*    <div className="wrapper-flex-start">{data?.title}</div>*/}
-                                                            {/*    <div key="mamdmkamasdasd" className="author-name wrapper-flex-end unselectable" onClick={(e) => {*/}
-                                                            {/*        e.preventDefault();*/}
-                                                            {/*        window.open('https://github.com/' + data?.user, "_blank");*/}
-                                                            {/*    }}>*/}
-                                                            {/*        {data?.user}*/}
-                                                            {/*    </div>*/}
-                                                            {/*</div>*/}
+                                        <div className="feed-wrapper">
+                                            {result.map(data =>
+                                                <div key={data?.ID}  className="feed-wrapper-item">
+                                                    {/*<div className="feed-item-title">*/}
+                                                    {/*    <div className="wrapper-flex-start">{data?.title}</div>*/}
+                                                    {/*    <div key="mamdmkamasdasd" className="author-name wrapper-flex-end unselectable" onClick={(e) => {*/}
+                                                    {/*        e.preventDefault();*/}
+                                                    {/*        window.open('https://github.com/' + data?.user, "_blank");*/}
+                                                    {/*    }}>*/}
+                                                    {/*        {data?.user}*/}
+                                                    {/*    </div>*/}
+                                                    {/*</div>*/}
 
-                                                            <div className="feed-item-value" >
-                                                                <div key="asldk" className="wrapper-data">
-                                                                    <div key="aksdlkasd"  className="photo-wrapper">
-                                                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.id} onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            window.location.href = `/user?id=${data?.uid}`
-                                                                        }} />
-                                                                    </div>
-                                                                    <div className="value-post">
-                                                                        <div className="feed-item-title">
-                                                                            <div className="link-user" onClick={(e) => {
-                                                                                e.preventDefault();
-                                                                                window.location.href = `/user?id=${data?.uid}`
-                                                                            }}>
-                                                                                {data?.user}
-                                                                            </div>
-                                                                            <div className="feed-item-datetime">
-                                                                                {this.unixToDateTime(data?.date_time)}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div key="asldkasd" className="wrapper-data">
-                                                                    {/*<div key="aksdlkasdasd"  className="photo-wrapper">*/}
-
-                                                                    {/*</div>*/}
-                                                                    <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components} onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        window.location.href = `/post?uuid=${data?.ID}`
-                                                                    }}>
-                                                                        {data?.value?.substring(0, 900) + "..."}
-                                                                    </ReactMarkdown>
-                                                                </div>
+                                                    <div className="feed-item-value" >
+                                                        <div key="asldk" className="wrapper-data">
+                                                            <div key="aksdlkasd"  className="photo-wrapper">
+                                                                <img key="asdmmmmasd" src={data?.photo} alt={data?.id} onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    window.location.href = `/user?id=${data?.uid}`
+                                                                }} />
                                                             </div>
-                                                            <div className="wrapper-bottom">
-                                                                <div className="wrapper-flex-start">
-                                                                    <div className="button-default" onClick={(e) => {
+                                                            <div className="value-post">
+                                                                <div className="feed-item-title">
+                                                                    <div className="link-user" onClick={(e) => {
                                                                         e.preventDefault();
-                                                                        window.location.href = `/post?uuid=${data?.ID}`
-                                                                    }}>Подробнее</div>
-                                                                </div>
-                                                                <div className="like_wrapper wrapper-flex-end">
-                                                                    <div className="like">
-                                                                        <div className="like-item">
-                                                                            <img src={look}  alt="like"/>
-                                                                        </div>
-                                                                        <div className="like-item">
-                                                            <span className="like-count">
-                                                                {data?.look_count}
-                                                            </span>
-                                                                        </div>
+                                                                        window.location.href = `/user?id=${data?.uid}`
+                                                                    }}>
+                                                                        {data?.user}
                                                                     </div>
-                                                                    <div className="like">
-                                                                        <div className="like-item" onClick={() => this.like(data?.ID)}>
-                                                                            <img src={like}  alt="like"/>
-                                                                        </div>
-                                                                        <div className="like-item">
-                                                            <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like}
-                                                            </span>
-                                                                        </div>
+                                                                    <div className="feed-item-datetime">
+                                                                        {this.unixToDateTime(data?.date_time)}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    )}
-                                                </div>
-                            }
+                                                        <div key="asldkasd" className="wrapper-data">
+                                                            {/*<div key="aksdlkasdasd"  className="photo-wrapper">*/}
 
-                        </div>
-                    </div>
+                                                            {/*</div>*/}
+                                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components} onClick={(e) => {
+                                                                e.preventDefault();
+                                                                window.location.href = `/post?uuid=${data?.ID}`
+                                                            }}>
+                                                                {data?.value?.substring(0, 900) + "..."}
+                                                            </ReactMarkdown>
+                                                        </div>
+                                                    </div>
+                                                    <div className="wrapper-bottom">
+                                                        <div className="wrapper-flex-start">
+                                                            <div className="button-default" onClick={(e) => {
+                                                                e.preventDefault();
+                                                                window.location.href = `/post?uuid=${data?.ID}`
+                                                            }}>Подробнее</div>
+                                                        </div>
+                                                        <div className="like_wrapper wrapper-flex-end">
+                                                            <div className="like">
+                                                                <div className="like-item">
+                                                                    <img src={look}  alt="like"/>
+                                                                </div>
+                                                                <div className="like-item">
+                                                    <span className="like-count">
+                                                        {data?.look_count}
+                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="like">
+                                                                <div className="like-item" onClick={() => this.like(data?.ID)}>
+                                                                    <img src={like}  alt="like"/>
+                                                                </div>
+                                                                <div className="like-item">
+                                                    <span className="like-count" id={data?.ID}>
+                                                        {data?.count_like}
+                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                    }
+
                 </div>
             </div>
-
         );
     }
 }

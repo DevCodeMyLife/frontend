@@ -20,6 +20,7 @@ import Freelances from "./components/Freelances";
 import Notification from "./components/Notification";
 import Teams from "./components/Teams";
 import {PushStorage} from "./components/PushStorage";
+import Nav from "./components/Nav";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -305,21 +306,25 @@ class App extends React.Component {
                             <BrowserRouter>
                                 <Switch>
                                     <Route path="/" render={({history, match}) =>
-                                        <Router
-                                            routes={this.routes}
-                                            history={history}
-                                            basename={match.url}
-                                        >
-                                            <Suspense fallback={null}>
-                                                <View/>
-                                            </Suspense>
-                                        </Router>
+                                        <div className="wrapper-content">
+                                            <div className="content">
+                                                <div id="vertical_menu" className="reviews-menu">
+                                                    <Nav />
+                                                </div>
+                                                <Router
+                                                    routes={this.routes}
+                                                    history={history}
+                                                    basename={match.url}
+                                                >
+                                                    <Suspense fallback={null}>
+                                                        <View/>
+                                                    </Suspense>
+                                                </Router>
+                                            </div>
+                                        </div>
                                     } />
                                 </Switch>
                             </BrowserRouter>
-                            {/*<div className="footer">*/}
-                            {/*    © {new Date().getFullYear()} DevCodeMyLife*/}
-                            {/*</div>*/}
                             <Footer />
                         </div>
                     </HelmetProvider>
@@ -330,9 +335,6 @@ class App extends React.Component {
                         <Head auth={false} load={true} />
                         <Main />
                         <Footer />
-                        {/*<div className="footer">*/}
-                        {/*    © {new Date().getFullYear()} DevCodeMyLife*/}
-                        {/*</div>*/}
                     </div>
                 );
             }
