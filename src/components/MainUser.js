@@ -355,7 +355,7 @@ class MainUsers extends Component {
                                         <img key="asdmmmmasd" src={res?.avatar_url} alt={res?.login}
                                              onClick={(e) => {
                                                e.preventDefault();
-                                               window.location.href = `/user?id=${res?.uid}`
+                                               window.location.href = `/user?id=${this.state.data[0].id}`
                                              }}
                                         />
                                       </div>
