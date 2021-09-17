@@ -38,7 +38,9 @@ export class PushStorage extends Component{
                         console.log("PushStorage downtime", time)
                     })
 
-                    this.subscribe()
+                    this.channel = this.centrifuge.subscribe(this.client, function (message){
+                        console.log(message)
+                    })
                 }
             })
     }
@@ -46,12 +48,6 @@ export class PushStorage extends Component{
     static down(){
         if (this.channel)
             this.channel.unsubscribe(this.client)
-    }
-
-    static subscribe(){
-        this.channel = this.centrifuge.subscribe(this.client, function (message){
-            console.log(message)
-        })
     }
 
     // static run() {
