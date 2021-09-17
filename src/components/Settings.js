@@ -8,50 +8,42 @@ class Settings extends Component{
 
     }
 
-
-
     render() {
-
-        if (this.state.loadCent) {
-            return (
-                        <div className="content-wall-views">
-                            <div className="feed-wrapper">
-                                <div className="main-place-wrapper-settings">
-                                    <div className="block-settings child_settings">
-                                        <div className="key-settings">
-                                            Публиковать заметки приватно
-                                        </div>
-                                        <div className="value-settings">
-                                            <Switch enable={false} callBack={()=> {}}/>
-                                        </div>
-                                        {/*<div className="separator" />*/}
-                                    </div>
-                                    <div className="block-settings child_settings">
-                                        <div className="key-settings">
-                                            Экспортировать GitHub Gists
-                                        </div>
-                                        <div className="value-settings">
-                                            <Switch enable={false} callBack={()=> {}}/>
-                                        </div>
-                                        {/*<div className="separator" />*/}
-                                    </div>
-                                    <div className="block-settings child_settings">
-                                        <div className="key-settings">
-                                            Участвовать в тестировании
-                                        </div>
-                                        <div className="value-settings">
-                                            <Switch enable={false} callBack={()=> {}}/>
-                                        </div>
-                                        {/*<div className="separator" />*/}
-                                    </div>
-                                </div>
+        return (
+            <div className="content-wall-views">
+                <div className="feed-wrapper">
+                    <div className="main-place-wrapper-settings">
+                        <div className="block-settings child_settings">
+                            <div className="key-settings">
+                                Публиковать заметки приватно
                             </div>
+                            <div className="value-settings">
+                                <Switch enable={false} callBack={()=> {}}/>
+                            </div>
+                            {/*<div className="separator" />*/}
                         </div>
-
-            );
-        }else{
-            return null
-        }
+                        <div className="block-settings child_settings">
+                            <div className="key-settings">
+                                Экспортировать GitHub Gists
+                            </div>
+                            <div className="value-settings">
+                                <Switch enable={false} callBack={()=> {}}/>
+                            </div>
+                            {/*<div className="separator" />*/}
+                        </div>
+                        <div className="block-settings child_settings">
+                            <div className="key-settings">
+                                Участвовать в тестировании
+                            </div>
+                            <div className="value-settings">
+                                <Switch enable={false} callBack={()=> {}}/>
+                            </div>
+                            {/*<div className="separator" />*/}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
 }
