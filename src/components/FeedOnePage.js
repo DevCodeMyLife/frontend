@@ -279,7 +279,7 @@ class FeedOnePage extends Component {
                                                                                                          alt={com?.user}
                                                                                                          onClick={(e) => {
                                                                                                              e.preventDefault();
-                                                                                                             window.location.href = `/user?id=${com?.uid}`
+                                                                                                             window.location.href = `/user?id=${com?.user_id}`
                                                                                                          }}
                                                                                                     />
                                                                                                 </div>
@@ -287,9 +287,9 @@ class FeedOnePage extends Component {
                                                                                                     <div className="feed-item-title">
                                                                                                         <div className="link-user" onClick={(e) => {
                                                                                                             e.preventDefault();
-                                                                                                            window.location.href = `/user?id=${com?.uid}`
+                                                                                                            window.location.href = `/user?id=${com?.user_id}`
                                                                                                         }}>
-                                                                                                            {data?.user}
+                                                                                                            {com?.user}
                                                                                                         </div>
                                                                                                         <div
                                                                                                             className="feed-item-datetime">
