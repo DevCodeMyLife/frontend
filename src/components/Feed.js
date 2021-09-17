@@ -339,6 +339,7 @@ class Feed extends Component {
                                                     <div className="feed-item-value" >
                                                         <div key="asldk" className="wrapper-data">
                                                             <div key="aksdlkasd"  className="photo-wrapper">
+                                                                <div className="online_user" />
                                                                 <img key="asdmmmmasd" src={data?.photo} alt={data?.id} onClick={(e) => {
                                                                     e.preventDefault();
                                                                     window.location.href = `/user?id=${data?.uid}`

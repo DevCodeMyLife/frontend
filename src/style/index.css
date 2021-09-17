@@ -577,6 +577,18 @@ a {
   font-size: 14px;
 }
 
+.online_user {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #07bc0c;
+  border: 1px solid #fafafa;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .button-auth:active {
   background: #5fc956;
 }
@@ -1412,6 +1424,7 @@ p {
 
 
 .photo-wrapper {
+  position: relative;
   display: inline-block;
   width: 50px;
   text-align: center;
