@@ -88,8 +88,11 @@ class App extends React.Component {
                     if (res.status.code === 0){
                         auth = true
                         user = res.data
+                        if (window.location.pathname.match("/") === true) {
+                            window.location.href = '/feeds'
+                        }
 
-                        window.location.href = '/feeds'
+
 
 
                         this.setState({
