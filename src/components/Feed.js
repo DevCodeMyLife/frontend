@@ -340,13 +340,13 @@ class Feed extends Component {
                                                     <div className="feed-item-value" >
                                                         <div key="asldk" className="wrapper-data">
                                                             <div key="aksdlkasd"  className="photo-wrapper">
+
                                                                 {
                                                                     (this.state.currentDateTime - new Date(data.last_active_at).getTime()) > 3600 ?
                                                                         null
                                                                     :
                                                                         <div className="online_user" />
                                                                 }
-                                                                <div className="online_user" />
                                                                 <img key="asdmmmmasd" src={data?.photo} alt={data?.id} onClick={(e) => {
                                                                     e.preventDefault();
                                                                     window.location.href = `/user?id=${data?.uid}`
