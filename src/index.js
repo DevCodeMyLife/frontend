@@ -89,7 +89,7 @@ class App extends React.Component {
                         auth = true
                         user = res.data
 
-
+                        window.location.href = '/feeds'
 
 
                         this.setState({
