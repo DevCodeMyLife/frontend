@@ -204,11 +204,21 @@ class FeedOnePage extends Component {
                                             <div className="feed-item-value">
                                                 <div key="asldk" className="wrapper-data">
                                                     <div key="aksdlkasd"  className="photo-wrapper">
-                                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.user} />
+                                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
+                                                             onClick={(e) => {
+                                                                 e.preventDefault();
+                                                                 window.location.href = `/user?id=${data?.uid}`
+                                                             }}
+                                                        />
                                                     </div>
                                                     <div className="value-post">
                                                         <div className="feed-item-title">
-                                                            {data?.user}
+                                                            <div className="link-user" onClick={(e) => {
+                                                                e.preventDefault();
+                                                                window.location.href = `/user?id=${data?.uid}`
+                                                            }}>
+                                                                {data?.user}
+                                                            </div>
                                                             <div className="feed-item-datetime">
                                                                 {this.unixToDateTime(data?.date_time)}
                                                             </div>
@@ -266,11 +276,21 @@ class FeedOnePage extends Component {
                                                                                                      className="photo-wrapper">
                                                                                                     <img key="asdmmmmasd"
                                                                                                          src={com?.photo}
-                                                                                                         alt={com?.user}/>
+                                                                                                         alt={com?.user}
+                                                                                                         onClick={(e) => {
+                                                                                                             e.preventDefault();
+                                                                                                             window.location.href = `/user?id=${com?.uid}`
+                                                                                                         }}
+                                                                                                    />
                                                                                                 </div>
                                                                                                 <div className="value-post">
                                                                                                     <div className="feed-item-title">
-                                                                                                        {com?.user}
+                                                                                                        <div className="link-user" onClick={(e) => {
+                                                                                                            e.preventDefault();
+                                                                                                            window.location.href = `/user?id=${com?.uid}`
+                                                                                                        }}>
+                                                                                                            {data?.user}
+                                                                                                        </div>
                                                                                                         <div
                                                                                                             className="feed-item-datetime">
                                                                                                             {this.unixToDateTime(com?.date_time)}
