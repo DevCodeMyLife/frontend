@@ -19,7 +19,6 @@ import Settings from "./components/Settings";
 import Freelances from "./components/Freelances";
 import Notification from "./components/Notification";
 import Teams from "./components/Teams";
-import {PushStorage} from "./components/PushStorage";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 
@@ -68,8 +67,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        PushStorage.run()
-
         this.setState({
             headComponent: <Head
                 auth={false}
