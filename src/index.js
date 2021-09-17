@@ -86,7 +86,6 @@ class App extends React.Component {
         })
 
         let check = true
-        let this_ = this
         if (check){
             fetch("/api/authentication", {
                 method: "POST",
