@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ToastContainer } from 'react-toastify';
-import { Socket } from './Socket'
+import { PushStorage } from './PushStorage'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
@@ -27,7 +27,7 @@ class Nav extends Component{
     }
 
     componentDidMount() {
-        Socket.run()
+        PushStorage.start()
 
         fetch("/api/authentication", {
             method: "POST",
