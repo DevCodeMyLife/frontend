@@ -9,7 +9,7 @@ class Main extends Component {
                     <div className="content-wall-views">
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
-                                <div className="button-default"
+                                <div className="button-auth"
                                      onClick={
                                          () => {
                                              window.location.href = "https://github.com/login/oauth/authorize?client_id=7262f0da224a3673dee9&redirect_uri=http://devcodemylife.tech/api/oauth/github/redirect&scope=email&state=asiud88as7d&login=devcodemylife&allow_signup=true"
