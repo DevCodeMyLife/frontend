@@ -321,11 +321,6 @@ class Freelances extends Component{
 
         if (this.state.loadCent) {
             return (
-                <div className="wrapper-content">
-                    <div className="content">
-                        <div id="vertical_menu" className="reviews-menu">
-                            <Nav />
-                        </div>
                         <div className="content-wall-views">
                             <div className="wrapper-search wrapper-inline-block unselectable">
                                 <div>
@@ -341,8 +336,7 @@ class Freelances extends Component{
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+
             );
         }else{
             return null

@@ -11,11 +11,7 @@ class Teams extends Component {
 
     render() {
         return (
-            <div className="wrapper-content">
-                <div className="content">
-                    <div id="vertical_menu" className="reviews-menu">
-                        <Nav />
-                    </div>
+
                     <div className="content-wall-views">
                         <div className="wrapper-feed">
                             <div className="feed-wrapper">
@@ -27,8 +23,7 @@ class Teams extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
         )
     }
 }

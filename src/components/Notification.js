@@ -73,11 +73,7 @@ class Notification extends Component {
     render() {
         const { notifications } = this.state;
         return (
-            <div className="wrapper-content">
-                <div className="content">
-                    <div id="vertical_menu" className="reviews-menu">
-                        <Nav />
-                    </div>
+
                     <div className="content-wall-views">
                         <div className="wrapper-feed">
                             <div className="feed-wrapper">
@@ -119,8 +115,7 @@ class Notification extends Component {
                         </div>
 
                     </div>
-                </div>
-            </div>
+
         )
     }
 }

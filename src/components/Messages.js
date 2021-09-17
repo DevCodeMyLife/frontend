@@ -396,11 +396,6 @@ class Messages extends Component{
 
         if (this.state.loadCent) {
             return (
-                <div className="wrapper-content">
-                    <div className="content">
-                        <div id="vertical_menu" className="reviews-menu">
-                            <Nav />
-                        </div>
                         <div className="content-wall-views">
                             <div className="wrapper-content-default">
                                 <div className="messages-control-nav">
@@ -609,8 +604,7 @@ class Messages extends Component{
 
                             </div>
                         </div>
-                    </div>
-                </div>
+
             );
         }else{
             return null

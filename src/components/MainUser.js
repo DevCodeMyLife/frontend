@@ -283,11 +283,6 @@ class MainUsers extends Component {
   render(){
     let { isLoaded, textNews, mainFeed, result, clicked_new_post } = this.state;
     return (
-        <div className="wrapper-content">
-          <div className="content">
-            <div id="vertical_menu" className="reviews-menu">
-              <Nav />
-            </div>
             <div className="content-wall-views">
               {
                 isLoaded ?
@@ -540,8 +535,7 @@ class MainUsers extends Component {
                             </div>
               }
             </div>
-          </div>
-        </div>
+
     )
   }
 }

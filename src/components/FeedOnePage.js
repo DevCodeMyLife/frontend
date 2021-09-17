@@ -186,11 +186,6 @@ class FeedOnePage extends Component {
     render(){
         let { isLoadedFeed, feed, result, comments, counter } = this.state;
         return (
-            <div className="wrapper-content">
-                <div className="content">
-                    <div id="vertical_menu" className="reviews-menu">
-                        <Nav />
-                    </div>
                     <div className="content-wall-views">
                         {
                             isLoadedFeed ?
@@ -385,8 +380,6 @@ class FeedOnePage extends Component {
                                 null
                         }
                     </div>
-                </div>
-            </div>
         )
     }
 }
