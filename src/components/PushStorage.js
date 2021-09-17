@@ -73,7 +73,7 @@ export class PushStorage extends Component{
                     this.centrifuge.setToken(res.token)
 
                     if (this.channel !== null)
-                        this.channel.unsubscribe(`${res.data[0].id}`)
+                        console.log(this.channel.unsubscribe(`${res.data[0].id}`))
 
                     // let this_ = this
                     this.channel = this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
