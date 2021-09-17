@@ -7,8 +7,8 @@ const CONFIG = {
 };
 
 export class PushStorage extends Component{
-    static client
-    static channel
+    static client = null
+    static channel = null
 
     static start(func){
         this.down()
