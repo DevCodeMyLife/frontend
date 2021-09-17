@@ -256,22 +256,6 @@ class Freelances extends Component{
             .then(res => {
                 if (res.status.code === 0){
 
-                    this_.centrifuge.setToken(res.token)
-                    this_.centrifuge.connect();
-
-                    this_.centrifuge.on('connect', function() {
-                        console.log("[ centrifuge connected ]")
-                    });
-                    this_.centrifuge.on('disconnect', function(){
-                        console.log("[ centrifuge disconnected ]")
-                    });
-
-
-
-                    this_.centrifuge.subscribe("public", function(message) {
-                        console.log(message);
-                    });
-
                     this_.changerPage()
 
                     this.setState({

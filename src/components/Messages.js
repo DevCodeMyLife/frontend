@@ -355,10 +355,6 @@ class Messages extends Component{
                         console.log("[ centrifuge disconnected ]")
                     });
 
-                    this_.centrifuge.subscribe("public", function(message) {
-                        console.log(message);
-                    });
-
                     this_.changerPage()
 
                     this.setState({

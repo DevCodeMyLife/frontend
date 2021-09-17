@@ -284,18 +284,16 @@ class App extends React.Component {
                             />
                             <BrowserRouter>
                                 <Switch>
-
                                     <Route path="/" render={({history, match}) =>
-
                                         <Router routes={this.routes} history={history} basename={match.url}>
                                             <div className="wrapper-content">
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
                                                         <Nav song={song} />
                                                     </div>
-                                                        <Suspense fallback={null}>
-                                                            <View/>
-                                                        </Suspense>
+                                                    <Suspense fallback={null}>
+                                                        <View/>
+                                                    </Suspense>
                                                 </div>
                                             </div>
                                         </Router>
