@@ -53,7 +53,8 @@ class Messages extends Component{
         console.log(this.state.cent_channel)
 
         if (this.state.cent_channel && this.state.cid) {
-            this.state.cent_channel.unsubscribe(this.state.cid)
+            this.state.cent_channel.unsubscribe();
+            this.state.cent_channel.removeAllListeners();
         }
 
         console.log(window.location.pathname)
@@ -238,7 +239,7 @@ class Messages extends Component{
                         document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
                 }
             }
-        });
+        })
 
         this.centrifuge.connect()
 
