@@ -568,7 +568,6 @@ a {
 
 .button-auth {
   background: #5fc953;
-  background: var(--white);
   color: #fff;
   border: 1px solid var(--button_border);
   padding: 15px;
@@ -579,7 +578,7 @@ a {
 }
 
 .button-auth:active {
-  background: #5549f2;
+  background: #5fc956;
 }
 
 .loader-small {
