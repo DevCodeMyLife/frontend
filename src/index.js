@@ -21,6 +21,7 @@ import Notification from "./components/Notification";
 import Teams from "./components/Teams";
 import {PushStorage} from "./components/PushStorage";
 import Nav from "./components/Nav";
+import song from "./sound/pop.mp3";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -309,7 +310,7 @@ class App extends React.Component {
                                         <div className="wrapper-content">
                                             <div className="content">
                                                 <div id="vertical_menu" className="reviews-menu">
-                                                    <Nav />
+                                                    <Nav song={song} />
                                                 </div>
                                                 <Router
                                                     routes={this.routes}

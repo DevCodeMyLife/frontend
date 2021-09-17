@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
@@ -7,7 +8,7 @@ import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import team from "../icon/team.png"
 import notification from "../icon/notification.png"
-import song from "../sound/pop.mp3";
+import Centrifuge from "centrifuge";
 
 class Nav extends Component{
     constructor(props) {
@@ -18,10 +19,10 @@ class Nav extends Component{
             auth: false,
             data: null,
             context: new AudioContext(),
-            audio: new Audio(song),
+            audio: new Audio(this.props.song),
             channel: null
         };
-
+        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
     componentDidMount() {
@@ -41,6 +42,93 @@ class Nav extends Component{
                         notification_count: res.notification_count
                     });
 
+                    this.centrifuge.setToken(res.token)
+
+                    // let this_ = this
+                   this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
+                        console.log("[ private channel connect ]")
+
+                        let event = message.data
+
+                        console.log(event)
+
+                        switch (event.type){
+                            case "event":
+                                this_.setState({notification_count: event.count })
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                    console.log('Playback resumed successfully');
+                                });
+                                toast.info('Вашу заметку посмотрели.', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                break;
+                            case "comment":
+                                this_.setState({notification_count: event.count })
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                    console.log('Playback resumed successfully');
+                                });
+                                toast.info('Вашу заметку прокомментировали.', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                break;
+                            case "message":
+                                if (window.location.pathname.match(/messages/) === null) {
+                                    this_.setState({messagesCount: event.count })
+                                    toast.info('Вам пришло новое сообщение.', {
+                                        position: "top-center",
+                                        autoClose: 5000,
+                                        hideProgressBar: true,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                    });
+                                }
+                                break;
+                            case "update":
+                                fetch("/api/authentication", {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        "finger": window.localStorage.getItem("finger")
+                                    })
+                                })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res.status.code === 0) {
+                                            this_.setState({
+                                                auth: true,
+                                                data: res.data,
+                                                messagesCount: res.count_message,
+                                                notification_count: res.notification_count
+                                            });
+                                        }
+                                    })
+
+                                break;
+                            default:
+                                console.log("[ unidentified event ]")
+                        }
+                    })
+
+                    this.centrifuge.connect()
+
+
+
+
 
                 }
                 this.setState({
@@ -54,6 +142,17 @@ class Nav extends Component{
     render() {
         return (
             <div className="wrapper-vertical-nav" >
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 {
                     !this.state.load ?
                         <div className="loader-flex">
