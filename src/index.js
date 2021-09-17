@@ -306,12 +306,12 @@ class App extends React.Component {
                             />
                             <BrowserRouter>
                                 <Switch>
-                                    <Route path="/" render={({history, match}) =>
-                                        <div className="wrapper-content">
-                                            <div className="content">
-                                                <div id="vertical_menu" className="reviews-menu">
-                                                    <Nav song={song} />
-                                                </div>
+                                    <div className="wrapper-content">
+                                        <div className="content">
+                                            <div id="vertical_menu" className="reviews-menu">
+                                                <Nav song={song} />
+                                            </div>
+                                            <Route path="/" render={({history, match}) =>
                                                 <Router
                                                     routes={this.routes}
                                                     history={history}
@@ -321,9 +321,9 @@ class App extends React.Component {
                                                         <View/>
                                                     </Suspense>
                                                 </Router>
-                                            </div>
+                                             } />
                                         </div>
-                                    } />
+                                    </div>
                                 </Switch>
                             </BrowserRouter>
                             <Footer />

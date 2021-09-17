@@ -28,11 +28,6 @@ class Freelances extends Component{
             data: null
         }
 
-        this.centrifuge = new Centrifuge(CONFIG.url);
-
-        this.setState({
-            cent: this.centrifuge
-        })
     }
 
     createMessage = (event) => {

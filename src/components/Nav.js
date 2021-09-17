@@ -26,7 +26,6 @@ class Nav extends Component{
             audio: new Audio(this.props.song),
             channel: null
         };
-        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
     componentDidMount() {
