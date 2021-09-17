@@ -38,6 +38,11 @@ export class PushStorage extends Component{
                         console.log("PushStorage downtime", time)
                     })
 
+                    this.centrifuge.on("unsubscribe", function (){
+                        let time = new Date().getTime()
+                        console.log("PushStorage unsubscribe", time)
+                    })
+
                     this.channel = this.centrifuge.subscribe(this.client, function (message){
                         console.log(message)
                     })
