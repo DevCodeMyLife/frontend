@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { ToastContainer } from 'react-toastify';
-import { PushStorage } from './PushStorage'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
@@ -27,8 +25,6 @@ class Nav extends Component{
     }
 
     componentDidMount() {
-        PushStorage.run()
-
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -58,17 +54,6 @@ class Nav extends Component{
     render() {
         return (
             <div className="wrapper-vertical-nav" >
-                <ToastContainer
-                    position="top-center"
-                    autoClose={2000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
                 {
                     !this.state.load ?
                         <div className="loader-flex">

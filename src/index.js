@@ -1,5 +1,6 @@
 import { mount, route } from 'navi'
 import { Router, View } from 'react-navi'
+import { ToastContainer } from 'react-toastify';
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.css'
@@ -18,6 +19,7 @@ import Settings from "./components/Settings";
 import Freelances from "./components/Freelances";
 import Notification from "./components/Notification";
 import Teams from "./components/Teams";
+import {PushStorage} from "./components/PushStorage";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -77,6 +79,8 @@ class App extends React.Component {
 
 
     componentDidMount() {
+        PushStorage.run()
+
         this.setState({
             headComponent: <Head
                 auth={false}
@@ -287,6 +291,17 @@ class App extends React.Component {
                                 this.state.headComponent
 
                             }
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={2000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                            />
                             <BrowserRouter>
                                 <Switch>
                                     <Route path="/" render={({history, match}) =>
