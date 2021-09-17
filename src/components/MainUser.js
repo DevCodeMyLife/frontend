@@ -335,7 +335,7 @@ class MainUsers extends Component {
                             {
                               Number(this.state.id) !== this.state.data[0].id ?
                                   <div className="button-default" onClick={this.createChat}>
-                                    Начать диалог
+                                    Написать сообщение
                                   </div>
                                   :
                                   null
