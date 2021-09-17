@@ -50,18 +50,6 @@ class App extends React.Component {
     }
 
     sendLogs(message) {
-        // fetch("/logs/gelf", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         "version": "1.1",
-        //         "host": document.location.host,
-        //         "short_message": message,
-        //         "level": 5, "_some_info": "foo"
-        //     }),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // }).then(_ => {})
     }
 
     checkCookie(cname) {
@@ -78,7 +66,6 @@ class App extends React.Component {
     delete_cookie(name) {
         document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
-
 
     componentDidMount() {
         PushStorage.run()
@@ -165,15 +152,6 @@ class App extends React.Component {
                     load={true}
                 />
             })
-        }
-
-
-        if (!window.Notification || !Notification.requestPermission){
-            console.log('...')
-        }else{
-            Notification.requestPermission(function(permission){
-                // console.log('Результат запроса прав:', permission);
-            });
         }
 
         cent = this.centrifuge
@@ -306,24 +284,23 @@ class App extends React.Component {
                             />
                             <BrowserRouter>
                                 <Switch>
-                                    <div className="wrapper-content">
-                                        <div className="content">
-                                            <div id="vertical_menu" className="reviews-menu">
-                                                <Nav song={song} />
+
+                                    <Route path="/" render={({history, match}) =>
+
+                                        <Router routes={this.routes} history={history} basename={match.url}>
+                                            <div className="wrapper-content">
+                                                <div className="content">
+                                                    <div id="vertical_menu" className="reviews-menu">
+                                                        <Nav song={song} />
+                                                    </div>
+                                                        <Suspense fallback={null}>
+                                                            <View/>
+                                                        </Suspense>
+                                                </div>
                                             </div>
-                                            <Route path="/" render={({history, match}) =>
-                                                <Router
-                                                    routes={this.routes}
-                                                    history={history}
-                                                    basename={match.url}
-                                                >
-                                                    <Suspense fallback={null}>
-                                                        <View/>
-                                                    </Suspense>
-                                                </Router>
-                                             } />
-                                        </div>
-                                    </div>
+                                        </Router>
+
+                                     } />
                                 </Switch>
                             </BrowserRouter>
                             <Footer />
