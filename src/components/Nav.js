@@ -172,7 +172,7 @@ class Nav extends Component{
                                             <img src={user} alt="messages" />
                                         </div>
                                         <div className="nav-value">
-                                            Ваша страница
+                                            Моя страница
                                         </div>
                                     </Link>
                                 </div>
