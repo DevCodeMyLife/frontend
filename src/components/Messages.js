@@ -50,6 +50,8 @@ class Messages extends Component{
             _createMessage: false
         })
 
+        console.log(this.state.cent_channel)
+
         if (this.state.cent_channel && this.state.cid) {
             this.state.cent_channel.unsubscribe(this.state.cid)
         }
