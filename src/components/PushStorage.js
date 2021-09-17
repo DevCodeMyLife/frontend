@@ -55,7 +55,9 @@ export class PushStorage extends Component{
     //         this.channel.unsubscribe(this.client)
     // }
 
+
     static run() {
+
         this.centrifuge = new Centrifuge(CONFIG.url);
 
         fetch("/api/authentication", {
@@ -71,7 +73,7 @@ export class PushStorage extends Component{
                     this.centrifuge.setToken(res.token)
 
                     // let this_ = this
-                    this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
+                    this.channel = this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
                             console.log("[ private channel connect ]")
 
                             let event = message.data
