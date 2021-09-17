@@ -12,9 +12,6 @@ class Header extends Component {
     }
 
     render() {
-        document.getElementsByClassName('content')[0].addEventListener("click", function(){
-            this.
-        })
         return (
             <header className="head">
                 <div className="rectangle-head">
