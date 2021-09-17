@@ -441,7 +441,7 @@ class MainUsers extends Component {
                               <div key="asldk" className="wrapper-data">
                                 <div key="aksdlkasd"  className="photo-wrapper">
                                   {
-                                    (this.state.currentDateTime - new Date(data?.last_active_at).getTime()) > 3600 ?
+                                    (this.state.currentDateTime - new Date(data?.last_active_at).getTime()) > 7200 ?
                                         null
                                         :
                                         <div className="online_user" />
