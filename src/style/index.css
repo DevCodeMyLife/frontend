@@ -1249,6 +1249,8 @@ p {
 
 .fake-textarea {
   padding: 8px;
+  background: var(--back_card);
+  border-radius: 10px;
 }
 
 
