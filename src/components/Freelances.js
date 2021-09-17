@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 import song from "../sound/pop.mp3"
-import Centrifuge from "centrifuge";
-
-const CONFIG = {
-    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
-};
 
 class Freelances extends Component{
     constructor(props) {
