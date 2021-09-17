@@ -4,7 +4,6 @@ import send from "../icon/send.png"
 import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
 import Centrifuge from "centrifuge";
-import Nav from "./Nav";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`

@@ -6,7 +6,6 @@ import like from "../icon/like.png"
 import look from "../icon/look.png"
 import TextareaAutosize from "react-textarea-autosize";
 import code from "../icon/code.png";
-import Nav from "./Nav";
 const gfm = require('remark-gfm')
 
 

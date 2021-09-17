@@ -1,5 +1,4 @@
 import React, { Component }  from "react";
-import Nav from "./Nav";
 
 class Notification extends Component {
     constructor(props) {

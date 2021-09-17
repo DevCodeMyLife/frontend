@@ -8,7 +8,6 @@ import look from "../icon/look.png";
 import open from "../icon/open.png"
 import close from "../icon/close.png"
 import code from "../icon/code.png";
-import Nav from "./Nav";
 
 const gfm = require('remark-gfm')
 

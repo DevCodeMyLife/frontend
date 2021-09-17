@@ -10,6 +10,10 @@ import team from "../icon/team.png"
 import notification from "../icon/notification.png"
 import Centrifuge from "centrifuge";
 
+const CONFIG = {
+    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
+};
+
 class Nav extends Component{
     constructor(props) {
         super(props);
@@ -44,7 +48,7 @@ class Nav extends Component{
 
                     this.centrifuge.setToken(res.token)
 
-                    // let this_ = this
+                    let this_ = this
                    this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
                         console.log("[ private channel connect ]")
 
