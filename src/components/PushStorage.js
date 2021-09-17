@@ -11,7 +11,7 @@ export class PushStorage extends Component{
     static channel = null
 
     static start(){
-        this.down()
+        // this.down()
 
         this.centrifuge = new Centrifuge(CONFIG.url);
         fetch("/api/authentication", {
