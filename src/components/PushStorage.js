@@ -44,7 +44,6 @@ export class PushStorage extends Component{
     static down(){
         if (this.channel)
             this.channel.unsubscribe()
-        this.centrifuge.disconnect()
     }
 
     static subscribe(func){
