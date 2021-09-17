@@ -352,7 +352,12 @@ class MainUsers extends Component {
 
                                     <div key={res.avatar_url} className="wrapper-data">
                                       <div key="aksdlkasd" className="photo-wrapper">
-                                        <img key="asdmmmmasd" src={res?.avatar_url} alt={res?.login}/>
+                                        <img key="asdmmmmasd" src={res?.avatar_url} alt={res?.login}
+                                             onClick={(e) => {
+                                               e.preventDefault();
+                                               window.location.href = `/user?id=${res?.uid}`
+                                             }}
+                                        />
                                       </div>
 
                                       <div className="value-post placeholder-main-feed" id="main_input" onClick={
@@ -434,11 +439,21 @@ class MainUsers extends Component {
                             <div className="feed-item-value">
                               <div key="asldk" className="wrapper-data">
                                 <div key="aksdlkasd"  className="photo-wrapper">
-                                  <img key="asdmmmmasd" src={data?.photo} alt={data?.user} />
+                                  <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
+                                       onClick={(e) => {
+                                         e.preventDefault();
+                                         window.location.href = `/user?id=${data?.uid}`
+                                       }}
+                                  />
                                 </div>
                                 <div className="value-post">
                                   <div className="feed-item-title">
-                                    {data?.user}
+                                    <div className="link-user" onClick={(e) => {
+                                      e.preventDefault();
+                                      window.location.href = `/user?id=${data?.uid}`
+                                    }}>
+                                      {data?.user}
+                                    </div>
                                     <div className="feed-item-datetime">
                                       {this.unixToDateTime(data?.date_time)}
                                     </div>
