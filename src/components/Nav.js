@@ -27,7 +27,7 @@ class Nav extends Component{
     }
 
     componentDidMount() {
-        PushStorage.start(null)
+        PushStorage.start()
 
         fetch("/api/authentication", {
             method: "POST",
