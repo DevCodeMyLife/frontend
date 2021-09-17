@@ -12,6 +12,9 @@ class Header extends Component {
     }
 
     render() {
+        document.getElementsByClassName('content')[0].addEventListener("click", function(){
+            this.
+        })
         return (
             <header className="head">
                 <div className="rectangle-head">
@@ -48,7 +51,15 @@ class Header extends Component {
                         </div>
                         {
                             this.state.showSettings ?
-                                <div className="settings-user">
+                                <div className="settings-user"
+                                onMouseLeave={
+                                    () => {
+                                        this.setState(prevState => ({
+                                            showSettings: !prevState.showSettings
+                                        }));
+                                    }
+                                }
+                                >
                                     <div className="settings-user-item" onClick={() => {
                                         window.location.href = `http://${window.location.host}/user?id=${this.state.user.id}`
                                     }}>
