@@ -29,11 +29,11 @@ export class PushStorage extends Component{
                     this.client = res.data[0].id
 
                     this.centrifuge.on("connect", function (){
-                        console.log(`PushStorage uptime ${new Date.now()}`)
+                        console.log(`PushStorage uptime`)
                     })
 
                     this.centrifuge.on("disconnect", function (){
-                        console.log(`PushStorage downtime ${new Date.now()}`)
+                        console.log(`PushStorage downtime`)
                     })
 
                     this.subscribe()
