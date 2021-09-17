@@ -102,7 +102,7 @@ class MainUsers extends Component {
 
           const urlParams = new URLSearchParams(window.location.search);
           const id = urlParams.get('id');
-          console.log(id)
+
           let path = `/api/user/${id}`
 
           fetch(path, {
