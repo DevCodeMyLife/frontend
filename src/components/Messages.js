@@ -238,6 +238,8 @@ class Messages extends Component{
             }
         });
 
+        this.centrifuge.connect()
+
         this.setState({
             cent_channel: cent_channel
         })
@@ -346,14 +348,6 @@ class Messages extends Component{
                 if (res.status.code === 0){
 
                     this_.centrifuge.setToken(res.token)
-                    this_.centrifuge.connect();
-
-                    this_.centrifuge.on('connect', function() {
-                        console.log("[ centrifuge connected ]")
-                    });
-                    this_.centrifuge.on('disconnect', function(){
-                        console.log("[ centrifuge disconnected ]")
-                    });
 
                     this_.changerPage()
 
