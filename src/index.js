@@ -100,24 +100,7 @@ class App extends React.Component {
                         auth = true
                         user = res.data
 
-                        this_.centrifuge.setToken(res.token)
-                        this_.centrifuge.connect();
 
-                        // this.centrifuge.setToken();
-                        //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM"
-
-                        this_.centrifuge.on('connect', function() {
-                            console.log("[ centrifuge connected ]")
-                        });
-                        this_.centrifuge.on('disconnect', function(){
-                            console.log("[ centrifuge disconnected ]")
-                        });
-
-
-
-                        this_.centrifuge.subscribe("public", function(message) {
-                            console.log(message);
-                        });
 
 
                         this.setState({
