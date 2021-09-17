@@ -7,7 +7,7 @@ const CONFIG = {
 };
 
 export class PushStorage extends Component{
-    static client = null
+    static client = ""
     static channel = null
 
     static start(){
@@ -29,11 +29,13 @@ export class PushStorage extends Component{
                     this.client = res.data[0].id
 
                     this.centrifuge.on("connect", function (){
-                        console.log(`PushStorage uptime`)
+                        let time = new Date().getTime()
+                        console.log("PushStorage uptime", time)
                     })
 
                     this.centrifuge.on("disconnect", function (){
-                        console.log(`PushStorage downtime`)
+                        let time = new Date().getTime()
+                        console.log("PushStorage downtime", time)
                     })
 
                     this.subscribe()
