@@ -294,12 +294,6 @@ class MainUsers extends Component {
                     <div className="feed-wrapper">
                       <div className="main-place-wrapper">
                         <div className="main-place-photo-column child">
-                          {
-                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
-                                <div className="offline_user"/>
-                                :
-                                <div className="online_user"/>
-                          }
                           <img src={result[0].avatar_url} alt={result[0]?.login}/>
                         </div>
                         <div className="main-place-info-column child">
@@ -463,9 +457,9 @@ class MainUsers extends Component {
                               <div key="asldk" className="wrapper-data">
                                 <div key="aksdlkasd"  className="photo-wrapper">
                                   {
-                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 7200 ?
+                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
                                         null
-                                        :
+                                    :
                                         <div className="online_user" />
                                   }
                                   <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
