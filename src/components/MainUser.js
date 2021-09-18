@@ -311,7 +311,7 @@ class MainUsers extends Component {
                                       :
                                       <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) )} минут назад.</span>
                                   :
-                                  null
+                                    <span className="info_status">Сейчас на сайте</span>
                             }
                           </div>
                           <div className="main-place name">
