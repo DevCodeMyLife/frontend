@@ -494,7 +494,7 @@ class MainUsers extends Component {
 
                                 {/*</div>*/}
                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components}>
-                                  {data?.value?.substring(0, 900) + "<br>..."}
+                                  {data?.value?.substring(0, 900) + "\n..."}
                                 </ReactMarkdown>
                               </div>
                             </div>
