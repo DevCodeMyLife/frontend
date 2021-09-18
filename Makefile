@@ -6,5 +6,5 @@ main:
 staging:
 	yarn install
 	yarn run build
-	docker build . -t registry.devcodemylife.tech/devcodemylife/app:test
-	docker push registry.devcodemylife.tech/devcodemylife/app:test
+	docker build . -t registry.devcodemylife.tech/devcodemylife/frontend:test
+	docker push registry.devcodemylife.tech/devcodemylife/frontend:test

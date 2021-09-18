@@ -54,15 +54,11 @@ class Nav extends Component{
                         console.log("[ private channel connect ]")
 
                         let event = message.data
-
-                        console.log(event)
-
                         switch (event.type){
                             case "event":
                                 this_.setState({notification_count: event.count })
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
-                                    console.log('Playback resumed successfully');
                                 });
                                 toast.info('Вашу заметку посмотрели.', {
                                     position: "top-center",
@@ -78,7 +74,6 @@ class Nav extends Component{
                                 this_.setState({notification_count: event.count })
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
-                                    console.log('Playback resumed successfully');
                                 });
                                 toast.info('Вашу заметку прокомментировали.', {
                                     position: "top-center",

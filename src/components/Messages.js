@@ -50,14 +50,12 @@ class Messages extends Component{
             _createMessage: false
         })
 
-        console.log(this.state.cent_channel)
 
         if (this.state.cent_channel && this.state.cid) {
             this.state.cent_channel.unsubscribe();
             this.state.cent_channel.removeAllListeners();
         }
 
-        console.log(window.location.pathname)
         if (event)
             window.history.pushState({urlPath:`/messages`},"",`/messages`)
 
@@ -225,11 +223,9 @@ class Messages extends Component{
             }
 
             if (message?.data?.login){
-                console.log(message?.data?.login, _this.state.user[0].login)
                 if (message?.data?.login !== _this.state.user[0].login){
                     _this.state.context.resume().then(() => {
                         _this.state.audio.play();
-                        console.log('Playback resumed successfully');
                     });
                 }
                 if (message.data.uid !== _this.state.user[0].id){
@@ -276,15 +272,12 @@ class Messages extends Component{
         let pathReadMessages = `/api/read_messages/${cid}`
 
 
-        console.log(pathMessages, pathReadMessages)
         fetch(pathReadMessages, {
             method: "POST",
             body: JSON.stringify({})
         })
             .then(response => response.json())
             .then(res => {
-                console.log(res)
-
                 fetch(pathMessages, {
                     method: "GET"
                 })
@@ -353,6 +346,20 @@ class Messages extends Component{
                     this_.centrifuge.setToken(res.token)
 
                     this_.changerPage()
+
+                    this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
+                        console.log("[ Connect updater pull ]")
+
+                        let event = message.data
+                        switch (event.type){
+                            case "update":
+                                this_.read(this_.state.cid)
+                                break
+                            default:
+                                console.log("")
+                                break
+                        }
+                    })
 
                     this.setState({
                         auth: true,
