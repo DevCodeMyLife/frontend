@@ -303,7 +303,7 @@ class MainUsers extends Component {
                           <img src={result[0].avatar_url} alt={result[0]?.login}/>
                         </div>
                         <div className="main-place-info-column child">
-                          <div className="main-place">
+                          <div className="main-place date_active">
                             {
                               (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
                                   (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 60 ?

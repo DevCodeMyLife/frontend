@@ -447,6 +447,10 @@ a {
   font-weight: bold;
 }
 
+.date_active {
+  margin-bottom: 20px;
+}
+
 .info_status {
   color: #8a8a8a;
   font-size: 14px;
