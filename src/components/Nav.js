@@ -228,7 +228,7 @@ class Nav extends Component{
                                             <img src={notification} alt="События" />
                                         </div>
                                         <div className="nav-value">
-                                            События
+                                            Уведомления
                                         </div>
                                     </Link>
                                 </div>
