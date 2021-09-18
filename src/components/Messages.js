@@ -364,6 +364,23 @@ class Messages extends Component{
                         token: res.token,
                         messagesCount: res.count_message
                     });
+
+                    this_.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
+                        console.log("[ private channel connect ]")
+
+                        let event = message.data
+
+                        console.log(event)
+
+                        switch (event.type){
+                            case "update":
+                                this_.read(this_.state.cid)
+                                break;
+                            default:
+                                console.log("[ unidentified event ]")
+                        }
+                    })
+
                 }else{
                     this.sendLogs(res.status.message)
                     this.delete_cookie("access_token")
