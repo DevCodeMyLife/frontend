@@ -228,8 +228,8 @@ class MainUsers extends Component {
   }
 
   getLastVisit = (d) => {
-    let date = new Date(d);
-    return date.getMinutes()
+
+    return Math.floor(d / 60000)
   }
 
   createChat = event => {
