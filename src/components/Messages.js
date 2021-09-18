@@ -139,8 +139,6 @@ class Messages extends Component{
 
         let value = event.target.value
 
-        this.read(this.state.cid)
-
         if (this.state.cent_channel){
             this.state.cent_channel.publish(
                 {
@@ -267,7 +265,7 @@ class Messages extends Component{
             });
     }
 
-    read(cid) {
+    read = (cid) => {
         let pathMessages = `/api/messages/${cid}`
         let pathReadMessages = `/api/read_messages/${cid}`
 
@@ -347,19 +345,57 @@ class Messages extends Component{
 
                     this_.changerPage()
 
-                    this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
-                        console.log("[ Connect updater pull ]")
-
-                        let event = message.data
-                        switch (event.type){
-                            case "update":
-                                this_.read(this_.state.cid)
-                                break
-                            default:
-                                console.log("")
-                                break
-                        }
-                    })
+                    // this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
+                    //     console.log("[ Connect updater pull ]")
+                    //
+                    //     let event = message.data
+                    //     if(event.type === "update") {
+                    //         let pathMessages = `/api/messages/${this_.state.cid}`
+                    //         let pathReadMessages = `/api/read_messages/${this_.state.cid}`
+                    //
+                    //
+                    //         fetch(pathReadMessages, {
+                    //             method: "POST",
+                    //             body: JSON.stringify({})
+                    //         })
+                    //             .then(response => response.json())
+                    //             .then(_ => {
+                    //                 fetch(pathMessages, {
+                    //                     method: "GET"
+                    //                 })
+                    //                     .then(response => response.json())
+                    //                     .then(res => {
+                    //                         if (res?.status?.code === 0){
+                    //                             this_.setState({
+                    //                                 messages: res?.data,
+                    //                                 dialog: true,
+                    //                                 cid: res?.cid
+                    //                             })
+                    //
+                    //
+                    //
+                    //                             // document.getElementById(
+                    //                             //     'messages').scrollTo(
+                    //                             //     {top: document.getElementById(
+                    //                             //             'messages').scrollHeight, left: 0, behavior: 'smooth' });
+                    //
+                    //                         }
+                    //                     })
+                    //                     .catch(error => {
+                    //                         this_.setState({
+                    //                             auth: false,
+                    //                             load: true
+                    //                         });
+                    //                     });
+                    //             })
+                    //             .catch(error => {
+                    //                 this_.setState({
+                    //                     auth: false,
+                    //                     load: true
+                    //                 });
+                    //             });
+                    //     }
+                    // })
 
                     this.setState({
                         auth: true,
