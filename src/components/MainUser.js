@@ -228,7 +228,7 @@ class MainUsers extends Component {
   }
 
   getLastVisit = (d) => {
-    let date = new Date(+d);
+    let date = new Date(d);
     return date.getMinutes()
   }
 
