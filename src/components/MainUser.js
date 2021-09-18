@@ -303,21 +303,23 @@ class MainUsers extends Component {
                           <img src={result[0].avatar_url} alt={result[0]?.login}/>
                         </div>
                         <div className="main-place-info-column child">
-                          <div className="main-place name">
-                            {
-                              result[0]?.name ?
-                                  " "+result[0].name
-                                  :
-                                  " "+result[0].login
-                            }
+                          <div className="main-place">
                             {
                               (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
                                   (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 60 ?
                                       <span className="info_status">Последняя активность была { (new Date(result[0]?.last_active_at).getTime() / 1000).toLocaleString() }</span>
 
                                       <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) )} минут назад.</span>
-                                :
+                                  :
                                   null
+                            }
+                          </div>
+                          <div className="main-place name">
+                            {
+                              result[0]?.name ?
+                                  " "+result[0].name
+                                  :
+                                  " "+result[0].login
                             }
                           </div>
                           <div className="main-place">
