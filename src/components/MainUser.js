@@ -294,6 +294,12 @@ class MainUsers extends Component {
                     <div className="feed-wrapper">
                       <div className="main-place-wrapper">
                         <div className="main-place-photo-column child">
+                          {
+                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
+                                <div className="offline_user"/>
+                                :
+                                <div className="online_user"/>
+                          }
                           <img src={result[0].avatar_url} alt={result[0]?.login}/>
                         </div>
                         <div className="main-place-info-column child">
@@ -308,7 +314,7 @@ class MainUsers extends Component {
                               (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
                                   <span>Был онлайн { this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000)))) } минут назад.</span>
                                 :
-                                  <div className="online_user"/>
+                                  null
                             }
                           </div>
                           <div className="main-place">

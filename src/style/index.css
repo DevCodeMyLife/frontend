@@ -589,6 +589,18 @@ a {
   right: 5px;
 }
 
+.offline_user {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a80808;
+  border: 1px solid #fafafa;
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 .button-auth:active {
   background: #5fc956;
 }
