@@ -173,7 +173,6 @@ class Feed extends Component {
                     isLoaded: "error",
                     result: {}
                 });
-                window.location.href = "/"
             });
 
         fetch("api/tags", {
@@ -315,7 +314,7 @@ class Feed extends Component {
                             </div>
                             {
                                 tags.map(data =>
-                                    <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
+                                    <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
                                         {data.value}
                                     </div>
                                 )
