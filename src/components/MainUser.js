@@ -227,6 +227,11 @@ class MainUsers extends Component {
     // `
   }
 
+  getLastVisit = (d) => {
+    let date = new Date(+d);
+    return date.getMinutes()
+  }
+
   createChat = event => {
     let data = {
       to_uid: Number(this.state.id)
@@ -298,6 +303,12 @@ class MainUsers extends Component {
                                   " "+result[0].name
                                   :
                                   " "+result[0].login
+                            }
+                            {
+                              (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 7200 ?
+                                  <span>Был онлайн { this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000)))) } минут назад.</span>
+                                :
+                                  <div className="online_user"/>
                             }
                           </div>
                           <div className="main-place">
