@@ -238,7 +238,7 @@ class Nav extends Component{
                                             <img  src={code} alt="Задачи" />
                                         </div>
                                         <div className="nav-value">
-                                            Задачи
+                                            Фриланс
                                         </div>
                                     </Link>
                                 </div>
