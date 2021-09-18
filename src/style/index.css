@@ -447,6 +447,15 @@ a {
   font-weight: bold;
 }
 
+.info_status {
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
+.info_status:after {
+  content: " ";
+}
+
 .main-place-photo-column {
   display: flex;
   justify-content: center;
@@ -455,6 +464,7 @@ a {
   padding: 20px;
   background: #fafafa;
   box-shadow: 0 0 2px var(--grey);
+  position: relative;
 }
 
 .main-place-photo-column > img {

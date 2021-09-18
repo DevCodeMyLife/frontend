@@ -312,7 +312,7 @@ class MainUsers extends Component {
                             }
                             {
                               (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
-                                  <span>Был онлайн { this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000)))) } минут назад.</span>
+                                  <span className="info_status">Был онлайн { this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000)))) } минут назад.</span>
                                 :
                                   null
                             }
