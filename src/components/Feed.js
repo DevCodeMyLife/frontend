@@ -18,8 +18,9 @@ class Feed extends Component {
             auth: false,
             messagesCount: 0,
             data: null,
-            currentDateTime: new Date().getTime()
-        };
+            currentDateTime: new Date().getTime(),
+            tags: []
+        }
     }
 
     like(uuid) {
@@ -175,6 +176,25 @@ class Feed extends Component {
                 window.location.href = "/"
             });
 
+        fetch("api/tags", {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(res => {
+
+                this.setState({
+                    tags: res.data
+                });
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    isLoaded: "error",
+                    result: {}
+                });
+            });
+
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -277,7 +297,7 @@ class Feed extends Component {
 // <img src={messages} alt="messages" path="/messages" />
 
     render() {
-        let { isLoaded, result } = this.state;
+        let { isLoaded, result, tags } = this.state;
         return (
 
             <div className="content-wall-views">
@@ -293,6 +313,13 @@ class Feed extends Component {
                             <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
                                 Топ 10 недели
                             </div>
+                            {
+                                tags.map(data =>
+                                    <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
+                                        {data.value}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
 
