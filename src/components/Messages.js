@@ -93,6 +93,8 @@ class Messages extends Component{
             c_id: this.state.cid
         }
 
+        this.read(this.state.cid)
+
         let value = document.getElementById("message_chat").value
 
         _this.clearInput(document.getElementById("message_chat"))
@@ -153,6 +155,8 @@ class Messages extends Component{
                 }
             );
         }
+
+        this.read(this.state.cid)
 
         if (event.keyCode===13){
             event.preventDefault();
@@ -265,7 +269,7 @@ class Messages extends Component{
             });
     }
 
-    read = (cid) => {
+    read(cid) {
         let pathMessages = `/api/messages/${cid}`
         let pathReadMessages = `/api/read_messages/${cid}`
 
