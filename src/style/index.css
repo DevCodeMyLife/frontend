@@ -711,7 +711,7 @@ a {
 }
 
 .auth-box-title {
-  padding: 20px;
+  padding: 20px 20px 20px 0;
   font-size: 14px;
   border-bottom: 1px solid #f6f6f6;
 }
