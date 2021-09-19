@@ -1,6 +1,5 @@
 import React, { Component }  from "react";
 import github from '../icon/logo_github.png'
-import Head from "./Header";
 
 
 class Main extends Component {
