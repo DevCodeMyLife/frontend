@@ -688,12 +688,7 @@ class MainUsers extends Component {
 
                                             </div>
                                             <div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>
-                                              {
-                                                  this.state.rewriteMode ?
-                                                      <div className="button-default" onClick={() => this.cancel()}>Отмена</div>
-                                                      :
-                                                      null
-                                              }
+                                              <div className="button-default" onClick={() => this.cancel()}>Отмена</div>
                                               {
                                                   this.state.rewriteMode ?
                                                       <div className="button-default" onClick={() => this.saveFeed()}>Сохранить</div>
