@@ -299,7 +299,7 @@ class MainUsers extends Component {
                         <div className="main-place-info-column child">
                           <div className="main-place date_active">
                             {
-                              (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
+                              (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 120 ?
                                   (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 60 ?
                                       <span className="info_status">Последняя активность была { new Date(result[0]?.last_active_at).toLocaleString() }</span>
                                       :
@@ -457,7 +457,7 @@ class MainUsers extends Component {
                               <div key="asldk" className="wrapper-data">
                                 <div key="aksdlkasd"  className="photo-wrapper">
                                   {
-                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 7200 ?
+                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(result[0]?.last_active_at).getTime() / 1000))) > 120 ?
                                         null
                                     :
                                         <div className="online_user" />

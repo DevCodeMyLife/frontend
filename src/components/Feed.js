@@ -368,7 +368,7 @@ class Feed extends Component {
                                                             <div key="aksdlkasd"  className="photo-wrapper">
 
                                                                 {
-                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 7200 ?
+                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
                                                                         null
                                                                     :
                                                                         <div className="online_user" />
