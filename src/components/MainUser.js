@@ -18,22 +18,105 @@ class MainUsers extends Component {
       name: "React"
     };
     this.state = {
-      error: false,
-      isLoaded: false,
-      result: null,
-      mainFeed: null,
-      textNews: "...",
-      heading: "...",
-      prevState: null,
-      clicked_new_post: false,
-      show_textarea: false,
-      id: 0,
-      data: [],
-      notUser: false,
-      close: true,
-      load: false,
-      currentDateTime: new Date().getTime()
+        error: false,
+        isLoaded: false,
+        result: null,
+        mainFeed: null,
+        showPreview: false,
+        textNews: "...",
+        heading: "...",
+        prevState: null,
+        clicked_new_post: false,
+        show_textarea: false,
+        id: 0,
+        data: [],
+        notUser: false,
+        close: true,
+        load: false,
+        rewriteMode: false,
+        rewriteValue: null,
+        currentDateTime: new Date().getTime()
     }
+  }
+
+  deleteFeed(uuid) {
+    fetch(`/api/feed/${uuid}`, {
+      method: "DELETE",
+      body: JSON.stringify({})
+    })
+        .then(response => response.json())
+        .then(_ => {
+          fetch("/api/authentication", {
+            method: "POST",
+            body: JSON.stringify({
+              "finger": window.localStorage.getItem("finger")
+            })
+          })
+              .then(response => response.json())
+              .then(res => {
+                if (res.status.code === 0){
+                  this.setState({
+                    auth: true,
+                    data: res.data,
+                    feed: res.feed,
+                    load: true,
+                    token: res.token,
+                  });
+
+
+                }else{
+                  this.sendLogs(res.status.message)
+                  this.delete_cookie("access_token")
+                }
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id');
+
+                let path = `/api/user/${id}`
+
+                fetch(path, {
+                  method: "GET"
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                      if (res.status.code === 0 && res.data.length > 0){
+                        this.setState({
+                          isLoaded: true,
+                          id: id,
+                          result: res.data,
+                          mainFeed: res.feed,
+                          notUser: false
+                        });
+                      }else{
+                        this.setState({
+                          isLoaded: false,
+                          result: {},
+                          notUser: true,
+                          error: true
+                        });
+                      }
+                    })
+                    .catch(error => {
+                      this.setState({
+                        isLoaded: false,
+                        error: true,
+                        result: {},
+                        notUser: true
+                      });
+                      console.log(error)
+                    });
+
+              })
+              .catch(error => {
+                this.setState({
+                  auth: false,
+                  load: true,
+                });
+              });
+        })
+        .catch(error => {
+          console.log(error)
+        });
   }
 
   like(uuid) {
@@ -66,10 +149,24 @@ class MainUsers extends Component {
         });
   }
 
-  previewClick (className){
-    const preview = document.getElementsByClassName(className)[0]
-    console.log(preview)
-    preview.classList.toggle("preview_swap")
+  previewClick (){
+    // const preview = document.getElementsByClassName(className)[0]
+    // console.log(preview)
+    // preview.classList.toggle("preview_swap")
+      this.setState({
+          showPreview: !this.state.showPreview
+      })
+  }
+
+  rewriteFeed(uuid, value, close){
+      this.setState({
+          rewriteUUID: uuid,
+          rewriteValue: value,
+          rewriteMode: true,
+          clicked_new_post: true,
+          show_textarea: true,
+          close: close
+      })
   }
 
 
@@ -160,6 +257,111 @@ class MainUsers extends Component {
     }
   }
 
+  cancel(){
+      this.setState({
+          clicked_new_post: false,
+          show_textarea: false,
+          rewriteValue: null,
+          showPreview: false
+      })
+  }
+
+  saveFeed(){
+      let data = {
+          title: "",
+          value: document.getElementById("text_news").value,
+          close: this.state.close
+      }
+
+      this.setState({
+          clicked_new_post: false,
+          show_textarea: false,
+          rewriteValue: null,
+          showPreview: false
+      })
+
+      fetch(`/api/feed/${this.state.rewriteUUID}`, {
+          method: "PUT",
+          body: JSON.stringify({
+              value:data.value,
+              close: data.close
+          })
+      })
+          .then(response => response.json())
+          .then(_ => {
+              fetch("/api/authentication", {
+                  method: "POST",
+                  body: JSON.stringify({
+                      "finger": window.localStorage.getItem("finger")
+                  })
+              })
+                  .then(response => response.json())
+                  .then(res => {
+                      if (res.status.code === 0){
+                          this.setState({
+                              auth: true,
+                              data: res.data,
+                              feed: res.feed,
+                              load: true,
+                              token: res.token,
+                          });
+
+
+                      }else{
+                          this.sendLogs(res.status.message)
+                          this.delete_cookie("access_token")
+                      }
+
+                      const urlParams = new URLSearchParams(window.location.search);
+                      const id = urlParams.get('id');
+
+                      let path = `/api/user/${id}`
+
+                      fetch(path, {
+                          method: "GET"
+                      })
+                          .then(response => response.json())
+                          .then(res => {
+                              if (res.status.code === 0 && res.data.length > 0){
+                                  this.setState({
+                                      isLoaded: true,
+                                      id: id,
+                                      result: res.data,
+                                      mainFeed: res.feed,
+                                      notUser: false
+                                  });
+                              }else{
+                                  this.setState({
+                                      isLoaded: false,
+                                      result: {},
+                                      notUser: true,
+                                      error: true
+                                  });
+                              }
+                          })
+                          .catch(error => {
+                              this.setState({
+                                  isLoaded: false,
+                                  error: true,
+                                  result: {},
+                                  notUser: true
+                              });
+                              console.log(error)
+                          });
+
+                  })
+                  .catch(error => {
+                      this.setState({
+                          auth: false,
+                          load: true,
+                      });
+                  });
+          })
+          .catch(error => {
+              console.log(error)
+          });
+  }
+
   feedNew() {
     let data = {
       title: "",
@@ -167,7 +369,15 @@ class MainUsers extends Component {
       close: this.state.close
     }
 
-    if (data.value.length > 3) {
+
+    if (data.value.length > 1) {
+
+        this.setState({
+            clicked_new_post: false,
+            show_textarea: false,
+            rewriteValue: null,
+            showPreview: false
+        })
       fetch("/api/feed", {
         method: "POST",
         body: JSON.stringify(data)
@@ -176,7 +386,73 @@ class MainUsers extends Component {
           .then(res => {
             console.log(res)
             if (res.status.code === 0) {
-              window.location.reload()
+                fetch("/api/authentication", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "finger": window.localStorage.getItem("finger")
+                    })
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        if (res.status.code === 0){
+                            this.setState({
+                                auth: true,
+                                data: res.data,
+                                feed: res.feed,
+                                load: true,
+                                token: res.token,
+                            });
+
+
+                        }else{
+                            this.sendLogs(res.status.message)
+                            this.delete_cookie("access_token")
+                        }
+
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const id = urlParams.get('id');
+
+                        let path = `/api/user/${id}`
+
+                        fetch(path, {
+                            method: "GET"
+                        })
+                            .then(response => response.json())
+                            .then(res => {
+                                if (res.status.code === 0 && res.data.length > 0){
+                                    this.setState({
+                                        isLoaded: true,
+                                        id: id,
+                                        result: res.data,
+                                        mainFeed: res.feed,
+                                        notUser: false
+                                    });
+                                }else{
+                                    this.setState({
+                                        isLoaded: false,
+                                        result: {},
+                                        notUser: true,
+                                        error: true
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                this.setState({
+                                    isLoaded: false,
+                                    error: true,
+                                    result: {},
+                                    notUser: true
+                                });
+                                console.log(error)
+                            });
+
+                    })
+                    .catch(error => {
+                        this.setState({
+                            auth: false,
+                            load: true,
+                        });
+                    });
             }
 
           })
@@ -382,8 +658,8 @@ class MainUsers extends Component {
                                           this.state.clicked_new_post ?
                                               <div className="textarea-hide">
                                                 <TextareaAutosize className="feed-textarea" onChange={this.handleChangeTextarea}
-                                                                  autoFocus={true} placeholder="Что у Вас нового?" id="text_news">
-
+                                                                  autoFocus={true} placeholder="Что у Вас нового?" id="text_news" >
+                                                    {this.state.rewriteMode ? this.state.rewriteValue : ""}
                                                 </TextareaAutosize>
                                               </div>
 
@@ -409,25 +685,44 @@ class MainUsers extends Component {
                                               }
 
                                             </div>
-                                            <div className="button-default" onClick={() => this.previewClick("preview-news")}>Показать что получилось</div>
-                                            <div className="button-default" onClick={() => this.feedNew()}>Опубликовать</div>
+                                            <div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>
+                                              {
+                                                  this.state.rewriteMode ?
+                                                      <div className="button-default" onClick={() => this.cancel()}>Отмена</div>
+                                                      :
+                                                      null
+                                              }
+                                              {
+                                                  this.state.rewriteMode ?
+                                                      <div className="button-default" onClick={() => this.saveFeed()}>Сохранить</div>
+                                                  :
+                                                      <div className="button-default" onClick={() => this.feedNew()}>Опубликовать</div>
+                                              }
+
+
                                           </div>
                                           :
                                           <div />
                                     }
-                                    <div className="preview-news">
+                                      {
+                                          this.state.showPreview ?
+                                              <div className="preview-news preview_swap">
 
-                                      <div className="feed-wrapper-item">
-                                        <div className="feed-item-value">
-                                          <div className="wrapper-data">
-                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components}>
-                                              {textNews}
-                                            </ReactMarkdown>
-                                          </div>
-                                        </div>
-                                      </div>
+                                                  <div className="feed-wrapper-item">
+                                                      <div className="feed-item-value">
+                                                          <div className="wrapper-data">
+                                                              <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components}>
+                                                                  {textNews}
+                                                              </ReactMarkdown>
+                                                          </div>
+                                                      </div>
+                                                  </div>
 
-                                    </div>
+                                              </div>
+                                              :
+                                              null
+                                      }
+
                                   </div>
                               )
                               :
@@ -484,6 +779,7 @@ class MainUsers extends Component {
                                 {/*<div key="aksdlkasd"  className="photo-wrapper">*/}
 
                                 {/*</div>*/}
+
                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components}>
                                   {data?.value?.substring(0, 900) + "\n..."}
                                 </ReactMarkdown>
@@ -504,6 +800,32 @@ class MainUsers extends Component {
                                   }
 
                                 </div>
+                                {
+                                  Number(this.state.id) === this.state.data[0].id ?
+                                      <div className="button-default"
+                                           onClick={() => {
+                                             this.deleteFeed(data?.ID)
+                                           }}
+                                      >
+                                        Удалить
+                                      </div>
+
+                                      :
+                                      null
+                                }
+                                  {
+                                      Number(this.state.id) === this.state.data[0].id ?
+                                          <div className="button-default"
+                                               onClick={() => {
+                                                   this.rewriteFeed(data?.ID, data?.value, data?.close)
+                                               }}
+                                          >
+                                              Изменить
+                                          </div>
+
+                                          :
+                                          null
+                                  }
                               </div>
                               <div className="like_wrapper wrapper-flex-end">
                                 <div className="like">
