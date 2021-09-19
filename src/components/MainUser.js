@@ -262,7 +262,8 @@ class MainUsers extends Component {
           clicked_new_post: false,
           show_textarea: false,
           rewriteValue: null,
-          showPreview: false
+          showPreview: false,
+          rewriteMode: false
       })
   }
 
@@ -277,7 +278,8 @@ class MainUsers extends Component {
           clicked_new_post: false,
           show_textarea: false,
           rewriteValue: null,
-          showPreview: false
+          showPreview: false,
+          rewriteMode: false
       })
 
       fetch(`/api/feed/${this.state.rewriteUUID}`, {
