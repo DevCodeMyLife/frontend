@@ -53,11 +53,15 @@ code {
     monospace;
 }
 
+.green {
+  color: green;
+}
+
 .auth-view-box {
-  padding: 10px;
   box-shadow: var(--view-shadow);
   background: var(--white);
   border-radius: 10px;
+  padding: 20px;
 }
 
 .wrapper {

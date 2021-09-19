@@ -1,8 +1,38 @@
 import React, { Component }  from "react";
 import github from '../icon/logo_github.png'
+import Head from "./Header";
 
 
 class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            countUsers: 0,
+            countNotes: 0,
+            countUsersToday: 0,
+            loadData: false
+        }
+    }
+
+    componentDidMount() {
+        fetch("/api/status_platform", {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 200){
+                    this.setState({
+                        countUsers: res.data.count_user,
+                        countNotes: res.data.count_notes,
+                        countUsersToday: res.data.count_users_today,
+                        loadData: true
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
 
     render() {
         return (
@@ -36,6 +66,27 @@ class Main extends Component {
                                 </div>
                             </div>
                         </div>
+                        {
+                            this.state.loadData ?
+                                <div className="auth-wrapper">
+                                    <div className="auth-view-box">
+                                        <div className="auth-box-title">
+                                            Статистика платформы
+                                        </div>
+                                        <div className="auths-list">
+                                            <p>
+                                                Пользователей: <span className="green">{this.state.countUsers}</span><br/>
+                                                Созданных заметок: <span className="green">{this.state.countNotes}</span><br/>
+                                                Активных пользователей сегодня: <span className="green">{this.state.countUsersToday}</span><br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                :
+                                <div className="auth-wrapper">
+                                    <div class="loader" />
+                                </div>
+                        }
                         <div className="wrapper-page-about">
                             {/*<div className="title-page">*/}
                             {/*    О нас*/}

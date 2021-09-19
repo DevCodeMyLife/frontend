@@ -319,6 +319,7 @@ class App extends React.Component {
                 return (
                     <div>
                         <Head auth={false} load={true} />
+
                         <Main />
                         <Footer />
                     </div>
