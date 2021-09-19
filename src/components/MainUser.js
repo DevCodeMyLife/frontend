@@ -626,7 +626,7 @@ class MainUsers extends Component {
                                 Профиль GitHub:
                                 {
                                     result[0]?.html_url ?
-                                        <a className="link_github" target="_blank" href={result[0].html_url}> {result[0].login}</a>
+                                        <a className="link_github" target="_blank" href={result[0].html_url} rel="noreferrer"> {result[0].login}</a>
                                         :
                                         " не указан"
                                 }

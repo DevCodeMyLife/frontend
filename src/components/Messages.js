@@ -448,7 +448,7 @@ class Messages extends Component{
                                             Все диалоги
                                         </div>
                                         <div className="title-dialog" >
-                                            <a className="link_github" target="_blank" href={"/user?id=" + this.state.linkUser} >{this.state.dialogTitle}</a>
+                                            <a className="link_github" target="_blank" href={"/user?id=" + this.state.linkUser} rel="noreferrer">{this.state.dialogTitle}</a>
                                         </div>
                                     </div>
                                 </div>
