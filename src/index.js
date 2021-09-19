@@ -21,6 +21,7 @@ import Notification from "./components/Notification";
 import Teams from "./components/Teams";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
+import HowToUse from "./components/HowToUse";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -247,8 +248,7 @@ class App extends React.Component {
                 </script>
             </>,
             view: <Notification/>
-        })
-        ,
+        }),
         '/teams': route({
             title: 'Команды | DevCodeMyLife',
             head: <>
@@ -258,6 +258,16 @@ class App extends React.Component {
                 </script>
             </>,
             view: <Teams/>
+        }),
+        '/how_to_use': route({
+            title: ' Привет! | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <HowToUse/>
         })
     })
 

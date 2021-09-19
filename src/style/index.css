@@ -625,16 +625,54 @@ a {
   right: 5px;
 }
 
-.offline_user {
+.main-developer-photos {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 50%;
+}
+
+.block-preview-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.m-small-bobble {
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.link_github {
+  font-weight: bold;
+}
+
+.link_github:after {
+  content: " ";
+}
+
+.s-small-bobble {
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #a80808;
-  border: 1px solid #fafafa;
+  background: #fff;
+}
 
-  position: absolute;
-  top: 5px;
-  right: 5px;
+.message-info {
+  position: relative;
+  border-radius: 10px;
+  background: #fff;
+  height: 80px;
+  width: 100%;
+  padding: 20px;
 }
 
 .button-auth:active {

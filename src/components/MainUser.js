@@ -622,6 +622,15 @@ class MainUsers extends Component {
                                   " не указана"
                             }
                           </div>
+                            <div className="main-place">
+                                Профиль GitHub:
+                                {
+                                    result[0]?.html_url ?
+                                        <a className="link_github" target="_blank" href={result[0].html_url}> {result[0].login}</a>
+                                        :
+                                        " не указан"
+                                }
+                            </div>
                           <div className="main-place">
 
                             {
