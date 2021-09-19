@@ -89,10 +89,7 @@ class MainUsers extends Component {
               data: res.data,
               feed: res.feed,
               load: true,
-              notification_count: res.notification_count,
-              notification: res.notification,
               token: res.token,
-              messagesCount: res.count_message
             });
 
 
