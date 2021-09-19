@@ -1,4 +1,6 @@
 import React, { Component }  from "react";
+import github from '../icon/logo_github.png'
+
 
 class Main extends Component {
 
@@ -9,14 +11,28 @@ class Main extends Component {
                     <div className="content-wall-views">
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
-                                <div className="button-auth"
-                                     onClick={
-                                         () => {
-                                             window.location.href = "https://github.com/login/oauth/authorize?client_id=7262f0da224a3673dee9&redirect_uri=http://devcodemylife.tech/api/oauth/github/redirect&scope=email&state=asiud88as7d&login=devcodemylife&allow_signup=true"
+                                <div className="auth-box-title">
+                                    Войти через
+                                </div>
+                                <div className="auths-list">
+                                    <div className="button-auth github"
+                                         onClick={
+                                             () => {
+                                                 window.location.href = "https://github.com/login/oauth/authorize?client_id=7262f0da224a3673dee9&redirect_uri=http://devcodemylife.tech/api/oauth/github/redirect&scope=email&state=asiud88as7d&login=devcodemylife&allow_signup=true"
+                                             }
                                          }
-                                     }
-                                >
-                                    Войти через GitHub
+                                    >
+                                        <img className="auth-logo" src={github} alt="github" />
+                                    </div>
+                                    {/*<div className="button-auth gitlab"*/}
+                                    {/*     onClick={*/}
+                                    {/*         () => {*/}
+                                    {/*             window.location.href = "https://gitlab.com/oauth/authorize?client_id=f60720800a4eaafcb6edf0a1df659b19e081f4069ca6fdf741a5f445049ac40a&redirect_uri=https://devcodemylife.tech/api/oauth/gitlab/redirect&response_type=code&scope=api+read_user&state=fca1dfacc51f49c2b7f9246264c46d40&code_challenge=kUta11xlQkPRg4PmL4XbW1sbohklCzg5UxLl9ymMxyU&code_challenge_method=S256"*/}
+                                    {/*         }*/}
+                                    {/*     }*/}
+                                    {/*>*/}
+                                    {/*    <img className="auth-logo" src={gitlab} alt="gitlab" />*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>

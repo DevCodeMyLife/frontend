@@ -580,15 +580,37 @@ a {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
+.auths-list {
+  padding-top: 10px;
+  display: flex;
+}
+
 .button-auth {
-  background: #5fc953;
   color: #fff;
   border: 1px solid var(--button_border);
-  padding: 15px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 10px;
   cursor: pointer;
   transition: .1s;
-  font-size: 14px;
+  font-size: 13px;
+  /*width: 60px;*/
+  text-align: center;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.github {
+  background: #fff;
+}
+
+.gitlab {
+  background: #fff;
+}
+
+.auth-logo {
+  max-width: 100px;
 }
 
 .online_user {
@@ -616,7 +638,7 @@ a {
 }
 
 .button-auth:active {
-  background: #5fc956;
+  transform: scale(0.9);
 }
 
 .loader-small {
@@ -639,7 +661,11 @@ a {
   box-sizing: border-box;
 }
 
-
+.auth-box-title {
+  padding: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #f6f6f6;
+}
 
 .typing_user {
   position: absolute;
