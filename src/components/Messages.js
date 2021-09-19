@@ -647,7 +647,13 @@ class Messages extends Component{
 
             );
         }else{
-            return null
+            return (
+                <div className="loader-wrapper feed-wrapper">
+                    <div className="loader">
+
+                    </div>
+                </div>
+            )
         }
     }
 }
