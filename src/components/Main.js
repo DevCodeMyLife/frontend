@@ -84,7 +84,10 @@ class Main extends Component {
                                 </div>
                                 :
                                 <div className="auth-wrapper">
-                                    <div class="loader" />
+                                    <div className="auth-view-box" style="display: flex; justify-content: center; align-items: center;">
+                                        <div className="loader"/>
+                                    </div>
+
                                 </div>
                         }
                         <div className="wrapper-page-about">
