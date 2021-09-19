@@ -257,7 +257,8 @@ class Messages extends Component{
                         messages: res?.data,
                         dialog: true,
                         cid: cid,
-                        dialogTitle: "123"
+                        dialogTitle: res?.title_dialog,
+                        linkUser: res?.id_user
                     })
 
                     document.getElementById(
@@ -447,7 +448,7 @@ class Messages extends Component{
                                             Все диалоги
                                         </div>
                                         <div className="title-dialog" >
-                                            {this.state.dialogTitle}
+                                            <a className="link_github" target="_blank" href={"/user?id=" + this.state.linkUser} >{this.state.dialogTitle}</a>
                                         </div>
                                     </div>
                                 </div>
