@@ -655,6 +655,12 @@ a {
   content: " ";
 }
 
+.title-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .s-small-bobble {
   position: absolute;
   bottom: -15px;

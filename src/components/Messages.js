@@ -29,7 +29,8 @@ class Messages extends Component{
             loadCent: false,
             messagesCount: 0,
             load: false,
-            data: null
+            data: null,
+            dialogTitle: null
         }
 
         this.centrifuge = new Centrifuge(CONFIG.url);
@@ -47,7 +48,8 @@ class Messages extends Component{
 
     allMessage = (event) => {
         this.setState({
-            _createMessage: false
+            _createMessage: false,
+            dialogTitle: null
         })
 
 
@@ -254,7 +256,8 @@ class Messages extends Component{
                     this.setState({
                         messages: res?.data,
                         dialog: true,
-                        cid: cid
+                        cid: cid,
+                        dialogTitle: "123"
                     })
 
                     document.getElementById(
@@ -442,6 +445,9 @@ class Messages extends Component{
                                     <div className="messages-control-nav-item">
                                         <div className="button-default" onClick={this.allMessage}>
                                             Все диалоги
+                                        </div>
+                                        <div className="title-dialog" >
+                                            {this.state.dialogTitle}
                                         </div>
                                     </div>
                                 </div>
