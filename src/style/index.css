@@ -54,7 +54,7 @@ code {
 }
 
 .green {
-  color: green;
+  color: var(--logo);
 }
 
 .auth-view-box {
