@@ -13,6 +13,62 @@ class Main extends Component {
         }
     }
 
+    auth() {
+        let data = {
+            login: document.getElementById("auth_login").value,
+            password: document.getElementById("auth_password").value,
+        }
+
+
+
+        fetch("/api/auth", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 200){
+                    window.location.href = res.data.location
+                }else if (res.status.code === 404) {
+                    document.getElementById("error_auth").innerHTML = "Неверный логин или пароль"
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    registration() {
+        let data = {
+            login: document.getElementById("registration_login").value,
+            email: document.getElementById("registration_email").value,
+            password: document.getElementById("registration_password").value,
+        }
+
+        let two_password = document.getElementById("registration_two_password").value
+
+        if (data.password !== two_password){
+            document.getElementById("error_registration").innerHTML = "Пароли не совпадают"
+            return
+        }
+
+        fetch("/api/registration", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 200){
+                    window.location.href = res.data.location
+                }else if (res.status.code === 3002) {
+                    document.getElementById("error_registration").innerHTML = "Такой логин или эл. почта уже есть"
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
     componentDidMount() {
         fetch("/api/status_platform", {
             method: "GET"
@@ -41,7 +97,57 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    Войти через
+                                    <div className="title-span-auth">Вход</div>
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Логин" type="text" id="auth_login" />
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Пароль" type="password" id="auth_password"/>
+                                </div>
+                                <div className="wrapper-input">
+                                    <div className="button-default" onClick={()=>{
+                                        this.auth()
+                                    }}>
+                                        Войти
+                                    </div>
+                                </div>
+                                <div className="error-wrapper center red" id="error_auth" />
+                            </div>
+                        </div>
+                        <div className="auth-wrapper">
+                            <div className="auth-view-box">
+                                <div className="auth-box-title">
+                                    <div className="title-span-auth">Если Вы у нас впервые</div>
+                                    <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Логин" type="text" id="registration_login" />
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Эл. почта" type="text" id="registration_email" />
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Пароль" type="password" id="registration_password"/>
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" placeholder="Повторите пароль" type="password" id="registration_two_password"/>
+                                </div>
+                                <div className="wrapper-input">
+                                    <div className="button-default" onClick={()=> {
+                                        this.registration()
+                                    }}>
+                                        Зарегистрироваться
+                                    </div>
+                                </div>
+                                <div className="error-wrapper center red" id="error_registration" />
+                            </div>
+                        </div>
+                        <div className="auth-wrapper">
+                            <div className="auth-view-box">
+                                <div className="auth-box-title">
+                                    <div className="title-span-auth">Вход через сторонние сервисы</div>
+                                    {/*<div className="title-span-auth-small">Пройдите легкую регистрацию</div>*/}
                                 </div>
                                 <div className="auths-list">
                                     <div className="button-auth github"
