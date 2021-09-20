@@ -1,6 +1,6 @@
 import React, { Component }  from "react";
 import github from '../icon/logo_github.png'
-
+import ruvds from '../icon/ruvds.png'
 
 class Main extends Component {
     constructor(props) {
@@ -96,6 +96,19 @@ class Main extends Component {
         return (
             <div className="wrapper-content">
                 <div className="content">
+                    <div id="vertical_menu" className="reviews-menu">
+                        <div className="wrapper-ad" onClick={()=>{
+                            window.location.href = "https://ruvds.com/pr4320"
+                        }}>
+                            <div className="image-ad">
+                                <img className="image-ad-tag" src={ruvds}  alt="ruvds"/>
+                            </div>
+                            <div className="ad-text">
+                                Cайт работает на серверах RuVDS
+                            </div>
+                            {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                        </div>
+                    </div>
                     <div className="content-wall-views">
                         <div className="auth-wrapper">
                             <div className="auth-view-box">

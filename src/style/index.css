@@ -1201,6 +1201,16 @@ p {
   padding: 10px;
 }
 
+.image-ad-tag {
+  max-width: 170px;
+}
+
+.ad-text {
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+}
+
 .about-text {
   padding: 20px;
   border-radius: 10px;
@@ -1550,6 +1560,14 @@ p {
   padding-bottom: 35px;
 }
 
+.wrapper-ad {
+  background: #fff;
+  padding: 20px;
+  width: 180px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: var(--view-shadow);
+}
 
 .photo-wrapper {
   position: relative;
