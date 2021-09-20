@@ -1563,8 +1563,8 @@ p {
 .wrapper-ad {
   background: #fff;
   padding: 20px;
-  width: 180px;
-  margin: 10px;
+  width: 175px;
+  margin: 10px 5px;
   border-radius: 10px;
   box-shadow: var(--view-shadow);
 }

@@ -22,6 +22,7 @@ import Teams from "./components/Teams";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
+import ruvds from "./icon/ruvds.png";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -300,6 +301,17 @@ class App extends React.Component {
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
                                                         <Nav song={song} />
+                                                        <div className="wrapper-ad" onClick={()=>{
+                                                            window.location.href = "https://ruvds.com/pr4320"
+                                                        }}>
+                                                            <div className="image-ad">
+                                                                <img className="image-ad-tag" src={ruvds}  alt="ruvds"/>
+                                                            </div>
+                                                            <div className="ad-text">
+                                                                Cайт работает на серверах RuVDS
+                                                            </div>
+                                                            {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                                        </div>
                                                     </div>
                                                     <Suspense fallback={null}>
                                                         <View/>
@@ -319,8 +331,25 @@ class App extends React.Component {
                 return (
                     <div>
                         <Head auth={false} load={true} />
+                        <div className="wrapper-content">
+                            <div className="content">
 
-                        <Main />
+                                <div id="vertical_menu" className="reviews-menu">
+                                    <div className="wrapper-ad" onClick={()=>{
+                                        window.location.href = "https://ruvds.com/pr4320"
+                                    }}>
+                                        <div className="image-ad">
+                                            <img className="image-ad-tag" src={ruvds}  alt="ruvds"/>
+                                        </div>
+                                        <div className="ad-text">
+                                            Cайт работает на серверах RuVDS
+                                        </div>
+                                        {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                    </div>
+                                </div>
+                                <Main />
+                            </div>
+                        </div>
                         <Footer />
                     </div>
                 );
