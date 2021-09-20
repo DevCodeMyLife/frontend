@@ -1565,7 +1565,7 @@ p {
   padding: 20px;
   width: 175px;
   margin: 10px 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: var(--view-shadow);
 }
 
