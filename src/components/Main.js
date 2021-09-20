@@ -1,6 +1,5 @@
 import React, { Component }  from "react";
 import github from '../icon/logo_github.png'
-import ruvds from '../icon/ruvds.png'
 
 class Main extends Component {
     constructor(props) {
