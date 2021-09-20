@@ -62,7 +62,10 @@ class Main extends Component {
                     window.location.href = res.data.location
                 }else if (res.status.code === 3002) {
                     document.getElementById("error_registration").innerHTML = "Такой логин или эл. почта уже есть"
+                }else if (res.status.code === 3003) {
+                    document.getElementById("error_registration").innerHTML = "Не все поля были заполнены"
                 }
+
             })
             .catch(error => {
                 console.log(error)
