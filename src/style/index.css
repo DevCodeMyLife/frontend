@@ -1518,7 +1518,7 @@ p {
   flex-direction: column;
   padding: 10px;
   background: var(--white);
-  margin: 10px 5px;
+  margin: 10px 5px 20px 5px;
   border-radius: 5px;
   box-shadow: var(--view-shadow);
 }
