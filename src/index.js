@@ -331,6 +331,13 @@ class App extends React.Component {
                 return (
                     <div>
                         <Head auth={false} load={true} />
+                        <div className="personal_data_accept-block full-width">
+                            <div className="wrapper-accept-personal-data">
+                                <div className="text-info-accept">
+                                    Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.
+                                </div>
+                            </div>
+                        </div>
                         <div className="wrapper-content">
                             <div className="content">
 

@@ -12,6 +12,42 @@
   --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 }
 
+.personal_data_accept-block {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+}
+
+.text-info-accept {
+  padding: 10px;
+  font-size: 14px;
+  color: #807b7b;
+  text-align: center;
+  width: 100%;
+}
+
+.wrapper-accept-personal-data {
+  width: 995px;
+  display: flex;
+  padding: 10px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.personal_data_accept-block-wrapper {
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.personal_data_accept-block {
+  background: #fff;
+}
+
 .unselectable {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -96,6 +132,16 @@ code {
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
+}
+
+.wrapper-flex-end-margin  {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
+
+.wrapper-flex-end-margin > * {
+  margin-left: 10px;
 }
 
 .separator {
@@ -792,6 +838,13 @@ a {
   resize: none;
 }
 
+.wrapper-white-default {
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 2px var(--grey);
+}
+
 .like-item {
   transition: .2s;
   cursor: pointer;
@@ -1183,13 +1236,15 @@ p {
   font-size: 12px;
 }
 
+
+
 .feed-wrapper {
   padding: 20px;
   /*transition: .3s;*/
 
   /*margin: 90px 0 30px;*/
   /*overflow: auto;*/
-  height: 100%;
+  /*height: 100%;*/
   box-sizing: border-box;
   /*background: var(--hover);*/
 }
@@ -1681,6 +1736,11 @@ p {
     display: none;
   }
 
+  .wrapper-accept-personal-data {
+    width: 100%;
+    margin: 0;
+  }
+
   .content {
     width: auto;
   }
@@ -1733,6 +1793,12 @@ p {
     max-height: 300px;
     border-radius: 50%;
   }
+
+  .wrapper-accept-personal-data {
+    width: 100%;
+    margin: 0;
+  }
+
 
   .left-view {
     width: 100%;
@@ -1814,6 +1880,12 @@ p {
     max-height: 300px;
     border-radius: 50%;
   }
+
+  .wrapper-accept-personal-data {
+    width: 100%;
+    margin: 0;
+  }
+
 
   .main-place-wrapper {
     flex-direction: column;
