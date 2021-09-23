@@ -55,9 +55,10 @@ class Freelances extends Component{
                             this.state.mode === "create" ?
                                 null
                             :
-                                <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
-                                    Создать задачу
-                                </div>
+                                // <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
+                                //     Создать задачу
+                                // </div>
+                            null
                         }
                     </div>
                     {
