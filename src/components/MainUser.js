@@ -886,7 +886,6 @@ class MainUsers extends Component {
                               {/*  Ошибка*/}
                               {/*</div>*/}
                               <div className="error-wrapper">
-
                                 <div className="error-page">
                                   Авторизуйтесь чтобы просматривать профили пользователей.
                                 </div>
