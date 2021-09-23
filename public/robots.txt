@@ -6,4 +6,4 @@ Disallow: /user/
 User-agent: *
 Allow: /
 
-Sitemap: http://devcodemylife.tech/sitemap.xml
+Sitemap: https://devcodemylife.tech/api/sitemap.xml
