@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ReactMarkdown from "react-markdown";
+import { JsonLd } from "react-schemaorg";
 import { Helmet } from 'react-helmet';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
@@ -31,6 +32,31 @@ class FeedOnePage extends Component {
             load: false,
             data: null
         }
+    }
+
+    dataLD = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Мамлайф",
+                "item": "https://mom.life"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Все записи",
+                "item": "https://mom.life/feed"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "❤️Девушки-программисты или у кого мужья программисты, подде…",
+                "item": "https://mom.life/post/60e92bec3ae65e73644f922f-devushkiprogrammisty-ili-u-k"
+            }
+        ]
     }
 
     handleKeyPress = () => {
@@ -185,9 +211,34 @@ class FeedOnePage extends Component {
     }
 
     render(){
+
         let { isLoadedFeed, feed, result, comments, counter } = this.state;
         return (
                     <div className="content-wall-views">
+                        <JsonLd item={{
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "DevCodeMyLife",
+                                    "item": "https://devcodemylife.tech"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Все заметки",
+                                    "item": "https://devcodemylife.tech/feed"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 3,
+                                    "name": feed[0].title || "Заметка",
+                                    "item": `https://devcodemylife.tech/post?uuid=${feed[0].ID}`
+                                }
+                            ]
+                        }} />
                         {
                             isLoadedFeed ?
                                 <div className="comments-view" id="comments_view">
@@ -199,7 +250,6 @@ class FeedOnePage extends Component {
                                         </div>
                                     </div>
                                     {feed.map(data =>
-
                                         <div className="place-items" id="place_feed" uuid={data?.ID}>
                                             <Helmet>
                                                 <title>Заметка {data.title} | DevCodeMyLife</title>
