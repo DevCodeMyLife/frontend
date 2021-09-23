@@ -8,7 +8,6 @@ import HelmetProvider from 'react-navi-helmet-async'
 import Head from './components/Header'
 import Feed from "./components/Feed";
 import FeedOnePage from "./components/FeedOnePage";
-import About from "./components/About";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Centrifuge from "centrifuge";
 import Main from "./components/Main";
