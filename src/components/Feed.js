@@ -190,7 +190,7 @@ class Feed extends Component {
             .catch(error => {
                 this.setState({
                     isLoaded: "error",
-                    result: {}
+                    tags: {}
                 });
             });
 
@@ -313,7 +313,7 @@ class Feed extends Component {
                                 Топ 10 недели
                             </div>
                             {
-                                tags.map(data =>
+                                tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
                                         {data.value}
                                     </div>

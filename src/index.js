@@ -164,6 +164,7 @@ class App extends React.Component {
             title: 'Добро пожаловать | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Социальная сеть для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -174,6 +175,7 @@ class App extends React.Component {
             title: 'Мессенджер | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Мессенджер" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -183,7 +185,8 @@ class App extends React.Component {
         '/user': route({
             title: 'DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Страница пользователя" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -194,6 +197,7 @@ class App extends React.Component {
             title: 'Новости | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Новости, у нас есть все, чего нет напиши сам." />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -203,27 +207,18 @@ class App extends React.Component {
         '/post': route({
             title: 'Заметка | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Заметка" />
                 <script>
                     console.log('[ app start ]')
                 </script>
             </>,
             view: <FeedOnePage/>
-        }),
-        '/about': route({
-            title: 'О нас | DevCodeMyLife',
-            head: <>
-                <meta name="description" content="" />
-                <script>
-                    console.log('[ app start ]')
-                </script>
-            </>,
-            view: <About/>
-        }),
+        })
         '/settings': route({
             title: 'Настройки | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Настройки" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -233,7 +228,7 @@ class App extends React.Component {
         '/freelances': route({
             title: 'Фриланс | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Фриланс" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -243,7 +238,8 @@ class App extends React.Component {
         '/notification': route({
             title: 'События | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Оповещения" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -253,7 +249,8 @@ class App extends React.Component {
         '/teams': route({
             title: 'Команды | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content="Команды" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -274,7 +271,7 @@ class App extends React.Component {
 
     render(){
         if (this.state.load){
-            if (this.state.auth){
+            if (true){
                 return (
                     <HelmetProvider>
                         <div className="wrapper">

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ReactMarkdown from "react-markdown";
+import { Helmet } from 'react-helmet';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
@@ -7,6 +8,7 @@ import look from "../icon/look.png"
 import TextareaAutosize from "react-textarea-autosize";
 import code from "../icon/code.png";
 const gfm = require('remark-gfm')
+
 
 
 class FeedOnePage extends Component {
@@ -197,7 +199,12 @@ class FeedOnePage extends Component {
                                         </div>
                                     </div>
                                     {feed.map(data =>
+
                                         <div className="place-items" id="place_feed" uuid={data?.ID}>
+                                            <Helmet>
+                                                <title>DevCodeMyLife | Заметка {data.title}</title>
+                                                <meta name="Keywords" content={"dev, code, life, messenger, социальная сеть, для разработчиков, "+data.title} />
+                                            </Helmet>
                                             {/*<div className="title-page">*/}
                                             {/*    О нас*/}
                                             {/*</div>*/}

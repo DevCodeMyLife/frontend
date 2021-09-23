@@ -8,6 +8,7 @@ import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import team from "../icon/team.png"
 import notification from "../icon/notification.png"
+import sing from "../icon/sing_in.png"
 import Centrifuge from "centrifuge";
 
 const CONFIG = {
@@ -249,7 +250,18 @@ class Nav extends Component{
                                 </div>
                             </div>
                             :
-                        null
+
+                            <div className="nav-item">
+                                <Link className="nav-value" href={`/`}>
+                                    <div  className="icon-image" >
+                                        <img src={sing} alt="messages" />
+                                    </div>
+                                    <div className="nav-value">
+                                        Войти
+                                    </div>
+                                </Link>
+                            </div>
+
                 }
             </div>
         )

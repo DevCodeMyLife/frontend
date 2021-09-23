@@ -8,6 +8,7 @@ import look from "../icon/look.png";
 import open from "../icon/open.png"
 import close from "../icon/close.png"
 import code from "../icon/code.png";
+import {Helmet} from "react-helmet";
 
 const gfm = require('remark-gfm')
 
@@ -583,6 +584,9 @@ class MainUsers extends Component {
                                     <span className="info_status">Сейчас на сайте</span>
                             }
                           </div>
+                            <Helmet>
+                                <title>DevCodeMyLife | {result[0].login}</title>
+                            </Helmet>
                           <div className="main-place name">
                             {
                               result[0]?.name ?
