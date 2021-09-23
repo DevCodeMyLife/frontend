@@ -247,7 +247,7 @@ class FeedOnePage extends Component {
                                                     {
                                                         "@type": "ListItem",
                                                         "position": 3,
-                                                        "name": data?.title || "Заметка",
+                                                        "name": data?.title || data?.value?.substring(0, 30),
                                                         "item": `https://devcodemylife.tech/post?uuid=${data?.ID}`
                                                     }
                                                 ]
