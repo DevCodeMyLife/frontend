@@ -202,7 +202,7 @@ class FeedOnePage extends Component {
 
                                         <div className="place-items" id="place_feed" uuid={data?.ID}>
                                             <Helmet>
-                                                <title>DevCodeMyLife | Заметка {data.title}</title>
+                                                <title>Заметка {data.title} | DevCodeMyLife</title>
                                                 <meta name="Keywords" content={"dev, code, life, messenger, социальная сеть, для разработчиков, "+data.title} />
                                             </Helmet>
                                             {/*<div className="title-page">*/}

@@ -257,7 +257,7 @@ class App extends React.Component {
             view: <Teams/>
         }),
         '/how_to_use': route({
-            title: ' Привет! | DevCodeMyLife',
+            title: 'Привет! | DevCodeMyLife',
             head: <>
                 <meta name="description" content="" />
                 <script>

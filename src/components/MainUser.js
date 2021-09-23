@@ -585,7 +585,7 @@ class MainUsers extends Component {
                             }
                           </div>
                             <Helmet>
-                                <title>DevCodeMyLife | {result[0].login}</title>
+                                <title>{result[0].login} | DevCodeMyLife</title>
                             </Helmet>
                           <div className="main-place name">
                             {
