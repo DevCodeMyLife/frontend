@@ -237,7 +237,8 @@ class MainUsers extends Component {
         .catch(error => {
           this.setState({
             auth: false,
-            load: true,
+            load: false,
+              error: true
           });
         });
 
@@ -895,7 +896,8 @@ class MainUsers extends Component {
                             <div className="feed-wrapper" style={{
                               display: "flex",
                               justifyContent: "center",
-                              alignItems: "center"
+                              alignItems: "center",
+                              height: "100%"
                             }}>
                               <div className="loader" />
                             </div>
