@@ -213,7 +213,7 @@ class App extends React.Component {
                 </script>
             </>,
             view: <FeedOnePage/>
-        })
+        }),
         '/settings': route({
             title: 'Настройки | DevCodeMyLife',
             head: <>
