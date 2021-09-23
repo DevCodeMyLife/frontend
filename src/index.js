@@ -163,7 +163,7 @@ class App extends React.Component {
             title: 'Добро пожаловать | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Социальная сеть для разработчиков" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -174,7 +174,7 @@ class App extends React.Component {
             title: 'Мессенджер | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Мессенджер" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -185,7 +185,7 @@ class App extends React.Component {
             title: 'DevCodeMyLife',
             head: <>
                 <meta name="description" content="Страница пользователя" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -196,7 +196,7 @@ class App extends React.Component {
             title: 'Новости | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Новости, у нас есть все, чего нет напиши сам." />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -217,7 +217,7 @@ class App extends React.Component {
             title: 'Настройки | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Настройки" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -238,7 +238,7 @@ class App extends React.Component {
             title: 'События | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Оповещения" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -249,7 +249,7 @@ class App extends React.Component {
             title: 'Команды | DevCodeMyLife',
             head: <>
                 <meta name="description" content="Команды" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                 <script>
                     console.log('[ app start ]')
                 </script>
