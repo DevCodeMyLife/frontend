@@ -215,30 +215,7 @@ class FeedOnePage extends Component {
         let { isLoadedFeed, feed, result, comments, counter } = this.state;
         return (
                     <div className="content-wall-views">
-                        <JsonLd item={{
-                            "@context": "https://schema.org",
-                            "@type": "BreadcrumbList",
-                            "itemListElement": [
-                                {
-                                    "@type": "ListItem",
-                                    "position": 1,
-                                    "name": "DevCodeMyLife",
-                                    "item": "https://devcodemylife.tech"
-                                },
-                                {
-                                    "@type": "ListItem",
-                                    "position": 2,
-                                    "name": "Все заметки",
-                                    "item": "https://devcodemylife.tech/feed"
-                                },
-                                {
-                                    "@type": "ListItem",
-                                    "position": 3,
-                                    "name": feed[0].title || "Заметка",
-                                    "item": `https://devcodemylife.tech/post?uuid=${feed[0].ID}`
-                                }
-                            ]
-                        }} />
+
                         {
                             isLoadedFeed ?
                                 <div className="comments-view" id="comments_view">
@@ -251,6 +228,30 @@ class FeedOnePage extends Component {
                                     </div>
                                     {feed.map(data =>
                                         <div className="place-items" id="place_feed" uuid={data?.ID}>
+                                            <JsonLd item={{
+                                                "@context": "https://schema.org",
+                                                "@type": "BreadcrumbList",
+                                                "itemListElement": [
+                                                    {
+                                                        "@type": "ListItem",
+                                                        "position": 1,
+                                                        "name": "DevCodeMyLife",
+                                                        "item": "https://devcodemylife.tech"
+                                                    },
+                                                    {
+                                                        "@type": "ListItem",
+                                                        "position": 2,
+                                                        "name": "Все заметки",
+                                                        "item": "https://devcodemylife.tech/feed"
+                                                    },
+                                                    {
+                                                        "@type": "ListItem",
+                                                        "position": 3,
+                                                        "name": data?.title || "Заметка",
+                                                        "item": `https://devcodemylife.tech/post?uuid=${data?.ID}`
+                                                    }
+                                                ]
+                                            }} />
                                             <Helmet>
                                                 <title>Заметка {data.title} | DevCodeMyLife</title>
                                                 <meta name="Keywords" content={"dev, code, life, messenger, социальная сеть, для разработчиков, "+data.title} />
