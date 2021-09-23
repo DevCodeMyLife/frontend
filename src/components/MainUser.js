@@ -32,7 +32,7 @@ class MainUsers extends Component {
         id: 0,
         data: [],
         notUser: false,
-        close: true,
+        close: false,
         load: false,
         rewriteMode: false,
         rewriteValue: null,
