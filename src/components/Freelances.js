@@ -103,10 +103,10 @@ class Freelances extends Component{
                             this.state.mode === "create" ?
                                 null
                             :
-                                // <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
-                                //     Создать задачу
-                                // </div>
-                            null
+                                <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
+                                    Создать задачу
+                                </div>
+                            // null
                         }
                     </div>
                     {
@@ -161,7 +161,7 @@ class Freelances extends Component{
                                             decimalsLimit={2}
                                             onValueChange={(value, name) => console.log(value, name)}
                                             style={{
-                                                width: "200px"
+                                                width: "220px"
                                             }}
                                         />
                                     </div>
