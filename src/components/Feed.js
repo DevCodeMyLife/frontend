@@ -5,6 +5,7 @@ import { tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import Head from "./Header";
+import {Link} from "@mui/material";
 const gfm = require('remark-gfm')
 
 
@@ -406,10 +407,9 @@ class Feed extends Component {
                                                     </div>
                                                     <div className="wrapper-bottom">
                                                         <div className="wrapper-flex-start">
-                                                            <div className="button-default" onClick={(e) => {
-                                                                e.preventDefault();
-                                                                window.location.href = `/post?uuid=${data?.ID}`
-                                                            }}>Подробнее</div>
+                                                            <Link className="nav-value" href={`/post?uuid=${data?.ID}`}>
+                                                                <div className="button-default" >Подробнее</div>
+                                                            </Link>
                                                         </div>
                                                         <div className="like_wrapper wrapper-flex-end">
                                                             <div className="like">
