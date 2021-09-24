@@ -210,7 +210,7 @@ code {
 }
 
 .wrapper-flex-start > * {
-  margin: 5px;
+  margin: 3px;
 }
 
 .author-name {
@@ -264,11 +264,11 @@ code {
 .button-default {
   background: var(--white);
   border: 1px solid var(--button_border);
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: .1s;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 
 .button-default-icon {
@@ -277,8 +277,7 @@ code {
   align-items: center;
   background: var(--white);
   border: 1px solid var(--button_border);
-  width: 48px;
-  height: 48px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: .1s;
@@ -290,8 +289,7 @@ code {
   align-items: center;
   background: var(--white);
   border: 1px solid var(--button_border);
-  width: 48px;
-  height: 48px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: .1s;
@@ -303,11 +301,11 @@ code {
 }
 
 .button-default-icon > img {
-  max-width: 20px;
+  max-width: 15px;
 }
 
 .button-default-icon-disable > img {
-  max-width: 20px;
+  max-width: 15px;
 }
 
 .reviews-menu {
@@ -1024,7 +1022,7 @@ p {
   align-items: center;
   margin-right: 10px;
   margin-left: 10px;
-  width: 302px;
+  width: 385px;
 }
 
 .head {
@@ -1436,7 +1434,7 @@ p {
 }
 
 .create-feed-wrapper-button > * {
-  margin: 5px;
+  margin: 3px;
 }
 
 .preview-news {
@@ -1739,6 +1737,9 @@ p {
     width: 100%;
     padding-left: 0px;
   }
+  .rectangle-head {
+    width: 100%;
+  }
 
   .to-top {
     display: none;
@@ -1797,8 +1798,8 @@ p {
 @media (max-width: 768px) {
 
   .main-place-photo-column > img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 50%;
+    max-height: 50%;
     border-radius: 50%;
   }
 
@@ -1806,7 +1807,9 @@ p {
     width: 100%;
     margin: 0;
   }
-
+  .rectangle-head {
+    width: 100%;
+  }
 
   .left-view {
     width: 100%;
@@ -1884,8 +1887,8 @@ p {
 
 @media (max-width: 576px) {
   .main-place-photo-column > img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 50%;
+    max-height: 50%;
     border-radius: 50%;
   }
 
@@ -1894,6 +1897,9 @@ p {
     margin: 0;
   }
 
+  .rectangle-head {
+    width: 100%;
+  }
 
   .main-place-wrapper {
     flex-direction: column;
@@ -1967,4 +1973,8 @@ p {
 
 
   /* и так далее... */
+}
+
+.hide-border {
+  border: none;
 }

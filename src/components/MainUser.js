@@ -63,7 +63,7 @@ class MainUsers extends Component {
                     load: true,
                     token: res.token,
                   });
-
+                    this.cancel()
 
                 }else{
                   this.sendLogs(res.status.message)
@@ -265,7 +265,8 @@ class MainUsers extends Component {
           show_textarea: false,
           rewriteValue: null,
           showPreview: false,
-          rewriteMode: false
+          rewriteMode: false,
+          textNews: "..."
       })
   }
 
@@ -281,7 +282,8 @@ class MainUsers extends Component {
           show_textarea: false,
           rewriteValue: null,
           showPreview: false,
-          rewriteMode: false
+          rewriteMode: false,
+          textNews: "..."
       })
 
       fetch(`/api/feed/${this.state.rewriteUUID}`, {
@@ -493,7 +495,7 @@ class MainUsers extends Component {
 
 
   newInputText = (event) => {
-    this.setState({clicked_new_post: true, show_textarea: true})
+    this.setState({clicked_new_post: true, show_textarea: true, showPreview: true})
 
 
     // event.target
@@ -701,10 +703,23 @@ class MainUsers extends Component {
                                               }
 
                                             </div>
-                                            <div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>
+                                            {/*<div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>*/}
                                               <div className="button-default" onClick={() => this.cancel()}>Отмена</div>
                                               {
                                                   this.state.rewriteMode ?
+                                                      <div className="button-default"
+                                                           onClick={() => {
+                                                               this.deleteFeed(this.state.rewriteUUID)
+                                                           }}
+                                                      >
+                                                          Удалить
+                                                      </div>
+                                                      :
+                                                      null
+                                              }
+                                              {
+                                                  this.state.rewriteMode ?
+
                                                       <div className="button-default" onClick={() => this.saveFeed()}>Сохранить</div>
                                                   :
                                                       <div className="button-default" onClick={() => this.feedNew()}>Опубликовать</div>
@@ -785,6 +800,15 @@ class MainUsers extends Component {
                                     </div>
                                   </div>
                                 </div>
+                                  <div className="button-default-icon-disable hide-border" >
+                                      {
+                                          data?.close ?
+                                              <img src={close} alt="close"/>
+                                              :
+                                              <img src={open} alt="open"/>
+                                      }
+
+                                  </div>
                               </div>
                               <div key="asldk" className="wrapper-data">
                                 {/*<div key="aksdlkasd"  className="photo-wrapper">*/}
@@ -802,28 +826,19 @@ class MainUsers extends Component {
                                   e.preventDefault();
                                   window.location.href = `/post?uuid=${data?.ID}`
                                 }}>Подробнее</div>
-                                <div className="button-default-icon-disable" >
-                                  {
-                                    data?.close ?
-                                        <img src={close} alt="close"/>
-                                        :
-                                        <img src={open} alt="open"/>
-                                  }
+                                {/*{*/}
+                                {/*  Number(this.state.id) === this.state.data[0].id ?*/}
+                                {/*      <div className="button-default"*/}
+                                {/*           onClick={() => {*/}
+                                {/*             this.deleteFeed(data?.ID)*/}
+                                {/*           }}*/}
+                                {/*      >*/}
+                                {/*        Удалить*/}
+                                {/*      </div>*/}
 
-                                </div>
-                                {
-                                  Number(this.state.id) === this.state.data[0].id ?
-                                      <div className="button-default"
-                                           onClick={() => {
-                                             this.deleteFeed(data?.ID)
-                                           }}
-                                      >
-                                        Удалить
-                                      </div>
-
-                                      :
-                                      null
-                                }
+                                {/*      :*/}
+                                {/*      null*/}
+                                {/*}*/}
                                   {
                                       Number(this.state.id) === this.state.data[0].id ?
                                           <div className="button-default"
