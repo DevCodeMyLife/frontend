@@ -2,19 +2,67 @@ import React, {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import CurrencyInput from 'react-currency-input-field';
+import Select from 'react-select';
 import '@emotion/react'
 import {MobileDatePicker} from "@mui/lab";
 import {TextField} from "@mui/material";
+
+const options = [
+    { value: '0', label: 'Легко' },
+    { value: '1', label: 'Средне' },
+    { value: '2', label: 'Сложно' },
+];
+
+const dot = (color = '#ccc') => ({
+    alignItems: 'center',
+    display: 'flex',
+
+    ':before': {
+        backgroundColor: color,
+        borderRadius: 10,
+        content: '" "',
+        display: 'block',
+        marginRight: 8,
+        height: 10,
+        width: 10,
+    },
+});
+
+const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        return {
+            ...styles,
+            color: isDisabled
+                ? '#ccc'
+                : isSelected
+                    ? 'white'
+                    : data.color,
+            cursor: isDisabled ? 'not-allowed' : 'default',
+        };
+    },
+    input: styles => ({ ...styles, ...dot() }),
+    placeholder: styles => ({ ...styles, ...dot() }),
+    singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
+};
 
 class Freelances extends Component{
     constructor(props) {
         super(props);
         this.state = {
             mode: null,
-            dateNow: new Date()
+            dateNow: new Date(),
+            selectedOption: null
         }
 
     }
+
+    handleChangeSelect = (selectedOption) => {
+        this.setState({ selectedOption }, () =>
+            console.log(`Option selected:`, this.state.selectedOption)
+        );
+    };
 
     cancelTask = () =>{
         this.setState({
@@ -55,10 +103,10 @@ class Freelances extends Component{
                             this.state.mode === "create" ?
                                 null
                             :
-                                <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
-                                    Создать задачу
-                                </div>
-                            // null
+                                // <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
+                                //     Создать задачу
+                                // </div>
+                            null
                         }
                     </div>
                     {
@@ -73,12 +121,13 @@ class Freelances extends Component{
                                         <input autoFocus={true} className="input-default" placeholder="Заголовок" type="text" />
                                     </div>
                                     <div className="wrapper-flex-end-margin">
-                                        <select className="input-default" >
-                                            <option value="20000">20000</option>
-                                            <option value="30000">30000</option>
-                                            <option value="40000">40000</option>
-                                            <option value="50000">50000</option>
-                                        </select>
+                                        <Select
+                                            className="selected-box"
+                                            value={this.state.selectedOption}
+                                            onChange={this.handleChangeSelect}
+                                            options={options}
+                                            styles={colourStyles}
+                                        />
                                     </div>
                                 </div>
                                 <div className="wrapper-input">
@@ -102,7 +151,19 @@ class Freelances extends Component{
                                                 renderInput={(params) => <TextField {...params} style={{marginRight: "10px"}} />}
                                             />
                                         </LocalizationProvider>
-                                        <TextField type="number" placeholder="Цена" />
+                                        <CurrencyInput
+                                            id="input-example"
+                                            className="input-default"
+                                            intlConfig={{ locale: 'ru-RU', currency: 'RUB' }}
+                                            name="input-name"
+                                            placeholder="Стоимость"
+                                            defaultValue={1000}
+                                            decimalsLimit={2}
+                                            onValueChange={(value, name) => console.log(value, name)}
+                                            style={{
+                                                width: "200px"
+                                            }}
+                                        />
                                     </div>
                                     <div className="wrapper-flex-end-margin">
                                         <div className="button-default" onClick={()=>{
