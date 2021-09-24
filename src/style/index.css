@@ -1286,7 +1286,7 @@ p {
 
 .feed-wrapper-item {
   /*border: 1px solid var(--logo);*/
-  box-shadow: 0 0 2px var(--grey);
+  box-shadow: var(--view-shadow);
   border-radius: 5px;
   /*padding: 10px;*/
   margin-bottom: 20px;
