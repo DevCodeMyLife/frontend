@@ -342,7 +342,7 @@ code {
   position: relative;
   width: 550px;
   min-height: 500px;
-  padding-left: 240px;
+  padding-left: 220px;
 }
 
 .button-default-tag {
@@ -1613,6 +1613,14 @@ p {
   /*height: 100%;*/
   box-sizing: border-box;
   /*padding-bottom: 35px;*/
+}
+
+.selected-box {
+  width: 100%;
+}
+
+.selected-box > div {
+  padding: 6px;
 }
 
 .wrapper-ad {
