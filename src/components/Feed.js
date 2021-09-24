@@ -407,7 +407,7 @@ class Feed extends Component {
                                                     </div>
                                                     <div className="wrapper-bottom">
                                                         <div className="wrapper-flex-start">
-                                                            <Link className="nav-value" href={`/post?uuid=${data?.ID}`}>
+                                                            <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>
                                                                 <div className="button-default" >Подробнее</div>
                                                             </Link>
                                                         </div>
