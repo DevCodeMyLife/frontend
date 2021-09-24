@@ -346,7 +346,7 @@ code {
 }
 
 .button-default-tag {
-  padding: 10px;.auth-view-box
+  padding: 10px;
   background: var(--white);
   cursor: pointer;
   transition: .1s;
