@@ -253,7 +253,7 @@ class FeedOnePage extends Component {
                                                 ]
                                             }} />
                                             <Helmet>
-                                                <title>Заметка {data.title} | DevCodeMyLife</title>
+                                                <title>{data.title} | DevCodeMyLife</title>
                                                 <meta name="Keywords" content={"dev, code, life, messenger, социальная сеть, для разработчиков, "+data.title} />
                                             </Helmet>
                                             {/*<div className="title-page">*/}
