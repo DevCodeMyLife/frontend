@@ -383,7 +383,7 @@ code {
 .content-wall-views {
   flex-grow: 10;
   position: relative;
-  width: 550px;
+  width: 775px;
   min-height: 500px;
   margin-left: 220px;
 }
