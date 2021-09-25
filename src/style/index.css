@@ -23,6 +23,10 @@
     --button_border: #dcdcdc;
     --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
   }
+
+  meta[name="theme-color"] {
+    attr-content: var(--logo);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,6 +50,10 @@
     --logo-color-text: #bdc1c6;
     --font-color: #bdc1c6;
     --view-shadow: 0 1px 0 0  #3c4043, 0 0 0 1px  #3c4043;
+  }
+
+  meta[name="theme-color"] {
+    attr-content: var(--logo);
   }
 }
 
