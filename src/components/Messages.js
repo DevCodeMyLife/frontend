@@ -253,8 +253,12 @@ class Messages extends Component{
             .then(response => response.json())
             .then(res => {
                 if (res?.status?.code === 0){
+
+
                     this.setState({
-                        messages: res?.data,
+                        messages: res.data.sort(function (x, y){
+                            return x.date_time > y.date_time ? -1 : 1;
+                        }),
                         dialog: true,
                         cid: cid,
                         dialogTitle: res?.title_dialog,
