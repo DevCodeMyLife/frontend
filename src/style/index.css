@@ -383,9 +383,9 @@ code {
 .content-wall-views {
   flex-grow: 10;
   position: relative;
-  width: 550px;
+  /*width: 550px;*/
   min-height: 500px;
-  padding-left: 220px;
+  margin-left: 220px;
 }
 
 .button-default-tag {
