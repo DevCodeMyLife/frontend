@@ -162,11 +162,6 @@ class Messages extends Component{
                 }
             );
         }
-
-        console.log(value.search(/\w*/i), value)
-
-
-
         if (event.keyCode===13 && value.search(/\w*/i) === 0){
             let mes = {
                 c_id: this.state.cid,
