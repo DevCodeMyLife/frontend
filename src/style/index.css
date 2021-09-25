@@ -218,6 +218,7 @@ code {
   transition: .1s;
   cursor: pointer;
   font-size: 20px;
+  width: max-content;
 }
 
 .auth-wrapper {
@@ -1085,7 +1086,7 @@ p {
   align-items: center;
   margin-right: 10px;
   margin-left: 10px;
-  width: 385px;
+  /*width: 385px;*/
 }
 
 .head {
@@ -1838,7 +1839,7 @@ textarea {
 
   .content-wall-views {
     width: 100%;
-    padding-left: 0px;
+    margin-left: 0px;
   }
   .rectangle-head {
     width: 100%;
@@ -1945,7 +1946,7 @@ textarea {
 
   .content-wall-views {
     width: 100%;
-    padding-left: 0px;
+    margin-left: 0px;
   }
 
   .content {
@@ -2041,7 +2042,7 @@ textarea {
 
   .content-wall-views {
     width: 100%;
-    padding-left: 0px;
+    margin-left: 0px;
   }
   .content {
     width: auto;
