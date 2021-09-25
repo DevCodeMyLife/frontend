@@ -101,7 +101,7 @@ class Messages extends Component{
 
         _this.clearInput(document.getElementById("message_chat"))
 
-        if (data.value.length > 0) {
+        if (data.value.length > 0 && data.value.search(/a/i) === 0) {
             let mes = {
                 c_id: this.state.cid,
                 value: value,
@@ -163,7 +163,7 @@ class Messages extends Component{
 
 
 
-        if (event.keyCode===13){
+        if (event.keyCode===13 && value.search(/a/i) === 0){
             let mes = {
                 c_id: this.state.cid,
                 value: value,

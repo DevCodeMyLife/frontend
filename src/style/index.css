@@ -1650,6 +1650,10 @@ p {
   padding: 5px;
 }
 
+textarea {
+  overflow:hidden;
+}
+
 .value-post {
   flex-grow:50;
   padding: 10px;
