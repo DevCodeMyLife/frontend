@@ -103,7 +103,7 @@ class Messages extends Component{
 
         _this.clearInput(document.getElementById("message_chat"))
 
-        if (data.value.length > 0 && data.value.search(/\w*/i) === 0) {
+        if (data.value.length > 0 && data.value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1) {
             let mes = {
                 c_id: this.state.cid,
                 value: value,
@@ -162,7 +162,7 @@ class Messages extends Component{
                 }
             );
         }
-        if (event.keyCode===13 && value.search(/\w*/i) === 0){
+        if (event.keyCode===13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1){
             let mes = {
                 c_id: this.state.cid,
                 value: value,
