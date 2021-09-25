@@ -95,13 +95,27 @@ class Messages extends Component{
             c_id: this.state.cid
         }
 
-        this.read(this.state.cid)
+
 
         let value = document.getElementById("message_chat").value
 
         _this.clearInput(document.getElementById("message_chat"))
 
         if (data.value.length > 0) {
+            let mes = {
+                c_id: this.state.cid,
+                value: value,
+                avatar_url: this.state.user[0].avatar_url,
+                uid: this.state.user[0].id,
+                date_time: Math.round((new Date()).getTime() / 1000),
+                login: this.state.user[0].login
+            }
+
+            this.state.messages.push(mes)
+
+            this.setState({
+                messages: this.state.messages
+            })
 
             fetch("/api/messages", {
                 method: "POST",
@@ -109,20 +123,9 @@ class Messages extends Component{
             })
                 .then(response => response.json())
                 .then(res => {
-                    let mes = {
-                        c_id: this.state.cid,
-                        value: value,
-                        avatar_url: this.state.user[0].avatar_url,
-                        uid: this.state.user[0].id,
-                        date_time: new Date().getTime(),
-                        login: this.state.user[0].login
-                    }
 
-                    this.state.messages.push(mes)
 
-                    this.setState({
-                        messages: this.state.messages
-                    })
+                    this.read(this.state.cid)
 
                     if (document.getElementById('messages'))
                         document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
@@ -158,9 +161,23 @@ class Messages extends Component{
             );
         }
 
-        this.read(this.state.cid)
+
 
         if (event.keyCode===13){
+            let mes = {
+                c_id: this.state.cid,
+                value: value,
+                avatar_url: this.state.user[0].avatar_url,
+                uid: this.state.user[0].id,
+                date_time: Math.round((new Date()).getTime() / 1000),
+                login: this.state.user[0].login
+            }
+
+            this.state.messages.push(mes)
+
+            this.setState({
+                messages: this.state.messages
+            })
             event.preventDefault();
             _this.clearInput(event.target)
 
@@ -172,20 +189,9 @@ class Messages extends Component{
                     .then(response => response.json())
                     .then(res => {
                         _this.clearInput(event.target)
-                        let mes = {
-                            c_id: this.state.cid,
-                            value: value,
-                            avatar_url: this.state.user[0].avatar_url,
-                            uid: this.state.user[0].id,
-                            date_time: new Date().getTime(),
-                            login: this.state.user[0].login
-                        }
 
-                        this.state.messages.push(mes)
 
-                        this.setState({
-                            messages: this.state.messages
-                        })
+                        this.read(this.state.cid)
 
                         if (document.getElementById('messages'))
                             document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
@@ -257,7 +263,7 @@ class Messages extends Component{
 
                     this.setState({
                         messages: res.data.sort(function (x, y){
-                            return x.date_time > y.date_time ? -1 : 1;
+                            return x.date_time > y.date_time ? 1 : -1;
                         }),
                         dialog: true,
                         cid: cid,
@@ -295,7 +301,9 @@ class Messages extends Component{
                     .then(res => {
                         if (res?.status?.code === 0){
                             this.setState({
-                                messages: res?.data,
+                                messages: res.data.sort(function (x, y){
+                                    return x.date_time > y.date_time ? 1 : -1;
+                                }),
                                 dialog: true,
                                 cid: cid
                             })
