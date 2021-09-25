@@ -1,15 +1,52 @@
-:root {
-  --main: #ffffff;
-  --hover: #F5F6FA;
-  --black: #000000;
-  --white: #ffffff;
-  --logo: #0072FC;
-  --grey: #dcdcdc;
-  --link: #4fa7db;
-  --placeholder: #828282;
-  --back_card: #F5F6FA;
-  --button_border: #e9e9f1;
-  --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --main: #ffffff;
+    --button-to-top: #eff1f5;
+    --hover: #F5F6FA;
+    /*--hover: #ffffff;*/
+    --hover-message-dialog: #d7e4fc;
+    --logo-color-text: #ffffff;
+    --notification-color-bg: #fbc5c5;
+    --bg-main-photo-box: #fafafa;
+    --black: #000000;
+    --white: #ffffff;
+    --bg-grey: #ffffff;
+    --logo: #0072FC;
+    --grey: #dcdcdc;
+    --link: #4fa7db;
+    --not-read-message: #D7E4FC;
+    --placeholder: #828282;
+    --back_card: #F5F6FA;
+    --font-color: #000000;
+    --button_border: #dcdcdc;
+    --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main: #202124;
+    --hover: #202124;
+    --bg-main-photo-box: #45464a;
+    --hover-message-dialog: #45464a;
+    --not-read-message: #45464a;
+    --button-to-top: #303134;
+    --black: #000000;
+    --white: #202124;
+    --notification-color-bg: #541919;
+    --bg-grey: #303134;
+    --logo: #0a2d98;
+    --grey: #dcdcdc;
+    --link: #4fa7db;
+    --placeholder: #828282;
+    --back_card: #303134;
+    --button_border: #3c4043;
+    --logo-color-text: #bdc1c6;
+    --font-color: #bdc1c6;
+    --view-shadow: 0 1px 0 0  #3c4043, 0 0 0 1px  #3c4043;
+  }
 }
 
 .personal_data_accept-block {
@@ -177,7 +214,7 @@ code {
 
 .place-logo {
 
-  color: var(--white);
+  color: var(--logo-color-text);
   transition: .1s;
   cursor: pointer;
   font-size: 20px;
@@ -240,7 +277,8 @@ code {
 .no-comments {
   padding: 20px;
   text-align: center;
-  border-top: 1px solid var(--grey);
+  color: var(--font-color);
+  border-top: 1px solid var(--button_border);
   font-size: 13px;
 }
 
@@ -262,7 +300,8 @@ code {
 }
 
 .button-default {
-  background: var(--white);
+  background: var(--bg-grey);
+  color: var(--font-color);
   border: 1px solid var(--button_border);
   padding: 10px;
   border-radius: 5px;
@@ -301,7 +340,9 @@ code {
 
 .rectangle-back {
   padding: 10px;
-  background: #fff;
+  background: var(--bg-grey);
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .button-default-icon > img {
@@ -353,7 +394,7 @@ code {
   cursor: pointer;
   transition: .1s;
   font-size: 12px;
-
+  color: var(--font-color);
   border: 1px solid var(--button_border);
   border-radius: 5px;
 }
@@ -381,7 +422,7 @@ code {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--font-color);
 }
 
 
@@ -405,7 +446,7 @@ a {
 }
 
 .wrapper-chat {
-  background-color: #fff;
+  background: var(--bg-grey);
   width: 100%;
   height: 100%;
 
@@ -441,19 +482,24 @@ a {
   overflow: auto;
   padding: 20px;
   box-sizing: border-box;
-  background: var(--hover);
+  background: var(--bg-grey);
 
 
+}
+
+.like-count {
+  color: var(--font-color);
 }
 
 .main-place-wrapper {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  background: #fff;
+  background: var(--bg-grey);
+  color: var(--font-color);
   /* border: 1px solid var(--grey); */
   border-radius: 5px;
-  box-shadow: 0 0 2px var(--grey);
+  box-shadow: 0 0 2px var(--view-shadow);
   margin-bottom: 20px;
 }
 
@@ -464,7 +510,8 @@ a {
 
 .main-place-wrapper-settings {
   padding: 20px;
-  background: #fff;
+  background: var(--bg-grey);
+  color: var(--font-color);
   /* border: 1px solid var(--grey); */
   border-radius: 5px;
   box-shadow: 0 0 2px var(--grey);
@@ -488,10 +535,11 @@ a {
 .main-place-info-column {
   padding: 20px;
   /*margin-left: 20px;*/
-  background: var(--back_card);
+  background: var(--bg-main-photo-box);
+  color: var(--font-color);
   border-radius: 10px;
   flex-grow: 10;
-  box-shadow: 0 0 2px var(--grey);
+  /*box-shadow: 0 0 2px var(--grey);*/
 }
 
 .name {
@@ -515,11 +563,11 @@ a {
 .main-place-photo-column {
   display: flex;
   justify-content: center;
-  border: 1px solid #fafafa;
+  border: 1px solid var(--button_border);
   border-radius: 10px;
   padding: 20px;
-  background: #fafafa;
-  box-shadow: 0 0 2px var(--grey);
+  background: var(--bg-main-photo-box);
+  /*box-shadow: 0 0 2px var(--grey);*/
   position: relative;
 }
 
@@ -598,7 +646,7 @@ a {
 
 .settings-user-item {
   padding: 10px;
-  background: var(--white);
+  background: var(--bg-grey);
   cursor: pointer;
   font-size: 13px;
 }
@@ -629,7 +677,7 @@ a {
 }
 
 .settings-user {
-  background: #fff;
+  background: var(--bg-grey);
   position: fixed;
   top: 50px;
   width: 225px;
@@ -764,7 +812,9 @@ a {
 
 .input-default {
   padding: 15px;
-  border: 1px solid var(--grey);
+  background: var(--bg-grey);
+  border: 1px solid var(--button_border);
+  color: var(--font-color);
   outline: none;
   width: 100%;
   font-size: 16px;
@@ -776,7 +826,12 @@ a {
 .auth-box-title {
   padding: 20px 20px 20px 0;
   font-size: 14px;
-  border-bottom: 1px solid #f6f6f6;
+  color: var(--font-color);
+  border-bottom: 1px solid var(--button_border);
+}
+
+.test-stat {
+  color: var(--font-color);
 }
 
 .typing_user {
@@ -812,13 +867,15 @@ a {
 
 .wrapper-input > textarea {
   padding: 15px;
-  border: 1px solid var(--grey);
+  border: 1px solid var(--button_border);
   outline: none;
   width: 100%;
   font-size: 16px;
   border-radius: 5px;
   margin: 0;
+  color: var(--font-color);
   box-sizing: border-box;
+  background: var(--bg-grey);
   resize: none;
 }
 
@@ -951,8 +1008,8 @@ p {
 
 .messages-control-nav {
   padding: 20px;
-  border-bottom: 1px solid #dcdcdc;
-  background: var(--white);
+  border-bottom: 1px solid var(--button_border);
+  background: var(--bg-grey);
 }
 
 .wrapper-maker-message {
@@ -993,7 +1050,9 @@ p {
 
 .wrapper-search > div > input {
   padding: 15px;
-  border: 1px solid var(--grey);
+  background: var(--bg-grey);
+  border: 1px solid var(--button_border);
+  color: var(--font-color);
   outline: none;
   width: 100%;
   font-size: 16px;
@@ -1037,6 +1096,7 @@ p {
   box-sizing: border-box;
   position: fixed;
   height: 50px;
+  color: var(--font-color);
   /*background: var(--white);*/
   background: var(--logo);
   z-index: 2;
@@ -1157,9 +1217,11 @@ p {
   text-align: center;
   font-weight: bold;
   font-size: 20px;
+  color: var(--font-color);
 }
 
 .title-span-auth-small {
+  color: var(--font-color);
   text-align: center;
   font-size: 14px;
 }
@@ -1208,7 +1270,7 @@ p {
 
 .button-select {
   background: var(--logo);
-  color: var(--white);
+  color: var(--logo-color-text);
   border: 1px solid var(--logo);
 }
 
@@ -1220,7 +1282,8 @@ p {
   outline: none;
   font-size: 14px;
   resize: none;
-  background: #f5f6fa;
+  background: var(--bg-grey);
+  color: var(--font-color);
   border-radius: 10px;
 }
 
@@ -1271,7 +1334,8 @@ p {
 .about-text {
   padding: 20px;
   border-radius: 5px;
-  background: #fff;
+  background: var(--white);
+  color: var(--font-color);
   margin-bottom: 10px;
   box-shadow: var(--view-shadow);
 }
@@ -1296,7 +1360,7 @@ p {
 }
 
 .feed-wrapper-item-chat:hover {
-  background: #d7e4fc;
+  background: var(--hover-message-dialog);
 }
 
 
@@ -1318,7 +1382,7 @@ p {
 
 .feed-comments-wrapper-item {
   /*border: 1px solid var(--logo);*/
-  box-shadow: 0 0 2px var(--grey);
+  box-shadow: var(--view-shadow);
   /*padding: 10px;*/
   margin-bottom: 20px;
   background: var(--white);
@@ -1347,15 +1411,16 @@ p {
 .comments-title {
   padding: 20px;
   text-align: center;
+  color: var(--font-color);
 }
 
 .wall-comments {
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px solid var(--button_border);
   margin-bottom: 10px;
 }
 
 .bottom-line {
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px solid var(--button_border);
 }
 
 .wrapper-bottom {
@@ -1385,7 +1450,7 @@ p {
 .feed-item-datetime {
   padding: 5px 0 0 0;
   font-size: 10px;
-  color: var(--black);
+  color: var(--font-color);
 }
 
 .login-wrapper {
@@ -1489,6 +1554,7 @@ p {
   justify-content: center;
   align-items: center;
   padding-right: 20px;
+  color: var(--font-color);
 }
 
 .nav-item {
@@ -1535,9 +1601,11 @@ p {
   margin: 5px;
   padding: 10px;
   /*background: #619bff;*/
-  border-radius: 10px;
+  border-radius: 5px;
+  background: var(--bg-grey);
+  color: var(--font-color);
   display: flex;
-  border: 1px solid var(--hover);
+  border: 1px solid var(--button_border);
 }
 
 .notifications-item > .info-notification-item {
@@ -1554,12 +1622,14 @@ p {
   width: 100px;
   padding: 10px;
   text-align: center;
-  color: #F5F6FA;
+  /*color: #F5F6FA;*/
+  color: var(--font-color);
+
 }
 
 .to-top:hover {
-  background: #eff1f5;
-  color: #000;
+  background: var(--button-to-top);
+  color: var(--font-color);
 }
 
 .info-notification-item {
@@ -1589,7 +1659,7 @@ p {
   text-align: center;
   width: 13px;
   border-radius: 50px;
-  background-color: #fbc5c5;
+  background: var(--notification-color-bg);
   font-size: 10px;
   color: white;
   margin: 2px;
@@ -1602,6 +1672,7 @@ p {
 .error-page {
   text-align: center;
   padding: 30px;
+  color: var(--font-color);
 }
 
 .wrapper-about {
@@ -1626,7 +1697,8 @@ p {
 }
 
 .wrapper-ad {
-  background: #fff;
+  background: var(--main);
+  color: var(--font-color);
   padding: 20px;
   width: 175px;
   margin: 10px 5px;
@@ -1664,7 +1736,18 @@ textarea {
   word-break: break-all;
   -ms-hyphens: auto;
   -webkit-hyphens: auto;
+  color: var(--font-color);
   hyphens: auto;
+}
+
+.svg-close {
+  stroke: var(--font-color);
+}
+
+.svg-close-view {
+  max-width: 15px;
+  max-height: 15px;
+  fill: var(--font-color);
 }
 
 .photo-wrapper > img {
@@ -1742,6 +1825,13 @@ textarea {
 /*}*/
 
 @media (max-width: 1024px) {
+  html {
+    height: 100%;
+  }
+
+  .wrapper-items {
+    height: 100%;
+  }
   .left-view {
     width: 100%;
   }
@@ -1810,6 +1900,13 @@ textarea {
 
 @media (max-width: 768px) {
 
+  html {
+    height: 100%;
+  }
+
+  .wrapper-items {
+    height: 100%;
+  }
   .main-place-photo-column > img {
     max-width: 50%;
     max-height: 50%;
@@ -1899,6 +1996,13 @@ textarea {
 }
 
 @media (max-width: 576px) {
+  html {
+    height: 100%;
+  }
+
+  .wrapper-items {
+    height: 100%;
+  }
   .main-place-photo-column > img {
     max-width: 50%;
     max-height: 50%;

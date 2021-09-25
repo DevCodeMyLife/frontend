@@ -337,7 +337,7 @@ class FeedOnePage extends Component {
                                                                         this.state.comments.length ?
                                                                             comments.map(com =>
                                                                                 <div>
-                                                                                    <div className="feed-item-value bottom-line">
+                                                                                    <div className="feed-item-value">
                                                                                         <div className="feed-item-value">
                                                                                             <div key="asldk" className="wrapper-data">
                                                                                                 <div key="aksdlkasd"

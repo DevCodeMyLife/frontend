@@ -197,9 +197,9 @@ class Main extends Component {
                                         </div>
                                         <div className="auths-list">
                                             <p>
-                                                Пользователей: <span className="green">{this.state.countUsers}</span><br/>
-                                                Созданных заметок: <span className="green">{this.state.countNotes}</span><br/>
-                                                Активных пользователей сегодня: <span className="green">{this.state.countUsersToday}</span><br/>
+                                                <span className="test-stat">Пользователей:</span> <span className="green">{this.state.countUsers}</span><br/>
+                                                <span className="test-stat">Созданных заметок:</span> <span className="green">{this.state.countNotes}</span><br/>
+                                                <span className="test-stat">Активных пользователей сегодня:</span> <span className="green">{this.state.countUsersToday}</span><br/>
                                             </p>
                                         </div>
                                     </div>

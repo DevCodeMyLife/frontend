@@ -82,7 +82,7 @@ class Notification extends Component {
                                             notification?.is_look ?
                                                 null
                                             :
-                                                <div className="notifications-item background-white" style={{ background: "white"}}>
+                                                <div className="notifications-item background-white">
                                                     <div className="info-notification-item feed-item-datetime">
                                                         {this.unixToDateTime(notification?.date_time)}
                                                     </div>

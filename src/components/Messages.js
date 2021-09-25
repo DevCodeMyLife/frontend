@@ -512,7 +512,7 @@ class Messages extends Component{
                                                 this.state.dialog ?
                                                     <div className="wrapper-chat">
                                                         <div className="wrapper-items" id="messages" style={{
-                                                            background: "#fff"
+                                                            // background: "#fff"
                                                         }}>
                                                             {
 
@@ -521,7 +521,7 @@ class Messages extends Component{
                                                                         <div className="message-item flex-end" style={{
                                                                             // display: "flex",
                                                                             boxShadow: "none",
-                                                                            background: !message.read ? "rgb(215, 228, 252)" : "#fff",
+                                                                            background: !message.read ? "var(--not-read-message)" : "none",
                                                                             // flexFlow: "column wrap"
                                                                         }}>
                                                                             <div className="wrapper-data" style={{
@@ -556,7 +556,7 @@ class Messages extends Component{
                                                                         :
                                                                         <div className="message-item flex-start" style={{
                                                                             // display: "flex",
-                                                                            background: !message.read ? "rgb(215, 228, 252)" : "#fff",
+                                                                            background: !message.read ? "var(--not-read-message)" : "none",
                                                                             boxShadow: "none",
                                                                             // flexFlow: "column wrap"
                                                                         }}
@@ -581,7 +581,7 @@ class Messages extends Component{
                                                                                             e.preventDefault();
                                                                                             window.location.href = `/user?id=${message?.uid}`
                                                                                         }}>
-                                                                                            {message?.login}
+                                                                                            <span className="test-stat">{message?.login}</span>
                                                                                         </div>
                                                                                         <div className="feed-item-datetime">
                                                                                             {this.unixToDateTime(message?.date_time)}
@@ -640,7 +640,7 @@ class Messages extends Component{
                                                                             padding: "13px",
 
                                                                         }}>
-                                                                            {chat.login}
+                                                                            <span className="test-stat">{chat.login}</span>
                                                                             <div className="feed-item-datetime">
                                                                                 {chat.last_message?.substring(0, 40) + "..."}
                                                                             </div>
@@ -665,7 +665,7 @@ class Messages extends Component{
                                                                         <div className="feed-item-title" style={{
                                                                             padding: "13px",
                                                                         }}>
-                                                                            {chat.login}
+                                                                            <span className="test-stat">{chat.login}</span>
                                                                             <div className="feed-item-datetime">
                                                                                 {chat.last_message?.substring(0, 40) + "..."}
                                                                             </div>
