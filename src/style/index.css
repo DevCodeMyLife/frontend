@@ -383,7 +383,7 @@ code {
 .content-wall-views {
   flex-grow: 10;
   position: relative;
-  /*width: 550px;*/
+  width: 550px;
   min-height: 500px;
   margin-left: 220px;
 }
@@ -1676,7 +1676,7 @@ p {
 }
 
 .wrapper-about {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   height: 100%;
   box-sizing: border-box;
   overflow: auto;
