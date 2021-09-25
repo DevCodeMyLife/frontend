@@ -6,6 +6,8 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png"
+import like_dark from "../icon/like_dark.png";
+import look_dark from "../icon/look_dark.png";
 import TextareaAutosize from "react-textarea-autosize";
 import code from "../icon/code.png";
 const gfm = require('remark-gfm')
@@ -31,7 +33,20 @@ class FeedOnePage extends Component {
             auth: false,
             load: false,
             data: null,
-            notFeed: false
+            notFeed: false,
+            isDark: "light"
+        }
+    }
+
+    getPreferredColorScheme = () => {
+        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+            this.setState({
+                isDark: "dark"
+            })
+        } else {
+            this.setState({
+                isDark: "light"
+            })
         }
     }
 
@@ -144,6 +159,12 @@ class FeedOnePage extends Component {
 
 
     componentWillMount() {
+        this.getPreferredColorScheme()
+
+        let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (event) => {
+            this.getPreferredColorScheme()
+        });
 
         fetch("api/authentication", {
             method: "POST"
@@ -306,7 +327,12 @@ class FeedOnePage extends Component {
                                                 <div className="like_wrapper wrapper-flex-end">
                                                     <div className="like">
                                                         <div className="like-item">
-                                                            <img src={look}  alt="like"/>
+                                                            {
+                                                                this.state.isDark === "light" ?
+                                                                    <img src={look}  alt="like"/>
+                                                                    :
+                                                                    <img src={look_dark}  alt="like"/>
+                                                            }
                                                         </div>
                                                         <div className="like-item">
                                                 <span className="like-count">
@@ -316,7 +342,12 @@ class FeedOnePage extends Component {
                                                     </div>
                                                     <div className="like">
                                                         <div className="like-item" onClick={() => this.like(data?.ID)}>
-                                                            <img src={like}  alt="like"/>
+                                                            {
+                                                                this.state.isDark === "light" ?
+                                                                    <img src={like}  alt="like"/>
+                                                                    :
+                                                                    <img src={like_dark}  alt="like"/>
+                                                            }
                                                         </div>
                                                         <div className="like-item">
                                                 <span className="like-count" id={data?.ID}>

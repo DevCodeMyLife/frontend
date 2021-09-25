@@ -5,6 +5,8 @@ import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import TextareaAutosize from 'react-textarea-autosize';
 import like from "../icon/like.png";
 import look from "../icon/look.png";
+import like_dark from "../icon/like_dark.png";
+import look_dark from "../icon/look_dark.png";
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 
@@ -34,9 +36,22 @@ class MainUsers extends Component {
         load: false,
         rewriteMode: false,
         rewriteValue: null,
-        currentDateTime: new Date().getTime()
+        currentDateTime: new Date().getTime(),
+        isDark: "light"
     }
   }
+
+    getPreferredColorScheme = () => {
+        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+            this.setState({
+                isDark: "dark"
+            })
+        } else {
+            this.setState({
+                isDark: "light"
+            })
+        }
+    }
 
   deleteFeed(uuid) {
     fetch(`/api/feed/${uuid}`, {
@@ -165,14 +180,23 @@ class MainUsers extends Component {
           clicked_new_post: true,
           show_textarea: true,
           close: close,
-          showPreview: true
+          showPreview: true,
+          isDark: "light"
       })
   }
 
 
   componentDidMount() {
 
-    fetch("/api/authentication", {
+      this.getPreferredColorScheme()
+
+      let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      colorSchemeQuery.addEventListener('change', (event) => {
+          this.getPreferredColorScheme()
+      });
+
+
+      fetch("/api/authentication", {
       method: "POST",
       body: JSON.stringify({
         "finger": window.localStorage.getItem("finger")
@@ -855,7 +879,12 @@ class MainUsers extends Component {
                               <div className="like_wrapper wrapper-flex-end">
                                 <div className="like">
                                   <div className="like-item">
-                                    <img src={look}  alt="like"/>
+                                      {
+                                          this.state.isDark === "light" ?
+                                              <img src={look}  alt="like"/>
+                                              :
+                                              <img src={look_dark}  alt="like"/>
+                                      }
                                   </div>
                                   <div className="like-item">
                                             <span className="like-count">
@@ -866,7 +895,12 @@ class MainUsers extends Component {
                                 <div className="like">
 
                                   <div className="like-item" onClick={() => this.like(data?.ID)}>
-                                    <img src={like}  alt="like"/>
+                                      {
+                                          this.state.isDark === "light" ?
+                                              <img src={like}  alt="like"/>
+                                              :
+                                              <img src={like_dark}  alt="like"/>
+                                      }
                                   </div>
                                   <div className="like-item">
                               <span className="like-count" id={data?.ID}>

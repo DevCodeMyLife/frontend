@@ -1346,7 +1346,7 @@ p {
 ::-webkit-scrollbar { width: 3px; height: 3px;}
 /*::-webkit-scrollbar-button {  background-color: #666; }*/
 ::-webkit-scrollbar-track {  background-color: #619bff;}
-::-webkit-scrollbar-track-piece { background-color: #fff;}
+::-webkit-scrollbar-track-piece { background-color: var(--main);}
 ::-webkit-scrollbar-thumb { height: 50px; background-color: #619bff; border-radius: 10px;}
 /*::-webkit-scrollbar-corner { background-color: #999;}*/
 /*::-webkit-resizer { background-color: #666;}*/

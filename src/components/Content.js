@@ -9,9 +9,9 @@ import Error from "./Error";
 import MainUsers from "./MainUser";
 import Agreement from "./Agreement";
 import FeedOnePage from "./FeedOnePage";
-import notes from "../icon/notes.png"
-import messages from "../icon/messages.png"
-import notification from "../icon/notification.png"
+import notes from "../icon/notes_.png"
+import messages from "../icon/messages_.png"
+import notification from "../icon/notification_.png"
 import Notification from "./Notification";
 import TextareaAutosize from "react-textarea-autosize";
 import Messages from "./Messages";

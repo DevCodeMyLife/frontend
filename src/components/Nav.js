@@ -3,12 +3,22 @@ import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
+import notes_dark from "../icon/notes_dark.png";
 import code from "../icon/code.png";
+import code_dark from "../icon/code_dark.png";
+
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
+import messages_dark from "../icon/messages_dark.png";
+
 import team from "../icon/team.png"
+import team_dark from "../icon/team_dark.png"
+
 import notification from "../icon/notification.png"
+import notification_dark from "../icon/notification_dark.png"
+
 import sing from "../icon/sing_in.png"
+import user_dark from "../icon/user-dark.png"
 import Centrifuge from "centrifuge";
 
 const CONFIG = {
@@ -25,13 +35,33 @@ class Nav extends Component{
             data: null,
             context: new AudioContext(),
             audio: new Audio(this.props.song),
-            channel: null
+            channel: null,
+            isDark: "light"
         };
         this.centrifuge = new Centrifuge(CONFIG.url);
 
     }
 
+    getPreferredColorScheme = () => {
+        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+            this.setState({
+                isDark: "dark"
+            })
+        } else {
+            this.setState({
+                isDark: "light"
+            })
+        }
+    }
+
     componentDidMount() {
+        this.getPreferredColorScheme()
+
+        let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (event) => {
+            this.getPreferredColorScheme()
+        });
+
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -166,7 +196,13 @@ class Nav extends Component{
                                     <div className="nav-item">
                                         <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
                                             <div  className="icon-image" >
-                                                <img src={user} alt="messages" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img src={user} alt="Ваша страница"/>
+                                                    :
+                                                        <img src={user_dark} alt="Ваша страница" />
+                                                }
+
                                             </div>
                                             <div className="nav-value">
                                                 Моя страница
@@ -176,7 +212,12 @@ class Nav extends Component{
                                     <div className="nav-item">
                                         <Link className="nav-value" href="/feeds">
                                             <div  className="icon-image" >
-                                                <img  src={notes} alt="Новости" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img src={notes} alt="Заметки"/>
+                                                        :
+                                                        <img src={notes_dark} alt="Заметки" />
+                                                }
                                             </div>
                                             <div className="nav-value">
                                                 Новости
@@ -199,7 +240,12 @@ class Nav extends Component{
                                         }
                                         <Link className="nav-value" href="/messages">
                                             <div  className="icon-image" >
-                                                <img src={messages} alt="messages" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img src={messages} alt="Мессенджер"/>
+                                                        :
+                                                        <img src={messages_dark} alt="Мессенджер" />
+                                                }
                                             </div>
                                             <div className="nav-value">
                                                 Мессенджер
@@ -222,7 +268,12 @@ class Nav extends Component{
                                         }
                                         <Link className="nav-value" href="/notification">
                                             <div  className="icon-image" >
-                                                <img src={notification} alt="События" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img src={notification} alt="События"/>
+                                                        :
+                                                        <img src={notification_dark} alt="События" />
+                                                }
                                             </div>
                                             <div className="nav-value">
                                                 Уведомления
@@ -232,7 +283,12 @@ class Nav extends Component{
                                     <div className="nav-item">
                                         <Link className="nav-value" href="/freelances">
                                             <div  className="icon-image" >
-                                                <img  src={code} alt="Задачи" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img  src={code} alt="Задачи" />
+                                                        :
+                                                        <img  src={code_dark} alt="Задачи" />
+                                                }
                                             </div>
                                             <div className="nav-value">
                                                 Фриланс
@@ -242,7 +298,12 @@ class Nav extends Component{
                                     <div className="nav-item">
                                         <Link className="nav-value" href="/teams">
                                             <div  className="icon-image" >
-                                                <img  src={team} alt="Команды" />
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img  src={team} alt="Команды" />
+                                                        :
+                                                        <img  src={team_dark} alt="Команды" />
+                                                }
                                             </div>
                                             <div className="nav-value">
                                                 Команды

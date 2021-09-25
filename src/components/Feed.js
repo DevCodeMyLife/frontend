@@ -4,8 +4,11 @@ import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
+import look_dark from "../icon/look_dark.png";
+
 import Head from "./Header";
 import {Link} from "@mui/material";
+import like_dark from "../icon/like_dark.png";
 const gfm = require('remark-gfm')
 
 
@@ -20,7 +23,20 @@ class Feed extends Component {
             messagesCount: 0,
             data: null,
             currentDateTime: new Date().getTime(),
-            tags: []
+            tags: [],
+            isDark: "light"
+        }
+    }
+
+    getPreferredColorScheme = () => {
+        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+            this.setState({
+                isDark: "dark"
+            })
+        } else {
+            this.setState({
+                isDark: "light"
+            })
         }
     }
 
@@ -156,6 +172,13 @@ class Feed extends Component {
     }
 
     componentDidMount() {
+        this.getPreferredColorScheme()
+
+        let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (event) => {
+            this.getPreferredColorScheme()
+        });
+
         fetch("api/feed", {
             method: "GET",
         })
@@ -414,7 +437,12 @@ class Feed extends Component {
                                                         <div className="like_wrapper wrapper-flex-end">
                                                             <div className="like">
                                                                 <div className="like-item">
-                                                                    <img src={look}  alt="like"/>
+                                                                    {
+                                                                        this.state.isDark === "light" ?
+                                                                            <img src={look}  alt="like"/>
+                                                                            :
+                                                                            <img src={look_dark}  alt="like"/>
+                                                                    }
                                                                 </div>
                                                                 <div className="like-item">
                                                     <span className="like-count">
@@ -424,7 +452,12 @@ class Feed extends Component {
                                                             </div>
                                                             <div className="like">
                                                                 <div className="like-item" onClick={() => this.like(data?.ID)}>
-                                                                    <img src={like}  alt="like"/>
+                                                                    {
+                                                                        this.state.isDark === "light" ?
+                                                                            <img src={like}  alt="like"/>
+                                                                            :
+                                                                            <img src={like_dark}  alt="like"/>
+                                                                    }
                                                                 </div>
                                                                 <div className="like-item">
                                                     <span className="like-count" id={data?.ID}>
