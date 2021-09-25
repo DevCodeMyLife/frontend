@@ -92,14 +92,14 @@ class Freelances extends Component{
     render() {
         return (
             <div className="content-wall-views">
-                <div className="main-place-wrapper">
-                    <p>
-                        <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свою<br/>
-                        Раздел пока в разработке, по этому здесь ничего нет.
-                    </p>
-                </div>
-                <div className="wrapper-search wrapper-inline-block unselectable">
 
+                <div className="wrapper-search wrapper-inline-block unselectable">
+                    <div className="main-place-wrapper">
+                        <p>
+                            <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свою<br/>
+                            Раздел пока в разработке, по этому здесь ничего нет.
+                        </p>
+                    </div>
                     <div>
                         <input placeholder="Найдем что нибудь для Вас..." onFocus={()=>{
                             this.cancelTask()
