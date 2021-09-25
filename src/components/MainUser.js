@@ -5,8 +5,6 @@ import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import TextareaAutosize from 'react-textarea-autosize';
 import like from "../icon/like.png";
 import look from "../icon/look.png";
-import open from "../icon/open.svg"
-import close from "../icon/close.svg"
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 
