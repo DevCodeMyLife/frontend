@@ -92,7 +92,14 @@ class Freelances extends Component{
     render() {
         return (
             <div className="content-wall-views">
+                <div className="main-place-wrapper">
+                    <p>
+                        <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свою<br/>
+                        Раздел пока в разработке, по этому здесь ничего нет.
+                    </p>
+                </div>
                 <div className="wrapper-search wrapper-inline-block unselectable">
+
                     <div>
                         <input placeholder="Найдем что нибудь для Вас..." onFocus={()=>{
                             this.cancelTask()
@@ -103,10 +110,10 @@ class Freelances extends Component{
                             this.state.mode === "create" ?
                                 null
                             :
-                                <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
-                                    Создать задачу
-                                </div>
-                            // null
+                                // <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
+                                //     Создать задачу
+                                // </div>
+                            null
                         }
                     </div>
                     {
