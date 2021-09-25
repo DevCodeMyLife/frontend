@@ -30,7 +30,8 @@ class FeedOnePage extends Component {
             counter: 0,
             auth: false,
             load: false,
-            data: null
+            data: null,
+            notFeed: false
         }
     }
 
@@ -183,12 +184,21 @@ class FeedOnePage extends Component {
                 .then(response => response.json())
                 .then(res => {
                     if (res.status.code === 0 && res.data.length > 0){
+                            this.setState({
+                                isLoadedFeed: true,
+                                feed: res.data,
+                                comments: res.comments,
+                                counter: res.counter,
+                                load: true,
+                            });
+                    }else{
                         this.setState({
-                            isLoadedFeed: true,
+                            isLoadedFeed: false,
                             feed: res.data,
                             comments: res.comments,
                             counter: res.counter,
                             load: true,
+                            notFeed: true
                         });
                     }
                 })
@@ -454,7 +464,23 @@ class FeedOnePage extends Component {
                                     )}
                                 </div>
                             :
-                                null
+                                this.state.notFeed ?
+                                    <div>
+                                        {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
+                                        {/*  Ошибка*/}
+                                        {/*</div>*/}
+                                        <div className="error-wrapper">
+                                            <div className="error-page">
+                                                Заметка удалена либо еще не создана.
+                                            </div>
+                                        </div>
+                                    </div>
+                                :
+                                <div className="loader-wrapper feed-wrapper">
+                                    <div className="loader">
+
+                                    </div>
+                                </div>
                         }
                     </div>
         )
