@@ -166,7 +166,8 @@ class MainUsers extends Component {
           rewriteMode: true,
           clicked_new_post: true,
           show_textarea: true,
-          close: close
+          close: close,
+          showPreview: true
       })
   }
 
