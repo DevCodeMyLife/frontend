@@ -96,7 +96,7 @@ class Freelances extends Component{
                 <div className="wrapper-search wrapper-inline-block unselectable">
                     <div className="main-place-wrapper">
                         <p>
-                            <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свою<br/>
+                            <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свои.<br/>
                             Раздел пока в разработке, по этому здесь ничего нет.
                         </p>
                     </div>
