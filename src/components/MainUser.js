@@ -194,8 +194,7 @@ class MainUsers extends Component {
           clicked_new_post: true,
           show_textarea: true,
           close: close,
-          showPreview: true,
-          isDark: "light"
+          showPreview: true
       })
   }
 
