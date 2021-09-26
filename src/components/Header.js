@@ -76,7 +76,7 @@ class Header extends Component {
                                         <div className="settings-user-item" onClick={() => {
                                             window.location.href = `http://${window.location.host}/messages`
                                         }}>
-                                            Сообщения
+                                            Мессенджер
                                         </div>
                                         <div className="settings-user-item" onClick={() => {
                                             window.location.href = `http://${window.location.host}/notification`
