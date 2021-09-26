@@ -423,7 +423,7 @@ code {
 
 .button-default-tag {
   padding: 10px;
-  background: var(--white);
+  background: var(--bg-grey);
   cursor: pointer;
   transition: .1s;
   font-size: 12px;
@@ -947,9 +947,9 @@ a {
 
 .wrapper-white-default {
   padding: 20px;
-  background: #fff;
+  background: var(--bg-grey);
   border-radius: 5px;
-  box-shadow: 0 0 2px var(--grey);
+  box-shadow: var(--view-shadow);
 }
 
 .like-item {
@@ -1755,11 +1755,18 @@ link-user {
 }
 
 .selected-box {
+  background: var(--bg-grey);
+  border: 1px solid var(--button_border);
+  color: var(--font-color);
   width: 100%;
 }
 
 .selected-box > div {
   padding: 6px;
+}
+
+.selected-box > * {
+  background: var(--bg-grey);
 }
 
 .wrapper-ad {

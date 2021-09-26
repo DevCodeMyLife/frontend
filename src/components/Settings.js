@@ -18,7 +18,7 @@ class Settings extends Component{
                                 Публиковать заметки приватно
                             </div>
                             <div className="value-settings">
-                                <Switch enable={true} callBack={()=> {}}/>
+                                <Switch enable={false} callBack={()=> {}}/>
                             </div>
                             {/*<div className="separator" />*/}
                         </div>

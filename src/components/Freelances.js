@@ -14,9 +14,10 @@ const options = [
     { value: '2', label: 'Сложно' },
 ];
 
-const dot = (color = '#ccc') => ({
+const dot = (color = 'var(--bg-grey)') => ({
     alignItems: 'center',
     display: 'flex',
+    color: "var(--font-color)",
 
     ':before': {
         backgroundColor: color,
@@ -30,7 +31,7 @@ const dot = (color = '#ccc') => ({
 });
 
 const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    control: styles => ({ ...styles, backgroundColor: 'var(--bg-grey)' }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         return {
             ...styles,
@@ -129,6 +130,7 @@ class Freelances extends Component{
                                     </div>
                                     <div className="wrapper-flex-end-margin">
                                         <Select
+                                            placeholder="Сложность"
                                             className="selected-box"
                                             value={this.state.selectedOption}
                                             onChange={this.handleChangeSelect}
@@ -149,13 +151,13 @@ class Freelances extends Component{
                                 </div>
                                 <div className="wrapper-bottom">
                                     <div className="wrapper-flex-start">
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <LocalizationProvider className="input-default" dateAdapter={AdapterDateFns}>
                                             <MobileDatePicker
                                                 label="Дата завершения задачи"
                                                 inputFormat="dd.MM.yyyy"
                                                 value={this.state.dateNow}
                                                 onChange={this.handleChange}
-                                                renderInput={(params) => <TextField {...params} style={{marginRight: "10px"}} />}
+                                                renderInput={(params) => <TextField {...params} style={{marginRight: "10px", background: "var(--bg-grey)"}} />}
                                             />
                                         </LocalizationProvider>
                                         <CurrencyInput
