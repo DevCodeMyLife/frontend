@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ReactMarkdown from 'react-markdown'
+import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import TextareaAutosize from 'react-textarea-autosize';
@@ -9,6 +10,8 @@ import like_dark from "../icon/like_dark.png";
 import look_dark from "../icon/look_dark.png";
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
+import "react-image-crop/dist/ReactCrop.css";
+import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
 
@@ -39,11 +42,22 @@ class MainUsers extends Component {
         currentDateTime: new Date().getTime(),
         isDark: "light",
         file: null,
-        imagePreviewUrl: null
+        imagePreviewUrl: null,
+        crop: {
+            unit: "px",
+            x: 130,
+            y: 50,
+            width: 300,
+            height: 300,
+            aspect: 300 / 300
+        },
+        cropImage: null,
+        showCrop: false,
+        imageRef: null
     }
   }
 
-    getPreferredColorScheme = () => {
+  getPreferredColorScheme = () => {
         if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
             this.setState({
                 isDark: "dark"
@@ -186,7 +200,6 @@ class MainUsers extends Component {
           isDark: "light"
       })
   }
-
 
   componentDidMount() {
 
@@ -517,8 +530,6 @@ class MainUsers extends Component {
 
   }
 
-
-
   newInputText = (event) => {
     this.setState({clicked_new_post: true, show_textarea: true, showPreview: true})
 
@@ -602,18 +613,75 @@ class MainUsers extends Component {
 
         let reader = new FileReader();
         let file = event.target.files[0];
-        // reader.onloadend = () => {
-        //     this.setState({
-        //         file: file,
-        //         imagePreviewUrl: reader.result
-        //     });
-        // }
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                src: reader.result,
+                showCrop: true
+            });
+        }
         reader.readAsDataURL(file)
 
-        event.preventDefault();
+        console.log(file)
+
+        // this.setState({
+        //     src: reader.result,
+        //     showCrop: true
+        // })
+        //
+        // event.preventDefault();
+        // const data = new FormData();
+        //
+        // data.append('data', event.target.files[0]);
+        //
+        // fetch("/api/upload_main_photo", {
+        //     method: "POST",
+        //     body: data
+        // })
+        //     .then(response => response.json())
+        //     .then(res => {
+        //         console.log(res)
+        //
+        //         this.setState({
+        //             imagePreviewUrl: res?.data[0].url_preview
+        //         })
+        //
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     });
+
+
+
+
+
+    }
+
+    makeUpload(){
         const data = new FormData();
 
-        data.append('data', event.target.files[0]);
+        // console.log(this.state.imageRef)
+
+        const scaleX = Math.floor(this.state.imageRef.naturalWidth / Number(this.state.imageRef.width));
+        const scaleY = Math.floor(this.state.imageRef.naturalHeight / Number(this.state.imageRef.height));
+
+        console.log(this.state.imageRef.naturalWidth, this.state.imageRef.naturalHeight, this.state.crop.x * scaleX, this.state.crop.y * scaleY)
+
+        const x0 = this.state.crop.x * scaleX
+        const y0 = this.state.crop.y * scaleY
+        const x1 = this.state.crop.width * scaleX
+        const y1 = this.state.crop.height * scaleY
+
+        console.log(x0, y0, x1, y1)
+
+        data.append('data', this.state.file);
+        data.append('x', x0.toString())
+        data.append('y', y0.toString())
+        data.append('x_', x1)
+        data.append('y_', y1)
+
+        console.log(data)
+
 
         fetch("/api/upload_main_photo", {
             method: "POST",
@@ -626,22 +694,81 @@ class MainUsers extends Component {
                 this.setState({
                     imagePreviewUrl: res?.data[0].url_preview
                 })
+                this.cancelCrop()
 
             })
             .catch(error => {
                 console.log(error)
             });
+    }
 
+    onCropChange = (crop, percentCrop) => {
+        // You could also use percentCrop:
+        // this.setState({ crop: percentCrop });
+        this.setState({ crop });
+    };
 
+    onCropComplete = (crop) => {
+        this.setState({
+            cropImage: crop
+        })
+        console.log(crop)
+    }
 
+    onImageLoaded = (image) => {
+        this.setState({imageRef: image})
+    };
 
-
+    cancelCrop(){
+        this.setState({
+            crop: {
+                unit: "px",
+                x: 130,
+                y: 50,
+                width: 300,
+                height: 300,
+                aspect: 300 / 300
+            },
+            cropImage: null,
+            showCrop: false,
+            imageRef: null
+        })
     }
 
   render(){
     let { isLoaded, textNews, mainFeed, result, clicked_new_post } = this.state;
     return (
             <div className="content-wall-views">
+                {
+                    this.state.showCrop ?
+                        <div className="pop-up">
+                            <div className="center-view">
+                                <ReactCrop
+                                    circularCrop={true}
+                                    keepSelection={true}
+                                    minWidth={300}
+                                    minHeight={300}
+                                    src={this.state.src}
+                                    crop={this.state.crop}
+                                    ruleOfThirds
+                                    onImageLoaded={this.onImageLoaded}
+                                    onComplete={this.onCropComplete}
+                                    onChange={this.onCropChange}
+                                />
+                                <div className="wrapper-bottom" style={{width: "100%", boxSizing: "border-box", padding: "20px 0"}}>
+                                    <div className="wrapper-flex-start">
+                                        <div className="button-default" onClick={() => this.cancelCrop()}>Отмена</div>
+                                    </div>
+                                    <div className="wrapper-flex-end">
+                                        <div className="button-default" onClick={() => this.makeUpload()}>Сохранить</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    :
+                        null
+                }
+
               {
                 isLoaded ?
                     <div className="feed-wrapper">

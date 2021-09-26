@@ -19,6 +19,7 @@
     "react-currency-input-field": "^3.5.1",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-image-crop": "^9.0.4",
     "react-navi": "^0.14.4",
     "react-navi-helmet-async": "^0.14.4",
     "react-scripts": "^4.0.3",
