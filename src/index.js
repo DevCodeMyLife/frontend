@@ -22,6 +22,7 @@ import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
 import ruvds from "./icon/ruvds.png";
+import People from "./components/People";
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
@@ -169,6 +170,17 @@ class App extends React.Component {
                 </script>
             </>,
             view: <Main />
+        }),
+        '/people': route({
+            title: 'Люди | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="Социальная сеть для разработчиков" />
+                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <People />
         }),
         '/messages': route({
             title: 'Мессенджер | DevCodeMyLife',

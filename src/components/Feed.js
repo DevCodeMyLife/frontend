@@ -373,7 +373,6 @@ class Feed extends Component {
                                             </div>
                                         </div>
                                         :
-
                                         <div className="feed-wrapper">
                                             {result.map(data =>
                                                 <div key={data?.ID}  className="feed-wrapper-item">

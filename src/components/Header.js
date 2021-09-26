@@ -62,6 +62,28 @@ class Header extends Component {
                                     }}>
                                         {this.state.user.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
                                     </div>
+                                    <div className="nav-hidden">
+                                        <div className="settings-user-item" onClick={() => {
+                                            window.location.href = `http://${window.location.host}/people`
+                                        }}>
+                                            Люди
+                                        </div>
+                                        <div className="settings-user-item" onClick={() => {
+                                            window.location.href = `http://${window.location.host}/feeds`
+                                        }}>
+                                            Новости
+                                        </div>
+                                        <div className="settings-user-item" onClick={() => {
+                                            window.location.href = `http://${window.location.host}/messages`
+                                        }}>
+                                            Сообщения
+                                        </div>
+                                        <div className="settings-user-item" onClick={() => {
+                                            window.location.href = `http://${window.location.host}/notification`
+                                        }}>
+                                            Уведомления
+                                        </div>
+                                    </div>
                                     <div className="settings-user-item" onClick={() => {
                                         window.location.href = `http://${window.location.host}/settings`
                                     }}>

@@ -14,6 +14,9 @@ import messages_dark from "../icon/messages_dark.png";
 import team from "../icon/team.png"
 import team_dark from "../icon/team_dark.png"
 
+import people from "../icon/people.png"
+import people_dark from "../icon/people_dark.png"
+
 import notification from "../icon/notification.png"
 import notification_dark from "../icon/notification_dark.png"
 
@@ -206,6 +209,21 @@ class Nav extends Component{
                                             </div>
                                             <div className="nav-value">
                                                 Моя страница
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="nav-item">
+                                        <Link className="nav-value" href="/people">
+                                            <div  className="icon-image" >
+                                                {
+                                                    this.state.isDark === "light" ?
+                                                        <img src={people} alt="Люди"/>
+                                                        :
+                                                        <img src={people_dark} alt="Люди" />
+                                                }
+                                            </div>
+                                            <div className="nav-value">
+                                                Люди
                                             </div>
                                         </Link>
                                     </div>
