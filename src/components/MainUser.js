@@ -37,7 +37,9 @@ class MainUsers extends Component {
         rewriteMode: false,
         rewriteValue: null,
         currentDateTime: new Date().getTime(),
-        isDark: "light"
+        isDark: "light",
+        file: null,
+        imagePreviewUrl: null
     }
   }
 
@@ -539,7 +541,6 @@ class MainUsers extends Component {
       to_uid: Number(this.state.id)
     }
 
-
     fetch("/api/create_chats", {
       method: "POST",
       body: JSON.stringify(data)
@@ -585,7 +586,57 @@ class MainUsers extends Component {
     }
   };
 
+    uploading = (event) => {
+        this.setState({
+            file: event.target.files[0]
+        })
+    };
 
+    uploadClick() {
+        let elem = document.getElementById("upload_file_input")
+        elem.click()
+    }
+
+    uploadPhotoAction = (event) => {
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        // reader.onloadend = () => {
+        //     this.setState({
+        //         file: file,
+        //         imagePreviewUrl: reader.result
+        //     });
+        // }
+        reader.readAsDataURL(file)
+
+        event.preventDefault();
+        const data = new FormData();
+
+        data.append('data', event.target.files[0]);
+
+        fetch("/api/upload_main_photo", {
+            method: "POST",
+            body: data
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+
+                this.setState({
+                    imagePreviewUrl: res?.data[0].url_preview
+                })
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+
+
+
+
+
+    }
 
   render(){
     let { isLoaded, textNews, mainFeed, result, clicked_new_post } = this.state;
@@ -596,7 +647,13 @@ class MainUsers extends Component {
                     <div className="feed-wrapper">
                       <div className="main-place-wrapper">
                         <div className="main-place-photo-column child">
-                          <img src={result[0].avatar_url} alt={result[0]?.login}/>
+                          <input type="file" name="file" id="upload_file_input" onChange={(e) => this.uploadPhotoAction(e)} accept="image/x-png,image/jpeg" style={{display: "none"}} />
+                            {
+                                this.state.imagePreviewUrl ?
+                                    <img src={this.state.imagePreviewUrl} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                :
+                                    <img src={result[0].avatar_url} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                            }
                         </div>
                         <div className="main-place-info-column child">
                           <div className="main-place date_active">
