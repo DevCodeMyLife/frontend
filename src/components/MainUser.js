@@ -649,10 +649,13 @@ class MainUsers extends Component {
                         <div className="main-place-photo-column child">
                           <input type="file" name="file" id="upload_file_input" onChange={(e) => this.uploadPhotoAction(e)} accept="image/x-png,image/jpeg" style={{display: "none"}} />
                             {
-                                this.state.imagePreviewUrl ?
-                                    <img src={this.state.imagePreviewUrl} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                Number(this.state.id) === this.state.data[0].id ?
+                                    this.state.imagePreviewUrl ?
+                                        <img src={this.state.imagePreviewUrl} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                    :
+                                        <img src={result[0].avatar_url} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
                                 :
-                                    <img src={result[0].avatar_url} alt={result[0]?.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                    <img src={result[0].avatar_url} alt={result[0]?.login} style={{cursor: "default"}}/>
                             }
                         </div>
                         <div className="main-place-info-column child">
