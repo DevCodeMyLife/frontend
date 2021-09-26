@@ -502,6 +502,7 @@ a {
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
+  background: var(--bg-grey);
 }
 
 .comments-view {
