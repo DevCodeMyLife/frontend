@@ -11,6 +11,24 @@ class People extends Component {
         };
     }
 
+    allUsers = (event) =>{
+        document.getElementById("search_users").value = ""
+        event.target.classList.add('button-select')
+        fetch("api/user", {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(res => {
+                this.setState({
+                    users: res.data,
+                    load: "continue"
+                });
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
     componentDidMount() {
         fetch("api/user", {
             method: "GET",
@@ -34,6 +52,11 @@ class People extends Component {
     }
 
     changeSearch = (event) => {
+        // console.log(document.getElementById("all_users").classList)
+        // document.getElementById("all_users").classList.remove('all_users')
+        // for (let sibling of event.target.parentNode.children) {
+        //     sibling.classList.remove('button-select');
+        // }
         fetch(`api/user?q=${event.target.value}`, {
             method: "GET",
         })
@@ -58,9 +81,9 @@ class People extends Component {
     }
 
     blurSearch = (event) => {
-        this.setState({
-            load: "continue"
-        })
+        // this.setState({
+        //     load: "continue"
+        // })
     }
 
     render() {
@@ -74,7 +97,12 @@ class People extends Component {
                     {/*    </p>*/}
                     {/*</div>*/}
                     <div>
-                        <input placeholder="Начните вводить..." onFocus={this.focusSearch} onBlur={this.blurSearch} onChange={this.changeSearch}/>
+                        <input placeholder="Начните вводить..." id="search_users" onFocus={this.focusSearch} onBlur={this.blurSearch} onChange={this.changeSearch}/>
+                    </div>
+                    <div className="tags-wrapper">
+                        <div className="button-default-tag tags-item unselectable button-select" id="all_users" action="all" onClick={this.allUsers}>
+                            Все
+                        </div>
                     </div>
                 </div>
                 {
