@@ -43,8 +43,8 @@ class MainUsers extends Component {
         imagePreviewUrl: null,
         crop: {
             unit: "px",
-            x: 130,
-            y: 50,
+            x: 0,
+            y: 0,
             width: 300,
             height: 300,
             aspect: 300 / 300
