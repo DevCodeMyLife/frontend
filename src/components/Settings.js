@@ -22,15 +22,15 @@ class Settings extends Component{
                             </div>
                             {/*<div className="separator" />*/}
                         </div>
-                        <div className="block-settings child_settings">
-                            <div className="key-settings">
-                                Экспортировать GitHub Gists
-                            </div>
-                            <div className="value-settings">
-                                <Switch enable={false} callBack={()=> {}}/>
-                            </div>
-                            {/*<div className="separator" />*/}
-                        </div>
+                        {/*<div className="block-settings child_settings">*/}
+                        {/*    <div className="key-settings">*/}
+                        {/*        Экспортировать GitHub Gists*/}
+                        {/*    </div>*/}
+                        {/*    <div className="value-settings">*/}
+                        {/*        <Switch enable={false} callBack={()=> {}}/>*/}
+                        {/*    </div>*/}
+                        {/*    /!*<div className="separator" />*!/*/}
+                        {/*</div>*/}
                         <div className="block-settings child_settings">
                             <div className="key-settings">
                                 Участвовать в тестировании
