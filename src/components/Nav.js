@@ -353,7 +353,7 @@ class Nav extends Component{
                     }
                 </div>
             :
-                window.location.pathname !== "/"?
+                window.location.pathname !== "/" ?
                     <div className="wrapper-vertical-nav" >
                         <ToastContainer
                             position="top-center"

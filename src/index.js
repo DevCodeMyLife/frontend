@@ -305,6 +305,19 @@ class App extends React.Component {
                                 <Switch>
                                     <Route path="/" render={({history, match}) =>
                                         <Router routes={this.routes} history={history} basename={match.url}>
+                                            {
+                                                window.location.pathname === "/" ?
+                                                    <div className="personal_data_accept-block full-width">
+                                                        <div className="wrapper-accept-personal-data">
+                                                            <div className="text-info-accept">
+                                                                Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                :
+                                                    null
+                                            }
+
                                             <div className="wrapper-content">
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
