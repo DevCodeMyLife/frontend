@@ -89,13 +89,19 @@ class Notification extends Component {
                                                     <div className="info-notification-item">
                                                         {
                                                             notification?.types === "post" ?
-                                                                <div>
-                                                                    <span className="link-user" onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        window.location.href = `/user?id=${notification?.uwuid}`
-                                                                    }}>{notification?.user_event_action}</span>
-                                                                    <span> посмотрел Вашу заметку</span>
-                                                                </div>
+                                                                notification?.user_event_action ?
+
+                                                                    <div>
+                                                                        <span className="link-user" onClick={(e) => {
+                                                                            e.preventDefault();
+                                                                            window.location.href = `/user?id=${notification?.uwuid}`
+                                                                        }}>{notification?.user_event_action}</span>
+                                                                        <span> посмотрел Вашу заметку</span>
+                                                                    </div>
+                                                                :
+                                                                    <div>
+                                                                        <span>Кто-то посмотрел Вашу заметку</span>
+                                                                    </div>
                                                                 :
                                                                 notification?.types === "comment" ?
                                                                     <div>
