@@ -284,13 +284,7 @@ class App extends React.Component {
         if (this.state.load){
             if (true){
                 return (
-                    <HelmetProvider onScroll={
-                        (e) =>
-                            e.target.scrollTop >= 300 ?
-                                document.getElementById("to_top").style.display = "block"
-                                :
-                                document.getElementById("to_top").style.display = "none"
-                    }>
+                    <HelmetProvider>
                         <div className="wrapper" >
                             {
                                 this.state.headComponent

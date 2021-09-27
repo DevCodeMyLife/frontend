@@ -1711,7 +1711,7 @@ link-user {
   width: 100px;
   padding: 10px;
   text-align: center;
-  display: none;
+  /*display: none;*/
   /*color: #F5F6FA;*/
   color: var(--font-color);
 
