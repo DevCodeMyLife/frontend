@@ -222,6 +222,7 @@ class MainUsers extends Component {
                   data: res.data,
                   feed: res.feed,
                   load: true,
+                  close: res.data[0].privat_post,
                   token: res.token,
                 });
 
@@ -440,6 +441,7 @@ class MainUsers extends Component {
                                 data: res.data,
                                 feed: res.feed,
                                 load: true,
+
                                 token: res.token,
                             });
 

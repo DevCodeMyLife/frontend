@@ -571,7 +571,7 @@ a {
   color: var(--font-color);
   /* border: 1px solid var(--grey); */
   border-radius: 5px;
-  box-shadow: 0 0 2px var(--view-shadow);
+  box-shadow: var(--view-shadow);
   margin-bottom: 20px;
 }
 
@@ -584,9 +584,8 @@ a {
   padding: 20px;
   background: var(--bg-grey);
   color: var(--font-color);
-  /* border: 1px solid var(--grey); */
   border-radius: 5px;
-  box-shadow: 0 0 2px var(--grey);
+  box-shadow: var(--view-shadow);
   margin-bottom: 20px;
 }
 
@@ -794,7 +793,7 @@ a {
   height: 10px;
   border-radius: 50%;
   background: #07bc0c;
-  border: 1px solid #fafafa;
+  border: 1px solid var(--button_border);
 
   position: absolute;
   top: 5px;
@@ -1712,6 +1711,7 @@ link-user {
   width: 100px;
   padding: 10px;
   text-align: center;
+  display: none;
   /*color: #F5F6FA;*/
   color: var(--font-color);
 

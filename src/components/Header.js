@@ -103,7 +103,7 @@ class Header extends Component {
                         }
                     </div>
                 </div>
-                <div className="to-top" onClick={()=>{
+                <div className="to-top" id="to_top" onClick={()=>{
                     let s = document.body.scrollTop||window.pageYOffset;
                     if(s > 0)
                         window.scroll(0,0)
