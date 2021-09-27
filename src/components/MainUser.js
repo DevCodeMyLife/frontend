@@ -209,73 +209,73 @@ class MainUsers extends Component {
 
 
       fetch("/api/authentication", {
-      method: "POST",
-      body: JSON.stringify({
-        "finger": window.localStorage.getItem("finger")
-      })
-    })
-        .then(response => response.json())
-        .then(res => {
-          if (res.status.code === 0){
-            this.setState({
-              auth: true,
-              data: res.data,
-              feed: res.feed,
-              load: true,
-              token: res.token,
-            });
-
-
-          }else{
-            this.sendLogs(res.status.message)
-            this.delete_cookie("access_token")
-          }
-
-          const urlParams = new URLSearchParams(window.location.search);
-          const id = urlParams.get('id');
-
-          let path = `/api/user/${id}`
-
-          fetch(path, {
-            method: "GET"
+          method: "POST",
+          body: JSON.stringify({
+            "finger": window.localStorage.getItem("finger")
           })
-              .then(response => response.json())
-              .then(res => {
-                if (res.status.code === 0 && res.data.length > 0){
-                  this.setState({
-                    isLoaded: true,
-                    id: id,
-                    result: res.data,
-                    mainFeed: res.feed,
-                    notUser: false
-                  });
-                }else{
-                  this.setState({
-                    isLoaded: false,
-                    result: {},
-                    notUser: true,
-                    error: true
-                  });
-                }
-              })
-              .catch(error => {
-                this.setState({
-                  isLoaded: false,
-                  error: true,
-                  result: {},
-                  notUser: true
-                });
-                console.log(error)
-              });
-
         })
-        .catch(error => {
-          this.setState({
-            auth: false,
-            load: false,
-              error: true
-          });
-        });
+            .then(response => response.json())
+            .then(res => {
+              if (res.status.code === 0){
+                this.setState({
+                  auth: true,
+                  data: res.data,
+                  feed: res.feed,
+                  load: true,
+                  token: res.token,
+                });
+
+
+              }else{
+                this.sendLogs(res.status.message)
+                this.delete_cookie("access_token")
+              }
+
+              const urlParams = new URLSearchParams(window.location.search);
+              const id = urlParams.get('id');
+
+              let path = `/api/user/${id}`
+
+              fetch(path, {
+                method: "GET"
+              })
+                  .then(response => response.json())
+                  .then(res => {
+                    if (res.status.code === 0 && res.data.length > 0){
+                      this.setState({
+                        isLoaded: true,
+                        id: id,
+                        result: res.data,
+                        mainFeed: res.feed,
+                        notUser: false
+                      });
+                    }else{
+                      this.setState({
+                        isLoaded: false,
+                        result: {},
+                        notUser: true,
+                        error: true
+                      });
+                    }
+                  })
+                  .catch(error => {
+                    this.setState({
+                      isLoaded: false,
+                      error: true,
+                      result: {},
+                      notUser: true
+                    });
+                    console.log(error)
+                  });
+
+            })
+            .catch(error => {
+              this.setState({
+                auth: false,
+                load: false,
+                  error: true
+              });
+            });
 
 
 

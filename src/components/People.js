@@ -30,19 +30,44 @@ class People extends Component {
     }
 
     componentDidMount() {
-        fetch("api/user", {
-            method: "GET",
+
+        fetch("/api/authentication", {
+            method: "POST",
+            body: JSON.stringify({
+                "finger": window.localStorage.getItem("finger")
+            })
         })
             .then(response => response.json())
             .then(res => {
-                this.setState({
-                    users: res.data,
-                    load: "continue"
-                });
+                if (res.status.code === 0) {
+                    this.setState({
+                        auth: true
+                    });
+
+                    fetch("api/user", {
+                        method: "GET",
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+                            this.setState({
+                                users: res.data,
+                                load: "continue"
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        });
+                }else{
+                    this.setState({
+                        load: "notAuth"
+                    })
+                }
+
             })
             .catch(error => {
                 console.log(error)
             });
+
     }
 
     focusSearch = (event) => {
@@ -89,136 +114,150 @@ class People extends Component {
     render() {
         return (
             <div className="content-wall-views">
-                <div className="wrapper-search wrapper-inline-block unselectable">
-                    {/*<div className="main-place-wrapper">*/}
-                    {/*    <p>*/}
-                    {/*        <b>Команды - </b> это раздел где можно присоединится к уже существующей команде единомышленников или создать свою.<br/>*/}
-                    {/*        Раздел пока в разработке, поэтому здесь ничего нет.*/}
-                    {/*    </p>*/}
-                    {/*</div>*/}
-                    <div>
-                        <input placeholder="Начните вводить..." id="search_users" onFocus={this.focusSearch} onBlur={this.blurSearch} onChange={this.changeSearch}/>
-                    </div>
-                    <div className="tags-wrapper">
-                        <div className="button-default-tag tags-item unselectable button-select" id="all_users" action="all" onClick={this.allUsers}>
-                            Все
-                        </div>
-                    </div>
-                </div>
                 {
-                    this.state.load === "load" ?
-                        <div className="loader-wrapper feed-wrapper">
-                            <div className="loader" />
-                        </div>
-                    :
-                        this.state.load === "error" ?
-                            <div>
-                                <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                    this.state.load === "notAuth" ?
+                        <div>
+                            <div className="error-wrapper">
+                                <div className="error-page">
+                                    Авторизуйтесь чтобы просматривать эту страницу.
+                                </div>
                             </div>
+                        </div>
                         :
-                            this.state.load === "onFocusSearch" ?
-                                <div className="feed-wrapper">
-                                    <div className="not_news">
-                                        Начните вводить и мы начнем искать...
+                        <div>
+                            <div className="wrapper-search wrapper-inline-block unselectable">
+                                {/*<div className="main-place-wrapper">*/}
+                                {/*    <p>*/}
+                                {/*        <b>Команды - </b> это раздел где можно присоединится к уже существующей команде единомышленников или создать свою.<br/>*/}
+                                {/*        Раздел пока в разработке, поэтому здесь ничего нет.*/}
+                                {/*    </p>*/}
+                                {/*</div>*/}
+                                <div>
+                                    <input placeholder="Начните вводить..." id="search_users" onFocus={this.focusSearch} onBlur={this.blurSearch} onChange={this.changeSearch}/>
+                                </div>
+                                <div className="tags-wrapper">
+                                    <div className="button-default-tag tags-item unselectable button-select" id="all_users" action="all" onClick={this.allUsers}>
+                                        Все
                                     </div>
                                 </div>
-                            :
-                                this.state.load === "onSearchError" ?
-                                    <div className="feed-wrapper">
-                                        <div className="not_news">
-                                            К сожалению по Вашему запросу ничего не найдено 🙁
-                                        </div>
+                            </div>
+                            {
+                                this.state.load === "load" ?
+                                    <div className="loader-wrapper feed-wrapper">
+                                        <div className="loader" />
                                     </div>
-                                :
-                                    this.state.load === "continueSearch" ?
-                                        <div className="feed-wrapper">
-                                            {
-                                                this.state.usersSearch?.map(data =>
-                                                    <div key={data.id} className="users-view">
-                                                        <div className="image-user">
-                                                            <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
-                                                        </div>
-                                                        <div className="info-user">
-                                                            <div className="feed-item-title">
-                                                                <div className="link-user" onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    window.location.href = `/user?id=${data?.id}`
-                                                                }}>
-                                                                    {data?.login}
-                                                                </div>
-                                                            </div>
-                                                            <div className="more-info">
-                                                                <div className="more-info-value">
-                                                                    Компания:
-                                                                    {
-                                                                        data?.company ?
-                                                                            " "+data.company
-                                                                            :
-                                                                            " не указана"
-                                                                    }
-                                                                </div>
-                                                                <div className="more-info-value">
-                                                                    Локация:
-                                                                    {
-                                                                        data?.location ?
-                                                                            " "+data.location
-                                                                            :
-                                                                            " не указана"
-                                                                    }
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            }
-                                        </div>
                                     :
-
-                                        this.state.load === "continue" ?
+                                    this.state.load === "error" ?
+                                        <div>
+                                            <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                        </div>
+                                        :
+                                        this.state.load === "onFocusSearch" ?
                                             <div className="feed-wrapper">
-                                                {
-                                                    this.state.users?.map(data =>
-                                                        <div key={data.id} className="users-view">
-                                                            <div className="image-user">
-                                                                <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
-                                                            </div>
-                                                            <div className="info-user">
-                                                                <div className="feed-item-title">
-                                                                    <div className="link-user" onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        window.location.href = `/user?id=${data?.id}`
-                                                                    }}>
-                                                                        {data?.login}
-                                                                    </div>
-                                                                </div>
-                                                                <div className="more-info">
-                                                                    <div className="more-info-value">
-                                                                        Компания:
-                                                                        {
-                                                                            data?.company ?
-                                                                                " "+data.company
-                                                                                :
-                                                                                " не указана"
-                                                                        }
-                                                                    </div>
-                                                                    <div className="more-info-value">
-                                                                        Локация:
-                                                                        {
-                                                                            data?.location ?
-                                                                                " "+data.location
-                                                                                :
-                                                                                " не указана"
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                }
+                                                <div className="not_news">
+                                                    Начните вводить и мы начнем искать...
+                                                </div>
                                             </div>
                                             :
-                                                null
+                                            this.state.load === "onSearchError" ?
+                                                <div className="feed-wrapper">
+                                                    <div className="not_news">
+                                                        К сожалению по Вашему запросу ничего не найдено 🙁
+                                                    </div>
+                                                </div>
+                                                :
+                                                this.state.load === "continueSearch" ?
+                                                    <div className="feed-wrapper">
+                                                        {
+                                                            this.state.usersSearch?.map(data =>
+                                                                <div key={data.id} className="users-view">
+                                                                    <div className="image-user">
+                                                                        <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
+                                                                    </div>
+                                                                    <div className="info-user">
+                                                                        <div className="feed-item-title">
+                                                                            <div className="link-user" onClick={(e) => {
+                                                                                e.preventDefault();
+                                                                                window.location.href = `/user?id=${data?.id}`
+                                                                            }}>
+                                                                                {data?.login}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="more-info">
+                                                                            <div className="more-info-value">
+                                                                                Компания:
+                                                                                {
+                                                                                    data?.company ?
+                                                                                        " "+data.company
+                                                                                        :
+                                                                                        " не указана"
+                                                                                }
+                                                                            </div>
+                                                                            <div className="more-info-value">
+                                                                                Локация:
+                                                                                {
+                                                                                    data?.location ?
+                                                                                        " "+data.location
+                                                                                        :
+                                                                                        " не указана"
+                                                                                }
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                    :
+
+                                                    this.state.load === "continue" ?
+                                                        <div className="feed-wrapper">
+                                                            {
+                                                                this.state.users?.map(data =>
+                                                                    <div key={data.id} className="users-view">
+                                                                        <div className="image-user">
+                                                                            <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
+                                                                        </div>
+                                                                        <div className="info-user">
+                                                                            <div className="feed-item-title">
+                                                                                <div className="link-user" onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                    window.location.href = `/user?id=${data?.id}`
+                                                                                }}>
+                                                                                    {data?.login}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="more-info">
+                                                                                <div className="more-info-value">
+                                                                                    Компания:
+                                                                                    {
+                                                                                        data?.company ?
+                                                                                            " "+data.company
+                                                                                            :
+                                                                                            " не указана"
+                                                                                    }
+                                                                                </div>
+                                                                                <div className="more-info-value">
+                                                                                    Локация:
+                                                                                    {
+                                                                                        data?.location ?
+                                                                                            " "+data.location
+                                                                                            :
+                                                                                            " не указана"
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        </div>
+                                                        :
+                                                        null
+                            }
+                        </div>
                 }
+
             </div>
         )
     }
