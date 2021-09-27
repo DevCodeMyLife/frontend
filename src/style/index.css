@@ -244,6 +244,16 @@ code {
   color: var(--placeholder);
 }
 
+.title-task {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--font-color);
+}
+
+.value-task {
+  color: var(--font-color);
+}
+
 .place-logo {
 
   color: var(--logo-color-text);
@@ -503,6 +513,20 @@ a {
   display: flex;
   flex-direction: row;
   background: var(--bg-grey);
+}
+
+.task-view {
+  box-shadow: var(--view-shadow);
+  margin-bottom: 20px;
+  background: var(--bg-grey);
+  border-radius: 5px;
+}
+
+.task-view-flex {
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 .comments-view {
@@ -1756,7 +1780,7 @@ link-user {
 
 .selected-box {
   background: var(--bg-grey);
-  border: 1px solid var(--button_border);
+  /*border: 1px solid var(--button_border);*/
   color: var(--font-color);
   width: 100%;
 }

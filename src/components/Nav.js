@@ -4,15 +4,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
 import notes_dark from "../icon/notes_dark.png";
-import code from "../icon/code.png";
-import code_dark from "../icon/code_dark.png";
+// import code from "../icon/code.png";
+// import code_dark from "../icon/code_dark.png";
 
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import messages_dark from "../icon/messages_dark.png";
 
-import team from "../icon/team.png"
-import team_dark from "../icon/team_dark.png"
+// import team from "../icon/team.png"
+// import team_dark from "../icon/team_dark.png"
 
 import people from "../icon/people.png"
 import people_dark from "../icon/people_dark.png"
@@ -298,36 +298,36 @@ class Nav extends Component{
                                             </div>
                                         </Link>
                                     </div>
-                                    <div className="nav-item">
-                                        <Link className="nav-value" href="/freelances">
-                                            <div  className="icon-image" >
-                                                {
-                                                    this.state.isDark === "light" ?
-                                                        <img  src={code} alt="Задачи" />
-                                                        :
-                                                        <img  src={code_dark} alt="Задачи" />
-                                                }
-                                            </div>
-                                            <div className="nav-value">
-                                                Фриланс
-                                            </div>
-                                        </Link>
-                                    </div>
-                                    <div className="nav-item">
-                                        <Link className="nav-value" href="/teams">
-                                            <div  className="icon-image" >
-                                                {
-                                                    this.state.isDark === "light" ?
-                                                        <img  src={team} alt="Команды" />
-                                                        :
-                                                        <img  src={team_dark} alt="Команды" />
-                                                }
-                                            </div>
-                                            <div className="nav-value">
-                                                Команды
-                                            </div>
-                                        </Link>
-                                    </div>
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/freelances">*/}
+                                    {/*        <div  className="icon-image" >*/}
+                                    {/*            {*/}
+                                    {/*                this.state.isDark === "light" ?*/}
+                                    {/*                    <img  src={code} alt="Задачи" />*/}
+                                    {/*                    :*/}
+                                    {/*                    <img  src={code_dark} alt="Задачи" />*/}
+                                    {/*            }*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Фриланс*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/teams">*/}
+                                    {/*        <div  className="icon-image" >*/}
+                                    {/*            {*/}
+                                    {/*                this.state.isDark === "light" ?*/}
+                                    {/*                    <img  src={team} alt="Команды" />*/}
+                                    {/*                    :*/}
+                                    {/*                    <img  src={team_dark} alt="Команды" />*/}
+                                    {/*            }*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Команды*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
                                 </div>
                                 // :
                                 // <div className="nav-item">
