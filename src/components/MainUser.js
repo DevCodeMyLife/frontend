@@ -425,7 +425,6 @@ class MainUsers extends Component {
       })
           .then(response => response.json())
           .then(res => {
-            console.log(res)
             if (res.status.code === 0) {
                 fetch("/api/authentication", {
                     method: "POST",

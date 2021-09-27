@@ -89,10 +89,22 @@ class Notification extends Component {
                                                     <div className="info-notification-item">
                                                         {
                                                             notification?.types === "post" ?
-                                                                notification?.user_event_action +" посмотрел Вашу заметку"
+                                                                <div>
+                                                                    <span className="link-user" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        window.location.href = `/user?id=${notification?.uwuid}`
+                                                                    }}>{notification?.user_event_action}</span>
+                                                                    <span> посмотрел Вашу заметку</span>
+                                                                </div>
                                                                 :
                                                                 notification?.types === "comment" ?
-                                                                    notification?.user_event_action +" оставил новый комментарий"
+                                                                    <div>
+                                                                        <span className="link-user" onClick={(e) => {
+                                                                            e.preventDefault();
+                                                                            window.location.href = `/user?id=${notification?.uwuid}`
+                                                                        }}>{notification?.user_event_action}</span>
+                                                                        <span> оставил новый комментарий</span>
+                                                                    </div>
                                                                     :
                                                                         null
                                                         }

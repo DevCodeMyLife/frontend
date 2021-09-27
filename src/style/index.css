@@ -1676,7 +1676,7 @@ link-user {
 
 .notifications-item > .info-notification-item {
   flex-grow: 1;
-  text-align: center;
+  /*text-align: center;*/
   padding: 10px;
 }
 
@@ -1699,9 +1699,9 @@ link-user {
 }
 
 .info-notification-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
   padding: 5px;
 }
 
