@@ -353,12 +353,13 @@ class Feed extends Component {
                             <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
                                 Топ 10 недели
                             </div>
-
-                            tags?.map(data =>
-                                <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
-                                    {data.value}
-                                </div>
-                            )
+                            {
+                                tags?.map(data =>
+                                    <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
+                                        {data.value}
+                                    </div>
+                                )
+                            }
 
                         </div>
                     </div>
