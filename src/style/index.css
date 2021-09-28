@@ -1830,7 +1830,7 @@ textarea {
   width: 100%;
   box-sizing: border-box;
   word-wrap: break-word;
-  word-break: break-all;
+  /*word-break: break-all;*/
   -ms-hyphens: auto;
   -webkit-hyphens: auto;
   color: var(--font-color);
