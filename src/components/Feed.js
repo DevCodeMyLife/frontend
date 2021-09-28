@@ -151,8 +151,25 @@ class Feed extends Component {
                         result: {}
                     });
                 });
-        }else{
+        }else if (attr === "all"){
             fetch("api/feed", {
+                method: "GET",
+            })
+                .then(response => response.json())
+                .then(res => {
+                    this.setState({
+                        isLoaded: "access",
+                        result: res.data
+                    });
+                })
+                .catch(error => {
+                    this.setState({
+                        isLoaded: "error",
+                        result: {}
+                    });
+                });
+        }else{
+            fetch(`api/feed?params=${attr}`, {
                 method: "GET",
             })
                 .then(response => response.json())
