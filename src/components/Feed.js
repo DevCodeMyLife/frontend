@@ -353,19 +353,13 @@ class Feed extends Component {
                             <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
                                 Топ 10 недели
                             </div>
-                            {
-                                this.state.auth && this.state.data.length > 0 ?
-                                    this.state.data[0]?.testing  ?
-                                        tags?.map(data =>
-                                            <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
-                                                {data.value}
-                                            </div>
-                                        )
-                                    :
-                                        null
-                                :
-                                    null
-                            }
+
+                            tags?.map(data =>
+                                <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
+                                    {data.value}
+                                </div>
+                            )
+
                         </div>
                     </div>
 
