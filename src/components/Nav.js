@@ -235,17 +235,6 @@ class Nav extends Component{
             :
                 window.location.pathname !== "/" ?
                     <div className="wrapper-vertical-nav" >
-                        <ToastContainer
-                            position="top-center"
-                            autoClose={2000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                        />
                         {
                             !this.state.load ?
                                 <div className="loader-flex">
