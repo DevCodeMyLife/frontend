@@ -20,7 +20,7 @@ class Settings extends Component{
             testing: !event,
             privat_post: this.state.privatPost
         }
-        fetch("/api/settings", {
+        fetch("/api/settings?flags=switch", {
             method: "PUT",
             body: JSON.stringify(data)
         })
@@ -82,7 +82,7 @@ class Settings extends Component{
     }
 
     fetchUpdateState(){
-        fetch("/api/settings?flags=switch", {
+        fetch("/api/settings", {
             method: "GET",
         })
             .then(response => response.json())
