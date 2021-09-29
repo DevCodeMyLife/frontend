@@ -6,7 +6,7 @@ import like from "../icon/like.png"
 import look from "../icon/look.png";
 import look_dark from "../icon/look_dark.png";
 
-import Head from "./Header";
+// import Head from "./Header";
 import {Link} from "@mui/material";
 import like_dark from "../icon/like_dark.png";
 const gfm = require('remark-gfm')
@@ -19,8 +19,6 @@ class Feed extends Component {
             error: null,
             isLoaded: "load",
             result: [],
-            auth: false,
-            messagesCount: 0,
             data: null,
             currentDateTime: new Date().getTime(),
             tags: [],
@@ -235,51 +233,7 @@ class Feed extends Component {
                 });
             });
 
-        fetch("/api/authentication", {
-            method: "POST",
-            body: JSON.stringify({
-                "finger": window.localStorage.getItem("finger")
-            })
-        })
-            .then(response => response.json())
-            .then(res => {
-                if (res.status.code === 0){
-                    this.setState({
-                        auth: true,
-                        data: res.data,
-                        feed: res.feed,
-                        notification_count: res.notification_count,
-                        notification: res.notification,
-                        token: res.token,
-                        messagesCount: res.count_message
-                    });
-                }else{
-                    this.sendLogs(res.status.message)
-                    this.delete_cookie("access_token")
-                }
-                this.setState({
-                    load: true,
-                    headComponent: null
-                });
 
-                this.setState({
-                    headComponent: <Head
-                        auth={true}
-                        user={res.data[0]}
-                        load={true}
-                    />
-                })
-
-
-            })
-            .catch(error => {
-                this.setState({
-                    auth: false,
-                    load: true,
-                    token: "asd",
-                });
-
-            });
     }
 
     handlerFocus = (event) => {
