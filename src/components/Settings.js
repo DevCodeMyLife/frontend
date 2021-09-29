@@ -71,7 +71,7 @@ class Settings extends Component{
                     this.fetchUpdateState()
                 }else{
                     document.getElementById("event_save").style.color = "red"
-                    document.getElementById("event_save").innerHTML = "Сохранено"
+                    document.getElementById("event_save").innerHTML = "Все поля должны быть заполнены"
                 }
 
 
