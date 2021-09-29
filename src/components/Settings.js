@@ -67,6 +67,7 @@ class Settings extends Component{
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === "0"){
+                    document.getElementById("event_save").style.color = "green"
                     document.getElementById("event_save").innerHTML = "Сохранено"
                     this.fetchUpdateState()
                 }else{
