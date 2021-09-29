@@ -371,15 +371,15 @@ class Freelances extends Component{
                                                                     <div key={data.id} className="task-view">
                                                                         <div className="task-view-flex">
                                                                             <div className="image-user">
-                                                                                <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
+                                                                                <img className="image-user-src" src={data.avatar_url} alt={data.login} onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                    window.location.href = `/user?id=${data?.user_creator_id}`
+                                                                                }}/>
                                                                             </div>
                                                                             <div className="info-user">
                                                                                 <div className="feed-item-title">
-                                                                                    <div className="link-user" onClick={(e) => {
-                                                                                        e.preventDefault();
-                                                                                        window.location.href = `/user?id=${data?.user_creator_id}`
-                                                                                    }}>
-                                                                                        {data?.login}
+                                                                                    <div className="link-user">
+                                                                                        {data?.title}
                                                                                     </div>
                                                                                     <div className="feed-item-datetime">
                                                                                         {
@@ -403,31 +403,22 @@ class Freelances extends Component{
                                                                                                         <span >Сложность не определенна</span>
                                                                                         }
                                                                                     </div>
-
-                                                                                {/*     •*/}
-                                                                                </div>
-                                                                                <div className="more-info">
-                                                                                    <div className="title-task">
-                                                                                        {data?.title}
-                                                                                    </div>
-                                                                                    <div className="value-task">
-                                                                                        <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components}>
-                                                                                            {data?.value}
-                                                                                        </ReactMarkdown>
-                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div className="wrapper-bottom">
-                                                                            <div className="wrapper-flex-start">
-                                                                                <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>
-                                                                                    <div className="button-default" >Подробнее</div>
-                                                                                </Link>
-                                                                            </div>
-                                                                            <div className="like_wrapper wrapper-flex-end">
+                                                                            <div className="task-price">
                                                                                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "var(--font-color)"}}>{data?.price} ₽</div>
                                                                             </div>
                                                                         </div>
+                                                                        {/*<div className="wrapper-bottom">*/}
+                                                                        {/*    <div className="wrapper-flex-start">*/}
+                                                                        {/*        <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>*/}
+                                                                        {/*            <div className="button-default" >Подробнее</div>*/}
+                                                                        {/*        </Link>*/}
+                                                                        {/*    </div>*/}
+                                                                        {/*    <div className="like_wrapper wrapper-flex-end">*/}
+                                                                        {/*        <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "var(--font-color)"}}>{data?.price} ₽</div>*/}
+                                                                        {/*    </div>*/}
+                                                                        {/*</div>*/}
                                                                     </div>
                                                                 )
                                                             }

@@ -172,7 +172,7 @@ class People extends Component {
                                                             this.state.usersSearch?.map(data =>
                                                                 <div key={data.id} className="users-view">
                                                                     <div className="image-user">
-                                                                        <img className="image-user-src" src={data.avatar_url} alt={data.login}/>
+                                                                        <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
                                                                     </div>
                                                                     <div className="info-user">
                                                                         <div className="feed-item-title">

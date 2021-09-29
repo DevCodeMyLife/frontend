@@ -203,6 +203,12 @@ code {
   box-sizing: border-box;
 }
 
+.task-price {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
 .wrapper-flex-end-margin  {
   display: flex;
   justify-content: flex-end;
@@ -501,8 +507,21 @@ a {
 }
 
 .image-user-src {
-  max-width: 100px;
+  max-width: 35px;
   border-radius: 50%;
+}
+
+.image-user-src-people {
+  max-width: 60px;
+  border-radius: 50%;
+}
+
+.task-view:active {
+  transform: scale(.98);
+}
+
+.task-title {
+  color: var(--font-color);
 }
 
 .users-view {
