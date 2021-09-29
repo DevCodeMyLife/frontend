@@ -631,7 +631,7 @@ class Messages extends Component{
                                                             this.state.chats.map(chat =>
                                                                 chat.no_read_count ?
                                                                     <div className="feed-wrapper-item-chat chat-flex-row"
-                                                                         style={{marginBottom: 0, background: "#d7e4fc"}}
+                                                                         style={{marginBottom: 0, background: "var(--hover-message-dialog)"}}
                                                                          onClick={() =>  window.location.href = `/messages?cid=${chat.c_id}`}>
                                                                         <div className="photo-wrapper-chat">
                                                                             <img src={chat.avatar_url} alt={chat.avatar_url}/>
