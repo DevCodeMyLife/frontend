@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-navi";
 import notes from "../icon/notes.png";
@@ -70,17 +69,6 @@ class Nav extends Component{
         return (
             state.auth.user.isAuth ?
                 <div className="wrapper-vertical-nav" >
-                    <ToastContainer
-                        position="top-center"
-                        autoClose={2000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
                     {
                         !this.state.load ?
                             <div className="loader-flex">
