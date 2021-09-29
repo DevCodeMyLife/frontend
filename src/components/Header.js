@@ -4,21 +4,21 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            auth: this.props.auth,
-            user: this.props.user,
+            store: this.props.store,
             load: this.props.load,
             showSettings: false
         }
     }
 
     render() {
+        const state = this.state.store.getState()
         return (
             <header className="head">
                 <div className="rectangle-head">
                     <div className="wrapper-logo unselectable">
                         <div className="place-logo wrapper-inline-block" onClick={(e) => {
                             e.preventDefault();
-                            if (this.state.auth){
+                            if (state.auth.user.isAuth){
                                 window.location.href = '/feeds'
                             }else{
                                 window.location.href = '/'
@@ -33,9 +33,9 @@ class Header extends Component {
                                 !this.state.load ?
                                     <div className="loader-small" />
                                 :
-                                    this.state.auth ?
+                                    state.auth.user.isAuth ?
                                         <div className="wrapper-auth-photo" style={this.state.showSettings ? {background: "#3890FC"} : {}}>
-                                            <img src={this.state.user.avatar_url} alt={this.state.user.login}  onClick={() => {
+                                            <img src={state.auth.user.data.avatar_url} alt={state.auth.user.data.login}  onClick={() => {
                                                 this.setState(prevState => ({
                                                     showSettings: !prevState.showSettings
                                                 }));
@@ -58,9 +58,9 @@ class Header extends Component {
                                 }
                                 >
                                     <div className="settings-user-item" onClick={() => {
-                                        window.location.href = `http://${window.location.host}/user?id=${this.state.user.id}`
+                                        window.location.href = `http://${window.location.host}/user?id=${state.auth.user.data.id}`
                                     }}>
-                                        {this.state.user.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
+                                        {state.auth.user.data.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
                                     </div>
                                     <div className="nav-hidden">
                                         <div className="separator">

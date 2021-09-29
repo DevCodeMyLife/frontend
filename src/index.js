@@ -1,7 +1,7 @@
-// import { createStore } from "redux"; // импорт из Redux-библиотеки
+import { createStore } from "redux"; // импорт из Redux-библиотеки
 import { mount, route } from 'navi'
 import { Router, View } from 'react-navi'
-import { ToastContainer } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.css'
@@ -24,8 +24,9 @@ import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
 import ruvds from "./icon/ruvds.png";
 import People from "./components/People";
+import AppReducer from "./components/reducers/common"
 
-// const store = createStore(reducer);
+const store = createStore(AppReducer);
 
 
 const CONFIG = {
@@ -41,126 +42,218 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            auth: false,
             load: false,
-            data: [],
-            feed: [],
-            token: null,
-            notification_count: 0,
-            notification: [],
-            messagesCount: 0,
-            headComponent: null
+            context: new AudioContext(),
+            audio: new Audio(this.props.song),
+            channel: null,
         }
-        this.centrifuge = new Centrifuge(CONFIG.url);
     }
 
-    sendLogs(message) {
-    }
 
-    checkCookie(cname) {
-        let ca = document.cookie.split(';');
-        let array = {};
+    checkAuth(){
+        fetch("/api/authentication", {
+            method: "POST",
+            body: JSON.stringify({})
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0) {
+                    store.dispatch({
+                        type: "ACTION_CHECK_AUTH", value: {
+                            user: {
+                                isAuth: true,
+                                data: res?.data[0],
+                                feeds: res?.feed,
+                                notificationCount: res?.notification_count,
+                                messagesCount: res?.count_message,
+                                notifications: res?.notification,
+                                token: res?.token,
+                                error: null
+                            },
+                        }
+                    })
 
-        for (let i = 0; i < ca.length; i++) {
-            array[ca[i].split('=')[0].trim()] = ca[i].split('=')[1]
-        }
+                    let centrifuge = new Centrifuge(CONFIG.url)
+                    centrifuge.setToken(res?.token)
+                    centrifuge.connect()
 
-        return Object.keys(array).includes(cname);
-    }
+                    centrifuge.on('connect', function(context) {
+                        console.log("[ app connected centrifuge ]")
+                    });
 
-    delete_cookie(name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    let this_ = this
+                    centrifuge.subscribe(`${res?.data[0].id}`, function(message) {
+                        console.log("[ Event pushStorage ]")
+
+                        const state = store.getState()
+
+                        let event = message.data
+                        switch (event.type){
+                            case "event":
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                });
+
+                                store.dispatch({
+                                    type: "ACTION_CHECK_AUTH", value: {
+                                        user: {
+                                            isAuth: true,
+                                            data: res?.data[0],
+                                            feeds: res?.feed,
+                                            notificationCount: event.count,
+                                            messagesCount: state.auth.user.messagesCount,
+                                            notifications: res?.notification,
+                                            token: res?.token,
+                                            error: null
+                                        },
+                                    }
+                                })
+
+                                toast.info('Вашу заметку посмотрели.', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                break;
+                            case "comment":
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                });
+
+                                store.dispatch({
+                                    type: "ACTION_CHECK_AUTH", value: {
+                                        user: {
+                                            isAuth: true,
+                                            data: res?.data[0],
+                                            feeds: res?.feed,
+                                            notificationCount: event.count,
+                                            messagesCount: state.auth.user.messagesCount,
+                                            notifications: res?.notification,
+                                            token: res?.token,
+                                            error: null
+                                        },
+                                    }
+                                })
+
+                                toast.info('Вашу заметку прокомментировали.', {
+                                    position: "top-center",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                break;
+                            case "message":
+                                if (window.location.pathname.match(/messages/) === null) {
+
+                                    store.dispatch({
+                                        type: "ACTION_CHECK_AUTH", value: {
+                                            user: {
+                                                isAuth: true,
+                                                data: res?.data[0],
+                                                feeds: res?.feed,
+                                                notificationCount: state.auth.user.notificationCount,
+                                                messagesCount: event.count,
+                                                notifications: res?.notification,
+                                                token: res?.token,
+                                                error: null
+                                            },
+                                        }
+                                    })
+
+                                    toast.info('Вам пришло новое сообщение.', {
+                                        position: "top-center",
+                                        autoClose: 5000,
+                                        hideProgressBar: true,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                    });
+                                }
+                                break;
+                            case "update":
+                                fetch("/api/authentication", {
+                                    method: "POST",
+                                    body: JSON.stringify({})
+                                })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res?.status.code === 0){
+                                            store.dispatch({
+                                                type: "ACTION_CHECK_AUTH", value: {
+                                                    user: {
+                                                        isAuth: true,
+                                                        data: res?.data[0],
+                                                        feeds: res?.feed,
+                                                        notificationCount: res?.notification_count,
+                                                        messagesCount: res?.count_message,
+                                                        notifications: res?.notification,
+                                                        token: res?.token,
+                                                        error: null
+                                                    },
+                                                }
+                                            })
+                                        }
+                                    })
+                                break;
+                            default:
+                                break
+                        }
+                    })
+
+                    store.dispatch({
+                        type: "ACTION_SET_CENTRIFUGE", value: {
+                            object: centrifuge
+                        }
+                    })
+
+                    if (document.location.pathname === "/") {
+                        window.location.href = '/feeds'
+                    }else{
+                        this.setState({
+                            load: true
+                        })
+                    }
+                }else{
+                    store.dispatch({
+                        type: "ACTION_CHECK_AUTH", value: {
+                            user: {
+                                isAuth: false,
+                                data: null,
+                                feeds: null,
+                                error: res?.status?.message
+                            },
+                        }
+                    })
+
+                    this.setState({
+                        load: true
+                    })
+                }
+            })
+            .catch(error => {
+                store.dispatch({
+                    type: "ACTION_CHECK_AUTH", value: {
+                        user: {
+                            isAuth: false,
+                            data: null,
+                            feeds: null,
+                            error: error
+                        },
+                    }
+                })
+            });
     }
 
     componentDidMount() {
-        this.setState({
-            headComponent: <Head
-                auth={false}
-                user={this.state.data[0]}
-                load={false}
-            />
-        })
-
-        let check = true
-        if (check){
-            fetch("/api/authentication", {
-                method: "POST",
-                body: JSON.stringify({
-                    "finger": window.localStorage.getItem("finger")
-                })
-            })
-                .then(response => response.json())
-                .then(res => {
-                    if (res.status.code === 0){
-                        auth = true
-                        user = res.data
-                        if (document.location.pathname === "/") {
-                            window.location.href = '/feeds'
-                        }
-
-
-
-
-                        this.setState({
-                            auth: true,
-                            data: res.data,
-                            feed: res.feed,
-                            notification_count: res.notification_count,
-                            notification: res.notification,
-                            token: res.token,
-                            messagesCount: res.count_message
-                        });
-                    }else{
-                        this.sendLogs(res.status.message)
-                        this.delete_cookie("access_token")
-                    }
-                    this.setState({
-                        load: true,
-                        headComponent: null
-                    });
-
-                    this.setState({
-                        headComponent: <Head
-                            auth={true}
-                            user={res.data[0]}
-                            load={true}
-                        />
-                    })
-
-
-                })
-                .catch(error => {
-                    this.setState({
-                        auth: false,
-                        load: true,
-                        token: "asd",
-                        headComponent: null
-                    });
-
-                    this.setState({
-                        headComponent: <Head
-                            auth={false}
-                            load={true}
-                        />
-                    })
-                });
-        }else{
-            this.setState({
-                auth: false,
-                load: true,
-                token: "asd",
-                headComponent: null
-            });
-
-            this.setState({
-                headComponent: <Head
-                    auth={false}
-                    load={true}
-                />
-            })
-        }
-
-        cent = this.centrifuge
+        this.checkAuth()
     }
 
     routes = mount({
@@ -184,7 +277,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <People />
+            view: <People store={store} />
         }),
         '/messages': route({
             title: 'Мессенджер | DevCodeMyLife',
@@ -195,7 +288,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Messages auth={auth} cent={cent} user={user} />
+            view: <Messages store={store} auth={auth} cent={cent} user={user} />
         }),
         '/user': route({
             title: 'DevCodeMyLife',
@@ -206,7 +299,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <MainUser />
+            view: <MainUser store={store} />
         }),
         '/feeds': route({
             title: 'Новости | DevCodeMyLife',
@@ -227,7 +320,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <FeedOnePage/>
+            view: <FeedOnePage store={store}/>
         }),
         '/settings': route({
             title: 'Настройки | DevCodeMyLife',
@@ -238,7 +331,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Settings/>
+            view: <Settings store={store}/>
         }),
         '/freelances': route({
             title: 'Фриланс | DevCodeMyLife',
@@ -248,7 +341,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Freelances/>
+            view: <Freelances store={store}/>
         }),
         '/notification': route({
             title: 'События | DevCodeMyLife',
@@ -259,7 +352,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Notification/>
+            view: <Notification store={store}/>
         }),
         '/teams': route({
             title: 'Команды | DevCodeMyLife',
@@ -270,7 +363,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Teams/>
+            view: <Teams store={store}/>
         }),
         '/how_to_use': route({
             title: 'Привет! | DevCodeMyLife',
@@ -280,7 +373,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <HowToUse/>
+            view: <HowToUse store={store}/>
         })
     })
 
@@ -290,10 +383,10 @@ class App extends React.Component {
                 return (
                     <HelmetProvider>
                         <div className="wrapper" >
-                            {
-                                this.state.headComponent
-
-                            }
+                            <Head
+                                store={store}
+                                load={true}
+                            />
                             <ToastContainer
                                 position="top-center"
                                 autoClose={2000}
@@ -325,7 +418,7 @@ class App extends React.Component {
                                             <div className="wrapper-content">
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
-                                                        <Nav song={song} />
+                                                        <Nav song={song} store={store}/>
                                                         <div className="wrapper-ad" onClick={()=>{
                                                             window.location.href = "https://ruvds.com/pr4320"
                                                         }}>
@@ -338,8 +431,8 @@ class App extends React.Component {
                                                             {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                                         </div>
                                                     </div>
-                                                    <Suspense fallback={null}>
-                                                        <View/>
+                                                    <Suspense fallback={true}>
+                                                        <View store={store}/>
                                                     </Suspense>
                                                 </div>
                                             </div>
@@ -355,7 +448,10 @@ class App extends React.Component {
             }else{
                 return (
                     <div>
-                        <Head auth={false} load={true} />
+                        <Head
+                            store={store}
+                            load={true}
+                        />
                         <div className="personal_data_accept-block full-width">
                             <div className="wrapper-accept-personal-data">
                                 <div className="text-info-accept">

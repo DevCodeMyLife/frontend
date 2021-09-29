@@ -23,11 +23,7 @@ import notification_dark from "../icon/notification_dark.png"
 
 import sing from "../icon/sing_in.png"
 import user_dark from "../icon/user-dark.png"
-import Centrifuge from "centrifuge";
 
-const CONFIG = {
-    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
-};
 
 class Nav extends Component{
     constructor(props) {
@@ -35,15 +31,13 @@ class Nav extends Component{
 
         this.state = {
             load: false,
-            auth: false,
-            data: null,
-            context: new AudioContext(),
-            audio: new Audio(this.props.song),
-            channel: null,
-            isDark: "light"
+            isDark: "light",
+            store: this.props.store
         };
-        this.centrifuge = new Centrifuge(CONFIG.url);
 
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
     getPreferredColorScheme = () => {
@@ -66,117 +60,15 @@ class Nav extends Component{
             this.getPreferredColorScheme()
         });
 
-        fetch("/api/authentication", {
-            method: "POST",
-            body: JSON.stringify({
-                "finger": window.localStorage.getItem("finger")
-            })
+        this.setState({
+            load: true
         })
-            .then(response => response.json())
-            .then(res => {
-                if (res.status.code === 0) {
-                    this.setState({
-                        auth: true,
-                        data: res.data,
-                        messagesCount: res.count_message,
-                        notification_count: res.notification_count
-                    });
-
-                    this.centrifuge.setToken(res.token)
-
-                    let this_ = this
-                   this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
-                        console.log("[ private channel connect ]")
-
-                        let event = message.data
-                        switch (event.type){
-                            case "event":
-                                this_.setState({notification_count: event.count })
-                                this_.state.context.resume().then(() => {
-                                    this_.state.audio.play();
-                                });
-                                toast.info('Вашу заметку посмотрели.', {
-                                    position: "top-center",
-                                    autoClose: 5000,
-                                    hideProgressBar: true,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                });
-                                break;
-                            case "comment":
-                                this_.setState({notification_count: event.count })
-                                this_.state.context.resume().then(() => {
-                                    this_.state.audio.play();
-                                });
-                                toast.info('Вашу заметку прокомментировали.', {
-                                    position: "top-center",
-                                    autoClose: 5000,
-                                    hideProgressBar: true,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                });
-                                break;
-                            case "message":
-                                if (window.location.pathname.match(/messages/) === null) {
-                                    this_.setState({messagesCount: event.count })
-                                    toast.info('Вам пришло новое сообщение.', {
-                                        position: "top-center",
-                                        autoClose: 5000,
-                                        hideProgressBar: true,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        progress: undefined,
-                                    });
-                                }
-                                break;
-                            case "update":
-                                fetch("/api/authentication", {
-                                    method: "POST",
-                                    body: JSON.stringify({
-                                        "finger": window.localStorage.getItem("finger")
-                                    })
-                                })
-                                    .then(response => response.json())
-                                    .then(res => {
-                                        if (res.status.code === 0) {
-                                            this_.setState({
-                                                auth: true,
-                                                data: res.data,
-                                                messagesCount: res.count_message,
-                                                notification_count: res.notification_count
-                                            });
-                                        }
-                                    })
-
-                                break;
-                            default:
-                                console.log("[ unidentified event ]")
-                        }
-                    })
-
-                    this.centrifuge.connect()
-
-
-
-
-
-                }
-                this.setState({
-                    load: true,
-                });
-            })
-
-
     }
 
     render() {
+        const state = this.state.store.getState()
         return (
-            this.state.auth ?
+            state.auth.user.isAuth ?
                 <div className="wrapper-vertical-nav" >
                     <ToastContainer
                         position="top-center"
@@ -198,7 +90,7 @@ class Nav extends Component{
 
                                 <div>
                                     <div className="nav-item">
-                                        <Link className="nav-value" href={`/user?id=${this.state.data[0].id}`}>
+                                        <Link className="nav-value" href={`/user?id=${state.auth.user.data.id}`}>
                                             <div  className="icon-image" >
                                                 {
                                                     this.state.isDark === "light" ?
@@ -245,13 +137,13 @@ class Nav extends Component{
                                     </div>
                                     <div className="nav-item" >
                                         {
-                                            this.state.messagesCount ?
+                                            state.auth.user.messagesCount ?
                                                 <div className="counter-notification" id="counter_notification" path="/messages" >
                                                     {
-                                                        this.state.messagesCount > 10 ?
+                                                        state.auth.user.messagesCount > 10 ?
                                                             "10+"
                                                             :
-                                                            this.state.messagesCount
+                                                            state.auth.user.messagesCount
                                                     }
                                                 </div>
                                                 :
@@ -273,13 +165,13 @@ class Nav extends Component{
                                     </div>
                                     <div className="nav-item" >
                                         {
-                                            this.state.notification_count ?
-                                                <div className="counter-notification" id="counter_notification" path="/messages" >
+                                            state.auth.user.notificationCount ?
+                                                <div className="counter-notification" id="counter_notification" path="/notification" >
                                                     {
-                                                        this.state.notification_count > 10 ?
+                                                        state.auth.user.notificationCount > 10 ?
                                                             "10+"
                                                             :
-                                                            this.state.notification_count
+                                                            state.auth.user.notificationCount
                                                     }
                                                 </div>
                                                     :
@@ -300,7 +192,7 @@ class Nav extends Component{
                                         </Link>
                                     </div>
                                     {
-                                        this.state.data[0]?.testing ?
+                                        state.auth.user.data.testing ?
                                             <div>
                                                 <div className="nav-item">
                                                     <Link className="nav-value" href="/freelances">

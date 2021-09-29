@@ -4,42 +4,16 @@ class Notification extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: "load",
-            result: [],
-            auth: false,
-            notifications: null
+            store: this.props.store
         };
+
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
     componentDidMount() {
-        fetch("/api/authentication", {
-            method: "POST",
-            body: JSON.stringify({
-                "finger": window.localStorage.getItem("finger")
-            })
-        })
-            .then(response => response.json())
-            .then(res => {
-                if (res.status.code === 0){
-                    this.setState({
-                        auth: true,
-                        notifications: res.notification,
-                    });
-                }
-                this.setState({
-                    load: true
-                });
 
-            })
-            .catch(error => {
-                // console.log(error)
-                this.setState({
-                    auth: false,
-                    load: true,
-                    token: 'asd'
-                });
-            });
     }
 
     checkNotification(uuid, addr){
@@ -70,68 +44,67 @@ class Notification extends Component {
     }
 
     render() {
-        const { notifications } = this.state;
+        const state = this.state.store.getState()
         return (
-
-                    <div className="content-wall-views">
-                        <div className="wrapper-feed">
-                            <div className="feed-wrapper">
-                                {
-                                    notifications?.length ?
-                                        notifications?.map(notification =>
-                                            notification?.is_look ?
-                                                null
-                                            :
-                                                <div className="notifications-item background-white">
-                                                    <div className="info-notification-item feed-item-datetime">
-                                                        {this.unixToDateTime(notification?.date_time)}
-                                                    </div>
-                                                    <div className="info-notification-item">
-                                                        {
-                                                            notification?.types === "post" ?
-                                                                notification?.user_event_action ?
-
-                                                                    <div>
-                                                                        <span className="link-user" onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            window.location.href = `/user?id=${notification?.uwuid}`
-                                                                        }}>{notification?.user_event_action}</span>
-                                                                        <span> посмотрел Вашу заметку</span>
-                                                                    </div>
-                                                                :
-                                                                    <div>
-                                                                        <span>Кто-то посмотрел Вашу заметку</span>
-                                                                    </div>
-                                                                :
-                                                                notification?.types === "comment" ?
-                                                                    <div>
-                                                                        <span className="link-user" onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            window.location.href = `/user?id=${notification?.uwuid}`
-                                                                        }}>{notification?.user_event_action}</span>
-                                                                        <span> оставил новый комментарий</span>
-                                                                    </div>
-                                                                    :
-                                                                        null
-                                                        }
-                                                    </div>
-                                                    <div className="info-notifications-item">
-                                                        <div className="button-default" onClick={() => this.checkNotification(
-                                                            notification.feeds_uuid, notification.addr)}>Перейти к заметке</div>
-                                                    </div>
-                                                </div>
-                                        )
+            <div className="content-wall-views">
+                <div className="wrapper-feed">
+                    <div className="feed-wrapper">
+                        {
+                            state.auth.user.notifications?.length ?
+                                state.auth.user.notifications?.map(notification =>
+                                    notification?.is_look ?
+                                        null
                                     :
-                                        <div className="error-wrapper">
-                                            <div className="error-page">
-                                                Новых событий пока нет.
+                                        <div className="notifications-item background-white">
+                                            <div className="info-notification-item feed-item-datetime">
+                                                {this.unixToDateTime(notification?.date_time)}
+                                            </div>
+                                            <div className="info-notification-item">
+                                                {
+                                                    notification?.types === "post" ?
+                                                        notification?.user_event_action ?
+
+                                                            <div>
+                                                                <span className="link-user" onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    window.location.href = `/user?id=${notification?.uwuid}`
+                                                                }}>{notification?.user_event_action}</span>
+                                                                <span> посмотрел Вашу заметку</span>
+                                                            </div>
+                                                        :
+                                                            <div>
+                                                                <span>Кто-то посмотрел Вашу заметку</span>
+                                                            </div>
+                                                        :
+                                                        notification?.types === "comment" ?
+                                                            <div>
+                                                                <span className="link-user" onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    window.location.href = `/user?id=${notification?.uwuid}`
+                                                                }}>{notification?.user_event_action}</span>
+                                                                <span> оставил новый комментарий</span>
+                                                            </div>
+                                                            :
+                                                                null
+                                                }
+                                            </div>
+                                            <div className="info-notifications-item">
+                                                <div className="button-default" onClick={() => this.checkNotification(
+                                                    notification.feeds_uuid, notification.addr)}>Перейти к заметке</div>
                                             </div>
                                         </div>
-                                }
-                            </div>
-                        </div>
-
+                                )
+                            :
+                                <div className="error-wrapper">
+                                    <div className="error-page">
+                                        Новых событий пока нет.
+                                    </div>
+                                </div>
+                        }
                     </div>
+                </div>
+
+            </div>
 
         )
     }
