@@ -3,9 +3,9 @@ import TextareaAutosize from "react-textarea-autosize";
 import CurrencyInput from 'react-currency-input-field';
 import Select from 'react-select';
 import '@emotion/react'
-import {Link} from "@mui/material";
-import gfm from "remark-gfm";
-import ReactMarkdown from "react-markdown";
+// import {Link} from "@mui/material";
+// import gfm from "remark-gfm";
+// import ReactMarkdown from "react-markdown";
 import {PrismAsync as SyntaxHighlighter} from "react-syntax-highlighter";
 import {tomorrow as style} from "react-syntax-highlighter/dist/cjs/styles/prism";
 
