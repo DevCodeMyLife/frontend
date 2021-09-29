@@ -801,7 +801,7 @@ class MainUsers extends Component {
                           <div className="main-place name">
                             {
                               result[0]?.name ?
-                                  " "+result[0].name
+                                  " "+result[0].name+" "+result[0].last_name
                                   :
                                   " "+result[0].login
                             }

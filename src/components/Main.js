@@ -139,10 +139,10 @@ class Main extends Component {
                                     <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
                                 </div>
                                 <div className="wrapper-input">
-                                    <input className="input-default" placeholder="Логин" type="text" id="registration_login" />
+                                    <input className="input-default" maxLength={28} placeholder="Логин" type="text" id="registration_login" />
                                 </div>
                                 <div className="wrapper-input">
-                                    <input className="input-default" placeholder="Эл. почта" type="text" id="registration_email" />
+                                    <input className="input-default" maxLength={30} placeholder="Эл. почта" type="text" id="registration_email" />
                                 </div>
                                 <div className="wrapper-input">
                                     <input className="input-default" placeholder="Пароль" type="password" id="registration_password"/>

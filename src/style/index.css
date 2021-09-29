@@ -90,7 +90,7 @@
 }
 
 .personal_data_accept-block {
-  background: #fff;
+  background: var(--bg-grey);
 }
 
 .unselectable {
@@ -135,7 +135,7 @@ code {
 }
 
 .green {
-  color: var(--logo);
+  color: var(--font-color);
 }
 
 .auth-view-box {

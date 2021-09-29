@@ -7,7 +7,11 @@ class Settings extends Component{
         this.state = {
             privatPost: false,
             testing: false,
-            load: "load"
+            load: "load",
+            login: null,
+            name: null,
+            lastName: null,
+            email: null
         }
     }
 
@@ -49,8 +53,30 @@ class Settings extends Component{
             });
     }
 
-    fetchUpdateState(){
+    save() {
+        let data = {
+            login: document.getElementById("login").value,
+            name: document.getElementById("name").value,
+            last_name: document.getElementById("last_name").value,
+            email: document.getElementById("email").value
+        }
         fetch("/api/settings", {
+            method: "PUT",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                document.getElementById("event_save").innerHTML = "Сохранено"
+                this.fetchUpdateState()
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    fetchUpdateState(){
+        fetch("/api/settings?flags=switch", {
             method: "GET",
         })
             .then(response => response.json())
@@ -59,10 +85,12 @@ class Settings extends Component{
                 this.setState({
                     privatPost: res.data.privat_post,
                     testing: res.data.testing,
+                    login: res.data.login,
+                    name: res.data.name,
+                    lastName: res.data.last_name,
+                    email: res.data.email,
                     load: "complete"
                 })
-                // }
-
             })
             .catch(error => {
                 console.log(error)
@@ -102,10 +130,15 @@ class Settings extends Component{
                                 </div>
                                 {/*<div className="block-settings child_settings">*/}
                                 {/*    <div className="key-settings">*/}
-                                {/*        Экспортировать GitHub Gists*/}
+                                {/*        Показывать Ваш email*/}
                                 {/*    </div>*/}
                                 {/*    <div className="value-settings">*/}
-                                {/*        <Switch enable={false} callBack={()=> {}}/>*/}
+                                {/*        {*/}
+                                {/*            this.state.privatPost ?*/}
+                                {/*                <Switch enable={true} callBack={(e)=> this.changeSettingsPrivat(e)}/>*/}
+                                {/*                :*/}
+                                {/*                <Switch enable={false} callBack={(e)=> this.changeSettingsPrivat(e)}/>*/}
+                                {/*        }*/}
                                 {/*    </div>*/}
                                 {/*    /!*<div className="separator" />*!/*/}
                                 {/*</div>*/}
@@ -123,6 +156,28 @@ class Settings extends Component{
                                     </div>
                                     {/*<div className="separator" />*/}
                                 </div>
+                            </div>
+                            <div className="main-place-wrapper-settings">
+                                <div className="wrapper-input">
+                                    <input className="input-default" maxLength="28" placeholder="Логин" type="text" id="login" defaultValue={this.state.login}/>
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" maxLength="28" placeholder="Имя" type="text" id="name" defaultValue={this.state.name}/>
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" maxLength="28" placeholder="Фамилия" type="text" id="last_name" defaultValue={this.state.lastName} />
+                                </div>
+                                <div className="wrapper-input">
+                                    <input className="input-default" maxLength="30" placeholder="Электронная почта" type="text" id="email" defaultValue={this.state.email} />
+                                </div>
+                                <div className="wrapper-input">
+                                    <div className="button-default" onClick={()=>
+                                        this.save()
+                                    }>
+                                        Сохранить
+                                    </div>
+                                </div>
+                                <div className="error-wrapper center" id="event_save" style={{color: "green"}}/>
                             </div>
                         </div>
                     :
