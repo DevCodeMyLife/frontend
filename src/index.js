@@ -73,6 +73,17 @@ class App extends React.Component {
                         }
                     })
 
+                    window.addEventListener('popstate', function (action){
+                        console.log(action)
+                        // store.dispatch({
+                        //     type: "ACTION_UPDATE_URL", value: {
+                        //         path: action.href
+                        //     }
+                        // })
+                    });
+
+
+
                     let centrifuge = new Centrifuge(CONFIG.url)
                     centrifuge.setToken(res?.token)
                     centrifuge.connect()
