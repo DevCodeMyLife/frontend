@@ -665,6 +665,10 @@ class Messages extends Component{
                                                                         <div className="feed-item-title" style={{
                                                                             padding: "13px",
                                                                         }}>
+                                                                            <span className="test-stat">{chat.login}</span>
+                                                                            <div className="feed-item-datetime">
+                                                                                {chat.last_message?.substring(0, 40) + "..."}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                             )

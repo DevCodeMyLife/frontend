@@ -1,3 +1,4 @@
+// import { createStore } from "redux"; // импорт из Redux-библиотеки
 import { mount, route } from 'navi'
 import { Router, View } from 'react-navi'
 import { ToastContainer } from 'react-toastify';
@@ -23,6 +24,9 @@ import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
 import ruvds from "./icon/ruvds.png";
 import People from "./components/People";
+
+// const store = createStore(reducer);
+
 
 const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
