@@ -808,7 +808,7 @@ class MainUsers extends Component {
                                 {
                                     Number(this.state.id) === store.auth.user.data.id ?
                                         store.auth.user.data?.html_url ?
-                                            <a className="link_github" target="_blank" href={store.auth.user.html_url} rel="noreferrer"> {this.state.result[0].login}</a>
+                                            <a className="link_github" target="_blank" href={store.auth.user.data.html_url} rel="noreferrer"> {store.auth.user.data.login}</a>
                                             :
                                             " не указан"
                                     :
