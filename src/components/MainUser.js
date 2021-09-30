@@ -952,10 +952,16 @@ class MainUsers extends Component {
                                   <Link href={`/user?id=${data?.uid}`}>
                                     <div key="aksdlkasd"  className="photo-wrapper">
                                       {
-                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                            null
-                                        :
-                                            <div className="online_user" />
+                                          store.auth.user.data.id === Number(this.state.id) ?
+                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                null
+                                            :
+                                                <div className="online_user" />
+                                          :
+                                              (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                                  null
+                                              :
+                                                  <div className="online_user" />
                                       }
 
                                         <img key="asdmmmmasd" src={data?.photo} alt={data?.user} />
