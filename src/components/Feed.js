@@ -7,7 +7,7 @@ import look from "../icon/look.png";
 import look_dark from "../icon/look_dark.png";
 
 // import Head from "./Header";
-import {Link} from "@mui/material";
+import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
 const gfm = require('remark-gfm')
 
@@ -360,27 +360,27 @@ class Feed extends Component {
 
                                                     <div className="feed-item-value" >
                                                         <div key="asldk" className="wrapper-data">
-                                                            <div key="aksdlkasd"  className="photo-wrapper">
+                                                            <Link href={`/user?id=${data?.uid}`}>
+                                                                <div key="aksdlkasd"  className="photo-wrapper">
 
-                                                                {
-                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
-                                                                        null
-                                                                    :
-                                                                        <div className="online_user" />
-                                                                }
-                                                                <img key="asdmmmmasd" src={data?.photo} alt={data?.id} onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    window.location.href = `/user?id=${data?.uid}`
-                                                                }} />
-                                                            </div>
+                                                                    {
+                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
+                                                                            null
+                                                                        :
+                                                                            <div className="online_user" />
+                                                                    }
+
+                                                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.id}  />
+
+                                                                </div>
+                                                            </Link>
                                                             <div className="value-post">
                                                                 <div className="feed-item-title">
-                                                                    <div className="link-user" onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        window.location.href = `/user?id=${data?.uid}`
-                                                                    }}>
-                                                                        {data?.user}
-                                                                    </div>
+                                                                    <Link href={`/user?id=${data?.uid}`}>
+                                                                        <div className="link-user">
+                                                                            {data?.user}
+                                                                        </div>
+                                                                    </Link>
                                                                     <div className="feed-item-datetime">
                                                                         {this.unixToDateTime(data?.date_time)}
                                                                     </div>

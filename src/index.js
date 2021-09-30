@@ -40,6 +40,7 @@ let user = null
 class App extends React.Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
             load: false,
@@ -73,16 +74,11 @@ class App extends React.Component {
                         }
                     })
 
-                    window.addEventListener('popstate', function (action){
-                        console.log(action)
-                        // store.dispatch({
-                        //     type: "ACTION_UPDATE_URL", value: {
-                        //         path: action.href
-                        //     }
-                        // })
-                    });
-
-
+                    store.dispatch({
+                        type: "ACTION_UPDATE_HISTORY", value: {
+                            path: new URLSearchParams(window.location.search)
+                        }
+                    })
 
                     let centrifuge = new Centrifuge(CONFIG.url)
                     centrifuge.setToken(res?.token)
@@ -394,25 +390,25 @@ class App extends React.Component {
                 return (
                     <HelmetProvider>
                         <div className="wrapper" >
-                            <Head
-                                store={store}
-                                load={true}
-                            />
-                            <ToastContainer
-                                position="top-center"
-                                autoClose={2000}
-                                hideProgressBar={false}
-                                newestOnTop={false}
-                                closeOnClick
-                                rtl={false}
-                                pauseOnFocusLoss
-                                draggable
-                                pauseOnHover
-                            />
                             <BrowserRouter>
                                 <Switch>
                                     <Route path="/" render={({history, match}) =>
                                         <Router routes={this.routes} history={history} basename={match.url}>
+                                            <Head
+                                                store={store}
+                                                load={true}
+                                            />
+                                            <ToastContainer
+                                                position="top-center"
+                                                autoClose={2000}
+                                                hideProgressBar={false}
+                                                newestOnTop={false}
+                                                closeOnClick
+                                                rtl={false}
+                                                pauseOnFocusLoss
+                                                draggable
+                                                pauseOnHover
+                                            />
                                             {
                                                 window.location.pathname === "/" ?
                                                     <div className="personal_data_accept-block full-width">

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-navi";
 
 class Header extends Component {
     constructor(props) {
@@ -16,16 +17,16 @@ class Header extends Component {
             <header className="head">
                 <div className="rectangle-head">
                     <div className="wrapper-logo unselectable">
-                        <div className="place-logo wrapper-inline-block" onClick={(e) => {
-                            e.preventDefault();
-                            if (state.auth.user.isAuth){
-                                window.location.href = '/feeds'
-                            }else{
-                                window.location.href = '/'
-                            }
-                        }}>
-                           [ DevCodeMyLife ]
-                        </div>
+                        <Link href={
+                            state.auth.user.isAuth ?
+                                '/feeds'
+                            :
+                                '/'
+                        }>
+                            <div className="place-logo wrapper-inline-block" >
+                               [ DevCodeMyLife ]
+                            </div>
+                        </Link>
                     </div>
                     <div className="wrapper-user">
                         <div className="wrapper-auth">
@@ -57,11 +58,11 @@ class Header extends Component {
                                     }
                                 }
                                 >
-                                    <div className="settings-user-item" onClick={() => {
-                                        window.location.href = `http://${window.location.host}/user?id=${state.auth.user.data.id}`
-                                    }}>
-                                        {state.auth.user.data.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
-                                    </div>
+                                    <Link href={`/user?id=${state.auth.user.data.id}`}>
+                                        <div className="settings-user-item">
+                                            {state.auth.user.data.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
+                                        </div>
+                                    </Link>
                                     <div className="nav-hidden">
                                         <div className="separator">
                                             <div className="line-separator" />
@@ -87,11 +88,11 @@ class Header extends Component {
                                             Уведомления
                                         </div>
                                     </div>
-                                    <div className="settings-user-item" onClick={() => {
-                                        window.location.href = `http://${window.location.host}/settings`
-                                    }}>
-                                        Настройки
-                                    </div>
+                                    <Link href="/settings">
+                                        <div className="settings-user-item" >
+                                            Настройки
+                                        </div>
+                                    </Link>
                                     <div className="separator">
                                         <div className="line-separator" />
                                     </div>

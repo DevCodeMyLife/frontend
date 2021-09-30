@@ -39,6 +39,15 @@ class Nav extends Component{
         })
     }
 
+    updateHistory = () =>{
+        console.log("ok")
+        this.state.store.dispatch({
+            type: "ACTION_UPDATE_HISTORY", value: {
+                path: new URLSearchParams(window.location.search)
+            }
+        })
+    }
+
     getPreferredColorScheme = () => {
         if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
             this.setState({
@@ -78,7 +87,7 @@ class Nav extends Component{
 
                                 <div>
                                     <div className="nav-item">
-                                        <Link className="nav-value" href={`/user?id=${state.auth.user.data.id}`}>
+                                        <Link className="nav-value" href={`/user?id=${state.auth.user.data.id}`} >
                                             <div  className="icon-image" >
                                                 {
                                                     this.state.isDark === "light" ?
@@ -88,7 +97,7 @@ class Nav extends Component{
                                                 }
 
                                             </div>
-                                            <div className="nav-value">
+                                            <div className="nav-value" onClick={() => this.updateHistory()}>
                                                 Моя страница
                                             </div>
                                         </Link>

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
+import {Link} from "react-navi";
 import TextareaAutosize from 'react-textarea-autosize';
 import like from "../icon/like.png";
 import look from "../icon/look.png";
@@ -19,6 +20,7 @@ class MainUsers extends Component {
     this.state = {
       name: "React"
     };
+
     this.state = {
         error: false,
         isLoaded: false,
@@ -54,10 +56,19 @@ class MainUsers extends Component {
         imageRef: null
     }
 
+
+
+
       this.state.store.subscribe(() => {
           this.setState(this.state.store.getState())
       })
 
+      console.log("ok")
+      this.state.store.dispatch({
+          type: "ACTION_UPDATE_HISTORY", value: {
+              path: new URLSearchParams(window.location.search)
+          }
+      })
   }
 
   getPreferredColorScheme = () => {
@@ -79,7 +90,8 @@ class MainUsers extends Component {
     })
         .then(response => response.json())
         .then(_ => {
-            const urlParams = new URLSearchParams(window.location.search);
+            const state = this.state.store.getState()
+            const urlParams = state.history.path
             const id = urlParams.get('id');
 
             let path = `/api/user/${id}`
@@ -177,6 +189,7 @@ class MainUsers extends Component {
   }
 
   componentDidMount() {
+      console.log(1)
 
       this.getPreferredColorScheme()
 
@@ -188,7 +201,8 @@ class MainUsers extends Component {
 
 
 
-      const urlParams = new URLSearchParams(window.location.search);
+      const state = this.state.store.getState()
+      const urlParams = state.history.path
       const id = urlParams.get('id');
 
       let path = `/api/user/${id}`
@@ -277,7 +291,8 @@ class MainUsers extends Component {
           .then(_ => {
 
 
-              const urlParams = new URLSearchParams(window.location.search);
+              const state = this.state.store.getState()
+              const urlParams = state.history.path
               const id = urlParams.get('id');
 
               let path = `/api/user/${id}`
@@ -367,7 +382,8 @@ class MainUsers extends Component {
                             this.delete_cookie("access_token")
                         }
 
-                        const urlParams = new URLSearchParams(window.location.search);
+                        const state = this.state.store.getState()
+                        const urlParams = state.history.path
                         const id = urlParams.get('id');
 
                         let path = `/api/user/${id}`
@@ -927,28 +943,26 @@ class MainUsers extends Component {
                             {/*</div>*/}
                             <div className="feed-item-value">
                               <div key="asldk" className="wrapper-data">
-                                <div key="aksdlkasd"  className="photo-wrapper">
-                                  {
-                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                        null
-                                    :
-                                        <div className="online_user" />
-                                  }
-                                  <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
-                                       onClick={(e) => {
-                                         e.preventDefault();
-                                         window.location.href = `/user?id=${data?.uid}`
-                                       }}
-                                  />
-                                </div>
+                                  <Link href={`/user?id=${data?.uid}`}>
+                                    <div key="aksdlkasd"  className="photo-wrapper">
+                                      {
+                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                            null
+                                        :
+                                            <div className="online_user" />
+                                      }
+
+                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.user} />
+
+                                    </div>
+                                  </Link>
                                 <div className="value-post">
                                   <div className="feed-item-title">
-                                    <div className="link-user" onClick={(e) => {
-                                      e.preventDefault();
-                                      window.location.href = `/user?id=${data?.uid}`
-                                    }}>
+                                  <Link href={`/user?id=${data?.uid}`}>
+                                    <div className="link-user">
                                       {data?.user}
                                     </div>
+                                  </Link>
                                     <div className="feed-item-datetime">
                                       {this.unixToDateTime(data?.date_time)}
                                     </div>
@@ -981,10 +995,9 @@ class MainUsers extends Component {
                             </div>
                             <div className="wrapper-bottom">
                               <div className="wrapper-flex-start">
-                                <div className="button-default" onClick={(e) => {
-                                  e.preventDefault();
-                                  window.location.href = `/post?uuid=${data?.ID}`
-                                }}>Подробнее</div>
+                                  <Link href={`/post?uuid=${data?.ID}`}>
+                                <div className="button-default">Подробнее</div>
+                                  </Link>
                                 {/*{*/}
                                 {/*  Number(this.state.id) === this.state.data[0].id ?*/}
                                 {/*      <div className="button-default"*/}

@@ -13,12 +13,18 @@ const initialState = {
     },
     centrifuge: {
         object: null
+    },
+    history: {
+        path: null
     }
 }
 
 export default function AppReducer(state = initialState, action) {
 
     switch (action.type) {
+        case "ACTION_UPDATE_HISTORY":
+            state.history = action.value
+            return state
         case "ACTION_CHECK_AUTH":
             state.auth = action.value
             return state
