@@ -1,4 +1,5 @@
 import React, { Component }  from "react";
+import {Link} from "react-navi";
 
 class People extends Component {
     constructor(props) {
@@ -171,17 +172,18 @@ class People extends Component {
                                                         {
                                                             this.state.usersSearch?.map(data =>
                                                                 <div key={data.id} className="users-view">
-                                                                    <div className="image-user">
-                                                                        <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
-                                                                    </div>
+                                                                    <Link href={`/user?id=${data?.id}`}>
+                                                                        <div className="image-user">
+                                                                            <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
+                                                                        </div>
+                                                                    </Link>
                                                                     <div className="info-user">
                                                                         <div className="feed-item-title">
-                                                                            <div className="link-user" onClick={(e) => {
-                                                                                e.preventDefault();
-                                                                                window.location.href = `/user?id=${data?.id}`
-                                                                            }}>
-                                                                                {data?.login}
-                                                                            </div>
+                                                                            <Link href={`/user?id=${data?.id}`}>
+                                                                                <div className="link-user">
+                                                                                    {data?.login}
+                                                                                </div>
+                                                                            </Link>
                                                                         </div>
                                                                         <div className="more-info">
                                                                             <div className="more-info-value">
@@ -215,17 +217,18 @@ class People extends Component {
                                                             {
                                                                 this.state.users?.map(data =>
                                                                     <div key={data.id} className="users-view">
-                                                                        <div className="image-user">
-                                                                            <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
-                                                                        </div>
+                                                                        <Link href={`/user?id=${data?.id}`}>
+                                                                            <div className="image-user">
+                                                                                <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
+                                                                            </div>
+                                                                        </Link>
                                                                         <div className="info-user">
                                                                             <div className="feed-item-title">
-                                                                                <div className="link-user" onClick={(e) => {
-                                                                                    e.preventDefault();
-                                                                                    window.location.href = `/user?id=${data?.id}`
-                                                                                }}>
-                                                                                    {data?.login}
-                                                                                </div>
+                                                                                <Link href={`/user?id=${data?.id}`}>
+                                                                                    <div className="link-user">
+                                                                                        {data?.login}
+                                                                                    </div>
+                                                                                </Link>
                                                                             </div>
                                                                             <div className="more-info">
                                                                                 <div className="more-info-value">
