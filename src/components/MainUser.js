@@ -1076,7 +1076,7 @@ class MainUsers extends Component {
 
                     </div>
                   :
-                    this.state.notUser && this.state.store.auth.user.isAuth ?
+                    this.state.notUser && store.auth.user.isAuth ?
                         <div>
                           {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
                           {/*  Ошибка*/}
@@ -1089,7 +1089,7 @@ class MainUsers extends Component {
                           </div>
                         </div>
                       :
-                        this.state.error ?
+                        !store.auth.user.isAuth ?
                             <div>
                               {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
                               {/*  Ошибка*/}
