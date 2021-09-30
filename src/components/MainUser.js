@@ -102,6 +102,7 @@ class MainUsers extends Component {
                 .then(response => response.json())
                 .then(res => {
                   if (res.status.code === 0 && res.data.length > 0){
+                      this.cancel()
                     this.setState({
                       isLoaded: true,
                       id: id,
