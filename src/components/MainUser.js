@@ -748,12 +748,12 @@ class MainUsers extends Component {
                           <div className="main-place name">
                             {
                                 store.auth.user.data.id === Number(this.state.id) ?
-                                    store.auth.user.data.name ?
+                                    store.auth.user.data?.name ?
                                       " "+store.auth.user.data.name+" "+store.auth.user.data.last_name
                                       :
                                       " "+store.auth.user.data.login
                                 :
-                                    this.state.result[0].name ?
+                                    this.state.result[0]?.name ?
                                         " "+this.state.result[0].name+" "+this.state.result[0].last_name
                                         :
                                         " "+this.state.result[0].login
@@ -763,7 +763,7 @@ class MainUsers extends Component {
                             Email:
                             {
                               Number(this.state.id) === store.auth.user.data.id ?
-                                  store.auth.user.data.email ?
+                                  store.auth.user.data?.email ?
                                       " "+store.auth.user.data.email
                                       :
                                       " не указан"
@@ -776,12 +776,12 @@ class MainUsers extends Component {
                             Компания:
                             {
                                 Number(this.state.id) === store.auth.user.data.id ?
-                                    store.auth.user.data.company ?
+                                    store.auth.user.data?.company ?
                                       " "+store.auth.user.data.company
                                       :
                                       " не указана"
                                 :
-                                    this.state.result[0].company ?
+                                    this.state.result[0]?.company ?
                                         " "+this.state.result[0].data.company
                                         :
                                         " не указана"
@@ -792,12 +792,12 @@ class MainUsers extends Component {
                             {
                                 Number(this.state.id) === store.auth.user.data.id ?
 
-                                    store.auth.user.data.location ?
+                                    store.auth.user.data?.location ?
                                       " "+store.auth.user.data.location
                                       :
                                       " не указана"
                                 :
-                                    this.state.result[0].location ?
+                                    this.state.result[0]?.location ?
                                         " "+this.state.result[0].location
                                         :
                                         " не указана"
@@ -807,12 +807,12 @@ class MainUsers extends Component {
                                 Профиль GitHub:
                                 {
                                     Number(this.state.id) === store.auth.user.data.id ?
-                                        store.auth.user.data.html_url ?
+                                        store.auth.user.data?.html_url ?
                                             <a className="link_github" target="_blank" href={store.auth.user.html_url} rel="noreferrer"> {this.state.result[0].login}</a>
                                             :
                                             " не указан"
                                     :
-                                        this.state.result[0].html_url ?
+                                        this.state.result[0]?.html_url ?
                                             <a className="link_github" target="_blank" href={this.state.result[0].html_url} rel="noreferrer"> {this.state.result[0].login}</a>
                                             :
                                             " не указан"
