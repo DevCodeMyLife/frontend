@@ -260,7 +260,7 @@ class FeedOnePage extends Component {
                                                 ]
                                             }} />
                                             <Helmet>
-                                                <title>{data.title} | DevCodeMyLife</title>
+                                                <title>{data.title || data?.value?.substring(0, 30)} | DevCodeMyLife</title>
                                                 <meta name="Keywords" content={"dev, code, life, messenger, социальная сеть, для разработчиков, "+data.title} />
                                             </Helmet>
                                             {/*<div className="title-page">*/}
