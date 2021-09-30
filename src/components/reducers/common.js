@@ -15,7 +15,8 @@ const initialState = {
         object: null
     },
     history: {
-        path: null
+        path: null,
+        id: null
     }
 }
 

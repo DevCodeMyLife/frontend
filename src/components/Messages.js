@@ -469,7 +469,7 @@ class Messages extends Component{
                                             Все диалоги
                                         </div>
                                         <div className="title-dialog" >
-                                            <a className="link_github" target="_blank" href={"/user?id=" + this.state.linkUser} rel="noreferrer">{this.state.dialogTitle}</a>
+                                            <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser} rel="noreferrer">{this.state.dialogTitle}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -532,14 +532,14 @@ class Messages extends Component{
                                                                                     <img src={message.avatar_url} alt={message.login}
                                                                                          onClick={(e) => {
                                                                                              e.preventDefault();
-                                                                                             window.location.href = `/user?id=${message.uid}`
+                                                                                             window.location.href = `/user/${message.uid}`
                                                                                          }}/>
                                                                                 </div>
                                                                                 <div className="value-post">
                                                                                     <div className="feed-item-title">
                                                                                         <div className="link-user" onClick={(e) => {
                                                                                             e.preventDefault();
-                                                                                            window.location.href = `/user?id=${message?.uid}`
+                                                                                            window.location.href = `/user/${message?.uid}`
                                                                                         }}>
                                                                                             {message?.login}
                                                                                         </div>
@@ -572,14 +572,14 @@ class Messages extends Component{
                                                                                     <img src={message.avatar_url} alt={message.login}
                                                                                          onClick={(e) => {
                                                                                              e.preventDefault();
-                                                                                             window.location.href = `/user?id=${message.uid}`
+                                                                                             window.location.href = `/user/${message.uid}`
                                                                                          }}/>
                                                                                 </div>
                                                                                 <div className="value-post">
                                                                                     <div className="feed-item-title">
                                                                                         <div className="link-user" onClick={(e) => {
                                                                                             e.preventDefault();
-                                                                                            window.location.href = `/user?id=${message?.uid}`
+                                                                                            window.location.href = `/user/${message?.uid}`
                                                                                         }}>
                                                                                             <span className="test-stat">{message?.login}</span>
                                                                                         </div>

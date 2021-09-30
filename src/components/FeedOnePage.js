@@ -278,7 +278,7 @@ class FeedOnePage extends Component {
                                                         <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
                                                              onClick={(e) => {
                                                                  e.preventDefault();
-                                                                 window.location.href = `/user?id=${data?.uid}`
+                                                                 window.location.href = `/user/${data?.uid}`
                                                              }}
                                                         />
                                                     </div>
@@ -286,7 +286,7 @@ class FeedOnePage extends Component {
                                                         <div className="feed-item-title">
                                                             <div className="link-user" onClick={(e) => {
                                                                 e.preventDefault();
-                                                                window.location.href = `/user?id=${data?.uid}`
+                                                                window.location.href = `/user/${data?.uid}`
                                                             }}>
                                                                 {data?.user}
                                                             </div>
@@ -360,7 +360,7 @@ class FeedOnePage extends Component {
                                                                                                          alt={com?.user}
                                                                                                          onClick={(e) => {
                                                                                                              e.preventDefault();
-                                                                                                             window.location.href = `/user?id=${com?.user_id}`
+                                                                                                             window.location.href = `/user/${com?.user_id}`
                                                                                                          }}
                                                                                                     />
                                                                                                 </div>
@@ -368,7 +368,7 @@ class FeedOnePage extends Component {
                                                                                                     <div className="feed-item-title">
                                                                                                         <div className="link-user" onClick={(e) => {
                                                                                                             e.preventDefault();
-                                                                                                            window.location.href = `/user?id=${com?.user_id}`
+                                                                                                            window.location.href = `/user/${com?.user_id}`
                                                                                                         }}>
                                                                                                             {com?.user}
                                                                                                         </div>

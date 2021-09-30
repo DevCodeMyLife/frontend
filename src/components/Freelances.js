@@ -373,7 +373,7 @@ class Freelances extends Component{
                                                                             <div className="image-user">
                                                                                 <img className="image-user-src" src={data.avatar_url} alt={data.login} onClick={(e) => {
                                                                                     e.preventDefault();
-                                                                                    window.location.href = `/user?id=${data?.user_creator_id}`
+                                                                                    window.location.href = `/user/${data?.user_creator_id}`
                                                                                 }}/>
                                                                             </div>
                                                                             <div className="info-user">

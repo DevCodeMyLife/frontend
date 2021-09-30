@@ -58,7 +58,7 @@ class Header extends Component {
                                     }
                                 }
                                 >
-                                    <Link href={`/user?id=${state.auth.user.data.id}`}>
+                                    <Link href={`/user/${state.auth.user.data.id}`}>
                                         <div className="settings-user-item">
                                             {state.auth.user.data.login} <span style={{fontSize: "12px", color: "#585858"}}> - Это Вы</span>
                                         </div>

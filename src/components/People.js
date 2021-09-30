@@ -172,14 +172,14 @@ class People extends Component {
                                                         {
                                                             this.state.usersSearch?.map(data =>
                                                                 <div key={data.id} className="users-view">
-                                                                    <Link href={`/user?id=${data?.id}`}>
+                                                                    <Link href={`/user/${data?.id}`}>
                                                                         <div className="image-user">
                                                                             <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
                                                                         </div>
                                                                     </Link>
                                                                     <div className="info-user">
                                                                         <div className="feed-item-title">
-                                                                            <Link href={`/user?id=${data?.id}`}>
+                                                                            <Link href={`/user/${data?.id}`}>
                                                                                 <div className="link-user">
                                                                                     {data?.login}
                                                                                 </div>
@@ -217,14 +217,14 @@ class People extends Component {
                                                             {
                                                                 this.state.users?.map(data =>
                                                                     <div key={data.id} className="users-view">
-                                                                        <Link href={`/user?id=${data?.id}`}>
+                                                                        <Link href={`/user/${data?.id}`}>
                                                                             <div className="image-user">
                                                                                 <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
                                                                             </div>
                                                                         </Link>
                                                                         <div className="info-user">
                                                                             <div className="feed-item-title">
-                                                                                <Link href={`/user?id=${data?.id}`}>
+                                                                                <Link href={`/user/${data?.id}`}>
                                                                                     <div className="link-user">
                                                                                         {data?.login}
                                                                                     </div>

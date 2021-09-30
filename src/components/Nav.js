@@ -39,10 +39,11 @@ class Nav extends Component{
         })
     }
 
-    updateHistory = () =>{
+    updateHistory = (id) =>{
         this.state.store.dispatch({
             type: "ACTION_UPDATE_HISTORY", value: {
-                path: new URLSearchParams(window.location.search)
+                path: null,
+                id: id
             }
         })
     }
@@ -86,7 +87,7 @@ class Nav extends Component{
 
                                 <div>
                                     <div className="nav-item">
-                                        <Link className="nav-value" href={`/user?id=${state.auth.user.data.id}`} >
+                                        <Link className="nav-value" href={`/user/${state.auth.user.data.id}`} >
                                             <div  className="icon-image" >
                                                 {
                                                     this.state.isDark === "light" ?
@@ -96,7 +97,7 @@ class Nav extends Component{
                                                 }
 
                                             </div>
-                                            <div className="nav-value" onClick={() => this.updateHistory()}>
+                                            <div className="nav-value">
                                                 Моя страница
                                             </div>
                                         </Link>

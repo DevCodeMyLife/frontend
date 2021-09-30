@@ -67,7 +67,7 @@ class Notification extends Component {
                                                             <div>
                                                                 <span className="link-user" onClick={(e) => {
                                                                     e.preventDefault();
-                                                                    window.location.href = `/user?id=${notification?.uwuid}`
+                                                                    window.location.href = `/user/${notification?.uwuid}`
                                                                 }}>{notification?.user_event_action}</span>
                                                                 <span> посмотрел Вашу заметку</span>
                                                             </div>
@@ -80,7 +80,7 @@ class Notification extends Component {
                                                             <div>
                                                                 <span className="link-user" onClick={(e) => {
                                                                     e.preventDefault();
-                                                                    window.location.href = `/user?id=${notification?.uwuid}`
+                                                                    window.location.href = `/user/${notification?.uwuid}`
                                                                 }}>{notification?.user_event_action}</span>
                                                                 <span> оставил новый комментарий</span>
                                                             </div>

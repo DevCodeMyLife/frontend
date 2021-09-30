@@ -74,11 +74,11 @@ class App extends React.Component {
                         }
                     })
 
-                    store.dispatch({
-                        type: "ACTION_UPDATE_HISTORY", value: {
-                            path: new URLSearchParams(window.location.search)
-                        }
-                    })
+                    // store.dispatch({
+                    //     type: "ACTION_UPDATE_HISTORY", value: {
+                    //         path: new URLSearchParams(window.location.search)
+                    //     }
+                    // })
 
                     let centrifuge = new Centrifuge(CONFIG.url)
                     centrifuge.setToken(res?.token)
@@ -297,16 +297,26 @@ class App extends React.Component {
             </>,
             view: <Messages store={store} auth={auth} cent={cent} user={user} />
         }),
-        '/user': route({
-            title: 'DevCodeMyLife',
-            head: <>
-                <meta name="description" content="Страница пользователя" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
-                <script>
-                    console.log('[ app start ]')
-                </script>
-            </>,
-            view: <MainUser store={store} />
+        '/user/:id': route( async req => {
+            let id = req.params.id
+            store.dispatch({
+                type: "ACTION_UPDATE_HISTORY", value: {
+                    path: null,
+                    id: id
+                }
+            })
+
+            return {
+                title: 'DevCodeMyLife',
+                head: <>
+                    <meta name="description" content="Страница пользователя" />
+                    <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                    <script>
+                        console.log('[ app start ]')
+                    </script>
+                </>,
+                view: <MainUser store={store} id={id} />
+            }
         }),
         '/feeds': route({
             title: 'Новости | DevCodeMyLife',

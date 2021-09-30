@@ -4,6 +4,7 @@ import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import {Link} from "react-navi";
+// import { route } from 'navi';
 import TextareaAutosize from 'react-textarea-autosize';
 import like from "../icon/like.png";
 import look from "../icon/look.png";
@@ -53,7 +54,8 @@ class MainUsers extends Component {
         },
         cropImage: null,
         showCrop: false,
-        imageRef: null
+        imageRef: null,
+        idPage: this.props.id
     }
 
 
@@ -61,13 +63,45 @@ class MainUsers extends Component {
 
       this.state.store.subscribe(() => {
           this.setState(this.state.store.getState())
+          this.updateStateUser()
       })
+  }
 
-      this.state.store.dispatch({
-          type: "ACTION_UPDATE_HISTORY", value: {
-              path: new URLSearchParams(window.location.search)
-          }
+  updateStateUser(){
+      const state = this.state.store.getState()
+      console.log(state)
+      let path = `/api/user/${state.history.id}`
+
+      fetch(path, {
+          method: "GET"
       })
+          .then(response => response.json())
+          .then(res => {
+              if (res.status.code === 0 && res.data.length > 0){
+                  this.setState({
+                      isLoaded: true,
+                      id: state.history.id,
+                      result: res.data,
+                      mainFeed: res.feed,
+                      notUser: false
+                  });
+              }else{
+                  this.setState({
+                      isLoaded: false,
+                      result: {},
+                      notUser: true,
+                      error: true
+                  });
+              }
+          })
+          .catch(error => {
+              this.setState({
+                  isLoaded: false,
+                  error: true,
+                  result: {},
+                  notUser: true
+              })
+          });
   }
 
   getPreferredColorScheme = () => {
@@ -89,11 +123,12 @@ class MainUsers extends Component {
     })
         .then(response => response.json())
         .then(_ => {
+            // const state = this.state.store.getState()
+            // const urlParams = state.history.path
+            // const id = urlParams.get('id');
             const state = this.state.store.getState()
-            const urlParams = state.history.path
-            const id = urlParams.get('id');
+            let path = `/api/user/${state.history.id}`
 
-            let path = `/api/user/${id}`
 
             fetch(path, {
               method: "GET"
@@ -104,7 +139,7 @@ class MainUsers extends Component {
                       this.cancel()
                     this.setState({
                       isLoaded: true,
-                      id: id,
+                      id: state.history.id,
                       result: res.data,
                       mainFeed: res.feed,
                       notUser: false
@@ -199,10 +234,13 @@ class MainUsers extends Component {
 
 
       const state = this.state.store.getState()
-      const urlParams = state.history.path
-      const id = urlParams.get('id');
+      // const urlParams = state.history.path
+      // const id = urlParams.get('id');
 
-      let path = `/api/user/${id}`
+
+
+      let path = `/api/user/${state.history.id}`
+
 
       fetch(path, {
         method: "GET"
@@ -212,7 +250,7 @@ class MainUsers extends Component {
             if (res.status.code === 0 && res.data.length > 0){
               this.setState({
                 isLoaded: true,
-                id: id,
+                id: state.history.id,
                 result: res.data,
                 mainFeed: res.feed,
                 notUser: false
@@ -289,10 +327,10 @@ class MainUsers extends Component {
 
 
               const state = this.state.store.getState()
-              const urlParams = state.history.path
-              const id = urlParams.get('id');
+              // const urlParams = state.history.path
+              // const id = urlParams.get('id');
 
-              let path = `/api/user/${id}`
+              let path = `/api/user/${state.history.id}`
 
               fetch(path, {
                   method: "GET"
@@ -302,7 +340,7 @@ class MainUsers extends Component {
                       if (res.status.code === 0 && res.data.length > 0){
                           this.setState({
                               isLoaded: true,
-                              id: id,
+                              id: state.history.id,
                               result: res.data,
                               mainFeed: res.feed,
                               notUser: false
@@ -380,10 +418,10 @@ class MainUsers extends Component {
                         }
 
                         const state = this.state.store.getState()
-                        const urlParams = state.history.path
-                        const id = urlParams.get('id');
+                        // const urlParams = state.history.path
+                        // const id = urlParams.get('id');
 
-                        let path = `/api/user/${id}`
+                        let path = `/api/user/${state.history.id}`
 
                         fetch(path, {
                             method: "GET"
@@ -393,7 +431,7 @@ class MainUsers extends Component {
                                 if (res.status.code === 0 && res.data.length > 0){
                                     this.setState({
                                         isLoaded: true,
-                                        id: id,
+                                        id: state.history.id,
                                         result: res.data,
                                         mainFeed: res.feed,
                                         notUser: false
@@ -577,10 +615,6 @@ class MainUsers extends Component {
         //     .catch(error => {
         //         console.log(error)
         //     });
-
-
-
-
 
     }
 
@@ -842,7 +876,7 @@ class MainUsers extends Component {
                                               <img key="asdmmmmasd" src={store.auth.user.data?.avatar_url} alt={store.auth.user.data?.login}
                                                    onClick={(e) => {
                                                        e.preventDefault();
-                                                       window.location.href = `/user?id=${store.auth.user.data.id}`
+                                                       window.location.href = `/user/${store.auth.user.data.id}`
                                                    }}
                                               />
                                           </div>
@@ -949,7 +983,7 @@ class MainUsers extends Component {
                             {/*</div>*/}
                             <div className="feed-item-value">
                               <div key="asldk" className="wrapper-data">
-                                  <Link href={`/user?id=${data?.uid}`}>
+                                  <Link href={`/user/${data?.uid}`}>
                                     <div key="aksdlkasd"  className="photo-wrapper">
                                       {
                                           store.auth.user.data.id === Number(this.state.id) ?
@@ -970,7 +1004,7 @@ class MainUsers extends Component {
                                   </Link>
                                 <div className="value-post">
                                   <div className="feed-item-title">
-                                  <Link href={`/user?id=${data?.uid}`}>
+                                  <Link href={`/user/${data?.uid}`}>
                                     <div className="link-user">
                                       {data?.user}
                                     </div>

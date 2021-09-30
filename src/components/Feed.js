@@ -360,7 +360,7 @@ class Feed extends Component {
 
                                                     <div className="feed-item-value" >
                                                         <div key="asldk" className="wrapper-data">
-                                                            <Link href={`/user?id=${data?.uid}`}>
+                                                            <Link href={`/user/${data?.uid}`}>
                                                                 <div key="aksdlkasd"  className="photo-wrapper">
 
                                                                     {
@@ -376,7 +376,7 @@ class Feed extends Component {
                                                             </Link>
                                                             <div className="value-post">
                                                                 <div className="feed-item-title">
-                                                                    <Link href={`/user?id=${data?.uid}`}>
+                                                                    <Link href={`/user/${data?.uid}`}>
                                                                         <div className="link-user">
                                                                             {data?.user}
                                                                         </div>
