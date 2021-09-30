@@ -782,7 +782,7 @@ class MainUsers extends Component {
                                       " не указана"
                                 :
                                     this.state.result[0]?.company ?
-                                        " "+this.state.result[0].data.company
+                                        " "+this.state.result[0].company
                                         :
                                         " не указана"
                             }
