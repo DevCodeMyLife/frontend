@@ -152,7 +152,6 @@ class MainUsers extends Component {
 
             document.getElementById(uuid).innerHTML = res.data.count
           }
-          console.log(res)
           // this.setState({
           //     isLoaded: "access",
           //     result: res.data
@@ -718,13 +717,22 @@ class MainUsers extends Component {
                         <div className="main-place-info-column child">
                           <div className="main-place date_active">
                             {
-                              (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                  (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
-                                      <span className="info_status">Последняя активность была { new Date(store.auth.user.data.last_active_at).toLocaleString() }</span>
+                                store.auth.user.data.id === Number(this.state.id) ?
+                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                      (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
+                                          <span className="info_status">Последняя активность была { new Date(store.auth.user.data.last_active_at).toLocaleString() }</span>
+                                          :
+                                          <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
                                       :
-                                      <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
-                                  :
-                                    <span className="info_status">Сейчас на сайте</span>
+                                        <span className="info_status">Сейчас на сайте</span>
+                                :
+                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 60 ?
+                                            <span className="info_status">Последняя активность была { new Date(this.state.result[0].last_active_at).toLocaleString() }</span>
+                                            :
+                                            <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) )} минут назад.</span>
+                                        :
+                                        <span className="info_status">Сейчас на сайте</span>
                             }
                           </div>
                             <Helmet>
