@@ -63,7 +63,6 @@ class MainUsers extends Component {
           this.setState(this.state.store.getState())
       })
 
-      console.log("ok")
       this.state.store.dispatch({
           type: "ACTION_UPDATE_HISTORY", value: {
               path: new URLSearchParams(window.location.search)
@@ -190,8 +189,6 @@ class MainUsers extends Component {
   }
 
   componentDidMount() {
-      console.log(1)
-
       this.getPreferredColorScheme()
 
       let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');

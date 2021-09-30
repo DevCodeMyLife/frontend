@@ -40,7 +40,6 @@ class Nav extends Component{
     }
 
     updateHistory = () =>{
-        console.log("ok")
         this.state.store.dispatch({
             type: "ACTION_UPDATE_HISTORY", value: {
                 path: new URLSearchParams(window.location.search)
