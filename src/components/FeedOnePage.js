@@ -50,30 +50,6 @@ class FeedOnePage extends Component {
         }
     }
 
-    dataLD = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Мамлайф",
-                "item": "https://mom.life"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Все записи",
-                "item": "https://mom.life/feed"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "❤️Девушки-программисты или у кого мужья программисты, подде…",
-                "item": "https://mom.life/post/60e92bec3ae65e73644f922f-devushkiprogrammisty-ili-u-k"
-            }
-        ]
-    }
 
     handleKeyPress = () => {
         document.getElementById('comments_view').scrollTop = document.getElementById('comments_view').scrollHeight
@@ -293,6 +269,12 @@ class FeedOnePage extends Component {
                                             <div className="feed-item-value">
                                                 <div key="asldk" className="wrapper-data">
                                                     <div key="aksdlkasd"  className="photo-wrapper">
+                                                        {
+                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
+                                                                null
+                                                                :
+                                                                <div className="online_user" />
+                                                        }
                                                         <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
                                                              onClick={(e) => {
                                                                  e.preventDefault();
