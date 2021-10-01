@@ -436,13 +436,14 @@ class App extends React.Component {
                                             />
                                             {
                                                 window.location.pathname === "/" ?
-                                                    <div className="personal_data_accept-block full-width">
-                                                        <div className="wrapper-accept-personal-data">
-                                                            <div className="text-info-accept">
-                                                                Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    // <div className="personal_data_accept-block full-width">
+                                                    //     <div className="wrapper-accept-personal-data">
+                                                    //         <div className="text-info-accept">
+                                                    //             Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.
+                                                    //         </div>
+                                                    //     </div>
+                                                    // </div>
+                                                    null
                                                 :
                                                     null
                                             }
@@ -494,13 +495,13 @@ class App extends React.Component {
                             store={store}
                             load={true}
                         />
-                        <div className="personal_data_accept-block full-width">
-                            <div className="wrapper-accept-personal-data">
-                                <div className="text-info-accept">
-                                    Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="personal_data_accept-block full-width">*/}
+                        {/*    <div className="wrapper-accept-personal-data">*/}
+                        {/*        <div className="text-info-accept">*/}
+                        {/*            Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                         <div className="wrapper-content">
                             <div className="content">
 
