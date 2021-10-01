@@ -69,10 +69,8 @@ class MainUsers extends Component {
 
   updateStateUser(){
       const state = this.state.store.getState()
-      console.log(state)
-      let path = `/api/user/${state.history.id}`
 
-      fetch(path, {
+      fetch(`/api/user/${state.history.id}`, {
           method: "GET"
       })
           .then(response => response.json())

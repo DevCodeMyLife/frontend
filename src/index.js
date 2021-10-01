@@ -298,7 +298,9 @@ class App extends React.Component {
             view: <Messages store={store} auth={auth} cent={cent} user={user} />
         }),
         '/user/:id': route( async req => {
+            let user;
             let id = req.params.id
+
             store.dispatch({
                 type: "ACTION_UPDATE_HISTORY", value: {
                     path: null,
@@ -306,10 +308,23 @@ class App extends React.Component {
                 }
             })
 
+            fetch(`/api/user/${id}`, {
+                method: "GET"
+            })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status.code === 0){
+                        user = res.data[0]
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+
             return {
-                title: 'DevCodeMyLife',
+                title: `${user?.name} | DevCodeMyLife`,
                 head: <>
-                    <meta name="description" content="Страница пользователя" />
+                    <meta name="description" content={`Страница пользователя ${user?.title}`} />
                     <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
                     <script>
                         console.log('[ app start ]')
