@@ -545,6 +545,7 @@ a {
   padding: 20px;
   border-radius: 5px;
   display: flex;
+  cursor: pointer;
   flex-direction: row;
 }
 
