@@ -1,6 +1,6 @@
 import { createStore } from "redux"; // импорт из Redux-библиотеки
 import { mount, route } from 'navi'
-import { Router, View } from 'react-navi'
+import {NotFoundBoundary, Router, View} from 'react-navi'
 import {toast, ToastContainer} from 'react-toastify';
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
@@ -448,9 +448,19 @@ class App extends React.Component {
                                                             {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                                         </div>
                                                     </div>
-                                                    <Suspense fallback={true}>
-                                                        <View store={store}/>
-                                                    </Suspense>
+                                                    <NotFoundBoundary render={() =>
+                                                        <div className="content-wall-views">
+                                                            <div className="error-wrapper">
+                                                                <div className="error-page">
+                                                                    Такой страницы не существует.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }>
+                                                        <Suspense fallback={true}>
+                                                            <View store={store}/>
+                                                        </Suspense>
+                                                    </NotFoundBoundary>
                                                 </div>
                                             </div>
                                         </Router>
