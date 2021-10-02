@@ -228,7 +228,7 @@ class Settings extends Component{
                                     <div>
                                         <div className="main-place-wrapper">
                                             <p>
-                                                Настройки сайта (для админа)
+                                                Панель управления
                                             </p>
                                         </div>
                                         <div className="main-place-wrapper-settings">
