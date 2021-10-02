@@ -19,7 +19,11 @@ const initialState = {
         id: null
     },
     components: {
-        settings: null
+        settings: {
+            main_page: true,
+            messenger: true,
+            feed: true
+        }
     }
 }
 

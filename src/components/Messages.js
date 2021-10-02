@@ -463,13 +463,7 @@ class Messages extends Component{
         const store = this.state.store.getState()
 
         if (this.state.loadCent) {
-            let statusComponent = true
-            for (let variable in store.components.settings) {
-                if (store.components.settings[variable].title === "messenger"){
-                    statusComponent = store.components.settings[variable].is_active
-                }
-            }
-            if (!statusComponent){
+            if (!store.components.settings.messenger){
                 return (
                     <div className="content-wall-views">
                         <div className="feed-wrapper">

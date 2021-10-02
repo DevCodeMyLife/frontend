@@ -60,6 +60,75 @@ class Settings extends Component{
             });
     }
 
+    changeSettingsAdminMainPage = (event) => {
+        const store = this.state.store.getState()
+
+
+        let data = {
+            main_page: !event,
+            feed: store.components.settings.feed,
+            messenger: store.components.settings.messenger
+        }
+        fetch("/api/app/components", {
+            method: "PUT",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                this.updateState()
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    changeSettingsAdminMessengerPage = (event) => {
+        const store = this.state.store.getState()
+
+
+        let data = {
+            main_page: store.components.settings.messenger,
+            feed: store.components.settings.feed,
+            messenger: !event
+        }
+        fetch("/api/app/components", {
+            method: "PUT",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                this.updateState()
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    changeSettingsAdminFeedPage = (event) => {
+        const store = this.state.store.getState()
+
+
+        let data = {
+            main_page: store.components.settings.messenger,
+            feed: !event,
+            messenger: store.components.settings.feed
+        }
+        fetch("/api/app/components", {
+            method: "PUT",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                this.updateState()
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
     updateState(){
         fetch("/api/authentication", {
             method: "POST",
@@ -82,8 +151,24 @@ class Settings extends Component{
                             },
                         }
                     })
+
+                    fetch("/api/app/components", {
+                        method: "GET"
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+                            if (res?.status.code === 0){
+                                this.state.store.dispatch({
+                                    type: "ACTION_SET_COMPONENTS", value: {
+                                        settings: res.data,
+                                    }
+                                })
+                            }
+                        })
                 }
             })
+
+
     }
 
     save() {
@@ -115,30 +200,20 @@ class Settings extends Component{
             });
     }
 
-    // fetchUpdateState(){
-    //     fetch("/api/settings", {
-    //         method: "GET",
-    //     })
-    //         .then(response => response.json())
-    //         .then(res => {
-    //             // if (res.status.code === "0") {
-    //             this.setState({
-    //                 privatPost: res.data.privat_post,
-    //                 testing: res.data.testing,
-    //                 login: res.data.login,
-    //                 name: res.data.name,
-    //                 lastName: res.data.last_name,
-    //                 email: res.data.email,
-    //                 load: "complete"
-    //             })
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         });
-    // }
-
     componentDidMount() {
-        // this.fetchUpdateState()
+        fetch("/api/app/components", {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res?.status.code === 0){
+                    this.state.store.dispatch({
+                        type: "ACTION_SET_COMPONENTS", value: {
+                            settings: res.data,
+                        }
+                    })
+                }
+            })
     }
 
     render() {
@@ -238,12 +313,10 @@ class Settings extends Component{
                                                 </div>
                                                 <div className="value-settings">
                                                     {
-                                                        state.auth.user.data.privatPost ?
-                                                            <Switch enable={true} callBack={(e) => {
-                                                            }}/>
+                                                        state.components.settings.messenger ?
+                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
                                                             :
-                                                            <Switch enable={false} callBack={(e) => {
-                                                            }}/>
+                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
                                                     }
                                                 </div>
                                             </div>
@@ -253,12 +326,10 @@ class Settings extends Component{
                                                 </div>
                                                 <div className="value-settings">
                                                     {
-                                                        state.auth.user.data.testing ?
-                                                            <Switch enable={true} callBack={(e) => {
-                                                            }}/>
+                                                        state.components.settings.main_page ?
+                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
                                                             :
-                                                            <Switch enable={false} callBack={(e) => {
-                                                            }}/>
+                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
                                                     }
                                                 </div>
                                                 {/*<div className="separator" />*/}
@@ -269,12 +340,10 @@ class Settings extends Component{
                                                 </div>
                                                 <div className="value-settings">
                                                     {
-                                                        state.auth.user.data.privatPost ?
-                                                            <Switch enable={true} callBack={(e) => {
-                                                            }}/>
+                                                        state.components.settings.feed ?
+                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
                                                             :
-                                                            <Switch enable={false} callBack={(e) => {
-                                                            }}/>
+                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
                                                     }
                                                 </div>
                                             </div>
