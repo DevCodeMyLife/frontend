@@ -230,11 +230,14 @@ class Messages extends Component{
                     _this.setState({
                         typing: `${message?.data?.input?.typing} набирает сообщение.`
                     })
-                    document.getElementById("hide-typing").style.display = "block"
-                    setTimeout(() => {
-                        document.getElementById("hide-typing").style.display = "none"
-                    }, 5000)
-
+                    try {
+                        document.getElementById("hide-typing").style.display = "block"
+                        setTimeout(() => {
+                            document.getElementById("hide-typing").style.display = "none"
+                        }, 5000)
+                    } catch (err){
+                        console.error(err)
+                    }
                 }
             }
 
