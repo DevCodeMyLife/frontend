@@ -206,7 +206,7 @@ class Messages extends Component{
         }
 
 
-        this.read(this.state.cid)
+        // this.read(this.state.cid)
 
     }
 
