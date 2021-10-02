@@ -3,11 +3,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
-import Centrifuge from "centrifuge";
 
-const CONFIG = {
-    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
-};
 
 
 class Messages extends Component{
