@@ -13,7 +13,6 @@ import look_dark from "../icon/look_dark.png";
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
-import {bool} from "prop-types";
 const gfm = require('remark-gfm')
 
 class MainUsers extends Component {
