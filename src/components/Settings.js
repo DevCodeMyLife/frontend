@@ -7,7 +7,7 @@ class Settings extends Component{
         this.state = {
             privatPost: false,
             testing: false,
-            load: "complete",
+            load: "load",
             login: null,
             name: null,
             lastName: null,
@@ -207,10 +207,14 @@ class Settings extends Component{
             .then(response => response.json())
             .then(res => {
                 if (res?.status.code === 0){
+
                     this.state.store.dispatch({
                         type: "ACTION_SET_COMPONENTS", value: {
                             settings: res.data,
                         }
+                    })
+                    this.setState({
+                        load: "complete"
                     })
                 }
             })
