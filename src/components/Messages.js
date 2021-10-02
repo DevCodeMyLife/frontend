@@ -328,7 +328,7 @@ class Messages extends Component{
     }
 
     read(cid) {
-        let pathMessages = `/api/messages/${cid}`
+        // let pathMessages = `/api/messages/${cid}`
         let pathReadMessages = `/api/read_messages/${cid}`
 
 
@@ -338,35 +338,7 @@ class Messages extends Component{
         })
             .then(response => response.json())
             .then(res => {
-                fetch(pathMessages, {
-                    method: "GET"
-                })
-                    .then(response => response.json())
-                    .then(res => {
-                        if (res?.status?.code === 0){
-                            this.setState({
-                                messages: res.data.sort(function (x, y){
-                                    return x.date_time > y.date_time ? 1 : -1;
-                                }),
-                                dialog: true,
-                                cid: cid
-                            })
 
-
-
-                            // document.getElementById(
-                            //     'messages').scrollTo(
-                            //     {top: document.getElementById(
-                            //             'messages').scrollHeight, left: 0, behavior: 'smooth' });
-
-                        }
-                    })
-                    .catch(error => {
-                        this.setState({
-                            auth: false,
-                            load: true
-                        });
-                    });
             })
             .catch(error => {
                 this.setState({
