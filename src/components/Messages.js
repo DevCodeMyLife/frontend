@@ -31,7 +31,8 @@ class Messages extends Component{
             load: false,
             data: null,
             dialogTitle: null,
-            loader: true
+            loader: true,
+            store: this.props.store
         }
 
         this.centrifuge = new Centrifuge(CONFIG.url);
@@ -459,227 +460,260 @@ class Messages extends Component{
 
     render() {
 
+        const store = this.state.store.getState()
+
         if (this.state.loadCent) {
-            return (
-                        <div className="content-wall-views">
-                            <div className="wrapper-content-default">
-                                <div className="messages-control-nav">
-                                    <div className="messages-control-nav-item">
-                                        <div className="button-default" onClick={this.allMessage}>
-                                            Все диалоги
-                                        </div>
-                                        <div className="title-dialog" >
-                                            <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser} rel="noreferrer">{this.state.dialogTitle}</a>
-                                        </div>
+            let statusComponent = true
+            for (let variable in store.components.settings) {
+                if (store.components.settings[variable].title === "messenger"){
+                    statusComponent = store.components.settings[variable].is_active
+                }
+            }
+            if (!statusComponent){
+                return (
+                    <div className="content-wall-views">
+                        <div className="feed-wrapper">
+                            <div className="main-place-wrapper">
+                                <p>
+                                    В данный момент данная страница недоступна, по техническим причинам.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }else {
+                return (
+                    <div className="content-wall-views">
+                        <div className="wrapper-content-default">
+                            <div className="messages-control-nav">
+                                <div className="messages-control-nav-item">
+                                    <div className="button-default" onClick={this.allMessage}>
+                                        Все диалоги
+                                    </div>
+                                    <div className="title-dialog">
+                                        <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser}
+                                           rel="noreferrer">{this.state.dialogTitle}</a>
                                     </div>
                                 </div>
-                                {
-                                    this.state.loader ?
-                                        <div className="loader-wrapper feed-wrapper">
-                                            <div className="loader">
+                            </div>
+                            {
+                                this.state.loader ?
+                                    <div className="loader-wrapper feed-wrapper">
+                                        <div className="loader">
 
+                                        </div>
+                                    </div>
+                                    :
+                                    this.state._createMessage ?
+                                        <div className="wrapper-maker-message">
+                                            <div className="maker-message">
+                                                <div className="wrapper-maker-message-input">
+                                                    <input className="in" placeholder="Кому"/>
+                                                </div>
+                                                <div className="wrapper-maker-message-input">
+                                                    <TextareaAutosize
+                                                        placeholder="Введите Ваше сообщение"
+                                                        minRows={15}
+                                                    >
+
+                                                    </TextareaAutosize>
+                                                </div>
+
+                                                <div className="wrapper-flex-end">
+                                                    <div className="button-default">
+                                                        Отправить
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    :
-                                        this.state._createMessage ?
-                                            <div className="wrapper-maker-message">
-                                                <div className="maker-message">
-                                                    <div className="wrapper-maker-message-input">
-                                                        <input className="in" placeholder="Кому"/>
-                                                    </div>
-                                                    <div className="wrapper-maker-message-input">
-                                                        <TextareaAutosize
-                                                            placeholder="Введите Ваше сообщение"
-                                                            minRows={15}
-                                                        >
-
-                                                        </TextareaAutosize>
-                                                    </div>
-
-                                                    <div className="wrapper-flex-end">
-                                                        <div className="button-default">
-                                                            Отправить
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        :
+                                        this.state.chats.length < 1 ?
+                                            <div className="error-page">
+                                                Вы не создали еще ни одного диалога, либо Вам никто не написал.
                                             </div>
                                             :
-                                            this.state.chats.length < 1 ?
-                                                <div className="error-page">
-                                                    Вы не создали еще ни одного диалога, либо Вам никто не написал.
-                                                </div>
-                                                :
-                                                this.state.dialog ?
-                                                    <div className="wrapper-chat">
-                                                        <div className="wrapper-items" id="messages" style={{
-                                                            // background: "#fff"
-                                                        }}>
-                                                            {
-
-                                                                this.state.messages?.map(message =>
-                                                                    this.state.user[0].id === message.uid ?
-                                                                        <div className="message-item flex-end" style={{
-                                                                            // display: "flex",
-                                                                            boxShadow: "none",
-                                                                            background: !message.read ? "var(--not-read-message)" : "none",
-                                                                            // flexFlow: "column wrap"
-                                                                        }}>
-                                                                            <div className="wrapper-data" style={{
-                                                                                flexDirection: "row",
-                                                                                borderRadius: "10px"
-                                                                            }}>
-                                                                                <div className="photo-wrapper">
-                                                                                    <img src={message.avatar_url} alt={message.login}
-                                                                                         onClick={(e) => {
-                                                                                             e.preventDefault();
-                                                                                             window.location.href = `/user/${message.uid}`
-                                                                                         }}/>
-                                                                                </div>
-                                                                                <div className="value-post">
-                                                                                    <div className="feed-item-title">
-                                                                                        <div className="link-user" onClick={(e) => {
-                                                                                            e.preventDefault();
-                                                                                            window.location.href = `/user/${message?.uid}`
-                                                                                        }}>
-                                                                                            {message?.login}
-                                                                                        </div>
-                                                                                        <div className="feed-item-datetime">
-                                                                                            {this.unixToDateTime(message?.date_time)}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <p>
-                                                                                        {message.value}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        :
-                                                                        <div className="message-item flex-start" style={{
-                                                                            // display: "flex",
-                                                                            background: !message.read ? "var(--not-read-message)" : "none",
-                                                                            boxShadow: "none",
-                                                                            // flexFlow: "column wrap"
-                                                                        }}
-                                                                             onMouseEnter={()=>{
-                                                                                 this.read(message.c_id)
-                                                                             }}
-                                                                        >
-                                                                            <div className="wrapper-data" style={{
-                                                                                flexDirection: "row",
-                                                                                borderRadius: "10px"
-                                                                            }}>
-                                                                                <div className="photo-wrapper">
-                                                                                    <img src={message.avatar_url} alt={message.login}
-                                                                                         onClick={(e) => {
-                                                                                             e.preventDefault();
-                                                                                             window.location.href = `/user/${message.uid}`
-                                                                                         }}/>
-                                                                                </div>
-                                                                                <div className="value-post">
-                                                                                    <div className="feed-item-title">
-                                                                                        <div className="link-user" onClick={(e) => {
-                                                                                            e.preventDefault();
-                                                                                            window.location.href = `/user/${message?.uid}`
-                                                                                        }}>
-                                                                                            <span className="test-stat">{message?.login}</span>
-                                                                                        </div>
-                                                                                        <div className="feed-item-datetime">
-                                                                                            {this.unixToDateTime(message?.date_time)}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <p>
-                                                                                        {message.value}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                )
-                                                            }
-                                                            <div className="typing_user" id="typing_user">
-                                                                <div className="hide-typing" id="hide-typing">
-                                                                    <div className="image-icon-typing">
-                                                                        <img src={k} alt="typing"/>
-                                                                    </div>
-                                                                    <div className="typing-text">
-                                                                        {this.state.typing}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="wrapper-input">
-                                                            <TextareaAutosize
-                                                                onKeyDown={this.sendMessage}
-                                                                placeholder="Введите сообщение"
-                                                                autoFocus={true}
-                                                                maxRows={15}
-                                                                id="message_chat"
-                                                                style={{
-                                                                    borderRadius: "30px"
-                                                                }}
-                                                            >
-
-                                                            </TextareaAutosize>
-                                                            <div className="send-button" onClick={this.sendMessageButton}>
-                                                                <img src={send} alt="send"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    :
-                                                    <div className="wrapper-chats-main">
+                                            this.state.dialog ?
+                                                <div className="wrapper-chat">
+                                                    <div className="wrapper-items" id="messages" style={{
+                                                        // background: "#fff"
+                                                    }}>
                                                         {
-                                                            // onClick={() => this.openDialog(chat.c_id)}
-                                                            this.state.chats.map(chat =>
-                                                                chat.no_read_count ?
-                                                                    <div className="feed-wrapper-item-chat chat-flex-row"
-                                                                         style={{marginBottom: 0, background: "var(--hover-message-dialog)"}}
-                                                                         onClick={() =>  window.location.href = `/messages?cid=${chat.c_id}`}>
-                                                                        <div className="photo-wrapper-chat">
-                                                                            <img src={chat.avatar_url} alt={chat.avatar_url}/>
-                                                                        </div>
-                                                                        <div className="feed-item-title" style={{
-                                                                            padding: "13px",
 
+                                                            this.state.messages?.map(message =>
+                                                                this.state.user[0].id === message.uid ?
+                                                                    <div className="message-item flex-end" style={{
+                                                                        // display: "flex",
+                                                                        boxShadow: "none",
+                                                                        background: !message.read ? "var(--not-read-message)" : "none",
+                                                                        // flexFlow: "column wrap"
+                                                                    }}>
+                                                                        <div className="wrapper-data" style={{
+                                                                            flexDirection: "row",
+                                                                            borderRadius: "10px"
                                                                         }}>
-                                                                            <span className="test-stat">{chat.login}</span>
-                                                                            <div className="feed-item-datetime">
-                                                                                {chat.last_message?.substring(0, 40) + "..."}
+                                                                            <div className="photo-wrapper">
+                                                                                <img src={message.avatar_url}
+                                                                                     alt={message.login}
+                                                                                     onClick={(e) => {
+                                                                                         e.preventDefault();
+                                                                                         window.location.href = `/user/${message.uid}`
+                                                                                     }}/>
+                                                                            </div>
+                                                                            <div className="value-post">
+                                                                                <div className="feed-item-title">
+                                                                                    <div className="link-user"
+                                                                                         onClick={(e) => {
+                                                                                             e.preventDefault();
+                                                                                             window.location.href = `/user/${message?.uid}`
+                                                                                         }}>
+                                                                                        {message?.login}
+                                                                                    </div>
+                                                                                    <div className="feed-item-datetime">
+                                                                                        {this.unixToDateTime(message?.date_time)}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <p>
+                                                                                    {message.value}
+                                                                                </p>
                                                                             </div>
                                                                         </div>
-                                                                        {/*<div className="feed-item-title" style={{*/}
-                                                                        {/*    textAlign: "center",*/}
-                                                                        {/*    padding: "5px",*/}
-                                                                        {/*    width: "170px"*/}
-                                                                        {/*}}>*/}
-                                                                        {/*    <div className="last-message">*/}
-                                                                        {/*        {chat.last_message?.substring(0, 40) + "..."}*/}
-                                                                        {/*    </div>*/}
-                                                                        {/*</div>*/}
                                                                     </div>
                                                                     :
-                                                                    <div className="feed-wrapper-item-chat chat-flex-row"
-                                                                         style={{marginBottom: 0}}
-                                                                         onClick={() => this.openDialog(chat.c_id)}>
-                                                                        <div className="photo-wrapper-chat">
-                                                                            <img src={chat.avatar_url} alt={chat.avatar_url}/>
-                                                                        </div>
-                                                                        <div className="feed-item-title" style={{
-                                                                            padding: "13px",
+                                                                    <div className="message-item flex-start" style={{
+                                                                        // display: "flex",
+                                                                        background: !message.read ? "var(--not-read-message)" : "none",
+                                                                        boxShadow: "none",
+                                                                        // flexFlow: "column wrap"
+                                                                    }}
+                                                                         onMouseEnter={() => {
+                                                                             this.read(message.c_id)
+                                                                         }}
+                                                                    >
+                                                                        <div className="wrapper-data" style={{
+                                                                            flexDirection: "row",
+                                                                            borderRadius: "10px"
                                                                         }}>
-                                                                            <span className="test-stat">{chat.login}</span>
-                                                                            <div className="feed-item-datetime">
-                                                                                {chat.last_message?.substring(0, 40) + "..."}
+                                                                            <div className="photo-wrapper">
+                                                                                <img src={message.avatar_url}
+                                                                                     alt={message.login}
+                                                                                     onClick={(e) => {
+                                                                                         e.preventDefault();
+                                                                                         window.location.href = `/user/${message.uid}`
+                                                                                     }}/>
+                                                                            </div>
+                                                                            <div className="value-post">
+                                                                                <div className="feed-item-title">
+                                                                                    <div className="link-user"
+                                                                                         onClick={(e) => {
+                                                                                             e.preventDefault();
+                                                                                             window.location.href = `/user/${message?.uid}`
+                                                                                         }}>
+                                                                                        <span
+                                                                                            className="test-stat">{message?.login}</span>
+                                                                                    </div>
+                                                                                    <div className="feed-item-datetime">
+                                                                                        {this.unixToDateTime(message?.date_time)}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <p>
+                                                                                    {message.value}
+                                                                                </p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                             )
                                                         }
+                                                        <div className="typing_user" id="typing_user">
+                                                            <div className="hide-typing" id="hide-typing">
+                                                                <div className="image-icon-typing">
+                                                                    <img src={k} alt="typing"/>
+                                                                </div>
+                                                                <div className="typing-text">
+                                                                    {this.state.typing}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <div className="wrapper-input">
+                                                        <TextareaAutosize
+                                                            onKeyDown={this.sendMessage}
+                                                            placeholder="Введите сообщение"
+                                                            autoFocus={true}
+                                                            maxRows={15}
+                                                            id="message_chat"
+                                                            style={{
+                                                                borderRadius: "30px"
+                                                            }}
+                                                        >
 
-                                }
-                            </div>
+                                                        </TextareaAutosize>
+                                                        <div className="send-button" onClick={this.sendMessageButton}>
+                                                            <img src={send} alt="send"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                :
+                                                <div className="wrapper-chats-main">
+                                                    {
+                                                        // onClick={() => this.openDialog(chat.c_id)}
+                                                        this.state.chats.map(chat =>
+                                                            chat.no_read_count ?
+                                                                <div className="feed-wrapper-item-chat chat-flex-row"
+                                                                     style={{
+                                                                         marginBottom: 0,
+                                                                         background: "var(--hover-message-dialog)"
+                                                                     }}
+                                                                     onClick={() => window.location.href = `/messages?cid=${chat.c_id}`}>
+                                                                    <div className="photo-wrapper-chat">
+                                                                        <img src={chat.avatar_url}
+                                                                             alt={chat.avatar_url}/>
+                                                                    </div>
+                                                                    <div className="feed-item-title" style={{
+                                                                        padding: "13px",
+
+                                                                    }}>
+                                                                        <span className="test-stat">{chat.login}</span>
+                                                                        <div className="feed-item-datetime">
+                                                                            {chat.last_message?.substring(0, 40) + "..."}
+                                                                        </div>
+                                                                    </div>
+                                                                    {/*<div className="feed-item-title" style={{*/}
+                                                                    {/*    textAlign: "center",*/}
+                                                                    {/*    padding: "5px",*/}
+                                                                    {/*    width: "170px"*/}
+                                                                    {/*}}>*/}
+                                                                    {/*    <div className="last-message">*/}
+                                                                    {/*        {chat.last_message?.substring(0, 40) + "..."}*/}
+                                                                    {/*    </div>*/}
+                                                                    {/*</div>*/}
+                                                                </div>
+                                                                :
+                                                                <div className="feed-wrapper-item-chat chat-flex-row"
+                                                                     style={{marginBottom: 0}}
+                                                                     onClick={() => this.openDialog(chat.c_id)}>
+                                                                    <div className="photo-wrapper-chat">
+                                                                        <img src={chat.avatar_url}
+                                                                             alt={chat.avatar_url}/>
+                                                                    </div>
+                                                                    <div className="feed-item-title" style={{
+                                                                        padding: "13px",
+                                                                    }}>
+                                                                        <span className="test-stat">{chat.login}</span>
+                                                                        <div className="feed-item-datetime">
+                                                                            {chat.last_message?.substring(0, 40) + "..."}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        )
+                                                    }
+                                                </div>
+
+                            }
                         </div>
+                    </div>
 
-            );
+                );
+            }
         }else{
             return (
                 <div className="loader-wrapper feed-wrapper">

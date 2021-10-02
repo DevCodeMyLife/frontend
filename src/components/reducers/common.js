@@ -17,6 +17,9 @@ const initialState = {
     history: {
         path: null,
         id: null
+    },
+    components: {
+        settings: null
     }
 }
 
@@ -31,6 +34,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_SET_CENTRIFUGE":
             state.centrifuge = action.value
+            return state
+        case "ACTION_SET_COMPONENTS":
+            state.components = action.value
             return state
         default:
             return state

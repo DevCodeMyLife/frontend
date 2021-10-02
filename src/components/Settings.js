@@ -21,9 +21,10 @@ class Settings extends Component{
     }
 
     changeSettingsTesting = (event) => {
+        const store = this.state.store.getState()
         let data = {
             testing: !event,
-            privat_post: this.state.privatPost
+            privat_post: store.auth.user.data.privat_post
         }
         fetch("/api/settings?flags=switch", {
             method: "PUT",
@@ -40,8 +41,9 @@ class Settings extends Component{
     }
 
     changeSettingsPrivat = (event) => {
+        const store = this.state.store.getState()
         let data = {
-            testing: this.state.testing,
+            testing: store.auth.user.data.privat_post,
             privat_post: !event
         }
         fetch("/api/settings?flags=switch", {
@@ -161,7 +163,7 @@ class Settings extends Component{
                                         </div>
                                         <div className="value-settings">
                                             {
-                                                state.auth.user.data.privatPost ?
+                                                state.auth.user.data.privat_post ?
                                                     <Switch enable={true} callBack={(e)=> this.changeSettingsPrivat(e)}/>
                                                     :
                                                     <Switch enable={false} callBack={(e)=> this.changeSettingsPrivat(e)}/>
@@ -220,7 +222,69 @@ class Settings extends Component{
                                     </div>
                                     <div className="error-wrapper center" id="event_save" style={{color: "green"}}/>
                                 </div>
+
+                            {
+                                state.auth.user.data.scope === "admin" ?
+                                    <div>
+                                        <div className="main-place-wrapper">
+                                            <p>
+                                                Настройки сайта (для админа)
+                                            </p>
+                                        </div>
+                                        <div className="main-place-wrapper-settings">
+                                            <div className="block-settings child_settings">
+                                                <div className="key-settings">
+                                                    messenger
+                                                </div>
+                                                <div className="value-settings">
+                                                    {
+                                                        state.auth.user.data.privatPost ?
+                                                            <Switch enable={true} callBack={(e) => {
+                                                            }}/>
+                                                            :
+                                                            <Switch enable={false} callBack={(e) => {
+                                                            }}/>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="block-settings child_settings">
+                                                <div className="key-settings">
+                                                    main_page
+                                                </div>
+                                                <div className="value-settings">
+                                                    {
+                                                        state.auth.user.data.testing ?
+                                                            <Switch enable={true} callBack={(e) => {
+                                                            }}/>
+                                                            :
+                                                            <Switch enable={false} callBack={(e) => {
+                                                            }}/>
+                                                    }
+                                                </div>
+                                                {/*<div className="separator" />*/}
+                                            </div>
+                                            <div className="block-settings child_settings">
+                                                <div className="key-settings">
+                                                    feed
+                                                </div>
+                                                <div className="value-settings">
+                                                    {
+                                                        state.auth.user.data.privatPost ?
+                                                            <Switch enable={true} callBack={(e) => {
+                                                            }}/>
+                                                            :
+                                                            <Switch enable={false} callBack={(e) => {
+                                                            }}/>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    :
+                                    null
+                            }
                             </div>
+
                         :
                             <div className="loader-wrapper feed-wrapper">
                                 <div className="loader" />

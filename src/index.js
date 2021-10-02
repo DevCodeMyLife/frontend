@@ -74,11 +74,20 @@ class App extends React.Component {
                         }
                     })
 
-                    // store.dispatch({
-                    //     type: "ACTION_UPDATE_HISTORY", value: {
-                    //         path: new URLSearchParams(window.location.search)
-                    //     }
-                    // })
+                    fetch("/api/app/components", {
+                        method: "GET"
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+                            if (res?.status.code === 0){
+                                store.dispatch({
+                                    type: "ACTION_SET_COMPONENTS", value: {
+                                        settings: res.data,
+                                    }
+                                })
+                            }
+                        })
+
 
                     let centrifuge = new Centrifuge(CONFIG.url)
                     centrifuge.setToken(res?.token)
