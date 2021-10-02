@@ -689,16 +689,17 @@ class MainUsers extends Component {
     }
 
   render(){
-        const store = this.state.store.getState()
-
         let {isLoaded, textNews, mainFeed, clicked_new_post } = this.state;
+
+
+        const store = this.state.store.getState()
         if (!store.components.settings.main_page){
             return (
                 <div className="content-wall-views">
                     <div className="feed-wrapper">
                         <div className="main-place-wrapper">
                             <p>
-                                В данный момент данная страница недоступна, по техническим причинам.
+                                В разделе Профилей ведутся технические работы.
                             </p>
                         </div>
                     </div>

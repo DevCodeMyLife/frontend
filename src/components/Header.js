@@ -17,16 +17,16 @@ class Header extends Component {
             <header className="head">
                 <div className="rectangle-head">
                     <div className="wrapper-logo unselectable">
-                        <Link href={
-                            state.auth.user.isAuth ?
-                                '/feeds'
-                            :
-                                '/'
-                        }>
-                            <div className="place-logo wrapper-inline-block" >
-                               [ DevCodeMyLife ]
-                            </div>
-                        </Link>
+                        <div className="place-logo wrapper-inline-block" onClick={(e) => {
+                            e.preventDefault();
+                            if (state.auth.user.isAuth){
+                                window.location.href = '/feeds'
+                            }else{
+                                window.location.href = '/'
+                            }
+                        }}>
+                            [ DevCodeMyLife ]
+                        </div>
                     </div>
                     <div className="wrapper-user">
                         <div className="wrapper-auth">

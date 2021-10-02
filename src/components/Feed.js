@@ -22,7 +22,8 @@ class Feed extends Component {
             data: null,
             currentDateTime: new Date().getTime(),
             tags: [],
-            isDark: "light"
+            isDark: "light",
+            store: this.props.store
         }
     }
 
@@ -292,160 +293,185 @@ class Feed extends Component {
 
     render() {
         let { isLoaded, result, tags } = this.state;
-        return (
 
-            <div className="content-wall-views">
-                <div className="wrapper-feed">
-                    <div className="wrapper-search wrapper-inline-block unselectable">
-                        <div>
-                            <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress} onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
-                        </div>
-                        <div className="tags-wrapper">
-                            <div className="button-default-tag tags-item unselectable button-select" id="all" action="all" onClick={this.handleClickTag}>
-                                Все
-                            </div>
-                            <div className="button-default-tag tags-item unselectable" action="top" onClick={this.handleClickTag}>
-                                Топ 10 недели
-                            </div>
-                            {
-                                tags?.map(data =>
-                                    <div className="button-default-tag tags-item unselectable" action={data.value} onClick={this.handleClickTag}>
-                                        {data.value}
-                                    </div>
-                                )
-                            }
-
+        const store = this.state.store.getState()
+        if (!store.components.settings.feed){
+            return (
+                <div className="content-wall-views">
+                    <div className="feed-wrapper">
+                        <div className="main-place-wrapper">
+                            <p>
+                                В разделе Новостей ведутся технические работы.
+                            </p>
                         </div>
                     </div>
-
-                    {
-                        isLoaded === "load" ?
-                            <div className="loader-wrapper feed-wrapper">
-                                <div className="loader">
-
-                                </div>
+                </div>
+            )
+        }else{
+            return (
+                <div className="content-wall-views">
+                    <div className="wrapper-feed">
+                        <div className="wrapper-search wrapper-inline-block unselectable">
+                            <div>
+                                <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress}
+                                       onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                             </div>
-                            :
-                            isLoaded === "error" ?
-                                <div>
-                                    <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                            <div className="tags-wrapper">
+                                <div className="button-default-tag tags-item unselectable button-select" id="all"
+                                     action="all" onClick={this.handleClickTag}>
+                                    Все
+                                </div>
+                                <div className="button-default-tag tags-item unselectable" action="top"
+                                     onClick={this.handleClickTag}>
+                                    Топ 10 недели
+                                </div>
+                                {
+                                    tags?.map(data =>
+                                        <div className="button-default-tag tags-item unselectable" action={data.value}
+                                             onClick={this.handleClickTag}>
+                                            {data.value}
+                                        </div>
+                                    )
+                                }
+
+                            </div>
+                        </div>
+
+                        {
+                            isLoaded === "load" ?
+                                <div className="loader-wrapper feed-wrapper">
+                                    <div className="loader">
+
+                                    </div>
                                 </div>
                                 :
-                                isLoaded === "OnFocusSearch" ?
-                                    <div className="feed-wrapper">
-                                        <div className="not_news">
-                                            Начните вводить и мы начнем искать...
-                                        </div>
+                                isLoaded === "error" ?
+                                    <div>
+                                        <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
                                     </div>
                                     :
-                                    result.length === 0 ?
+                                    isLoaded === "OnFocusSearch" ?
                                         <div className="feed-wrapper">
                                             <div className="not_news">
-                                                К сожалению показать нечего 🙁
+                                                Начните вводить и мы начнем искать...
                                             </div>
                                         </div>
                                         :
-                                        <div className="feed-wrapper">
-                                            {result.map(data =>
-                                                <div key={data?.ID}  className="feed-wrapper-item">
-                                                    {/*<div className="feed-item-title">*/}
-                                                    {/*    <div className="wrapper-flex-start">{data?.title}</div>*/}
-                                                    {/*    <div key="mamdmkamasdasd" className="author-name wrapper-flex-end unselectable" onClick={(e) => {*/}
-                                                    {/*        e.preventDefault();*/}
-                                                    {/*        window.open('https://github.com/' + data?.user, "_blank");*/}
-                                                    {/*    }}>*/}
-                                                    {/*        {data?.user}*/}
-                                                    {/*    </div>*/}
-                                                    {/*</div>*/}
+                                        result.length === 0 ?
+                                            <div className="feed-wrapper">
+                                                <div className="not_news">
+                                                    К сожалению показать нечего 🙁
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className="feed-wrapper">
+                                                {result.map(data =>
+                                                    <div key={data?.ID} className="feed-wrapper-item">
+                                                        {/*<div className="feed-item-title">*/}
+                                                        {/*    <div className="wrapper-flex-start">{data?.title}</div>*/}
+                                                        {/*    <div key="mamdmkamasdasd" className="author-name wrapper-flex-end unselectable" onClick={(e) => {*/}
+                                                        {/*        e.preventDefault();*/}
+                                                        {/*        window.open('https://github.com/' + data?.user, "_blank");*/}
+                                                        {/*    }}>*/}
+                                                        {/*        {data?.user}*/}
+                                                        {/*    </div>*/}
+                                                        {/*</div>*/}
 
-                                                    <div className="feed-item-value" >
-                                                        <div key="asldk" className="wrapper-data">
-                                                            <Link href={`/user/${data?.uid}`}>
-                                                                <div key="aksdlkasd"  className="photo-wrapper">
+                                                        <div className="feed-item-value">
+                                                            <div key="asldk" className="wrapper-data">
+                                                                <Link href={`/user/${data?.uid}`}>
+                                                                    <div key="aksdlkasd" className="photo-wrapper">
 
-                                                                    {
-                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
-                                                                            null
-                                                                        :
-                                                                            <div className="online_user" />
-                                                                    }
+                                                                        {
+                                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
+                                                                                null
+                                                                                :
+                                                                                <div className="online_user"/>
+                                                                        }
 
-                                                                        <img key="asdmmmmasd" src={data?.photo} alt={data?.id}  />
+                                                                        <img key="asdmmmmasd" src={data?.photo}
+                                                                             alt={data?.id}/>
 
-                                                                </div>
-                                                            </Link>
-                                                            <div className="value-post">
-                                                                <div className="feed-item-title">
-                                                                    <Link href={`/user/${data?.uid}`}>
-                                                                        <div className="link-user">
-                                                                            {data?.user}
+                                                                    </div>
+                                                                </Link>
+                                                                <div className="value-post">
+                                                                    <div className="feed-item-title">
+                                                                        <Link href={`/user/${data?.uid}`}>
+                                                                            <div className="link-user">
+                                                                                {data?.user}
+                                                                            </div>
+                                                                        </Link>
+                                                                        <div className="feed-item-datetime">
+                                                                            {this.unixToDateTime(data?.date_time)}
                                                                         </div>
-                                                                    </Link>
-                                                                    <div className="feed-item-datetime">
-                                                                        {this.unixToDateTime(data?.date_time)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div key="asldkasd" className="wrapper-data">
+                                                                {/*<div key="aksdlkasdasd"  className="photo-wrapper">*/}
+
+                                                                {/*</div>*/}
+                                                                <ReactMarkdown className="value-post"
+                                                                               remarkPlugins={[gfm]}
+                                                                               components={this.components}
+                                                                               onClick={(e) => {
+                                                                                   e.preventDefault();
+                                                                                   window.location.href = `/post?uuid=${data?.ID}`
+                                                                               }}>
+                                                                    {data?.value?.substring(0, 900) + "\n..."}
+                                                                </ReactMarkdown>
+                                                            </div>
+                                                        </div>
+                                                        <div className="wrapper-bottom">
+                                                            <div className="wrapper-flex-start">
+                                                                <Link style={{textDecoration: "none", color: "#000"}}
+                                                                      href={`/post?uuid=${data?.ID}`}>
+                                                                    <div className="button-default">Подробнее</div>
+                                                                </Link>
+                                                            </div>
+                                                            <div className="like_wrapper wrapper-flex-end">
+                                                                <div className="like">
+                                                                    <div className="like-item">
+                                                                        {
+                                                                            this.state.isDark === "light" ?
+                                                                                <img src={look} alt="like"/>
+                                                                                :
+                                                                                <img src={look_dark} alt="like"/>
+                                                                        }
+                                                                    </div>
+                                                                    <div className="like-item">
+                                                        <span className="like-count">
+                                                            {data?.look_count}
+                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="like">
+                                                                    <div className="like-item"
+                                                                         onClick={() => this.like(data?.ID)}>
+                                                                        {
+                                                                            this.state.isDark === "light" ?
+                                                                                <img src={like} alt="like"/>
+                                                                                :
+                                                                                <img src={like_dark} alt="like"/>
+                                                                        }
+                                                                    </div>
+                                                                    <div className="like-item">
+                                                        <span className="like-count" id={data?.ID}>
+                                                            {data?.count_like}
+                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div key="asldkasd" className="wrapper-data">
-                                                            {/*<div key="aksdlkasdasd"  className="photo-wrapper">*/}
-
-                                                            {/*</div>*/}
-                                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]} components={this.components} onClick={(e) => {
-                                                                e.preventDefault();
-                                                                window.location.href = `/post?uuid=${data?.ID}`
-                                                            }}>
-                                                                {data?.value?.substring(0, 900) + "\n..."}
-                                                            </ReactMarkdown>
-                                                        </div>
                                                     </div>
-                                                    <div className="wrapper-bottom">
-                                                        <div className="wrapper-flex-start">
-                                                            <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>
-                                                                <div className="button-default" >Подробнее</div>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="like_wrapper wrapper-flex-end">
-                                                            <div className="like">
-                                                                <div className="like-item">
-                                                                    {
-                                                                        this.state.isDark === "light" ?
-                                                                            <img src={look}  alt="like"/>
-                                                                            :
-                                                                            <img src={look_dark}  alt="like"/>
-                                                                    }
-                                                                </div>
-                                                                <div className="like-item">
-                                                    <span className="like-count">
-                                                        {data?.look_count}
-                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="like">
-                                                                <div className="like-item" onClick={() => this.like(data?.ID)}>
-                                                                    {
-                                                                        this.state.isDark === "light" ?
-                                                                            <img src={like}  alt="like"/>
-                                                                            :
-                                                                            <img src={like_dark}  alt="like"/>
-                                                                    }
-                                                                </div>
-                                                                <div className="like-item">
-                                                    <span className="like-count" id={data?.ID}>
-                                                        {data?.count_like}
-                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                    }
+                                                )}
+                                            </div>
+                        }
 
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 

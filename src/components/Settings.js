@@ -43,7 +43,7 @@ class Settings extends Component{
     changeSettingsPrivat = (event) => {
         const store = this.state.store.getState()
         let data = {
-            testing: store.auth.user.data.privat_post,
+            testing: store.auth.user.data.testing,
             privat_post: !event
         }
         fetch("/api/settings?flags=switch", {
@@ -250,20 +250,6 @@ class Settings extends Component{
                                         </div>
                                         {/*<div className="separator" />*/}
                                     </div>
-                                    {/*<div className="block-settings child_settings">*/}
-                                    {/*    <div className="key-settings">*/}
-                                    {/*        Показывать Ваш email*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="value-settings">*/}
-                                    {/*        {*/}
-                                    {/*            this.state.privatPost ?*/}
-                                    {/*                <Switch enable={true} callBack={(e)=> this.changeSettingsPrivat(e)}/>*/}
-                                    {/*                :*/}
-                                    {/*                <Switch enable={false} callBack={(e)=> this.changeSettingsPrivat(e)}/>*/}
-                                    {/*        }*/}
-                                    {/*    </div>*/}
-                                    {/*    /!*<div className="separator" />*!/*/}
-                                    {/*</div>*/}
                                     <div className="block-settings child_settings">
                                         <div className="key-settings">
                                             Участвовать в тестировании

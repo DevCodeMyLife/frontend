@@ -351,7 +351,7 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Feed/>
+            view: <Feed store={store} />
         }),
         '/post': route({
             title: 'Заметка | DevCodeMyLife',

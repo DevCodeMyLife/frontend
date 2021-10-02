@@ -35,10 +35,9 @@ class Messages extends Component{
             store: this.props.store
         }
 
-        this.centrifuge = new Centrifuge(CONFIG.url);
 
-        this.setState({
-            cent: this.centrifuge
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
         })
     }
 
@@ -220,12 +219,14 @@ class Messages extends Component{
             loader: true
         })
 
+        const store = this.state.store.getState()
+
         let _this = this
         let path = `/api/messages/${cid}`
 
         window.history.pushState({urlPath:`/messages?cid=${cid}`},"",`/messages?cid=${cid}`)
 
-        let cent_channel = _this.state.cent.subscribe(cid, function (message) {
+        let cent_channel = store.centrifuge.object.subscribe(cid, function (message) {
             let data = _this.state.messages
 
             if (message.data?.input?.typing !== _this.state.user[0].login){
@@ -255,8 +256,6 @@ class Messages extends Component{
                 }
             }
         })
-
-        this.centrifuge.connect()
 
         this.setState({
             cent_channel: cent_channel
@@ -371,8 +370,6 @@ class Messages extends Component{
             .then(res => {
                 if (res.status.code === 0){
 
-                    this_.centrifuge.setToken(res.token)
-
                     this_.changerPage()
 
                     // this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
@@ -462,14 +459,14 @@ class Messages extends Component{
 
         const store = this.state.store.getState()
 
-        if (this.state.loadCent) {
+        if (this.state.load) {
             if (!store.components.settings.messenger){
                 return (
                     <div className="content-wall-views">
                         <div className="feed-wrapper">
                             <div className="main-place-wrapper">
                                 <p>
-                                    В данный момент данная страница недоступна, по техническим причинам.
+                                    В разделе Сообщений ведутся технические работы.
                                 </p>
                             </div>
                         </div>
