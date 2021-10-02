@@ -35,6 +35,7 @@ class Messages extends Component{
 
         this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
+            this.updateState()
         })
     }
 
@@ -203,12 +204,46 @@ class Messages extends Component{
             }
 
         }
+
+
+        this.read(this.state.cid)
+
     }
 
     clearInput(target) {
         target.value = target.value.replace(/[\n\r]/g, '')
         target.value = ''
         target.style.height = "50px"
+    }
+
+    updateState(){
+        if (this.state.dialog) {
+            let path = `/api/messages/${this.state.cid}`
+
+            fetch(path, {
+                method: "GET"
+            })
+                .then(response => response.json())
+                .then(res => {
+                    if (res?.status?.code === 0){
+
+
+                        this.setState({
+                            messages: res.data.sort(function (x, y){
+                                return x.date_time > y.date_time ? 1 : -1;
+                            }),
+                            dialog: true,
+                            cid: this.state.cid,
+                            dialogTitle: res?.title_dialog,
+                            linkUser: res?.id_user,
+                            loader: false
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
     }
 
     openDialog(cid) {
