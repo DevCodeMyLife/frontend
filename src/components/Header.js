@@ -20,8 +20,10 @@ class Header extends Component {
                         <div className="place-logo wrapper-inline-block" onClick={(e) => {
                             e.preventDefault();
                             if (state.auth.user.isAuth){
+                                state.centrifuge.object.disconnect()
                                 window.location.href = '/feeds'
                             }else{
+                                state.centrifuge.object.disconnect()
                                 window.location.href = '/'
                             }
                         }}>
