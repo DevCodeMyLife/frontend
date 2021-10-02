@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import {Link} from "react-navi";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
@@ -541,23 +542,20 @@ class Messages extends Component{
                                                                             flexDirection: "row",
                                                                             borderRadius: "10px"
                                                                         }}>
-                                                                            <div className="photo-wrapper">
-                                                                                <img src={message.avatar_url}
-                                                                                     alt={message.login}
-                                                                                     onClick={(e) => {
-                                                                                         e.preventDefault();
-                                                                                         window.location.href = `/user/${message.uid}`
-                                                                                     }}/>
-                                                                            </div>
+                                                                            <Link href={`/user/${message.uid}`}>
+                                                                                <div className="photo-wrapper">
+                                                                                    <img src={message.avatar_url}
+                                                                                         alt={message.login}
+                                                                                    />
+                                                                                </div>
+                                                                            </Link>
                                                                             <div className="value-post">
                                                                                 <div className="feed-item-title">
-                                                                                    <div className="link-user"
-                                                                                         onClick={(e) => {
-                                                                                             e.preventDefault();
-                                                                                             window.location.href = `/user/${message?.uid}`
-                                                                                         }}>
-                                                                                        {message?.login}
-                                                                                    </div>
+                                                                                    <Link href={`/user/${message?.uid}`}>
+                                                                                        <div className="link-user">
+                                                                                            {message?.login}
+                                                                                        </div>
+                                                                                    </Link>
                                                                                     <div className="feed-item-datetime">
                                                                                         {this.unixToDateTime(message?.date_time)}
                                                                                     </div>
@@ -583,24 +581,21 @@ class Messages extends Component{
                                                                             flexDirection: "row",
                                                                             borderRadius: "10px"
                                                                         }}>
-                                                                            <div className="photo-wrapper">
-                                                                                <img src={message.avatar_url}
-                                                                                     alt={message.login}
-                                                                                     onClick={(e) => {
-                                                                                         e.preventDefault();
-                                                                                         window.location.href = `/user/${message.uid}`
-                                                                                     }}/>
-                                                                            </div>
+                                                                            <Link href={`/user/${message.uid}`} >
+                                                                                <div className="photo-wrapper">
+                                                                                    <img src={message.avatar_url}
+                                                                                         alt={message.login}
+                                                                                    />
+                                                                                </div>
+                                                                            </Link>
                                                                             <div className="value-post">
                                                                                 <div className="feed-item-title">
-                                                                                    <div className="link-user"
-                                                                                         onClick={(e) => {
-                                                                                             e.preventDefault();
-                                                                                             window.location.href = `/user/${message?.uid}`
-                                                                                         }}>
-                                                                                        <span
-                                                                                            className="test-stat">{message?.login}</span>
-                                                                                    </div>
+                                                                                    <Link href={`/user/${message?.uid}`} >
+                                                                                        <div className="link-user">
+                                                                                            <span
+                                                                                                className="test-stat">{message?.login}</span>
+                                                                                        </div>
+                                                                                    </Link>
                                                                                     <div className="feed-item-datetime">
                                                                                         {this.unixToDateTime(message?.date_time)}
                                                                                     </div>
