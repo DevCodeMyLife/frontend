@@ -25,6 +25,7 @@ import HowToUse from "./components/HowToUse";
 import ruvds from "./icon/ruvds.png";
 import People from "./components/People";
 import AppReducer from "./components/reducers/common"
+import Agreement from "./components/Agreement";
 
 const store = createStore(AppReducer);
 
@@ -362,6 +363,16 @@ class App extends React.Component {
                 </script>
             </>,
             view: <FeedOnePage store={store}/>
+        }),
+        '/agreement': route({
+            title: 'Пользовательское соглашение | DevCodeMyLife',
+            head: <>
+                <meta name="description" content="Пользовательское соглашение" />
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>,
+            view: <Agreement store={store}/>
         }),
         '/settings': route({
             title: 'Настройки | DevCodeMyLife',

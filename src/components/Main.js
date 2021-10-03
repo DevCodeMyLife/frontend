@@ -30,6 +30,8 @@ class Main extends Component {
                     window.location.href = res.data.location
                 }else if (res.status.code === 404) {
                     document.getElementById("error_auth").innerHTML = "Неверный логин или пароль"
+                }else if (res.status.code === 7182) {
+                    document.getElementById("error_auth").innerHTML = "Аккаунт был заблокирован администрацией сайта"
                 }
             })
             .catch(error => {

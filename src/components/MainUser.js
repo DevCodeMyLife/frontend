@@ -767,6 +767,15 @@ class MainUsers extends Component {
 
                     {
                         isLoaded ?
+                            this.state.result[0].is_block ?
+                                <div>
+                                    <div className="error-wrapper">
+                                        <div className="error-page">
+                                            Страница была заблокирована администрацией сайта.
+                                        </div>
+                                    </div>
+                                </div>
+                        :
                             <div className="feed-wrapper">
                                 <div className="main-place-wrapper">
                                     <div className="main-place-photo-column child">
@@ -1168,7 +1177,7 @@ class MainUsers extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    :
+                                :
                                     <div className="feed-wrapper" style={{
                                         display: "flex",
                                         justifyContent: "center",
