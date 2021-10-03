@@ -39,6 +39,8 @@ class Messages extends Component{
         })
     }
 
+    messagesEndRef = React.createRef()
+
     createMessage = (event) => {
         this.setState({
             _createMessage: true
@@ -70,6 +72,7 @@ class Messages extends Component{
                         chats: res?.data,
                         dialog: false,
                         messages: [],
+                        load: true,
                         loader: false
                     })
                 }
@@ -89,6 +92,8 @@ class Messages extends Component{
     }
 
     sendMessageButton = (event) => {
+        const store = this.state.store.getState()
+
         let _this = this
         let data = {
             value: document.getElementById("message_chat").value,
@@ -105,10 +110,10 @@ class Messages extends Component{
             let mes = {
                 c_id: this.state.cid,
                 value: value,
-                avatar_url: this.state.user[0].avatar_url,
-                uid: this.state.user[0].id,
+                avatar_url: store.auth.user.data.avatar_url,
+                uid: store.auth.user.data.id,
                 date_time: Math.round((new Date()).getTime() / 1000),
-                login: this.state.user[0].login
+                login: store.auth.user.data.login
             }
 
             this.state.messages.push(mes)
@@ -116,8 +121,7 @@ class Messages extends Component{
             this.setState({
                 messages: this.state.messages
             })
-            if (document.getElementById('messages'))
-                document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+            this.scrollToBottom();
 
             fetch("/api/messages", {
                 method: "POST",
@@ -128,9 +132,7 @@ class Messages extends Component{
 
 
                     this.read(this.state.cid)
-
-                    if (document.getElementById('messages'))
-                        document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                    this.scrollToBottom();
                 })
                 .catch(error => {
                     console.log(error)
@@ -140,6 +142,7 @@ class Messages extends Component{
     }
 
     sendMessage = (event) => {
+        const store = this.state.store.getState()
         let _this = this
         let data = {
             value: event.target.value,
@@ -152,7 +155,7 @@ class Messages extends Component{
             this.state.cent_channel.publish(
                 {
                     "input": {
-                        "typing": this.state.user[0].login
+                        "typing": store.auth.user.data.login
                     }
                 }).then(
                 function() {
@@ -166,10 +169,10 @@ class Messages extends Component{
             let mes = {
                 c_id: this.state.cid,
                 value: value,
-                avatar_url: this.state.user[0].avatar_url,
-                uid: this.state.user[0].id,
+                avatar_url: store.auth.user.data.avatar_url,
+                uid: store.auth.user.data.id,
                 date_time: Math.round((new Date()).getTime() / 1000),
-                login: this.state.user[0].login
+                login: store.auth.user.data.login
             }
 
             this.state.messages.push(mes)
@@ -178,8 +181,7 @@ class Messages extends Component{
                 messages: this.state.messages
             })
 
-            if (document.getElementById('messages'))
-                document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+            this.scrollToBottom();
             event.preventDefault();
             _this.clearInput(event.target)
 
@@ -192,11 +194,8 @@ class Messages extends Component{
                     .then(res => {
                         _this.clearInput(event.target)
 
-
                         this.read(this.state.cid)
-
-                        if (document.getElementById('messages'))
-                            document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                        this.scrollToBottom();
                     })
                     .catch(error => {
                         console.log(error)
@@ -261,7 +260,7 @@ class Messages extends Component{
         let cent_channel = store.centrifuge.object.subscribe(cid, function (message) {
             let data = _this.state.messages
 
-            if (message.data?.input?.typing !== _this.state.user[0].login){
+            if (message.data?.input?.typing !== store.auth.user.data.login){
                 if (message.data?.input?.typing){
                     _this.setState({
                         typing: `${message?.data?.input?.typing} набирает сообщение.`
@@ -278,16 +277,15 @@ class Messages extends Component{
             }
 
             if (message?.data?.login){
-                if (message?.data?.login !== _this.state.user[0].login){
+                if (message?.data?.login !== store.auth.user.data.login){
                     _this.state.context.resume().then(() => {
                         _this.state.audio.play();
                     });
                 }
-                if (message.data.uid !== _this.state.user[0].id){
+                if (message.data.uid !== store.auth.user.data.id){
                     data.push(message?.data)
                     _this.setState({messages: data})
-                    if (document.getElementById('messages'))
-                        document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                    _this.scrollToBottom();
                 }
             }
         })
@@ -312,13 +310,11 @@ class Messages extends Component{
                         cid: cid,
                         dialogTitle: res?.title_dialog,
                         linkUser: res?.id_user,
-                        loader: false
+                        loader: false,
+                        load: true
                     })
 
-                    document.getElementById(
-                        'messages').scrollTo(
-                            {top: document.getElementById(
-                                'messages').scrollHeight, left: 0, behavior: 'smooth' });
+                    this.scrollToBottom();
 
                 }
             })
@@ -366,100 +362,12 @@ class Messages extends Component{
     }
 
     componentDidMount() {
-        let this_ = this
-        fetch("/api/authentication", {
-            method: "POST",
-            body: JSON.stringify({
-                "finger": window.localStorage.getItem("finger")
-            })
-        })
-            .then(response => response.json())
-            .then(res => {
-                if (res.status.code === 0){
+        this.changerPage()
+    }
 
-                    this_.changerPage()
 
-                    // this.centrifuge.subscribe(`${res.data[0].id}`, function(message) {
-                    //     console.log("[ Connect updater pull ]")
-                    //
-                    //     let event = message.data
-                    //     if(event.type === "update") {
-                    //         let pathMessages = `/api/messages/${this_.state.cid}`
-                    //         let pathReadMessages = `/api/read_messages/${this_.state.cid}`
-                    //
-                    //
-                    //         fetch(pathReadMessages, {
-                    //             method: "POST",
-                    //             body: JSON.stringify({})
-                    //         })
-                    //             .then(response => response.json())
-                    //             .then(_ => {
-                    //                 fetch(pathMessages, {
-                    //                     method: "GET"
-                    //                 })
-                    //                     .then(response => response.json())
-                    //                     .then(res => {
-                    //                         if (res?.status?.code === 0){
-                    //                             this_.setState({
-                    //                                 messages: res?.data,
-                    //                                 dialog: true,
-                    //                                 cid: res?.cid
-                    //                             })
-                    //
-                    //
-                    //
-                    //                             // document.getElementById(
-                    //                             //     'messages').scrollTo(
-                    //                             //     {top: document.getElementById(
-                    //                             //             'messages').scrollHeight, left: 0, behavior: 'smooth' });
-                    //
-                    //                         }
-                    //                     })
-                    //                     .catch(error => {
-                    //                         this_.setState({
-                    //                             auth: false,
-                    //                             load: true
-                    //                         });
-                    //                     });
-                    //             })
-                    //             .catch(error => {
-                    //                 this_.setState({
-                    //                     auth: false,
-                    //                     load: true
-                    //                 });
-                    //             });
-                    //     }
-                    // })
-
-                    this.setState({
-                        auth: true,
-                        load: true,
-                        data: res.data,
-                        user: res.data,
-                        notification_count: res.notification_count,
-                        notification: res.notification,
-                        token: res.token,
-                        messagesCount: res.count_message
-                    });
-
-                }else{
-                    this.sendLogs(res.status.message)
-                    this.delete_cookie("access_token")
-                }
-
-            })
-            .catch(error => {
-                this.setState({
-                    auth: false,
-                    load: true
-                });
-            });
-
-        this.setState({
-            cent: this.centrifuge,
-            loadCent: true
-        })
-
+    scrollToBottom = () => {
+        this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
 
     render() {
@@ -538,7 +446,7 @@ class Messages extends Component{
                                                         {
 
                                                             this.state.messages?.map(message =>
-                                                                this.state.user[0].id === message.uid ?
+                                                                store.auth.user.data.id === message.uid ?
                                                                     <div className="message-item flex-end" style={{
                                                                         // display: "flex",
                                                                         boxShadow: "none",
@@ -625,6 +533,7 @@ class Messages extends Component{
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div ref={this.messagesEndRef} />
                                                     </div>
                                                     <div className="wrapper-input">
                                                         <TextareaAutosize
