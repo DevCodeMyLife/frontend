@@ -126,7 +126,7 @@ class App extends React.Component {
                                 })
 
                                 toast.info('Вашу заметку посмотрели.', {
-                                    position: "top-center",
+                                    position: "bottom-right",
                                     autoClose: 5000,
                                     hideProgressBar: true,
                                     closeOnClick: true,
@@ -156,7 +156,7 @@ class App extends React.Component {
                                 })
 
                                 toast.info('Вашу заметку прокомментировали.', {
-                                    position: "top-center",
+                                    position: "bottom-right",
                                     autoClose: 5000,
                                     hideProgressBar: true,
                                     closeOnClick: true,
@@ -184,7 +184,7 @@ class App extends React.Component {
                                     })
 
                                     toast.info('Вам пришло новое сообщение.', {
-                                        position: "top-center",
+                                        position: "bottom-right",
                                         autoClose: 5000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -433,7 +433,7 @@ class App extends React.Component {
                                                 load={true}
                                             />
                                             <ToastContainer
-                                                position="top-center"
+                                                position="bottom-right"
                                                 autoClose={2000}
                                                 hideProgressBar={false}
                                                 newestOnTop={false}

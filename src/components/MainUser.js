@@ -13,6 +13,7 @@ import look_dark from "../icon/look_dark.png";
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
+import {toast} from "react-toastify";
 const gfm = require('remark-gfm')
 
 class MainUsers extends Component {
@@ -55,7 +56,8 @@ class MainUsers extends Component {
         cropImage: null,
         showCrop: false,
         imageRef: null,
-        idPage: this.props.id
+        idPage: this.props.id,
+        loadImage: false
     }
 
 
@@ -611,6 +613,12 @@ class MainUsers extends Component {
     }
 
     makeUpload(){
+
+        // this.setState({
+        //     loadImage: true
+        // })
+
+        const id = toast.loading("Подождите, фотография обрабатывается")
         const data = new FormData();
 
         // console.log(this.state.imageRef)
@@ -633,9 +641,9 @@ class MainUsers extends Component {
         data.append('x_', x1)
         data.append('y_', y1)
 
-        console.log(data)
 
-
+        this.cancelCrop()
+        toast.update(id, { render: "Фотография отправлена на сервер", type: "default", isLoading: true });
         fetch("/api/upload_main_photo", {
             method: "POST",
             body: data
@@ -643,15 +651,27 @@ class MainUsers extends Component {
             .then(response => response.json())
             .then(res => {
                 console.log(res)
+                if (res.status.code === 0) {
+                    this.setState({
+                        imagePreviewUrl: res?.data[0].url_preview
+                    })
 
-                this.setState({
-                    imagePreviewUrl: res?.data[0].url_preview
-                })
-                this.cancelCrop()
+                    toast.update(id, { render: "Фотография успешно обновлена", type: "success", isLoading: false, autoClose: 5000, hideProgressBar: true});
+
+
+                }else{
+                    toast.update(id, { render: "Сервер не смог обработать фотографию", type: "error", isLoading: false, autoClose: 5000, hideProgressBar: true });
+                }
+
+
 
             })
             .catch(error => {
-                console.log(error)
+                this.setState({
+                    loadImage: false
+                })
+                toast.update(id, { render: error, type: "error", isLoading: false, autoClose: 5000, hideProgressBar: true });
+
             });
     }
 
@@ -712,26 +732,33 @@ class MainUsers extends Component {
                         this.state.showCrop ?
                             <div className="pop-up">
                                 <div className="center-view">
-                                    <ReactCrop
-                                        circularCrop={true}
-                                        keepSelection={true}
-                                        minWidth={300}
-                                        minHeight={300}
-                                        src={this.state.src}
-                                        crop={this.state.crop}
-                                        ruleOfThirds
-                                        onImageLoaded={this.onImageLoaded}
-                                        onComplete={this.onCropComplete}
-                                        onChange={this.onCropChange}
-                                    />
-                                    <div className="wrapper-bottom" style={{width: "100%", boxSizing: "border-box", padding: "20px 0"}}>
-                                        <div className="wrapper-flex-start">
-                                            <div className="button-default" onClick={() => this.cancelCrop()}>Отмена</div>
-                                        </div>
-                                        <div className="wrapper-flex-end">
-                                            <div className="button-default" onClick={() => this.makeUpload()}>Сохранить</div>
-                                        </div>
-                                    </div>
+                                    {
+                                        this.state.loadImage ?
+                                            <div className="loader" />
+                                        :
+                                            <div>
+                                                <ReactCrop
+                                                    circularCrop={true}
+                                                    keepSelection={true}
+                                                    minWidth={300}
+                                                    minHeight={300}
+                                                    src={this.state.src}
+                                                    crop={this.state.crop}
+                                                    ruleOfThirds
+                                                    onImageLoaded={this.onImageLoaded}
+                                                    onComplete={this.onCropComplete}
+                                                    onChange={this.onCropChange}
+                                                />
+                                                <div className="wrapper-bottom" style={{width: "100%", boxSizing: "border-box", padding: "20px 0"}}>
+                                                    <div className="wrapper-flex-start">
+                                                        <div className="button-default" onClick={() => this.cancelCrop()}>Отмена</div>
+                                                    </div>
+                                                    <div className="wrapper-flex-end">
+                                                        <div className="button-default" onClick={() => this.makeUpload()}>Сохранить</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    }
                                 </div>
                             </div>
                             :
