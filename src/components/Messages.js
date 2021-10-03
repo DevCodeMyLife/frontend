@@ -315,6 +315,7 @@ class Messages extends Component{
                         cid: cid,
                         dialogTitle: res?.title_dialog,
                         linkUser: res?.id_user,
+                        avatar: res?.avatar,
                         loader: false,
                         load: true
                     })
@@ -399,10 +400,23 @@ class Messages extends Component{
                                     <div className="button-default" onClick={this.allMessage}>
                                         Все диалоги
                                     </div>
-                                    <div className="title-dialog">
-                                        <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser}
-                                           rel="noreferrer">{this.state.dialogTitle}</a>
-                                    </div>
+                                    {
+                                        this.state.dialog ?
+                                            <div>
+                                                <div className="title-dialog">
+                                                    <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser}
+                                                       rel="noreferrer">{this.state.dialogTitle}</a>
+                                                </div>
+                                                <div className="photo-wrapper">
+                                                    <img src={this.state.avatar}
+                                                         alt={this.state.dialogTitle}
+                                                    />
+                                                </div>
+                                            </div>
+                                        :
+                                            null
+                                    }
+
                                 </div>
                             </div>
                             {
