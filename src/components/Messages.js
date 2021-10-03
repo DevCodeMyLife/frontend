@@ -82,11 +82,8 @@ class Messages extends Component{
             });
     }
 
-
-
     unixToDateTime(unixTimestamp) {
-        const milliseconds = unixTimestamp * 1000
-        const dateObject = new Date(milliseconds)
+        const dateObject = new Date(unixTimestamp)
 
         return dateObject.toLocaleString()
     }
@@ -108,6 +105,7 @@ class Messages extends Component{
 
         if (data.value.length > 0 && data.value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1) {
             let mes = {
+                created_at: new Date().getTime(),
                 c_id: this.state.cid,
                 value: value,
                 avatar_url: store.auth.user.data.avatar_url,
@@ -167,6 +165,7 @@ class Messages extends Component{
         }
         if (event.keyCode===13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1){
             let mes = {
+                created_at: new Date().getTime(),
                 c_id: this.state.cid,
                 value: value,
                 avatar_url: store.auth.user.data.avatar_url,
@@ -225,11 +224,13 @@ class Messages extends Component{
                 .then(response => response.json())
                 .then(res => {
                     if (res?.status?.code === 0){
-
-
                         this.setState({
                             messages: res.data.sort(function (x, y){
-                                return x.date_time > y.date_time ? 1 : -1;
+                                return Math.round(
+                                    new Date(x.created_at).getTime() * 1000
+                                ) > Math.round(
+                                    new Date(y.created_at).getTime() * 1000
+                                ) ? 1 : -1;
                             }),
                             dialog: true,
                             cid: this.state.cid,
@@ -304,7 +305,11 @@ class Messages extends Component{
 
                     this.setState({
                         messages: res.data.sort(function (x, y){
-                            return x.date_time > y.date_time ? 1 : -1;
+                            return Math.round(
+                                new Date(x.created_at).getTime() * 1000
+                            ) > Math.round(
+                                new Date(y.created_at).getTime() * 1000
+                            ) ? 1 : -1;
                         }),
                         dialog: true,
                         cid: cid,
@@ -344,7 +349,6 @@ class Messages extends Component{
             });
     }
 
-
     changerPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const cid = urlParams.get('cid');
@@ -364,7 +368,6 @@ class Messages extends Component{
     componentDidMount() {
         this.changerPage()
     }
-
 
     scrollToBottom = () => {
         this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -472,7 +475,13 @@ class Messages extends Component{
                                                                                         </div>
                                                                                     </Link>
                                                                                     <div className="feed-item-datetime">
-                                                                                        {this.unixToDateTime(message?.date_time)}
+                                                                                        {
+                                                                                            new Date(
+                                                                                                Math.round(
+                                                                                                    new Date(message.created_at).getTime() / 1000
+                                                                                                ) * 1000
+                                                                                            ).toLocaleString()
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                                 <p>
@@ -512,7 +521,13 @@ class Messages extends Component{
                                                                                         </div>
                                                                                     </Link>
                                                                                     <div className="feed-item-datetime">
-                                                                                        {this.unixToDateTime(message?.date_time)}
+                                                                                        {
+                                                                                            new Date(
+                                                                                                Math.round(
+                                                                                                    new Date(message.created_at).getTime() / 1000
+                                                                                                ) * 1000
+                                                                                            ).toLocaleString()
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                                 <p>
