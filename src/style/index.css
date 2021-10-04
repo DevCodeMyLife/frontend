@@ -662,6 +662,14 @@ a {
   position: relative;
 }
 
+.view-peer {
+  padding: 10px;
+}
+
+.video-call {
+  margin-top: 20px;
+}
+
 .main-place-photo-column > img {
   max-width: 300px;
   max-height: 300px;

@@ -24,6 +24,9 @@ const initialState = {
             messenger: true,
             feed: true
         }
+    },
+    webRTC: {
+        pc: null
     }
 }
 
@@ -41,6 +44,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_SET_COMPONENTS":
             state.components = action.value
+            return state
+        case "ACTION_SET_WEBRTC":
+            state.webRTC = action.value
             return state
         default:
             return state

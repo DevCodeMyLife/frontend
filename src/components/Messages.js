@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { sha256 } from 'js-sha256';
 import {Link} from "react-navi";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
-import song from "../sound/pop.mp3"
+import video from "../icon/video.png"
+import video_dark from "../icon/video_dark.png"
 
+import song from "../sound/pop.mp3"
 
 
 class Messages extends Component{
@@ -29,7 +32,10 @@ class Messages extends Component{
             data: null,
             dialogTitle: null,
             loader: true,
-            store: this.props.store
+            store: this.props.store,
+            openCall: false,
+            isDark: "light",
+            uidUserPeer: 0
         }
 
 
@@ -37,9 +43,32 @@ class Messages extends Component{
             this.setState(this.state.store.getState())
             this.updateState()
         })
+
+        this.pc1 = null
+        this.pc2 = null
+    }
+
+    getPreferredColorScheme = () => {
+        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+            this.setState({
+                isDark: "dark"
+            })
+        } else {
+            this.setState({
+                isDark: "light"
+            })
+        }
     }
 
     messagesEndRef = React.createRef()
+    videoMain = React.createRef()
+    videoPeer = React.createRef()
+    localStream = null
+    streamConstraints = { "audio": true, "video": true };
+    offerOptions = {
+        offerToReceiveAudio: 1,
+        offerToReceiveVideo: 1
+    }
 
     createMessage = (event) => {
         this.setState({
@@ -252,17 +281,32 @@ class Messages extends Component{
         })
 
         const store = this.state.store.getState()
+        //
+        // // store.webRTC.pc.onicecandidate = this.onIceCandidate
+        // // store.webRTC.pc.onaddstream = this.onRemoteStreamAdded
+        // let this_ = this
+        // store.webRTC.pc.ontrack = function({ streams: [stream] }) {
+        //     this_.videoPeer.srcObject = new MediaStream(stream)
+        //     this_.videoPeer.current.play()
+        // };
+
+        // this.setState({
+        //     openCall: true
+        // })
+
+
+        // this.getUserMedia_click().then(_ => {})
 
         let _this = this
         let path = `/api/messages/${cid}`
 
         window.history.pushState({urlPath:`/messages?cid=${cid}`},"",`/messages?cid=${cid}`)
 
-        let cent_channel = store.centrifuge.object.subscribe(cid, function (message) {
+        let cent_channel = store.centrifuge.object.subscribe(cid, async function (message) {
             let data = _this.state.messages
 
-            if (message.data?.input?.typing !== store.auth.user.data.login){
-                if (message.data?.input?.typing){
+            if (message.data?.input?.typing !== store.auth.user.data.login) {
+                if (message.data?.input?.typing) {
                     _this.setState({
                         typing: `${message?.data?.input?.typing} набирает сообщение.`
                     })
@@ -271,19 +315,54 @@ class Messages extends Component{
                         setTimeout(() => {
                             document.getElementById("hide-typing").style.display = "none"
                         }, 5000)
-                    } catch (err){
+                    } catch (err) {
                         console.error(err)
                     }
                 }
             }
 
-            if (message?.data?.login){
-                if (message?.data?.login !== store.auth.user.data.login){
+            switch (message?.data?.type) {
+                case "offer":
+                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID)
+                        console.log(message?.data?.offer)
+                    _this.setState({
+                        uidUserPeer: message?.data?.uid
+                    })
+                    _this.onOffer(message?.data?.offer);
+                    break;
+
+                case "answer":
+                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
+                        console.log(message?.data?.answer)
+                        await store.webRTC.pc.setRemoteDescription(data.answer)
+                    }
+                    break;
+
+                case "candidate":
+                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
+                        console.log(message?.data?.candidate)
+                        if (message?.data?.candidate)
+                            await store.webRTC.pc.addIceCandidate(message?.data?.candidate)
+                    }
+                    break;
+                case "crypto_id":
+                    if (message?.data?.uid !== _this.state.uidUserPeerMainUUID && message?.data?.uid) {
+                        console.log(message?.data?.uid)
+                        _this.setState({
+                            uidUserPeer: message?.data?.uid
+                        })
+                    }
+                    break;
+            }
+
+
+            if (message?.data?.login) {
+                if (message?.data?.login !== store.auth.user.data.login) {
                     _this.state.context.resume().then(() => {
                         _this.state.audio.play();
                     });
                 }
-                if (message.data.uid !== store.auth.user.data.id){
+                if (message.data.uid !== store.auth.user.data.id) {
                     data.push(message?.data)
                     _this.setState({messages: data})
                     _this.scrollToBottom();
@@ -291,9 +370,13 @@ class Messages extends Component{
             }
         })
 
+
+
+
         this.setState({
             cent_channel: cent_channel
         })
+
 
         fetch(path, {
             method: "GET"
@@ -367,11 +450,183 @@ class Messages extends Component{
     }
 
     componentDidMount() {
+        const store = this.state.store.getState()
+
+        this.getPreferredColorScheme()
+        let _this = this
+
+        _this.setState({
+            uidUserPeerMainUUID: sha256(store.auth.user.data.login)
+        })
+
+
+
+        let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (event) => {
+            this.getPreferredColorScheme()
+        });
+
         this.changerPage()
     }
 
     scrollToBottom = () => {
         this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    async start(e) {
+        const store = this.state.store.getState()
+
+        this.setState({
+            openCall: !this.state.openCall
+        })
+        await this.getUserMedia_click()
+
+        console.log(this.state.uidUserPeerMainUUID)
+        setInterval(() => {
+            this.state.cent_channel.publish(
+                {
+                    type: "crypto_id",
+                    uid: this.state.uidUserPeerMainUUID
+                }).then(
+                function() {
+                    // success ack from Centrifugo received
+                }, function(err) {
+                    // publish call failed with error
+                }
+            );
+        }, 5000)
+
+    }
+
+
+
+    async call(e) {
+        const store = this.state.store.getState()
+        const videoTracks = this.localStream.getVideoTracks();
+        const audioTracks = this.localStream.getAudioTracks();
+
+        if (videoTracks.length > 0) {
+            console.log(`Using video device: ${videoTracks[0].label}`);
+        }
+        if (audioTracks.length > 0) {
+            console.log(`Using audio device: ${audioTracks[0].label}`);
+        }
+
+        let this_ = this
+
+        store.webRTC.pc.ontrack = function (event){
+            console.log(event)
+            if (event){
+                this_.videoPeer.current.srcObject = event.streams[0]
+                this_.videoPeer.current.play()
+            }
+        }
+
+        this_.videoMain.onloadedmetadata = function() {
+            console.log(`Local video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
+        };
+
+        this_.videoPeer.onloadedmetadata = function() {
+            console.log(`Remote video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
+        };
+
+        store.webRTC.pc.onicecandidate = function (event){
+            if (event.candidate) {
+                this_.state.cent_channel.publish({
+                    type: "candidate",
+                    candidate: event.candidate,
+                    uid: this_.state.uidUserPeer
+                }).then(
+                    function() {
+                        // success ack from Centrifugo received
+                    }, function(err) {
+                        // publish call failed with error
+                    }
+                );
+            } else {
+                // All ICE candidates have been sent
+            }
+        }
+
+        this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+
+
+
+        this.createOffer()
+    }
+
+    createOffer(pc) {
+        const store = this.state.store.getState()
+        let _this = this
+        store.webRTC.pc.createOffer((offer) => {
+            _this.state.cent_channel.publish(
+                {
+                    type: "offer",
+                    offer: offer,
+                    uid: _this.state.uidUserPeer
+                }).then(
+                function() {
+                    // success ack from Centrifugo received
+                }, function(err) {
+                    // publish call failed with error
+                }
+            );
+
+                store.webRTC.pc.setLocalDescription(offer)
+                    .then(r => {
+                        console.log(r)
+                    })
+            }, (error) => {
+                console.log(error)
+            })
+    }
+
+    onOffer(message) {
+        const store = this.state.store.getState()
+        let this_ = this
+        store.webRTC.pc.setRemoteDescription(message)
+            .then(offer => {
+                store.webRTC.pc.createAnswer(offer)
+                    .then(answer => {
+                        this.state.cent_channel.publish(
+                            {
+                                type: "answer",
+                                answer: answer,
+                                uid: this_.state.uidUserPeer
+                            }).then(
+                            function () {
+                                // success ack from Centrifugo received
+                            }, function (err) {
+                                // publish call failed with error
+                            }
+                        );
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    getUserMedia_success(stream) {
+        this.videoMain.current.srcObject = new MediaStream(stream)
+        this.videoMain.current.play()
+
+        this.localStream = stream
+    }
+
+    getUserRemote(stream) {
+        console.log(stream)
+        this.videoPeer.current.srcObject = new MediaStream(stream)
+        this.videoPeer.current.play()
+        this.localStream = stream
+    }
+
+    async getUserMedia_click() {
+        const stream = await navigator.mediaDevices.getUserMedia(this.streamConstraints);
+        this.getUserMedia_success(stream)
     }
 
     render() {
@@ -406,17 +661,41 @@ class Messages extends Component{
                                     </div>
                                     {
                                         this.state.dialog ?
-                                            <div className="photo-wrapper">
-                                                <img src={this.state.avatar}
-                                                     alt={this.state.dialogTitle}
-                                                     style={{ maxWidth: "28px" }}
-                                                />
+                                            <div>
+                                                <div className="button-default" onClick={(e)=> this.call(e)}>
+                                                    call
+                                                </div>
+                                                <div className="button-default" onClick={(e)=> this.start(e)}>
+                                                    {
+                                                        this.state.isDark === "light" ?
+                                                            <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>
+                                                        :
+                                                            <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>
+                                                    }
+                                                </div>
+                                                <div className="photo-wrapper">
+                                                    <img src={this.state.avatar}
+                                                         alt={this.state.dialogTitle}
+                                                         style={{ maxWidth: "28px" }}
+                                                    />
+                                                </div>
                                             </div>
                                         :
                                             null
                                     }
 
                                 </div>
+                                {
+                                    this.state.openCall ?
+                                        <div className="video-call">
+                                            <div className="view-peer">
+                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} style={{width: "50%"}} />
+                                                <video ref={this.videoPeer} autoPlay={true} controls={false} style={{width: "50%"}} />
+                                            </div>
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                             {
                                 this.state.loader ?

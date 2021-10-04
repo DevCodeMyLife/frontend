@@ -31,7 +31,7 @@ const store = createStore(AppReducer);
 
 
 const CONFIG = {
-    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
+    url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : document.location.host === "192.168.100.5" ? `ws://192.168.100.5/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
 };
 
 let auth = false
@@ -72,6 +72,21 @@ class App extends React.Component {
                                 token: res?.token,
                                 error: null
                             },
+                        }
+                    })
+
+                    store.dispatch({
+                        type: "ACTION_SET_WEBRTC", value: {
+                            pc: new RTCPeerConnection(
+                                {
+                                    iceServers: [
+                                        {
+                                            urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302']
+                                        }
+                                    ]
+                                }
+                            ),
+
                         }
                     })
 

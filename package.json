@@ -61,6 +61,7 @@
     "axios": "^0.21.1",
     "gitlab-auth": "^0.1.8",
     "jquery": "^3.6.0",
+    "js-sha256": "^0.9.0",
     "prop-types": "^15.7.2",
     "react-datepicker": "^4.2.1",
     "react-document-meta": "^3.0.0-beta.2",

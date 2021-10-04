@@ -713,6 +713,8 @@ class MainUsers extends Component {
 
 
         const store = this.state.store.getState()
+
+        console.log(store)
         if (!store.components.settings.main_page){
             return (
                 <div className="content-wall-views">
