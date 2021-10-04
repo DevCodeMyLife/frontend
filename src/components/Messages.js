@@ -324,25 +324,30 @@ class Messages extends Component{
             switch (message?.data?.type) {
                 case "offer":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID)
-                        console.log(message?.data?.offer)
-                    _this.setState({
-                        uidUserPeer: message?.data?.uid
-                    })
-                    _this.onOffer(message?.data?.offer);
+                        // console.log(message?.data?.offer)
+                        message?.data?.offer && await _this.onOffer(message?.data?.offer);
                     break;
 
                 case "answer":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-                        console.log(message?.data?.answer)
-                        await store.webRTC.pc.setRemoteDescription(data.answer)
+                        // console.log(message?.data?.answer)
+                        message?.data?.answer && await store.webRTC.pc.setRemoteDescription(new RTCSessionDescription(message?.data?.answer))
                     }
                     break;
 
                 case "candidate":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-                        console.log(message?.data?.candidate)
-                        if (message?.data?.candidate)
-                            await store.webRTC.pc.addIceCandidate(message?.data?.candidate)
+
+                        // ICE candidate configuration.
+                        let candidate = new RTCIceCandidate({
+                            sdpMLineIndex: message?.data?.label,
+                            candidate: message?.data?.candidate,
+                        })
+
+
+                        await store.webRTC.pc.addIceCandidate(candidate)
+                        console.log(candidate)
+                        console.log(store.webRTC.pc.signalingState)
                     }
                     break;
                 case "crypto_id":
@@ -503,39 +508,25 @@ class Messages extends Component{
 
     async call(e) {
         const store = this.state.store.getState()
-        const videoTracks = this.localStream.getVideoTracks();
-        const audioTracks = this.localStream.getAudioTracks();
-
-        if (videoTracks.length > 0) {
-            console.log(`Using video device: ${videoTracks[0].label}`);
-        }
-        if (audioTracks.length > 0) {
-            console.log(`Using audio device: ${audioTracks[0].label}`);
-        }
 
         let this_ = this
 
         store.webRTC.pc.ontrack = function (event){
             console.log(event)
-            if (event){
-                this_.videoPeer.current.srcObject = event.streams[0]
-                this_.videoPeer.current.play()
-            }
+
+            this_.videoPeer.current.srcObject = event.streams[0]
+            this_.videoPeer.current.play()
+
+            // let remoteStreams = ev.streams
+            // this.videoPeer.srcObject = remoteStreams[0]
         }
 
-        this_.videoMain.onloadedmetadata = function() {
-            console.log(`Local video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
-        };
-
-        this_.videoPeer.onloadedmetadata = function() {
-            console.log(`Remote video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
-        };
 
         store.webRTC.pc.onicecandidate = function (event){
-            if (event.candidate) {
-                this_.state.cent_channel.publish({
+            event.candidate && this_.state.cent_channel.publish({
                     type: "candidate",
-                    candidate: event.candidate,
+                    label: event.candidate.sdpMLineIndex,
+                    candidate: event.candidate.candidate,
                     uid: this_.state.uidUserPeer
                 }).then(
                     function() {
@@ -544,71 +535,78 @@ class Messages extends Component{
                         // publish call failed with error
                     }
                 );
-            } else {
-                // All ICE candidates have been sent
+            console.log(store.webRTC.pc.signalingState)
+        }
+
+        store.webRTC.pc.onnegotiationneeded = async () => {
+            await this.createOffer();
+        }
+
+        store.webRTC.pc.onconnectionstatechange = function (event){
+            console.log(store.webRTC.pc.connectionState)
+            if (store.webRTC.pc.connectionState === 'connected') {
+                // Peers connected!
             }
         }
 
+
+
         this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
 
-
-
-        this.createOffer()
     }
 
-    createOffer(pc) {
+    async createOffer(){
+        let this_ = this
         const store = this.state.store.getState()
-        let _this = this
-        store.webRTC.pc.createOffer((offer) => {
-            _this.state.cent_channel.publish(
+
+        let offer
+        try {
+            offer = await store.webRTC.pc.createOffer()
+            await store.webRTC.pc.setLocalDescription(offer)
+
+            console.log("create offer", offer)
+            this.state.cent_channel.publish(
                 {
                     type: "offer",
-                    offer: offer,
-                    uid: _this.state.uidUserPeer
+                    offer: store.webRTC.pc.localDescription,
+                    uid: this_.state.uidUserPeer
                 }).then(
-                function() {
+                function () {
                     // success ack from Centrifugo received
-                }, function(err) {
+                }, function (err) {
                     // publish call failed with error
                 }
-            );
-
-                store.webRTC.pc.setLocalDescription(offer)
-                    .then(r => {
-                        console.log(r)
-                    })
-            }, (error) => {
-                console.log(error)
-            })
+            )
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    onOffer(message) {
+
+    async onOffer(event) {
         const store = this.state.store.getState()
         let this_ = this
-        store.webRTC.pc.setRemoteDescription(message)
-            .then(offer => {
-                store.webRTC.pc.createAnswer(offer)
-                    .then(answer => {
-                        this.state.cent_channel.publish(
-                            {
-                                type: "answer",
-                                answer: answer,
-                                uid: this_.state.uidUserPeer
-                            }).then(
-                            function () {
-                                // success ack from Centrifugo received
-                            }, function (err) {
-                                // publish call failed with error
-                            }
-                        );
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            })
-            .catch(err => {
-                console.log(err)
-            })
+
+        await store.webRTC.pc.setRemoteDescription(event)
+
+        // if (store.webRTC.pc.signalingState !== 'stable') {
+            let answer = await store.webRTC.pc.createAnswer()
+            await store.webRTC.pc.setLocalDescription(answer)
+
+            console.log(store.webRTC.pc.localDescription)
+
+            this.state.cent_channel.publish({
+                    type: "answer",
+                    answer: store.webRTC.pc.localDescription,
+                    uid: this_.state.uidUserPeer
+                }).then(
+                function () {
+                    // success ack from Centrifugo received
+                }, function (err) {
+                    // publish call failed with error
+                }
+            )
+        // }
     }
 
     getUserMedia_success(stream) {
