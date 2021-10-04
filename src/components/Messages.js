@@ -8,6 +8,7 @@ import video from "../icon/video.png"
 import video_dark from "../icon/video_dark.png"
 
 import song from "../sound/pop.mp3"
+import
 
 
 class Messages extends Component{
@@ -353,6 +354,8 @@ class Messages extends Component{
                         })
                     }
                     break;
+                default:
+                    console.log(0)
             }
 
 
@@ -474,7 +477,6 @@ class Messages extends Component{
     }
 
     async start(e) {
-        const store = this.state.store.getState()
 
         this.setState({
             openCall: !this.state.openCall
