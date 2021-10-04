@@ -8,7 +8,6 @@ import video from "../icon/video.png"
 import video_dark from "../icon/video_dark.png"
 
 import song from "../sound/pop.mp3"
-import
 
 
 class Messages extends Component{
