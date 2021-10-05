@@ -57,7 +57,8 @@ class MainUsers extends Component {
         showCrop: false,
         imageRef: null,
         idPage: this.props.id,
-        loadImage: false
+        loadImage: false,
+        clickCreateDialog: false
     }
 
 
@@ -507,6 +508,9 @@ class MainUsers extends Component {
   }
 
   createChat = event => {
+      this.setState({
+          clickCreateDialog: true
+      })
     let data = {
       to_uid: Number(this.state.id)
     }
@@ -900,9 +904,15 @@ class MainUsers extends Component {
 
                                             {
                                                 Number(this.state.id) !== store.auth.user.data.id ?
-                                                    <div className="button-default" onClick={this.createChat}>
-                                                        Написать сообщение
-                                                    </div>
+
+                                                        this.state.clickCreateDialog ?
+                                                            <div>
+                                                                <div className="loader-small" />
+                                                            </div>
+                                                        :
+                                                            <div className="button-default" onClick={this.createChat}>
+                                                                Написать сообщение
+                                                            </div>
                                                     :
                                                     null
                                             }
