@@ -662,8 +662,22 @@ a {
   position: relative;
 }
 
+.view-call-now {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 200px;
+  background: var(--bg-grey);
+  border: var(--button_border);
+}
+
 .view-peer {
   padding: 10px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .video-call {

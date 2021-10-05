@@ -335,6 +335,17 @@ class Messages extends Component{
                     }
                     break;
 
+                case "connected":
+                    await _this.call()
+                    _this.videoMain.current.style.position = "absolute"
+                    _this.videoMain.current.style.width = "20%"
+                    _this.videoMain.current.style.left = "20px"
+                    _this.videoMain.current.style.bottom = "20px"
+
+
+                    _this.videoPeer.current.style.display = "block"
+                    break;
+
                 case "candidate":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
 
@@ -542,10 +553,29 @@ class Messages extends Component{
             await this.createOffer();
         }
 
-        store.webRTC.pc.onconnectionstatechange = function (event){
+        store.webRTC.pc.onconnectionstatechange = async function (event) {
             console.log(store.webRTC.pc.connectionState)
             if (store.webRTC.pc.connectionState === 'connected') {
-                // Peers connected!
+                // await this_.createOffer();
+                this_.videoMain.current.style.position = "absolute"
+                this_.videoMain.current.style.width = "20%"
+                this_.videoMain.current.style.left = "20px"
+                this_.videoMain.current.style.bottom = "20px"
+
+
+                this_.videoPeer.current.style.display = "block"
+
+                this_.state.cent_channel.publish(
+                    {
+                        type: "connected",
+                        uid: this_.state.uidUserPeer
+                    }).then(
+                    function () {
+                        // success ack from Centrifugo received
+                    }, function (err) {
+                        // publish call failed with error
+                    }
+                )
             }
         }
 
@@ -589,7 +619,7 @@ class Messages extends Component{
 
         await store.webRTC.pc.setRemoteDescription(event)
 
-        // if (store.webRTC.pc.signalingState !== 'stable') {
+        if (store.webRTC.pc.signalingState !== 'stable') {
             let answer = await store.webRTC.pc.createAnswer()
             await store.webRTC.pc.setLocalDescription(answer)
 
@@ -606,7 +636,9 @@ class Messages extends Component{
                     // publish call failed with error
                 }
             )
-        // }
+        }else{
+
+        }
     }
 
     getUserMedia_success(stream) {
@@ -661,17 +693,25 @@ class Messages extends Component{
                                     {
                                         this.state.dialog ?
                                             <div>
-                                                <div className="button-default" onClick={(e)=> this.call(e)}>
-                                                    call
-                                                </div>
-                                                <div className="button-default" onClick={(e)=> this.start(e)}>
-                                                    {
-                                                        this.state.isDark === "light" ?
-                                                            <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>
-                                                        :
-                                                            <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>
-                                                    }
-                                                </div>
+                                                {
+                                                    store.auth.user.data.testing ?
+                                                        <div>
+                                                            <div className="button-default" onClick={(e)=> this.call(e)}>
+                                                                call
+                                                            </div>
+                                                            <div className="button-default" onClick={(e)=> this.start(e)}>
+                                                                {
+                                                                    this.state.isDark === "light" ?
+                                                                        <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>
+                                                                        :
+                                                                        <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    :
+                                                        null
+                                                }
+
                                                 <div className="photo-wrapper">
                                                     <img src={this.state.avatar}
                                                          alt={this.state.dialogTitle}
@@ -688,8 +728,8 @@ class Messages extends Component{
                                     this.state.openCall ?
                                         <div className="video-call">
                                             <div className="view-peer">
-                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} style={{width: "50%"}} />
-                                                <video ref={this.videoPeer} autoPlay={true} controls={false} style={{width: "50%"}} />
+                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />
+                                                <video ref={this.videoPeer} autoPlay={true} controls={false} style={{display: "none"}} />
                                             </div>
                                         </div>
                                         :

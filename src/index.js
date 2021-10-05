@@ -26,6 +26,7 @@ import ruvds from "./icon/ruvds.png";
 import People from "./components/People";
 import AppReducer from "./components/reducers/common"
 import Agreement from "./components/Agreement";
+import Call from "./components/Call";
 
 const store = createStore(AppReducer);
 
@@ -467,6 +468,7 @@ class App extends React.Component {
                                                 draggable
                                                 pauseOnHover
                                             />
+                                            <Call store={store} />
                                             {
                                                 window.location.pathname === "/" ?
                                                     // <div className="personal_data_accept-block full-width">
