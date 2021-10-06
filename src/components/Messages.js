@@ -522,7 +522,6 @@ class Messages extends Component{
 
         let this_ = this
 
-        this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
 
         store.webRTC.pc.ontrack = function (event){
             console.log(event)
@@ -552,6 +551,8 @@ class Messages extends Component{
         }
 
         store.webRTC.pc.onnegotiationneeded = async () => {
+            // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+            await this.openCall(this.localStream)
             await this.createOffer();
         }
 
@@ -585,6 +586,14 @@ class Messages extends Component{
 
 
 
+    }
+
+    async openCall(gumStream) {
+        const store = this.state.store.getState()
+
+        for (const track of gumStream.getTracks()) {
+            store.webRTC.pc.addTrack(track);
+        }
     }
 
     async createOffer(){
