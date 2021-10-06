@@ -64,10 +64,10 @@ class Messages extends Component{
     videoMain = React.createRef()
     videoPeer = React.createRef()
     localStream = null
-    streamConstraints = { "audio": true, "video": true };
+    streamConstraints = { "audio": true, "video": false };
     offerOptions = {
         offerToReceiveAudio: 1,
-        offerToReceiveVideo: 1
+        offerToReceiveVideo: 0
     }
 
     createMessage = (event) => {
@@ -336,14 +336,9 @@ class Messages extends Component{
                     break;
 
                 case "connected":
-                    await _this.call()
-                    _this.videoMain.current.style.position = "absolute"
-                    _this.videoMain.current.style.width = "20%"
-                    _this.videoMain.current.style.left = "20px"
-                    _this.videoMain.current.style.bottom = "20px"
-
-
-                    _this.videoPeer.current.style.display = "block"
+                    if (message?.data?.uid !== _this.state.uidUserPeerMainUUID) {
+                        await _this.call()
+                    }
                     break;
 
                 case "candidate":
@@ -467,8 +462,112 @@ class Messages extends Component{
         }
     }
 
+    async getMediaStream(){
+
+
+        //  Старые браузеры не поддерживают новое свойство mediaDevices
+        //  По этому сначала присваиваем пустой объект
+
+        if (navigator.mediaDevices === undefined) {
+            navigator.mediaDevices = {};
+        }
+
+        if (navigator.mediaDevices.getUserMedia === undefined) {
+            navigator.mediaDevices.getUserMedia = function(constraints) {
+
+                var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+                if (!getUserMedia) {
+                    return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+                }
+
+                return new Promise(function(resolve, reject) {
+                    getUserMedia.call(navigator, constraints, resolve, reject);
+                });
+            }
+        }
+
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+
+        if (this.videoMain.current.srcObject !== undefined) {
+            this.videoMain.current.srcObject = stream
+            this.videoMain.current.play()
+
+            this.localStream = stream
+
+        }else{
+            return Promise.reject(new Error('object is not have srcObject'));
+        }
+
+    };
+
     componentDidMount() {
         const store = this.state.store.getState()
+        let this_ = this
+
+
+        store.webRTC.pc.ontrack = function (event){
+            console.log(event)
+
+            this_.videoPeer.current.srcObject = event.streams[0]
+            this_.videoPeer.current.play()
+
+            // let remoteStreams = ev.streams
+            // this.videoPeer.srcObject = remoteStreams[0]
+        }
+
+
+        store.webRTC.pc.onicecandidate = function (event){
+
+            event.candidate && this_.state.cent_channel.publish({
+                type: "candidate",
+                label: event.candidate.sdpMLineIndex,
+                candidate: event.candidate.candidate,
+                uid: this_.state.uidUserPeer
+            }).then(
+                function() {
+                    // success ack from Centrifugo received
+                }, function(err) {
+                    // publish call failed with error
+                }
+            );
+            console.log(store.webRTC.pc.signalingState)
+        }
+
+        // // store.webRTC.pc.onnegotiationneeded = async () => {
+        // //     // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+        // //
+        // // }
+        //
+        store.webRTC.pc.onconnectionstatechange = async function (event) {
+            console.log(store.webRTC.pc.connectionState)
+            if (store.webRTC.pc.connectionState === 'connected') {
+                // await this_.createOffer();
+                // await this_.openCall(this_.localStream)
+                // // await this_.createOffer();
+                // this_.videoMain.current.style.position = "absolute"
+                // this_.videoMain.current.style.width = "20%"
+                // this_.videoMain.current.style.left = "20px"
+                // this_.videoMain.current.style.bottom = "20px"
+                //
+                //
+                // this_.videoPeer.current.style.display = "block"
+
+                this_.state.cent_channel.publish(
+                    {
+                        type: "connected",
+                        uid: this_.state.uidUserPeer
+                    }).then(
+                    function () {
+                        // success ack from Centrifugo received
+                    }, function (err) {
+                        // publish call failed with error
+                    }
+                )
+            }
+        }
+
+
 
         this.getPreferredColorScheme()
         let _this = this
@@ -496,7 +595,9 @@ class Messages extends Component{
         this.setState({
             openCall: !this.state.openCall
         })
-        await this.getUserMedia_click()
+        // await this.getUserMedia_click()
+
+        await this.getMediaStream()
 
         console.log(this.state.uidUserPeerMainUUID)
         setInterval(() => {
@@ -518,75 +619,8 @@ class Messages extends Component{
 
 
     async call(e) {
-        const store = this.state.store.getState()
-
-        let this_ = this
-
-
-        store.webRTC.pc.ontrack = function (event){
-            console.log(event)
-
-            this_.videoPeer.current.srcObject = event.streams[0]
-            this_.videoPeer.current.play()
-
-            // let remoteStreams = ev.streams
-            // this.videoPeer.srcObject = remoteStreams[0]
-        }
-
-
-        store.webRTC.pc.onicecandidate = function (event){
-            event.candidate && this_.state.cent_channel.publish({
-                    type: "candidate",
-                    label: event.candidate.sdpMLineIndex,
-                    candidate: event.candidate.candidate,
-                    uid: this_.state.uidUserPeer
-                }).then(
-                    function() {
-                        // success ack from Centrifugo received
-                    }, function(err) {
-                        // publish call failed with error
-                    }
-                );
-            console.log(store.webRTC.pc.signalingState)
-        }
-
-        // store.webRTC.pc.onnegotiationneeded = async () => {
-        //     // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
-        //
-        // }
-
-        store.webRTC.pc.onconnectionstatechange = async function (event) {
-            console.log(store.webRTC.pc.connectionState)
-            if (store.webRTC.pc.connectionState === 'connected') {
-                await this_.openCall(this_.localStream)
-                // // await this_.createOffer();
-                // this_.videoMain.current.style.position = "absolute"
-                // this_.videoMain.current.style.width = "20%"
-                // this_.videoMain.current.style.left = "20px"
-                // this_.videoMain.current.style.bottom = "20px"
-                //
-                //
-                // this_.videoPeer.current.style.display = "block"
-                //
-                // this_.state.cent_channel.publish(
-                //     {
-                //         type: "connected",
-                //         uid: this_.state.uidUserPeer
-                //     }).then(
-                //     function () {
-                //         // success ack from Centrifugo received
-                //     }, function (err) {
-                //         // publish call failed with error
-                //     }
-                // )
-            }
-        }
-
-
-
-        await this_.openCall(this_.localStream)
+        await this.openCall(this.localStream)
         await this.createOffer();
-
     }
 
     async openCall(gumStream) {
@@ -708,7 +742,7 @@ class Messages extends Component{
                                                 {
                                                     store.auth.user.data.testing ?
                                                         <div>
-                                                            <div className="button-default" onClick={(e)=> this.call(e)}>
+                                                            <div className="button-default" onClick={(e)=> {this.call(e)}}>
                                                                 call
                                                             </div>
                                                             <div className="button-default" onClick={(e)=> this.start(e)}>
@@ -740,8 +774,10 @@ class Messages extends Component{
                                     this.state.openCall ?
                                         <div className="video-call">
                                             <div className="view-peer">
-                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />
-                                                <video ref={this.videoPeer} autoPlay={true} controls={false} style={{display: "none"}} />
+                                                <audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>
+                                                <audio ref={this.videoPeer} autoPlay={true} controls={true}/>
+                                                {/*<video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />*/}
+                                                {/*<video ref={this.videoPeer} autoPlay={true} controls={false} style={{display: "none"}} />*/}
                                             </div>
                                         </div>
                                         :
