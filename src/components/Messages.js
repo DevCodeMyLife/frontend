@@ -584,7 +584,7 @@ class Messages extends Component{
 
 
 
-
+        await this_.openCall(this_.localStream)
         await this.createOffer();
 
     }
