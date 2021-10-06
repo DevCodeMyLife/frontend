@@ -550,11 +550,10 @@ class Messages extends Component{
             console.log(store.webRTC.pc.signalingState)
         }
 
-        store.webRTC.pc.onnegotiationneeded = async () => {
-            // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
-            await this.openCall(this.localStream)
-            await this.createOffer();
-        }
+        // store.webRTC.pc.onnegotiationneeded = async () => {
+        //     // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+        //
+        // }
 
         store.webRTC.pc.onconnectionstatechange = async function (event) {
             console.log(store.webRTC.pc.connectionState)
@@ -584,7 +583,8 @@ class Messages extends Component{
 
 
 
-
+        await this.openCall(this.localStream)
+        await this.createOffer();
 
     }
 
