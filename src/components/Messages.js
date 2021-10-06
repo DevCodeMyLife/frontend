@@ -487,7 +487,7 @@ class Messages extends Component{
             }
         }
 
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
 
         if (this.videoMain.current.srcObject !== undefined) {
             this.videoMain.current.srcObject = stream
@@ -774,10 +774,10 @@ class Messages extends Component{
                                     this.state.openCall ?
                                         <div className="video-call">
                                             <div className="view-peer">
-                                                <audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>
-                                                <audio ref={this.videoPeer} autoPlay={true} controls={true}/>
-                                                {/*<video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />*/}
-                                                {/*<video ref={this.videoPeer} autoPlay={true} controls={false} style={{display: "none"}} />*/}
+                                                {/*<audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>*/}
+                                                {/*<audio ref={this.videoPeer} autoPlay={true} controls={true}/>*/}
+                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />
+                                                <video ref={this.videoPeer} autoPlay={true} controls={false}  />
                                             </div>
                                         </div>
                                         :
