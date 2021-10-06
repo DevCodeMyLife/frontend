@@ -22,6 +22,7 @@
     --font-color: #000000;
     --button_border: #dcdcdc;
     --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+    --view-shadow-call: 0 0 100px -36px #000;
   }
 
   meta[name="theme-color"] {
@@ -155,7 +156,7 @@ code {
   justify-content: center;
   align-items: center;
   z-index: 4;
-  background: var(--bg-grey);
+  background: var(--hover);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -663,12 +664,80 @@ a {
 }
 
 .view-call-now {
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-  width: 200px;
+  padding: 40px;
   background: var(--bg-grey);
-  border: var(--button_border);
+  box-shadow: var(--view-shadow-call);
+  border-radius: 5px;
+}
+
+.video-view-main {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  /*border: 1px solid #fafafa;*/
+}
+
+.video-width {
+  position: relative;
+  min-width: 640px;
+  min-height: 520px;
+
+  max-width: 700px;
+  max-height: 700px;
+}
+
+.background-green {
+  background: #07bc0c;
+}
+
+.background-red {
+  background: #e74c3c;
+}
+
+.margin-top {
+  margin-top: 40px;
+}
+
+@-webkit-keyframes glow {
+  to {
+    -webkit-box-shadow: 0 0 25px var(--logo);
+    -moz-box-shadow: 0 0 25px var(--logo);
+    box-shadow: 0 0 25px var(--logo);
+  }
+}
+
+.video-view-peer {
+  /*display: none;*/
+}
+
+.round-animate {
+  -webkit-animation: glow 1.0s infinite alternate;
+  -webkit-transition: border 1.0s linear, box-shadow 1.0s linear;
+  -moz-transition: border 1.0s linear, box-shadow 1.0s linear;
+  transition: border 1.0s linear, box-shadow 1.0s linear;
+}
+
+.button-round {
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.button-round:active {
+  transform: scale(.9);
+}
+
+.view-image-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-user-src-standard {
+  border-radius: 50%;
+  max-width: 200px;
 }
 
 .view-peer {
@@ -1055,6 +1124,22 @@ p {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+.view-flex {
+  display: flex;
+}
+
+.view-flex-start {
+  display: flex;
+  width: 100%;
+  align-content: flex-start;
+}
+
+.view-flex-end {
+  display: flex;
+  width: 100%;
+  align-content: flex-end;
 }
 
 .wrapper-maker-message-input > * {

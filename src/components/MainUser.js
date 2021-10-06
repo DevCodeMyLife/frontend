@@ -713,13 +713,11 @@ class MainUsers extends Component {
     }
 
   render(){
-        let {isLoaded, textNews, mainFeed, clicked_new_post } = this.state;
+        let { isLoaded, textNews, mainFeed, clicked_new_post } = this.state;
 
 
         const store = this.state.store.getState()
-
-        console.log(store)
-        if (!store.components.settings.main_page){
+       if (!store.components.settings.main_page){
             return (
                 <div className="content-wall-views">
                     <div className="feed-wrapper">

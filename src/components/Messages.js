@@ -522,11 +522,13 @@ class Messages extends Component{
 
         let this_ = this
 
+        this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+
         store.webRTC.pc.ontrack = function (event){
             console.log(event)
 
             this_.videoPeer.current.srcObject = event.streams[0]
-            this_.videoPeer.current.play()
+            // this_.videoPeer.current.play()
 
             // let remoteStreams = ev.streams
             // this.videoPeer.srcObject = remoteStreams[0]
@@ -581,7 +583,7 @@ class Messages extends Component{
 
 
 
-        this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+
 
     }
 
