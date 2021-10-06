@@ -558,26 +558,26 @@ class Messages extends Component{
         store.webRTC.pc.onconnectionstatechange = async function (event) {
             console.log(store.webRTC.pc.connectionState)
             if (store.webRTC.pc.connectionState === 'connected') {
-                // await this_.createOffer();
-                this_.videoMain.current.style.position = "absolute"
-                this_.videoMain.current.style.width = "20%"
-                this_.videoMain.current.style.left = "20px"
-                this_.videoMain.current.style.bottom = "20px"
-
-
-                this_.videoPeer.current.style.display = "block"
-
-                this_.state.cent_channel.publish(
-                    {
-                        type: "connected",
-                        uid: this_.state.uidUserPeer
-                    }).then(
-                    function () {
-                        // success ack from Centrifugo received
-                    }, function (err) {
-                        // publish call failed with error
-                    }
-                )
+                // // await this_.createOffer();
+                // this_.videoMain.current.style.position = "absolute"
+                // this_.videoMain.current.style.width = "20%"
+                // this_.videoMain.current.style.left = "20px"
+                // this_.videoMain.current.style.bottom = "20px"
+                //
+                //
+                // this_.videoPeer.current.style.display = "block"
+                //
+                // this_.state.cent_channel.publish(
+                //     {
+                //         type: "connected",
+                //         uid: this_.state.uidUserPeer
+                //     }).then(
+                //     function () {
+                //         // success ack from Centrifugo received
+                //     }, function (err) {
+                //         // publish call failed with error
+                //     }
+                // )
             }
         }
 
