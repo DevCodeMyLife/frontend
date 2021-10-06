@@ -558,6 +558,7 @@ class Messages extends Component{
         store.webRTC.pc.onconnectionstatechange = async function (event) {
             console.log(store.webRTC.pc.connectionState)
             if (store.webRTC.pc.connectionState === 'connected') {
+                await this_.openCall(this_.localStream)
                 // // await this_.createOffer();
                 // this_.videoMain.current.style.position = "absolute"
                 // this_.videoMain.current.style.width = "20%"
@@ -583,7 +584,7 @@ class Messages extends Component{
 
 
 
-        await this.openCall(this.localStream)
+
         await this.createOffer();
 
     }
