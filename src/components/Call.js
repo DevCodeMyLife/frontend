@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import { sha256 } from 'js-sha256';
+// import { sha256 } from 'js-sha256';
 import callMe from "../sound/callMe.mp3";
 import video from "../icon/video.png";
 
@@ -100,7 +100,7 @@ class Call extends Component {
         //
         const state = this.state.store.getState();
         if (state.auth.user.isAuth){
-            let channelTitle = sha256(state.auth.user.data.login);
+            // let channelTitle = sha256(state.auth.user.data.login);
 
             // state.centrifuge.object.subscribe("$" + channelTitle , (event) => {
             //     console.log(event)
