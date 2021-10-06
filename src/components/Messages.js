@@ -528,7 +528,7 @@ class Messages extends Component{
             console.log(event)
 
             this_.videoPeer.current.srcObject = event.streams[0]
-            // this_.videoPeer.current.play()
+            this_.videoPeer.current.play()
 
             // let remoteStreams = ev.streams
             // this.videoPeer.srcObject = remoteStreams[0]
