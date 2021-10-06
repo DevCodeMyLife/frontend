@@ -593,7 +593,7 @@ class Messages extends Component{
         const store = this.state.store.getState()
 
         for (const track of gumStream.getTracks()) {
-            store.webRTC.pc.addTrack(track);
+            store.webRTC.pc.addTrack(track, this.localStream);
         }
     }
 
