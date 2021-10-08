@@ -39,13 +39,13 @@ class Call extends Component {
             }
         };
 
-
         this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
         })
     }
 
     localStream = null
+    callMe = new Audio(callMe)
 
     muted(){
         this.setState({
@@ -218,20 +218,20 @@ class Call extends Component {
 
     playSoundCall(){
         this.state.context.resume().then(() => {
-            this.setState({
-                callMe: this.state.callMe.currentTime = 0
-            })
-
-            this.setState({
-                callMe: this.state.callMe.loop = true
-            })
-
-            this.setState({
-                callMe: this.state.callMe.play()
-            })
-            // this.state.callMe.currentTime = 0
-            // this.state.callMe.loop = true
-            // this.state.callMe.play()
+            // this.setState({
+            //     callMe: this.state.callMe.currentTime = 0
+            // })
+            //
+            // this.setState({
+            //     callMe: this.state.callMe.loop = true
+            // })
+            //
+            // this.setState({
+            //     callMe: this.state.callMe.play()
+            // })
+            this.callMe.currentTime = 0
+            this.callMe.loop = true
+            this.callMe.play()
         })
     }
 
@@ -307,11 +307,11 @@ class Call extends Component {
                 }
             }
 
-            this.state.audioPeer.ontimeupdate = () => {
-                this_.setState({
-                    status: this_.state.audioPeer.currentTime
-                })
-            }
+            // this.state.audioPeer.ontimeupdate = () => {
+            //     this_.setState({
+            //         status: this_.state.audioPeer.currentTime
+            //     })
+            // }
         }
 
 
