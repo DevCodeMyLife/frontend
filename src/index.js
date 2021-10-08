@@ -43,6 +43,8 @@ class App extends React.Component {
 
     constructor(props) {
 
+        let AudioContext = window.AudioContext || window.webkitAudioContext
+
         super(props);
         this.state = {
             load: false,

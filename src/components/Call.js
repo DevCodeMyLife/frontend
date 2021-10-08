@@ -16,6 +16,9 @@ import drop_call_dark from "../icon/drop_call_dark.png"
 
 class Call extends Component {
     constructor(props) {
+
+        let AudioContext = window.AudioContext || window.webkitAudioContext
+
         super(props);
         this.state = {
             store: this.props.store,
@@ -23,7 +26,6 @@ class Call extends Component {
             openPopUp: false,
             videoView: false,
             context: new AudioContext(),
-            callMe: new Audio(callMe),
             audioPeer: new Audio(),
             name: null,
             userChannel: null,
@@ -33,6 +35,7 @@ class Call extends Component {
             status: "connecting...",
             uidUserPeerMainUUID: null,
             uidUserPeer: null,
+            photoUrl: null,
             deltaPosition: {
                 x: 0,
                 y: 0,
@@ -47,10 +50,21 @@ class Call extends Component {
     localStream = null
     callMe = new Audio(callMe)
 
-    muted(){
+    async muted() {
+        const store = this.state.store.getState()
         this.setState({
             isMuted: !this.state.isMuted
         })
+
+
+        console.log(store.stream.getAudioTracks())
+        store.stream.getAudioTracks()[0].enabled = !(store.stream.getAudioTracks()[0].enabled);
+
+
+        this.state.store.dispatch({
+            type: "ACTION_SET_STREAM", value: store.stream
+        })
+
     }
 
     cancel(){
@@ -59,9 +73,7 @@ class Call extends Component {
             openPopUp: false,
             thisWindow: true
         });
-        this.state.context.resume().then(() => {
-            this.state.callMe.pause()
-        })
+        this.callMe.pause()
 
         console.log(this.userChannel)
 
@@ -260,10 +272,10 @@ class Call extends Component {
             })
 
             this.getPreferredColorScheme()
-            let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            colorSchemeQuery.addEventListener('change', (event) => {
+
+            window.matchMedia('(prefers-color-scheme: dark)').onchange =  (event) => {
                 this.getPreferredColorScheme()
-            });
+            };
 
             let this_ = this
 
@@ -335,6 +347,7 @@ class Call extends Component {
                         name: event.data.last_name + " " + event.data.name,
                         openPopUp: true,
                         callNow: true,
+                        photoUrl: event.data.photo_url,
                         uidUserPeer: event.data.id_channel
                     })
 
@@ -426,12 +439,15 @@ class Call extends Component {
     };
 
     drop(){
-        const state = this.state.store.getState();
-        state.webRTC.pc.close()
+        const store = this.state.store.getState();
         this.setState({
             videoView: false
         })
-        window.reload()
+        store.call.state = false
+        store.webRTC.pc.close()
+
+
+        // window.location.reload()
     }
 
     render() {
@@ -446,7 +462,7 @@ class Call extends Component {
                                 callNow ?
                                     <div className="view-call-now">
                                         <div className="view-image-user">
-                                            <img className="image-user-src-standard round-animate" src="https://devcodemylife.tech/api/storage?file_key=7df91f7d947601d6232c254e5e3888fd0cb1fe7605c44413c28f4d5ccf00feb7"  alt="user"/>
+                                            <img className="image-user-src-standard round-animate" src={this.state.photoUrl}  alt="user"/>
                                         </div>
                                         <div className="center">{ name }</div>
                                         <div className="view-flex margin-top">

@@ -12,6 +12,9 @@ import song from "../sound/pop.mp3"
 class Messages extends Component{
     constructor(props) {
         super(props);
+
+        let AudioContext = window.AudioContext || window.webkitAudioContext
+
         this.state = {
             auth: this.props.auth,
             cent: null,
@@ -474,6 +477,7 @@ class Messages extends Component{
     }
 
     async getMediaStream(){
+        const store = this.state.store.getState()
 
 
         //  Старые браузеры не поддерживают новое свойство mediaDevices
@@ -486,7 +490,7 @@ class Messages extends Component{
         if (navigator.mediaDevices.getUserMedia === undefined) {
             navigator.mediaDevices.getUserMedia = function(constraints) {
 
-                var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.GetUserMedia;
 
                 if (!getUserMedia) {
                     return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
@@ -499,6 +503,10 @@ class Messages extends Component{
         }
 
         this.localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+
+        this.state.store.dispatch({
+            type: "ACTION_SET_STREAM", value: this.localStream
+        })
 
         if (!this.state.am){
             this.state.cent_channel.publish({
@@ -513,7 +521,7 @@ class Messages extends Component{
             )
         }
 
-        await this.openCall(this.localStream)
+        await this.openCall(store.stream)
 
 
     };
@@ -529,6 +537,7 @@ class Messages extends Component{
             const store = this_.state.store.getState()
             store.call.audio.srcObject = event.streams[0]
             store.call.audio.play()
+
         }
 
 
@@ -554,52 +563,52 @@ class Messages extends Component{
         // //
         // // }
         //
-        store.webRTC.pc.onconnectionstatechange = async function (event) {
-            console.log(store.webRTC.pc.connectionState)
-            if (store.webRTC.pc.connectionState === 'connected') {
-                // await this_.createOffer();
-                // await this_.openCall(this_.localStream)
-                // // await this_.createOffer();
-                // this_.videoMain.current.style.position = "absolute"
-                // this_.videoMain.current.style.width = "20%"
-                // this_.videoMain.current.style.left = "20px"
-                // this_.videoMain.current.style.bottom = "20px"
-                //
-                //
-                // this_.videoPeer.current.style.display = "block"
+        store.webRTC.pc.onconnectionstatechange = function (event) {
+            const store = this_.state.store.getState()
+            switch(event.connectionState) {
+                case "connected":
+                    this_.state.store.dispatch({
+                        type: "ACTION_SET_STATUS_CALL", value: this_.state.dialogTitle
+                    })
 
-                this.state.store.dispatch({
-                    type: "ACTION_SET_STATUS_CALL", value: this.state.dialogTitle
-                })
+                    this_.state.cent_channel.publish(
+                        {
+                            type: "connected",
+                            uid: this_.state.uidUserPeer
+                        }).then(
+                        function () {
+                            // success ack from Centrifugo received
+                        }, function (err) {
+                            // publish call failed with error
+                        }
+                    )
+                    break;
+                case "disconnected":
+                    console.log("disconnected")
+                    store.call.state = false
+                    break
+                case "failed":
+                    console.log("failed")
+                    break;
+                case "closed":
+                    console.log("close")
+                    break;
 
-                this_.state.cent_channel.publish(
-                    {
-                        type: "connected",
-                        uid: this_.state.uidUserPeer
-                    }).then(
-                    function () {
-                        // success ack from Centrifugo received
-                    }, function (err) {
-                        // publish call failed with error
-                    }
-                )
+                default:
+                    break;
             }
         }
 
 
-
-        this.getPreferredColorScheme()
-        let _this = this
-
-        _this.setState({
+        this_.setState({
             uidUserPeerMainUUID: sha256(store.auth.user.data.login)
         })
 
         setInterval(() => {
-            this.state.cent_channel.publish(
+            this_.state.cent_channel.publish(
                 {
                     type: "crypto_id",
-                    uid: this.state.uidUserPeerMainUUID
+                    uid: this_.state.uidUserPeerMainUUID
                 }).then(
                 function() {
                     // success ack from Centrifugo received
@@ -610,11 +619,10 @@ class Messages extends Component{
         }, 5000)
 
 
-
-        let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        colorSchemeQuery.addEventListener('change', (event) => {
+        this.getPreferredColorScheme()
+        window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
             this.getPreferredColorScheme()
-        });
+        };
 
         this.changerPage()
     }
@@ -643,6 +651,19 @@ class Messages extends Component{
             am: true
         })
 
+        // this.state.store.dispatch({
+        //     type: "ACTION_SET_WEBRTC", value: {
+        //         pc: new RTCPeerConnection(
+        //             {
+        //                 iceServers: [
+        //                     {
+        //                         urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
+        //                     },
+        //                 ]
+        //             })
+        //     }
+        // })
+
         await this.getMediaStream()
 
         fetch(`/api/call/${id}`, {
@@ -665,7 +686,7 @@ class Messages extends Component{
         const store = this.state.store.getState()
 
         for (const track of gumStream.getTracks()) {
-            store.webRTC.pc.addTrack(track, this.localStream);
+            store.webRTC.pc.addTrack(track, store.stream);
         }
     }
 

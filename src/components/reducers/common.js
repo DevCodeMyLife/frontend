@@ -32,7 +32,8 @@ const initialState = {
     call: {
         state: false,
         audio: new Audio()
-    }
+    },
+    stream: null
 }
 
 export default function AppReducer(state = initialState, action) {
@@ -58,6 +59,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_SET_STATUS_CALL":
             state.status_call = action.value
+            return state
+        case "ACTION_SET_STREAM":
+            state.stream = action.value
             return state
         default:
             return state

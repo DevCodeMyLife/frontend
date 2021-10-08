@@ -227,13 +227,9 @@ class MainUsers extends Component {
   componentDidMount() {
       this.getPreferredColorScheme()
 
-      let colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      colorSchemeQuery.addEventListener('change', (event) => {
+      window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
           this.getPreferredColorScheme()
-      });
-
-
-
+      };
 
       const state = this.state.store.getState()
       let path = `/api/user/${state.history.id}`
