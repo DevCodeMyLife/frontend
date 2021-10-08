@@ -28,7 +28,7 @@ const initialState = {
     webRTC: {
         pc: null
     },
-    status_call: null,
+    status_call: "connecting",
     call: {
         state: false,
         audio: new Audio()

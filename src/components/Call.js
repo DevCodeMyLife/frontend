@@ -473,7 +473,7 @@ class Call extends Component {
                             <div className="view-call-now position-call" style={{padding: "15px"}}>
                                 <div className="control">
                                     <div className="status">
-                                        { name || store.status_call }
+                                        Голосовой вызов
                                     </div>
                                     <div className="mic">
                                         {
