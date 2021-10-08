@@ -80,7 +80,7 @@ class Call extends Component {
 
     async answer() {
         const store = this.state.store.getState()
-        this.state.callMe.pause()
+        this.callMe.pause()
         this.setState({
             openPopUp: false,
             callNow: false,
@@ -103,6 +103,7 @@ class Call extends Component {
                 console.log(err)
             }
         );
+
         //
         //
         // await this.getMediaStream()
