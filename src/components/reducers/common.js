@@ -27,6 +27,11 @@ const initialState = {
     },
     webRTC: {
         pc: null
+    },
+    status_call: null,
+    call: {
+        state: false,
+        audio: new Audio()
     }
 }
 
@@ -47,6 +52,12 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_SET_WEBRTC":
             state.webRTC = action.value
+            return state
+        case "ACTION_SET_CALL":
+            state.call = action.value
+            return state
+        case "ACTION_SET_STATUS_CALL":
+            state.status_call = action.value
             return state
         default:
             return state

@@ -643,6 +643,18 @@ a {
   margin-bottom: 20px;
 }
 
+.status {
+  padding: 10px;
+  color: #aca9a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.call-ha {
+  padding: 10px;
+}
+
 .info_status {
   color: #8a8a8a;
   font-size: 14px;
@@ -661,6 +673,15 @@ a {
   background: var(--bg-main-photo-box);
   /*box-shadow: 0 0 2px var(--grey);*/
   position: relative;
+}
+
+.control {
+  display: flex;
+  flex-direction: row;
+}
+
+.mic {
+  padding: 10px;
 }
 
 .view-call-now {
@@ -1301,6 +1322,13 @@ p {
 
 }
 
+.position-call {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
 .nav-hidden {
   display: none;
 }
@@ -1370,6 +1398,7 @@ p {
   text-align: center;
   /*background: #f3f3f3;*/
   margin-top: 20px;
+  color: var(--font-color);
 }
 
 .img-ad {

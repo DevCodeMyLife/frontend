@@ -104,7 +104,13 @@ class App extends React.Component {
                         })
 
 
-                    let centrifuge = new Centrifuge(CONFIG.url)
+                    let centrifuge = new Centrifuge(CONFIG.url, {
+                        subscribeEndpoint: "/api/subscribe",
+                        onPrivateSubscribe: (e) => {
+                            console.log(e)
+                        }
+                    })
+
                     centrifuge.setToken(res?.token)
                     centrifuge.connect()
 

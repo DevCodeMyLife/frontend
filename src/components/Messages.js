@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { sha256 } from 'js-sha256';
+import {sha256} from 'js-sha256';
 import {Link} from "react-navi";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
 import video from "../icon/video.png"
-import video_dark from "../icon/video_dark.png"
 
 import song from "../sound/pop.mp3"
 
@@ -35,7 +34,8 @@ class Messages extends Component{
             store: this.props.store,
             openCall: false,
             isDark: "light",
-            uidUserPeer: 0
+            uidUserPeer: 0,
+            am: false
         }
 
 
@@ -337,7 +337,9 @@ class Messages extends Component{
 
                 case "connected":
                     if (message?.data?.uid !== _this.state.uidUserPeerMainUUID) {
-                        await _this.call()
+                        // await _this.call()
+                        // await _this.openCall(_this.localStream)
+                        await _this.createOffer();
                     }
                     break;
 
@@ -356,6 +358,18 @@ class Messages extends Component{
                         console.log(store.webRTC.pc.signalingState)
                     }
                     break;
+                case "answer_on_user":
+                    if (!_this.state.am) {
+                        await _this.start()
+                    }
+                    break
+
+                case "ready":
+                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
+                        await _this.createOffer();
+                    }
+                    break
+
                 case "crypto_id":
                     if (message?.data?.uid !== _this.state.uidUserPeerMainUUID && message?.data?.uid) {
                         console.log(message?.data?.uid)
@@ -382,9 +396,6 @@ class Messages extends Component{
                 }
             }
         })
-
-
-
 
         this.setState({
             cent_channel: cent_channel
@@ -487,17 +498,23 @@ class Messages extends Component{
             }
         }
 
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+        this.localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
 
-        if (this.videoMain.current.srcObject !== undefined) {
-            this.videoMain.current.srcObject = stream
-            this.videoMain.current.play()
-
-            this.localStream = stream
-
-        }else{
-            return Promise.reject(new Error('object is not have srcObject'));
+        if (!this.state.am){
+            this.state.cent_channel.publish({
+                type: "ready",
+                uid: this.state.uidUserPeer
+            }).then(
+                function () {
+                    // success ack from Centrifugo received
+                }, function (err) {
+                    // publish call failed with error
+                }
+            )
         }
+
+        await this.openCall(this.localStream)
+
 
     };
 
@@ -509,11 +526,9 @@ class Messages extends Component{
         store.webRTC.pc.ontrack = function (event){
             console.log(event)
 
-            this_.videoPeer.current.srcObject = event.streams[0]
-            this_.videoPeer.current.play()
-
-            // let remoteStreams = ev.streams
-            // this.videoPeer.srcObject = remoteStreams[0]
+            const store = this_.state.store.getState()
+            store.call.audio.srcObject = event.streams[0]
+            store.call.audio.play()
         }
 
 
@@ -553,6 +568,10 @@ class Messages extends Component{
                 //
                 // this_.videoPeer.current.style.display = "block"
 
+                this.state.store.dispatch({
+                    type: "ACTION_SET_STATUS_CALL", value: this.state.dialogTitle
+                })
+
                 this_.state.cent_channel.publish(
                     {
                         type: "connected",
@@ -575,6 +594,20 @@ class Messages extends Component{
         _this.setState({
             uidUserPeerMainUUID: sha256(store.auth.user.data.login)
         })
+
+        setInterval(() => {
+            this.state.cent_channel.publish(
+                {
+                    type: "crypto_id",
+                    uid: this.state.uidUserPeerMainUUID
+                }).then(
+                function() {
+                    // success ack from Centrifugo received
+                }, function(err) {
+                    // publish call failed with error
+                }
+            );
+        }, 5000)
 
 
 
@@ -600,27 +633,32 @@ class Messages extends Component{
         await this.getMediaStream()
 
         console.log(this.state.uidUserPeerMainUUID)
-        setInterval(() => {
-            this.state.cent_channel.publish(
-                {
-                    type: "crypto_id",
-                    uid: this.state.uidUserPeerMainUUID
-                }).then(
-                function() {
-                    // success ack from Centrifugo received
-                }, function(err) {
-                    // publish call failed with error
-                }
-            );
-        }, 5000)
 
     }
 
 
+    async call(id) {
 
-    async call(e) {
-        await this.openCall(this.localStream)
-        await this.createOffer();
+        this.setState({
+            am: true
+        })
+
+        await this.getMediaStream()
+
+        fetch(`/api/call/${id}`, {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+                this.state.store.dispatch({
+                    type: "ACTION_SET_CALL", value: {
+                        status: "Ждем ответа",
+                        state: true,
+                        audio: new Audio()
+                    }
+                })
+
+            })
     }
 
     async openCall(gumStream) {
@@ -657,7 +695,6 @@ class Messages extends Component{
             console.error(error)
         }
     }
-
 
     async onOffer(event) {
         const store = this.state.store.getState()
@@ -742,17 +779,17 @@ class Messages extends Component{
                                                 {
                                                     store.auth.user.data.testing ?
                                                         <div>
-                                                            <div className="button-default" onClick={(e)=> {this.call(e)}}>
-                                                                call
+                                                            <div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>
+                                                                Позвонить
                                                             </div>
-                                                            <div className="button-default" onClick={(e)=> this.start(e)}>
-                                                                {
-                                                                    this.state.isDark === "light" ?
-                                                                        <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>
-                                                                        :
-                                                                        <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>
-                                                                }
-                                                            </div>
+                                                            {/*<div className="button-default" onClick={(e)=> this.start(e)}>*/}
+                                                            {/*    {*/}
+                                                            {/*        this.state.isDark === "light" ?*/}
+                                                            {/*            <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>*/}
+                                                            {/*            :*/}
+                                                            {/*            <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>*/}
+                                                            {/*    }*/}
+                                                            {/*</div>*/}
                                                         </div>
                                                     :
                                                         null
@@ -770,19 +807,19 @@ class Messages extends Component{
                                     }
 
                                 </div>
-                                {
-                                    this.state.openCall ?
-                                        <div className="video-call">
-                                            <div className="view-peer">
-                                                {/*<audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>*/}
-                                                {/*<audio ref={this.videoPeer} autoPlay={true} controls={true}/>*/}
-                                                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />
-                                                <video ref={this.videoPeer} autoPlay={true} controls={false}  />
-                                            </div>
-                                        </div>
-                                        :
-                                        null
-                                }
+                                {/*{*/}
+                                {/*    this.state.openCall ?*/}
+                                {/*        <div className="video-call">*/}
+                                {/*            <div className="view-peer">*/}
+                                {/*                /!*<audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>*!/*/}
+                                {/*                /!*<audio ref={this.videoPeer} autoPlay={true} controls={true}/>*!/*/}
+                                {/*                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />*/}
+                                {/*                <video ref={this.videoPeer} autoPlay={true} controls={false}  />*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*        :*/}
+                                {/*        null*/}
+                                {/*}*/}
                             </div>
                             {
                                 this.state.loader ?

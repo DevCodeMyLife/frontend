@@ -58,7 +58,8 @@ class MainUsers extends Component {
         imageRef: null,
         idPage: this.props.id,
         loadImage: false,
-        clickCreateDialog: false
+        clickCreateDialog: false,
+        isCall: false
     }
 
 
@@ -293,6 +294,8 @@ class MainUsers extends Component {
           textNews: "..."
       })
   }
+
+
 
   saveFeed(){
       let data = {
