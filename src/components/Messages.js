@@ -4,7 +4,7 @@ import {sha256} from 'js-sha256';
 import {Link} from "react-navi";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
-import video from "../icon/video.png"
+// import video from "../icon/video.png"
 
 import song from "../sound/pop.mp3"
 
