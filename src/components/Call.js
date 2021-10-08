@@ -218,9 +218,20 @@ class Call extends Component {
 
     playSoundCall(){
         this.state.context.resume().then(() => {
-            this.state.callMe.currentTime = 0
-            this.state.callMe.loop = true
-            this.state.callMe.play()
+            this.setState({
+                callMe: this.state.callMe.currentTime = 0
+            })
+
+            this.setState({
+                callMe: this.state.callMe.loop = true
+            })
+
+            this.setState({
+                callMe: this.state.callMe.play()
+            })
+            // this.state.callMe.currentTime = 0
+            // this.state.callMe.loop = true
+            // this.state.callMe.play()
         })
     }
 
@@ -393,6 +404,8 @@ class Call extends Component {
                         })
                     }
                     break;
+                default:
+                        break
             }
         })
 
