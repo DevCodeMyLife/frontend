@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import {sha256} from 'js-sha256';
 import {Link} from "react-navi";
 import send from "../icon/send.png"
 import k from "../icon/k.png"
@@ -327,13 +326,13 @@ class Messages extends Component{
             switch (message?.data?.type) {
                 case "offer":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID)
-                        // console.log(message?.data?.offer)
+                        console.log(message?.data?.offer)
                         message?.data?.offer && await _this.onOffer(message?.data?.offer);
                     break;
 
                 case "answer":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-                        // console.log(message?.data?.answer)
+                        console.log(message?.data?.answer)
                         message?.data?.answer && await store.webRTC.pc.setRemoteDescription(new RTCSessionDescription(message?.data?.answer))
                     }
                     break;
@@ -479,7 +478,6 @@ class Messages extends Component{
     async getMediaStream(){
         const store = this.state.store.getState()
 
-
         //  Старые браузеры не поддерживают новое свойство mediaDevices
         //  По этому сначала присваиваем пустой объект
 
@@ -522,101 +520,97 @@ class Messages extends Component{
         }
 
         await this.openCall(store.stream)
-
-
     };
 
     componentDidMount() {
-        const store = this.state.store.getState()
-        let this_ = this
 
 
-        store.webRTC.pc.ontrack = function (event){
-            console.log(event)
-
-            const store = this_.state.store.getState()
-            store.call.audio.srcObject = event.streams[0]
-            store.call.audio.play()
-
-        }
-
-
-        store.webRTC.pc.onicecandidate = function (event){
-
-            event.candidate && this_.state.cent_channel.publish({
-                type: "candidate",
-                label: event.candidate.sdpMLineIndex,
-                candidate: event.candidate.candidate,
-                uid: this_.state.uidUserPeer
-            }).then(
-                function() {
-                    // success ack from Centrifugo received
-                }, function(err) {
-                    // publish call failed with error
-                }
-            );
-            console.log(store.webRTC.pc.signalingState)
-        }
-
-        // // store.webRTC.pc.onnegotiationneeded = async () => {
-        // //     // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
-        // //
-        // // }
+        // store.webRTC.pc.ontrack = function (event){
+        //     console.log(event)
         //
-        store.webRTC.pc.onconnectionstatechange = function (event) {
-            const store = this_.state.store.getState()
-            switch(event.connectionState) {
-                case "connected":
-                    this_.state.store.dispatch({
-                        type: "ACTION_SET_STATUS_CALL", value: this_.state.dialogTitle
-                    })
-
-                    this_.state.cent_channel.publish(
-                        {
-                            type: "connected",
-                            uid: this_.state.uidUserPeer
-                        }).then(
-                        function () {
-                            // success ack from Centrifugo received
-                        }, function (err) {
-                            // publish call failed with error
-                        }
-                    )
-                    break;
-                case "disconnected":
-                    console.log("disconnected")
-                    store.call.state = false
-                    break
-                case "failed":
-                    console.log("failed")
-                    break;
-                case "closed":
-                    console.log("close")
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-
-        this_.setState({
-            uidUserPeerMainUUID: sha256(store.auth.user.data.login)
-        })
-
-        setInterval(() => {
-            this_.state.cent_channel.publish(
-                {
-                    type: "crypto_id",
-                    uid: this_.state.uidUserPeerMainUUID
-                }).then(
-                function() {
-                    // success ack from Centrifugo received
-                }, function(err) {
-                    // publish call failed with error
-                }
-            );
-        }, 5000)
+        //     const store = this_.state.store.getState()
+        //     store.call.audio.srcObject = event.streams[0]
+        //     store.call.audio.play()
+        //
+        // }
+        //
+        //
+        // store.webRTC.pc.onicecandidate = function (event){
+        //
+        //     event.candidate && this_.state.cent_channel.publish({
+        //         type: "candidate",
+        //         label: event.candidate.sdpMLineIndex,
+        //         candidate: event.candidate.candidate,
+        //         uid: this_.state.uidUserPeer
+        //     }).then(
+        //         function() {
+        //             // success ack from Centrifugo received
+        //         }, function(err) {
+        //             // publish call failed with error
+        //         }
+        //     );
+        //     console.log(store.webRTC.pc.signalingState)
+        // }
+        //
+        // // // store.webRTC.pc.onnegotiationneeded = async () => {
+        // // //     // this.localStream.getTracks().forEach(track => store.webRTC.pc.addTrack(track, this.localStream));
+        // // //
+        // // // }
+        // //
+        // store.webRTC.pc.onconnectionstatechange = function (event) {
+        //     const store = this_.state.store.getState()
+        //     switch(event.connectionState) {
+        //         case "connected":
+        //             this_.state.store.dispatch({
+        //                 type: "ACTION_SET_STATUS_CALL", value: this_.state.dialogTitle
+        //             })
+        //
+        //             this_.state.cent_channel.publish(
+        //                 {
+        //                     type: "connected",
+        //                     uid: this_.state.uidUserPeer
+        //                 }).then(
+        //                 function () {
+        //                     // success ack from Centrifugo received
+        //                 }, function (err) {
+        //                     // publish call failed with error
+        //                 }
+        //             )
+        //             break;
+        //         case "disconnected":
+        //             console.log("disconnected")
+        //             store.call.state = false
+        //             break
+        //         case "failed":
+        //             console.log("failed")
+        //             break;
+        //         case "closed":
+        //             console.log("close")
+        //             break;
+        //
+        //         default:
+        //             break;
+        //     }
+        // }
+        //
+        //
+        // this_.setState({
+        //     uidUserPeerMainUUID: sha256(store.auth.user.data.login)
+        // })
+        //
+        // // setInterval(() => {
+        // //     this_.state.cent_channel.publish(
+        // //         {
+        // //             type: "crypto_id",
+        // //             uid: this_.state.uidUserPeerMainUUID
+        // //         }).then(
+        // //         function() {
+        // //             // success ack from Centrifugo received
+        // //         }, function(err) {
+        // //             // publish call failed with error
+        // //         }
+        // //     );
+        // // }, 5000)
 
 
         this.getPreferredColorScheme()
@@ -647,23 +641,23 @@ class Messages extends Component{
 
     async call(id) {
 
-        this.setState({
-            am: true
-        })
-
-        // this.state.store.dispatch({
-        //     type: "ACTION_SET_WEBRTC", value: {
-        //         pc: new RTCPeerConnection(
-        //             {
-        //                 iceServers: [
-        //                     {
-        //                         urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-        //                     },
-        //                 ]
-        //             })
-        //     }
+        // this.setState({
+        //     am: true
         // })
-
+        //
+        // // this.state.store.dispatch({
+        // //     type: "ACTION_SET_WEBRTC", value: {
+        // //         pc: new RTCPeerConnection(
+        // //             {
+        // //                 iceServers: [
+        // //                     {
+        // //                         urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
+        // //                     },
+        // //                 ]
+        // //             })
+        // //     }
+        // // })
+        //
         await this.getMediaStream()
 
         fetch(`/api/call/${id}`, {
@@ -675,8 +669,13 @@ class Messages extends Component{
                     type: "ACTION_SET_CALL", value: {
                         status: "Ждем ответа",
                         state: true,
-                        audio: new Audio()
+                        audio: new Audio(),
+                        cc: res.data.cc
                     }
+                })
+
+                this.state.store.dispatch({
+                    type: "ACTION_SET_AM", value: true,
                 })
 
             })
@@ -686,7 +685,7 @@ class Messages extends Component{
         const store = this.state.store.getState()
 
         for (const track of gumStream.getTracks()) {
-            store.webRTC.pc.addTrack(track, store.stream);
+            store.webRTC.pc.addTrack(track, gumStream);
         }
     }
 
