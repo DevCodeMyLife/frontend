@@ -56,7 +56,8 @@ class Call extends Component {
                 openPopUp: false,
                 callNow: false,
                 videoView: true,
-                thisWindow: true
+                thisWindow: true,
+                status: "Ждем ответ от собеседника"
             });
 
             this.subscribeChannelCall(store.call.cc)
@@ -87,7 +88,7 @@ class Call extends Component {
             isMuted: !this.state.isMuted
         })
 
-        // console.log(store.stream.getAudioTracks()[0])
+        console.log(store.stream.getAudioTracks()[0])
 
         store.stream.getAudioTracks()[0].enabled = !(store.stream.getAudioTracks()[0].enabled);
         this.state.store.dispatch({
@@ -308,11 +309,11 @@ class Call extends Component {
             }
 
             state.webRTC.pc.onsignalingstatechange = async function (event) {
-                // console.log(state.webRTC.pc.signalingState)
+                console.log(state.webRTC.pc.signalingState)
             }
 
             state.webRTC.pc.onconnectionstatechange = async function (event) {
-                // console.log(state.webRTC.pc.connectionState)
+                console.log(state.webRTC.pc.connectionState)
 
                 if (state.webRTC.pc.connectionState === 'connected') {
                     this_.setState({
@@ -362,13 +363,13 @@ class Call extends Component {
             switch (event.data?.type) {
                 case "offer":
                     if (event?.data?.uid === this_.state.uidUserPeerMainUUID)
-                        // console.log(event?.data)
+                        console.log(event?.data)
                         event?.data?.offer && await this_.onOffer(event?.data?.offer);
                     break;
 
                 case "answer":
                     if (event?.data?.uid === this_.state.uidUserPeerMainUUID) {
-                        // console.log(event?.data)
+                        console.log(event?.data)
                         event?.data?.answer && await state.webRTC.pc.setRemoteDescription(new RTCSessionDescription(event?.data?.answer))
                     }
                     break;
@@ -391,7 +392,7 @@ class Call extends Component {
                     break
                 case "status_call":
                     if (event?.data?.uid === this_.state.uidUserPeerMainUUID) {
-                        // console.log("create offer ")
+                        console.log("create offer ")
                         this_.setState({
                             videoView: true
                         })
@@ -402,9 +403,7 @@ class Call extends Component {
 
                 case "candidate":
                     if (event?.data?.uid === this_.state.uidUserPeerMainUUID) {
-                        this_.setState({
-                            status: "Устанавливается соединение..."
-                        })
+                        this_.state.status = "Устанавливается соединение..."
                         // ICE candidate configuration.
                         let candidate = new RTCIceCandidate({
                             sdpMLineIndex: event?.data?.label,
@@ -455,7 +454,7 @@ class Call extends Component {
 
                     // -------------test----------------
 
-                    // console.log(event.data)
+                    console.log(event.data)
 
                     // -------------test----------------
                     break
