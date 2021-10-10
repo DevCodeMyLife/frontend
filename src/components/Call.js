@@ -56,8 +56,7 @@ class Call extends Component {
                 openPopUp: false,
                 callNow: false,
                 videoView: true,
-                thisWindow: true,
-                status: "Ждем ответ от собеседника"
+                thisWindow: true
             });
 
             this.subscribeChannelCall(store.call.cc)
