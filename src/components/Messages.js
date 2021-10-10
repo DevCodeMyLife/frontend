@@ -796,8 +796,8 @@ class Messages extends Component{
                                     {
                                         this.state.dialog ?
                                             <div>
-                                                {
-                                                    store.auth.user.data.testing ?
+                                                {/*{*/}
+                                                {/*    store.auth.user.data.testing ?*/}
                                                         <div>
                                                             <div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>
                                                                 Позвонить
@@ -811,9 +811,9 @@ class Messages extends Component{
                                                             {/*    }*/}
                                                             {/*</div>*/}
                                                         </div>
-                                                    :
-                                                        null
-                                                }
+                                                {/*    :*/}
+                                                {/*        null*/}
+                                                {/*}*/}
 
                                                 <div className="photo-wrapper">
                                                     <img src={this.state.avatar}
