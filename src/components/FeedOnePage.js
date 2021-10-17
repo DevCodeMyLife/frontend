@@ -608,7 +608,7 @@ class FeedOnePage extends Component {
                                         null
                                 }
                                 {
-                                    user?.company ?
+                                    user?.count_feeds ?
                                         <div className="main-place">
                                             Количество постов:
                                             {
