@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import ReactMarkdown from 'react-markdown'
+// import ReactMarkdown from 'react-markdown'
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
@@ -9,7 +9,7 @@ import look_dark from "../icon/look_dark.png";
 // import Head from "./Header";
 import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
-const gfm = require('remark-gfm')
+// const gfm = require('remark-gfm')
 
 
 class Feed extends Component {
