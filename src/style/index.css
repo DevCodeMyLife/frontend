@@ -685,6 +685,7 @@ a {
 
 .main-place {
   padding: 5px;
+  color: var(--font-color);
 
 }
 
