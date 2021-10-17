@@ -695,6 +695,7 @@ a {
   color: var(--font-color);
   /*border-radius: 10px;*/
   flex-grow: 10;
+  font-size: 13px;
   /*box-shadow: 0 0 2px var(--grey);*/
 }
 
