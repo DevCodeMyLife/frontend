@@ -81,9 +81,9 @@ class Main extends Component {
             .then(res => {
                 if (res.status.code === 200){
                     this.setState({
-                        countUsers: res.data.count_user,
+                        countUsers: res.data.count_user_to_day,
                         countNotes: res.data.count_notes,
-                        countUsersToday: res.data.count_users_today,
+                        // countUsersToday: res.data.count_users_today,
                         loadData: true
                     })
                 }
@@ -252,9 +252,9 @@ class Main extends Component {
                                         </div>
                                         <div className="auths-list">
                                             <p>
-                                                <span className="test-stat">Пользователей:</span> <span className="green">{this.state.countUsers}</span><br/>
-                                                <span className="test-stat">Созданных заметок:</span> <span className="green">{this.state.countNotes}</span><br/>
-                                                <span className="test-stat">Активных пользователей сегодня:</span> <span className="green">{this.state.countUsersToday}</span><br/>
+                                                <span className="test-stat">Посетителей сегодня:</span> <span className="green">{this.state.countUsers}</span><br/>
+                                                <span className="test-stat">Созданных заметок всего:</span> <span className="green">{this.state.countNotes}</span><br/>
+
                                             </p>
                                         </div>
                                     </div>
