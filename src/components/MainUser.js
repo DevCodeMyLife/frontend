@@ -1299,7 +1299,7 @@ class MainUsers extends Component {
                                                             <div className="loader-small" />
                                                         </div>
                                                         :
-                                                        <div className="button-default" onClick={this.createChat}>
+                                                        <div className="button-default" style={{width: "100%", boxSizing: "border-box"}} onClick={this.createChat}>
                                                             Написать сообщение
                                                         </div>
                                                     :
