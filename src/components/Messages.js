@@ -800,9 +800,9 @@ class Messages extends Component{
                                                     {/*{*/}
                                                     {/*    store.auth.user.data.testing ?*/}
                                                     <div>
-                                                        <div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>
-                                                            Позвонить
-                                                        </div>
+                                                        {/*<div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>*/}
+                                                        {/*    Позвонить*/}
+                                                        {/*</div>*/}
                                                         {/*<div className="button-default" onClick={(e)=> this.start(e)}>*/}
                                                         {/*    {*/}
                                                         {/*        this.state.isDark === "light" ?*/}
