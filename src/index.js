@@ -22,7 +22,7 @@ import Teams from "./components/Teams";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
-import ruvds from "./icon/ruvds.png";
+// import ruvds from "./icon/ruvds.png";
 import People from "./components/People";
 import AppReducer from "./components/reducers/common"
 import Agreement from "./components/Agreement";
