@@ -1970,12 +1970,14 @@ link-user {
   /*display: none;*/
   /*color: #F5F6FA;*/
   color: var(--font-color);
+  opacity: 0;
 
 }
 
 .to-top:hover {
   background: var(--button-to-top);
   color: var(--font-color);
+  opacity: 1;
 }
 
 .info-notification-item {
