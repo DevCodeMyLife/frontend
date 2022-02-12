@@ -22,7 +22,7 @@ import Teams from "./components/Teams";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
-// import ruvds from "./icon/ruvds.png";
+import vk from "./icon/vk.jpeg";
 import People from "./components/People";
 import AppReducer from "./components/reducers/common"
 import Agreement from "./components/Agreement";
@@ -495,17 +495,17 @@ class App extends React.Component {
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
                                                         <Nav song={song} store={store}/>
-                                                        {/*<div className="wrapper-ad" onClick={()=>{*/}
-                                                        {/*    window.location.href = "https://ruvds.com/pr4320"*/}
-                                                        {/*}}>*/}
-                                                        {/*    <div className="image-ad">*/}
-                                                        {/*        <img className="image-ad-tag" src={ruvds}  alt="ruvds"/>*/}
-                                                        {/*    </div>*/}
-                                                        {/*    <div className="ad-text">*/}
-                                                        {/*        Cайт работает на серверах RuVDS*/}
-                                                        {/*    </div>*/}
-                                                        {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
-                                                        {/*</div>*/}
+                                                        <div className="wrapper-ad" onClick={()=>{
+                                                            window.location.href = "https://mcs.mail.ru/"
+                                                        }}>
+                                                            <div className="image-ad">
+                                                                <img className="image-ad-tag" src={vk}  alt="vk"/>
+                                                            </div>
+                                                            <div className="ad-text">
+                                                                Сайт работает в облаках VK Cloud Solutions
+                                                            </div>
+                                                            {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                                        </div>
                                                     </div>
                                                     <NotFoundBoundary render={() =>
                                                         <div className="content-wall-views">
@@ -549,17 +549,17 @@ class App extends React.Component {
                             <div className="content">
 
                                 <div id="vertical_menu" className="reviews-menu">
-                                    {/*<div className="wrapper-ad" onClick={()=>{*/}
-                                    {/*    window.location.href = "https://ruvds.com/pr4320"*/}
-                                    {/*}}>*/}
-                                    {/*    <div className="image-ad">*/}
-                                    {/*        <img className="image-ad-tag" src={ruvds}  alt="ruvds"/>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="ad-text">*/}
-                                    {/*        Cайт работает на серверах RuVDS*/}
-                                    {/*    </div>*/}
-                                    {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
-                                    {/*</div>*/}
+                                    <div className="wrapper-ad" onClick={()=>{
+                                        window.location.href = "https://mcs.mail.ru/"
+                                    }}>
+                                        <div className="image-ad">
+                                            <img className="image-ad-tag" src={vk}  alt="vk"/>
+                                        </div>
+                                        <div className="ad-text">
+                                            Сайт работает в облаках VK Cloud Solutions
+                                        </div>
+                                        {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                    </div>
                                 </div>
                                 <Main />
                             </div>
