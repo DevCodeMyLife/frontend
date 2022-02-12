@@ -22,7 +22,7 @@ import Teams from "./components/Teams";
 import Nav from "./components/Nav";
 import song from "./sound/pop.mp3";
 import HowToUse from "./components/HowToUse";
-import vk from "./icon/vk.jpeg";
+import vk from "./icon/vk.png";
 import People from "./components/People";
 import AppReducer from "./components/reducers/common"
 import Agreement from "./components/Agreement";
