@@ -502,7 +502,7 @@ class App extends React.Component {
                                                                 <img className="image-ad-tag" src={vk}  alt="vk"/>
                                                             </div>
                                                             <div className="ad-text">
-                                                                Сайт работает в облаках VK Cloud Solutions
+                                                                Сайт работает в облаках
                                                             </div>
                                                             {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                                         </div>
@@ -556,7 +556,7 @@ class App extends React.Component {
                                             <img className="image-ad-tag" src={vk}  alt="vk"/>
                                         </div>
                                         <div className="ad-text">
-                                            Сайт работает в облаках VK Cloud Solutions
+                                            Сайт работает в облаках
                                         </div>
                                         {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                     </div>
