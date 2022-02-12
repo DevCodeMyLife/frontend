@@ -22,7 +22,7 @@ class Header extends Component {
                             if (state.auth.user.isAuth){
                                 window.location.href = '/feeds'
                             }else{
-                                window.location.href = '/'
+                                window.location.href = '/feeds'
                             }
                         }}>
                             [ DevCodeMyLife ]
