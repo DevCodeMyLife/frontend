@@ -12,6 +12,7 @@ class Settings extends Component{
             name: null,
             lastName: null,
             email: null,
+            link: null,
             store: this.props.store
         }
 
@@ -176,7 +177,9 @@ class Settings extends Component{
             login: document.getElementById("login").value,
             name: document.getElementById("name").value,
             last_name: document.getElementById("last_name").value,
-            email: document.getElementById("email").value
+            email: document.getElementById("email").value,
+            link: document.getElementById("link").value
+
         }
         fetch("/api/settings", {
             method: "PUT",
@@ -192,8 +195,6 @@ class Settings extends Component{
                     document.getElementById("event_save").style.color = "red"
                     document.getElementById("event_save").innerHTML = "Все поля должны быть заполнены"
                 }
-
-
             })
             .catch(error => {
                 console.log(error)
@@ -277,6 +278,9 @@ class Settings extends Component{
                                     </div>
                                     <div className="wrapper-input">
                                         <input className="input-default" maxLength="30" placeholder="Электронная почта" type="text" id="email" defaultValue={state.auth.user.data.email} />
+                                    </div>
+                                    <div className="wrapper-input">
+                                        <input className="input-default" maxLength="30" placeholder="Ссылка на резюме" type="text" id="link" defaultValue={state.auth.user.data.link} />
                                     </div>
                                     <div className="wrapper-input">
                                         <div className="button-default" onClick={()=>
