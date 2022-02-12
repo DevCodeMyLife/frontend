@@ -18,7 +18,7 @@
     --link: #4fa7db;
     --not-read-message: #D7E4FC;
     --placeholder: #828282;
-    --back_card: #F5F6FA;
+    --back_card: #ffffff;
     --font-color: #000000;
     --button_border: #dcdcdc;
     --view-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
@@ -1869,7 +1869,7 @@ link-user {
 
 .fake-textarea {
   padding: 8px;
-  background: var(--back_card);
+  /*background: var(--back_card);*/
   border-radius: 10px;
 }
 
