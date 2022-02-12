@@ -280,7 +280,7 @@ class Settings extends Component{
                                         <input className="input-default" maxLength="30" placeholder="Электронная почта" type="text" id="email" defaultValue={state.auth.user.data.email} />
                                     </div>
                                     <div className="wrapper-input">
-                                        <input className="input-default" maxLength="30" placeholder="Ссылка на резюме" type="text" id="link" defaultValue={state.auth.user.data.link} />
+                                        <input className="input-default" maxLength="30" placeholder="Ссылка на резюме" type="text" id="link" defaultValue={state.auth.user.data.link_summary} />
                                     </div>
                                     <div className="wrapper-input">
                                         <div className="button-default" onClick={()=>
