@@ -1293,12 +1293,12 @@ class MainUsers extends Component {
                                             Ссылка на резюме:
                                             {
                                                 Number(this.state.id) === store.auth.user.data.id ?
-                                                    store.auth.user.data?.html_url ?
+                                                    store.auth.user.data?.link_summary ?
                                                         <a className="link_github" target="_blank" href={store.auth.user.data.link_summary} rel="noreferrer"> {store.auth.user.data.login}</a>
                                                         :
                                                         " нет"
                                                     :
-                                                    this.state.result[0]?.html_url ?
+                                                    this.state.result[0]?.link_summary ?
                                                         <a className="link_github" target="_blank" href={this.state.result[0].link_summary} rel="noreferrer"> {this.state.result[0].login}</a>
                                                         :
                                                         " нет"
