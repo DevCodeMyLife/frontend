@@ -1237,7 +1237,7 @@ class MainUsers extends Component {
                                                     store.auth.user.data?.email ?
                                                         " "+store.auth.user.data.email
                                                         :
-                                                        " не указан"
+                                                        " нет"
                                                     :
                                                     " Скрыт либо не задан"
 
@@ -1250,12 +1250,12 @@ class MainUsers extends Component {
                                                     store.auth.user.data?.company ?
                                                         " "+store.auth.user.data.company
                                                         :
-                                                        " не указана"
+                                                        " нет"
                                                     :
                                                     this.state.result[0]?.company ?
                                                         " "+this.state.result[0].company
                                                         :
-                                                        " не указана"
+                                                        " нет"
                                             }
                                         </div>
                                         <div className="main-place">
@@ -1266,12 +1266,12 @@ class MainUsers extends Component {
                                                     store.auth.user.data?.location ?
                                                         " "+store.auth.user.data.location
                                                         :
-                                                        " не указана"
+                                                        " нет"
                                                     :
                                                     this.state.result[0]?.location ?
                                                         " "+this.state.result[0].location
                                                         :
-                                                        " не указана"
+                                                        " нет"
                                             }
                                         </div>
                                         <div className="main-place">
@@ -1281,12 +1281,27 @@ class MainUsers extends Component {
                                                     store.auth.user.data?.html_url ?
                                                         <a className="link_github" target="_blank" href={store.auth.user.data.html_url} rel="noreferrer"> {store.auth.user.data.login}</a>
                                                         :
-                                                        " не указан"
+                                                        " нет"
                                                     :
                                                     this.state.result[0]?.html_url ?
                                                         <a className="link_github" target="_blank" href={this.state.result[0].html_url} rel="noreferrer"> {this.state.result[0].login}</a>
                                                         :
-                                                        " не указан"
+                                                        " нет"
+                                            }
+                                        </div>
+                                        <div className="main-place">
+                                            Ссылка на резюме:
+                                            {
+                                                Number(this.state.id) === store.auth.user.data.id ?
+                                                    store.auth.user.data?.html_url ?
+                                                        <a className="link_github" target="_blank" href={store.auth.user.data.link_summary} rel="noreferrer"> {store.auth.user.data.login}</a>
+                                                        :
+                                                        " нет"
+                                                    :
+                                                    this.state.result[0]?.html_url ?
+                                                        <a className="link_github" target="_blank" href={this.state.result[0].link_summary} rel="noreferrer"> {this.state.result[0].login}</a>
+                                                        :
+                                                        " нет"
                                             }
                                         </div>
                                         <div className="main-place">
