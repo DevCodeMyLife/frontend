@@ -1661,7 +1661,11 @@ p {
 }
 
 .image-ad-tag {
-  max-width: 170px;
+  max-width: 90px;
+}
+
+.image-ad {
+  text-align: center;
 }
 
 .ad-text {
