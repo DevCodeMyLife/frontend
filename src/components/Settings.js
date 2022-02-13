@@ -394,19 +394,19 @@ class Settings extends Component{
                                     }
                                 </div>
                                 <div className="main-place-info-column ">
-                                    <div className="main-place date_active">
-                                        {
+                                    {/*<div className="main-place date_active">*/}
+                                    {/*    {*/}
 
-                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                                (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
-                                                    <span className="info_status">Последняя активность была { new Date(state.auth.user.data.last_active_at).toLocaleString() }</span>
-                                                    :
-                                                    <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
-                                                :
-                                                    <span className="info_status">Сейчас на сайте</span>
+                                    {/*        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?*/}
+                                    {/*            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?*/}
+                                    {/*                <span className="info_status">Последняя активность была { new Date(state.auth.user.data.last_active_at).toLocaleString() }</span>*/}
+                                    {/*                :*/}
+                                    {/*                <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(state.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>*/}
+                                    {/*            :*/}
+                                    {/*                <span className="info_status">Сейчас на сайте</span>*/}
 
-                                        }
-                                    </div>
+                                    {/*    }*/}
+                                    {/*</div>*/}
                                     <div className="main-place name">
                                         {
                                             state.auth.user.data?.name ?
