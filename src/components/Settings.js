@@ -240,7 +240,6 @@ class Settings extends Component{
 
     render() {
         const state = this.state.store.getState()
-        console.log(state)
         return (
             <div style={{display: "flex"}}>
                 <div className="content-wall-views">
