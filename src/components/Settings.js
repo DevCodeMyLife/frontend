@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Switch from "./Switch";
-import {Helmet} from "react-helmet";
+// import {Helmet} from "react-helmet";
 
 class Settings extends Component{
     constructor(props) {
