@@ -380,7 +380,18 @@ class Settings extends Component{
                     }
                 </div>
                 <div className="tags-view">
-
+                    {
+                        state.load ?
+                            <div className="tags-box">
+                                <div className="main-place-photo-column ">
+                                    {
+                                        <img src={state.auth.user.avatar_url} alt={state.auth.user.login} style={{cursor: "default"}}/>
+                                    }
+                                </div>
+                            </div>
+                        :
+                               null
+                    }
                 </div>
             </div>
         );
