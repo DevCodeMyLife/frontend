@@ -407,6 +407,15 @@ class Settings extends Component{
 
                                         }
                                     </div>
+                                    <div className="main-place name">
+                                        {
+                                            state.auth.user.data?.name ?
+                                                " "+state.auth.user.data.name+" "+state.auth.user.data.last_name
+                                            :
+                                                " "+state.auth.user.data.login
+
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         :
