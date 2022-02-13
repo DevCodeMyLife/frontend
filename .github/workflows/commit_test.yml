@@ -3,7 +3,7 @@ name: commit_test
 on:
   push:
     branches:
-      - "test"
+      - "*"
 
 jobs:
   build-and-push:
@@ -32,6 +32,6 @@ jobs:
       with:
         push: true
         context: .
-        tags: registry.devcodemylife.tech/devcodemylife/frontend:test
+        tags: registry.devcodemylife.tech/devcodemylife/frontend:staging
         cache-from: type=gha
         cache-to: type=gha,mode=max
