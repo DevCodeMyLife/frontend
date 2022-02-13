@@ -511,7 +511,6 @@ class MainUsers extends Component {
   }
 
   getLastVisit = (d) => {
-
     return Math.floor(d / 60)
   }
 

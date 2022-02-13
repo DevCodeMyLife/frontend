@@ -143,6 +143,10 @@ class Settings extends Component{
             });
     }
 
+    getLastVisit = (d) => {
+        return Math.floor(d / 60)
+    }
+
     updateState(){
         fetch("/api/authentication", {
             method: "POST",
@@ -388,6 +392,21 @@ class Settings extends Component{
                                     {
                                         <img src={state.auth.user.data.avatar_url} alt={state.auth.user.data.login} style={{cursor: "default"}}/>
                                     }
+                                </div>
+                                <div className="main-place-info-column ">
+                                    <div className="main-place date_active">
+                                        {
+
+                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
+                                                    <span className="info_status">Последняя активность была { new Date(store.auth.user.data.last_active_at).toLocaleString() }</span>
+                                                    :
+                                                    <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
+                                                :
+                                                <span className="info_status">Сейчас на сайте</span>
+
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         :
