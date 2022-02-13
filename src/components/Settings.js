@@ -403,7 +403,7 @@ class Settings extends Component{
                                                     :
                                                     <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
                                                 :
-                                                <span className="info_status">Сейчас на сайте</span>
+                                                    <span className="info_status">Сейчас на сайте</span>
 
                                         }
                                     </div>
