@@ -236,6 +236,7 @@ class Settings extends Component{
 
     render() {
         const state = this.state.store.getState()
+        console.log(state)
         return (
             <div style={{display: "flex"}}>
                 <div className="content-wall-views">
@@ -390,7 +391,12 @@ class Settings extends Component{
                                 </div>
                             </div>
                         :
-                               null
+                            state.auth.user.isAuth ?
+                                null
+                            :
+                                <div className="loader-wrapper feed-wrapper">
+                                    <div className="loader" />
+                                </div>
                     }
                 </div>
             </div>
