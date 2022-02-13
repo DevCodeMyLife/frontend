@@ -50,13 +50,21 @@ class Header extends Component {
                         {
                             this.state.showSettings ?
                                 <div className="settings-user"
-                                onMouseLeave={
-                                    () => {
-                                        this.setState(prevState => ({
-                                            showSettings: !prevState.showSettings
-                                        }));
+                                    onMouseLeave={
+                                        () => {
+                                            this.setState(prevState => ({
+                                                showSettings: !prevState.showSettings
+                                            }));
+                                        }
                                     }
-                                }
+
+                                     onClick={
+                                         () => {
+                                             this.setState(prevState => ({
+                                                 showSettings: !prevState.showSettings
+                                             }));
+                                         }
+                                     }
                                 >
                                     <Link href={`/user/${state.auth.user.data.id}`}>
                                         <div className="settings-user-item">
