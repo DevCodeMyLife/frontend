@@ -1324,11 +1324,17 @@ class MainUsers extends Component {
                                     </div>
                                 </div>
                             :
-                                <div className="loader-wrapper feed-wrapper">
-                                    <div className="loader-small">
+                                this.state.notUser && store.auth.user.isAuth ?
+                                    null
+                                :
+                                    !store.auth.user.isAuth ?
+                                        null
+                                    :
+                                        <div className="loader-wrapper feed-wrapper">
+                                            <div className="loader-small">
 
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
                         }
 
                         {/*<div className="tags-box">*/}
