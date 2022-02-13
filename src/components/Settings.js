@@ -382,11 +382,11 @@ class Settings extends Component{
                 </div>
                 <div className="tags-view">
                     {
-                        state.load ?
+                        this.state.load === "complete" ?
                             <div className="tags-box">
                                 <div className="main-place-photo-column ">
                                     {
-                                        <img src={state.auth.user.avatar_url} alt={state.auth.user.login} style={{cursor: "default"}}/>
+                                        <img src={state.auth.user.data.avatar_url} alt={state.auth.user.data.login} style={{cursor: "default"}}/>
                                     }
                                 </div>
                             </div>
