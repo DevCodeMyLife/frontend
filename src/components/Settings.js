@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Switch from "./Switch";
+import {Helmet} from "react-helmet";
 
 class Settings extends Component{
     constructor(props) {
@@ -13,7 +14,19 @@ class Settings extends Component{
             lastName: null,
             email: null,
             link: null,
-            store: this.props.store
+            store: this.props.store,
+            imagePreviewUrl: null,
+            crop: {
+                unit: "px",
+                x: 0,
+                y: 0,
+                width: 300,
+                height: 300,
+                aspect: 300 / 300
+            },
+            cropImage: null,
+            showCrop: false,
+            imageRef: null
         }
 
         this.state.store.subscribe(() => {
@@ -224,146 +237,151 @@ class Settings extends Component{
     render() {
         const state = this.state.store.getState()
         return (
-            <div className="content-wall-views">
-                {
-                    state.auth.user.isAuth ?
+            <div style={{display: "flex"}}>
+                <div className="content-wall-views">
+                    {
+                        state.auth.user.isAuth ?
 
-                        this.state.load === "complete" ?
-                            <div className="feed-wrapper">
-                                <div className="main-place-wrapper">
-                                    <p>
-                                        <b>Тестирование - </b> включив режим готовности тестирования, Вы подтверждаете что готовы,
-                                        в случайном порядке, в любой момент времени, получить доступ к функционалу что может работать не стабильно.
-                                    </p>
-                                </div>
-                                <div className="main-place-wrapper-settings">
-                                    <div className="block-settings child_settings">
-                                        <div className="key-settings">
-                                            Публиковать заметки приватно
-                                        </div>
-                                        <div className="value-settings">
-                                            {
-                                                state.auth.user.data.privat_post ?
-                                                    <Switch enable={true} callBack={(e)=> this.changeSettingsPrivat(e)}/>
-                                                    :
-                                                    <Switch enable={false} callBack={(e)=> this.changeSettingsPrivat(e)}/>
-                                            }
-                                        </div>
-                                        {/*<div className="separator" />*/}
+                            this.state.load === "complete" ?
+                                <div className="feed-wrapper">
+                                    <div className="main-place-wrapper">
+                                        <p>
+                                            <b>Тестирование - </b> включив режим готовности тестирования, Вы подтверждаете что готовы,
+                                            в случайном порядке, в любой момент времени, получить доступ к функционалу что может работать не стабильно.
+                                        </p>
                                     </div>
-                                    <div className="block-settings child_settings">
-                                        <div className="key-settings">
-                                            Участвовать в тестировании
-                                        </div>
-                                        <div className="value-settings">
-                                            {
-                                                state.auth.user.data.testing ?
-                                                    <Switch enable={true} callBack={(e)=> this.changeSettingsTesting(e)}/>
-                                                    :
-                                                    <Switch enable={false} callBack={(e)=> this.changeSettingsTesting(e)}/>
-                                            }
-                                        </div>
-                                        {/*<div className="separator" />*/}
-                                    </div>
-                                </div>
-                                <div className="main-place-wrapper-settings">
-                                    <div className="wrapper-input">
-                                        <input className="input-default" maxLength="28" placeholder="Логин" type="text" id="login" defaultValue={state.auth.user.data.login}/>
-                                    </div>
-                                    <div className="wrapper-input">
-                                        <input className="input-default" maxLength="28" placeholder="Имя" type="text" id="name" defaultValue={state.auth.user.data.name}/>
-                                    </div>
-                                    <div className="wrapper-input">
-                                        <input className="input-default" maxLength="28" placeholder="Фамилия" type="text" id="last_name" defaultValue={state.auth.user.data.last_name} />
-                                    </div>
-                                    <div className="wrapper-input">
-                                        <input className="input-default" maxLength="30" placeholder="Электронная почта" type="text" id="email" defaultValue={state.auth.user.data.email} />
-                                    </div>
-                                    <div className="wrapper-input">
-                                        <input className="input-default" maxLength="60" placeholder="Ссылка на резюме" type="text" id="link" defaultValue={state.auth.user.data.link_summary} />
-                                    </div>
-                                    <div className="wrapper-input">
-                                        <div className="button-default" onClick={()=>
-                                            this.save()
-                                        }>
-                                            Сохранить
-                                        </div>
-                                    </div>
-                                    <div className="error-wrapper center" id="event_save" style={{color: "green"}}/>
-                                </div>
-
-                            {
-                                state.auth.user.data.scope === "admin" ?
-                                    <div>
-                                        <div className="main-place-wrapper">
-                                            <p>
-                                                Панель управления
-                                            </p>
-                                        </div>
-                                        <div className="main-place-wrapper-settings">
-                                            <div className="block-settings child_settings">
-                                                <div className="key-settings">
-                                                    messenger
-                                                </div>
-                                                <div className="value-settings">
-                                                    {
-                                                        state.components.settings.messenger ?
-                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
-                                                            :
-                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
-                                                    }
-                                                </div>
+                                    <div className="main-place-wrapper-settings">
+                                        <div className="block-settings child_settings">
+                                            <div className="key-settings">
+                                                Публиковать заметки приватно
                                             </div>
-                                            <div className="block-settings child_settings">
-                                                <div className="key-settings">
-                                                    main_page
-                                                </div>
-                                                <div className="value-settings">
-                                                    {
-                                                        state.components.settings.main_page ?
-                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
-                                                            :
-                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
-                                                    }
-                                                </div>
-                                                {/*<div className="separator" />*/}
+                                            <div className="value-settings">
+                                                {
+                                                    state.auth.user.data.privat_post ?
+                                                        <Switch enable={true} callBack={(e)=> this.changeSettingsPrivat(e)}/>
+                                                        :
+                                                        <Switch enable={false} callBack={(e)=> this.changeSettingsPrivat(e)}/>
+                                                }
                                             </div>
-                                            <div className="block-settings child_settings">
-                                                <div className="key-settings">
-                                                    feed
-                                                </div>
-                                                <div className="value-settings">
-                                                    {
-                                                        state.components.settings.feed ?
-                                                            <Switch enable={true} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
-                                                            :
-                                                            <Switch enable={false} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
-                                                    }
-                                                </div>
+                                            {/*<div className="separator" />*/}
+                                        </div>
+                                        <div className="block-settings child_settings">
+                                            <div className="key-settings">
+                                                Участвовать в тестировании
+                                            </div>
+                                            <div className="value-settings">
+                                                {
+                                                    state.auth.user.data.testing ?
+                                                        <Switch enable={true} callBack={(e)=> this.changeSettingsTesting(e)}/>
+                                                        :
+                                                        <Switch enable={false} callBack={(e)=> this.changeSettingsTesting(e)}/>
+                                                }
+                                            </div>
+                                            {/*<div className="separator" />*/}
+                                        </div>
+                                    </div>
+                                    <div className="main-place-wrapper-settings">
+                                        <div className="wrapper-input">
+                                            <input className="input-default" maxLength="28" placeholder="Логин" type="text" id="login" defaultValue={state.auth.user.data.login}/>
+                                        </div>
+                                        <div className="wrapper-input">
+                                            <input className="input-default" maxLength="28" placeholder="Имя" type="text" id="name" defaultValue={state.auth.user.data.name}/>
+                                        </div>
+                                        <div className="wrapper-input">
+                                            <input className="input-default" maxLength="28" placeholder="Фамилия" type="text" id="last_name" defaultValue={state.auth.user.data.last_name} />
+                                        </div>
+                                        <div className="wrapper-input">
+                                            <input className="input-default" maxLength="30" placeholder="Электронная почта" type="text" id="email" defaultValue={state.auth.user.data.email} />
+                                        </div>
+                                        <div className="wrapper-input">
+                                            <input className="input-default" maxLength="60" placeholder="Ссылка на резюме" type="text" id="link" defaultValue={state.auth.user.data.link_summary} />
+                                        </div>
+                                        <div className="wrapper-input">
+                                            <div className="button-default" onClick={()=>
+                                                this.save()
+                                            }>
+                                                Сохранить
                                             </div>
                                         </div>
+                                        <div className="error-wrapper center" id="event_save" style={{color: "green"}}/>
                                     </div>
-                                    :
-                                    null
-                            }
-                            </div>
 
+                                {
+                                    state.auth.user.data.scope === "admin" ?
+                                        <div>
+                                            <div className="main-place-wrapper">
+                                                <p>
+                                                    Панель управления
+                                                </p>
+                                            </div>
+                                            <div className="main-place-wrapper-settings">
+                                                <div className="block-settings child_settings">
+                                                    <div className="key-settings">
+                                                        messenger
+                                                    </div>
+                                                    <div className="value-settings">
+                                                        {
+                                                            state.components.settings.messenger ?
+                                                                <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
+                                                                :
+                                                                <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMessengerPage(e) }}/>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="block-settings child_settings">
+                                                    <div className="key-settings">
+                                                        main_page
+                                                    </div>
+                                                    <div className="value-settings">
+                                                        {
+                                                            state.components.settings.main_page ?
+                                                                <Switch enable={true} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
+                                                                :
+                                                                <Switch enable={false} callBack={(e) => { this.changeSettingsAdminMainPage(e) }}/>
+                                                        }
+                                                    </div>
+                                                    {/*<div className="separator" />*/}
+                                                </div>
+                                                <div className="block-settings child_settings">
+                                                    <div className="key-settings">
+                                                        feed
+                                                    </div>
+                                                    <div className="value-settings">
+                                                        {
+                                                            state.components.settings.feed ?
+                                                                <Switch enable={true} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
+                                                                :
+                                                                <Switch enable={false} callBack={(e) => { this.changeSettingsAdminFeedPage(e) }}/>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        null
+                                }
+                                </div>
+
+                            :
+                                <div className="loader-wrapper feed-wrapper">
+                                    <div className="loader" />
+                                </div>
                         :
-                            <div className="loader-wrapper feed-wrapper">
-                                <div className="loader" />
-                            </div>
-                    :
-                        <div>
-                            {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
-                            {/*  Ошибка*/}
-                            {/*</div>*/}
-                            <div className="error-wrapper">
-                                <div className="error-page">
-                                    Авторизуйтесь чтобы просматривать эту страницу.
+                            <div>
+                                {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
+                                {/*  Ошибка*/}
+                                {/*</div>*/}
+                                <div className="error-wrapper">
+                                    <div className="error-page">
+                                        Авторизуйтесь чтобы просматривать эту страницу.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                }
+                    }
+                </div>
+                <div className="tags-view">
+
+                </div>
             </div>
         );
     }
