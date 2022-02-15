@@ -291,86 +291,8 @@ class App extends React.Component {
             });
     }
 
-    downPage = () => {
-
-        if (window.location.pathname !== "/people" ){
-            return
-        }
-
-        let scrollHeight = Math.max(
-            document.body.scrollHeight, document.documentElement.scrollHeight,
-            document.body.offsetHeight, document.documentElement.offsetHeight,
-            document.body.clientHeight, document.documentElement.clientHeight
-        );
-
-
-        if  (window.scrollY >= scrollHeight - innerHeight) {
-            if (!this.state.scrollDown) {
-
-                // this.setState({
-                //     scrollDown: true
-                // })
-
-                let store = store.getState()
-                let length_users = store.people.length
-
-
-                // this.setState({
-                //     last_count_users: length_users
-                // })
-
-
-                fetch(`api/user/pagination/${length_users}`, {
-                    method: "GET",
-                })
-                    .then(response => response.json())
-                    .then(res => {
-                        if (res.data.length === 0) {
-                            // this.setState({
-                            //     small_louder_show: false
-                            // })
-                        }else{
-                            let tmp = [...store.people, ...res.data]
-                            store.dispatch({
-                                type: "ACTION_UPDATE_PEOPLE", value: tmp
-                            })
-                        }
-
-                        // this.setState({
-                        //     load: "continue"
-                        // });
-
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-
-                // setTimeout(()=>{
-                //     // this.setState({scrollDown: false})
-                // }, 1000)
-            }
-            // fetch("api/user", {
-            //     method: "GET",
-            // })
-            //     .then(response => response.json())
-            //     .then(res => {
-            //         this.setState({
-            //             users: res.data,
-            //             load: "continue"
-            //         });
-            //
-            //         () => {
-            //
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     });
-        }
-    }
 
     componentDidMount() {
-        window.onscroll = this.downPage
         this.checkAuth()
     }
 
