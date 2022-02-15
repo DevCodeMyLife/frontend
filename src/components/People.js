@@ -48,8 +48,7 @@ class People extends Component {
             if (!this.state.scrollDown) {
                 console.log("down")
                 this.setState({
-                    scrollDown: true,
-                    load: "load"
+                    scrollDown: true
                 })
 
                 let length_users = this.state.users.length
