@@ -59,11 +59,11 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
+                        this.state.store.dispatch({
+                            type: "ACTION_UPDATE_PEOPLE", value: Object.assign(this.state.store.people, res.data)
+                        })
 
                         this.setState({
-                            users: this.state.store.dispatch({
-                                type: "ACTION_UPDATE_PEOPLE", value: Object.assign(this.state.users, res.data)
-                            }),
                             load: "continue"
                         });
 
@@ -116,10 +116,11 @@ class People extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
+                            this.state.store.dispatch({
+                                type: "ACTION_UPDATE_PEOPLE", value: res.data
+                            })
+
                             this.setState({
-                                users: this.state.store.dispatch({
-                                    type: "ACTION_UPDATE_PEOPLE", value: res.data
-                                }),
                                 load: "continue"
                             });
 
