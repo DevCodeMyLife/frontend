@@ -25,6 +25,10 @@ class Feed extends Component {
             isDark: "light",
             store: this.props.store
         }
+
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
     getPreferredColorScheme = () => {
