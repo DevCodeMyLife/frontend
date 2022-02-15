@@ -35,7 +35,7 @@ const initialState = {
     },
     stream: null,
     am: false,
-    people: {},
+    people: [],
 }
 
 export default function AppReducer(state = initialState, action) {
