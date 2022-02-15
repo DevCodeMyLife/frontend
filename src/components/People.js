@@ -10,11 +10,10 @@ class People extends Component {
             usersSearch: null,
             error: null,
             scrollDown: false,
-            store_f: this.props.store,
-            store: this.props.store.getState()
+            store: this.props.store,
         };
 
-        this.state.store_f.subscribe(() => {
+        this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
         })
     }
@@ -60,8 +59,10 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
-                        this.state.store_f.dispatch({
-                            type: "ACTION_UPDATE_PEOPLE", value: Object.assign(this.state.store.people, res.data)
+                        let store = this.state.store.getState()
+
+                        this.state.store.dispatch({
+                            type: "ACTION_UPDATE_PEOPLE", value: Object.assign(store.people, res.data)
                         })
 
                         this.setState({
@@ -117,7 +118,7 @@ class People extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
-                            this.state.store_f.dispatch({
+                            this.state.store.dispatch({
                                 type: "ACTION_UPDATE_PEOPLE", value: res.data
                             })
 
@@ -185,6 +186,8 @@ class People extends Component {
 
     render() {
         console.log(this.state.store)
+        let store = this.state.store.getState()
+
         return (
             <div>
                 <div className="content-wall-views">
@@ -288,7 +291,7 @@ class People extends Component {
                                                         this.state.load === "continue" ?
                                                             <div className="feed-wrapper">
                                                                 {
-                                                                    this.state.store.people?.map(data =>
+                                                                    store.people?.map(data =>
                                                                         <div key={data.id} className="users-view">
                                                                             <Link href={`/user/${data?.id}`}>
                                                                                 <div className="image-user">
