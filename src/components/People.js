@@ -340,7 +340,11 @@ class People extends Component {
                                                                             <div className="loader-small" />
                                                                         </div>
                                                                     :
-                                                                        null
+                                                                        <div className="loader-wrapper feed-wrapper">
+                                                                            <div>
+                                                                                Больше показать нечего
+                                                                            </div>
+                                                                        </div>
                                                                 }
 
                                                             </div>
