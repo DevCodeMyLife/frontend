@@ -133,9 +133,7 @@ class People extends Component {
                                 store.people[variable.id] = variable
                             }
                             this.state.store.dispatch({
-                                type: "ACTION_UPDATE_PEOPLE", value: store.people.sort(function (x, y){
-                                    return x.id > y.id ? 1 : -1;
-                                })
+                                type: "ACTION_UPDATE_PEOPLE", value: store.people
                             })
 
                             this.setState({
