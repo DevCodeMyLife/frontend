@@ -54,6 +54,29 @@ class People extends Component {
                                 users: res.data,
                                 load: "continue"
                             });
+
+                            document.onscroll(() => {
+                                if  ($(window).scrollTop() === $(document).height() - $(window).height()) {
+                                    console.log("down")
+                                    // fetch("api/user", {
+                                    //     method: "GET",
+                                    // })
+                                    //     .then(response => response.json())
+                                    //     .then(res => {
+                                    //         this.setState({
+                                    //             users: res.data,
+                                    //             load: "continue"
+                                    //         });
+                                    //
+                                    //         () => {
+                                    //
+                                    //         }
+                                    //     })
+                                    //     .catch(error => {
+                                    //         console.log(error)
+                                    //     });
+                                }
+                            })
                         })
                         .catch(error => {
                             console.log(error)
@@ -151,7 +174,7 @@ class People extends Component {
                                         :
                                         this.state.load === "error" ?
                                             <div>
-                                                <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                                <div className="not_news">Ошибка соединения с сервером. Попробуйте позднее.</div>
                                             </div>
                                             :
                                             this.state.load === "onFocusSearch" ?
