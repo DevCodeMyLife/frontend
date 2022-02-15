@@ -132,6 +132,8 @@ class People extends Component {
                             for (let variable in res.data) {
                                 store.people[variable.id] = variable
                             }
+
+                            console.log(store.people)
                             this.state.store.dispatch({
                                 type: "ACTION_UPDATE_PEOPLE", value: store.people
                             })
