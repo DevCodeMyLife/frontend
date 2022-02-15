@@ -52,7 +52,7 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
                         this.setState({
-                            users: {...this.state.users, ...res.data},
+                            users: Object.assign(this.state.users, res.data),
                             load: "continue"
                         });
 
