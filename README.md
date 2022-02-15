@@ -1,0 +1,2 @@
+[![commit](https://github.com/DevCodeMyLife/frontend/actions/workflows/commit.yml/badge.svg)](https://github.com/DevCodeMyLife/frontend/actions/workflows/commit.yml)
+[![commit_test](https://github.com/DevCodeMyLife/frontend/actions/workflows/commit_test.yml/badge.svg)](https://github.com/DevCodeMyLife/frontend/actions/workflows/commit_test.yml)
