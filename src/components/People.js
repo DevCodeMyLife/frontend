@@ -51,7 +51,7 @@ class People extends Component {
                     scrollDown: true
                 })
 
-                let length_users = this.state.users.length
+                let length_users = this.state.store.people.length
 
                 fetch(`api/user/pagination/${length_users}`, {
                     method: "GET",
