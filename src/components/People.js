@@ -37,7 +37,7 @@ class People extends Component {
     }
 
     downPage = () => {
-        var scrollHeight = Math.max(
+        let scrollHeight = Math.max(
             document.body.scrollHeight, document.documentElement.scrollHeight,
             document.body.offsetHeight, document.documentElement.offsetHeight,
             document.body.clientHeight, document.documentElement.clientHeight
@@ -62,9 +62,7 @@ class People extends Component {
 
 
 
-                        for (let variable in res.data) {
-                            store.people.push(variable)
-                        }
+                        store.people.concat(res.data)
 
                         // let obj_assign = Object.assign(store.people, res.data)
                         this.state.store.dispatch({
@@ -129,9 +127,7 @@ class People extends Component {
                         .then(response => response.json())
                         .then(res => {
 
-                            for (let variable in res.data) {
-                                store.people.push(variable)
-                            }
+                            store.people.concat(res.data)
 
                             console.log(store.people)
                             this.state.store.dispatch({
@@ -161,7 +157,7 @@ class People extends Component {
 
     }
 
-    focusSearch = (event) => {
+    focusSearch = () => {
         this.setState({
             load: "onFocusSearch"
         })
@@ -196,7 +192,7 @@ class People extends Component {
             });
     }
 
-    blurSearch = (event) => {
+    blurSearch = () => {
         // this.setState({
         //     load: "continue"
         // })
