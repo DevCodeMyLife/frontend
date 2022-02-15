@@ -31,8 +31,45 @@ class People extends Component {
             });
     }
 
-    componentDidMount() {
+    downPage = () => {
+        var scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
 
+
+        if  (window.scrollY >= scrollHeight - innerHeight) {
+            if (!this.state.scrollDown) {
+            console.log("down")
+            this.setState({scrollDown: true})
+
+            setTimeout(()=>{
+                this.setState({scrollDown: false})
+              }, 3000)
+        }
+        // fetch("api/user", {
+        //     method: "GET",
+        // })
+        //     .then(response => response.json())
+        //     .then(res => {
+        //         this.setState({
+        //             users: res.data,
+        //             load: "continue"
+        //         });
+        //
+        //         () => {
+        //
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     });
+        }
+    }
+
+    componentDidMount() {
+        window.onscroll = downPage()
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -55,43 +92,6 @@ class People extends Component {
                                 users: res.data,
                                 load: "continue"
                             });
-
-                            window.onscroll = () => {
-                                var scrollHeight = Math.max(
-                                    document.body.scrollHeight, document.documentElement.scrollHeight,
-                                    document.body.offsetHeight, document.documentElement.offsetHeight,
-                                    document.body.clientHeight, document.documentElement.clientHeight
-                                );
-
-
-                                if  (window.scrollY >= scrollHeight - innerHeight) {
-                                    if (!this.state.scrollDown) {
-                                        console.log("down")
-                                        this.setState({scrollDown: true})
-
-                                        setTimeout(()=>{
-                                            this.setState({scrollDown: false})
-                                        }, 3000)
-                                    }
-                                    // fetch("api/user", {
-                                    //     method: "GET",
-                                    // })
-                                    //     .then(response => response.json())
-                                    //     .then(res => {
-                                    //         this.setState({
-                                    //             users: res.data,
-                                    //             load: "continue"
-                                    //         });
-                                    //
-                                    //         () => {
-                                    //
-                                    //         }
-                                    //     })
-                                    //     .catch(error => {
-                                    //         console.log(error)
-                                    //     });
-                                }
-                            }
 
                         })
                         .catch(error => {
