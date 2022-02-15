@@ -41,12 +41,27 @@ class People extends Component {
 
         if  (window.scrollY >= scrollHeight - innerHeight) {
             if (!this.state.scrollDown) {
-            console.log("down")
-            this.setState({scrollDown: true})
+                console.log("down")
+                this.setState({scrollDown: true})
 
-            setTimeout(()=>{
-                this.setState({scrollDown: false})
-              }, 3000)
+                fetch(`api/user/pagination/${this.state.users.lenght}`, {
+                    method: "GET",
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        this.setState({
+                            users: {...this.state.users, ...res.data},
+                            load: "continue"
+                        });
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+                setTimeout(()=>{
+                    this.setState({scrollDown: false})
+                }, 3000)
         }
         // fetch("api/user", {
         //     method: "GET",
