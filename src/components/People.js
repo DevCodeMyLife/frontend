@@ -10,10 +10,11 @@ class People extends Component {
             usersSearch: null,
             error: null,
             scrollDown: false,
-            store: this.props.store
+            store_f: this.props.store,
+            store: this.props.store.getState()
         };
 
-        this.state.store.subscribe(() => {
+        this.state.store_f.subscribe(() => {
             this.setState(this.state.store.getState())
         })
     }
@@ -59,7 +60,7 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
-                        this.state.store.dispatch({
+                        this.state.store_f.dispatch({
                             type: "ACTION_UPDATE_PEOPLE", value: Object.assign(this.state.store.people, res.data)
                         })
 
@@ -116,7 +117,7 @@ class People extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
-                            this.state.store.dispatch({
+                            this.state.store_f.dispatch({
                                 type: "ACTION_UPDATE_PEOPLE", value: res.data
                             })
 
