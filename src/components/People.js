@@ -119,7 +119,7 @@ class People extends Component {
                         auth: true
                     });
 
-                    let store = this.state.store.getState()
+                    // let store = this.state.store.getState()
 
                     fetch("api/user", {
                         method: "GET",
@@ -127,11 +127,9 @@ class People extends Component {
                         .then(response => response.json())
                         .then(res => {
 
-                            store.people.concat(res.data)
 
-                            console.log(store.people)
                             this.state.store.dispatch({
-                                type: "ACTION_UPDATE_PEOPLE", value: store.people.sort(function (x, y){
+                                type: "ACTION_UPDATE_PEOPLE", value: res.data.sort(function (x, y){
                                     return x.id > y.id ? 1 : -1;
                                 })
                             })
