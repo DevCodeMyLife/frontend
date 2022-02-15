@@ -44,7 +44,9 @@ class People extends Component {
                 console.log("down")
                 this.setState({scrollDown: true})
 
-                fetch(`api/user/pagination/${this.state.users.lenght}`, {
+                let length_users = this.state.users.lenght
+
+                fetch(`api/user/pagination/${length_users}`, {
                     method: "GET",
                 })
                     .then(response => response.json())
