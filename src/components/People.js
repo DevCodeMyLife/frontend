@@ -183,6 +183,7 @@ class People extends Component {
     }
 
     render() {
+        console.log(this.state.store)
         return (
             <div>
                 <div className="content-wall-views">
