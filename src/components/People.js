@@ -39,6 +39,11 @@ class People extends Component {
     }
 
     downPage = () => {
+
+        if (window.location.pathname !== "/people" ){
+            return
+        }
+
         let scrollHeight = Math.max(
             document.body.scrollHeight, document.documentElement.scrollHeight,
             document.body.offsetHeight, document.documentElement.offsetHeight,
