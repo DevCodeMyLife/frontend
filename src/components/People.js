@@ -10,6 +10,7 @@ class People extends Component {
             usersSearch: null,
             error: null,
             scrollDown: false,
+            last_count_users: 0,
             store: this.props.store,
         };
 
@@ -53,6 +54,15 @@ class People extends Component {
 
                 let store = this.state.store.getState()
                 let length_users = store.people.length
+
+                if (this.state.last_count_users === length_users) {
+                    return
+                }
+
+                this.setState({
+                    last_count_users: length_users
+                })
+
 
                 fetch(`api/user/pagination/${length_users}`, {
                     method: "GET",
@@ -197,7 +207,6 @@ class People extends Component {
     render() {
 
         let store = this.state.store.getState()
-        console.log(store)
         return (
             <div>
                 <div className="content-wall-views">
