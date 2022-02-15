@@ -51,16 +51,16 @@ class People extends Component {
                     scrollDown: true
                 })
 
-                let length_users = this.state.store.people.length
+                let store = this.state.store.getState()
+
+
+                let length_users = store.people.length
 
                 fetch(`api/user/pagination/${length_users}`, {
                     method: "GET",
                 })
                     .then(response => response.json())
                     .then(res => {
-
-                        let store = this.state.store.getState()
-
                         this.state.store.dispatch({
                             type: "ACTION_UPDATE_PEOPLE", value: Object.assign(store.people, res.data)
                         })
