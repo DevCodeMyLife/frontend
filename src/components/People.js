@@ -60,10 +60,16 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
-                        let obj_assign = Object.assign(store.people, res.data)
+
+
+                        for (let variable in res.data) {
+                            store.people[variable.id] = variable
+                        }
+
+                        // let obj_assign = Object.assign(store.people, res.data)
                         this.state.store.dispatch({
                             type: "ACTION_UPDATE_PEOPLE", value: obj_assign.sort(function (x, y){
-                                return x.id > y.id ? -1 : 1;
+                                return x.id > y.id ? 1 : -1;
                             })
                         })
 
@@ -120,9 +126,13 @@ class People extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
+
+                            for (let variable in res.data) {
+                                store.people[variable.id] = variable
+                            }
                             this.state.store.dispatch({
                                 type: "ACTION_UPDATE_PEOPLE", value: res.data.sort(function (x, y){
-                                    return x.id > y.id ? -1 : 1;
+                                    return x.id > y.id ? 1 : -1;
                                 })
                             })
 
