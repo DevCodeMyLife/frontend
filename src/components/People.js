@@ -61,12 +61,6 @@ class People extends Component {
                 let store = this.state.store.getState()
                 let length_users = store.people.length
 
-                if (this.state.last_count_users === length_users) {
-                    this.setState({
-                        small_louder_show: false
-                    })
-                    return
-                }
 
                 this.setState({
                     last_count_users: length_users
@@ -78,13 +72,16 @@ class People extends Component {
                 })
                     .then(response => response.json())
                     .then(res => {
-
-                        let tmp = [...store.people, ...res.data]
-
-                        // let obj_assign = Object.assign(store.people, res.data)
-                        this.state.store.dispatch({
-                            type: "ACTION_UPDATE_PEOPLE", value: tmp
-                        })
+                        if (res.data.length === 0) {
+                            this.setState({
+                                small_louder_show: false
+                            })
+                        }else{
+                            let tmp = [...store.people, ...res.data]
+                            this.state.store.dispatch({
+                                type: "ACTION_UPDATE_PEOPLE", value: tmp
+                            })
+                        }
 
                         this.setState({
                             load: "continue"
