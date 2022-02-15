@@ -42,7 +42,10 @@ class People extends Component {
         if  (window.scrollY >= scrollHeight - innerHeight) {
             if (!this.state.scrollDown) {
                 console.log("down")
-                this.setState({scrollDown: true})
+                this.setState({
+                    scrollDown: true,
+                    load: "load"
+                })
 
                 let length_users = this.state.users.length
 
@@ -311,6 +314,9 @@ class People extends Component {
                                                                         </div>
                                                                     )
                                                                 }
+                                                                <div className="loader-wrapper feed-wrapper">
+                                                                    <div className="loader-small" />
+                                                                </div>
                                                             </div>
                                                             :
                                                             null
