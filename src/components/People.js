@@ -8,7 +8,8 @@ class People extends Component {
             load: "load",
             users: null,
             usersSearch: null,
-            error: null
+            error: null,
+            scrollDown: false,
         };
     }
 
@@ -30,8 +31,62 @@ class People extends Component {
             });
     }
 
-    componentDidMount() {
+    downPage = () => {
+        var scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
 
+
+        if  (window.scrollY >= scrollHeight - innerHeight) {
+            if (!this.state.scrollDown) {
+                console.log("down")
+                this.setState({scrollDown: true})
+
+                let length_users = this.state.users.lenght
+
+                fetch(`api/user/pagination/${length_users}`, {
+                    method: "GET",
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        this.setState({
+                            users: {...this.state.users, ...res.data},
+                            load: "continue"
+                        });
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+                setTimeout(()=>{
+                    this.setState({scrollDown: false})
+                }, 3000)
+        }
+        // fetch("api/user", {
+        //     method: "GET",
+        // })
+        //     .then(response => response.json())
+        //     .then(res => {
+        //         this.setState({
+        //             users: res.data,
+        //             load: "continue"
+        //         });
+        //
+        //         () => {
+        //
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     });
+        }
+    }
+
+    componentDidMount() {
+        window.onscroll = this.downPage
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
@@ -54,6 +109,7 @@ class People extends Component {
                                 users: res.data,
                                 load: "continue"
                             });
+
                         })
                         .catch(error => {
                             console.log(error)
@@ -151,7 +207,7 @@ class People extends Component {
                                         :
                                         this.state.load === "error" ?
                                             <div>
-                                                <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                                <div className="not_news">Ошибка соединения с сервером. Попробуйте позднее.</div>
                                             </div>
                                             :
                                             this.state.load === "onFocusSearch" ?
