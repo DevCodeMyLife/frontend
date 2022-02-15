@@ -52,8 +52,6 @@ class People extends Component {
                 })
 
                 let store = this.state.store.getState()
-
-
                 let length_users = store.people.length
 
                 fetch(`api/user/pagination/${length_users}`, {
@@ -185,9 +183,9 @@ class People extends Component {
     }
 
     render() {
-        console.log(this.state.store)
-        let store = this.state.store.getState()
 
+        let store = this.state.store.getState()
+        console.log(store)
         return (
             <div>
                 <div className="content-wall-views">
