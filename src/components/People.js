@@ -11,6 +11,7 @@ class People extends Component {
             error: null,
             scrollDown: false,
             last_count_users: 0,
+            small_louder_show: true,
             store: this.props.store,
         };
 
@@ -56,6 +57,9 @@ class People extends Component {
                 let length_users = store.people.length
 
                 if (this.state.last_count_users === length_users) {
+                    this.setState({
+                        small_louder_show: false
+                    })
                     return
                 }
 
@@ -70,7 +74,7 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
-                        let tmp = [...res.data, ...store.people]
+                        let tmp = [...store.people, ...res.data]
 
                         // let obj_assign = Object.assign(store.people, res.data)
                         this.state.store.dispatch({
@@ -345,9 +349,15 @@ class People extends Component {
                                                                         </div>
                                                                     )
                                                                 }
-                                                                <div className="loader-wrapper feed-wrapper">
-                                                                    <div className="loader-small" />
-                                                                </div>
+                                                                {
+                                                                    this.state.small_louder_show ?
+                                                                        <div className="loader-wrapper feed-wrapper">
+                                                                            <div className="loader-small" />
+                                                                        </div>
+                                                                    :
+                                                                        null
+                                                                }
+
                                                             </div>
                                                             :
                                                             null
