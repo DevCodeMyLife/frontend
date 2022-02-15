@@ -8,7 +8,8 @@ class People extends Component {
             load: "load",
             users: null,
             usersSearch: null,
-            error: null
+            error: null,
+            scrollDown: false,
         };
     }
 
@@ -55,7 +56,7 @@ class People extends Component {
                                 load: "continue"
                             });
 
-                            document.onscroll(() => {
+                            window.onscroll = () => {
                                 var scrollHeight = Math.max(
                                     document.body.scrollHeight, document.documentElement.scrollHeight,
                                     document.body.offsetHeight, document.documentElement.offsetHeight,
@@ -64,7 +65,14 @@ class People extends Component {
 
 
                                 if  (window.scrollY >= scrollHeight - innerHeight) {
-                                    console.log("down")
+                                    if (!this.state.scrollDown) {
+                                        console.log("down")
+                                        this.setState({scrollDown: true})
+
+                                        setTimeout(()=>{
+                                            this.setState({scrollDown: false})
+                                        }, 3000)
+                                    }
                                     // fetch("api/user", {
                                     //     method: "GET",
                                     // })
@@ -83,7 +91,8 @@ class People extends Component {
                                     //         console.log(error)
                                     //     });
                                 }
-                            })
+                            }
+
                         })
                         .catch(error => {
                             console.log(error)
