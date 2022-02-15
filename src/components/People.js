@@ -70,7 +70,7 @@ class People extends Component {
                     .then(response => response.json())
                     .then(res => {
 
-                        let tmp = [...store.people, ...res.data]
+                        let tmp = [...res.data, ...store.people]
 
                         // let obj_assign = Object.assign(store.people, res.data)
                         this.state.store.dispatch({
