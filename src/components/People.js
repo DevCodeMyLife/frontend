@@ -69,7 +69,7 @@ class People extends Component {
     }
 
     componentDidMount() {
-        window.onscroll = downPage()
+        window.onscroll = this.downPage
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({
