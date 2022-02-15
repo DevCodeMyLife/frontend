@@ -94,7 +94,7 @@ class People extends Component {
 
                 setTimeout(()=>{
                     this.setState({scrollDown: false})
-                }, 3000)
+                }, 1000)
         }
         // fetch("api/user", {
         //     method: "GET",
