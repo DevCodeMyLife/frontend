@@ -10,7 +10,12 @@ class People extends Component {
             usersSearch: null,
             error: null,
             scrollDown: false,
+            store: this.props.store
         };
+
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
     allUsers = (event) =>{
@@ -54,8 +59,12 @@ class People extends Component {
                 })
                     .then(response => response.json())
                     .then(res => {
+
+
                         this.setState({
-                            users: Object.assign(this.state.users, res.data),
+                            users: this.state.store.dispatch({
+                                type: "ACTION_UPDATE_PEOPLE", value: Object.assign(this.state.users, res.data)
+                            }),
                             load: "continue"
                         });
 
@@ -109,7 +118,9 @@ class People extends Component {
                         .then(response => response.json())
                         .then(res => {
                             this.setState({
-                                users: res.data,
+                                users: this.state.store.dispatch({
+                                    type: "ACTION_UPDATE_PEOPLE", value: res.data
+                                }),
                                 load: "continue"
                             });
 
@@ -275,7 +286,7 @@ class People extends Component {
                                                         this.state.load === "continue" ?
                                                             <div className="feed-wrapper">
                                                                 {
-                                                                    this.state.users?.map(data =>
+                                                                    this.state.store.people?.map(data =>
                                                                         <div key={data.id} className="users-view">
                                                                             <Link href={`/user/${data?.id}`}>
                                                                                 <div className="image-user">

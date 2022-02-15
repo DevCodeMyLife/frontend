@@ -34,7 +34,8 @@ const initialState = {
         audio: new Audio()
     },
     stream: null,
-    am: false
+    am: false,
+    people: null,
 }
 
 export default function AppReducer(state = initialState, action) {
@@ -66,6 +67,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_SET_AM":
             state.am = action.value
+            return state
+        case "ACTION_UPDATE_PEOPLE":
+            state.people = action.value
             return state
         default:
             return state
