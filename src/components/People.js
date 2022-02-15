@@ -56,7 +56,14 @@ class People extends Component {
                             });
 
                             document.onscroll(() => {
-                                if  ($(window).scrollTop() === $(document).height() - $(window).height()) {
+                                var scrollHeight = Math.max(
+                                    document.body.scrollHeight, document.documentElement.scrollHeight,
+                                    document.body.offsetHeight, document.documentElement.offsetHeight,
+                                    document.body.clientHeight, document.documentElement.clientHeight
+                                );
+
+
+                                if  (window.scrollY >= scrollHeight - innerHeight) {
                                     console.log("down")
                                     // fetch("api/user", {
                                     //     method: "GET",
