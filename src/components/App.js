@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Header from "./Header";
 import Centrifuge from 'centrifuge';
 import Content from "./Content";
@@ -7,7 +7,7 @@ const CONFIG = {
     url: document.location.host === "localhost" ? `ws://${document.location.host}/cent/connection/websocket` : `wss://${document.location.host}/cent/connection/websocket`
 };
 
-class App extends Component{
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,22 +50,21 @@ class App extends Component{
     }
 
     delete_cookie(name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
 
     componentDidMount() {
         let check = this.checkCookie("access_token")
-        if (check){
+        if (check) {
             fetch("/api/authentication", {
-                method: "POST",
-                body: JSON.stringify({
+                method: "POST", body: JSON.stringify({
                     "finger": window.localStorage.getItem("finger")
                 })
             })
                 .then(response => response.json())
                 .then(res => {
-                    if (res.status.code === 0){
+                    if (res.status.code === 0) {
                         this.setState({
                             auth: true,
                             data: res.data,
@@ -75,7 +74,7 @@ class App extends Component{
                             token: res.token,
                             messagesCount: res.count_message
                         });
-                    }else{
+                    } else {
                         this.sendLogs(res.status.message)
                         this.delete_cookie("access_token")
                     }
@@ -87,67 +86,58 @@ class App extends Component{
                 .catch(error => {
                     // console.log(error)
                     this.setState({
-                        auth: false,
-                        load: true,
-                        token: 'asd'
+                        auth: false, load: true, token: 'asd'
                     });
                 });
-        }else{
+        } else {
             this.setState({
-                auth: false,
-                load: true,
-                token: 'asd'
+                auth: false, load: true, token: 'asd'
             });
         }
 
         this.centrifuge = new Centrifuge(CONFIG.url);
         this.centrifuge.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjYwMzI0MzEsImV4cCI6MTc4Mzc5ODgzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.meN08YC99TeOJZWLbMKCwxhtOA_s3RaZ1QH-YARC6CM");
 
-        this.centrifuge.on('connect', function() {
+        this.centrifuge.on('connect', function () {
             console.log("[ centrifuge connected ]")
         });
-        this.centrifuge.on('disconnect', function(){
+        this.centrifuge.on('disconnect', function () {
             console.log("[ centrifuge disconnected ]")
         });
         this.centrifuge.connect();
 
 
-        this.centrifuge.subscribe("public", function(message) {
+        this.centrifuge.subscribe("public", function (message) {
             console.log(message);
         });
 
-        if (!window.Notification || !Notification.requestPermission){
+        if (!window.Notification || !Notification.requestPermission) {
             console.log('...')
-        }else{
-            Notification.requestPermission(function(permission){
+        } else {
+            Notification.requestPermission(function (permission) {
                 // console.log('Результат запроса прав:', permission);
             });
         }
     }
 
 
-    render (){
-        return (
-            this.state.load ?
-                <div className="wrapper">
-                    <Header
-                        auth={this.state.auth}
-                        user={this.state.data[0]}
-                        load={this.state.load}
-                    />
-                    <Content
-                        auth={this.state.auth}
-                        data={this.state.data}
-                        feed={this.state.feed}
-                        cent={this.centrifuge}
-                        notification_count={this.state.notification_count}
-                        notification={this.state.notification}
-                        messagesCount={this.state.messagesCount}
-                    />
-                </div>
-            :
-                null
-        )
+    render() {
+        return (this.state.load ? <div className="wrapper">
+            <Header
+                auth={this.state.auth}
+                user={this.state.data[0]}
+                load={this.state.load}
+            />
+            <Content
+                auth={this.state.auth}
+                data={this.state.data}
+                feed={this.state.feed}
+                cent={this.centrifuge}
+                notification_count={this.state.notification_count}
+                notification={this.state.notification}
+                messagesCount={this.state.messagesCount}
+            />
+        </div> : null)
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component }  from "react";
+import React, {Component} from "react";
 import {Link} from "react-navi";
 
 class People extends Component {
@@ -20,7 +20,7 @@ class People extends Component {
         })
     }
 
-    allUsers = (event) =>{
+    allUsers = (event) => {
         document.getElementById("search_users").value = ""
         event.target.classList.add('button-select')
         fetch("api/user", {
@@ -40,7 +40,7 @@ class People extends Component {
 
     downPage = () => {
 
-        if (window.location.pathname !== "/people" ){
+        if (window.location.pathname !== "/people") {
             return
         }
 
@@ -51,7 +51,7 @@ class People extends Component {
         );
 
 
-        if  (window.scrollY >= scrollHeight - innerHeight) {
+        if (window.scrollY >= scrollHeight - innerHeight) {
             if (!this.state.scrollDown) {
 
                 this.setState({
@@ -76,7 +76,7 @@ class People extends Component {
                             this.setState({
                                 small_louder_show: false
                             })
-                        }else{
+                        } else {
                             let tmp = [...store.people, ...res.data]
                             this.state.store.dispatch({
                                 type: "ACTION_UPDATE_PEOPLE", value: tmp
@@ -92,7 +92,7 @@ class People extends Component {
                         console.log(error)
                     });
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.setState({scrollDown: false})
                 }, 1000)
             }
@@ -135,7 +135,7 @@ class People extends Component {
                         .catch(error => {
                             console.log(error)
                         });
-                }else{
+                } else {
                     this.setState({
                         load: "notAuth"
                     })
@@ -170,7 +170,7 @@ class People extends Component {
                         usersSearch: res.data,
                         load: "continueSearch"
                     });
-                }else{
+                } else {
                     this.setState({
                         usersSearch: res.data,
                         load: "onSearchError"
@@ -214,10 +214,13 @@ class People extends Component {
                                     {/*    </p>*/}
                                     {/*</div>*/}
                                     <div>
-                                        <input placeholder="Начните вводить..." id="search_users" onFocus={this.focusSearch} onBlur={this.blurSearch} onChange={this.changeSearch}/>
+                                        <input placeholder="Начните вводить..." id="search_users"
+                                               onFocus={this.focusSearch} onBlur={this.blurSearch}
+                                               onChange={this.changeSearch}/>
                                     </div>
                                     <div className="tags-wrapper">
-                                        <div className="button-default-tag tags-item unselectable button-select" id="all_users" action="all" onClick={this.allUsers}>
+                                        <div className="button-default-tag tags-item unselectable button-select"
+                                             id="all_users" action="all" onClick={this.allUsers}>
                                             Все
                                         </div>
                                     </div>
@@ -225,12 +228,14 @@ class People extends Component {
                                 {
                                     this.state.load === "load" ?
                                         <div className="loader-wrapper feed-wrapper">
-                                            <div className="loader" />
+                                            <div className="loader"/>
                                         </div>
                                         :
                                         this.state.load === "error" ?
                                             <div>
-                                                <div className="not_news">Ошибка соединения с сервером. Попробуйте позднее.</div>
+                                                <div className="not_news">Ошибка соединения с сервером. Попробуйте
+                                                    позднее.
+                                                </div>
                                             </div>
                                             :
                                             this.state.load === "onFocusSearch" ?
@@ -254,7 +259,9 @@ class People extends Component {
                                                                     <div key={data.id} className="users-view">
                                                                         <Link href={`/user/${data?.id}`}>
                                                                             <div className="image-user">
-                                                                                <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
+                                                                                <img className="image-user-src-people"
+                                                                                     src={data.avatar_url}
+                                                                                     alt={data.login}/>
                                                                             </div>
                                                                         </Link>
                                                                         <div className="info-user">
@@ -270,7 +277,7 @@ class People extends Component {
                                                                                     Компания:
                                                                                     {
                                                                                         data?.company ?
-                                                                                            " "+data.company
+                                                                                            " " + data.company
                                                                                             :
                                                                                             " не указана"
                                                                                     }
@@ -279,7 +286,7 @@ class People extends Component {
                                                                                     Локация:
                                                                                     {
                                                                                         data?.location ?
-                                                                                            " "+data.location
+                                                                                            " " + data.location
                                                                                             :
                                                                                             " не указана"
                                                                                     }
@@ -299,7 +306,10 @@ class People extends Component {
                                                                         <div key={data.id} className="users-view">
                                                                             <Link href={`/user/${data?.id}`}>
                                                                                 <div className="image-user">
-                                                                                    <img className="image-user-src-people" src={data.avatar_url} alt={data.login}/>
+                                                                                    <img
+                                                                                        className="image-user-src-people"
+                                                                                        src={data.avatar_url}
+                                                                                        alt={data.login}/>
                                                                                 </div>
                                                                             </Link>
                                                                             <div className="info-user">
@@ -315,7 +325,7 @@ class People extends Component {
                                                                                         Компания:
                                                                                         {
                                                                                             data?.company ?
-                                                                                                " "+data.company
+                                                                                                " " + data.company
                                                                                                 :
                                                                                                 " не указана"
                                                                                         }
@@ -324,7 +334,7 @@ class People extends Component {
                                                                                         Локация:
                                                                                         {
                                                                                             data?.location ?
-                                                                                                " "+data.location
+                                                                                                " " + data.location
                                                                                                 :
                                                                                                 " не указана"
                                                                                         }
@@ -337,9 +347,9 @@ class People extends Component {
                                                                 {
                                                                     this.state.small_louder_show ?
                                                                         <div className="loader-wrapper feed-wrapper">
-                                                                            <div className="loader-small" />
+                                                                            <div className="loader-small"/>
                                                                         </div>
-                                                                    :
+                                                                        :
                                                                         <div className="loader-wrapper feed-wrapper">
                                                                             <div>
                                                                                 Больше показать нечего

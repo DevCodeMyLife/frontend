@@ -8,7 +8,7 @@ import k from "../icon/k.png"
 import song from "../sound/pop.mp3"
 
 
-class Messages extends Component{
+class Messages extends Component {
     constructor(props) {
         super(props);
 
@@ -51,7 +51,7 @@ class Messages extends Component{
     }
 
     getPreferredColorScheme = () => {
-        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+        if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
             this.setState({
                 isDark: "dark"
             })
@@ -66,7 +66,7 @@ class Messages extends Component{
     videoMain = React.createRef()
     videoPeer = React.createRef()
     localStream = null
-    streamConstraints = { "audio": true, "video": false };
+    streamConstraints = {"audio": true, "video": false};
     offerOptions = {
         offerToReceiveAudio: 1,
         offerToReceiveVideo: 0
@@ -91,14 +91,14 @@ class Messages extends Component{
         }
 
         if (event)
-            window.history.pushState({urlPath:`/messages`},"",`/messages`)
+            window.history.pushState({urlPath: `/messages`}, "", `/messages`)
 
         fetch("/api/messages", {
             method: "GET"
         })
             .then(response => response.json())
             .then(res => {
-                if (res?.status?.code === 0){
+                if (res?.status?.code === 0) {
                     this.setState({
                         chats: res?.data,
                         dialog: false,
@@ -127,7 +127,6 @@ class Messages extends Component{
             value: document.getElementById("message_chat").value,
             c_id: this.state.cid
         }
-
 
 
         let value = document.getElementById("message_chat").value
@@ -180,21 +179,21 @@ class Messages extends Component{
 
         let value = event.target.value
 
-        if (this.state.cent_channel){
+        if (this.state.cent_channel) {
             this.state.cent_channel.publish(
                 {
                     "input": {
                         "typing": store.auth.user.data.login
                     }
                 }).then(
-                function() {
+                function () {
                     // success ack from Centrifugo received
-                }, function(err) {
+                }, function (err) {
                     // publish call failed with error
                 }
             );
         }
-        if (event.keyCode===13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1){
+        if (event.keyCode === 13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1) {
             let mes = {
                 created_at: new Date().getTime(),
                 c_id: this.state.cid,
@@ -245,7 +244,7 @@ class Messages extends Component{
         target.style.height = "50px"
     }
 
-    updateState(){
+    updateState() {
         if (this.state.dialog) {
             let path = `/api/messages/${this.state.cid}`
 
@@ -254,9 +253,9 @@ class Messages extends Component{
             })
                 .then(response => response.json())
                 .then(res => {
-                    if (res?.status?.code === 0){
+                    if (res?.status?.code === 0) {
                         this.setState({
-                            messages: res.data.sort(function (x, y){
+                            messages: res.data.sort(function (x, y) {
                                 return Math.round(
                                     new Date(x.created_at).getTime() * 1000
                                 ) > Math.round(
@@ -302,7 +301,7 @@ class Messages extends Component{
         let _this = this
         let path = `/api/messages/${cid}`
 
-        window.history.pushState({urlPath:`/messages?cid=${cid}`},"",`/messages?cid=${cid}`)
+        window.history.pushState({urlPath: `/messages?cid=${cid}`}, "", `/messages?cid=${cid}`)
 
         let cent_channel = store.centrifuge.object.subscribe(cid, async function (message) {
             let data = _this.state.messages
@@ -327,7 +326,7 @@ class Messages extends Component{
                 case "offer":
                     if (message?.data?.uid === _this.state.uidUserPeerMainUUID)
                         console.log(message?.data?.offer)
-                        message?.data?.offer && await _this.onOffer(message?.data?.offer);
+                    message?.data?.offer && await _this.onOffer(message?.data?.offer);
                     break;
 
                 case "answer":
@@ -409,11 +408,11 @@ class Messages extends Component{
         })
             .then(response => response.json())
             .then(res => {
-                if (res?.status?.code === 0){
+                if (res?.status?.code === 0) {
 
 
                     this.setState({
-                        messages: res.data.sort(function (x, y){
+                        messages: res.data.sort(function (x, y) {
                             return Math.round(
                                 new Date(x.created_at).getTime() * 1000
                             ) > Math.round(
@@ -463,19 +462,19 @@ class Messages extends Component{
         const urlParams = new URLSearchParams(window.location.search);
         const cid = urlParams.get('cid');
 
-        if (cid){
+        if (cid) {
             this.setState({
                 cid: cid,
                 chats: [1]
             })
 
             this.openDialog(cid)
-        }else{
+        } else {
             this.allMessage()
         }
     }
 
-    async getMediaStream(){
+    async getMediaStream() {
         const store = this.state.store.getState()
 
         //  Старые браузеры не поддерживают новое свойство mediaDevices
@@ -486,7 +485,7 @@ class Messages extends Component{
         }
 
         if (navigator.mediaDevices.getUserMedia === undefined) {
-            navigator.mediaDevices.getUserMedia = function(constraints) {
+            navigator.mediaDevices.getUserMedia = function (constraints) {
 
                 let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.GetUserMedia;
 
@@ -494,7 +493,7 @@ class Messages extends Component{
                     return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
                 }
 
-                return new Promise(function(resolve, reject) {
+                return new Promise(function (resolve, reject) {
                     getUserMedia.call(navigator, constraints, resolve, reject);
                 });
             }
@@ -506,7 +505,7 @@ class Messages extends Component{
             type: "ACTION_SET_STREAM", value: this.localStream
         })
 
-        if (!this.state.am){
+        if (!this.state.am) {
             this.state.cent_channel.publish({
                 type: "ready",
                 uid: this.state.uidUserPeer
@@ -622,7 +621,7 @@ class Messages extends Component{
     }
 
     scrollToBottom = () => {
-        this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+        this.messagesEndRef.current.scrollIntoView({behavior: 'smooth'})
     }
 
     async start(e) {
@@ -689,7 +688,7 @@ class Messages extends Component{
         }
     }
 
-    async createOffer(){
+    async createOffer() {
         let this_ = this
         const store = this.state.store.getState()
 
@@ -729,17 +728,17 @@ class Messages extends Component{
             console.log(store.webRTC.pc.localDescription)
 
             this.state.cent_channel.publish({
-                    type: "answer",
-                    answer: store.webRTC.pc.localDescription,
-                    uid: this_.state.uidUserPeer
-                }).then(
+                type: "answer",
+                answer: store.webRTC.pc.localDescription,
+                uid: this_.state.uidUserPeer
+            }).then(
                 function () {
                     // success ack from Centrifugo received
                 }, function (err) {
                     // publish call failed with error
                 }
             )
-        }else{
+        } else {
 
         }
     }
@@ -768,7 +767,7 @@ class Messages extends Component{
         const store = this.state.store.getState()
 
         if (this.state.load) {
-            if (!store.components.settings.messenger){
+            if (!store.components.settings.messenger) {
                 return (
                     <div className="content-wall-views">
                         <div className="feed-wrapper">
@@ -780,7 +779,7 @@ class Messages extends Component{
                         </div>
                     </div>
                 )
-            }else {
+            } else {
                 return (
                     <div>
                         <div className="content-wall-views">
@@ -791,7 +790,8 @@ class Messages extends Component{
                                             Все диалоги
                                         </div>
                                         <div className="title-dialog">
-                                            <a className="link_github" target="_blank" href={"/user/" + this.state.linkUser}
+                                            <a className="link_github" target="_blank"
+                                               href={"/user/" + this.state.linkUser}
                                                rel="noreferrer">{this.state.dialogTitle}</a>
                                         </div>
                                         {
@@ -819,7 +819,7 @@ class Messages extends Component{
                                                     <div className="photo-wrapper">
                                                         <img src={this.state.avatar}
                                                              alt={this.state.dialogTitle}
-                                                             style={{ maxWidth: "28px" }}
+                                                             style={{maxWidth: "28px"}}
                                                         />
                                                     </div>
                                                 </div>
@@ -906,12 +906,14 @@ class Messages extends Component{
                                                                                 </Link>
                                                                                 <div className="value-post">
                                                                                     <div className="feed-item-title">
-                                                                                        <Link href={`/user/${message?.uid}`}>
+                                                                                        <Link
+                                                                                            href={`/user/${message?.uid}`}>
                                                                                             <div className="link-user">
                                                                                                 {message?.login}
                                                                                             </div>
                                                                                         </Link>
-                                                                                        <div className="feed-item-datetime">
+                                                                                        <div
+                                                                                            className="feed-item-datetime">
                                                                                             {
                                                                                                 new Date(
                                                                                                     Math.round(
@@ -928,12 +930,13 @@ class Messages extends Component{
                                                                             </div>
                                                                         </div>
                                                                         :
-                                                                        <div className="message-item flex-start" style={{
-                                                                            // display: "flex",
-                                                                            background: !message.read ? "var(--not-read-message)" : "none",
-                                                                            boxShadow: "none",
-                                                                            // flexFlow: "column wrap"
-                                                                        }}
+                                                                        <div className="message-item flex-start"
+                                                                             style={{
+                                                                                 // display: "flex",
+                                                                                 background: !message.read ? "var(--not-read-message)" : "none",
+                                                                                 boxShadow: "none",
+                                                                                 // flexFlow: "column wrap"
+                                                                             }}
                                                                              onMouseEnter={() => {
                                                                                  this.read(message.c_id)
                                                                              }}
@@ -942,7 +945,7 @@ class Messages extends Component{
                                                                                 flexDirection: "row",
                                                                                 borderRadius: "10px"
                                                                             }}>
-                                                                                <Link href={`/user/${message.uid}`} >
+                                                                                <Link href={`/user/${message.uid}`}>
                                                                                     <div className="photo-wrapper">
                                                                                         <img src={message.avatar_url}
                                                                                              alt={message.login}
@@ -951,13 +954,15 @@ class Messages extends Component{
                                                                                 </Link>
                                                                                 <div className="value-post">
                                                                                     <div className="feed-item-title">
-                                                                                        <Link href={`/user/${message?.uid}`} >
+                                                                                        <Link
+                                                                                            href={`/user/${message?.uid}`}>
                                                                                             <div className="link-user">
                                                                                             <span
                                                                                                 className="test-stat">{message?.login}</span>
                                                                                             </div>
                                                                                         </Link>
-                                                                                        <div className="feed-item-datetime">
+                                                                                        <div
+                                                                                            className="feed-item-datetime">
                                                                                             {
                                                                                                 new Date(
                                                                                                     Math.round(
@@ -985,7 +990,7 @@ class Messages extends Component{
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div ref={this.messagesEndRef} />
+                                                            <div ref={this.messagesEndRef}/>
                                                         </div>
                                                         <div className="wrapper-input">
                                                             <TextareaAutosize
@@ -1000,7 +1005,8 @@ class Messages extends Component{
                                                             >
 
                                                             </TextareaAutosize>
-                                                            <div className="send-button" onClick={this.sendMessageButton}>
+                                                            <div className="send-button"
+                                                                 onClick={this.sendMessageButton}>
                                                                 <img src={send} alt="send"/>
                                                             </div>
                                                         </div>
@@ -1011,12 +1017,13 @@ class Messages extends Component{
                                                             // onClick={() => this.openDialog(chat.c_id)}
                                                             this.state.chats.map(chat =>
                                                                 chat.no_read_count ?
-                                                                    <div className="feed-wrapper-item-chat chat-flex-row"
-                                                                         style={{
-                                                                             marginBottom: 0,
-                                                                             background: "var(--hover-message-dialog)"
-                                                                         }}
-                                                                         onClick={() => this.openDialog(chat.c_id)}>
+                                                                    <div
+                                                                        className="feed-wrapper-item-chat chat-flex-row"
+                                                                        style={{
+                                                                            marginBottom: 0,
+                                                                            background: "var(--hover-message-dialog)"
+                                                                        }}
+                                                                        onClick={() => this.openDialog(chat.c_id)}>
                                                                         <div className="photo-wrapper-chat">
                                                                             <img src={chat.avatar_url}
                                                                                  alt={chat.avatar_url}/>
@@ -1025,7 +1032,8 @@ class Messages extends Component{
                                                                             padding: "13px",
 
                                                                         }}>
-                                                                            <span className="test-stat">{chat.login}</span>
+                                                                            <span
+                                                                                className="test-stat">{chat.login}</span>
                                                                             <div className="feed-item-datetime">
                                                                                 {chat.last_message?.substring(0, 40) + "..."}
                                                                             </div>
@@ -1041,9 +1049,10 @@ class Messages extends Component{
                                                                         {/*</div>*/}
                                                                     </div>
                                                                     :
-                                                                    <div className="feed-wrapper-item-chat chat-flex-row"
-                                                                         style={{marginBottom: 0}}
-                                                                         onClick={() => this.openDialog(chat.c_id)}>
+                                                                    <div
+                                                                        className="feed-wrapper-item-chat chat-flex-row"
+                                                                        style={{marginBottom: 0}}
+                                                                        onClick={() => this.openDialog(chat.c_id)}>
                                                                         <div className="photo-wrapper-chat">
                                                                             <img src={chat.avatar_url}
                                                                                  alt={chat.avatar_url}/>
@@ -1051,7 +1060,8 @@ class Messages extends Component{
                                                                         <div className="feed-item-title" style={{
                                                                             padding: "13px",
                                                                         }}>
-                                                                            <span className="test-stat">{chat.login}</span>
+                                                                            <span
+                                                                                className="test-stat">{chat.login}</span>
                                                                             <div className="feed-item-datetime">
                                                                                 {chat.last_message?.substring(0, 40) + "..."}
                                                                             </div>
@@ -1080,7 +1090,7 @@ class Messages extends Component{
                     </div>
                 );
             }
-        }else{
+        } else {
             return (
                 <div className="loader-wrapper feed-wrapper">
                     <div className="loader">

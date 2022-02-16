@@ -1,4 +1,4 @@
-import React, { Component }  from "react";
+import React, {Component} from "react";
 
 class Notification extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class Notification extends Component {
 
     }
 
-    checkNotification(uuid, addr){
+    checkNotification(uuid, addr) {
         fetch("/api/notification", {
             method: "PUT",
             body: JSON.stringify({
@@ -26,7 +26,7 @@ class Notification extends Component {
         })
             .then(response => response.json())
             .then(res => {
-                if (res.status.code === 0){
+                if (res.status.code === 0) {
                     window.location.href = `/post?uuid=${uuid}`
                 }
 
@@ -54,7 +54,7 @@ class Notification extends Component {
                                 state.auth.user.notifications?.map(notification =>
                                     notification?.is_look ?
                                         null
-                                    :
+                                        :
                                         <div className="notifications-item background-white">
                                             <div className="info-notification-item feed-item-datetime">
                                                 {this.unixToDateTime(notification?.date_time)}
@@ -71,7 +71,7 @@ class Notification extends Component {
                                                                 }}>{notification?.user_event_action}</span>
                                                                 <span> посмотрел Вашу заметку</span>
                                                             </div>
-                                                        :
+                                                            :
                                                             <div>
                                                                 <span>Кто-то посмотрел Вашу заметку</span>
                                                             </div>
@@ -85,16 +85,17 @@ class Notification extends Component {
                                                                 <span> оставил новый комментарий</span>
                                                             </div>
                                                             :
-                                                                null
+                                                            null
                                                 }
                                             </div>
                                             <div className="info-notifications-item">
                                                 <div className="button-default" onClick={() => this.checkNotification(
-                                                    notification.feeds_uuid, notification.addr)}>Перейти к заметке</div>
+                                                    notification.feeds_uuid, notification.addr)}>Перейти к заметке
+                                                </div>
                                             </div>
                                         </div>
                                 )
-                            :
+                                :
                                 <div className="error-wrapper">
                                     <div className="error-page">
                                         Новых событий пока нет.

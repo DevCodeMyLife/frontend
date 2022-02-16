@@ -10,9 +10,9 @@ import {PrismAsync as SyntaxHighlighter} from "react-syntax-highlighter";
 import {tomorrow as style} from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const options = [
-    { value: '0', label: 'Легко' },
-    { value: '1', label: 'Средне' },
-    { value: '2', label: 'Сложно' },
+    {value: '0', label: 'Легко'},
+    {value: '1', label: 'Средне'},
+    {value: '2', label: 'Сложно'},
 ];
 
 const dot = (color = 'var(--bg-grey)') => ({
@@ -32,8 +32,8 @@ const dot = (color = 'var(--bg-grey)') => ({
 });
 
 const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'var(--bg-grey)' }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    control: styles => ({...styles, backgroundColor: 'var(--bg-grey)'}),
+    option: (styles, {data, isDisabled, isFocused, isSelected}) => {
         return {
             ...styles,
             color: isDisabled
@@ -44,12 +44,12 @@ const colourStyles = {
             cursor: isDisabled ? 'not-allowed' : 'default',
         };
     },
-    input: styles => ({ ...styles, ...dot() }),
-    placeholder: styles => ({ ...styles, ...dot() }),
-    singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
+    input: styles => ({...styles, ...dot()}),
+    placeholder: styles => ({...styles, ...dot()}),
+    singleValue: (styles, {data}) => ({...styles, ...dot(data.color)}),
 };
 
-class Freelances extends Component{
+class Freelances extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,7 +93,7 @@ class Freelances extends Component{
                         .catch(error => {
                             console.log(error)
                         });
-                }else{
+                } else {
                     this.setState({
                         load: "notAuth"
                     })
@@ -113,7 +113,7 @@ class Freelances extends Component{
         });
     };
 
-    cancelTask = () =>{
+    cancelTask = () => {
         this.setState({
             mode: null
         })
@@ -175,7 +175,8 @@ class Freelances extends Component{
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter style={style} wrapLongLines={false} language={match[1]} showLineNumbers={false} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+                <SyntaxHighlighter style={style} wrapLongLines={false} language={match[1]} showLineNumbers={false}
+                                   PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
                     {children}
@@ -184,7 +185,7 @@ class Freelances extends Component{
         }
     }
 
-    setStartDate(d){
+    setStartDate(d) {
         console.log(d)
     }
 
@@ -201,17 +202,18 @@ class Freelances extends Component{
                                 </div>
                             </div>
                         </div>
-                    :
+                        :
                         <div>
                             <div className="wrapper-search wrapper-inline-block unselectable">
                                 <div className="main-place-wrapper">
                                     <p>
-                                        <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать свои.<br/>
+                                        <b>Фриланс - </b> Здесь ты можешь взять чьи-то задачи в работу либо создать
+                                        свои.<br/>
                                         Раздел пока в разработке, поэтому здесь ничего нет.
                                     </p>
                                 </div>
                                 <div>
-                                    <input placeholder="Найдем что нибудь для Вас..." onFocus={()=>{
+                                    <input placeholder="Найдем что нибудь для Вас..." onFocus={() => {
                                         this.cancelTask()
                                     }}/>
                                 </div>
@@ -220,7 +222,8 @@ class Freelances extends Component{
                                         this.state.mode === "create" ?
                                             null
                                             :
-                                            <div className="button-default-tag tags-item unselectable" id="all" action="create" onClick={this.createTask}>
+                                            <div className="button-default-tag tags-item unselectable" id="all"
+                                                 action="create" onClick={this.createTask}>
                                                 Создать задачу
                                             </div>
                                         // null
@@ -235,7 +238,8 @@ class Freelances extends Component{
                                             </div>
                                             <div className="wrapper-bottom">
                                                 <div className="wrapper-flex-start">
-                                                    <input autoFocus={true} className="input-default" id="title" placeholder="Заголовок" type="text" />
+                                                    <input autoFocus={true} className="input-default" id="title"
+                                                           placeholder="Заголовок" type="text"/>
                                                 </div>
                                                 <div className="wrapper-flex-end-margin">
                                                     <Select
@@ -265,7 +269,7 @@ class Freelances extends Component{
                                                     <CurrencyInput
                                                         id="price"
                                                         className="input-default"
-                                                        intlConfig={{ locale: 'ru-RU', currency: 'RUB' }}
+                                                        intlConfig={{locale: 'ru-RU', currency: 'RUB'}}
                                                         name="price"
                                                         placeholder="Стоимость"
                                                         defaultValue={null}
@@ -277,10 +281,13 @@ class Freelances extends Component{
                                                     />
                                                 </div>
                                                 <div className="wrapper-flex-end-margin">
-                                                    <div className="button-default" onClick={()=>{
+                                                    <div className="button-default" onClick={() => {
                                                         this.cancelTask()
-                                                    }}>Отменить</div>
-                                                    <div className="button-default" onClick={this.createTaskFull}>Опубликовать</div>
+                                                    }}>Отменить
+                                                    </div>
+                                                    <div className="button-default"
+                                                         onClick={this.createTaskFull}>Опубликовать
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -297,12 +304,13 @@ class Freelances extends Component{
                             {
                                 this.state.load === "load" ?
                                     <div className="loader-wrapper feed-wrapper">
-                                        <div className="loader" />
+                                        <div className="loader"/>
                                     </div>
                                     :
                                     this.state.load === "error" ?
                                         <div>
-                                            <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.</div>
+                                            <div className="not_news">Ошибка соединеия с сервером. Попробуйте поздее.
+                                            </div>
                                         </div>
                                         :
                                         this.state.load === "onFocusSearch" ?
@@ -363,7 +371,7 @@ class Freelances extends Component{
                                                             )
                                                         }
                                                     </div>
-                                                :
+                                                    :
                                                     this.state.load === "continue" ?
                                                         <div className="feed-wrapper">
                                                             {
@@ -371,7 +379,9 @@ class Freelances extends Component{
                                                                     <div key={data.id} className="task-view">
                                                                         <div className="task-view-flex">
                                                                             <div className="image-user">
-                                                                                <img className="image-user-src" src={data.avatar_url} alt={data.login} onClick={(e) => {
+                                                                                <img className="image-user-src"
+                                                                                     src={data.avatar_url}
+                                                                                     alt={data.login} onClick={(e) => {
                                                                                     e.preventDefault();
                                                                                     window.location.href = `/user/${data?.user_creator_id}`
                                                                                 }}/>
@@ -384,29 +394,40 @@ class Freelances extends Component{
                                                                                     <div className="feed-item-datetime">
                                                                                         {
                                                                                             data?.status === "wait" ?
-                                                                                                <span style={{color: "green"}}>Ожидает исполнителя</span>
-                                                                                            :
-                                                                                                <span style={{color: "green"}}>Ожидает исполнителя</span>
+                                                                                                <span
+                                                                                                    style={{color: "green"}}>Ожидает исполнителя</span>
+                                                                                                :
+                                                                                                <span
+                                                                                                    style={{color: "green"}}>Ожидает исполнителя</span>
                                                                                         }
                                                                                     </div>
                                                                                     <div className="feed-item-datetime">
                                                                                         {
                                                                                             data?.complexity === 0 ?
-                                                                                                <span style={{color: "green"}}>Легко</span>
-                                                                                            :
-                                                                                                data?.complexity === 1 ?
-                                                                                                    <span style={{color: "orange"}}>Средне</span>
+                                                                                                <span
+                                                                                                    style={{color: "green"}}>Легко</span>
                                                                                                 :
-                                                                                                    data?.complexity === 2 ?
-                                                                                                        <span style={{color: "red"}}>Сложно</span>
+                                                                                                data?.complexity === 1 ?
+                                                                                                    <span
+                                                                                                        style={{color: "orange"}}>Средне</span>
                                                                                                     :
-                                                                                                        <span >Сложность не определенна</span>
+                                                                                                    data?.complexity === 2 ?
+                                                                                                        <span
+                                                                                                            style={{color: "red"}}>Сложно</span>
+                                                                                                        :
+                                                                                                        <span>Сложность не определенна</span>
                                                                                         }
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="task-price">
-                                                                                <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "var(--font-color)"}}>{data?.price} ₽</div>
+                                                                                <div style={{
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    alignItems: "center",
+                                                                                    color: "var(--font-color)"
+                                                                                }}>{data?.price} ₽
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         {/*<div className="wrapper-bottom">*/}

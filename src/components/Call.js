@@ -48,10 +48,10 @@ class Call extends Component {
         })
     }
 
-    update(){
+    update() {
         const store = this.state.store.getState()
 
-        if(store.call.cc){
+        if (store.call.cc) {
             this.setState({
                 openPopUp: false,
                 callNow: false,
@@ -131,8 +131,8 @@ class Call extends Component {
 
         await this.getMediaStream()
 
-        let a = setInterval(()=>{
-            if (this.state.channelCallObj){
+        let a = setInterval(() => {
+            if (this.state.channelCallObj) {
                 this.state.channelCallObj?.publish({
                     type: "status_call",
                     uid: this.state.uidUserPeer
@@ -145,7 +145,7 @@ class Call extends Component {
 
                 clearInterval(a)
             }
-        },3000)
+        }, 3000)
 
     }
 
@@ -162,7 +162,7 @@ class Call extends Component {
         }
     }
 
-    async createOffer(){
+    async createOffer() {
         let this_ = this
         const store = this.state.store.getState()
 
@@ -206,7 +206,7 @@ class Call extends Component {
         }
     }
 
-    async getMediaStream(){
+    async getMediaStream() {
 
         const store = this.state.store.getState()
 
@@ -216,7 +216,7 @@ class Call extends Component {
         }
 
         if (navigator.mediaDevices.getUserMedia === undefined) {
-            navigator.mediaDevices.getUserMedia = function(constraints) {
+            navigator.mediaDevices.getUserMedia = function (constraints) {
 
                 let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -224,7 +224,7 @@ class Call extends Component {
                     return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
                 }
 
-                return new Promise(function(resolve, reject) {
+                return new Promise(function (resolve, reject) {
                     getUserMedia.call(navigator, constraints, resolve, reject);
                 });
             }
@@ -236,7 +236,7 @@ class Call extends Component {
             type: "ACTION_SET_STREAM", value: this.localStream
         })
 
-        if (!store.am){
+        if (!store.am) {
             this.state.channelCallObj.publish({
                 type: "ready",
                 uid: this.state.uidUserPeer
@@ -252,7 +252,7 @@ class Call extends Component {
         await this.openCall(store.stream)
     };
 
-    playSoundCall(){
+    playSoundCall() {
         this.state.context.resume().then(() => {
             this.audioCall.currentTime = 0
             this.audioCall.loop = true
@@ -261,7 +261,7 @@ class Call extends Component {
     }
 
     getPreferredColorScheme = () => {
-        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+        if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
             this.setState({
                 isDark: "dark"
             })
@@ -274,7 +274,7 @@ class Call extends Component {
 
     componentDidMount() {
         const state = this.state.store.getState();
-        if (state.auth.user.isAuth){
+        if (state.auth.user.isAuth) {
             this.setState({
                 uidUserPeerMainUUID: sha256(state.auth.user.data.login)
             })
@@ -286,18 +286,18 @@ class Call extends Component {
             this.eventing()
 
             this.getPreferredColorScheme()
-            window.matchMedia('(prefers-color-scheme: dark)').onchange =  (event) => {
+            window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
                 this.getPreferredColorScheme()
             };
 
             let this_ = this
 
-            state.webRTC.pc.ontrack = function (event){
+            state.webRTC.pc.ontrack = function (event) {
                 this_.state.audioPeer.srcObject = event.streams[0]
                 this_.state.audioPeer.play()
             }
 
-            state.webRTC.pc.onicecandidate = function (event){
+            state.webRTC.pc.onicecandidate = function (event) {
 
                 event.candidate && this_.state.channelCallObj.publish({
                     type: "candidate",
@@ -320,23 +320,23 @@ class Call extends Component {
                     })
 
                     this_.state.channelCallObj.publish({
-                            type: "connected",
-                            uid: this_.state.uidUserPeer
+                        type: "connected",
+                        uid: this_.state.uidUserPeer
                     })
-                } else if(state.webRTC.pc.connectionState === "disconnected"){
+                } else if (state.webRTC.pc.connectionState === "disconnected") {
                     this_.setState({
                         status: "Звонок завершен"
                     })
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this_.setState({
                             videoView: false
                         })
                     }, 5000)
-                } else if(state.webRTC.pc.connectionState === "failed"){
+                } else if (state.webRTC.pc.connectionState === "failed") {
                     this_.setState({
                         status: "Ошибка соединения"
                     })
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this_.setState({
                             videoView: false
                         })
@@ -346,7 +346,7 @@ class Call extends Component {
         }
     }
 
-    subscribeChannelCall(channelId){
+    subscribeChannelCall(channelId) {
         const state = this.state.store.getState();
 
         this.state.channelCallObj && this.state.channelCallObj.unsubscribe()
@@ -363,7 +363,7 @@ class Call extends Component {
                 case "offer":
                     if (event?.data?.uid === this_.state.uidUserPeerMainUUID)
                         console.log(event?.data)
-                        event?.data?.offer && await this_.onOffer(event?.data?.offer);
+                    event?.data?.offer && await this_.onOffer(event?.data?.offer);
                     break;
 
                 case "answer":
@@ -431,7 +431,7 @@ class Call extends Component {
 
     }
 
-    eventing(){
+    eventing() {
         const state = this.state.store.getState();
 
         let channelTitle = sha256(state.auth.user.data.login)
@@ -461,7 +461,7 @@ class Call extends Component {
                     this_.subscribeChannelCall(event.data.id_channel)
                     break
                 case "action_call":
-                    if(event?.data.event === "close_other_window"){
+                    if (event?.data.event === "close_other_window") {
                         if (!this_.state.thisWindow) {
                             this_.setState({
                                 callNow: false,
@@ -471,7 +471,7 @@ class Call extends Component {
                             this.state.context.resume().then(() => {
                                 this.audioCall.pause()
                             })
-                        }else{
+                        } else {
                             this_.setState({
                                 thisWindow: false
                             });
@@ -498,7 +498,7 @@ class Call extends Component {
         });
     };
 
-    drop(){
+    drop() {
         const store = this.state.store.getState();
         // this.setState({
         //     videoView: false
@@ -523,72 +523,81 @@ class Call extends Component {
         const store = this.state.store.getState();
 
         return (
-                this.state.openPopUp ?
-                    <div>
-                        <div className="pop-up">
-                            {
-                                callNow ?
-                                    <div className="view-call-now">
-                                        <div className="view-image-user">
-                                            <img className="image-user-src-standard round-animate" src={this.state.photoUrl}  alt="user"/>
-                                        </div>
-                                        <div className="center">{ name }</div>
-                                        <div className="view-flex margin-top">
-                                            <div className="view-flex-start">
-                                                <div className="button-round background-green unselectable" onClick={()=> this.answer()}>
-                                                    Ответить
-                                                </div>
-                                            </div>
-                                            <div className="view-flex-end">
-                                                <div className="button-round background-red unselectable" onClick={()=> this.cancel()}>
-                                                    Отклонить
-                                                </div>
+            this.state.openPopUp ?
+                <div>
+                    <div className="pop-up">
+                        {
+                            callNow ?
+                                <div className="view-call-now">
+                                    <div className="view-image-user">
+                                        <img className="image-user-src-standard round-animate" src={this.state.photoUrl}
+                                             alt="user"/>
+                                    </div>
+                                    <div className="center">{name}</div>
+                                    <div className="view-flex margin-top">
+                                        <div className="view-flex-start">
+                                            <div className="button-round background-green unselectable"
+                                                 onClick={() => this.answer()}>
+                                                Ответить
                                             </div>
                                         </div>
-                                    </div>
-                                    :
-                                    null
-                            }
-                        </div>
-                    </div>
-                :
-                    this.state.videoView || store.call.state ?
-                        <Draggable onDrag={this.handleDrag}>
-                            <div className="view-call-now position-call" style={{padding: "15px"}}>
-                                <div className="control">
-                                    <div className="status">
-                                        { this.state.status }
-                                    </div>
-                                    <div className="mic">
-                                        {
-                                            this.state.isDark === "light" ?
-                                                this.state.isMuted ?
-                                                    <img style={{maxWidth: "25px"}} src={mic_mute} alt="mic" onClick={()=> this.muted()}/>
-                                                :
-                                                    <img style={{maxWidth: "25px"}} src={mic} alt="mic" onClick={()=> this.muted()}/>
-                                            :
-                                                this.state.isMuted ?
-                                                    <img style={{maxWidth: "25px"}} src={mic_mute_dark} alt="mic" onClick={()=> this.muted()}/>
-                                                    :
-                                                    <img style={{maxWidth: "25px"}} src={mic_dark} alt="mic" onClick={()=> this.muted()}/>
-                                        }
-
-                                    </div>
-                                    <div className="call-ha">
-                                        {
-                                            this.state.isDark === "light" ?
-                                                <img style={{maxWidth: "25px"}} src={drop_call} alt="mic" onClick={()=> this.drop()}/>
-                                                :
-                                                <img style={{maxWidth: "25px"}} src={drop_call_dark} alt="mic" onClick={()=> this.drop()}/>
-
-                                        }
-
+                                        <div className="view-flex-end">
+                                            <div className="button-round background-red unselectable"
+                                                 onClick={() => this.cancel()}>
+                                                Отклонить
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                :
+                                null
+                        }
+                    </div>
+                </div>
+                :
+                this.state.videoView || store.call.state ?
+                    <Draggable onDrag={this.handleDrag}>
+                        <div className="view-call-now position-call" style={{padding: "15px"}}>
+                            <div className="control">
+                                <div className="status">
+                                    {this.state.status}
+                                </div>
+                                <div className="mic">
+                                    {
+                                        this.state.isDark === "light" ?
+                                            this.state.isMuted ?
+                                                <img style={{maxWidth: "25px"}} src={mic_mute} alt="mic"
+                                                     onClick={() => this.muted()}/>
+                                                :
+                                                <img style={{maxWidth: "25px"}} src={mic} alt="mic"
+                                                     onClick={() => this.muted()}/>
+                                            :
+                                            this.state.isMuted ?
+                                                <img style={{maxWidth: "25px"}} src={mic_mute_dark} alt="mic"
+                                                     onClick={() => this.muted()}/>
+                                                :
+                                                <img style={{maxWidth: "25px"}} src={mic_dark} alt="mic"
+                                                     onClick={() => this.muted()}/>
+                                    }
+
+                                </div>
+                                <div className="call-ha">
+                                    {
+                                        this.state.isDark === "light" ?
+                                            <img style={{maxWidth: "25px"}} src={drop_call} alt="mic"
+                                                 onClick={() => this.drop()}/>
+                                            :
+                                            <img style={{maxWidth: "25px"}} src={drop_call_dark} alt="mic"
+                                                 onClick={() => this.drop()}/>
+
+                                    }
+
+                                </div>
                             </div>
-                        </Draggable>
+                        </div>
+                    </Draggable>
                     :
-                        null
+                    null
         )
     }
 }

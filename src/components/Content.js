@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Footer from "./Footer";
 import Feed from "./Feed";
 
@@ -17,9 +17,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import Messages from "./Messages";
 
 
-
-
-class Content extends Component  {
+class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,11 +56,10 @@ class Content extends Component  {
 
         console.log(`[ routing page => ${attr} ]`)
 
-        if (attr){
-            window.history.pushState({urlPath:attr},"",attr)
+        if (attr) {
+            window.history.pushState({urlPath: attr}, "", attr)
             this.swapComponent()
         }
-
 
 
     };
@@ -83,25 +80,28 @@ class Content extends Component  {
     }
 
 
-
     getChat() {
         fetch("/api/chat", {
             method: "GET"
         })
             .then(response => response.json())
             .then(res => {
-                if (res.status.code === 0){
+                if (res.status.code === 0) {
                     this.setState({
                         message: res.data,
                     });
 
 
-                    setTimeout(()=> {
+                    setTimeout(() => {
                         if (document.getElementById('messages'))
-                            document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                            document.getElementById('messages').scrollTo({
+                                top: document.getElementById('messages').scrollHeight,
+                                left: 0,
+                                behavior: 'smooth'
+                            });
                         // document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
                     }, 200)
-                }else{
+                } else {
                     this.sendLogs(res.status.message)
                     console.log("[ Is not auth ]")
                 }
@@ -199,8 +199,8 @@ class Content extends Component  {
         input.selectionStart = input.value.length
     }
 
-    _handleKeyDownChat = (event)  => {
-        if (event.keyCode===13 && event.ctrlKey) {
+    _handleKeyDownChat = (event) => {
+        if (event.keyCode === 13 && event.ctrlKey) {
             let data = {
                 value: event.target.value
             }
@@ -249,14 +249,18 @@ class Content extends Component  {
 
                 data.push(message.data)
                 this_.setState({message: data})
-                document.getElementById('messages').scrollTo({top: document.getElementById('messages').scrollHeight, left: 0, behavior: 'smooth' });
+                document.getElementById('messages').scrollTo({
+                    top: document.getElementById('messages').scrollHeight,
+                    left: 0,
+                    behavior: 'smooth'
+                });
 
                 // document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
             });
 
-            chatAll.presenceStats().then(function(resp) {
+            chatAll.presenceStats().then(function (resp) {
                 this_.setState({countUser: resp.num_clients})
-            }, function(err) {
+            }, function (err) {
                 this_.sendLogs(err)
                 console.log(err)
             });
@@ -270,9 +274,9 @@ class Content extends Component  {
                 <div className="content">
                     <div id="vertical_menu" className="reviews-menu">
                         <div className="wrapper-vertical-nav">
-                            <div className="nav-item" path="/" onClick={this.handleClick} >
-                                <div  className="icon-image" path="/" >
-                                    <img  src={home} alt="home" path="/" />
+                            <div className="nav-item" path="/" onClick={this.handleClick}>
+                                <div className="icon-image" path="/">
+                                    <img src={home} alt="home" path="/"/>
                                 </div>
                                 <div className="nav-value" path="/">
                                     Главная
@@ -281,11 +285,12 @@ class Content extends Component  {
                             {
                                 this.state.auth ?
                                     <div>
-                                        <div className="nav-item" path={`/user/${this.state.data[0].id}`} onClick={this.handleClick} >
-                                            <div  className="icon-image" path={`/user/${this.state.data[0].id}`}  >
-                                                <img src={notes} alt="home" path={`/user/${this.state.data[0].id}`} />
+                                        <div className="nav-item" path={`/user/${this.state.data[0].id}`}
+                                             onClick={this.handleClick}>
+                                            <div className="icon-image" path={`/user/${this.state.data[0].id}`}>
+                                                <img src={notes} alt="home" path={`/user/${this.state.data[0].id}`}/>
                                             </div>
-                                            <div path={`/user/${this.state.data[0].id}`}  className="nav-value">
+                                            <div path={`/user/${this.state.data[0].id}`} className="nav-value">
                                                 Заметки
                                             </div>
                                         </div>
@@ -306,36 +311,38 @@ class Content extends Component  {
                                         {/*    /!*    Заметки*!/*/}
                                         {/*    /!*</div>*!/*/}
                                         {/*</div>*/}
-                                        <div className="nav-item" path="/messages" onClick={this.handleClick} >
+                                        <div className="nav-item" path="/messages" onClick={this.handleClick}>
                                             {
                                                 this.state.messagesCount ?
-                                                    <div className="counter-notification" id="counter_notification" path="/messages" >
+                                                    <div className="counter-notification" id="counter_notification"
+                                                         path="/messages">
                                                         {this.state.messagesCount}
                                                     </div>
                                                     :
                                                     null
                                             }
-                                            <div  className="icon-image" path="/messages" >
-                                                <img src={messages} alt="messages" path="/messages" />
+                                            <div className="icon-image" path="/messages">
+                                                <img src={messages} alt="messages" path="/messages"/>
                                             </div>
                                             <div path="/messages" className="nav-value">
                                                 Мессенджер
                                             </div>
                                         </div>
-                                        <div className="nav-item" path="/notification" onClick={this.handleClick} >
+                                        <div className="nav-item" path="/notification" onClick={this.handleClick}>
                                             {
                                                 this.state.notification_count ?
-                                                    <div className="counter-notification" id="counter_notification" path="/notification" >
+                                                    <div className="counter-notification" id="counter_notification"
+                                                         path="/notification">
                                                         {this.state.notification_count}
                                                     </div>
-                                                :
+                                                    :
                                                     null
                                             }
 
-                                            <div  className="icon-image" path="/notification"  >
-                                                <img src={notification} alt="home" path="/notification" />
+                                            <div className="icon-image" path="/notification">
+                                                <img src={notification} alt="home" path="/notification"/>
                                             </div>
-                                            <div path="/notification"  className="nav-value">
+                                            <div path="/notification" className="nav-value">
                                                 Уведомления
                                             </div>
                                         </div>
@@ -356,20 +363,20 @@ class Content extends Component  {
                                         {/*    /!*</div>*!/*/}
                                         {/*</div>*/}
                                     </div>
-                                :
+                                    :
                                     null
-                                    // <div className="nav-item" path="/auth" onClick={this.handleClick} >
-                                    //     <div  className="icon-image" path="/auth" onClick={this.handleClick} >
-                                    //         <img path="/auth" onClick={this.handleClick} src={singIn} alt="home"/>
-                                    //     </div>
-                                    //     {/*<div path="/auth" onClick={this.handleClick} className="nav-value">*/}
-                                    //     {/*    Войти*/}
-                                    //     {/*</div>*/}
-                                    // </div>
+                                // <div className="nav-item" path="/auth" onClick={this.handleClick} >
+                                //     <div  className="icon-image" path="/auth" onClick={this.handleClick} >
+                                //         <img path="/auth" onClick={this.handleClick} src={singIn} alt="home"/>
+                                //     </div>
+                                //     {/*<div path="/auth" onClick={this.handleClick} className="nav-value">*/}
+                                //     {/*    Войти*/}
+                                //     {/*</div>*/}
+                                // </div>
                             }
 
                             <div className="nav-item" path="/about" onClick={this.handleClick}>
-                                <div  className="icon-image" path="/about" >
+                                <div className="icon-image" path="/about">
                                     <img path="/about" src={about} alt="about"/>
                                 </div>
                                 <div path="/about" className="nav-value">
@@ -398,7 +405,7 @@ class Content extends Component  {
                                                 <div className="message-item">
                                                     <div className="wrapper-data">
                                                         <div className="photo-wrapper">
-                                                            <img src={mes.avatar_url}  alt={mes.login} onClick={(e) => {
+                                                            <img src={mes.avatar_url} alt={mes.login} onClick={(e) => {
                                                                 e.preventDefault();
                                                                 window.location.href = `/user/${mes.id}`
                                                             }}/>
@@ -420,7 +427,8 @@ class Content extends Component  {
                                                     <div className="wrapper-data">
                                                         <div className="value-post">
                                                             <p>
-                                                                <span onClick={() => this.copyLogin(mes.login)}>{mes.value}</span>
+                                                                <span
+                                                                    onClick={() => this.copyLogin(mes.login)}>{mes.value}</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -451,7 +459,7 @@ class Content extends Component  {
                                         </div>
                                     </div>
                                 </div>
-                            :
+                                :
                                 null
 
                         }

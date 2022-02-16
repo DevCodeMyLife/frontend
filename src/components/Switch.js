@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 
-class Switch extends Component{
+class Switch extends Component {
     constructor(props) {
         super(props);
 
@@ -12,14 +12,17 @@ class Switch extends Component{
     }
 
     switcher() {
-        this.setState(({ enable }) => ({ enable: !enable }));
+        this.setState(({enable}) => ({enable: !enable}));
         this.state?.callBack(this.state.enable)
     }
 
     render() {
         return (
-            <div className="button-switch" style={this.state.enable ? {background: '#38FC93', flexDirection: 'row-reverse'} : {background: '#ff8585', flexDirection: 'row'}}>
-                <div className="bobble" onClick={() => this.switcher()}  />
+            <div className="button-switch" style={this.state.enable ? {
+                background: '#38FC93',
+                flexDirection: 'row-reverse'
+            } : {background: '#ff8585', flexDirection: 'row'}}>
+                <div className="bobble" onClick={() => this.switcher()}/>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 class Login extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class Login extends Component {
             .then(response => response.json())
             .then(res => {
                 console.log(res)
-                if (res.status.code === 0 && res.data.length > 0){
+                if (res.status.code === 0 && res.data.length > 0) {
                     this.setState({
                         isLoaded: true,
                         result: res.data
@@ -51,21 +51,21 @@ class Login extends Component {
 
         return dateObject.toLocaleString()
     }
-    render(){
-        let { isLoaded, result } = this.state;
-        if (!isLoaded){
+
+    render() {
+        let {isLoaded, result} = this.state;
+        if (!isLoaded) {
             return (
                 <div className="menu-user unselectable">
 
-                        <div className="menu-user-item">
-                            <div className="login-logo" onClick={(e) => {
-                                e.preventDefault();
-                                window.location.href = 'https://github.com/login/oauth/authorize?client_id=7262f0da224a3673dee9&redirect_uri=http://devcodemylife.tech/api/oauth/github/redirect&scope=email&state=asiud88as7d&login=devcodemylife&allow_signup=true';
-                            }}>
-                                Войти через GitHub
-                            </div>
+                    <div className="menu-user-item">
+                        <div className="login-logo" onClick={(e) => {
+                            e.preventDefault();
+                            window.location.href = 'https://github.com/login/oauth/authorize?client_id=7262f0da224a3673dee9&redirect_uri=http://devcodemylife.tech/api/oauth/github/redirect&scope=email&state=asiud88as7d&login=devcodemylife&allow_signup=true';
+                        }}>
+                            Войти через GitHub
                         </div>
-
+                    </div>
 
 
                     {/*<div className="login-value">*/}
@@ -73,19 +73,19 @@ class Login extends Component {
                     {/*</div>*/}
                 </div>
             )
-        }else{
+        } else {
             return (
                 <div>
-                {result?.map( data =>
-                    <div key="wrapper" className="menu-user unselectable">
-                        <div key={data.login} className="menu-user-item" path="/user" onClick={this.handleClick}>
-                            Ваши заметки
+                    {result?.map(data =>
+                        <div key="wrapper" className="menu-user unselectable">
+                            <div key={data.login} className="menu-user-item" path="/user" onClick={this.handleClick}>
+                                Ваши заметки
+                            </div>
+                            <div key="settings" className="menu-user-item" path="/settings" onClick={this.handleClick}>
+                                Настройки
+                            </div>
                         </div>
-                        <div key="settings" className="menu-user-item" path="/settings" onClick={this.handleClick}>
-                            Настройки
-                        </div>
-                    </div>
-                )}
+                    )}
                 </div>
             )
         }

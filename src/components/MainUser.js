@@ -14,101 +14,100 @@ import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
 import {toast} from "react-toastify";
+
 const gfm = require('remark-gfm')
 
 class MainUsers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "React"
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "React"
+        };
 
-    this.state = {
-        error: false,
-        isLoaded: false,
-        mainFeed: [],
-        showPreview: false,
-        textNews: "...",
-        heading: "...",
-        prevState: null,
-        clicked_new_post: false,
-        show_textarea: false,
-        id: 0,
-        data: [],
-        notUser: false,
-        close: false,
-        load: false,
-        rewriteMode: false,
-        rewriteValue: null,
-        rewriteTitle: null,
-        currentDateTime: new Date().getTime(),
-        isDark: "light",
-        file: null,
-        imagePreviewUrl: null,
-        store: this.props.store,
-        crop: {
-            unit: "px",
-            x: 0,
-            y: 0,
-            width: 300,
-            height: 300,
-            aspect: 300 / 300
-        },
-        cropImage: null,
-        showCrop: false,
-        imageRef: null,
-        idPage: this.props.id,
-        loadImage: false,
-        clickCreateDialog: false,
-        isCall: false
+        this.state = {
+            error: false,
+            isLoaded: false,
+            mainFeed: [],
+            showPreview: false,
+            textNews: "...",
+            heading: "...",
+            prevState: null,
+            clicked_new_post: false,
+            show_textarea: false,
+            id: 0,
+            data: [],
+            notUser: false,
+            close: false,
+            load: false,
+            rewriteMode: false,
+            rewriteValue: null,
+            rewriteTitle: null,
+            currentDateTime: new Date().getTime(),
+            isDark: "light",
+            file: null,
+            imagePreviewUrl: null,
+            store: this.props.store,
+            crop: {
+                unit: "px",
+                x: 0,
+                y: 0,
+                width: 300,
+                height: 300,
+                aspect: 300 / 300
+            },
+            cropImage: null,
+            showCrop: false,
+            imageRef: null,
+            idPage: this.props.id,
+            loadImage: false,
+            clickCreateDialog: false,
+            isCall: false
+        }
+
+
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+            this.updateStateUser()
+        })
     }
 
+    updateStateUser() {
+        const state = this.state.store.getState()
 
+        fetch(`/api/user/${state.history.id}`, {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0 && res.data.length > 0) {
+                    this.setState({
+                        isLoaded: true,
+                        id: state.history.id,
+                        result: res.data,
+                        mainFeed: res.feed,
+                        notUser: false
+                    });
+                } else {
+                    this.setState({
+                        isLoaded: false,
+                        result: {},
+                        notUser: true,
+                        error: true
+                    });
+                }
+            })
+            .catch(error => {
+                this.setState({
+                    isLoaded: false,
+                    error: true,
+                    result: {},
+                    notUser: true
+                })
+            });
+    }
 
-
-      this.state.store.subscribe(() => {
-          this.setState(this.state.store.getState())
-          this.updateStateUser()
-      })
-  }
-
-  updateStateUser(){
-      const state = this.state.store.getState()
-
-      fetch(`/api/user/${state.history.id}`, {
-          method: "GET"
-      })
-          .then(response => response.json())
-          .then(res => {
-              if (res.status.code === 0 && res.data.length > 0){
-                  this.setState({
-                      isLoaded: true,
-                      id: state.history.id,
-                      result: res.data,
-                      mainFeed: res.feed,
-                      notUser: false
-                  });
-              }else{
-                  this.setState({
-                      isLoaded: false,
-                      result: {},
-                      notUser: true,
-                      error: true
-                  });
-              }
-          })
-          .catch(error => {
-              this.setState({
-                  isLoaded: false,
-                  error: true,
-                  result: {},
-                  notUser: true
-              })
-          });
-  }
-
-  getPreferredColorScheme = () => {
-        if(window?.matchMedia('(prefers-color-scheme: dark)').matches){
+    getPreferredColorScheme = () => {
+        if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
             this.setState({
                 isDark: "dark"
             })
@@ -119,453 +118,453 @@ class MainUsers extends Component {
         }
     }
 
-  deleteFeed(uuid) {
-    fetch(`/api/feed/${uuid}`, {
-      method: "DELETE",
-      body: JSON.stringify({})
-    })
-        .then(response => response.json())
-        .then(_ => {
-            // const state = this.state.store.getState()
-            // const urlParams = state.history.path
-            // const id = urlParams.get('id');
-            const state = this.state.store.getState()
-            let path = `/api/user/${state.history.id}`
+    deleteFeed(uuid) {
+        fetch(`/api/feed/${uuid}`, {
+            method: "DELETE",
+            body: JSON.stringify({})
+        })
+            .then(response => response.json())
+            .then(_ => {
+                // const state = this.state.store.getState()
+                // const urlParams = state.history.path
+                // const id = urlParams.get('id');
+                const state = this.state.store.getState()
+                let path = `/api/user/${state.history.id}`
 
 
-            fetch(path, {
-              method: "GET"
-            })
-                .then(response => response.json())
-                .then(res => {
-                  if (res.status.code === 0 && res.data.length > 0){
-                      this.cancel()
-                    this.setState({
-                      isLoaded: true,
-                      id: state.history.id,
-                      result: res.data,
-                      mainFeed: res.feed,
-                      notUser: false
-                    });
-                  }else{
-                    this.setState({
-                      isLoaded: false,
-                      result: {},
-                      notUser: true,
-                      error: true
-                    });
-                  }
+                fetch(path, {
+                    method: "GET"
                 })
-                .catch(error => {
-                  this.setState({
+                    .then(response => response.json())
+                    .then(res => {
+                        if (res.status.code === 0 && res.data.length > 0) {
+                            this.cancel()
+                            this.setState({
+                                isLoaded: true,
+                                id: state.history.id,
+                                result: res.data,
+                                mainFeed: res.feed,
+                                notUser: false
+                            });
+                        } else {
+                            this.setState({
+                                isLoaded: false,
+                                result: {},
+                                notUser: true,
+                                error: true
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        this.setState({
+                            isLoaded: false,
+                            error: true,
+                            result: {},
+                            notUser: true
+                        });
+                        console.log(error)
+                    });
+
+            })
+            .catch(error => {
+                this.setState({
+                    auth: false,
+                    load: true,
+                });
+            });
+    }
+
+    like(uuid) {
+        let data = {
+            feeds_uuid: uuid
+        }
+        fetch("/api/like", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0) {
+                    console.log(res)
+
+                    document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
+                }
+                // this.setState({
+                //     isLoaded: "access",
+                //     result: res.data
+                // });
+                // if (!result.ok) {
+                //     throw new Error("Network response was not ok");
+                // }
+                // return result.blob();
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    previewClick() {
+        // const preview = document.getElementsByClassName(className)[0]
+        // console.log(preview)
+        // preview.classList.toggle("preview_swap")
+        this.setState({
+            showPreview: !this.state.showPreview
+        })
+    }
+
+    rewriteFeed(uuid, value, title, close) {
+        this.setState({
+            rewriteUUID: uuid,
+            rewriteValue: value,
+            rewriteTitle: title,
+            rewriteMode: true,
+            clicked_new_post: true,
+            show_textarea: true,
+            close: close,
+            showPreview: true
+        })
+    }
+
+    componentDidMount() {
+        this.getPreferredColorScheme()
+
+        window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
+            this.getPreferredColorScheme()
+        };
+
+        const state = this.state.store.getState()
+        let path = `/api/user/${state.history.id}`
+
+        fetch(path, {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0 && res.data.length > 0) {
+                    this.setState({
+                        isLoaded: true,
+                        id: state.history.id,
+                        result: res.data,
+                        mainFeed: res.feed,
+                        notUser: false
+                    });
+                } else {
+                    this.setState({
+                        isLoaded: false,
+                        result: {},
+                        notUser: true,
+                        error: true
+                    });
+                }
+            })
+            .catch(error => {
+                this.setState({
                     isLoaded: false,
                     error: true,
                     result: {},
                     notUser: true
-                  });
-                  console.log(error)
-                });
-
-          })
-          .catch(error => {
-            this.setState({
-              auth: false,
-              load: true,
+                })
             });
-          });
-  }
 
-  like(uuid) {
-    let data = {
-      feeds_uuid: uuid
     }
-    fetch("/api/like", {
-      method: "POST",
-      body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(res => {
-          if (res.status.code === 0){
-            console.log(res)
 
-              document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
-          }
-          // this.setState({
-          //     isLoaded: "access",
-          //     result: res.data
-          // });
-          // if (!result.ok) {
-          //     throw new Error("Network response was not ok");
-          // }
-          // return result.blob();
+    components = {
+        code({node, inline, className, children, ...props}) {
+            const match = /language-(\w+)/.exec(className || '')
+            return !inline && match ? (
+                <SyntaxHighlighter style={tomorrow} wrapLongLines={false} language={match[1]} PreTag="div"
+                                   children={String(children).replace(/\n$/, '')} {...props} />
+            ) : (
+                <code className={className} {...props}>
+                    {children}
+                </code>
+            )
+        }
+    }
+
+    cancel() {
+        this.setState({
+            clicked_new_post: false,
+            show_textarea: false,
+            rewriteValue: null,
+            showPreview: false,
+            rewriteMode: false,
+            textNews: "..."
         })
-        .catch(error => {
-          console.log(error)
-        });
-  }
-
-  previewClick (){
-    // const preview = document.getElementsByClassName(className)[0]
-    // console.log(preview)
-    // preview.classList.toggle("preview_swap")
-      this.setState({
-          showPreview: !this.state.showPreview
-      })
-  }
-
-  rewriteFeed(uuid, value, title, close){
-      this.setState({
-          rewriteUUID: uuid,
-          rewriteValue: value,
-          rewriteTitle: title,
-          rewriteMode: true,
-          clicked_new_post: true,
-          show_textarea: true,
-          close: close,
-          showPreview: true
-      })
-  }
-
-  componentDidMount() {
-      this.getPreferredColorScheme()
-
-      window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
-          this.getPreferredColorScheme()
-      };
-
-      const state = this.state.store.getState()
-      let path = `/api/user/${state.history.id}`
-
-      fetch(path, {
-        method: "GET"
-      })
-          .then(response => response.json())
-          .then(res => {
-            if (res.status.code === 0 && res.data.length > 0){
-              this.setState({
-                isLoaded: true,
-                id: state.history.id,
-                result: res.data,
-                mainFeed: res.feed,
-                notUser: false
-              });
-            }else{
-              this.setState({
-                isLoaded: false,
-                result: {},
-                notUser: true,
-                error: true
-              });
-            }
-          })
-          .catch(error => {
-            this.setState({
-              isLoaded: false,
-              error: true,
-              result: {},
-              notUser: true
-            })
-          });
-
-  }
-
-  components = {
-    code({node, inline, className, children, ...props}) {
-      const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-          <SyntaxHighlighter style={tomorrow} wrapLongLines={false} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
-      ) : (
-          <code className={className} {...props}>
-            {children}
-          </code>
-      )
-    }
-  }
-
-  cancel(){
-      this.setState({
-          clicked_new_post: false,
-          show_textarea: false,
-          rewriteValue: null,
-          showPreview: false,
-          rewriteMode: false,
-          textNews: "..."
-      })
-  }
-
-
-
-  saveFeed(){
-      let data = {
-          title: document.getElementById("text_title").value,
-          value: document.getElementById("text_news").value,
-          close: this.state.close
-      }
-
-      this.setState({
-          clicked_new_post: false,
-          show_textarea: false,
-          rewriteValue: null,
-          showPreview: false,
-          rewriteMode: false,
-          textNews: "..."
-      })
-
-      fetch(`/api/feed/${this.state.rewriteUUID}`, {
-          method: "PUT",
-          body: JSON.stringify({
-              value:data.value,
-              close: data.close,
-              title: data.title
-          })
-      })
-          .then(response => response.json())
-          .then(_ => {
-
-
-              const state = this.state.store.getState()
-              // const urlParams = state.history.path
-              // const id = urlParams.get('id');
-
-              let path = `/api/user/${state.history.id}`
-
-              fetch(path, {
-                  method: "GET"
-              })
-                  .then(response => response.json())
-                  .then(res => {
-                      if (res.status.code === 0 && res.data.length > 0){
-                          this.setState({
-                              isLoaded: true,
-                              id: state.history.id,
-                              result: res.data,
-                              mainFeed: res.feed,
-                              notUser: false
-                          });
-                      }else{
-                          this.setState({
-                              isLoaded: false,
-                              result: {},
-                              notUser: true,
-                              error: true
-                          });
-                      }
-                  })
-                  .catch(error => {
-                      this.setState({
-                          isLoaded: false,
-                          error: true,
-                          result: {},
-                          notUser: true
-                      });
-                      console.log(error)
-                  });
-
-          })
-          .catch(error => {
-              console.log(error)
-          });
-  }
-
-  feedNew() {
-    let data = {
-        title: document.getElementById("text_title").value,
-      value: document.getElementById("text_news").value,
-      close: this.state.close
     }
 
 
-    if (data.value.length > 1) {
+    saveFeed() {
+        let data = {
+            title: document.getElementById("text_title").value,
+            value: document.getElementById("text_news").value,
+            close: this.state.close
+        }
 
         this.setState({
             clicked_new_post: false,
             show_textarea: false,
             rewriteValue: null,
-            showPreview: false
+            showPreview: false,
+            rewriteMode: false,
+            textNews: "..."
         })
-      fetch("/api/feed", {
-        method: "POST",
-        body: JSON.stringify(data)
-      })
-          .then(response => response.json())
-          .then(res => {
-            if (res.status.code === 0) {
-                fetch("/api/authentication", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        "finger": window.localStorage.getItem("finger")
-                    })
+
+        fetch(`/api/feed/${this.state.rewriteUUID}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                value: data.value,
+                close: data.close,
+                title: data.title
+            })
+        })
+            .then(response => response.json())
+            .then(_ => {
+
+
+                const state = this.state.store.getState()
+                // const urlParams = state.history.path
+                // const id = urlParams.get('id');
+
+                let path = `/api/user/${state.history.id}`
+
+                fetch(path, {
+                    method: "GET"
                 })
                     .then(response => response.json())
                     .then(res => {
-                        if (res.status.code === 0){
+                        if (res.status.code === 0 && res.data.length > 0) {
                             this.setState({
-                                auth: true,
-                                data: res.data,
-                                feed: res.feed,
-                                load: true,
-
-                                token: res.token,
+                                isLoaded: true,
+                                id: state.history.id,
+                                result: res.data,
+                                mainFeed: res.feed,
+                                notUser: false
                             });
-
-
-                        }else{
-                            this.sendLogs(res.status.message)
-                            this.delete_cookie("access_token")
+                        } else {
+                            this.setState({
+                                isLoaded: false,
+                                result: {},
+                                notUser: true,
+                                error: true
+                            });
                         }
-
-                        const state = this.state.store.getState()
-                        // const urlParams = state.history.path
-                        // const id = urlParams.get('id');
-
-                        let path = `/api/user/${state.history.id}`
-
-                        fetch(path, {
-                            method: "GET"
-                        })
-                            .then(response => response.json())
-                            .then(res => {
-                                if (res.status.code === 0 && res.data.length > 0){
-                                    this.setState({
-                                        isLoaded: true,
-                                        id: state.history.id,
-                                        result: res.data,
-                                        mainFeed: res.feed,
-                                        notUser: false
-                                    });
-                                }else{
-                                    this.setState({
-                                        isLoaded: false,
-                                        result: {},
-                                        notUser: true,
-                                        error: true
-                                    });
-                                }
-                            })
-                            .catch(error => {
-                                this.setState({
-                                    isLoaded: false,
-                                    error: true,
-                                    result: {},
-                                    notUser: true
-                                });
-                                console.log(error)
-                            });
-
                     })
                     .catch(error => {
                         this.setState({
-                            auth: false,
-                            load: true,
+                            isLoaded: false,
+                            error: true,
+                            result: {},
+                            notUser: true
                         });
+                        console.log(error)
                     });
-            }
 
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    }
-  }
-
-  unixToDateTime(unixTimestamp) {
-    const milliseconds = unixTimestamp * 1000
-    const dateObject = new Date(milliseconds)
-
-    return dateObject.toLocaleString()
-  }
-
-  handleChangeTextarea = (event) => {
-    if (event.target.value === ""){
-      this.setState({textNews: "Текст статьи"})
-    }else{
-      this.setState({textNews: event.target.value})
-    }
-  }
-
-  handleChangeTitle = (event) => {
-
-      this.setState({rewriteTitle: event.target.value})
-
-  }
-
-  handleChangeInput = (event) => {
-    if (event.target.value === "") {
-      this.setState({heading: "Текст заголовка"})
-    }else{
-      this.setState({heading: event.target.value})
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
-  }
+    feedNew() {
+        let data = {
+            title: document.getElementById("text_title").value,
+            value: document.getElementById("text_news").value,
+            close: this.state.close
+        }
 
-  newInputText = (event) => {
-    this.setState({clicked_new_post: true, show_textarea: true, showPreview: true})
+
+        if (data.value.length > 1) {
+
+            this.setState({
+                clicked_new_post: false,
+                show_textarea: false,
+                rewriteValue: null,
+                showPreview: false
+            })
+            fetch("/api/feed", {
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status.code === 0) {
+                        fetch("/api/authentication", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                "finger": window.localStorage.getItem("finger")
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(res => {
+                                if (res.status.code === 0) {
+                                    this.setState({
+                                        auth: true,
+                                        data: res.data,
+                                        feed: res.feed,
+                                        load: true,
+
+                                        token: res.token,
+                                    });
 
 
-    // event.target
-    // a.innerHTML = `
-    //   <textarea onChange={this.handleChangeTextarea} placeholder="Что у Вас нового?" id="text_news">
-    //
-    //   </textarea>
-    // `
-  }
+                                } else {
+                                    this.sendLogs(res.status.message)
+                                    this.delete_cookie("access_token")
+                                }
 
-  getLastVisit = (d) => {
-    return Math.floor(d / 60)
-  }
+                                const state = this.state.store.getState()
+                                // const urlParams = state.history.path
+                                // const id = urlParams.get('id');
 
-  createChat = event => {
-      this.setState({
-          clickCreateDialog: true
-      })
-    let data = {
-      to_uid: Number(this.state.id)
+                                let path = `/api/user/${state.history.id}`
+
+                                fetch(path, {
+                                    method: "GET"
+                                })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res.status.code === 0 && res.data.length > 0) {
+                                            this.setState({
+                                                isLoaded: true,
+                                                id: state.history.id,
+                                                result: res.data,
+                                                mainFeed: res.feed,
+                                                notUser: false
+                                            });
+                                        } else {
+                                            this.setState({
+                                                isLoaded: false,
+                                                result: {},
+                                                notUser: true,
+                                                error: true
+                                            });
+                                        }
+                                    })
+                                    .catch(error => {
+                                        this.setState({
+                                            isLoaded: false,
+                                            error: true,
+                                            result: {},
+                                            notUser: true
+                                        });
+                                        console.log(error)
+                                    });
+
+                            })
+                            .catch(error => {
+                                this.setState({
+                                    auth: false,
+                                    load: true,
+                                });
+                            });
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
     }
 
-    fetch("/api/create_chats", {
-      method: "POST",
-      body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(res => {
-          console.log(res)
-          if (res.status.code === 0) {
-            window.location.href = `/messages?cid=${res.data}`
-          }
+    unixToDateTime(unixTimestamp) {
+        const milliseconds = unixTimestamp * 1000
+        const dateObject = new Date(milliseconds)
 
+        return dateObject.toLocaleString()
+    }
+
+    handleChangeTextarea = (event) => {
+        if (event.target.value === "") {
+            this.setState({textNews: "Текст статьи"})
+        } else {
+            this.setState({textNews: event.target.value})
+        }
+    }
+
+    handleChangeTitle = (event) => {
+
+        this.setState({rewriteTitle: event.target.value})
+
+    }
+
+    handleChangeInput = (event) => {
+        if (event.target.value === "") {
+            this.setState({heading: "Текст заголовка"})
+        } else {
+            this.setState({heading: event.target.value})
+        }
+
+    }
+
+    newInputText = (event) => {
+        this.setState({clicked_new_post: true, show_textarea: true, showPreview: true})
+
+
+        // event.target
+        // a.innerHTML = `
+        //   <textarea onChange={this.handleChangeTextarea} placeholder="Что у Вас нового?" id="text_news">
+        //
+        //   </textarea>
+        // `
+    }
+
+    getLastVisit = (d) => {
+        return Math.floor(d / 60)
+    }
+
+    createChat = event => {
+        this.setState({
+            clickCreateDialog: true
         })
-        .catch(error => {
-          console.log(error)
-        });
+        let data = {
+            to_uid: Number(this.state.id)
+        }
 
-  }
+        fetch("/api/create_chats", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                if (res.status.code === 0) {
+                    window.location.href = `/messages?cid=${res.data}`
+                }
 
-  onKeyDown = event => {
-    // 'event.key' will return the key as a string: 'Tab'
-    // 'event.keyCode' will return the key code as a number: Tab = '9'
-    // You can use either of them
-    if (event.keyCode === 9) {
-      // Prevent the default action to not lose focus when tab
-      event.preventDefault();
+            })
+            .catch(error => {
+                console.log(error)
+            });
 
-      // Get the cursor position
-      const { selectionStart, selectionEnd } = event.target;
-      // update the state
-      this.setState(
-          prevState => ({
-            lyrics:
-                prevState.lyrics.substring(0, selectionStart) +
-                "\t" + // '\t' = tab, size can be change by CSS
-                prevState.lyrics.substring(selectionEnd)
-          }),
-          // update the cursor position after the state is updated
-          () => {
-            this.textAreaRef.current.selectionStart = this.textAreaRef.current.selectionEnd =
-                selectionStart + 1;
-          }
-      );
     }
-  };
+
+    onKeyDown = event => {
+        // 'event.key' will return the key as a string: 'Tab'
+        // 'event.keyCode' will return the key code as a number: Tab = '9'
+        // You can use either of them
+        if (event.keyCode === 9) {
+            // Prevent the default action to not lose focus when tab
+            event.preventDefault();
+
+            // Get the cursor position
+            const {selectionStart, selectionEnd} = event.target;
+            // update the state
+            this.setState(
+                prevState => ({
+                    lyrics:
+                        prevState.lyrics.substring(0, selectionStart) +
+                        "\t" + // '\t' = tab, size can be change by CSS
+                        prevState.lyrics.substring(selectionEnd)
+                }),
+                // update the cursor position after the state is updated
+                () => {
+                    this.textAreaRef.current.selectionStart = this.textAreaRef.current.selectionEnd =
+                        selectionStart + 1;
+                }
+            );
+        }
+    };
 
     uploading = (event) => {
         this.setState({
@@ -623,7 +622,7 @@ class MainUsers extends Component {
 
     }
 
-    makeUpload(){
+    makeUpload() {
 
         // this.setState({
         //     loadImage: true
@@ -654,7 +653,7 @@ class MainUsers extends Component {
 
 
         this.cancelCrop()
-        toast.update(id, { render: "Фотография отправлена на сервер", type: "default", isLoading: true });
+        toast.update(id, {render: "Фотография отправлена на сервер", type: "default", isLoading: true});
         fetch("/api/upload_main_photo", {
             method: "POST",
             body: data
@@ -667,13 +666,24 @@ class MainUsers extends Component {
                         imagePreviewUrl: res?.data[0].url_preview
                     })
 
-                    toast.update(id, { render: "Фотография успешно обновлена", type: "success", isLoading: false, autoClose: 5000, hideProgressBar: true});
+                    toast.update(id, {
+                        render: "Фотография успешно обновлена",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
 
 
-                }else{
-                    toast.update(id, { render: "Сервер не смог обработать фотографию", type: "error", isLoading: false, autoClose: 5000, hideProgressBar: true });
+                } else {
+                    toast.update(id, {
+                        render: "Сервер не смог обработать фотографию",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
                 }
-
 
 
             })
@@ -681,7 +691,13 @@ class MainUsers extends Component {
                 this.setState({
                     loadImage: false
                 })
-                toast.update(id, { render: error, type: "error", isLoading: false, autoClose: 5000, hideProgressBar: true });
+                toast.update(id, {
+                    render: error,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 5000,
+                    hideProgressBar: true
+                });
 
             });
     }
@@ -689,7 +705,7 @@ class MainUsers extends Component {
     onCropChange = (crop, percentCrop) => {
         // You could also use percentCrop:
         // this.setState({ crop: percentCrop });
-        this.setState({ crop });
+        this.setState({crop});
     };
 
     onCropComplete = (crop) => {
@@ -703,7 +719,7 @@ class MainUsers extends Component {
         this.setState({imageRef: image})
     };
 
-    cancelCrop(){
+    cancelCrop() {
         this.setState({
             crop: {
                 unit: "px",
@@ -719,12 +735,12 @@ class MainUsers extends Component {
         })
     }
 
-  render(){
-        let { isLoaded, textNews, mainFeed, clicked_new_post } = this.state;
+    render() {
+        let {isLoaded, textNews, mainFeed, clicked_new_post} = this.state;
 
 
         const store = this.state.store.getState()
-       if (!store.components.settings.main_page){
+        if (!store.components.settings.main_page) {
             return (
                 <div className="content-wall-views">
                     <div className="feed-wrapper">
@@ -736,7 +752,7 @@ class MainUsers extends Component {
                     </div>
                 </div>
             )
-        }else{
+        } else {
             return (
                 <div style={{display: "flex"}}>
                     <div className="content-wall-views">
@@ -746,7 +762,7 @@ class MainUsers extends Component {
                                     <div className="center-view">
                                         {
                                             this.state.loadImage ?
-                                                <div className="loader" />
+                                                <div className="loader"/>
                                                 :
                                                 <div>
                                                     <ReactCrop
@@ -761,12 +777,20 @@ class MainUsers extends Component {
                                                         onComplete={this.onCropComplete}
                                                         onChange={this.onCropChange}
                                                     />
-                                                    <div className="wrapper-bottom" style={{width: "100%", boxSizing: "border-box", padding: "20px 0"}}>
+                                                    <div className="wrapper-bottom" style={{
+                                                        width: "100%",
+                                                        boxSizing: "border-box",
+                                                        padding: "20px 0"
+                                                    }}>
                                                         <div className="wrapper-flex-start">
-                                                            <div className="button-default" onClick={() => this.cancelCrop()}>Отмена</div>
+                                                            <div className="button-default"
+                                                                 onClick={() => this.cancelCrop()}>Отмена
+                                                            </div>
                                                         </div>
                                                         <div className="wrapper-flex-end">
-                                                            <div className="button-default" onClick={() => this.makeUpload()}>Сохранить</div>
+                                                            <div className="button-default"
+                                                                 onClick={() => this.makeUpload()}>Сохранить
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -946,26 +970,28 @@ class MainUsers extends Component {
                                         {
                                             mainFeed?.length > 0 ?
                                                 mainFeed?.map(data =>
-                                                    <div key={data?.ID}  className="feed-wrapper-item">
-                                                        <Link style={{textDecoration: "none"}} href={`/post?uuid=${data?.ID}`}>
+                                                    <div key={data?.ID} className="feed-wrapper-item">
+                                                        <Link style={{textDecoration: "none"}}
+                                                              href={`/post?uuid=${data?.ID}`}>
                                                             <div className="feed-item-value">
                                                                 <div key="asldk" className="wrapper-data">
                                                                     <Link href={`/user/${data?.uid}`}>
-                                                                        <div key="aksdlkasd"  className="photo-wrapper">
+                                                                        <div key="aksdlkasd" className="photo-wrapper">
                                                                             {
                                                                                 store.auth.user.data.id === Number(this.state.id) ?
                                                                                     (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
                                                                                         null
                                                                                         :
-                                                                                        <div className="online_user" />
+                                                                                        <div className="online_user"/>
                                                                                     :
                                                                                     (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
                                                                                         null
                                                                                         :
-                                                                                        <div className="online_user" />
+                                                                                        <div className="online_user"/>
                                                                             }
 
-                                                                            <img key="asdmmmmasd" src={data?.photo} alt={data?.user} />
+                                                                            <img key="asdmmmmasd" src={data?.photo}
+                                                                                 alt={data?.user}/>
 
                                                                         </div>
                                                                     </Link>
@@ -983,12 +1009,41 @@ class MainUsers extends Component {
                                                                     </div>
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
-                                                                            <div className="button-default-icon-disable hide-border" >
+                                                                            <div
+                                                                                className="button-default-icon-disable hide-border">
                                                                                 {
                                                                                     data?.close ?
-                                                                                        <svg className="svg-close-view" fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path fill="none" className="svg-close" stroke="#000000" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2" d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/><path d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/></svg>
+                                                                                        <svg className="svg-close-view"
+                                                                                             fill="#000000"
+                                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                                             viewBox="0 0 50 50"
+                                                                                             width="50px" height="50px">
+                                                                                            <path fill="none"
+                                                                                                  className="svg-close"
+                                                                                                  stroke="#000000"
+                                                                                                  strokeLinecap="round"
+                                                                                                  strokeMiterlimit="10"
+                                                                                                  strokeWidth="2"
+                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                                                            <path
+                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                        </svg>
                                                                                         :
-                                                                                        <svg className="svg-close-view" fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path fill="none" className="svg-close" stroke="#000000" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2" d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/><path d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/></svg>
+                                                                                        <svg className="svg-close-view"
+                                                                                             fill="#000000"
+                                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                                             viewBox="0 0 50 50"
+                                                                                             width="50px" height="50px">
+                                                                                            <path fill="none"
+                                                                                                  className="svg-close"
+                                                                                                  stroke="#000000"
+                                                                                                  strokeLinecap="round"
+                                                                                                  strokeMiterlimit="10"
+                                                                                                  strokeWidth="2"
+                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                                                            <path
+                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                        </svg>
                                                                                 }
 
                                                                             </div>
@@ -1056,7 +1111,8 @@ class MainUsers extends Component {
                                                             {/*    </div>*/}
                                                             {/*</div>*/}
                                                             <div className="like_wrapper wrapper-flex-start">
-                                                                <div className="like" onClick={() => this.like(data?.ID)}>
+                                                                <div className="like"
+                                                                     onClick={() => this.like(data?.ID)}>
                                                                     <div className="like-item">
                                                                         {
                                                                             this.state.isDark === "light" ?
@@ -1081,7 +1137,7 @@ class MainUsers extends Component {
                                                                         }
                                                                     </div>
                                                                     <div className="like-text">
-                                                            <span className="like-count" >
+                                                            <span className="like-count">
                                                                 {data?.look_count} Просмотров
                                                             </span>
                                                                     </div>
@@ -1089,7 +1145,7 @@ class MainUsers extends Component {
                                                                 {
                                                                     Number(this.state.id) === store.auth.user.data.id ?
                                                                         <div className="like" onClick={() => {
-                                                                            this.rewriteFeed(data?.ID, data?.value,data?.title, data?.close)
+                                                                            this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close)
                                                                         }}>
                                                                             <div className="like-text">
                                                                     <span className="like-count">
@@ -1115,7 +1171,7 @@ class MainUsers extends Component {
                                                         </div>
                                                     </div>
                                                 )
-                                            :
+                                                :
                                                 Number(this.state.id) === store.auth.user.data.id ?
 
                                                     <div className="error-wrapper">
@@ -1123,7 +1179,7 @@ class MainUsers extends Component {
                                                             Напишите что-нибудь полезное для сообщества или для себя ð.
                                                         </div>
                                                     </div>
-                                                :
+                                                    :
                                                     <div className="error-wrapper">
                                                         <div className="error-page">
                                                             {this.state.result[0].login} пока ничего не написал.
@@ -1164,7 +1220,7 @@ class MainUsers extends Component {
                                             alignItems: "center",
                                             height: "100%"
                                         }}>
-                                            <div className="loader" />
+                                            <div className="loader"/>
                                         </div>
                         }
                     </div>
@@ -1173,15 +1229,24 @@ class MainUsers extends Component {
                             isLoaded ?
                                 <div className="tags-box">
                                     <div className="main-place-photo-column ">
-                                        <input type="file" name="file" id="upload_file_input" onChange={(e) => this.uploadPhotoAction(e)} accept="image/x-png,image/jpeg" style={{display: "none"}} />
+                                        <input type="file" name="file" id="upload_file_input"
+                                               onChange={(e) => this.uploadPhotoAction(e)}
+                                               accept="image/x-png,image/jpeg" style={{display: "none"}}/>
                                         {
                                             Number(this.state.id) === store.auth.user.data.id ?
                                                 this.state.imagePreviewUrl ?
-                                                    <img src={this.state.imagePreviewUrl} alt={store.auth.user.data.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                                    <img src={this.state.imagePreviewUrl}
+                                                         alt={store.auth.user.data.login}
+                                                         onClick={() => this.uploadClick()}
+                                                         style={{cursor: "pointer"}}/>
                                                     :
-                                                    <img src={store.auth.user.data.avatar_url} alt={store.auth.user.data.login} onClick={() => this.uploadClick()} style={{cursor: "pointer"}}/>
+                                                    <img src={store.auth.user.data.avatar_url}
+                                                         alt={store.auth.user.data.login}
+                                                         onClick={() => this.uploadClick()}
+                                                         style={{cursor: "pointer"}}/>
                                                 :
-                                                <img src={this.state.result[0].avatar_url} alt={this.state.result[0].login} style={{cursor: "default"}}/>
+                                                <img src={this.state.result[0].avatar_url}
+                                                     alt={this.state.result[0].login} style={{cursor: "default"}}/>
                                         }
                                     </div>
                                     <div className="main-place-info-column ">
@@ -1190,17 +1255,21 @@ class MainUsers extends Component {
                                                 store.auth.user.data.id === Number(this.state.id) ?
                                                     (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
                                                         (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
-                                                            <span className="info_status">Последняя активность была { new Date(store.auth.user.data.last_active_at).toLocaleString() }</span>
+                                                            <span
+                                                                className="info_status">Последняя активность была {new Date(store.auth.user.data.last_active_at).toLocaleString()}</span>
                                                             :
-                                                            <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) )} минут назад.</span>
+                                                            <span
+                                                                className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))))} минут назад.</span>
                                                         :
                                                         <span className="info_status">Сейчас на сайте</span>
                                                     :
                                                     (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
                                                         (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 60 ?
-                                                            <span className="info_status">Последняя активность была { new Date(this.state.result[0].last_active_at).toLocaleString() }</span>
+                                                            <span
+                                                                className="info_status">Последняя активность была {new Date(this.state.result[0].last_active_at).toLocaleString()}</span>
                                                             :
-                                                            <span className="info_status">Последняя активность была { this.getLastVisit( (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) )} минут назад.</span>
+                                                            <span
+                                                                className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))))} минут назад.</span>
                                                         :
                                                         <span className="info_status">Сейчас на сайте</span>
                                             }
@@ -1219,14 +1288,14 @@ class MainUsers extends Component {
                                             {
                                                 store.auth.user.data.id === Number(this.state.id) ?
                                                     store.auth.user.data?.name ?
-                                                        " "+store.auth.user.data.name+" "+store.auth.user.data.last_name
+                                                        " " + store.auth.user.data.name + " " + store.auth.user.data.last_name
                                                         :
-                                                        " "+store.auth.user.data.login
+                                                        " " + store.auth.user.data.login
                                                     :
                                                     this.state.result[0]?.name ?
-                                                        " "+this.state.result[0].name+" "+this.state.result[0].last_name
+                                                        " " + this.state.result[0].name + " " + this.state.result[0].last_name
                                                         :
-                                                        " "+this.state.result[0].login
+                                                        " " + this.state.result[0].login
                                             }
                                         </div>
                                         <div className="main-place">
@@ -1234,7 +1303,7 @@ class MainUsers extends Component {
                                             {
                                                 Number(this.state.id) === store.auth.user.data.id ?
                                                     store.auth.user.data?.email ?
-                                                        " "+store.auth.user.data.email
+                                                        " " + store.auth.user.data.email
                                                         :
                                                         " нет"
                                                     :
@@ -1247,12 +1316,12 @@ class MainUsers extends Component {
                                             {
                                                 Number(this.state.id) === store.auth.user.data.id ?
                                                     store.auth.user.data?.company ?
-                                                        " "+store.auth.user.data.company
+                                                        " " + store.auth.user.data.company
                                                         :
                                                         " нет"
                                                     :
                                                     this.state.result[0]?.company ?
-                                                        " "+this.state.result[0].company
+                                                        " " + this.state.result[0].company
                                                         :
                                                         " нет"
                                             }
@@ -1263,12 +1332,12 @@ class MainUsers extends Component {
                                                 Number(this.state.id) === store.auth.user.data.id ?
 
                                                     store.auth.user.data?.location ?
-                                                        " "+store.auth.user.data.location
+                                                        " " + store.auth.user.data.location
                                                         :
                                                         " нет"
                                                     :
                                                     this.state.result[0]?.location ?
-                                                        " "+this.state.result[0].location
+                                                        " " + this.state.result[0].location
                                                         :
                                                         " нет"
                                             }
@@ -1278,12 +1347,16 @@ class MainUsers extends Component {
                                             {
                                                 Number(this.state.id) === store.auth.user.data.id ?
                                                     store.auth.user.data?.html_url ?
-                                                        <a className="link_github" target="_blank" href={store.auth.user.data.html_url} rel="noreferrer"> {store.auth.user.data.login}</a>
+                                                        <a className="link_github" target="_blank"
+                                                           href={store.auth.user.data.html_url}
+                                                           rel="noreferrer"> {store.auth.user.data.login}</a>
                                                         :
                                                         " нет"
                                                     :
                                                     this.state.result[0]?.html_url ?
-                                                        <a className="link_github" target="_blank" href={this.state.result[0].html_url} rel="noreferrer"> {this.state.result[0].login}</a>
+                                                        <a className="link_github" target="_blank"
+                                                           href={this.state.result[0].html_url}
+                                                           rel="noreferrer"> {this.state.result[0].login}</a>
                                                         :
                                                         " нет"
                                             }
@@ -1293,12 +1366,16 @@ class MainUsers extends Component {
                                             {
                                                 Number(this.state.id) === store.auth.user.data.id ?
                                                     store.auth.user.data?.link_summary ?
-                                                        <a className="link_github" target="_blank" href={store.auth.user.data.link_summary} rel="noreferrer"> {store.auth.user.data.login}</a>
+                                                        <a className="link_github" target="_blank"
+                                                           href={store.auth.user.data.link_summary}
+                                                           rel="noreferrer"> {store.auth.user.data.login}</a>
                                                         :
                                                         " нет"
                                                     :
                                                     this.state.result[0]?.link_summary ?
-                                                        <a className="link_github" target="_blank" href={this.state.result[0].link_summary} rel="noreferrer"> {this.state.result[0].login}</a>
+                                                        <a className="link_github" target="_blank"
+                                                           href={this.state.result[0].link_summary}
+                                                           rel="noreferrer"> {this.state.result[0].login}</a>
                                                         :
                                                         " нет"
                                             }
@@ -1310,10 +1387,12 @@ class MainUsers extends Component {
 
                                                     this.state.clickCreateDialog ?
                                                         <div>
-                                                            <div className="loader-small" />
+                                                            <div className="loader-small"/>
                                                         </div>
                                                         :
-                                                        <div className="button-default" style={{width: "100%", boxSizing: "border-box"}} onClick={this.createChat}>
+                                                        <div className="button-default"
+                                                             style={{width: "100%", boxSizing: "border-box"}}
+                                                             onClick={this.createChat}>
                                                             Написать сообщение
                                                         </div>
                                                     :
@@ -1322,13 +1401,13 @@ class MainUsers extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            :
+                                :
                                 this.state.notUser && store.auth.user.isAuth ?
                                     null
-                                :
+                                    :
                                     !store.auth.user.isAuth ?
                                         null
-                                    :
+                                        :
                                         <div className="loader-wrapper feed-wrapper">
                                             <div className="loader-small">
 
@@ -1352,7 +1431,7 @@ class MainUsers extends Component {
             )
         }
 
-  }
+    }
 }
 
 export default MainUsers;

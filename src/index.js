@@ -1,8 +1,8 @@
-import { createStore } from "redux"; // импорт из Redux-библиотеки
-import { mount, route } from 'navi'
+import {createStore} from "redux"; // импорт из Redux-библиотеки
+import {mount, route} from 'navi'
 import {NotFoundBoundary, Router, View} from 'react-navi'
 import {toast, ToastContainer} from 'react-toastify';
-import React, { Suspense } from 'react'
+import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.css'
 import HelmetProvider from 'react-navi-helmet-async'
@@ -55,7 +55,7 @@ class App extends React.Component {
     }
 
 
-    checkAuth(){
+    checkAuth() {
         fetch("/api/authentication", {
             method: "POST",
             body: JSON.stringify({})
@@ -87,7 +87,7 @@ class App extends React.Component {
                                             urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
                                         },
                                     ]
-                            })
+                                })
                         }
                     })
 
@@ -96,7 +96,7 @@ class App extends React.Component {
                     })
                         .then(response => response.json())
                         .then(res => {
-                            if (res?.status.code === 0){
+                            if (res?.status.code === 0) {
                                 store.dispatch({
                                     type: "ACTION_SET_COMPONENTS", value: {
                                         settings: res.data,
@@ -116,18 +116,18 @@ class App extends React.Component {
                     centrifuge.setToken(res?.token)
                     centrifuge.connect()
 
-                    centrifuge.on('connect', function(context) {
+                    centrifuge.on('connect', function (context) {
                         console.log("[ app connected centrifuge ]")
                     });
 
                     let this_ = this
-                    centrifuge.subscribe(`${res?.data[0].id}`, function(message) {
+                    centrifuge.subscribe(`${res?.data[0].id}`, function (message) {
                         console.log("[ Event pushStorage ]")
 
                         const state = store.getState()
 
                         let event = message.data
-                        switch (event.type){
+                        switch (event.type) {
                             case "event":
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
@@ -224,7 +224,7 @@ class App extends React.Component {
                                 })
                                     .then(response => response.json())
                                     .then(res => {
-                                        if (res?.status.code === 0){
+                                        if (res?.status.code === 0) {
                                             store.dispatch({
                                                 type: "ACTION_CHECK_AUTH", value: {
                                                     user: {
@@ -255,12 +255,12 @@ class App extends React.Component {
 
                     if (document.location.pathname === "/") {
                         window.location.href = '/feeds'
-                    }else{
+                    } else {
                         this.setState({
                             load: true
                         })
                     }
-                }else{
+                } else {
                     store.dispatch({
                         type: "ACTION_CHECK_AUTH", value: {
                             user: {
@@ -300,37 +300,40 @@ class App extends React.Component {
         '/': route({
             title: 'Добро пожаловать | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Социальная сеть для разработчиков" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Социальная сеть для разработчиков"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Main />
+            view: <Main/>
         }),
         '/people': route({
             title: 'Люди | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Социальная сеть для разработчиков" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Социальная сеть для разработчиков"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <People store={store} />
+            view: <People store={store}/>
         }),
         '/messages': route({
             title: 'Мессенджер | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Мессенджер" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Мессенджер"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Messages store={store} auth={auth} cent={cent} user={user} />
+            view: <Messages store={store} auth={auth} cent={cent} user={user}/>
         }),
-        '/user/:id': route( async req => {
+        '/user/:id': route(async req => {
             let user;
             let id = req.params.id
 
@@ -346,7 +349,7 @@ class App extends React.Component {
             })
                 .then(response => response.json())
                 .then(res => {
-                    if (res.status.code === 0){
+                    if (res.status.code === 0) {
                         user = res.data[0]
                     }
                 })
@@ -357,30 +360,32 @@ class App extends React.Component {
             return {
                 title: `${user?.name} | DevCodeMyLife`,
                 head: <>
-                    <meta name="description" content={`Страница пользователя ${user?.title}`} />
-                    <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                    <meta name="description" content={`Страница пользователя ${user?.title}`}/>
+                    <meta name="Keywords"
+                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                     <script>
                         console.log('[ app start ]')
                     </script>
                 </>,
-                view: <MainUser store={store} id={id} />
+                view: <MainUser store={store} id={id}/>
             }
         }),
         '/feeds': route({
             title: 'Новости | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Новости, у нас есть все, чего нет напиши сам." />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Новости, у нас есть все, чего нет напиши сам."/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
             </>,
-            view: <Feed store={store} />
+            view: <Feed store={store}/>
         }),
         '/post': route({
             title: 'Заметка | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Заметка" />
+                <meta name="description" content="Заметка"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -390,7 +395,7 @@ class App extends React.Component {
         '/agreement': route({
             title: 'Пользовательское соглашение | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Пользовательское соглашение" />
+                <meta name="description" content="Пользовательское соглашение"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -400,8 +405,9 @@ class App extends React.Component {
         '/settings': route({
             title: 'Настройки | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Настройки" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Настройки"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -411,7 +417,7 @@ class App extends React.Component {
         '/freelances': route({
             title: 'Фриланс | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Фриланс" />
+                <meta name="description" content="Фриланс"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -421,8 +427,9 @@ class App extends React.Component {
         '/notification': route({
             title: 'События | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Оповещения" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Оповещения"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -432,8 +439,9 @@ class App extends React.Component {
         '/teams': route({
             title: 'Команды | DevCodeMyLife',
             head: <>
-                <meta name="description" content="Команды" />
-                <meta name="Keywords" content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode" />
+                <meta name="description" content="Команды"/>
+                <meta name="Keywords"
+                      content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -443,7 +451,7 @@ class App extends React.Component {
         '/how_to_use': route({
             title: 'Привет! | DevCodeMyLife',
             head: <>
-                <meta name="description" content="" />
+                <meta name="description" content=""/>
                 <script>
                     console.log('[ app start ]')
                 </script>
@@ -452,12 +460,12 @@ class App extends React.Component {
         })
     })
 
-    render(){
-        if (this.state.load){
-            if (true){
+    render() {
+        if (this.state.load) {
+            if (true) {
                 return (
                     <HelmetProvider>
-                        <div className="wrapper" >
+                        <div className="wrapper">
                             <BrowserRouter>
                                 <Switch>
                                     <Route path="/" render={({history, match}) =>
@@ -477,7 +485,7 @@ class App extends React.Component {
                                                 draggable
                                                 pauseOnHover
                                             />
-                                            <Call store={store} />
+                                            <Call store={store}/>
                                             {
                                                 window.location.pathname === "/" ?
                                                     // <div className="personal_data_accept-block full-width">
@@ -488,7 +496,7 @@ class App extends React.Component {
                                                     //     </div>
                                                     // </div>
                                                     null
-                                                :
+                                                    :
                                                     null
                                             }
 
@@ -496,11 +504,11 @@ class App extends React.Component {
                                                 <div className="content">
                                                     <div id="vertical_menu" className="reviews-menu">
                                                         <Nav song={song} store={store}/>
-                                                        <div className="wrapper-ad" onClick={()=>{
+                                                        <div className="wrapper-ad" onClick={() => {
                                                             window.location.href = "https://mcs.mail.ru/"
                                                         }}>
                                                             <div className="image-ad">
-                                                                <img className="image-ad-tag" src={vk}  alt="vk"/>
+                                                                <img className="image-ad-tag" src={vk} alt="vk"/>
                                                             </div>
                                                             <div className="ad-text">
                                                                 Сайт работает в облаках
@@ -525,14 +533,14 @@ class App extends React.Component {
                                             </div>
                                         </Router>
 
-                                     } />
+                                    }/>
                                 </Switch>
                             </BrowserRouter>
-                            <Footer />
+                            <Footer/>
                         </div>
                     </HelmetProvider>
                 );
-            }else{
+            } else {
                 return (
                     <div>
                         <Head
@@ -550,11 +558,11 @@ class App extends React.Component {
                             <div className="content">
 
                                 <div id="vertical_menu" className="reviews-menu">
-                                    <div className="wrapper-ad" onClick={()=>{
+                                    <div className="wrapper-ad" onClick={() => {
                                         window.location.href = "https://mcs.mail.ru/"
                                     }}>
                                         <div className="image-ad">
-                                            <img className="image-ad-tag" src={vk}  alt="vk"/>
+                                            <img className="image-ad-tag" src={vk} alt="vk"/>
                                         </div>
                                         <div className="ad-text">
                                             Сайт работает в облаках
@@ -562,14 +570,14 @@ class App extends React.Component {
                                         {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                     </div>
                                 </div>
-                                <Main />
+                                <Main/>
                             </div>
                         </div>
-                        <Footer />
+                        <Footer/>
                     </div>
                 );
             }
-        }else{
+        } else {
             return (
                 <div style={{
                     position: "fixed",
@@ -579,7 +587,7 @@ class App extends React.Component {
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <div className="loader" />
+                    <div className="loader"/>
                 </div>
             )
         }
