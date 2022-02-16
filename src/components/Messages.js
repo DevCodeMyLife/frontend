@@ -15,14 +15,12 @@ class Messages extends Component {
         let AudioContext = window.AudioContext || window.webkitAudioContext
 
         this.state = {
-            auth: this.props.auth,
             cent: null,
             _createMessage: false,
             chats: [],
             messages: [],
             dialog: false,
             cid: null,
-            user: this.props.user,
             cent_channel: null,
             typing: null,
             context: new AudioContext(),
