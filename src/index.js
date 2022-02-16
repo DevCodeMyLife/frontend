@@ -43,10 +43,9 @@ class App extends React.Component {
 
         super(props);
         this.state = {
-            load: false, context: new AudioContext(), audio: new Audio(this.props.song), channel: null
+            load: false, context: new AudioContext(), audio: new Audio(song), channel: null
         }
     }
-
 
     checkAuth() {
         fetch("/api/authentication", {
@@ -406,6 +405,7 @@ class App extends React.Component {
     })
 
     render() {
+        console.log("staging")
         if (this.state.load) {
             if (true) {
                 return (<HelmetProvider>
