@@ -115,7 +115,6 @@ class Nav extends Component {
                             </div>
                         </Link>
                     </div>
-
                     <div className="nav-item">
                         <Link className="nav-value" href="/people">
                             <div className="icon-image">
