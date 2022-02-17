@@ -139,10 +139,11 @@ class App extends React.Component {
                                     position: "bottom-right",
                                     autoClose: 5000,
                                     hideProgressBar: true,
-                                    closeOnClick: true,
+                                    closeOnClick: false,
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
+                                    onClick: ()=>{ location.href = "/notification"}
                                 });
                                 break;
                             case "comment":
@@ -169,10 +170,11 @@ class App extends React.Component {
                                     position: "bottom-right",
                                     autoClose: 5000,
                                     hideProgressBar: true,
-                                    closeOnClick: true,
+                                    closeOnClick: false,
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
+                                    onClick: ()=>{ location.href = "/notification"}
                                 });
                                 break;
                             case "message":
