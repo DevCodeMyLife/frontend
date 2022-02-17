@@ -63,7 +63,6 @@ class Notification extends Component {
                                                 {
                                                     notification?.types === "post" ?
                                                         notification?.user_event_action ?
-
                                                             <div>
                                                                 <span className="link-user" onClick={(e) => {
                                                                     e.preventDefault();
@@ -71,11 +70,11 @@ class Notification extends Component {
                                                                 }}>{notification?.user_event_action}</span>
                                                                 <span> посмотрел Вашу заметку</span>
                                                             </div>
-                                                            :
-                                                            <div>
-                                                                <span>Кто-то посмотрел Вашу заметку</span>
-                                                            </div>
                                                         :
+                                                            <div>
+                                                                <span>Неавторизованный пользователь посмотрел Вашу заметку</span>
+                                                            </div>
+                                                    :
                                                         notification?.types === "comment" ?
                                                             <div>
                                                                 <span className="link-user" onClick={(e) => {
