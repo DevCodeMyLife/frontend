@@ -203,6 +203,7 @@ class App extends React.Component {
                                         pauseOnHover: true,
                                         draggable: true,
                                         progress: undefined,
+                                        onClick: ()=>{ location.href = "/messages"}
                                     });
                                 }
                                 break;
