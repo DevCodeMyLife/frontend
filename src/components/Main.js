@@ -270,7 +270,7 @@ class Main extends Component {
                                         </div>
                                         <div className="auths-list">
                                             <p>
-                                                <span className="test-stat">Посетителей сегодня:</span> <span
+                                                <span className="test-stat">Событий сегодня:</span> <span
                                                 className="green">{this.state.countUsers}</span><br/>
                                                 <span className="test-stat">Созданных заметок всего:</span> <span
                                                 className="green">{this.state.countNotes}</span><br/>
