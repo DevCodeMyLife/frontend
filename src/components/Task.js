@@ -350,7 +350,7 @@ class Task extends Component {
                                             {
                                                 task?.status === "wait" ?
                                                     <div className="like">
-                                                        <div className="like-text" onClick={this.actionExec()} ref={this.refActionExecButton}>
+                                                        <div className="like-text" onClick={()=> {this.actionExec()}} ref={this.refActionExecButton}>
                                                             <span className="like-count">
                                                                 Отправить заявку на исполнение
                                                             </span>
