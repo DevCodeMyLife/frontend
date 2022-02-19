@@ -361,7 +361,7 @@ class Task extends Component {
                                                             </div>
                                                             <div className="wall-comments">
                                                                 {
-                                                                    this.state.comments.length ?
+                                                                    this.state.comments?.length ?
                                                                         comments.map(com =>
                                                                             <div>
                                                                                 <div className="feed-item-value">
