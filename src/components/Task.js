@@ -235,7 +235,7 @@ class Task extends Component {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
 
-                                    <div className="place-items" id="place_feed" uuid={data?.ID}>
+                                    <div className="place-items" id="place_feed" uuid={task?.data?.ID}>
                                         <JsonLd item={{
                                             "@context": "https://schema.org",
                                             "@type": "BreadcrumbList",
