@@ -152,7 +152,7 @@ class Task extends Component {
 
         fetch("api/notification", {
             method: "POST",
-            data: JSON.stringify(data)
+            body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(res => {
