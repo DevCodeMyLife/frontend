@@ -637,6 +637,17 @@ class FeedOnePage extends Component {
                                         :
                                         null
                                 }
+                                {
+                                    user?.count_tasks ?
+                                        <div className="main-place">
+                                            Создал задач:
+                                            {
+                                                " " + user?.count_tasks
+                                            }
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                             :
                             <div className="loader-wrapper feed-wrapper">
