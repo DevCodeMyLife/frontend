@@ -343,7 +343,7 @@ class Task extends Component {
                                             </div>
                                             <div className="like_wrapper wrapper-flex-end">
                                                 {
-                                                    data?.tag ?
+                                                    task?.tag ?
                                                         <div className="tags-type">
                                                             #{task?.tag}
                                                         </div>
