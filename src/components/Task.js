@@ -299,7 +299,7 @@ class Task extends Component {
                                                 </div>
                                             </div>
                                             <div className="title-feed">
-                                                {data?.title}
+                                                {task?.title}
                                             </div>
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
