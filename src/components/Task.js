@@ -627,7 +627,7 @@ class Task extends Component {
                                 {
                                     user?.count_tasks ?
                                         <div className="main-place">
-                                            Количество фриланс задач:
+                                            Создал задач:
                                             {
                                                 " " + user?.count_tasks
                                             }
