@@ -139,8 +139,9 @@ class Task extends Component {
     }
 
     actionExec (){
-        this.refActionExecButton.current.style.background = "green"
-        this.refActionExecButton.current.style.color = "white"
+        this.refActionExecButton.current.style.background = "#e0f7e0"
+        this.refActionExecButton.current.style.borderRadius = "10px"
+
     }
 
 
