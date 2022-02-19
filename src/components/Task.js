@@ -381,8 +381,8 @@ class Task extends Component {
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
                                                             <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
-                                                                <div className="like-text" >
-                                                                    <span className="like-count">
+                                                                <div className="like-text" uuid={task?.id}>
+                                                                    <span className="like-count" uuid={task?.id}>
                                                                         {this.state.exec}
                                                                     </span>
                                                                 </div>
