@@ -234,7 +234,7 @@ class Task extends Component {
                     {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
-                                {task.map(data =>
+
                                     <div className="place-items" id="place_feed" uuid={data?.ID}>
                                         <JsonLd item={{
                                             "@context": "https://schema.org",
@@ -256,14 +256,14 @@ class Task extends Component {
                                                     "@type": "ListItem",
                                                     "position": 3,
                                                     "name": data?.title || data?.value?.substring(0, 30),
-                                                    "item": `https://devcodemylife.tech/task?uuid=${data?.ID}`
+                                                    "item": `https://devcodemylife.tech/task?uuid=${task?.data.ID}`
                                                 }
                                             ]
                                         }}/>
                                         <Helmet>
-                                            <title>{data.title || data?.value?.substring(0, 30)} | DevCodeMyLife</title>
+                                            <title>{task.data.title || task.data?.value?.substring(0, 30)} | DevCodeMyLife</title>
                                             <meta name="Keywords"
-                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + data.title}/>
+                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + task?.data.title}/>
                                         </Helmet>
                                         {/*<div className="title-page">*/}
                                         {/*    О нас*/}
@@ -272,15 +272,15 @@ class Task extends Component {
                                             <div key="asldk" className="wrapper-data">
                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                     {
-                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
+                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(task?.data.last_active_at).getTime() / 1000))) > 120 ?
                                                             null
                                                             :
                                                             <div className="online_user"/>
                                                     }
-                                                    <img key="asdmmmmasd" src={data?.photo} alt={data?.user}
+                                                    <img key="asdmmmmasd" src={task?.data.photo} alt={task?.data.user}
                                                          onClick={(e) => {
                                                              e.preventDefault();
-                                                             window.location.href = `/user/${data?.uid}`
+                                                             window.location.href = `/user/${task?.data.uid}`
                                                          }}
                                                     />
                                                 </div>
@@ -288,12 +288,12 @@ class Task extends Component {
                                                     <div className="feed-item-title">
                                                         <div className="link-user" onClick={(e) => {
                                                             e.preventDefault();
-                                                            window.location.href = `/user/${data?.uid}`
+                                                            window.location.href = `/user/${task?.data?.uid}`
                                                         }}>
                                                             {data?.user}
                                                         </div>
                                                         <div className="feed-item-datetime">
-                                                            {this.unixToDateTime(data?.date_time)}
+                                                            {this.unixToDateTime(task?.data?.date_time)}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,13 +304,13 @@ class Task extends Component {
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                components={this.components}>
-                                                    {data?.value}
+                                                    {task?.data?.value}
                                                 </ReactMarkdown>
                                             </div>
                                         </div>
                                         <div className="wrapper-bottom">
                                             <div className="like_wrapper wrapper-flex-start">
-                                                <div className="like" onClick={() => this.like(data?.ID)}>
+                                                <div className="like" onClick={() => this.like(task?.data?.ID)}>
                                                     <div className="like-item">
                                                         {
                                                             this.state.isDark === "light" ?
@@ -320,8 +320,8 @@ class Task extends Component {
                                                         }
                                                     </div>
                                                     <div className="like-text">
-                                                            <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like} Нравиться
+                                                            <span className="like-count" id={task?.data?.ID}>
+                                                                {task?.data?.count_like} Нравиться
                                                             </span>
                                                     </div>
                                                 </div>
@@ -345,7 +345,7 @@ class Task extends Component {
                                                 {
                                                     data?.tag ?
                                                         <div className="tags-type">
-                                                            #{data?.tag}
+                                                            #{task?.data?.tag}
                                                         </div>
                                                         :
                                                         null
@@ -504,7 +504,6 @@ class Task extends Component {
                                         }
 
                                     </div>
-                                )}
                             </div>
                             :
                             this.state.notFeed ?
