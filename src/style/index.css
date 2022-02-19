@@ -130,9 +130,9 @@ html {
 }
 
 @keyframes blink_ready {
-  0% { color: #cffa87; }
-  50% { color: #54f331; }
-  100% { color: #cffa87; }
+  0% { color: #7ab41d; }
+  50% { color: #26a609; }
+  100% { color: #86c020; }
 }
 
 @keyframes blink_fail {
