@@ -145,7 +145,23 @@ class Task extends Component {
         this.setState({
              exec: "Ожидаем подтверждения"
         })
-        // this.refActionExecButton.current.addClass("wait_blink")
+
+        fetch("api/notification", {
+            method: "POST"
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0) {
+                    console.log(res)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({
+                    isLoaded: false,
+                    result: {}
+                });
+            });
     }
 
 
