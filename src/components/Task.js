@@ -379,7 +379,7 @@ class Task extends Component {
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
                                                             event?.executor ?
-                                                                <div className="like ready_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                <div className="ready_blink like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                     <div className="like-text" uuid={task?.id}>
                                                                         <span className="like-count" uuid={task?.id}>
                                                                             Отправить на проверку
@@ -388,7 +388,7 @@ class Task extends Component {
                                                                 </div>
                                                             :
                                                                 event?.block ?
-                                                                    <div className="like fail_blink" uuid={task?.id} ref={this.refActionExecButton}>
+                                                                    <div className="fail_blink like" uuid={task?.id} ref={this.refActionExecButton}>
                                                                         <div className="like-text" uuid={task?.id}>
                                                                             <span className="like-count" uuid={task?.id}>
                                                                                 Запрос отклонен
@@ -397,7 +397,7 @@ class Task extends Component {
                                                                     </div>
                                                                 :
                                                                     event?.feeds_uuid !== "" ?
-                                                                        <div className="like wait_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                        <div className="wait_blink like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                             <div className="like-text" uuid={task?.id}>
                                                                                 <span className="like-count" uuid={task?.id}>
                                                                                     Ожидаем подтверждения
