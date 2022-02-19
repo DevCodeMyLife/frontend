@@ -73,8 +73,6 @@ class Task extends Component {
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 0) {
-                    console.log(res)
-
                     document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
                 }
                 console.log(res)
@@ -149,8 +147,6 @@ class Task extends Component {
         let data = {
             uuid: event.target.getAttribute('uuid')
         }
-
-        console.log(data)
 
         fetch("api/notification", {
             method: "POST",

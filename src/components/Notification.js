@@ -83,15 +83,33 @@ class Notification extends Component {
                                                                 }}>{notification?.user_event_action}</span>
                                                                 <span> оставил новый комментарий</span>
                                                             </div>
+                                                        :
+                                                            notification?.types === "task" ?
+                                                                <div>
+                                                                    <span className="link-user" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        window.location.href = `/user/${notification?.uwuid}`
+                                                                    }}>{notification?.user_event_action}</span>
+                                                                    <span> хочет выполнить <a href={`/task?uuid=${notification?.feeds_uuid}`}>задачу</a></span>
+                                                                </div>
                                                             :
-                                                            null
+                                                                null
                                                 }
                                             </div>
-                                            <div className="info-notifications-item">
-                                                <div className="button-default" onClick={() => this.checkNotification(
-                                                    notification.feeds_uuid, notification.addr)}>Перейти к заметке
-                                                </div>
-                                            </div>
+                                            {
+                                                notification?.types === "task" ?
+                                                    <div className="info-notifications-item">
+                                                        <div className="button-default" onClick={() => this.checkNotification(
+                                                            notification.feeds_uuid, notification.addr)}>Отдать в работу
+                                                        </div>
+                                                    </div>
+                                                :
+                                                    <div className="info-notifications-item">
+                                                        <div className="button-default" onClick={() => this.checkNotification(
+                                                            notification.feeds_uuid, notification.addr)}>Перейти к заметке
+                                                        </div>
+                                                    </div>
+                                            }
                                         </div>
                                 )
                                 :
