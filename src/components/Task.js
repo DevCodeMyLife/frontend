@@ -142,6 +142,9 @@ class Task extends Component {
 
     actionExec = event => {
         event.target.classList.add("wait_blink")
+        this.setState({
+             exec: "Ожидаем подтверждения"
+        })
         // this.refActionExecButton.current.addClass("wait_blink")
     }
 
@@ -357,7 +360,7 @@ class Task extends Component {
                                                             <div className="like" onClick={this.actionExec(store.auth.user.data.id)} ref={this.refActionExecButton}>
                                                                 <div className="like-text" >
                                                                     <span className="like-count">
-                                                                        Стать исполненителем
+                                                                        {this.state.exec}
                                                                     </span>
                                                                 </div>
                                                             </div>
