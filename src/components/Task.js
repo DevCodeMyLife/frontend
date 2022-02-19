@@ -36,7 +36,8 @@ class Task extends Component {
             notFeed: false,
             isDark: "light",
             user: null,
-            store: this.props.store
+            store: this.props.store,
+            exec: "Стать исполнителем"
         }
         this.refActionExecButton = React.createRef();
 
@@ -139,8 +140,9 @@ class Task extends Component {
         }
     }
 
-    actionExec (uid){
-        this.refActionExecButton.current.addClass("wait_blink")
+    actionExec = event => {
+        event.target.classList.add("wait_blink")
+        // this.refActionExecButton.current.addClass("wait_blink")
     }
 
 
@@ -352,7 +354,7 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            <div className="like" onClick={()=> {this.actionExec(store.auth.user.data.id)}} ref={this.refActionExecButton}>
+                                                            <div className="like" onClick={this.actionExec(store.auth.user.data.id)} ref={this.refActionExecButton}>
                                                                 <div className="like-text" >
                                                                     <span className="like-count">
                                                                         Стать исполненителем
