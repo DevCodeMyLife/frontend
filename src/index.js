@@ -27,6 +27,7 @@ import People from "./components/People";
 import AppReducer from "./components/reducers/common"
 import Agreement from "./components/Agreement";
 import Call from "./components/Call";
+import Task from "./components/Task";
 
 const store = createStore(AppReducer);
 
@@ -404,7 +405,14 @@ class App extends React.Component {
                     console.log('[ app start ]')
                 </script>
             </>, view: <HowToUse store={store}/>
-        })
+        }), '/task': route({
+            title: 'Задача | DevCodeMyLife', head: <>
+                <meta name="description" content="Задача"/>
+                <script>
+                    console.log('[ app start ]')
+                </script>
+            </>, view: <Task store={store}/>
+        }),
     })
 
     render() {
