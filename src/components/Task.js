@@ -146,8 +146,13 @@ class Task extends Component {
              exec: "Ожидаем подтверждения"
         })
 
+        let data = {
+            uuid: event.target.getAttribute('uuid')
+        }
+
         fetch("api/notification", {
-            method: "POST"
+            method: "POST",
+            data: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(res => {
@@ -373,7 +378,7 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            <div className="like" onClick={this.actionExec} ref={this.refActionExecButton}>
+                                                            <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                 <div className="like-text" >
                                                                     <span className="like-count">
                                                                         {this.state.exec}
