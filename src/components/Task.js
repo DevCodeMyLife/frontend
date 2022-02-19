@@ -290,7 +290,7 @@ class Task extends Component {
                                                             e.preventDefault();
                                                             window.location.href = `/user/${task?.uid}`
                                                         }}>
-                                                            {data?.user}
+                                                            {task?.user}
                                                         </div>
                                                         <div className="feed-item-datetime">
                                                             {this.unixToDateTime(task?.date_time)}
