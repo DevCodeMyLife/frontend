@@ -624,6 +624,17 @@ class Task extends Component {
                                         :
                                         null
                                 }
+                                {
+                                    user?.count_tasks ?
+                                        <div className="main-place">
+                                            Количество фриланс задач:
+                                            {
+                                                " " + user?.count_tasks
+                                            }
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                             :
                             <div className="loader-wrapper feed-wrapper">
