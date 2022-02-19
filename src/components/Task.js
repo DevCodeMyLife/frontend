@@ -224,7 +224,7 @@ class Task extends Component {
                             isLoadedFeed: true,
                             task: res.data,
                             comments: res.comments,
-                            event: res.event,
+                            event: res.events,
                             counter: res.counter,
                             user: res.user,
                             load: true,
