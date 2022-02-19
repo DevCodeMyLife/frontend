@@ -150,6 +150,8 @@ class Task extends Component {
             uuid: event.target.getAttribute('uuid')
         }
 
+        console.log(data)
+
         fetch("api/notification", {
             method: "POST",
             body: JSON.stringify(data)
