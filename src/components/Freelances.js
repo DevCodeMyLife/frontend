@@ -8,6 +8,7 @@ import '@emotion/react'
 // import ReactMarkdown from "react-markdown";
 import {PrismAsync as SyntaxHighlighter} from "react-syntax-highlighter";
 import {tomorrow as style} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import {Link} from "react-navi";
 
 const options = [
     {value: '0', label: 'Легко'},
@@ -380,72 +381,77 @@ class Freelances extends Component {
                                                         <div className="feed-wrapper">
                                                             {
                                                                 this.state.free?.map(data =>
-                                                                    <div key={data.id} className="task-view"
-                                                                         onClick={window.location.href = `/task?uuid=${data?.id}`}>
-                                                                        <div className="task-view-flex">
-                                                                            <div className="image-user">
-                                                                                <img className="image-user-src"
-                                                                                     src={data.avatar_url}
-                                                                                     alt={data.login} onClick={(e) => {
-                                                                                    e.preventDefault();
-                                                                                    window.location.href = `/user/${data?.user_creator_id}`
-                                                                                }}/>
-                                                                            </div>
-                                                                            <div className="info-user">
-                                                                                <div className="feed-item-title">
-                                                                                    <div className="link-user">
-                                                                                        {data?.title}
-                                                                                    </div>
-                                                                                    <div className="feed-item-datetime">
-                                                                                        {
-                                                                                            data?.status === "wait" ?
-                                                                                                <span
-                                                                                                    style={{color: "green"}}>Ожидает исполнителя</span>
-                                                                                                :
-                                                                                                <span
-                                                                                                    style={{color: "green"}}>Ожидает исполнителя</span>
-                                                                                        }
-                                                                                    </div>
-                                                                                    <div className="feed-item-datetime">
-                                                                                        {
-                                                                                            data?.complexity === 0 ?
-                                                                                                <span
-                                                                                                    style={{color: "green"}}>Легко</span>
-                                                                                                :
-                                                                                                data?.complexity === 1 ?
+                                                                    <Link style={{textDecoration: "none"}}
+                                                                          href={`/task?uuid=${data?.ID}`}>
+                                                                        <div key={data.id} className="task-view">
+                                                                            <div className="task-view-flex">
+                                                                                <div className="image-user">
+                                                                                    <img className="image-user-src"
+                                                                                         src={data.avatar_url}
+                                                                                         alt={data.login}
+                                                                                         onClick={(e) => {
+                                                                                             e.preventDefault();
+                                                                                             window.location.href = `/user/${data?.user_creator_id}`
+                                                                                         }}/>
+                                                                                </div>
+                                                                                <div className="info-user">
+                                                                                    <div className="feed-item-title">
+                                                                                        <div className="link-user">
+                                                                                            {data?.title}
+                                                                                        </div>
+                                                                                        <div
+                                                                                            className="feed-item-datetime">
+                                                                                            {
+                                                                                                data?.status === "wait" ?
                                                                                                     <span
-                                                                                                        style={{color: "orange"}}>Средне</span>
+                                                                                                        style={{color: "green"}}>Ожидает исполнителя</span>
                                                                                                     :
-                                                                                                    data?.complexity === 2 ?
+                                                                                                    <span
+                                                                                                        style={{color: "green"}}>Ожидает исполнителя</span>
+                                                                                            }
+                                                                                        </div>
+                                                                                        <div
+                                                                                            className="feed-item-datetime">
+                                                                                            {
+                                                                                                data?.complexity === 0 ?
+                                                                                                    <span
+                                                                                                        style={{color: "green"}}>Легко</span>
+                                                                                                    :
+                                                                                                    data?.complexity === 1 ?
                                                                                                         <span
-                                                                                                            style={{color: "red"}}>Сложно</span>
+                                                                                                            style={{color: "orange"}}>Средне</span>
                                                                                                         :
-                                                                                                        <span>Сложность не определенна</span>
-                                                                                        }
+                                                                                                        data?.complexity === 2 ?
+                                                                                                            <span
+                                                                                                                style={{color: "red"}}>Сложно</span>
+                                                                                                            :
+                                                                                                            <span>Сложность не определенна</span>
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="task-price">
+                                                                                    <div style={{
+                                                                                        display: "flex",
+                                                                                        justifyContent: "center",
+                                                                                        alignItems: "center",
+                                                                                        color: "var(--font-color)"
+                                                                                    }}>{data?.price} ₽
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="task-price">
-                                                                                <div style={{
-                                                                                    display: "flex",
-                                                                                    justifyContent: "center",
-                                                                                    alignItems: "center",
-                                                                                    color: "var(--font-color)"
-                                                                                }}>{data?.price} ₽
-                                                                                </div>
-                                                                            </div>
+                                                                            {/*<div className="wrapper-bottom">*/}
+                                                                            {/*    <div className="wrapper-flex-start">*/}
+                                                                            {/*        <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>*/}
+                                                                            {/*            <div className="button-default" >Подробнее</div>*/}
+                                                                            {/*        </Link>*/}
+                                                                            {/*    </div>*/}
+                                                                            {/*    <div className="like_wrapper wrapper-flex-end">*/}
+                                                                            {/*        <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "var(--font-color)"}}>{data?.price} ₽</div>*/}
+                                                                            {/*    </div>*/}
+                                                                            {/*</div>*/}
                                                                         </div>
-                                                                        {/*<div className="wrapper-bottom">*/}
-                                                                        {/*    <div className="wrapper-flex-start">*/}
-                                                                        {/*        <Link style={{textDecoration: "none", color: "#000"}} href={`/post?uuid=${data?.ID}`}>*/}
-                                                                        {/*            <div className="button-default" >Подробнее</div>*/}
-                                                                        {/*        </Link>*/}
-                                                                        {/*    </div>*/}
-                                                                        {/*    <div className="like_wrapper wrapper-flex-end">*/}
-                                                                        {/*        <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "var(--font-color)"}}>{data?.price} ₽</div>*/}
-                                                                        {/*    </div>*/}
-                                                                        {/*</div>*/}
-                                                                    </div>
+                                                                    </Link>
                                                                 )
                                                             }
                                                         </div>
