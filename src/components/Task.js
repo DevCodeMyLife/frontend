@@ -260,6 +260,7 @@ class Task extends Component {
 
     render() {
         let store = this.state.store.getState()
+        console.log(event)
         let {isLoadedFeed, task, result, comments, counter, user, event} = this.state;
         return (
             <div style={{display: "flex"}}>
@@ -378,7 +379,7 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            event?.feeds_uuid !== "" && !event?.block && !event?.executor?
+                                                            event.feeds_uuid !== "" && !event.block && !event.executor?
                                                                 <div className="wait_blink like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton} style={{animation: "blink_wait 2s linear infinite"}}>
                                                                     <div className="like-text" uuid={task?.id}>
                                                                         <span className="like-count" uuid={task?.id}>
@@ -387,7 +388,7 @@ class Task extends Component {
                                                                     </div>
                                                                 </div>
                                                             :
-                                                                event?.feeds_uuid === "" && !event?.block && !event?.executor ?
+                                                                event.feeds_uuid === "" && !event.block && !event.executor ?
                                                                     <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                         <div className="like-text" uuid={task?.id}>
                                                                             <span className="like-count" uuid={task?.id}>
