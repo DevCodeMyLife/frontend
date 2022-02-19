@@ -450,7 +450,7 @@ class Task extends Component {
                                                         <div className="comments-title">Комментарии</div>
                                                         <div className="wall-comments">
                                                             {
-                                                                this.state.comments.length ?
+                                                                this.state.comments?.length ?
                                                                     comments.map(com =>
                                                                         <div>
                                                                             <div
