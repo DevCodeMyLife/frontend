@@ -388,7 +388,7 @@ class Task extends Component {
                                                                 </div>
                                                             :
                                                                 event?.block ?
-                                                                    <div className="like fail_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                    <div className="like fail_blink" uuid={task?.id} ref={this.refActionExecButton}>
                                                                         <div className="like-text" uuid={task?.id}>
                                                                             <span className="like-count" uuid={task?.id}>
                                                                                 Запрос отклонен
