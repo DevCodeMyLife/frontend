@@ -277,7 +277,8 @@ class Freelances extends Component {
                                                         intlConfig={{locale: 'ru-RU', currency: 'RUB'}}
                                                         name="price"
                                                         placeholder="Стоимость"
-                                                        defaultValue={null}
+                                                        maxLength={6}
+                                                        defaultValue={0}
                                                         decimalsLimit={2}
                                                         onValueChange={(value, name) => this.updatePrice(value, name)}
                                                         style={{
