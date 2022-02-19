@@ -35,7 +35,8 @@ class Task extends Component {
             data: null,
             notFeed: false,
             isDark: "light",
-            user: null
+            user: null,
+            store: this.props.store
         }
         this.refActionExecButton = React.createRef();
 
@@ -234,7 +235,7 @@ class Task extends Component {
     }
 
     render() {
-
+        let store = this.state.store.getState()
         let {isLoadedFeed, task, result, comments, counter, user} = this.state;
         return (
             <div style={{display: "flex"}}>
@@ -350,15 +351,21 @@ class Task extends Component {
                                                 </div>
                                             </div>
                                             {
-                                                task?.status === "wait" ?
-                                                    <div className="like" onClick={()=> {this.actionExec()}} ref={this.refActionExecButton}>
-                                                        <div className="like-text" >
-                                                            <span className="like-count">
-                                                                Стать исполненителем
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                store.user.isAuth ?
+                                                    store.user.data.id !== task?.user_creator_id ?
+                                                        task?.status === "wait" ?
+                                                            <div className="like" onClick={()=> {this.actionExec()}} ref={this.refActionExecButton}>
+                                                                <div className="like-text" >
+                                                                    <span className="like-count">
+                                                                        Стать исполненителем
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            null
                                                     :
+                                                        null
+                                                :
                                                     null
                                             }
                                             <div className="like">
