@@ -219,7 +219,7 @@ class Freelances extends Component {
                                 </div>
                                 <div className="tags-wrapper">
                                     <div className="button-default-tag tags-item unselectable" id="all"
-                                         action="main" >
+                                         action="main">
                                         Мои задачи
                                     </div>
                                     {
@@ -380,7 +380,8 @@ class Freelances extends Component {
                                                         <div className="feed-wrapper">
                                                             {
                                                                 this.state.free?.map(data =>
-                                                                    <div key={data.id} className="task-view">
+                                                                    <div key={data.id} className="task-view"
+                                                                         onClick={window.location.href = `/task?uuid=${data?.id}`}>
                                                                         <div className="task-view-flex">
                                                                             <div className="image-user">
                                                                                 <img className="image-user-src"
