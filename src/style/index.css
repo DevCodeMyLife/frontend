@@ -111,6 +111,16 @@ html {
   box-sizing: border-box;
 }
 
+.wait_blink {
+  animation: blink_wait 2s linear infinite;
+}
+
+@keyframes blink_wait {
+  0% { color: #fcbc69; }
+  50% { color: #f38b25; }
+  100% { color: #fcbc69; }
+}
+
 body {
   line-height: 1.36;
   /*overflow: hidden;*/

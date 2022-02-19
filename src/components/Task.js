@@ -139,10 +139,8 @@ class Task extends Component {
         }
     }
 
-    actionExec (){
-        this.refActionExecButton.current.style.background = "#e0f7e0"
-        this.refActionExecButton.current.style.borderRadius = "10px"
-
+    actionExec (uid){
+        this.refActionExecButton.current.addClass("wait_blink")
     }
 
 
@@ -354,7 +352,7 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            <div className="like" onClick={()=> {this.actionExec()}} ref={this.refActionExecButton}>
+                                                            <div className="like" onClick={()=> {this.actionExec(store.auth.user.data.id)}} ref={this.refActionExecButton}>
                                                                 <div className="like-text" >
                                                                     <span className="like-count">
                                                                         Стать исполненителем
