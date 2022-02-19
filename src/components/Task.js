@@ -340,6 +340,21 @@ class Task extends Component {
                                                             </span>
                                                     </div>
                                                 </div>
+
+                                                    {
+                                                        task?.status === "wait" ?
+                                                            <div className="like">
+
+                                                                <div className="like-text">
+                                                                    <span className="like-count">
+                                                                        Отправить заявку на исполнение
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        :
+                                                            null
+                                                    }
+
                                             </div>
                                             <div className="like_wrapper wrapper-flex-end">
                                                 {
