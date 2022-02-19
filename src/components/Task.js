@@ -514,7 +514,7 @@ class Task extends Component {
                                     {/*</div>*/}
                                     <div className="error-wrapper">
                                         <div className="error-page">
-                                            Заметка удалена либо еще не создана.
+                                            Задача удалена либо еще не создана.
                                         </div>
                                     </div>
                                 </div>
@@ -530,15 +530,6 @@ class Task extends Component {
                     {
                         isLoadedFeed ?
                             <div className="tags-box">
-                                {/*<div className="title-box">{user?.login}</div>*/}
-                                {/*/!*{*!/*/}
-                                {/*/!*    tags?.map(data =>*!/*/}
-                                {/*/!*        <div className="button-default-tag tags-item unselectable" action={data.value}*!/*/}
-                                {/*/!*             onClick={this.handleClickTag}>*!/*/}
-                                {/*/!*            #{data.value}*!/*/}
-                                {/*/!*        </div>*!/*/}
-                                {/*/!*    )*!/*/}
-                                {/*/!*}*!/*/}
                                 <div className="wrapper-data">
                                     <div className="photo-wrapper">
                                         {
