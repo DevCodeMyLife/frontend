@@ -186,7 +186,7 @@ class Task extends Component {
             })
                 .then(response => response.json())
                 .then(res => {
-                    if (res.status.code === 0 && res.data.length > 0) {
+                    if (res.status.code === 0) {
                         this.setState({
                             isLoadedFeed: true,
                             task: res.data,
