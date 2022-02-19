@@ -354,7 +354,7 @@ class Task extends Component {
                                                     <div className="like" onClick={()=> {this.actionExec()}} ref={this.refActionExecButton}>
                                                         <div className="like-text" >
                                                             <span className="like-count">
-                                                                Отправить заявку на исполнение
+                                                                Стать исполненителем
                                                             </span>
                                                         </div>
                                                     </div>
