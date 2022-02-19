@@ -235,7 +235,7 @@ class Task extends Component {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
 
-                                    <div className="place-items" id="place_feed" uuid={task?.data?.ID}>
+                                    <div className="place-items" id="place_feed" uuid={task?.ID}>
                                         <JsonLd item={{
                                             "@context": "https://schema.org",
                                             "@type": "BreadcrumbList",
@@ -249,21 +249,21 @@ class Task extends Component {
                                                 {
                                                     "@type": "ListItem",
                                                     "position": 2,
-                                                    "name": "Все заметки",
-                                                    "item": "https://devcodemylife.tech/feed"
+                                                    "name": "Фриланс",
+                                                    "item": "https://devcodemylife.tech/freelances"
                                                 },
                                                 {
                                                     "@type": "ListItem",
                                                     "position": 3,
-                                                    "name": data?.title || data?.value?.substring(0, 30),
-                                                    "item": `https://devcodemylife.tech/task?uuid=${task?.data.ID}`
+                                                    "name": task?.title || task?.value?.substring(0, 30),
+                                                    "item": `https://devcodemylife.tech/task?uuid=${task?.ID}`
                                                 }
                                             ]
                                         }}/>
                                         <Helmet>
-                                            <title>{task.data.title || task.data?.value?.substring(0, 30)} | DevCodeMyLife</title>
+                                            <title>{task?.title || task?.value?.substring(0, 30)} | DevCodeMyLife</title>
                                             <meta name="Keywords"
-                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + task?.data.title}/>
+                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + task?.title}/>
                                         </Helmet>
                                         {/*<div className="title-page">*/}
                                         {/*    О нас*/}
@@ -272,15 +272,15 @@ class Task extends Component {
                                             <div key="asldk" className="wrapper-data">
                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                     {
-                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(task?.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(task?.last_active_at).getTime() / 1000))) > 120 ?
                                                             null
                                                             :
                                                             <div className="online_user"/>
                                                     }
-                                                    <img key="asdmmmmasd" src={task?.data.photo} alt={task?.data.user}
+                                                    <img key="asdmmmmasd" src={task?.photo} alt={task?.user}
                                                          onClick={(e) => {
                                                              e.preventDefault();
-                                                             window.location.href = `/user/${task?.data.uid}`
+                                                             window.location.href = `/user/${task?.uid}`
                                                          }}
                                                     />
                                                 </div>
@@ -288,12 +288,12 @@ class Task extends Component {
                                                     <div className="feed-item-title">
                                                         <div className="link-user" onClick={(e) => {
                                                             e.preventDefault();
-                                                            window.location.href = `/user/${task?.data?.uid}`
+                                                            window.location.href = `/user/${task?.uid}`
                                                         }}>
                                                             {data?.user}
                                                         </div>
                                                         <div className="feed-item-datetime">
-                                                            {this.unixToDateTime(task?.data?.date_time)}
+                                                            {this.unixToDateTime(task?.date_time)}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,13 +304,13 @@ class Task extends Component {
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                components={this.components}>
-                                                    {task?.data?.value}
+                                                    {task?.value}
                                                 </ReactMarkdown>
                                             </div>
                                         </div>
                                         <div className="wrapper-bottom">
                                             <div className="like_wrapper wrapper-flex-start">
-                                                <div className="like" onClick={() => this.like(task?.data?.ID)}>
+                                                <div className="like" onClick={() => this.like(task?.ID)}>
                                                     <div className="like-item">
                                                         {
                                                             this.state.isDark === "light" ?
@@ -320,8 +320,8 @@ class Task extends Component {
                                                         }
                                                     </div>
                                                     <div className="like-text">
-                                                            <span className="like-count" id={task?.data?.ID}>
-                                                                {task?.data?.count_like} Нравиться
+                                                            <span className="like-count" id={task?.ID}>
+                                                                {task?.count_like} Нравиться
                                                             </span>
                                                     </div>
                                                 </div>
@@ -345,7 +345,7 @@ class Task extends Component {
                                                 {
                                                     data?.tag ?
                                                         <div className="tags-type">
-                                                            #{task?.data?.tag}
+                                                            #{task?.tag}
                                                         </div>
                                                         :
                                                         null
