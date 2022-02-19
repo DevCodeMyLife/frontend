@@ -90,7 +90,7 @@ class Notification extends Component {
                                                                         e.preventDefault();
                                                                         window.location.href = `/user/${notification?.uwuid}`
                                                                     }}>{notification?.user_event_action}</span>
-                                                                    <span> хочет выполнить <a href={`/task?uuid=${notification?.feeds_uuid}`}>задачу</a></span>
+                                                                    <span> хочет выполнить <a target="_blank" className="link-user" href={`/task?uuid=${notification?.feeds_uuid}`}>задачу</a></span>
                                                                 </div>
                                                             :
                                                                 null
