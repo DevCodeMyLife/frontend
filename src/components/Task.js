@@ -310,7 +310,7 @@ class Task extends Component {
                                         </div>
                                         <div className="wrapper-bottom">
                                             <div className="like_wrapper wrapper-flex-start">
-                                                <div className="like" onClick={() => this.like(task?.ID)}>
+                                                <div className="like" onClick={() => this.like(task?.id)}>
                                                     <div className="like-item">
                                                         {
                                                             this.state.isDark === "light" ?
@@ -320,7 +320,7 @@ class Task extends Component {
                                                         }
                                                     </div>
                                                     <div className="like-text">
-                                                            <span className="like-count" id={task?.ID}>
+                                                            <span className="like-count" id={task?.id}>
                                                                 {task?.count_like} Нравиться
                                                             </span>
                                                     </div>
