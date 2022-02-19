@@ -39,6 +39,8 @@ class Task extends Component {
         }
     }
 
+    refActionExecButton = React.useRef()
+
     getPreferredColorScheme = () => {
         if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
             this.setState({
@@ -133,6 +135,11 @@ class Task extends Component {
                     console.log(error)
                 });
         }
+    }
+
+    actionExec (){
+        this.refActionExecButton.current.background = "green"
+        this.refActionExecButton.current.color = "white"
     }
 
 
@@ -235,241 +242,148 @@ class Task extends Component {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
 
-                                    <div className="place-items" id="place_feed" uuid={task?.id}>
-                                        <JsonLd item={{
-                                            "@context": "https://schema.org",
-                                            "@type": "BreadcrumbList",
-                                            "itemListElement": [
+                                <div className="place-items" id="place_feed" uuid={task?.id}>
+                                    <JsonLd item={{
+                                        "@context": "https://schema.org",
+                                        "@type": "BreadcrumbList",
+                                        "itemListElement": [
+                                            {
+                                                "@type": "ListItem",
+                                                "position": 1,
+                                                "name": "DevCodeMyLife",
+                                                "item": "https://devcodemylife.tech"
+                                            },
+                                            {
+                                                "@type": "ListItem",
+                                                "position": 2,
+                                                "name": "Фриланс",
+                                                "item": "https://devcodemylife.tech/freelances"
+                                            },
+                                            {
+                                                "@type": "ListItem",
+                                                "position": 3,
+                                                "name": task?.title || task?.value?.substring(0, 30),
+                                                "item": `https://devcodemylife.tech/task?uuid=${task?.ID}`
+                                            }
+                                        ]
+                                    }}/>
+                                    <Helmet>
+                                        <title>{task?.title || task?.value?.substring(0, 30)} | DevCodeMyLife</title>
+                                        <meta name="Keywords"
+                                              content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + task?.title}/>
+                                    </Helmet>
+                                    {/*<div className="title-page">*/}
+                                    {/*    О нас*/}
+                                    {/*</div>*/}
+                                    <div className="feed-item-value">
+                                        <div key="asldk" className="wrapper-data">
+                                            <div key="aksdlkasd" className="photo-wrapper">
                                                 {
-                                                    "@type": "ListItem",
-                                                    "position": 1,
-                                                    "name": "DevCodeMyLife",
-                                                    "item": "https://devcodemylife.tech"
-                                                },
-                                                {
-                                                    "@type": "ListItem",
-                                                    "position": 2,
-                                                    "name": "Фриланс",
-                                                    "item": "https://devcodemylife.tech/freelances"
-                                                },
-                                                {
-                                                    "@type": "ListItem",
-                                                    "position": 3,
-                                                    "name": task?.title || task?.value?.substring(0, 30),
-                                                    "item": `https://devcodemylife.tech/task?uuid=${task?.ID}`
+                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(task?.last_active_at).getTime() / 1000))) > 120 ?
+                                                        null
+                                                        :
+                                                        <div className="online_user"/>
                                                 }
-                                            ]
-                                        }}/>
-                                        <Helmet>
-                                            <title>{task?.title || task?.value?.substring(0, 30)} | DevCodeMyLife</title>
-                                            <meta name="Keywords"
-                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + task?.title}/>
-                                        </Helmet>
-                                        {/*<div className="title-page">*/}
-                                        {/*    О нас*/}
-                                        {/*</div>*/}
-                                        <div className="feed-item-value">
-                                            <div key="asldk" className="wrapper-data">
-                                                <div key="aksdlkasd" className="photo-wrapper">
-                                                    {
-                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(task?.last_active_at).getTime() / 1000))) > 120 ?
-                                                            null
-                                                            :
-                                                            <div className="online_user"/>
-                                                    }
-                                                    <img key="asdmmmmasd" src={task?.photo} alt={task?.user}
-                                                         onClick={(e) => {
-                                                             e.preventDefault();
-                                                             window.location.href = `/user/${task?.uid}`
-                                                         }}
-                                                    />
-                                                </div>
-                                                <div className="value-post">
-                                                    <div className="feed-item-title">
-                                                        <div className="link-user" onClick={(e) => {
-                                                            e.preventDefault();
-                                                            window.location.href = `/user/${task?.uid}`
-                                                        }}>
-                                                            {task?.user}
-                                                        </div>
-                                                        <div className="feed-item-datetime">
-                                                            {this.unixToDateTime(task?.date_time)}
-                                                        </div>
+                                                <img key="asdmmmmasd" src={task?.photo} alt={task?.user}
+                                                     onClick={(e) => {
+                                                         e.preventDefault();
+                                                         window.location.href = `/user/${task?.uid}`
+                                                     }}
+                                                />
+                                            </div>
+                                            <div className="value-post">
+                                                <div className="feed-item-title">
+                                                    <div className="link-user" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        window.location.href = `/user/${task?.uid}`
+                                                    }}>
+                                                        {task?.user}
+                                                    </div>
+                                                    <div className="feed-item-datetime">
+                                                        {this.unixToDateTime(task?.date_time)}
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="title-feed">
-                                                {task?.title}
-                                            </div>
-                                            <div key="asldk" className="wrapper-data">
-                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                               components={this.components}>
-                                                    {task?.value}
-                                                </ReactMarkdown>
                                             </div>
                                         </div>
-                                        <div className="wrapper-bottom">
-                                            <div className="like_wrapper wrapper-flex-start">
-                                                <div className="like" onClick={() => this.like(task?.id)}>
-                                                    <div className="like-item">
-                                                        {
-                                                            this.state.isDark === "light" ?
-                                                                <img src={like} alt="like"/>
-                                                                :
-                                                                <img src={like_dark} alt="like"/>
-                                                        }
-                                                    </div>
-                                                    <div className="like-text">
+                                        <div className="title-feed">
+                                            {task?.title}
+                                        </div>
+                                        <div key="asldk" className="wrapper-data">
+                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                           components={this.components}>
+                                                {task?.value}
+                                            </ReactMarkdown>
+                                        </div>
+                                    </div>
+                                    <div className="wrapper-bottom">
+                                        <div className="like_wrapper wrapper-flex-start">
+                                            <div className="like" onClick={() => this.like(task?.id)}>
+                                                <div className="like-item">
+                                                    {
+                                                        this.state.isDark === "light" ?
+                                                            <img src={like} alt="like"/>
+                                                            :
+                                                            <img src={like_dark} alt="like"/>
+                                                    }
+                                                </div>
+                                                <div className="like-text">
                                                             <span className="like-count" id={task?.id}>
                                                                 {task?.count_like} Нравиться
                                                             </span>
-                                                    </div>
                                                 </div>
-                                                <div className="like">
-                                                    <div className="like-item">
-                                                        {
-                                                            this.state.isDark === "light" ?
-                                                                <img src={look} alt="like"/>
-                                                                :
-                                                                <img src={look_dark} alt="like"/>
-                                                        }
-                                                    </div>
-                                                    <div className="like-text">
+                                            </div>
+                                            <div className="like">
+                                                <div className="like-item">
+                                                    {
+                                                        this.state.isDark === "light" ?
+                                                            <img src={look} alt="like"/>
+                                                            :
+                                                            <img src={look_dark} alt="like"/>
+                                                    }
+                                                </div>
+                                                <div className="like-text">
                                                             <span className="like-count">
                                                                 {counter} Просмотров
                                                             </span>
-                                                    </div>
                                                 </div>
-
-                                                    {
-                                                        task?.status === "wait" ?
-                                                            <div className="like">
-
-                                                                <div className="like-text">
-                                                                    <span className="like-count">
-                                                                        Отправить заявку на исполнение
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        :
-                                                            null
-                                                    }
-
                                             </div>
-                                            <div className="like_wrapper wrapper-flex-end">
-                                                {
-                                                    task?.tag ?
-                                                        <div className="tags-type">
-                                                            #{task?.tag}
-                                                        </div>
-                                                        :
-                                                        null
-                                                }
-                                            </div>
-                                        </div>
-                                        {
-                                            this.state.isLoaded ?
-                                                result.map(res =>
-                                                    <div className="feed-comments-wrapper-item background-white">
-                                                        <div className="wrapper-comments">
-                                                            <div className="comments-title bottom-line">Комментарии
-                                                            </div>
-                                                            <div className="wall-comments">
-                                                                {
-                                                                    this.state.comments?.length ?
-                                                                        comments.map(com =>
-                                                                            <div>
-                                                                                <div className="feed-item-value">
-                                                                                    <div className="feed-item-value">
-                                                                                        <div key="asldk"
-                                                                                             className="wrapper-data">
-                                                                                            <div key="aksdlkasd"
-                                                                                                 className="photo-wrapper">
-                                                                                                <img key="asdmmmmasd"
-                                                                                                     src={com?.photo}
-                                                                                                     alt={com?.user}
-                                                                                                     onClick={(e) => {
-                                                                                                         e.preventDefault();
-                                                                                                         window.location.href = `/user/${com?.user_id}`
-                                                                                                     }}
-                                                                                                />
-                                                                                            </div>
-                                                                                            <div className="value-post">
-                                                                                                <div
-                                                                                                    className="feed-item-title">
-                                                                                                    <div
-                                                                                                        className="link-user"
-                                                                                                        onClick={(e) => {
-                                                                                                            e.preventDefault();
-                                                                                                            window.location.href = `/user/${com?.user_id}`
-                                                                                                        }}>
-                                                                                                        {com?.user}
-                                                                                                    </div>
-                                                                                                    <div
-                                                                                                        className="feed-item-datetime">
-                                                                                                        {this.unixToDateTime(com?.date_time)}
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className="wrapper-data">
-                                                                                        {/*<div   className="photo-wrapper">*/}
-
-                                                                                        {/*</div>*/}
-                                                                                        <ReactMarkdown
-                                                                                            className="value-post"
-                                                                                            remarkPlugins={[gfm]}
-                                                                                            components={this.components}>
-                                                                                            {com?.value}
-                                                                                        </ReactMarkdown>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        )
-                                                                        :
-                                                                        <div className="no-comments">Новых комментариев
-                                                                            нет.</div>
-                                                                }
-                                                            </div>
-                                                            <div className="wrapper-data">
-                                                                <div key="aksdlkasd" className="photo-wrapper">
-                                                                    <img key="asdmmmmasd" src={res?.avatar_url}
-                                                                         alt={res?.login}/>
-                                                                </div>
-                                                                <div className="value-post placeholder-main-feed">
-                                                                    <TextareaAutosize
-                                                                        className="feed-textarea"
-                                                                        onChange={this.handleChangeTextarea}
-                                                                        autoFocus={false}
-                                                                        placeholder="Напишите Ваш комментарий"
-                                                                        id="text_comments"
-                                                                        onKeyPress={this.handleKeyPress}
-                                                                    >
-
-                                                                    </TextareaAutosize>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                className="wrapper-flex-end create-feed-wrapper-button">
-                                                                <div className="button-default"
-                                                                     onClick={() => this.sendComments()}>Отправить
-                                                                </div>
-                                                            </div>
+                                            {
+                                                task?.status === "wait" ?
+                                                    <div className="like">
+                                                        <div className="like-text" onClick={this.actionExec()} ref={this.refActionExecButton}>
+                                                            <span className="like-count">
+                                                                Отправить заявку на исполнение
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                )
-                                                :
+                                                    :
+                                                    null
+                                            }
+                                        </div>
+                                        <div className="like_wrapper wrapper-flex-end">
+                                            {
+                                                task?.tag ?
+                                                    <div className="tags-type">
+                                                        #{task?.tag}
+                                                    </div>
+                                                    :
+                                                    null
+                                            }
+                                        </div>
+                                    </div>
+                                    {
+                                        this.state.isLoaded ?
+                                            result.map(res =>
                                                 <div className="feed-comments-wrapper-item background-white">
                                                     <div className="wrapper-comments">
-                                                        <div className="comments-title">Комментарии</div>
+                                                        <div className="comments-title bottom-line">Комментарии
+                                                        </div>
                                                         <div className="wall-comments">
                                                             {
                                                                 this.state.comments?.length ?
                                                                     comments.map(com =>
                                                                         <div>
-                                                                            <div
-                                                                                className="feed-item-value bottom-line">
+                                                                            <div className="feed-item-value">
                                                                                 <div className="feed-item-value">
                                                                                     <div key="asldk"
                                                                                          className="wrapper-data">
@@ -477,14 +391,22 @@ class Task extends Component {
                                                                                              className="photo-wrapper">
                                                                                             <img key="asdmmmmasd"
                                                                                                  src={com?.photo}
-                                                                                                 alt={com?.user}/>
+                                                                                                 alt={com?.user}
+                                                                                                 onClick={(e) => {
+                                                                                                     e.preventDefault();
+                                                                                                     window.location.href = `/user/${com?.user_id}`
+                                                                                                 }}
+                                                                                            />
                                                                                         </div>
                                                                                         <div className="value-post">
                                                                                             <div
                                                                                                 className="feed-item-title">
                                                                                                 <div
                                                                                                     className="link-user"
-                                                                                                    onClick={this.copyLogin}>
+                                                                                                    onClick={(e) => {
+                                                                                                        e.preventDefault();
+                                                                                                        window.location.href = `/user/${com?.user_id}`
+                                                                                                    }}>
                                                                                                     {com?.user}
                                                                                                 </div>
                                                                                                 <div
@@ -496,7 +418,7 @@ class Task extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="wrapper-data">
-                                                                                    {/*<div className="photo-wrapper">*/}
+                                                                                    {/*<div   className="photo-wrapper">*/}
 
                                                                                     {/*</div>*/}
                                                                                     <ReactMarkdown
@@ -514,11 +436,93 @@ class Task extends Component {
                                                                         нет.</div>
                                                             }
                                                         </div>
+                                                        <div className="wrapper-data">
+                                                            <div key="aksdlkasd" className="photo-wrapper">
+                                                                <img key="asdmmmmasd" src={res?.avatar_url}
+                                                                     alt={res?.login}/>
+                                                            </div>
+                                                            <div className="value-post placeholder-main-feed">
+                                                                <TextareaAutosize
+                                                                    className="feed-textarea"
+                                                                    onChange={this.handleChangeTextarea}
+                                                                    autoFocus={false}
+                                                                    placeholder="Напишите Ваш комментарий"
+                                                                    id="text_comments"
+                                                                    onKeyPress={this.handleKeyPress}
+                                                                >
+
+                                                                </TextareaAutosize>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className="wrapper-flex-end create-feed-wrapper-button">
+                                                            <div className="button-default"
+                                                                 onClick={() => this.sendComments()}>Отправить
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                        }
+                                            )
+                                            :
+                                            <div className="feed-comments-wrapper-item background-white">
+                                                <div className="wrapper-comments">
+                                                    <div className="comments-title">Комментарии</div>
+                                                    <div className="wall-comments">
+                                                        {
+                                                            this.state.comments?.length ?
+                                                                comments.map(com =>
+                                                                    <div>
+                                                                        <div
+                                                                            className="feed-item-value bottom-line">
+                                                                            <div className="feed-item-value">
+                                                                                <div key="asldk"
+                                                                                     className="wrapper-data">
+                                                                                    <div key="aksdlkasd"
+                                                                                         className="photo-wrapper">
+                                                                                        <img key="asdmmmmasd"
+                                                                                             src={com?.photo}
+                                                                                             alt={com?.user}/>
+                                                                                    </div>
+                                                                                    <div className="value-post">
+                                                                                        <div
+                                                                                            className="feed-item-title">
+                                                                                            <div
+                                                                                                className="link-user"
+                                                                                                onClick={this.copyLogin}>
+                                                                                                {com?.user}
+                                                                                            </div>
+                                                                                            <div
+                                                                                                className="feed-item-datetime">
+                                                                                                {this.unixToDateTime(com?.date_time)}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="wrapper-data">
+                                                                                {/*<div className="photo-wrapper">*/}
 
-                                    </div>
+                                                                                {/*</div>*/}
+                                                                                <ReactMarkdown
+                                                                                    className="value-post"
+                                                                                    remarkPlugins={[gfm]}
+                                                                                    components={this.components}>
+                                                                                    {com?.value}
+                                                                                </ReactMarkdown>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                                :
+                                                                <div className="no-comments">Новых комментариев
+                                                                    нет.</div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    }
+
+                                </div>
                             </div>
                             :
                             this.state.notFeed ?
