@@ -357,7 +357,7 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            <div className="like" onClick={this.actionExec(store.auth.user.data.id)} ref={this.refActionExecButton}>
+                                                            <div className="like" onClick={this.actionExec} ref={this.refActionExecButton}>
                                                                 <div className="like-text" >
                                                                     <span className="like-count">
                                                                         {this.state.exec}
