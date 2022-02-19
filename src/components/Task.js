@@ -361,6 +361,21 @@ class Task extends Component {
                                                     :
                                                     null
                                             }
+                                            <div className="like">
+                                                <div className="like-text" >
+
+                                                        {
+                                                            task?.price !== "0" ?
+                                                                <span className="like-count">
+                                                                    {task?.price} руб.
+                                                                </span>
+                                                            :
+                                                                <span className="like-count">
+                                                                    Вознаграждение не указано
+                                                                </span>
+                                                        }
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="like_wrapper wrapper-flex-end">
                                             {
