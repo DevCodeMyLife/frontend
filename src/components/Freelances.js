@@ -218,6 +218,10 @@ class Freelances extends Component {
                                     }}/>
                                 </div>
                                 <div className="tags-wrapper">
+                                    <div className="button-default-tag tags-item unselectable" id="all"
+                                         action="main" >
+                                        Мои задачи
+                                    </div>
                                     {
                                         this.state.mode === "create" ?
                                             null
