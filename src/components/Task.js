@@ -33,6 +33,7 @@ class Task extends Component {
             auth: false,
             load: false,
             data: null,
+            event: null,
             notFeed: false,
             isDark: "light",
             user: null,
@@ -223,6 +224,7 @@ class Task extends Component {
                             isLoadedFeed: true,
                             task: res.data,
                             comments: res.comments,
+                            event: res.event,
                             counter: res.counter,
                             user: res.user,
                             load: true,
@@ -258,7 +260,7 @@ class Task extends Component {
 
     render() {
         let store = this.state.store.getState()
-        let {isLoadedFeed, task, result, comments, counter, user} = this.state;
+        let {isLoadedFeed, task, result, comments, counter, user, event} = this.state;
         return (
             <div style={{display: "flex"}}>
                 <div className="content-wall-views">
@@ -376,13 +378,40 @@ class Task extends Component {
                                                 store.auth.user.isAuth ?
                                                     store.auth.user.data.id !== task?.user_creator_id ?
                                                         task?.status === "wait" ?
-                                                            <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
-                                                                <div className="like-text" uuid={task?.id}>
-                                                                    <span className="like-count" uuid={task?.id}>
-                                                                        {this.state.exec}
-                                                                    </span>
+                                                            event?.executor ?
+                                                                <div className="like ready_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                    <div className="like-text" uuid={task?.id}>
+                                                                        <span className="like-count" uuid={task?.id}>
+                                                                            Отправить на проверку
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            :
+                                                                event?.block ?
+                                                                    <div className="like fail_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                        <div className="like-text" uuid={task?.id}>
+                                                                            <span className="like-count" uuid={task?.id}>
+                                                                                Запрос отклонен
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                :
+                                                                    event?.feeds_uuid === "" ?
+                                                                        <div className="like wait_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                            <div className="like-text" uuid={task?.id}>
+                                                                                <span className="like-count" uuid={task?.id}>
+                                                                                    Ожидаем подтверждения
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    :
+                                                                        <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
+                                                                            <div className="like-text" uuid={task?.id}>
+                                                                                <span className="like-count" uuid={task?.id}>
+                                                                                    Стать исполнителем
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
                                                             :
                                                             null
                                                     :

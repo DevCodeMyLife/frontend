@@ -115,10 +115,30 @@ html {
   animation: blink_wait 2s linear infinite;
 }
 
+.ready_blink {
+  animation: blink_ready 2s linear infinite;
+}
+
+.fail_blink {
+  animation: blink_fail 2s linear infinite;
+}
+
 @keyframes blink_wait {
   0% { color: #fcbc69; }
   50% { color: #f38b25; }
   100% { color: #fcbc69; }
+}
+
+@keyframes blink_ready {
+  0% { color: #cffa87; }
+  50% { color: #54f331; }
+  100% { color: #cffa87; }
+}
+
+@keyframes blink_fail {
+  0% { color: #f86262; }
+  50% { color: #f81313; }
+  100% { color: #f86262; }
 }
 
 body {
