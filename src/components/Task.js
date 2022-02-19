@@ -396,7 +396,7 @@ class Task extends Component {
                                                                         </div>
                                                                     </div>
                                                                 :
-                                                                    event?.feeds_uuid === "" ?
+                                                                    event?.feeds_uuid !== "" ?
                                                                         <div className="like wait_blink" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                             <div className="like-text" uuid={task?.id}>
                                                                                 <span className="like-count" uuid={task?.id}>
@@ -408,7 +408,7 @@ class Task extends Component {
                                                                         <div className="like" onClick={this.actionExec} uuid={task?.id} ref={this.refActionExecButton}>
                                                                             <div className="like-text" uuid={task?.id}>
                                                                                 <span className="like-count" uuid={task?.id}>
-                                                                                    Стать исполнителем
+                                                                                    {this.state.exec}
                                                                                 </span>
                                                                             </div>
                                                                         </div>
