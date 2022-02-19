@@ -123,7 +123,7 @@ class Task extends Component {
                 .then(res => {
                     console.log(res)
                     if (res.status.code === 0) {
-                        this.getFeed()
+                        this.getTask()
                         document.getElementById('text_comments').value = ""
                     }
 
