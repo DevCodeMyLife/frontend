@@ -37,9 +37,10 @@ class Task extends Component {
             isDark: "light",
             user: null
         }
+        this.refActionExecButton = React.createRef();
+
     }
 
-    refActionExecButton = React.createRef();
 
     getPreferredColorScheme = () => {
         if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
