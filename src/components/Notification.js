@@ -16,12 +16,13 @@ class Notification extends Component {
 
     }
 
-    callExecutor(uuid, uwid) {
+    callExecutor(uuid, uwid, flag) {
         fetch(`/api/task/`, {
             method: "POST",
             body: JSON.stringify({
                 uuid: uuid,
-                uid: uwid
+                uid: uwid,
+                flag: flag
             })
         })
             .then(response => response.json())
@@ -121,10 +122,10 @@ class Notification extends Component {
                                                 notification?.types === "task" ?
                                                     <div style={{display: "flex", flexWrap: "wrap", gap: "1rem"}}>
                                                         <div className="button-default" onClick={() => this.callExecutor(
-                                                            notification.feeds_uuid, notification?.uwuid)}>Отклонить
+                                                            notification.feeds_uuid, notification?.uwuid, true)}>Отклонить
                                                         </div>
-                                                        <div className="button-default" onClick={() => this.checkNotification(
-                                                            notification.feeds_uuid, notification.addr)}>Отдать в работу
+                                                        <div className="button-default" onClick={() => this.callExecutor(
+                                                            notification.feeds_uuid, notification?.uwuid, false)}>Отдать в работу
                                                         </div>
                                                     </div>
                                                 :
