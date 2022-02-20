@@ -147,6 +147,68 @@ class App extends React.Component {
                                     onClick: ()=>{ location.href = "/notification"}
                                 });
                                 break;
+                            case "task_win":
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                });
+
+                                store.dispatch({
+                                    type: "ACTION_CHECK_AUTH", value: {
+                                        user: {
+                                            isAuth: true,
+                                            data: res?.data[0],
+                                            feeds: res?.feed,
+                                            notificationCount: event.count,
+                                            messagesCount: state.auth.user.messagesCount,
+                                            notifications: res?.notification,
+                                            token: res?.token,
+                                            error: null
+                                        },
+                                    }
+                                })
+
+                                toast.info('Вы стали исполнителем задачи!', {
+                                    position: "bottom-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: false,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    onClick: ()=>{ location.href = "/notification"}
+                                });
+                                break;
+                            case "task_lose":
+                                this_.state.context.resume().then(() => {
+                                    this_.state.audio.play();
+                                });
+
+                                store.dispatch({
+                                    type: "ACTION_CHECK_AUTH", value: {
+                                        user: {
+                                            isAuth: true,
+                                            data: res?.data[0],
+                                            feeds: res?.feed,
+                                            notificationCount: event.count,
+                                            messagesCount: state.auth.user.messagesCount,
+                                            notifications: res?.notification,
+                                            token: res?.token,
+                                            error: null
+                                        },
+                                    }
+                                })
+
+                                toast.info('Вам отказали в выполнении задачи', {
+                                    position: "bottom-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: true,
+                                    closeOnClick: false,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    onClick: ()=>{ location.href = "/notification"}
+                                });
+                                break;
                             case "comment":
                                 this_.state.context.resume().then(() => {
                                     this_.state.audio.play();
