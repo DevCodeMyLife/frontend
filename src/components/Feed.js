@@ -431,12 +431,12 @@ class Feed extends Component {
                                                                         <div className="like-item">
                                                                             {
                                                                                 this.state.isDark === "light" ?
-                                                                                    this.state.likeType[data?.ID] === true ?
+                                                                                    data?.is_like !== "" ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like} alt="like"/>
                                                                                 :
-                                                                                    this.state.likeType[data?.ID] === true  ?
+                                                                                    data?.is_like !== ""  ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like_dark} alt="like"/>
