@@ -315,7 +315,6 @@ class Feed extends Component {
 
     render() {
         let {isLoaded, result, tags} = this.state;
-        console.log(this.state.likeType)
         const store = this.state.store.getState()
         if (!store.components.settings.feed) {
             return (
