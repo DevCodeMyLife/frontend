@@ -16,6 +16,27 @@ class Notification extends Component {
 
     }
 
+    callExecutor(uuid, uwid) {
+        fetch(`/api/task/`, {
+            method: "PUT",
+            body: JSON.stringify({
+                uuid: uuid,
+                uid: uwid
+            })
+        })
+            .then(response => response.json())
+            .then(res => {
+                if (res.status.code === 0) {
+                    // window.location.href = `/post?uuid=${uuid}`
+                }
+                console.log(res)
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
     checkNotification(uuid, addr) {
         fetch("/api/notification", {
             method: "PUT",
@@ -99,8 +120,8 @@ class Notification extends Component {
                                             {
                                                 notification?.types === "task" ?
                                                     <div style={{display: "flex", flexWrap: "wrap", gap: "1rem"}}>
-                                                        <div className="button-default" onClick={() => this.checkNotification(
-                                                            notification.feeds_uuid, notification.addr)}>Отклонить
+                                                        <div className="button-default" onClick={() => this.callExecutor(
+                                                            notification.feeds_uuid, notification.uwuid)}>Отклонить
                                                         </div>
                                                         <div className="button-default" onClick={() => this.checkNotification(
                                                             notification.feeds_uuid, notification.addr)}>Отдать в работу
