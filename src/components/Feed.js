@@ -5,6 +5,8 @@ import {tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import look_dark from "../icon/look_dark.png";
+import like_red from "../icon/like_red.png";
+
 
 // import Head from "./Header";
 import {Link} from "react-navi";
@@ -416,9 +418,15 @@ class Feed extends Component {
                                                                         <div className="like-item">
                                                                             {
                                                                                 this.state.isDark === "light" ?
-                                                                                    <img src={like} alt="like"/>
+                                                                                    data?.is_like === true ?
+                                                                                        <img src={like_red} alt="like"/>
                                                                                     :
-                                                                                    <img src={like_dark} alt="like"/>
+                                                                                        <img src={like} alt="like"/>
+                                                                                :
+                                                                                    data?.is_like === true ?
+                                                                                        <img src={like_red} alt="like"/>
+                                                                                    :
+                                                                                        <img src={like_dark} alt="like"/>
                                                                             }
                                                                         </div>
                                                                         <div className="like-text">
