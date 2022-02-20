@@ -42,6 +42,9 @@ class Task extends Component {
         }
         this.refActionExecButton = React.createRef();
 
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
 
