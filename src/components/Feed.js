@@ -58,6 +58,25 @@ class Feed extends Component {
             .then(res => {
                 if (res.status.code === 0) {
                     document.getElementById(uuid).innerHTML = res.data.count
+                    fetch("api/feed", {
+                        method: "GET",
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+
+                            this.setState({
+                                isLoaded: "access",
+                                result: res.data
+                            });
+
+
+                        })
+                        .catch(error => {
+                            this.setState({
+                                isLoaded: "error",
+                                result: {}
+                            });
+                        });
                 }
             })
             .catch(error => {
