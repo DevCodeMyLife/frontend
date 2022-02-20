@@ -99,15 +99,13 @@ class Notification extends Component {
                                             {
                                                 notification?.types === "task" ?
                                                     <div className="info-notifications-item">
-                                                        <div className="info-notifications-item">
+                                                        <div className="info-notification-item">
                                                             <div className="button-default" onClick={() => this.checkNotification(
                                                                 notification.feeds_uuid, notification.addr)}>Отдdsf
                                                             </div>
                                                         </div>
-                                                        <div className="info-notifications-item">
-                                                            <div className="button-default" onClick={() => this.checkNotification(
-                                                                notification.feeds_uuid, notification.addr)}>Отдать в работу
-                                                            </div>
+                                                        <div className="button-default" onClick={() => this.checkNotification(
+                                                            notification.feeds_uuid, notification.addr)}>Отдать в работу
                                                         </div>
                                                     </div>
                                                 :
