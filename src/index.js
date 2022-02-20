@@ -152,20 +152,43 @@ class App extends React.Component {
                                     this_.state.audio.play();
                                 });
 
-                                store.dispatch({
-                                    type: "ACTION_CHECK_AUTH", value: {
-                                        user: {
-                                            isAuth: true,
-                                            data: res?.data[0],
-                                            feeds: res?.feed,
-                                            notificationCount: event.count,
-                                            messagesCount: state.auth.user.messagesCount,
-                                            notifications: res?.notification,
-                                            token: res?.token,
-                                            error: null
-                                        },
-                                    }
+                                // store.dispatch({
+                                //     type: "ACTION_CHECK_AUTH", value: {
+                                //         user: {
+                                //             isAuth: true,
+                                //             data: res?.data[0],
+                                //             feeds: res?.feed,
+                                //             notificationCount: event.count,
+                                //             messagesCount: state.auth.user.messagesCount,
+                                //             notifications: res?.notification,
+                                //             token: res?.token,
+                                //             error: null
+                                //         },
+                                //     }
+                                // })
+
+                                fetch("/api/authentication", {
+                                    method: "POST", body: JSON.stringify({})
                                 })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res?.status.code === 0) {
+                                            store.dispatch({
+                                                type: "ACTION_CHECK_AUTH", value: {
+                                                    user: {
+                                                        isAuth: true,
+                                                        data: res?.data[0],
+                                                        feeds: res?.feed,
+                                                        notificationCount: res?.notification_count,
+                                                        messagesCount: res?.count_message,
+                                                        notifications: res?.notification,
+                                                        token: res?.token,
+                                                        error: null
+                                                    },
+                                                }
+                                            })
+                                        }
+                                    })
 
                                 toast.info('Вы стали исполнителем задачи!', {
                                     position: "bottom-right",
@@ -183,20 +206,43 @@ class App extends React.Component {
                                     this_.state.audio.play();
                                 });
 
-                                store.dispatch({
-                                    type: "ACTION_CHECK_AUTH", value: {
-                                        user: {
-                                            isAuth: true,
-                                            data: res?.data[0],
-                                            feeds: res?.feed,
-                                            notificationCount: event.count,
-                                            messagesCount: state.auth.user.messagesCount,
-                                            notifications: res?.notification,
-                                            token: res?.token,
-                                            error: null
-                                        },
-                                    }
+                                // store.dispatch({
+                                //     type: "ACTION_CHECK_AUTH", value: {
+                                //         user: {
+                                //             isAuth: true,
+                                //             data: res?.data[0],
+                                //             feeds: res?.feed,
+                                //             notificationCount: event.count,
+                                //             messagesCount: state.auth.user.messagesCount,
+                                //             notifications: res?.notification,
+                                //             token: res?.token,
+                                //             error: null
+                                //         },
+                                //     }
+                                // })
+
+                                fetch("/api/authentication", {
+                                    method: "POST", body: JSON.stringify({})
                                 })
+                                    .then(response => response.json())
+                                    .then(res => {
+                                        if (res?.status.code === 0) {
+                                            store.dispatch({
+                                                type: "ACTION_CHECK_AUTH", value: {
+                                                    user: {
+                                                        isAuth: true,
+                                                        data: res?.data[0],
+                                                        feeds: res?.feed,
+                                                        notificationCount: res?.notification_count,
+                                                        messagesCount: res?.count_message,
+                                                        notifications: res?.notification,
+                                                        token: res?.token,
+                                                        error: null
+                                                    },
+                                                }
+                                            })
+                                        }
+                                    })
 
                                 toast.info('Вам отказали в выполнении задачи', {
                                     position: "bottom-right",
@@ -257,6 +303,7 @@ class App extends React.Component {
                                             },
                                         }
                                     })
+
 
                                     toast.info('Вам пришло новое сообщение.', {
                                         position: "bottom-right",
