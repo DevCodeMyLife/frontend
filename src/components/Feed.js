@@ -219,12 +219,12 @@ class Feed extends Component {
                     result: res.data
                 });
 
-                res.data.forEach((key, data)=>{
+                for (data of res.data) {
                     this.state.likeType[data.ID] = data.is_like !== ""
                     this.setState({
                         likeType:  this.state.likeType
                     })
-                })
+                }
 
 
             })
