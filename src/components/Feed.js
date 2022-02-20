@@ -220,6 +220,7 @@ class Feed extends Component {
                 });
 
                 for (data of res.data) {
+                    console.log(this.state.likeType)
                     this.state.likeType[data.ID] = data.is_like !== ""
                 }
                 this.setState({
