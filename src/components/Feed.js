@@ -26,7 +26,8 @@ class Feed extends Component {
             currentDateTime: new Date().getTime(),
             tags: [],
             isDark: "light",
-            store: this.props.store
+            store: this.props.store,
+            likeType: {}
         }
 
         this.state.store.subscribe(() => {
@@ -58,25 +59,6 @@ class Feed extends Component {
             .then(res => {
                 if (res.status.code === 0) {
                     document.getElementById(uuid).innerHTML = res.data.count
-                    fetch("api/feed", {
-                        method: "GET",
-                    })
-                        .then(response => response.json())
-                        .then(res => {
-
-                            this.setState({
-                                isLoaded: "access",
-                                result: res.data
-                            });
-
-
-                        })
-                        .catch(error => {
-                            this.setState({
-                                isLoaded: "error",
-                                result: {}
-                            });
-                        });
                 }
             })
             .catch(error => {
@@ -232,6 +214,12 @@ class Feed extends Component {
                     isLoaded: "access",
                     result: res.data
                 });
+
+                res.data.forEach((key, data)=>{
+                    this.setState({
+                        likeType: this.state.likeType[data.ID] = data.is_like !== ""
+                    })
+                })
 
 
             })
@@ -437,12 +425,12 @@ class Feed extends Component {
                                                                         <div className="like-item">
                                                                             {
                                                                                 this.state.isDark === "light" ?
-                                                                                    data?.is_like !== "" ?
+                                                                                    this.state.likeType[data?.ID] === true ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like} alt="like"/>
                                                                                 :
-                                                                                    data?.is_like !== "" ?
+                                                                                    this.state.likeType[data?.ID] === true  ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like_dark} alt="like"/>
