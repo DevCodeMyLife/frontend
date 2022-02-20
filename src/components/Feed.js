@@ -59,6 +59,10 @@ class Feed extends Component {
             .then(res => {
                 if (res.status.code === 0) {
                     document.getElementById(uuid).innerHTML = res.data.count
+                    this.state.likeType[uuid] = !this.state.likeType[uuid]
+                    this.setState({
+                        likeType:  this.state.likeType
+                    })
                 }
             })
             .catch(error => {
@@ -216,8 +220,9 @@ class Feed extends Component {
                 });
 
                 res.data.forEach((key, data)=>{
+                    this.state.likeType[data.ID] = data.is_like !== ""
                     this.setState({
-                        likeType: this.state.likeType[data.ID] = data.is_like !== ""
+                        likeType:  this.state.likeType
                     })
                 })
 
