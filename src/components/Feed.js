@@ -221,10 +221,10 @@ class Feed extends Component {
 
                 for (data of res.data) {
                     this.state.likeType[data.ID] = data.is_like !== ""
-                    this.setState({
-                        likeType:  this.state.likeType
-                    })
                 }
+                this.setState({
+                    likeType:  this.state.likeType
+                })
 
 
             })
