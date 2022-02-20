@@ -437,7 +437,12 @@ class Freelances extends Component {
                                                                                         justifyContent: "center",
                                                                                         alignItems: "center",
                                                                                         color: "var(--font-color)"
-                                                                                    }}>{(data?.price).toLocaleString('ru')} ₽
+                                                                                    }}>{
+                                                                                        data?.price === "0" ?
+                                                                                            "Вознаграждение не указано"
+                                                                                        :
+                                                                                            (data?.price).toLocaleString('ru') + " ₽"
+                                                                                    }
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
