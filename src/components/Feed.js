@@ -424,7 +424,7 @@ class Feed extends Component {
                                                                         <div className="like-text">
                                                                                 <span className="like-count"
                                                                                       id={data?.ID}>
-                                                                                    {data?.count_like} Нравиться
+                                                                                    {data?.count_like}
                                                                                 </span>
                                                                         </div>
                                                                     </div>
@@ -439,7 +439,7 @@ class Feed extends Component {
                                                                         </div>
                                                                         <div className="like-text">
                                                                                 <span className="like-count">
-                                                                                    {data?.look_count} Просмотров
+                                                                                    {data?.look_count}
                                                                                 </span>
                                                                         </div>
                                                                     </div>
