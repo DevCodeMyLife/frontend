@@ -57,7 +57,7 @@ class Feed extends Component {
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 0) {
-                    document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
+                    document.getElementById(uuid).innerHTML = res.data.count
                 }
             })
             .catch(error => {
@@ -418,12 +418,12 @@ class Feed extends Component {
                                                                         <div className="like-item">
                                                                             {
                                                                                 this.state.isDark === "light" ?
-                                                                                    data?.is_like === true ?
+                                                                                    data?.is_like !== "" ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like} alt="like"/>
                                                                                 :
-                                                                                    data?.is_like === true ?
+                                                                                    data?.is_like !== "" ?
                                                                                         <img src={like_red} alt="like"/>
                                                                                     :
                                                                                         <img src={like_dark} alt="like"/>
