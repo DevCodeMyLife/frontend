@@ -441,7 +441,7 @@ class Freelances extends Component {
                                                                                         data?.price === "0" ?
                                                                                             "Вознаграждение не указано"
                                                                                         :
-                                                                                            (data?.price).toLocaleString('ru') + " ₽"
+                                                                                            (parseInt(data?.price)).toLocaleString('ru') + " ₽"
                                                                                     }
                                                                                     </div>
                                                                                 </div>

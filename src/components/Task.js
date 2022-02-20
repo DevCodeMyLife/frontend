@@ -429,7 +429,7 @@ class Task extends Component {
                                                         {
                                                             task?.price !== "0" ?
                                                                 <span className="like-count">
-                                                                    {(task?.price).toLocaleString('ru')} руб.
+                                                                    {(parseInt(task?.price)).toLocaleString('ru')} руб.
                                                                 </span>
                                                             :
                                                                 <span className="like-count">
