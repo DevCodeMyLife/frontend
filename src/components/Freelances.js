@@ -221,7 +221,19 @@ class Freelances extends Component {
                                 <div className="tags-wrapper">
                                     <div className="button-default-tag tags-item unselectable" id="all"
                                          action="main">
-                                        Мои задачи
+                                        Все
+                                    </div>
+                                    <div className="button-default-tag tags-item unselectable" id="all"
+                                         action="main">
+                                        Созданные
+                                    </div>
+                                    <div className="button-default-tag tags-item unselectable" id="all"
+                                         action="main">
+                                        В ожидании
+                                    </div>
+                                    <div className="button-default-tag tags-item unselectable" id="all"
+                                         action="main">
+                                        В исполнении
                                     </div>
                                     {
                                         this.state.mode === "create" ?
