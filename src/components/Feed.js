@@ -219,13 +219,13 @@ class Feed extends Component {
                     result: res.data
                 });
 
-                for (data of res.data) {
-                    console.log(this.state.likeType)
-                    this.state.likeType[data.ID] = data.is_like !== ""
-                }
-                this.setState({
-                    likeType:  this.state.likeType
-                })
+                // for (data of res.data) {
+                //     console.log(this.state.likeType)
+                //     this.state.likeType[data.ID] = data.is_like !== ""
+                // }
+                // this.setState({
+                //     likeType:  this.state.likeType
+                // })
 
 
             })
