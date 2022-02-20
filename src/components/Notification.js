@@ -18,7 +18,7 @@ class Notification extends Component {
 
     callExecutor(uuid, uwid) {
         fetch(`/api/task/`, {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify({
                 uuid: uuid,
                 uid: uwid
