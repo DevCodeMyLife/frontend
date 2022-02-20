@@ -98,7 +98,7 @@ class Notification extends Component {
                                             </div>
                                             {
                                                 notification?.types === "task" ?
-                                                    <div style={{display: "flex"}}>
+                                                    <div style={{display: "flex", flexWrap: "wrap", gap: "1rem"}}>
                                                         <div className="button-default" onClick={() => this.checkNotification(
                                                             notification.feeds_uuid, notification.addr)}>Отклонить
                                                         </div>
