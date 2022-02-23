@@ -950,7 +950,10 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <p>
-                                                                                {message.value}
+                                                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                                                               components={this.components}>
+                                                                                    {message.value}
+                                                                                </ReactMarkdown>
                                                                             </p>
                                                                         </div>
                                                                     </div>
