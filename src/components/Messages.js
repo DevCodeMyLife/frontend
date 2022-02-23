@@ -311,6 +311,11 @@ class Messages extends Component {
         //     loader: true
         // })
 
+        setTimeout(()=>{
+            let blockChat = document.getElementById(cid)
+            blockChat.style.background = "var(--hover-message-dialog)"
+        }, 1000)
+
         const store = this.state.store.getState()
         let _this = this
         let path = `/api/messages/${cid}`
@@ -481,7 +486,7 @@ class Messages extends Component {
         setTimeout(()=>{
             let blockChat = document.getElementById(cid)
             blockChat.style.background = "var(--hover-message-dialog)"
-        }, 1000)
+        }, 500)
 
         if (cid) {
             this.setState({
