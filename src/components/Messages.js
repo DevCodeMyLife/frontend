@@ -783,7 +783,7 @@ class Messages extends Component {
                                                                     <div
                                                                         className="feed-wrapper-item-chat chat-flex-row"
                                                                         style={{marginBottom: 0}}
-                                                                        onClick={() => this.openDialog(chat.c_id)}>
+                                                                        onClick={() => this.openDialog(chat.c_id)} id={chat.c_id}>
                                                                         <div className="photo-wrapper-chat">
                                                                             <img src={chat.avatar_url}
                                                                                  alt={chat.avatar_url}/>
