@@ -534,6 +534,13 @@ class Messages extends Component {
         await this.openCall(store.stream)
     };
 
+    textToHTML(str) {
+        // Otherwise, create div and append HTML
+        let dom = document.createElement('div');
+        dom.innerHTML = str;
+        return dom;
+    };
+
     componentDidMount() {
         this.getPreferredColorScheme()
         window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {
@@ -904,10 +911,7 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components}>
-                                                                                {
-                                                                                    message.value
-                                                                                }
+                                                                                           components={this.components} value={{__html: this.convertNewLinesToBr(message.value)}}>
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
@@ -956,10 +960,7 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components}>
-                                                                                {
-                                                                                    message.value
-                                                                                }
+                                                                                           components={this.components} value={{__html: this.convertNewLinesToBr(message.value)}}>
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
