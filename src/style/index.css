@@ -663,6 +663,10 @@ a {
   box-shadow: 0 0 2px var(--grey);
 }
 
+.lable-dialogs-list {
+  padding: 20px;
+}
+
 .wrapper-items {
   width: 100%;
   height: 100vh;
