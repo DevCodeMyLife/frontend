@@ -285,6 +285,20 @@ class Messages extends Component {
         if (this.state.dialog) {
             let path = `/api/messages/${this.state.cid}`
 
+            if (document.getElementById("chats-list")){
+                for (let sibling of document.getElementById("chats-list").children) {
+                    sibling.classList.remove('hover-message-dialog');
+                }
+            }else{
+                setTimeout(()=>{
+                    if (document.getElementById("chats-list")){
+                        for (let sibling of document.getElementById("chats-list").children) {
+                            sibling.classList.remove('hover-message-dialog');
+                        }
+                    }
+                }, 600)
+            }
+
             fetch(path, {
                 method: "GET"
             })
@@ -305,6 +319,12 @@ class Messages extends Component {
                             linkUser: res?.id_user,
                             loader: false
                         })
+
+                        for (let sibling of document.getElementById("chats-list").children) {
+                            if (sibling.getAttribute("id") === this.state.cid){
+                                sibling.classList.add("hover-message-dialog")
+                            }
+                        }
                     }
                 })
                 .catch(error => {
