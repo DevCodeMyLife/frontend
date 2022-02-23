@@ -1416,7 +1416,7 @@ p {
   display: inline-block;
 }
 
-.avatar-wrapper > img {
+.avatar-wrapper > a > img {
   border-radius: 50%;
   max-width: 40px;
 }
