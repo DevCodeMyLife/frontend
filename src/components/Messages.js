@@ -94,9 +94,9 @@ class Messages extends Component {
             this.state.cent_channel.removeAllListeners();
         }
 
-        for (let sibling of document.getElementById("chats-list").children) {
-            sibling.classList.remove('hover-message-dialog');
-        }
+        // for (let sibling of document.getElementById("chats-list").children) {
+        //     sibling.classList.remove('hover-message-dialog');
+        // }
 
         if (event)
             window.history.pushState({urlPath: `/messages`}, "", `/messages`)
