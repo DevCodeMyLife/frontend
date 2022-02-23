@@ -324,6 +324,10 @@ class Messages extends Component {
         //     blockChat.style.background = "var(--hover-message-dialog)"
         // }, 1000)
 
+        for (let sibling of document.getElementById("chats-list").children) {
+            sibling.classList.remove('hover-message-dialog');
+        }
+
         const store = this.state.store.getState()
         let _this = this
         let path = `/api/messages/${cid}`
