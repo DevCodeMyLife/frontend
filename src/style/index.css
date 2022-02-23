@@ -2112,8 +2112,8 @@ link-user {
   text-align: center;
   padding: 30px;
   color: var(--font-color);
-  background: var(--bg-grey);
-  border-right: 1px solid var(--button_border);
+  /*background: var(--bg-grey);*/
+  /*border-right: 1px solid var(--button_border);*/
 }
 
 .wrapper-about {
