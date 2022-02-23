@@ -444,8 +444,11 @@ class Messages extends Component {
                     })
 
                     this.scrollToBottom();
-                    let blockChat = document.getElementById(cid)
-                    blockChat.style.background = "var(--hover-message-dialog)"
+                    setTimeout(()=>{
+                        let blockChat = document.getElementById(cid)
+                        blockChat.style.background = "var(--hover-message-dialog)"
+                    }, 3000)
+
                 }
             })
             .catch(error => {
