@@ -5,6 +5,11 @@ import send from "../icon/send.png"
 import k from "../icon/k.png"
 
 import song from "../sound/pop.mp3"
+import gfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
+import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
+import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import code from "../icon/code.png";
 
 
 class Messages extends Component {
@@ -198,9 +203,7 @@ class Messages extends Component {
             })
         }
 
-        console.log(event.keyCode)
-
-        if (event.keyCode === 13 && this.state.stateCode !== 16 ) {
+        if (event.keyCode === 13 && this.state.stateCode !== 16 &&  value.length > 0) {
             this.setState({
                 stateCode: 0
             })
@@ -247,6 +250,20 @@ class Messages extends Component {
 
         // this.read(this.state.cid)
 
+    }
+
+    components = {
+        code({node, inline, className, children, ...props}) {
+            const match = /language-(\w+)/.exec(className || '')
+            return !inline && match ? (
+                <SyntaxHighlighter style={tomorrow} wrapLongLines={false} language={match[1]} PreTag="div"
+                                   children={String(children).replace(/\n$/, '')} {...props} />
+            ) : (
+                <code className={className} {...props}>
+                    {children}
+                </code>
+            )
+        }
     }
 
     clearInput(target) {
@@ -881,7 +898,10 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <p>
-                                                                                {message.value}
+                                                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                                                               components={this.components}>
+                                                                                    {message.value}
+                                                                                </ReactMarkdown>
                                                                             </p>
                                                                         </div>
                                                                     </div>
