@@ -200,7 +200,7 @@ class Messages extends Component {
 
         console.log(event.keyCode)
 
-        if (event.keyCode === 13 && this.state.stateCode === 91) {
+        if (event.keyCode === 13 && this.state.stateCode !== 16 ) {
             this.setState({
                 stateCode: 0
             })
