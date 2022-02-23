@@ -597,7 +597,7 @@ a {
   display: flex;
   flex-direction: column;
 
-  border-radius: 0 0 10px 10px;
+  /*border-radius: 0 0 10px 10px;*/
   overflow: hidden;
 }
 
@@ -939,6 +939,7 @@ a {
   overflow: auto;
   width: 500px;
   background: var(--bg-grey);
+  border-right: 1px solid var(--button_border);
 }
 
 .hide-typing {
