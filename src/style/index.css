@@ -665,6 +665,7 @@ a {
 
 .lable-dialogs-list {
   padding: 20px;
+  color: var(--font-color);
 }
 
 .wrapper-items {
