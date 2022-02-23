@@ -938,6 +938,7 @@ a {
   box-sizing: border-box;
   overflow: auto;
   width: 500px;
+  background: var(--bg-grey);
 }
 
 .hide-typing {
