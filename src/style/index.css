@@ -647,7 +647,7 @@ a {
 .comments-view {
   padding: 20px;
   overflow: auto;
-  height: 100%;
+  height: auto;
   transition: .3s;
   box-sizing: border-box;
   background: var(--hover);
@@ -1760,6 +1760,7 @@ link-user {
   /*padding: 10px;*/
   margin-bottom: 20px;
   background: var(--white);
+  z-index: 10;
 }
 
 .feed-item-title {
