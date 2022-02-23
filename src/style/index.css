@@ -2087,6 +2087,7 @@ link-user {
   text-align: center;
   padding: 30px;
   color: var(--font-color);
+  background: var(--bg-grey);
 }
 
 .wrapper-about {
