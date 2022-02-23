@@ -110,6 +110,9 @@ class Messages extends Component {
                         load: true,
                         loader: false
                     })
+
+                    let blockChat = document.getElementById(cid)
+                    blockChat.style.background = "var(--hover-message-dialog)"
                 }
             })
             .catch(error => {
@@ -311,10 +314,10 @@ class Messages extends Component {
         //     loader: true
         // })
 
-        setTimeout(()=>{
-            let blockChat = document.getElementById(cid)
-            blockChat.style.background = "var(--hover-message-dialog)"
-        }, 1000)
+        // setTimeout(()=>{
+        //     let blockChat = document.getElementById(cid)
+        //     blockChat.style.background = "var(--hover-message-dialog)"
+        // }, 1000)
 
         const store = this.state.store.getState()
         let _this = this
