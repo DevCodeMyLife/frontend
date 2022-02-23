@@ -664,7 +664,7 @@ a {
 }
 
 .lable-dialogs-list {
-  padding: 20px;
+  padding: 11px;
   color: var(--font-color);
   border-bottom: 1px solid var(--button_border);
 }
@@ -1367,7 +1367,7 @@ p {
 }
 
 .messages-control-nav {
-  padding: 20px;
+  /*padding: 20px;*/
   border-bottom: 1px solid var(--button_border);
   background: var(--bg-grey);
 }
