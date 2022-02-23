@@ -720,7 +720,7 @@ class Messages extends Component {
 
         // more that two days
         if (seconds > 2*24*3600) {
-            return "Был(а) 5 дней назад";
+            return "Был(а) больше 5 дней назад";
         }
         // a day
         if (seconds > 24*3600) {
