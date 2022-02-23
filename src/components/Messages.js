@@ -193,7 +193,7 @@ class Messages extends Component {
 
         console.log(event.keyCode)
 
-        if (event.keyCode === 13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1) {
+        if (event.keyCode === 13 && event.keyCode === 91) {
             let mes = {
                 created_at: new Date().getTime(),
                 c_id: this.state.cid,
@@ -221,10 +221,10 @@ class Messages extends Component {
                 })
                     .then(response => response.json())
                     .then(res => {
-                        _this.clearInput(event.target)
+                        // _this.clearInput(event.target)
 
                         this.read(this.state.cid)
-                        this.scrollToBottom();
+                        // this.scrollToBottom();
                     })
                     .catch(error => {
                         console.log(error)
