@@ -952,6 +952,9 @@ class Messages extends Component {
                                                                 </div>
                                                         )
                                                     }
+                                                    <div ref={this.messagesEndRef}/>
+                                                </div>
+                                                <div className="wrapper-input">
                                                     <div className="typing_user" id="typing_user">
                                                         <div className="hide-typing" id="hide-typing">
                                                             <div className="image-icon-typing">
@@ -962,9 +965,6 @@ class Messages extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div ref={this.messagesEndRef}/>
-                                                </div>
-                                                <div className="wrapper-input">
                                                     <TextareaAutosize
                                                         onKeyDown={this.sendMessage}
                                                         placeholder="Введите сообщение"

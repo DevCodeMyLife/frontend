@@ -1155,14 +1155,14 @@ a {
 }
 
 .typing_user {
-  position: absolute;
-  bottom: 94px;
+  /*position: absolute;*/
+  /*bottom: 94px;*/
   display: flex;
   flex-direction: row;
   /* background: whitesmoke; */
-  left: 20px;
+  /*left: 20px;*/
   /*width: 100%;*/
-  padding: 10px;
+  padding: 3px;
   text-align: center;
   box-sizing: border-box;
   font-size: 9px;
