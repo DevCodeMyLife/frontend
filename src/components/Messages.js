@@ -503,10 +503,10 @@ class Messages extends Component {
         const urlParams = new URLSearchParams(window.location.search);
         const cid = urlParams.get('cid');
 
-        setTimeout(()=>{
-            let blockChat = document.getElementById(cid)
-            blockChat.style.background = "var(--hover-message-dialog)"
-        }, 500)
+        // setTimeout(()=>{
+        //     let blockChat = document.getElementById(cid)
+        //     blockChat.style.background = "var(--hover-message-dialog)"
+        // }, 500)
 
         if (cid) {
             this.setState({
