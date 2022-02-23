@@ -1088,10 +1088,10 @@ a {
 }
 
 .title-dialog {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 27;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*flex-grow: 27;*/
 }
 
 .s-small-bobble {

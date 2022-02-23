@@ -844,7 +844,7 @@ class Messages extends Component {
                                                         {/*    />*/}
                                                         {/*</div>*/}
 
-                                                        <div className="photo-wrapper">
+                                                        <div>
                                                             <img src={this.state.avatar}
                                                                  alt={this.state.dialogTitle}
                                                             />
