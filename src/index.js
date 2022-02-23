@@ -595,7 +595,7 @@ class App extends React.Component {
                                        }/>
                             </Switch>
                         </BrowserRouter>
-                        <Footer/>
+                        {/*<Footer/>*/}
                     </div>
                 </HelmetProvider>);
             } else {
