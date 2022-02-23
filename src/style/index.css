@@ -2218,7 +2218,7 @@ textarea {
   /*}*/
 
   .wrapper-items {
-    height: 100%;
+    height: 75vh;
   }
   .left-view {
     width: 100%;
@@ -2305,7 +2305,7 @@ textarea {
   /*}*/
 
   .wrapper-items {
-    height: 100%;
+    height: 75vh;
   }
   .main-place-photo-column > img {
     max-width: 50%;
