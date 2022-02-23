@@ -437,6 +437,7 @@ class Messages extends Component {
                         dialogTitle: res?.title_dialog,
                         linkUser: res?.id_user,
                         avatar: res?.avatar,
+                        lastTimeToLive: res?.last_time_to_live,
                         loader: false,
                         load: true
                     })
