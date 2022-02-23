@@ -447,7 +447,7 @@ class Messages extends Component {
                     setTimeout(()=>{
                         let blockChat = document.getElementById(cid)
                         blockChat.style.background = "var(--hover-message-dialog)"
-                    }, 3000)
+                    }, 1000)
 
                 }
             })
