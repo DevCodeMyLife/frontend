@@ -937,6 +937,7 @@ a {
   height: 100%;
   box-sizing: border-box;
   overflow: auto;
+  width: 500px;
 }
 
 .hide-typing {
