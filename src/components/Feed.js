@@ -125,7 +125,7 @@ class Feed extends Component {
             sibling.classList.remove('button-select');
         }
 
-        for (let sibling of document.getElementById("tags-wrapper-default").parentNode.children) {
+        for (let sibling of document.getElementById("tags-wrapper-default").children) {
             sibling.classList.remove('button-select');
         }
 
