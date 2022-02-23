@@ -116,11 +116,7 @@ class Messages extends Component {
                     })
 
                     // let blockChat = document.getElementById(cid)
-                    for (let sibling of document.getElementById("chats-list").children) {
-                        if (sibling.classList.getAttribute("id") === cid){
-                            sibling.classList.add("hover-message-dialog")
-                        }
-                    }
+
                     // blockChat.style.background = "var(--hover-message-dialog)"
                 }
             })
@@ -461,7 +457,11 @@ class Messages extends Component {
                     })
 
                     this.scrollToBottom();
-
+                    for (let sibling of document.getElementById("chats-list").children) {
+                        if (sibling.classList.getAttribute("id") === cid){
+                            sibling.classList.add("hover-message-dialog")
+                        }
+                    }
 
                 }
             })
