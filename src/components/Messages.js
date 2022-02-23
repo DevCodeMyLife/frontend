@@ -296,22 +296,6 @@ class Messages extends Component {
         blockChat.style.background = "var(--hover-message-dialog)"
 
         const store = this.state.store.getState()
-        //
-        // // store.webRTC.pc.onicecandidate = this.onIceCandidate
-        // // store.webRTC.pc.onaddstream = this.onRemoteStreamAdded
-        // let this_ = this
-        // store.webRTC.pc.ontrack = function({ streams: [stream] }) {
-        //     this_.videoPeer.srcObject = new MediaStream(stream)
-        //     this_.videoPeer.current.play()
-        // };
-
-        // this.setState({
-        //     openCall: true
-        // })
-
-
-        // this.getUserMedia_click().then(_ => {})
-
         let _this = this
         let path = `/api/messages/${cid}`
 
