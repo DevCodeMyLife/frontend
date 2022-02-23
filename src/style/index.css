@@ -1407,6 +1407,10 @@ p {
   /*margin-right: 10px;*/
 }
 
+.block-title-chat {
+  padding: 8px;
+}
+
 .avatar-wrapper {
   padding: 10px;
   display: inline-block;
