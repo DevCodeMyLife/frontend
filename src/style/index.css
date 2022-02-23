@@ -188,7 +188,8 @@ code {
   justify-content: center;
   align-items: center;
   z-index: 4;
-  background: var(--hover);
+  /*background: var(--hover);*/
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -1434,7 +1435,7 @@ p {
   box-sizing: border-box;
   position: fixed;
   color: var(--font-color);
-  /* background: #0072fc91; */
+  /* background: #0072fc; */
   z-index: 2;
   /* background: rgba(0,0,0,0.8); */
   -webkit-backdrop-filter: saturate(180%) blur(20px);
