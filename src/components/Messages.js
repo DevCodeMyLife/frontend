@@ -764,11 +764,11 @@ class Messages extends Component {
                                                 Все чаты
                                             </div>
                                             <div className="chats-list">
-                                                <div className="loader-wrapper feed-wrapper">
-                                                    <div className="loader">
+                                                {/*<div className="loader-wrapper feed-wrapper">*/}
+                                                {/*    <div className="loader">*/}
 
-                                                    </div>
-                                                </div>
+                                                {/*    </div>*/}
+                                                {/*</div>*/}
                                             </div>
                                         </div>
                                         :
