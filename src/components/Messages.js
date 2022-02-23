@@ -911,7 +911,8 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components} dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} >
+                                                                                           components={this.components} >
+                                                                                <div dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} />
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
@@ -960,7 +961,8 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components} dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} >
+                                                                                           components={this.components} >
+                                                                                <div dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} />
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
