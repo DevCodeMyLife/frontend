@@ -115,13 +115,13 @@ class Messages extends Component {
                         loader: false
                     })
 
-                    let blockChat = document.getElementById(cid)
+                    // let blockChat = document.getElementById(cid)
                     for (let sibling of document.getElementById("chats-list").children) {
                         if (sibling.classList.getAttribute("id") === cid){
                             sibling.classList.add("hover-message-dialog")
                         }
                     }
-                    blockChat.style.background = "var(--hover-message-dialog)"
+                    // blockChat.style.background = "var(--hover-message-dialog)"
                 }
             })
             .catch(error => {
