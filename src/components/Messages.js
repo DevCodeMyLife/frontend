@@ -79,7 +79,7 @@ class Messages extends Component {
     allMessage = (event) => {
         this.setState({
             _createMessage: false,
-            dialogTitle: null
+            // dialogTitle: null
         })
 
 
@@ -99,8 +99,8 @@ class Messages extends Component {
                 if (res?.status?.code === 0) {
                     this.setState({
                         chats: res?.data,
-                        dialog: false,
-                        messages: [],
+                        // dialog: false,
+                        // messages: [],
                         load: true,
                         loader: false
                     })
