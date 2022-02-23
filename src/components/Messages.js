@@ -34,7 +34,8 @@ class Messages extends Component {
             openCall: false,
             isDark: "light",
             uidUserPeer: 0,
-            am: false
+            am: false,
+            stateCode: 0
         }
 
 
@@ -191,9 +192,19 @@ class Messages extends Component {
             );
         }
 
+        if (this.state.stateCode !== 91) {
+            this.setState({
+                stateCode: event.keyCode
+            })
+        }
+
         console.log(event.keyCode)
 
-        if (event.keyCode === 13 && event.keyCode === 91) {
+        if (event.keyCode === 13 && this.state.stateCode === 91) {
+            this.setState({
+                stateCode: 0
+            })
+
             let mes = {
                 created_at: new Date().getTime(),
                 c_id: this.state.cid,
