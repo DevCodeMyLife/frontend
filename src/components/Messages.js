@@ -706,7 +706,7 @@ class Messages extends Component {
 
         let d=new Date();  // Gets the current time
         let nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-        let seconds = nowTs-ts;
+        let seconds = nowTs - (new Date(ts).getTime()/1000);
 
         // more that two days
         if (seconds > 2*24*3600) {
