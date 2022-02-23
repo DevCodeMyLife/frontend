@@ -353,7 +353,7 @@ class Feed extends Component {
                             <div className="wrapper-search wrapper-inline-block unselectable">
                                 <div>
                                     <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress}
-                                           onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
+                                           onFocus={this.handlerFocus} />
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
                                     <div className="button-default-tag tags-item unselectable button-select" id="all"
