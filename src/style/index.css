@@ -1801,7 +1801,7 @@ p {
   padding: 10px;
   margin-bottom: 20px;
   /*background: var(--white);*/
-  transition: .3s;
+  /*transition: .3s;*/
 }
 
 link-user {
