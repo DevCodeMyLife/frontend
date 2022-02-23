@@ -975,7 +975,7 @@ class Messages extends Component {
                                                                 maxRows={15}
                                                                 id="message_chat"
                                                                 style={{
-                                                                    borderRadius: "30px"
+                                                                    borderRadius: "5px"
                                                                 }}
                                                             >
 
