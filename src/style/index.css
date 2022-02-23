@@ -1288,7 +1288,7 @@ p {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-  white-space: pre;
+  /*white-space: pre;*/
 }
 
 .view-flex {

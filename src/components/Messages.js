@@ -906,7 +906,7 @@ class Messages extends Component {
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                                            components={this.components}>
                                                                                 {
-                                                                                    this.convertNewLinesToBr(message.value)
+                                                                                    message.value
                                                                                 }
                                                                             </ReactMarkdown>
                                                                         </div>
@@ -958,7 +958,7 @@ class Messages extends Component {
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                                            components={this.components}>
                                                                                 {
-                                                                                    this.convertNewLinesToBr(message.value)
+                                                                                    message.value
                                                                                 }
                                                                             </ReactMarkdown>
                                                                         </div>
