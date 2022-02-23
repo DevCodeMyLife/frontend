@@ -1176,7 +1176,7 @@ class MainUsers extends Component {
 
                                                     <div className="error-wrapper">
                                                         <div className="error-page">
-                                                            Напишите что-нибудь полезное для сообщества или для себя ð.
+                                                            Напишите что-нибудь полезное для сообщества или для себя.
                                                         </div>
                                                     </div>
                                                     :
