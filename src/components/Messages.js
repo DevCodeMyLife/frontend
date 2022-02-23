@@ -755,7 +755,9 @@ class Messages extends Component {
                                                         Все чаты
                                                     </div>
                                                     <div className="chats-list">
-                                                        Активных чатов пока нет
+                                                        <div className="info-user-chat" style={{color: "var(--font-color)"}}>
+                                                            Активных чатов пока нет
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 :
@@ -1004,7 +1006,7 @@ class Messages extends Component {
                                         <>
                                             <div className="wrapper-chat">
                                                 <div className="info-user-chat">
-                                                    <div>
+                                                    <div style={{color: "var(--font-color)"}}>
                                                         Выберите чат чтобы начать общаться
                                                     </div>
                                                 </div>
