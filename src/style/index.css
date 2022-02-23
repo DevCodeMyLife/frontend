@@ -1465,7 +1465,7 @@ p {
 }
 
 @supports (backdrop-filter: none) {
-  .frosted {
+  .head {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
   }
