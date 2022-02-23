@@ -192,7 +192,7 @@ class Messages extends Component {
             );
         }
 
-        if (this.state.stateCode !== 91) {
+        if (event.keyCode !== 13) {
             this.setState({
                 stateCode: event.keyCode
             })
