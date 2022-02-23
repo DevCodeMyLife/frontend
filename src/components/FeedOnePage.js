@@ -234,13 +234,13 @@ class FeedOnePage extends Component {
                     {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
-                                {/*<div className="rectangle-back">*/}
-                                {/*    <div className="button-default wrapper-inline-block" onClick={() => {*/}
-                                {/*        window.history.go(-1)*/}
-                                {/*    }}>*/}
-                                {/*        Назад*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                                <div className="rectangle-back">
+                                    <div className="button-default wrapper-inline-block" onClick={() => {
+                                        window.history.go(-1)
+                                    }}>
+                                        Назад
+                                    </div>
+                                </div>
                                 {feed.map(data =>
                                     <div className="place-items" id="place_feed" uuid={data?.ID}>
                                         <JsonLd item={{
