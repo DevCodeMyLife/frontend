@@ -343,19 +343,19 @@ class Messages extends Component {
         //     let blockChat = document.getElementById(cid)
         //     blockChat.style.background = "var(--hover-message-dialog)"
         // }, 1000)
-        if (document.getElementById("chats-list")){
-            for (let sibling of document.getElementById("chats-list").children) {
-                sibling.classList.remove('hover-message-dialog');
-            }
-        }else{
-            setTimeout(()=>{
-                if (document.getElementById("chats-list")){
-                    for (let sibling of document.getElementById("chats-list").children) {
-                        sibling.classList.remove('hover-message-dialog');
-                    }
-                }
-            }, 600)
-        }
+        // if (document.getElementById("chats-list")){
+        //     for (let sibling of document.getElementById("chats-list").children) {
+        //         sibling.classList.remove('hover-message-dialog');
+        //     }
+        // }else{
+        //     setTimeout(()=>{
+        //         if (document.getElementById("chats-list")){
+        //             for (let sibling of document.getElementById("chats-list").children) {
+        //                 sibling.classList.remove('hover-message-dialog');
+        //             }
+        //         }
+        //     }, 600)
+        // }
 
 
 
