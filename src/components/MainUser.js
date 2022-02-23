@@ -187,7 +187,7 @@ class MainUsers extends Component {
                 if (res.status.code === 0) {
                     console.log(res)
 
-                    document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
+                    document.getElementById(uuid).innerHTML = res.data.count
                 }
                 // this.setState({
                 //     isLoaded: "access",
