@@ -665,13 +665,11 @@ a {
 
 .wrapper-items {
   width: 100%;
-  height: 500px;
+  height: 75vh;
   overflow: auto;
   padding: 20px;
   box-sizing: border-box;
   background: var(--bg-grey);
-
-
 }
 
 .like-count {
