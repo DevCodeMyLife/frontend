@@ -119,6 +119,16 @@ class Feed extends Component {
     }
 
     handleClickTag = event => {
+
+
+        for (let sibling of document.getElementById("tags-wrapper-all-tags").parentNode.children) {
+            sibling.classList.remove('button-select');
+        }
+
+        for (let sibling of document.getElementById("tags-wrapper-default").parentNode.children) {
+            sibling.classList.remove('button-select');
+        }
+
         for (let sibling of event.target.parentNode.children) {
             sibling.classList.remove('button-select');
         }
@@ -338,7 +348,7 @@ class Feed extends Component {
                                     <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress}
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
-                                <div className="tags-wrapper">
+                                <div className="tags-wrapper" id="tags-wrapper-default">
                                     <div className="button-default-tag tags-item unselectable button-select" id="all"
                                          action="all" onClick={this.handleClickTag}>
                                         Популярные
@@ -478,7 +488,7 @@ class Feed extends Component {
                     </div>
                     <div className="tags-view">
                         <div className="tags-box">
-                            <div className="title-box">Теги</div>
+                            <div className="title-box" id="tags-wrapper-all-tags">Теги</div>
                             {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable" action={data.value}
