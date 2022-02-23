@@ -702,7 +702,7 @@ class Messages extends Component {
         const store = this.state.store.getState()
 
         if (this.state.load) {
-            if (!store.components.settings.messenger) {
+            if (!store.components.settings.messenger && store.auth.user.scope !== 'admin') {
                 return (
                     <div className="content-wall-views">
                         <div className="feed-wrapper">
