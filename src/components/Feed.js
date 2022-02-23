@@ -269,6 +269,13 @@ class Feed extends Component {
     }
 
     handlerFocus = (event) => {
+        for (let sibling of document.getElementById("tags-wrapper-all-tags").parentNode.children) {
+            sibling.classList.remove('button-select');
+        }
+
+        for (let sibling of document.getElementById("tags-wrapper-default").children) {
+            sibling.classList.remove('button-select');
+        }
         this.setState({
             isLoaded: "OnFocusSearch"
         })
