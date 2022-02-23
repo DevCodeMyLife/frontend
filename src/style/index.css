@@ -933,6 +933,12 @@ a {
   bottom: 0;
 }
 
+.info-user-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .wrapper-chats-main {
   height: 100%;
   box-sizing: border-box;
