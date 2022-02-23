@@ -40,7 +40,8 @@ class Messages extends Component {
             isDark: "light",
             uidUserPeer: 0,
             am: false,
-            stateCode: 0
+            stateCode: 0,
+            lastTimeToLive: null
         }
 
 
@@ -859,7 +860,7 @@ class Messages extends Component {
                                                                 {
                                                                     new Date(
                                                                         Math.round(
-                                                                            new Date().getTime() / 1000
+                                                                            new Date(this.state.lastTimeToLive).getTime() / 1000
                                                                         ) * 1000
                                                                     ).toLocaleString()
                                                                 }
