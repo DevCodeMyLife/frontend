@@ -444,10 +444,7 @@ class Messages extends Component {
                     })
 
                     this.scrollToBottom();
-                    setTimeout(()=>{
-                        let blockChat = document.getElementById(cid)
-                        blockChat.style.background = "var(--hover-message-dialog)"
-                    }, 1000)
+
 
                 }
             })
@@ -480,6 +477,11 @@ class Messages extends Component {
     changerPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const cid = urlParams.get('cid');
+
+        setTimeout(()=>{
+            let blockChat = document.getElementById(cid)
+            blockChat.style.background = "var(--hover-message-dialog)"
+        }, 1000)
 
         if (cid) {
             this.setState({
