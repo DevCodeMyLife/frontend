@@ -756,7 +756,7 @@ class Messages extends Component {
                                                 :
                                                 <div className="wrapper-chats-main">
                                                     <div className="lable-dialogs-list">
-                                                        Диалоги
+                                                        Все чаты
                                                     </div>
                                                     <div className="chats-list">
                                                         {
@@ -995,7 +995,7 @@ class Messages extends Component {
                                             <div className="wrapper-chat">
                                                 <div className="info-user-chat">
                                                     <div>
-                                                        Выберите диалог
+                                                        Выберите чат чтобы начать общаться
                                                     </div>
                                                 </div>
                                             </div>
