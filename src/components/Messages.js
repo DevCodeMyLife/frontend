@@ -874,14 +874,14 @@ class Messages extends Component {
                                                         {/*</div>*/}
 
                                                         <div className="avatar-wrapper">
-                                                            <Link href={`/user/${this.state.id_user}`}>
+                                                            <Link href={`/user/${this.state.linkUser}`}>
                                                                 <img src={this.state.avatar}
                                                                      alt={this.state.dialogTitle}
                                                                 />
                                                             </Link>
                                                         </div>
                                                         <div className="block-title-chat">
-                                                            <Link href={`/user/${this.state.id_user}`}>
+                                                            <Link href={`/user/${this.state.linkUser}`}>
                                                                 <div className="title-dialog">
                                                                     {this.state.dialogTitle}
                                                                 </div>
