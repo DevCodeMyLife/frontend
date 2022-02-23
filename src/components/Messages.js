@@ -912,7 +912,7 @@ class Messages extends Component {
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                                            components={this.components} >
-                                                                                <div dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} />
+                                                                                {message.value}
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
@@ -962,7 +962,7 @@ class Messages extends Component {
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                                            components={this.components} >
-                                                                                <div dangerouslySetInnerHTML={{__html: this.convertNewLinesToBr(message.value)}} />
+                                                                                {message.value}
                                                                             </ReactMarkdown>
                                                                         </div>
                                                                     </div>
