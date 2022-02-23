@@ -891,6 +891,51 @@ class Messages extends Component {
                                                             }
                                                         </div>
                                                         <div className="wrapper-chat">
+                                                            <div className="messages-control-nav">
+                                                                <div className="messages-control-nav-item">
+                                                                    <div className="button-default" onClick={this.allMessage}>
+                                                                        Все диалоги
+                                                                    </div>
+                                                                    <div className="title-dialog">
+                                                                        <a className="link_github" target="_blank"
+                                                                           href={"/user/" + this.state.linkUser}
+                                                                           rel="noreferrer">{this.state.dialogTitle}</a>
+                                                                    </div>
+                                                                    {
+                                                                        this.state.dialog ?
+                                                                            <div>
+                                                                                {/*{*/}
+                                                                                {/*    store.auth.user.data.testing ?*/}
+                                                                                <div>
+                                                                                    {/*<div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>*/}
+                                                                                    {/*    Позвонить*/}
+                                                                                    {/*</div>*/}
+                                                                                    {/*<div className="button-default" onClick={(e)=> this.start(e)}>*/}
+                                                                                    {/*    {*/}
+                                                                                    {/*        this.state.isDark === "light" ?*/}
+                                                                                    {/*            <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>*/}
+                                                                                    {/*            :*/}
+                                                                                    {/*            <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>*/}
+                                                                                    {/*    }*/}
+                                                                                    {/*</div>*/}
+                                                                                </div>
+                                                                                {/*    :*/}
+                                                                                {/*        null*/}
+                                                                                {/*}*/}
+
+                                                                                <div className="photo-wrapper">
+                                                                                    <img src={this.state.avatar}
+                                                                                         alt={this.state.dialogTitle}
+                                                                                         style={{maxWidth: "28px"}}
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            null
+                                                                    }
+
+                                                                </div>
+                                                            </div>
                                                             <div className="wrapper-items" id="messages" style={{
                                                                 // background: "#fff"
                                                             }}>
