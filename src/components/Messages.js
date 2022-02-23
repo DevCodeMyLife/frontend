@@ -911,7 +911,7 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components} >
+                                                                                           components={this.components} style={{whiteSpace: "pre-line"}}>
                                                                                 {message.value}
                                                                             </ReactMarkdown>
                                                                         </div>
@@ -961,7 +961,7 @@ class Messages extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                           components={this.components} >
+                                                                                           components={this.components} style={{whiteSpace: "pre-line"}}>
                                                                                 {message.value}
                                                                             </ReactMarkdown>
                                                                         </div>
