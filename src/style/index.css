@@ -955,6 +955,7 @@ a {
 
 .chats-list {
   overflow: auto;
+  height: calc(100% - 61px);
 }
 
 .hide-typing {
