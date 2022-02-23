@@ -867,14 +867,18 @@ class Messages extends Component {
                                                         {/*</div>*/}
 
                                                         <div className="avatar-wrapper">
-                                                            <img src={this.state.avatar}
-                                                                 alt={this.state.dialogTitle}
-                                                            />
+                                                            <Link href={`/user/${this.state.id_user}`}>
+                                                                <img src={this.state.avatar}
+                                                                     alt={this.state.dialogTitle}
+                                                                />
+                                                            </Link>
                                                         </div>
                                                         <div className="block-title-chat">
-                                                            <div className="title-dialog">
-                                                                {this.state.dialogTitle}
-                                                            </div>
+                                                            <Link href={`/user/${this.state.id_user}`}>
+                                                                <div className="title-dialog">
+                                                                    {this.state.dialogTitle}
+                                                                </div>
+                                                            </Link>
                                                             <div
                                                                 className="feed-item-datetime">
                                                                 {
