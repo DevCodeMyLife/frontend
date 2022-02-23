@@ -1409,6 +1409,7 @@ p {
 
 .avatar-wrapper {
   padding: 10px;
+  display: inline-block;
 }
 
 .avatar-wrapper > img {
