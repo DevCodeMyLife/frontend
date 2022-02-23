@@ -947,10 +947,13 @@ a {
 .wrapper-chats-main {
   height: 100%;
   box-sizing: border-box;
-  overflow: auto;
   width: 500px;
   background: var(--bg-grey);
   border-right: 1px solid var(--button_border);
+}
+
+.chats-list {
+  overflow: auto;
 }
 
 .hide-typing {

@@ -743,7 +743,7 @@ class Messages extends Component {
                                                     <div className="lable-dialogs-list">
                                                         Диалоги
                                                     </div>
-                                                    <div>
+                                                    <div className="chats-list">
                                                         {
                                                             // onClick={() => this.openDialog(chat.c_id)}
                                                             this.state.chats.map(chat =>
