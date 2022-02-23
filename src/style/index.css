@@ -909,9 +909,13 @@ a {
   flex-direction: row;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+
   /*border-top: 1px solid var(--hover);*/
   position: relative;
+}
+
+.view-typing-text {
+  padding: 10px;
 }
 
 .red {

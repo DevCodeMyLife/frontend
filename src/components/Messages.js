@@ -954,7 +954,7 @@ class Messages extends Component {
                                                     }
                                                     <div ref={this.messagesEndRef}/>
                                                 </div>
-                                                <div className="wrapper-input">
+                                                <div className="view-typing-text">
                                                     <div className="typing_user" id="typing_user">
                                                         <div className="hide-typing" id="hide-typing">
                                                             <div className="image-icon-typing">
@@ -965,21 +965,23 @@ class Messages extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <TextareaAutosize
-                                                        onKeyDown={this.sendMessage}
-                                                        placeholder="Введите сообщение"
-                                                        autoFocus={true}
-                                                        maxRows={15}
-                                                        id="message_chat"
-                                                        style={{
-                                                            borderRadius: "5px"
-                                                        }}
-                                                    >
+                                                    <div className="wrapper-input">
+                                                        <TextareaAutosize
+                                                            onKeyDown={this.sendMessage}
+                                                            placeholder="Введите сообщение"
+                                                            autoFocus={true}
+                                                            maxRows={15}
+                                                            id="message_chat"
+                                                            style={{
+                                                                borderRadius: "5px"
+                                                            }}
+                                                        >
 
-                                                    </TextareaAutosize>
-                                                    <div className="send-button"
-                                                         onClick={this.sendMessageButton}>
-                                                        <img src={send} alt="send"/>
+                                                        </TextareaAutosize>
+                                                        <div className="send-button"
+                                                             onClick={this.sendMessageButton}>
+                                                            <img src={send} alt="send"/>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
