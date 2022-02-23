@@ -285,19 +285,19 @@ class Messages extends Component {
         if (this.state.dialog) {
             let path = `/api/messages/${this.state.cid}`
 
-            if (document.getElementById("chats-list")){
-                for (let sibling of document.getElementById("chats-list").children) {
-                    sibling.classList.remove('hover-message-dialog');
-                }
-            }else{
-                setTimeout(()=>{
-                    if (document.getElementById("chats-list")){
-                        for (let sibling of document.getElementById("chats-list").children) {
-                            sibling.classList.remove('hover-message-dialog');
-                        }
-                    }
-                }, 600)
-            }
+            // if (document.getElementById("chats-list")){
+            //     for (let sibling of document.getElementById("chats-list").children) {
+            //         sibling.classList.remove('hover-message-dialog');
+            //     }
+            // }else{
+            //     setTimeout(()=>{
+            //         if (document.getElementById("chats-list")){
+            //             for (let sibling of document.getElementById("chats-list").children) {
+            //                 sibling.classList.remove('hover-message-dialog');
+            //             }
+            //         }
+            //     }, 600)
+            // }
 
             fetch(path, {
                 method: "GET"
