@@ -292,30 +292,30 @@ class Settings extends Component {
                                         </div>
                                     </div>
                                     <div className="main-place-wrapper-settings">
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <input className="input-default" maxLength="28" placeholder="Логин"
                                                    type="text" id="login" defaultValue={state.auth.user.data.login}/>
                                         </div>
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <input className="input-default" maxLength="28" placeholder="Имя"
                                                    type="text" id="name" defaultValue={state.auth.user.data.name}/>
                                         </div>
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <input className="input-default" maxLength="28" placeholder="Фамилия"
                                                    type="text" id="last_name"
                                                    defaultValue={state.auth.user.data.last_name}/>
                                         </div>
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <input className="input-default" maxLength="30"
                                                    placeholder="Электронная почта" type="text" id="email"
                                                    defaultValue={state.auth.user.data.email}/>
                                         </div>
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <input className="input-default" maxLength="60"
                                                    placeholder="Ссылка на резюме" type="text" id="link"
                                                    defaultValue={state.auth.user.data.link_summary}/>
                                         </div>
-                                        <div className="wrapper-input">
+                                        <div className="wrapper-input fix_wrapper">
                                             <div className="button-default" onClick={() =>
                                                 this.save()
                                             }>

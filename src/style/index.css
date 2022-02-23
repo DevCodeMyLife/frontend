@@ -904,6 +904,10 @@ a {
   animation: typing 2s linear infinite;
 }
 
+.fix_wrapper {
+  margin-bottom: 10px;
+}
+
 .wrapper-input {
   display: flex;
   flex-direction: row;

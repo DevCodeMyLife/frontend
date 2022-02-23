@@ -268,7 +268,7 @@ class Freelances extends Component {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="wrapper-input">
+                                            <div className="wrapper-input fix_wrapper">
                                                 <TextareaAutosize
                                                     id="value"
                                                     minRows={12}

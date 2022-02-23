@@ -154,14 +154,14 @@ class Main extends Component {
                                 <div className="auth-box-title">
                                     <div className="title-span-auth">Вход</div>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Логин" type="text" id="auth_login"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Пароль" type="password"
                                            id="auth_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <div className="button-default" onClick={() => {
                                         this.auth()
                                     }}>
@@ -177,23 +177,23 @@ class Main extends Component {
                                     <div className="title-span-auth">Если Вы у нас впервые</div>
                                     <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={28} placeholder="Логин" type="text"
                                            id="registration_login"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={30} placeholder="Эл. почта" type="text"
                                            id="registration_email"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Пароль" type="password"
                                            id="registration_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Повторите пароль" type="password"
                                            id="registration_two_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <div className="button-default" onClick={() => {
                                         this.registration()
                                     }}>
@@ -321,14 +321,14 @@ class Main extends Component {
                                 <div className="auth-box-title">
                                     <div className="title-span-auth">Вход</div>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Логин" type="text" id="auth_login"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Пароль" type="password"
                                            id="auth_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <div className="button-default" onClick={() => {
                                         this.auth()
                                     }}>
@@ -344,23 +344,23 @@ class Main extends Component {
                                     <div className="title-span-auth">Если Вы у нас впервые</div>
                                     <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={28} placeholder="Логин" type="text"
                                            id="registration_login"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={30} placeholder="Эл. почта" type="text"
                                            id="registration_email"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Пароль" type="password"
                                            id="registration_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Повторите пароль" type="password"
                                            id="registration_two_password"/>
                                 </div>
-                                <div className="wrapper-input">
+                                <div className="wrapper-input fix_wrapper">
                                     <div className="button-default" onClick={() => {
                                         this.registration()
                                     }}>
