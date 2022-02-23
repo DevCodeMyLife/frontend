@@ -795,29 +795,6 @@ class Messages extends Component {
                     <>
                         <div className="content-wall-views">
                             <div className="wrapper-content-default">
-                                <div className="messages-control-nav">
-                                    <div className="messages-control-nav-item">
-                                        <div className="button-default" onClick={this.allMessage}>
-                                            Все диалоги
-                                        </div>
-                                        <div className="title-dialog">
-                                            <a className="link_github" target="_blank"
-                                               href={"/user/" + this.state.linkUser}
-                                               rel="noreferrer">{this.state.dialogTitle}</a>
-                                        </div>
-                                        {
-                                            this.state.dialog ?
-                                                <div className="photo-wrapper">
-                                                    <img src={this.state.avatar}
-                                                         alt={this.state.dialogTitle}
-                                                         style={{maxWidth: "28px"}}
-                                                    />
-                                                </div>
-                                                :
-                                                null
-                                        }
-                                    </div>
-                                </div>
                                 {
                                     this.state.loader ?
                                         <div className="loader-wrapper feed-wrapper">
@@ -988,7 +965,88 @@ class Messages extends Component {
                                                     </div>
                                                     :
                                                     <>
+                                                        <div className="wrapper-chats-main">
+                                                            {
+                                                                // onClick={() => this.openDialog(chat.c_id)}
+                                                                this.state.chats.map(chat =>
+                                                                    chat.no_read_count ?
+                                                                        <div
+                                                                            className="feed-wrapper-item-chat chat-flex-row"
+                                                                            style={{
+                                                                                marginBottom: 0,
+                                                                                background: "var(--hover-message-dialog)"
+                                                                            }}
+                                                                            onClick={() => this.openDialog(chat.c_id)}>
+                                                                            <div className="photo-wrapper-chat">
+                                                                                <img src={chat.avatar_url}
+                                                                                     alt={chat.avatar_url}/>
+                                                                            </div>
+                                                                            <div className="feed-item-title" style={{
+                                                                                padding: "13px",
+
+                                                                            }}>
+                                                                            <span
+                                                                                className="test-stat">{chat.login}</span>
+                                                                                <div className="feed-item-datetime">
+                                                                                    {chat.last_message?.substring(0, 40) + "..."}
+                                                                                </div>
+                                                                            </div>
+                                                                            {/*<div className="feed-item-title" style={{*/}
+                                                                            {/*    textAlign: "center",*/}
+                                                                            {/*    padding: "5px",*/}
+                                                                            {/*    width: "170px"*/}
+                                                                            {/*}}>*/}
+                                                                            {/*    <div className="last-message">*/}
+                                                                            {/*        {chat.last_message?.substring(0, 40) + "..."}*/}
+                                                                            {/*    </div>*/}
+                                                                            {/*</div>*/}
+                                                                        </div>
+                                                                        :
+                                                                        <div
+                                                                            className="feed-wrapper-item-chat chat-flex-row"
+                                                                            style={{marginBottom: 0}}
+                                                                            onClick={() => this.openDialog(chat.c_id)}>
+                                                                            <div className="photo-wrapper-chat">
+                                                                                <img src={chat.avatar_url}
+                                                                                     alt={chat.avatar_url}/>
+                                                                            </div>
+                                                                            <div className="feed-item-title" style={{
+                                                                                padding: "13px",
+                                                                            }}>
+                                                                            <span
+                                                                                className="test-stat">{chat.login}</span>
+                                                                                <div className="feed-item-datetime">
+                                                                                    {chat.last_message?.substring(0, 40) + "..."}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                )
+                                                            }
+                                                        </div>
                                                         <div className="wrapper-chat">
+                                                            <div className="messages-control-nav">
+                                                                <div className="messages-control-nav-item">
+                                                                    <div className="button-default" onClick={this.allMessage}>
+                                                                        Все диалоги
+                                                                    </div>
+                                                                    <div className="title-dialog">
+                                                                        <a className="link_github" target="_blank"
+                                                                           href={"/user/" + this.state.linkUser}
+                                                                           rel="noreferrer">{this.state.dialogTitle}</a>
+                                                                    </div>
+                                                                    {
+                                                                        this.state.dialog ?
+                                                                            <div className="photo-wrapper">
+                                                                                <img src={this.state.avatar}
+                                                                                     alt={this.state.dialogTitle}
+                                                                                     style={{maxWidth: "28px"}}
+                                                                                />
+                                                                            </div>
+                                                                            :
+                                                                            null
+                                                                    }
+                                                                </div>
+                                                            </div>
                                                             <div className="wrapper-items" id="messages" style={{
                                                                 // background: "#fff"
                                                             }}>
@@ -1126,64 +1184,6 @@ class Messages extends Component {
                                                                     <img src={send} alt="send"/>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="wrapper-chats-main">
-                                                            {
-                                                                // onClick={() => this.openDialog(chat.c_id)}
-                                                                this.state.chats.map(chat =>
-                                                                    chat.no_read_count ?
-                                                                        <div
-                                                                            className="feed-wrapper-item-chat chat-flex-row"
-                                                                            style={{
-                                                                                marginBottom: 0,
-                                                                                background: "var(--hover-message-dialog)"
-                                                                            }}
-                                                                            onClick={() => this.openDialog(chat.c_id)}>
-                                                                            <div className="photo-wrapper-chat">
-                                                                                <img src={chat.avatar_url}
-                                                                                     alt={chat.avatar_url}/>
-                                                                            </div>
-                                                                            <div className="feed-item-title" style={{
-                                                                                padding: "13px",
-
-                                                                            }}>
-                                                                            <span
-                                                                                className="test-stat">{chat.login}</span>
-                                                                                <div className="feed-item-datetime">
-                                                                                    {chat.last_message?.substring(0, 40) + "..."}
-                                                                                </div>
-                                                                            </div>
-                                                                            {/*<div className="feed-item-title" style={{*/}
-                                                                            {/*    textAlign: "center",*/}
-                                                                            {/*    padding: "5px",*/}
-                                                                            {/*    width: "170px"*/}
-                                                                            {/*}}>*/}
-                                                                            {/*    <div className="last-message">*/}
-                                                                            {/*        {chat.last_message?.substring(0, 40) + "..."}*/}
-                                                                            {/*    </div>*/}
-                                                                            {/*</div>*/}
-                                                                        </div>
-                                                                        :
-                                                                        <div
-                                                                            className="feed-wrapper-item-chat chat-flex-row"
-                                                                            style={{marginBottom: 0}}
-                                                                            onClick={() => this.openDialog(chat.c_id)}>
-                                                                            <div className="photo-wrapper-chat">
-                                                                                <img src={chat.avatar_url}
-                                                                                     alt={chat.avatar_url}/>
-                                                                            </div>
-                                                                            <div className="feed-item-title" style={{
-                                                                                padding: "13px",
-                                                                            }}>
-                                                                            <span
-                                                                                className="test-stat">{chat.login}</span>
-                                                                                <div className="feed-item-datetime">
-                                                                                    {chat.last_message?.substring(0, 40) + "..."}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                )
-                                                            }
                                                         </div>
                                                     </>
                                 }
