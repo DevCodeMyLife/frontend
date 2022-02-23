@@ -343,19 +343,7 @@ class Messages extends Component {
         //     let blockChat = document.getElementById(cid)
         //     blockChat.style.background = "var(--hover-message-dialog)"
         // }, 1000)
-        // if (document.getElementById("chats-list")){
-        //     for (let sibling of document.getElementById("chats-list").children) {
-        //         sibling.classList.remove('hover-message-dialog');
-        //     }
-        // }else{
-        //     setTimeout(()=>{
-        //         if (document.getElementById("chats-list")){
-        //             for (let sibling of document.getElementById("chats-list").children) {
-        //                 sibling.classList.remove('hover-message-dialog');
-        //             }
-        //         }
-        //     }, 600)
-        // }
+
 
 
 
@@ -493,6 +481,22 @@ class Messages extends Component {
                     })
 
                     this.scrollToBottom();
+
+
+                    if (document.getElementById("chats-list")){
+                        for (let sibling of document.getElementById("chats-list").children) {
+                            sibling.classList.remove('hover-message-dialog');
+                        }
+                    }else{
+                        setTimeout(()=>{
+                            if (document.getElementById("chats-list")){
+                                for (let sibling of document.getElementById("chats-list").children) {
+                                    sibling.classList.remove('hover-message-dialog');
+                                }
+                            }
+                        }, 600)
+                    }
+
                     for (let sibling of document.getElementById("chats-list").children) {
                         if (sibling.getAttribute("id") === cid){
                             sibling.classList.add("hover-message-dialog")
