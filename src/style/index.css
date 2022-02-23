@@ -1403,8 +1403,16 @@ p {
 }
 
 .messages-control-nav-item > * {
-  display: flex;
-  margin-right: 10px;
+  /*display: flex;*/
+  /*margin-right: 10px;*/
+}
+
+.avatar-wrapper {
+  padding: 10px;
+}
+
+.avatar-wrapper > img {
+  border-radius: 50%;
 }
 
 .wrapper-content-default {
