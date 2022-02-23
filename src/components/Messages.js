@@ -754,7 +754,7 @@ class Messages extends Component {
                                                                             marginBottom: 0,
                                                                             background: "var(--hover-message-dialog)"
                                                                         }}
-                                                                        onClick={() => this.openDialog(chat.c_id)}>
+                                                                        onClick={() => this.openDialog(chat.c_id)} id={chat.c_id}>
                                                                         <div className="photo-wrapper-chat">
                                                                             <img src={chat.avatar_url}
                                                                                  alt={chat.avatar_url}/>
