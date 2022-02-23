@@ -1291,6 +1291,10 @@ p {
   /*white-space: pre;*/
 }
 
+.value-post > p {
+  white-space: pre-line;
+}
+
 .view-flex {
   display: flex;
 }
