@@ -750,8 +750,13 @@ class Messages extends Component {
                                             </div>
                                             :
                                             this.state.chats.length < 1 ?
-                                                <div className="error-page">
-                                                    Вы не создали еще ни одного диалога, либо Вам никто не написал.
+                                                <div className="wrapper-chats-main">
+                                                    <div className="lable-dialogs-list">
+                                                        Все чаты
+                                                    </div>
+                                                    <div className="chats-list">
+                                                        Активных чатов пока нет
+                                                    </div>
                                                 </div>
                                                 :
                                                 <div className="wrapper-chats-main">
@@ -842,15 +847,20 @@ class Messages extends Component {
                                                                  alt={this.state.dialogTitle}
                                                             />
                                                         </div>
-                                                        <div
-                                                            className="feed-item-datetime">
-                                                            {
-                                                                new Date(
-                                                                    Math.round(
-                                                                        new Date().getTime() / 1000
-                                                                    ) * 1000
-                                                                ).toLocaleString()
-                                                            }
+                                                        <div className="block-title-chat">
+                                                            <div className="title-dialog">
+                                                                {this.state.dialogTitle}
+                                                            </div>
+                                                            <div
+                                                                className="feed-item-datetime">
+                                                                {
+                                                                    new Date(
+                                                                        Math.round(
+                                                                            new Date().getTime() / 1000
+                                                                        ) * 1000
+                                                                    ).toLocaleString()
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
