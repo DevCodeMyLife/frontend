@@ -897,12 +897,10 @@ class Messages extends Component {
                                                                                     }
                                                                                 </div>
                                                                             </div>
-                                                                            <p>
-                                                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                               components={this.components}>
-                                                                                    {message.value}
-                                                                                </ReactMarkdown>
-                                                                            </p>
+                                                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                                                           components={this.components}>
+                                                                                {message.value}
+                                                                            </ReactMarkdown>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -949,12 +947,10 @@ class Messages extends Component {
                                                                                     }
                                                                                 </div>
                                                                             </div>
-                                                                            <p>
-                                                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                                                               components={this.components}>
-                                                                                    {message.value}
-                                                                                </ReactMarkdown>
-                                                                            </p>
+                                                                            <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                                                           components={this.components}>
+                                                                                {message.value}
+                                                                            </ReactMarkdown>
                                                                         </div>
                                                                     </div>
                                                                 </div>
