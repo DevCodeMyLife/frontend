@@ -94,6 +94,10 @@ class Messages extends Component {
             this.state.cent_channel.removeAllListeners();
         }
 
+        for (let sibling of document.getElementById("chats-list").children) {
+            sibling.classList.remove('hover-message-dialog');
+        }
+
         if (event)
             window.history.pushState({urlPath: `/messages`}, "", `/messages`)
 
@@ -112,6 +116,11 @@ class Messages extends Component {
                     })
 
                     let blockChat = document.getElementById(cid)
+                    for (let sibling of document.getElementById("chats-list").children) {
+                        if (sibling.classList.getAttribute("id") === cid){
+                            sibling.classList.add("hover-message-dialog")
+                        }
+                    }
                     blockChat.style.background = "var(--hover-message-dialog)"
                 }
             })
@@ -797,16 +806,15 @@ class Messages extends Component {
                                                 <div className="lable-dialogs-list">
                                                     Все чаты
                                                 </div>
-                                                <div className="chats-list">
+                                                <div className="chats-list" id="chats-list">
                                                     {
                                                         // onClick={() => this.openDialog(chat.c_id)}
                                                         this.state.chats.map(chat =>
                                                             chat.no_read_count ?
                                                                 <div
-                                                                    className="feed-wrapper-item-chat chat-flex-row"
+                                                                    className="feed-wrapper-item-chat chat-flex-row hover-message-dialog"
                                                                     style={{
-                                                                        marginBottom: 0,
-                                                                        background: "var(--hover-message-dialog)"
+                                                                        marginBottom: 0
                                                                     }}
                                                                     onClick={() => this.openDialog(chat.c_id)} id={chat.c_id}>
                                                                     <div className="photo-wrapper-chat">
