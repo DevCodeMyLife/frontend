@@ -301,6 +301,7 @@ class Messages extends Component {
                 .catch(error => {
                     console.log(error)
                 });
+            this.allMessage()
         }
     }
 
