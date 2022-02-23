@@ -307,9 +307,9 @@ class Messages extends Component {
     }
 
     openDialog(cid) {
-        this.setState({
-            loader: true
-        })
+        // this.setState({
+        //     loader: true
+        // })
 
         const store = this.state.store.getState()
         let _this = this
