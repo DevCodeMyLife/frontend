@@ -699,6 +699,38 @@ class Messages extends Component {
         this.getUserMedia_success(stream)
     }
 
+    time2TimeAgo(ts) {
+        // This function computes the delta between the
+        // provided timestamp and the current time, then test
+        // the delta for predefined ranges.
+
+        let d=new Date();  // Gets the current time
+        let nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
+        let seconds = nowTs-ts;
+
+        // more that two days
+        if (seconds > 2*24*3600) {
+            return "Был(а) 5 дней назад";
+        }
+        // a day
+        if (seconds > 24*3600) {
+            return "Был(а) вчера";
+        }
+
+        if (seconds > 3600) {
+            return "Был(а) 5 часов назад";
+        }
+        if (seconds > 1800) {
+            return "Был(а) полчаса назад";
+        }
+        if (seconds > 60) {
+            return "Был(а) " + Math.floor(seconds/60) + " минут назад";
+        }
+        if (seconds < 60) {
+            return "Online";
+        }
+    }
+
     render() {
 
         const store = this.state.store.getState()
@@ -843,11 +875,7 @@ class Messages extends Component {
                                                             <div
                                                                 className="feed-item-datetime">
                                                                 {
-                                                                    new Date(
-                                                                        Math.round(
-                                                                            new Date(this.state.lastTimeToLive).getTime() / 1000
-                                                                        ) * 1000
-                                                                    ).toLocaleString()
+                                                                    this.time2TimeAgo(this.state.lastTimeToLive)
                                                                 }
                                                             </div>
                                                         </div>
