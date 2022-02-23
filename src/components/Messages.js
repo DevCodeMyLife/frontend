@@ -292,6 +292,9 @@ class Messages extends Component {
             loader: true
         })
 
+        let blockChat = document.getElementById(cid)
+        blockChat.style.background = "var(--hover-message-dialog)"
+
         const store = this.state.store.getState()
         //
         // // store.webRTC.pc.onicecandidate = this.onIceCandidate
