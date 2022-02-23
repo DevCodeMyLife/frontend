@@ -190,6 +190,9 @@ class Messages extends Component {
                 }
             );
         }
+
+        console.log(event.keyCode)
+
         if (event.keyCode === 13 && value.search(/[a-zA-Zа-яА-Я0-9]/i) > -1) {
             let mes = {
                 created_at: new Date().getTime(),
