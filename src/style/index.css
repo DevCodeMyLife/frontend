@@ -1414,6 +1414,7 @@ p {
 
 .avatar-wrapper > img {
   border-radius: 50%;
+  max-width: 40px;
 }
 
 .wrapper-content-default {
