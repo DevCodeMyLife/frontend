@@ -476,13 +476,12 @@ class Messages extends Component {
         if (cid) {
             this.setState({
                 cid: cid,
-                chats: [1]
+                // chats: [1]
             })
 
             this.openDialog(cid)
-        } else {
-            this.allMessage()
         }
+        this.allMessage()
     }
 
     async getMediaStream() {
