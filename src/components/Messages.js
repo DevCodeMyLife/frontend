@@ -292,9 +292,6 @@ class Messages extends Component {
             loader: true
         })
 
-        let blockChat = document.getElementById(cid)
-        blockChat.style.background = "var(--hover-message-dialog)"
-
         const store = this.state.store.getState()
         let _this = this
         let path = `/api/messages/${cid}`
@@ -427,7 +424,8 @@ class Messages extends Component {
                     })
 
                     this.scrollToBottom();
-
+                    let blockChat = document.getElementById(cid)
+                    blockChat.style.background = "var(--hover-message-dialog)"
                 }
             })
             .catch(error => {
