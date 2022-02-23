@@ -893,9 +893,9 @@ class Messages extends Component {
                                                         <div className="wrapper-chat">
                                                             <div className="messages-control-nav">
                                                                 <div className="messages-control-nav-item">
-                                                                    <div className="button-default" onClick={this.allMessage}>
-                                                                        Все диалоги
-                                                                    </div>
+                                                                    {/*<div className="button-default" onClick={this.allMessage}>*/}
+                                                                    {/*    Все диалоги*/}
+                                                                    {/*</div>*/}
                                                                     <div className="title-dialog">
                                                                         <a className="link_github" target="_blank"
                                                                            href={"/user/" + this.state.linkUser}
