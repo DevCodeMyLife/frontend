@@ -792,7 +792,7 @@ class Messages extends Component {
                 )
             } else {
                 return (
-                    <div>
+                    <>
                         <div className="content-wall-views">
                             <div className="wrapper-content-default">
                                 <div className="messages-control-nav">
@@ -807,51 +807,16 @@ class Messages extends Component {
                                         </div>
                                         {
                                             this.state.dialog ?
-                                                <div>
-                                                    {/*{*/}
-                                                    {/*    store.auth.user.data.testing ?*/}
-                                                    <div>
-                                                        {/*<div className="button-default" onClick={()=> {this.call(this.state.linkUser)}}>*/}
-                                                        {/*    Позвонить*/}
-                                                        {/*</div>*/}
-                                                        {/*<div className="button-default" onClick={(e)=> this.start(e)}>*/}
-                                                        {/*    {*/}
-                                                        {/*        this.state.isDark === "light" ?*/}
-                                                        {/*            <img style={{maxWidth: "20px"}} src={video} alt="video_call"/>*/}
-                                                        {/*            :*/}
-                                                        {/*            <img style={{maxWidth: "20px"}} src={video_dark} alt="video_call"/>*/}
-                                                        {/*    }*/}
-                                                        {/*</div>*/}
-                                                    </div>
-                                                    {/*    :*/}
-                                                    {/*        null*/}
-                                                    {/*}*/}
-
-                                                    <div className="photo-wrapper">
-                                                        <img src={this.state.avatar}
-                                                             alt={this.state.dialogTitle}
-                                                             style={{maxWidth: "28px"}}
-                                                        />
-                                                    </div>
+                                                <div className="photo-wrapper">
+                                                    <img src={this.state.avatar}
+                                                         alt={this.state.dialogTitle}
+                                                         style={{maxWidth: "28px"}}
+                                                    />
                                                 </div>
                                                 :
                                                 null
                                         }
-
                                     </div>
-                                    {/*{*/}
-                                    {/*    this.state.openCall ?*/}
-                                    {/*        <div className="video-call">*/}
-                                    {/*            <div className="view-peer">*/}
-                                    {/*                /!*<audio ref={this.videoMain} autoPlay={true} muted={true} controls={true}/>*!/*/}
-                                    {/*                /!*<audio ref={this.videoPeer} autoPlay={true} controls={true}/>*!/*/}
-                                    {/*                <video ref={this.videoMain} autoPlay={true} muted={true} controls={false} />*/}
-                                    {/*                <video ref={this.videoPeer} autoPlay={true} controls={false}  />*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        :*/}
-                                    {/*        null*/}
-                                    {/*}*/}
                                 </div>
                                 {
                                     this.state.loader ?
@@ -875,7 +840,6 @@ class Messages extends Component {
 
                                                         </TextareaAutosize>
                                                     </div>
-
                                                     <div className="wrapper-flex-end">
                                                         <div className="button-default">
                                                             Отправить
@@ -1085,20 +1049,8 @@ class Messages extends Component {
                                 }
                             </div>
                         </div>
-                        <div className="tags-view">
-                            {/*<div className="tags-box">*/}
-                            {/*    <div className="title-box">Теги</div>*/}
-                            {/*    {*/}
-                            {/*        tags?.map(data =>*/}
-                            {/*            <div className="button-default-tag tags-item unselectable" action={data.value}*/}
-                            {/*                 onClick={this.handleClickTag}>*/}
-                            {/*                #{data.value}*/}
-                            {/*            </div>*/}
-                            {/*        )*/}
-                            {/*    }*/}
-                            {/*</div>*/}
-                        </div>
-                    </div>
+                        <div className="tags-view"/>
+                    </>
                 );
             }
         } else {
