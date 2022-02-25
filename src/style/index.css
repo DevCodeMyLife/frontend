@@ -7,6 +7,7 @@
     --hover: #F5F6FA;
     /*--hover: #ffffff;*/
     --hover-message-dialog: #d7e4fc;
+    --h-message-dialog: #ecf2fe;
     --logo-color-text: #ffffff;
     --notification-color-bg: #fbc5c5;
     --bg-main-photo-box: #fafafa;
@@ -37,6 +38,7 @@
     --hover: #202124;
     --bg-main-photo-box: #45464a;
     --hover-message-dialog: #45464a;
+    --h-message-dialog: #5c5d62;
     --not-read-message: #45464a;
     --button-to-top: #303134;
     --black: #000000;
@@ -1794,7 +1796,7 @@ p {
 }
 
 .feed-wrapper-item-chat:hover {
-  background: #eef3fd;
+  background: var(--h-message-dialog);
 }
 
 
