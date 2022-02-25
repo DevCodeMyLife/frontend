@@ -917,14 +917,14 @@ class Messages extends Component {
                                                                                 {message.value}
                                                                             </ReactMarkdown>
                                                                             <div className="settings-messages">
-                                                                                <div className="answer">
-                                                                                    {
-                                                                                        this.state.isDark === "light" ?
-                                                                                            <img src={answer} alt="answer"/>
-                                                                                            :
-                                                                                            <img src={answer_dark} alt="answer"/>
-                                                                                    }
-                                                                                </div>
+                                                                                {/*<div className="answer">*/}
+                                                                                {/*    {*/}
+                                                                                {/*        this.state.isDark === "light" ?*/}
+                                                                                {/*            <img src={answer} alt="answer"/>*/}
+                                                                                {/*            :*/}
+                                                                                {/*            <img src={answer_dark} alt="answer"/>*/}
+                                                                                {/*    }*/}
+                                                                                {/*</div>*/}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -977,14 +977,14 @@ class Messages extends Component {
                                                                                 {message.value}
                                                                             </ReactMarkdown>
                                                                             <div className="settings-messages">
-                                                                                <div className="answer">
-                                                                                    {
-                                                                                        this.state.isDark === "light" ?
-                                                                                            <img src={answer} alt="answer"/>
-                                                                                        :
-                                                                                            <img src={answer_dark} alt="answer"/>
-                                                                                    }
-                                                                                </div>
+                                                                                {/*<div className="answer">*/}
+                                                                                {/*    {*/}
+                                                                                {/*        this.state.isDark === "light" ?*/}
+                                                                                {/*            <img src={answer} alt="answer"/>*/}
+                                                                                {/*        :*/}
+                                                                                {/*            <img src={answer_dark} alt="answer"/>*/}
+                                                                                {/*    }*/}
+                                                                                {/*</div>*/}
                                                                             </div>
                                                                         </div>
                                                                     </div>
