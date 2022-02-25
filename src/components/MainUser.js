@@ -519,8 +519,6 @@ class MainUsers extends Component {
             clickCreateDialog: true
         })
 
-        let store = this.state.getState()
-
         let data = {
             to_uid: Number(this.state.id)
         }
