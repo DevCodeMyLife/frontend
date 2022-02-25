@@ -103,7 +103,7 @@ class Messages extends Component {
         if (event)
             window.history.pushState({urlPath: `/messages`}, "", `/messages`)
 
-        fetch("/api/messages", {
+        fetch("/api/chat", {
             method: "GET"
         })
             .then(response => response.json())
@@ -335,7 +335,7 @@ class Messages extends Component {
     openDialog(cid) {
         const store = this.state.store.getState()
         let _this = this
-        let path = `/api/messages/${cid}`
+        let path = `/api/message/${cid}`
 
         window.history.pushState({urlPath: `/messages?cid=${cid}`}, "", `/messages?cid=${cid}`)
 
