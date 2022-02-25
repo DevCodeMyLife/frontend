@@ -255,10 +255,6 @@ class Messages extends Component {
             }
 
         }
-
-
-        // this.read(this.state.cid)
-
     }
 
     components = {
@@ -284,8 +280,6 @@ class Messages extends Component {
     updateState() {
         if (this.state.dialog) {
             let path = `/api/messages/${this.state.cid}`
-
-
 
             fetch(path, {
                 method: "GET"
@@ -337,19 +331,6 @@ class Messages extends Component {
     }
 
     openDialog(cid) {
-        // this.setState({
-        //     loader: true
-        // })
-
-        // setTimeout(()=>{
-        //     let blockChat = document.getElementById(cid)
-        //     blockChat.style.background = "var(--hover-message-dialog)"
-        // }, 1000)
-
-
-
-
-
         const store = this.state.store.getState()
         let _this = this
         let path = `/api/messages/${cid}`
@@ -374,68 +355,6 @@ class Messages extends Component {
                     }
                 }
             }
-
-            switch (message?.data?.type) {
-                case "offer":
-                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID)
-                        console.log(message?.data?.offer)
-                    message?.data?.offer && await _this.onOffer(message?.data?.offer);
-                    break;
-
-                case "answer":
-                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-                        console.log(message?.data?.answer)
-                        message?.data?.answer && await store.webRTC.pc.setRemoteDescription(new RTCSessionDescription(message?.data?.answer))
-                    }
-                    break;
-
-                case "connected":
-                    if (message?.data?.uid !== _this.state.uidUserPeerMainUUID) {
-                        // await _this.call()
-                        // await _this.openCall(_this.localStream)
-                        await _this.createOffer();
-                    }
-                    break;
-
-                case "candidate":
-                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-
-                        // ICE candidate configuration.
-                        let candidate = new RTCIceCandidate({
-                            sdpMLineIndex: message?.data?.label,
-                            candidate: message?.data?.candidate,
-                        })
-
-
-                        await store.webRTC.pc.addIceCandidate(candidate)
-                        console.log(candidate)
-                        console.log(store.webRTC.pc.signalingState)
-                    }
-                    break;
-                case "answer_on_user":
-                    if (!_this.state.am) {
-                        await _this.start()
-                    }
-                    break
-
-                case "ready":
-                    if (message?.data?.uid === _this.state.uidUserPeerMainUUID) {
-                        await _this.createOffer();
-                    }
-                    break
-
-                case "crypto_id":
-                    if (message?.data?.uid !== _this.state.uidUserPeerMainUUID && message?.data?.uid) {
-                        console.log(message?.data?.uid)
-                        _this.setState({
-                            uidUserPeer: message?.data?.uid
-                        })
-                    }
-                    break;
-                default:
-                    console.log(0)
-            }
-
 
             if (message?.data?.login) {
                 if (message?.data?.login !== store.auth.user.data.login) {
