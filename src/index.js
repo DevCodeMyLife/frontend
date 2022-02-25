@@ -525,7 +525,6 @@ class App extends React.Component {
     })
 
     render() {
-        console.log("staging")
         if (this.state.load) {
             if (true) {
                 return (<HelmetProvider>
