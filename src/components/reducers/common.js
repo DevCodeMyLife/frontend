@@ -1,3 +1,5 @@
+import {object} from "prop-types";
+
 const initialState = {
     auth: {
         user: {
@@ -36,6 +38,7 @@ const initialState = {
     stream: null,
     am: false,
     people: [],
+    notification_user: {}
 }
 
 export default function AppReducer(state = initialState, action) {
@@ -70,6 +73,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_UPDATE_PEOPLE":
             state.people = action.value
+            return state
+        case "ACTION_UPDATE_NOTIFICATION_USER":
+            state.notification_user = action.value
             return state
         default:
             return state
