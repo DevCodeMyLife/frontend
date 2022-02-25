@@ -596,6 +596,7 @@ a {
 
   display: flex;
   flex-direction: column;
+  position: relative;
 
   /*border-radius: 0 0 10px 10px;*/
   overflow: hidden;
@@ -676,6 +677,7 @@ a {
   padding: 20px;
   box-sizing: border-box;
   background: var(--bg-grey);
+  padding-top: 65px;
 }
 
 .like-count {
@@ -1381,9 +1383,13 @@ p {
 }
 
 .messages-control-nav {
-  /*padding: 20px;*/
-  border-bottom: 1px solid var(--button_border);
+  /* border-bottom: 1px solid var(--button_border); */
   background: var(--bg-grey);
+  position: absolute;
+  width: 100%;
+  background: hsla(0,0%,100%,.3);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 4;
 }
 
 .wrapper-maker-message {
