@@ -533,8 +533,8 @@ class MainUsers extends Component {
                 if (res.status.code === 0) {
                     window.location.href = `/messages?cid=${res.data}`
                 }else{
-                    toast.error(res.status?.message, {
-                        position: "bottom-right",
+                    toast.error(res.status?.message + " - Попробуйте позже", {
+                        position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: true,
                         closeOnClick: false,
@@ -546,8 +546,8 @@ class MainUsers extends Component {
 
             })
             .catch(error => {
-                toast.error(error, {
-                    position: "bottom-right",
+                toast.error(error + " - Попробуйте позже", {
+                    position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: true,
                     closeOnClick: false,
