@@ -281,7 +281,7 @@ class Messages extends Component {
 
     updateState() {
         if (this.state.dialog) {
-            let path = `/api/messages/${this.state.cid}`
+            let path = `/api/message/${this.state.cid}`
 
             fetch(path, {
                 method: "GET"
