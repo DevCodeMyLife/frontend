@@ -521,7 +521,7 @@ class MainUsers extends Component {
             to_uid: Number(this.state.id)
         }
 
-        fetch("/api/create_chats", {
+        fetch("/api/chats", {
             method: "POST",
             body: JSON.stringify(data)
         })
