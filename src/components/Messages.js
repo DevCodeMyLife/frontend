@@ -434,9 +434,7 @@ class Messages extends Component {
     }
 
     read(cid) {
-        // let pathMessages = `/api/messages/${cid}`
-        let pathReadMessages = `/api/read_messages/${cid}`
-
+        let pathReadMessages = `/api/message/read/${cid}`
 
         fetch(pathReadMessages, {
             method: "POST",
