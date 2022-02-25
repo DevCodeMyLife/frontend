@@ -12,6 +12,7 @@ import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import code from "../icon/code.png";
 import answer from "../icon/answer.png";
 import answer_dark from "../icon/answer_dark.png";
+import {toast} from "react-toastify";
 
 
 class Messages extends Component {
@@ -437,14 +438,23 @@ class Messages extends Component {
         let pathReadMessages = `/api/message/read/${cid}`
 
         fetch(pathReadMessages, {
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify({})
         })
             .then(response => response.json())
-            .then(res => {
+            .then(_ => {
 
             })
             .catch(error => {
+                toast.error(error + " - Попробуйте позже", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                });
                 this.setState({
                     auth: false,
                     load: true
