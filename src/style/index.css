@@ -1505,6 +1505,11 @@ p {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
   }
+
+  .messages-control-nav {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+  }
 }
 
 .position-call {
