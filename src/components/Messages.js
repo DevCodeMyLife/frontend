@@ -10,6 +10,8 @@ import ReactMarkdown from "react-markdown";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import code from "../icon/code.png";
+import answer from "../icon/answer.png";
+import answer_dark from "../icon/answer_dard.png";
 
 
 class Messages extends Component {
@@ -914,6 +916,16 @@ class Messages extends Component {
                                                                                            components={this.components}>
                                                                                 {message.value}
                                                                             </ReactMarkdown>
+                                                                            <div className="settings-messages">
+                                                                                <div className="answer">
+                                                                                    {
+                                                                                        this.state.isDark === "light" ?
+                                                                                            <img src={answer} alt="answer"/>
+                                                                                            :
+                                                                                            <img src={answer_dark} alt="answer"/>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -964,6 +976,16 @@ class Messages extends Component {
                                                                                            components={this.components}>
                                                                                 {message.value}
                                                                             </ReactMarkdown>
+                                                                            <div className="settings-messages">
+                                                                                <div className="answer">
+                                                                                    {
+                                                                                        this.state.isDark === "light" ?
+                                                                                            <img src={answer} alt="answer"/>
+                                                                                        :
+                                                                                            <img src={answer_dark} alt="answer"/>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
