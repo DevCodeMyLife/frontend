@@ -531,16 +531,7 @@ class MainUsers extends Component {
             .then(res => {
                 console.log(res)
                 if (res.status.code === 0) {
-                    // window.location.href = `/messages?cid=${res.data}`
-                    toast.error(res.status.message, {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined
-                    });
+                    window.location.href = `/messages?cid=${res.data}`
                 }else{
                     toast.error(res.status?.message, {
                         position: "bottom-right",
