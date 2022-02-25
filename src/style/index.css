@@ -7,6 +7,7 @@
     --hover: #F5F6FA;
     /*--hover: #ffffff;*/
     --hover-message-dialog: #d7e4fc;
+    --h-message-dialog: #ecf2fe;
     --logo-color-text: #ffffff;
     --notification-color-bg: #fbc5c5;
     --bg-main-photo-box: #fafafa;
@@ -37,6 +38,7 @@
     --hover: #202124;
     --bg-main-photo-box: #45464a;
     --hover-message-dialog: #45464a;
+    --h-message-dialog: #5c5d62;
     --not-read-message: #45464a;
     --button-to-top: #303134;
     --black: #000000;
@@ -596,6 +598,7 @@ a {
 
   display: flex;
   flex-direction: column;
+  position: relative;
 
   /*border-radius: 0 0 10px 10px;*/
   overflow: hidden;
@@ -676,6 +679,7 @@ a {
   padding: 20px;
   box-sizing: border-box;
   background: var(--bg-grey);
+  padding-top: 65px;
 }
 
 .like-count {
@@ -1381,9 +1385,13 @@ p {
 }
 
 .messages-control-nav {
-  /*padding: 20px;*/
-  border-bottom: 1px solid var(--button_border);
+  /* border-bottom: 1px solid var(--button_border); */
   background: var(--bg-grey);
+  position: absolute;
+  width: 100%;
+  background: hsla(0,0%,100%,.3);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 4;
 }
 
 .wrapper-maker-message {
@@ -1494,6 +1502,11 @@ p {
 
 @supports (backdrop-filter: none) {
   .head {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .messages-control-nav {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
   }
@@ -1788,7 +1801,7 @@ p {
 }
 
 .feed-wrapper-item-chat:hover {
-  background: #eef3fd;
+  background: var(--h-message-dialog);
 }
 
 
