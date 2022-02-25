@@ -11,7 +11,7 @@ import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import code from "../icon/code.png";
 import answer from "../icon/answer.png";
-import answer_dark from "../icon/answer_dard.png";
+import answer_dark from "../icon/answer_dark.png";
 
 
 class Messages extends Component {
