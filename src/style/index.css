@@ -541,6 +541,10 @@ code {
   margin-right: 7px;
 }
 
+.menu-nav-item:hover {
+  text-decoration: underline;
+}
+
 .button-default-tag:active {
   transform: scale(.9);
 }
