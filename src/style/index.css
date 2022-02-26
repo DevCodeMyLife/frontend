@@ -531,6 +531,15 @@ code {
   transition: 9ms;
 }
 
+.menu-nav {
+  padding: 10px;
+}
+
+.menu-nav-item {
+  display: inline-block;
+  text-decoration: underline;
+}
+
 .button-default-tag:active {
   transform: scale(.9);
 }

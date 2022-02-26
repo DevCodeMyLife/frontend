@@ -1,6 +1,6 @@
 import {createStore} from "redux";
 import {mount, route} from 'navi'
-import {NotFoundBoundary, Router, View} from 'react-navi'
+import {Link, NotFoundBoundary, Router, View} from 'react-navi'
 import {toast, ToastContainer} from 'react-toastify';
 import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom'
@@ -577,6 +577,11 @@ class App extends React.Component {
                                                                Сайт работает в облаках
                                                            </div>
                                                            {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                                       </div>
+                                                       <div className="menu-nav">
+                                                           <div className="menu-nav-item">
+                                                               <Link href="/user/6">Поддержка</Link>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                    <NotFoundBoundary
