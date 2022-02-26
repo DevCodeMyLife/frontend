@@ -383,6 +383,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            cover: this.state.coverUpload,
             close: this.state.close
         }
 
@@ -1076,206 +1077,216 @@ class MainUsers extends Component {
                                         {
                                             mainFeed?.length > 0 ?
                                                 mainFeed?.map(data =>
-                                                    <div key={data?.ID} className="feed-wrapper-item">
-                                                        <Link style={{textDecoration: "none"}}
-                                                              href={`/post?uuid=${data?.ID}`}>
-                                                            <div className="feed-item-value">
-                                                                <div key="asldk" className="wrapper-data">
-                                                                    <Link href={`/user/${data?.uid}`}>
-                                                                        <div key="aksdlkasd" className="photo-wrapper">
-                                                                            {
-                                                                                store.auth.user.data.id === Number(this.state.id) ?
-                                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                                                                        null
+                                                    <div>
+                                                        {
+                                                            data.cover_path !== "" ?
+                                                                <img className="cover-feed" src={data.cover_path}
+                                                                     alt={data.title} />
+                                                            :
+                                                                null
+                                                        }
+                                                        <div key={data?.ID} className="feed-wrapper-item">
+                                                            <Link style={{textDecoration: "none"}}
+                                                                  href={`/post?uuid=${data?.ID}`}>
+                                                                <div className="feed-item-value">
+                                                                    <div key="asldk" className="wrapper-data">
+                                                                        <Link href={`/user/${data?.uid}`}>
+                                                                            <div key="aksdlkasd" className="photo-wrapper">
+                                                                                {
+                                                                                    store.auth.user.data.id === Number(this.state.id) ?
+                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                                                            null
+                                                                                            :
+                                                                                            <div className="online_user"/>
                                                                                         :
-                                                                                        <div className="online_user"/>
-                                                                                    :
-                                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
-                                                                                        null
-                                                                                        :
-                                                                                        <div className="online_user"/>
-                                                                            }
+                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                                                                            null
+                                                                                            :
+                                                                                            <div className="online_user"/>
+                                                                                }
 
-                                                                            <img key="asdmmmmasd" src={data?.photo}
-                                                                                 alt={data?.user}/>
+                                                                                <img key="asdmmmmasd" src={data?.photo}
+                                                                                     alt={data?.user}/>
 
-                                                                        </div>
-                                                                    </Link>
-                                                                    <div className="value-post">
-                                                                        <div className="feed-item-title">
-                                                                            <Link href={`/user/${data?.uid}`}>
-                                                                                <div className="link-user">
-                                                                                    {data?.user}
-                                                                                </div>
-                                                                            </Link>
-                                                                            <div className="feed-item-datetime">
-                                                                                {this.unixToDateTime(data?.date_time)}
                                                                             </div>
+                                                                        </Link>
+                                                                        <div className="value-post">
+                                                                            <div className="feed-item-title">
+                                                                                <Link href={`/user/${data?.uid}`}>
+                                                                                    <div className="link-user">
+                                                                                        {data?.user}
+                                                                                    </div>
+                                                                                </Link>
+                                                                                <div className="feed-item-datetime">
+                                                                                    {this.unixToDateTime(data?.date_time)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {
+                                                                            Number(this.state.id) === store.auth.user.data.id ?
+                                                                                <div
+                                                                                    className="button-default-icon-disable hide-border">
+                                                                                    {
+                                                                                        data?.close ?
+                                                                                            <svg className="svg-close-view"
+                                                                                                 fill="#000000"
+                                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                                 viewBox="0 0 50 50"
+                                                                                                 width="50px" height="50px">
+                                                                                                <path fill="none"
+                                                                                                      className="svg-close"
+                                                                                                      stroke="#000000"
+                                                                                                      strokeLinecap="round"
+                                                                                                      strokeMiterlimit="10"
+                                                                                                      strokeWidth="2"
+                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                                                                <path
+                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                            </svg>
+                                                                                            :
+                                                                                            <svg className="svg-close-view"
+                                                                                                 fill="#000000"
+                                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                                 viewBox="0 0 50 50"
+                                                                                                 width="50px" height="50px">
+                                                                                                <path fill="none"
+                                                                                                      className="svg-close"
+                                                                                                      stroke="#000000"
+                                                                                                      strokeLinecap="round"
+                                                                                                      strokeMiterlimit="10"
+                                                                                                      strokeWidth="2"
+                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                                                                <path
+                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                            </svg>
+                                                                                    }
+
+                                                                                </div>
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                    </div>
+                                                                    <div key="asldk" className="wrapper-data">
+                                                                        <div className="title-feed">
+                                                                            {data?.title}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </Link>
+                                                            <div className="wrapper-bottom">
+                                                                {/*/!*<div className="wrapper-flex-start">*!/*/}
+                                                                {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
+                                                                {/*        <div className="button-default">Подробнее</div>*/}
+                                                                {/*    </Link>*/}
+                                                                {/*    {*/}
+                                                                {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
+                                                                {/*            <div className="button-default"*/}
+                                                                {/*                 onClick={() => {*/}
+                                                                {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
+                                                                {/*                 }}*/}
+                                                                {/*            >*/}
+                                                                {/*                Изменить*/}
+                                                                {/*            </div>*/}
+
+                                                                {/*            :*/}
+                                                                {/*            null*/}
+                                                                {/*    }*/}
+                                                                {/*</div>*/}
+                                                                {/*<div className="like_wrapper wrapper-flex-end">*/}
+                                                                {/*    <div className="like">*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*            {*/}
+                                                                {/*                this.state.isDark === "light" ?*/}
+                                                                {/*                    <img src={look}  alt="like"/>*/}
+                                                                {/*                    :*/}
+                                                                {/*                    <img src={look_dark}  alt="like"/>*/}
+                                                                {/*            }*/}
+                                                                {/*        </div>*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*            <span className="like-count">*/}
+                                                                {/*                {data?.look_count}*/}
+                                                                {/*            </span>*/}
+                                                                {/*        </div>*/}
+                                                                {/*    </div>*/}
+                                                                {/*    <div className="like">*/}
+
+                                                                {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
+                                                                {/*            {*/}
+                                                                {/*                this.state.isDark === "light" ?*/}
+                                                                {/*                    <img src={like}  alt="like"/>*/}
+                                                                {/*                    :*/}
+                                                                {/*                    <img src={like_dark}  alt="like"/>*/}
+                                                                {/*            }*/}
+                                                                {/*        </div>*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*          <span className="like-count" id={data?.ID}>*/}
+                                                                {/*              {data?.count_like}*/}
+                                                                {/*          </span>*/}
+                                                                {/*        </div>*/}
+                                                                {/*    </div>*/}
+                                                                {/*</div>*/}
+                                                                <div className="like_wrapper wrapper-flex-start">
+                                                                    <div className="like"
+                                                                         onClick={() => this.like(data?.ID)}>
+                                                                        <div className="like-item">
+                                                                            {
+                                                                                this.state.isDark === "light" ?
+                                                                                    <img src={like} alt="like"/>
+                                                                                    :
+                                                                                    <img src={like_dark} alt="like"/>
+                                                                            }
+                                                                        </div>
+                                                                        <div className="like-text">
+                                                            <span className="like-count" id={data?.ID}>
+                                                                {data?.count_like}
+                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="like">
+                                                                        <div className="like-item">
+                                                                            {
+                                                                                this.state.isDark === "light" ?
+                                                                                    <img src={look} alt="like"/>
+                                                                                    :
+                                                                                    <img src={look_dark} alt="like"/>
+                                                                            }
+                                                                        </div>
+                                                                        <div className="like-text">
+                                                            <span className="like-count">
+                                                                {data?.look_count}
+                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
-                                                                            <div
-                                                                                className="button-default-icon-disable hide-border">
-                                                                                {
-                                                                                    data?.close ?
-                                                                                        <svg className="svg-close-view"
-                                                                                             fill="#000000"
-                                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                                             viewBox="0 0 50 50"
-                                                                                             width="50px" height="50px">
-                                                                                            <path fill="none"
-                                                                                                  className="svg-close"
-                                                                                                  stroke="#000000"
-                                                                                                  strokeLinecap="round"
-                                                                                                  strokeMiterlimit="10"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
-                                                                                            <path
-                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                        </svg>
-                                                                                        :
-                                                                                        <svg className="svg-close-view"
-                                                                                             fill="#000000"
-                                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                                             viewBox="0 0 50 50"
-                                                                                             width="50px" height="50px">
-                                                                                            <path fill="none"
-                                                                                                  className="svg-close"
-                                                                                                  stroke="#000000"
-                                                                                                  strokeLinecap="round"
-                                                                                                  strokeMiterlimit="10"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
-                                                                                            <path
-                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                        </svg>
-                                                                                }
+                                                                            <div className="like" onClick={() => {
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close)
+                                                                            }}>
+                                                                                <div className="like-text">
+                                                                    <span className="like-count">
+                                                                        Изменить
+                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            null
+                                                                    }
 
+                                                                </div>
+                                                                <div className="like_wrapper wrapper-flex-end">
+                                                                    {
+                                                                        data?.tag ?
+                                                                            <div className="tags-type">
+                                                                                #{data?.tag}
                                                                             </div>
                                                                             :
                                                                             null
                                                                     }
                                                                 </div>
-                                                                <div key="asldk" className="wrapper-data">
-                                                                    <div className="title-feed">
-                                                                        {data?.title}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Link>
-                                                        <div className="wrapper-bottom">
-                                                            {/*/!*<div className="wrapper-flex-start">*!/*/}
-                                                            {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
-                                                            {/*        <div className="button-default">Подробнее</div>*/}
-                                                            {/*    </Link>*/}
-                                                            {/*    {*/}
-                                                            {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
-                                                            {/*            <div className="button-default"*/}
-                                                            {/*                 onClick={() => {*/}
-                                                            {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
-                                                            {/*                 }}*/}
-                                                            {/*            >*/}
-                                                            {/*                Изменить*/}
-                                                            {/*            </div>*/}
-
-                                                            {/*            :*/}
-                                                            {/*            null*/}
-                                                            {/*    }*/}
-                                                            {/*</div>*/}
-                                                            {/*<div className="like_wrapper wrapper-flex-end">*/}
-                                                            {/*    <div className="like">*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*            {*/}
-                                                            {/*                this.state.isDark === "light" ?*/}
-                                                            {/*                    <img src={look}  alt="like"/>*/}
-                                                            {/*                    :*/}
-                                                            {/*                    <img src={look_dark}  alt="like"/>*/}
-                                                            {/*            }*/}
-                                                            {/*        </div>*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*            <span className="like-count">*/}
-                                                            {/*                {data?.look_count}*/}
-                                                            {/*            </span>*/}
-                                                            {/*        </div>*/}
-                                                            {/*    </div>*/}
-                                                            {/*    <div className="like">*/}
-
-                                                            {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
-                                                            {/*            {*/}
-                                                            {/*                this.state.isDark === "light" ?*/}
-                                                            {/*                    <img src={like}  alt="like"/>*/}
-                                                            {/*                    :*/}
-                                                            {/*                    <img src={like_dark}  alt="like"/>*/}
-                                                            {/*            }*/}
-                                                            {/*        </div>*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*          <span className="like-count" id={data?.ID}>*/}
-                                                            {/*              {data?.count_like}*/}
-                                                            {/*          </span>*/}
-                                                            {/*        </div>*/}
-                                                            {/*    </div>*/}
-                                                            {/*</div>*/}
-                                                            <div className="like_wrapper wrapper-flex-start">
-                                                                <div className="like"
-                                                                     onClick={() => this.like(data?.ID)}>
-                                                                    <div className="like-item">
-                                                                        {
-                                                                            this.state.isDark === "light" ?
-                                                                                <img src={like} alt="like"/>
-                                                                                :
-                                                                                <img src={like_dark} alt="like"/>
-                                                                        }
-                                                                    </div>
-                                                                    <div className="like-text">
-                                                            <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like}
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="like">
-                                                                    <div className="like-item">
-                                                                        {
-                                                                            this.state.isDark === "light" ?
-                                                                                <img src={look} alt="like"/>
-                                                                                :
-                                                                                <img src={look_dark} alt="like"/>
-                                                                        }
-                                                                    </div>
-                                                                    <div className="like-text">
-                                                            <span className="like-count">
-                                                                {data?.look_count}
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                                {
-                                                                    Number(this.state.id) === store.auth.user.data.id ?
-                                                                        <div className="like" onClick={() => {
-                                                                            this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close)
-                                                                        }}>
-                                                                            <div className="like-text">
-                                                                    <span className="like-count">
-                                                                        Изменить
-                                                                    </span>
-                                                                            </div>
-                                                                        </div>
-                                                                        :
-                                                                        null
-                                                                }
-
-                                                            </div>
-                                                            <div className="like_wrapper wrapper-flex-end">
-                                                                {
-                                                                    data?.tag ?
-                                                                        <div className="tags-type">
-                                                                            #{data?.tag}
-                                                                        </div>
-                                                                        :
-                                                                        null
-                                                                }
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 )
                                                 :
                                                 Number(this.state.id) === store.auth.user.data.id ?
