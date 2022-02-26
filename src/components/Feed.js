@@ -360,11 +360,11 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} />
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select" id="all"
+                                    <div className="button-default-tag tags-item unselectable button-select" id="top"
                                          action="all" onClick={this.handleClickTag}>
                                         Популярные
                                     </div>
-                                    <div className="button-default-tag tags-item unselectable" action="top"
+                                    <div className="button-default-tag tags-item unselectable" action="all"
                                          onClick={this.handleClickTag}>
                                         Новые
                                     </div>
