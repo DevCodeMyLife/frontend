@@ -56,6 +56,14 @@ class MainUsers extends Component {
                 height: 300,
                 aspect: 300 / 300
             },
+            cropCover: {
+                unit: "px",
+                x: 0,
+                y: 0,
+                width: 735,
+                height: 200,
+                aspect: 735 / 200
+            },
             cropImage: null,
             showCrop: false,
             imageRef: null,
@@ -63,7 +71,9 @@ class MainUsers extends Component {
             loadImage: false,
             clickCreateDialog: false,
             isCall: false,
-            coverUpload: null
+            coverUpload: null,
+            src_cover: null,
+            imageCropCover: false
         }
 
 
@@ -628,68 +638,69 @@ class MainUsers extends Component {
         reader.onloadend = () => {
             this.setState({
                 file: file,
-                src: reader.result,
+                src_cover: reader.result,
+                imageCropCover: true
             });
         }
         reader.readAsDataURL(file)
 
-        const data = new FormData();
-        const id = toast.loading("Подождите, обложка обрабатывается")
-
-
-        toast.update(id, {render: "Обложка отправлена на сервер", type: "default", isLoading: true});
-
-        data.append('data', file);
-
-
-        fetch("/api/upload_image", {
-            method: "POST",
-            body: data
-        })
-            .then(response => response.json())
-            .then(res => {
-                console.log(res)
-                if (res.status.code === 0) {
-                    this.setState({
-                        coverUpload: res?.data[0].url_preview
-                    })
-
-                    toast.update(id, {
-                        render: "Обложка успешно обновлена",
-                        type: "success",
-                        isLoading: false,
-                        autoClose: 5000,
-                        hideProgressBar: true
-                    });
-
-
-                } else {
-                    toast.update(id, {
-                        render: "Сервер не смог обработать обложку",
-                        type: "error",
-                        isLoading: false,
-                        autoClose: 5000,
-                        hideProgressBar: true
-                    });
-                }
-
-
-            })
-            .catch(error => {
-                this.setState({
-                    loadImage: false
-                })
-                toast.update(id, {
-                    render: error,
-                    type: "error",
-                    isLoading: false,
-                    autoClose: 5000,
-                    hideProgressBar: true
-                });
-
-            });
-
-        console.log(file)
+        // const data = new FormData();
+        // const id = toast.loading("Подождите, обложка обрабатывается")
+        //
+        //
+        // toast.update(id, {render: "Обложка отправлена на сервер", type: "default", isLoading: true});
+        //
+        // data.append('data', file);
+        //
+        //
+        // fetch("/api/upload_image", {
+        //     method: "POST",
+        //     body: data
+        // })
+        //     .then(response => response.json())
+        //     .then(res => {
+        //         console.log(res)
+        //         if (res.status.code === 0) {
+        //             this.setState({
+        //                 coverUpload: res?.data[0].url_preview
+        //             })
+        //
+        //             toast.update(id, {
+        //                 render: "Обложка успешно обновлена",
+        //                 type: "success",
+        //                 isLoading: false,
+        //                 autoClose: 5000,
+        //                 hideProgressBar: true
+        //             });
+        //
+        //
+        //         } else {
+        //             toast.update(id, {
+        //                 render: "Сервер не смог обработать обложку",
+        //                 type: "error",
+        //                 isLoading: false,
+        //                 autoClose: 5000,
+        //                 hideProgressBar: true
+        //             });
+        //         }
+        //
+        //
+        //     })
+        //     .catch(error => {
+        //         this.setState({
+        //             loadImage: false
+        //         })
+        //         toast.update(id, {
+        //             render: error,
+        //             type: "error",
+        //             isLoading: false,
+        //             autoClose: 5000,
+        //             hideProgressBar: true
+        //         });
+        //
+        //     });
+        //
+        // console.log(file)
     }
 
     makeUpload() {
@@ -868,7 +879,48 @@ class MainUsers extends Component {
                                     </div>
                                 </div>
                                 :
-                                null
+                                this.state.imageCropCover ?
+                                    <div className="pop-up">
+                                        <div className="center-view">
+                                            {
+                                                this.state.loadImage ?
+                                                    <div className="loader"/>
+                                                    :
+                                                    <div>
+                                                        <ReactCrop
+                                                            circularCrop={true}
+                                                            keepSelection={true}
+                                                            minWidth={300}
+                                                            minHeight={300}
+                                                            src={this.state.src_cover}
+                                                            crop={this.state.cropCover}
+                                                            ruleOfThirds
+                                                            onImageLoaded={this.onImageLoaded}
+                                                            onComplete={this.onCropComplete}
+                                                            onChange={this.onCropChange}
+                                                        />
+                                                        <div className="wrapper-bottom" style={{
+                                                            width: "100%",
+                                                            boxSizing: "border-box",
+                                                            padding: "20px 0"
+                                                        }}>
+                                                            <div className="wrapper-flex-start">
+                                                                <div className="button-default"
+                                                                     onClick={() => this.cancelCrop()}>Отмена
+                                                                </div>
+                                                            </div>
+                                                            <div className="wrapper-flex-end">
+                                                                <div className="button-default"
+                                                                     onClick={() => this.makeUpload()}>Сохранить
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    :
+                                    null
                         }
 
                         {
