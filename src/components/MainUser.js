@@ -653,23 +653,22 @@ class MainUsers extends Component {
 
         // console.log(this.state.imageRef)
 
-        const scaleX = file.naturalWidth
-        const scaleY = file.naturalHeight
+        const wrapper_cover_w = 725
+        const wrapper_cover_h = 200
+
+        let scaleX = file.width
+        let scaleY = file.height
 
         console.log(scaleX, scaleY)
-
 
         let center_x = scaleX / 2
         let center_y = scaleY / 2
 
-        const wrapper_cover_w = 725
-        const wrapper_cover_h = 200
+        let wrapper_cover_left_w = center_x - (wrapper_cover_w / 2)
+        let wrapper_cover_right_w = center_x + (wrapper_cover_w / 2)
 
-        const wrapper_cover_left_w = center_x - (wrapper_cover_w / 2)
-        const wrapper_cover_right_w = center_x + (wrapper_cover_w / 2)
-
-        const wrapper_cover_left_h = center_y - (wrapper_cover_h / 2)
-        const wrapper_cover_right_h = center_y + (wrapper_cover_h / 2)
+        let wrapper_cover_left_h = center_y - (wrapper_cover_h / 2)
+        let wrapper_cover_right_h = center_y + (wrapper_cover_h / 2)
 
         let x0 = wrapper_cover_left_w
         let x1 = wrapper_cover_right_w
