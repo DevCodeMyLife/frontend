@@ -921,7 +921,9 @@ class MainUsers extends Component {
                                                                 {
                                                                     this.state.clicked_new_post ?
                                                                         <div className="textarea-hide">
-
+                                                                            <input type="file" name="file" id="upload_file_input_cover"
+                                                                                   onChange={(e) => this.uploadCoverAction(e)}
+                                                                                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>
                                                                             {
                                                                                 this.state.coverUpload ?
                                                                                     <img src={this.state.coverUpload}
@@ -930,9 +932,6 @@ class MainUsers extends Component {
                                                                                          style={{cursor: "pointer", maxWidth: "634px"}}/>
                                                                                 :
                                                                                         <>
-                                                                                            <input type="file" name="file" id="upload_file_input_cover"
-                                                                                                   onChange={(e) => this.uploadCoverAction(e)}
-                                                                                                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>
                                                                                             <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>
                                                                                                 Нажмите что бы добавить обложку
                                                                                             </div>
