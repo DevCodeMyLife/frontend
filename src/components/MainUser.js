@@ -653,8 +653,8 @@ class MainUsers extends Component {
 
         // console.log(this.state.imageRef)
 
-        const scaleX = this.state.imageRef.naturalWidth
-        const scaleY = this.state.imageRef.naturalHeight
+        const scaleX = file.naturalWidth
+        const scaleY = file.naturalHeight
 
         let center_x = scaleX / 2
         let center_y = scaleY / 2
