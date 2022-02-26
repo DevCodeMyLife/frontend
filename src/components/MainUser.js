@@ -1045,7 +1045,7 @@ class MainUsers extends Component {
                                                                 <>
                                                                     <div className="preview-news preview_swap">
 
-                                                                        <div className="feed-wrapper-item">
+                                                                        <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
                                                                             <div className="feed-item-value">
                                                                                 <div className="wrapper-data">
                                                                                     <ReactMarkdown className="value-post"
