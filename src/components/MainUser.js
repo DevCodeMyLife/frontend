@@ -15,6 +15,7 @@ import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
 import {toast} from 'react-toastify';
 import error from "./Error";
+import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
 
@@ -644,63 +645,88 @@ class MainUsers extends Component {
         }
         reader.readAsDataURL(file)
 
-        // const data = new FormData();
-        // const id = toast.loading("Подождите, обложка обрабатывается")
-        //
-        //
-        // toast.update(id, {render: "Обложка отправлена на сервер", type: "default", isLoading: true});
-        //
-        // data.append('data', file);
-        //
-        //
-        // fetch("/api/upload_image", {
-        //     method: "POST",
-        //     body: data
-        // })
-        //     .then(response => response.json())
-        //     .then(res => {
-        //         console.log(res)
-        //         if (res.status.code === 0) {
-        //             this.setState({
-        //                 coverUpload: res?.data[0].url_preview
-        //             })
-        //
-        //             toast.update(id, {
-        //                 render: "Обложка успешно обновлена",
-        //                 type: "success",
-        //                 isLoading: false,
-        //                 autoClose: 5000,
-        //                 hideProgressBar: true
-        //             });
-        //
-        //
-        //         } else {
-        //             toast.update(id, {
-        //                 render: "Сервер не смог обработать обложку",
-        //                 type: "error",
-        //                 isLoading: false,
-        //                 autoClose: 5000,
-        //                 hideProgressBar: true
-        //             });
-        //         }
-        //
-        //
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             loadImage: false
-        //         })
-        //         toast.update(id, {
-        //             render: error,
-        //             type: "error",
-        //             isLoading: false,
-        //             autoClose: 5000,
-        //             hideProgressBar: true
-        //         });
-        //
-        //     });
-        //
-        // console.log(file)
+        const id = toast.loading("Подождите, фотография обрабатывается")
+        const data = new FormData();
+
+        // console.log(this.state.imageRef)
+
+        const scaleX = this.state.imageRef.naturalWidth
+        const scaleY = this.state.imageRef.naturalHeight
+
+        let center_x = scaleX / 2
+        let center_y = scaleY / 2
+
+        const wrapper_cover_w = 725
+        const wrapper_cover_h = 200
+
+        const wrapper_cover_left_w = center_x - (wrapper_cover_w / 2)
+        const wrapper_cover_right_w = center_x + (wrapper_cover_w / 2)
+
+        const wrapper_cover_left_h = center_y - (wrapper_cover_h / 2)
+        const wrapper_cover_right_h = center_y + (wrapper_cover_h / 2)
+
+        const x0 = wrapper_cover_left_w
+        const x1 = wrapper_cover_right_w
+
+        const y0 = wrapper_cover_left_h
+        const y1 = wrapper_cover_right_h
+
+
+        data.append('data', this.state.file)
+        data.append('x', x0.toString())
+        data.append('y', y0.toString())
+        data.append('x_', x1)
+        data.append('y_', y1)
+
+
+        this.cancelCrop()
+        toast.update(id, {render: "Фотография отправлена на сервер", type: "default", isLoading: true});
+        fetch("/api/upload_image", {
+            method: "POST",
+            body: data
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                if (res.status.code === 0) {
+                    this.setState({
+                        coverUpload: res?.data[0].url_preview
+                    })
+
+                    toast.update(id, {
+                        render: "Фотография успешно обновлена",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+
+
+                } else {
+                    toast.update(id, {
+                        render: "Сервер не смог обработать фотографию",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+                }
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    loadImage: false
+                })
+                toast.update(id, {
+                    render: error,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 5000,
+                    hideProgressBar: true
+                });
+
+            });
     }
 
     makeUpload() {
@@ -878,49 +904,8 @@ class MainUsers extends Component {
                                         }
                                     </div>
                                 </div>
-                                :
-                                this.state.imageCropCover ?
-                                    <div className="pop-up">
-                                        <div className="center-view">
-                                            {
-                                                this.state.loadImage ?
-                                                    <div className="loader"/>
-                                                    :
-                                                    <div>
-                                                        <ReactCrop
-                                                            circularCrop={false}
-                                                            keepSelection={true}
-                                                            minWidth={300}
-                                                            minHeight={300}
-                                                            src={this.state.src_cover}
-                                                            crop={this.state.cropCover}
-                                                            ruleOfThirds
-                                                            onImageLoaded={this.onImageLoaded}
-                                                            onComplete={this.onCropComplete}
-                                                            onChange={this.onCropChange}
-                                                        />
-                                                        <div className="wrapper-bottom" style={{
-                                                            width: "100%",
-                                                            boxSizing: "border-box",
-                                                            padding: "20px 0"
-                                                        }}>
-                                                            <div className="wrapper-flex-start">
-                                                                <div className="button-default"
-                                                                     onClick={() => this.cancelCrop()}>Отмена
-                                                                </div>
-                                                            </div>
-                                                            <div className="wrapper-flex-end">
-                                                                <div className="button-default"
-                                                                     onClick={() => this.makeUpload()}>Сохранить
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            }
-                                        </div>
-                                    </div>
-                                    :
-                                    null
+                            :
+                                null
                         }
 
                         {
