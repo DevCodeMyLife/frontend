@@ -234,7 +234,7 @@ class Feed extends Component {
                 this.setState({
                     isLoaded: "access",
                     result: res.data.sort(function (x, y) {
-                        return x.look_count > y.look_count ? -1 : 1;
+                        return x.look_count > y.look_count ? 1 : -1;
                     })
                 });
 
