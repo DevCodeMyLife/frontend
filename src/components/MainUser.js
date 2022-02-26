@@ -925,7 +925,7 @@ class MainUsers extends Component {
                                                                                 this.state.coverUpload ?
                                                                                     <img src={this.state.coverUpload}
                                                                                          alt={store.auth.user.data.login}
-                                                                                         onClick={() => this.uploadClick()}
+                                                                                         onClick={() => this.uploadClickCover()}
                                                                                          style={{cursor: "pointer", maxWidth: "634px"}}/>
                                                                                 :
                                                                                         <>
