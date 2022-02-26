@@ -383,7 +383,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
-            cover: this.state.coverUpload,
+            cover_path: this.state.coverUpload,
             close: this.state.close
         }
 
