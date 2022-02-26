@@ -152,19 +152,8 @@ class Feed extends Component {
                     if (res.status.code === 0 && res.data != null) {
                         this.setState({
                             isLoaded: "access",
-                            result: res.data.sort(function (x, y) {
-                                return x.look_count > y.look_count ? -1 : 1;
-                            })
+                            result: res.data
                         });
-                        //.sort(function (x, y) {
-                        //                                 return x.count_like > y.count_like ? -1 : 1;
-                        //                             })
-
-                        // this.setState({
-                        //     result: res.data.sort(function (x, y) {
-                        //         return x.look_count > y.look_count ? -1 : 1;
-                        //     })
-                        // });
                     } else {
                         this.setState({
                             isLoaded: "access",
@@ -230,21 +219,10 @@ class Feed extends Component {
         })
             .then(response => response.json())
             .then(res => {
-
                 this.setState({
                     isLoaded: "access",
                     result: res.data
                 });
-
-                // for (data of res.data) {
-                //     console.log(this.state.likeType)
-                //     this.state.likeType[data.ID] = data.is_like !== ""
-                // }
-                // this.setState({
-                //     likeType:  this.state.likeType
-                // })
-
-
             })
             .catch(error => {
                 this.setState({
