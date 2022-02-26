@@ -218,7 +218,7 @@ class Feed extends Component {
             this.getPreferredColorScheme()
         });
 
-        fetch("api/feed", {
+        fetch("api/feed/top", {
             method: "GET",
         })
             .then(response => response.json())
