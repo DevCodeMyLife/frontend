@@ -291,6 +291,9 @@ class Feed extends Component {
     }
 
     handlerBlur = (event) => {
+        if (event.target.value.length !== 0){
+            return
+        }
 
         fetch("api/feed/top", {
             method: "GET",
