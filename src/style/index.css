@@ -1866,6 +1866,7 @@ link-user {
 
 .place-items {
   /*padding-bottom: 20px;*/
+  background: var(--white);
 }
 
 .wrapper-comments {
