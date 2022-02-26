@@ -675,9 +675,9 @@ class MainUsers extends Component {
         const y1 = wrapper_cover_right_h
 
 
-        data.append('data', this.state.file)
-        data.append('x', x0.toString())
-        data.append('y', y0.toString())
+        data.append('data', file)
+        data.append('x', x0)
+        data.append('y', y0)
         data.append('x_', x1)
         data.append('y_', y1)
 
