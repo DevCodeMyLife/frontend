@@ -656,6 +656,8 @@ class MainUsers extends Component {
         const scaleX = file.naturalWidth
         const scaleY = file.naturalHeight
 
+        console.log(scaleX, scaleY)
+
         let center_x = scaleX / 2
         let center_y = scaleY / 2
 
@@ -668,12 +670,13 @@ class MainUsers extends Component {
         const wrapper_cover_left_h = center_y - (wrapper_cover_h / 2)
         const wrapper_cover_right_h = center_y + (wrapper_cover_h / 2)
 
-        const x0 = wrapper_cover_left_w
-        const x1 = wrapper_cover_right_w
+        let x0 = wrapper_cover_left_w
+        let x1 = wrapper_cover_right_w
 
-        const y0 = wrapper_cover_left_h
-        const y1 = wrapper_cover_right_h
+        let y0_ = wrapper_cover_left_h
+        let y1 = wrapper_cover_right_h
 
+        console.log(x0, y0_, x1, y1)
 
         data.append('data', file)
         data.append('x', x0)
@@ -681,7 +684,7 @@ class MainUsers extends Component {
         data.append('x_', x1)
         data.append('y_', y1)
 
-        console.log(x0, y0, x1, y1)
+
 
 
         this.cancelCrop()
