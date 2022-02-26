@@ -640,6 +640,7 @@ class MainUsers extends Component {
             this.setState({
                 file: file,
                 src_cover: reader.result,
+                imageRef: reader.result,
                 imageCropCover: true
             });
         }
@@ -647,6 +648,8 @@ class MainUsers extends Component {
 
         const id = toast.loading("Подождите, фотография обрабатывается")
         const data = new FormData();
+
+
 
         // console.log(this.state.imageRef)
 
