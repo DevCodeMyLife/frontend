@@ -676,10 +676,10 @@ class MainUsers extends Component {
 
 
         data.append('data', file)
-        data.append('x', x0)
-        data.append('y', y0)
-        data.append('x_', x1)
-        data.append('y_', y1)
+        data.append('x', 100)
+        data.append('y', 100)
+        data.append('x_', 200)
+        data.append('y_', 200)
 
 
         this.cancelCrop()
