@@ -926,7 +926,7 @@ class MainUsers extends Component {
                                                                                     <img src={this.state.coverUpload}
                                                                                          alt={store.auth.user.data.login}
                                                                                          onClick={() => this.uploadClick()}
-                                                                                         style={{cursor: "pointer"}}/>
+                                                                                         style={{cursor: "pointer", maxWidth: "634px"}}/>
                                                                                 :
                                                                                         <>
                                                                                             <input type="file" name="file" id="upload_file_input_cover"
