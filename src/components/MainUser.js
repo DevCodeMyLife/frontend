@@ -1041,22 +1041,33 @@ class MainUsers extends Component {
                                                         }
                                                         {
                                                             this.state.showPreview ?
-                                                                <div className="preview-news preview_swap">
+                                                                <>
+                                                                    {
+                                                                        this.state.coverUpload ?
+                                                                            <img className="cover-feed" src={this.state.coverUpload}
+                                                                                 alt={store.auth.user.data.login}
+                                                                                 onClick={() => this.uploadClick()}
+                                                                                 style={{cursor: "pointer"}}/>
+                                                                            :
+                                                                            null
+                                                                    }
+                                                                    <div className="preview-news preview_swap">
 
-                                                                    <div className="feed-wrapper-item">
-                                                                        <div className="feed-item-value">
-                                                                            <div className="wrapper-data">
-                                                                                <ReactMarkdown className="value-post"
-                                                                                               remarkPlugins={[gfm]}
-                                                                                               components={this.components}>
-                                                                                    {textNews}
-                                                                                </ReactMarkdown>
+                                                                        <div className="feed-wrapper-item">
+                                                                            <div className="feed-item-value">
+                                                                                <div className="wrapper-data">
+                                                                                    <ReactMarkdown className="value-post"
+                                                                                                   remarkPlugins={[gfm]}
+                                                                                                   components={this.components}>
+                                                                                        {textNews}
+                                                                                    </ReactMarkdown>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 
-                                                                </div>
-                                                                :
+                                                                    </div>
+                                                                </>
+                                                            :
                                                                 null
                                                         }
 

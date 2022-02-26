@@ -1522,6 +1522,11 @@ p {
   margin-bottom: 20px;
 }
 
+.cover-feed {
+  max-width: 724px;
+  border-radius: 10px 10px 0 0;
+}
+
 .position-call {
   position: fixed;
   bottom: 10px;
