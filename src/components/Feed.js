@@ -361,7 +361,7 @@ class Feed extends Component {
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
                                     <div className="button-default-tag tags-item unselectable button-select" id="top"
-                                         action="all" onClick={this.handleClickTag}>
+                                         action="top" onClick={this.handleClickTag}>
                                         Популярные
                                     </div>
                                     <div className="button-default-tag tags-item unselectable" action="all"
