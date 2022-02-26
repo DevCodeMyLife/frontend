@@ -393,7 +393,7 @@ class Feed extends Component {
                                                 </div>
                                             </div>
                                             :
-                                            result.length === 0 ?
+                                            result.length === null ?
                                                 <div className="feed-wrapper">
                                                     <div className="not_news">
                                                         К сожалению показать нечего 🙁
