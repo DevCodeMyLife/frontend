@@ -859,6 +859,9 @@ class MainUsers extends Component {
                                                                 {
                                                                     this.state.clicked_new_post ?
                                                                         <div className="textarea-hide">
+                                                                            <div className="palace-upload-photo-liable">
+                                                                                Нажмите что бы добавить обложку
+                                                                            </div>
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
@@ -877,8 +880,7 @@ class MainUsers extends Component {
                                                                         </div>
 
                                                                         :
-                                                                        <div className="fake-textarea">Что у Вас
-                                                                            нового?</div>
+                                                                        <div className="fake-textarea">Что у Вас нового?</div>
                                                                 }
                                                             </div>
                                                         </div>

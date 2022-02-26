@@ -1512,6 +1512,14 @@ p {
   }
 }
 
+.palace-upload-photo-liable {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: dotted 5px var(--grey);
+}
+
 .position-call {
   position: fixed;
   bottom: 10px;
