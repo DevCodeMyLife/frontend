@@ -136,6 +136,10 @@ class App extends React.Component {
                                     }
                                 })
 
+                                store.dispatch({
+                                    type: "ACTION_UPDATE_NOTIFICATION_USER", value: toast
+                                })
+
                                 toast.info('Вашу заметку посмотрели.', {
                                     position: "bottom-right",
                                     autoClose: 5000,

@@ -149,7 +149,9 @@ class Feed extends Component {
                     if (res.status.code === 0 && res.data != null) {
                         this.setState({
                             isLoaded: "access",
-                            result: res.data
+                            result: res.data.sort(function (x, y) {
+                                return x.look_count > y.look_count ? -1 : 1;
+                            })
                         });
                         //.sort(function (x, y) {
                         //                                 return x.count_like > y.count_like ? -1 : 1;
@@ -181,7 +183,9 @@ class Feed extends Component {
                 .then(res => {
                     this.setState({
                         isLoaded: "access",
-                        result: res.data
+                        result: res.data.sort(function (x, y) {
+                        return x.date_time > y.date_time ? -1 : 1;
+                    })
                     });
                 })
                 .catch(error => {
@@ -218,7 +222,7 @@ class Feed extends Component {
             this.getPreferredColorScheme()
         });
 
-        fetch("api/feed", {
+        fetch("api/feed/top", {
             method: "GET",
         })
             .then(response => response.json())
@@ -226,7 +230,9 @@ class Feed extends Component {
 
                 this.setState({
                     isLoaded: "access",
-                    result: res.data
+                    result: res.data.sort(function (x, y) {
+                        return x.look_count > y.look_count ? -1 : 1;
+                    })
                 });
 
                 // for (data of res.data) {
@@ -356,11 +362,11 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} />
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select" id="all"
-                                         action="all" onClick={this.handleClickTag}>
+                                    <div className="button-default-tag tags-item unselectable button-select" id="top"
+                                         action="top" onClick={this.handleClickTag}>
                                         Популярные
                                     </div>
-                                    <div className="button-default-tag tags-item unselectable" action="top"
+                                    <div className="button-default-tag tags-item unselectable" action="all"
                                          onClick={this.handleClickTag}>
                                         Новые
                                     </div>
@@ -389,7 +395,7 @@ class Feed extends Component {
                                                 </div>
                                             </div>
                                             :
-                                            result.length === 0 ?
+                                            result.length === null ?
                                                 <div className="feed-wrapper">
                                                     <div className="not_news">
                                                         К сожалению показать нечего 🙁

@@ -13,7 +13,8 @@ import look_dark from "../icon/look_dark.png";
 import code from "../icon/code.png";
 import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
-import {toast} from "react-toastify";
+import {toast} from 'react-toastify';
+import error from "./Error";
 
 const gfm = require('remark-gfm')
 
@@ -517,11 +518,12 @@ class MainUsers extends Component {
         this.setState({
             clickCreateDialog: true
         })
+
         let data = {
             to_uid: Number(this.state.id)
         }
 
-        fetch("/api/create_chats", {
+        fetch("/api/chat", {
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -530,11 +532,29 @@ class MainUsers extends Component {
                 console.log(res)
                 if (res.status.code === 0) {
                     window.location.href = `/messages?cid=${res.data}`
+                }else{
+                    toast.error(res.status?.message + " - Попробуйте позже", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined
+                    });
                 }
 
             })
             .catch(error => {
-                console.log(error)
+                toast.error(error + " - Попробуйте позже", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                });
             });
 
     }

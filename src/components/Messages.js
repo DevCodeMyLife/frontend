@@ -12,6 +12,7 @@ import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import code from "../icon/code.png";
 import answer from "../icon/answer.png";
 import answer_dark from "../icon/answer_dark.png";
+import {toast} from "react-toastify";
 
 
 class Messages extends Component {
@@ -103,7 +104,7 @@ class Messages extends Component {
         if (event)
             window.history.pushState({urlPath: `/messages`}, "", `/messages`)
 
-        fetch("/api/messages", {
+        fetch("/api/chat", {
             method: "GET"
         })
             .then(response => response.json())
@@ -281,7 +282,7 @@ class Messages extends Component {
 
     updateState() {
         if (this.state.dialog) {
-            let path = `/api/messages/${this.state.cid}`
+            let path = `/api/message/${this.state.cid}`
 
             fetch(path, {
                 method: "GET"
@@ -335,7 +336,7 @@ class Messages extends Component {
     openDialog(cid) {
         const store = this.state.store.getState()
         let _this = this
-        let path = `/api/messages/${cid}`
+        let path = `/api/message/${cid}`
 
         window.history.pushState({urlPath: `/messages?cid=${cid}`}, "", `/messages?cid=${cid}`)
 
@@ -434,19 +435,26 @@ class Messages extends Component {
     }
 
     read(cid) {
-        // let pathMessages = `/api/messages/${cid}`
-        let pathReadMessages = `/api/read_messages/${cid}`
-
+        let pathReadMessages = `/api/message/read/${cid}`
 
         fetch(pathReadMessages, {
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify({})
         })
             .then(response => response.json())
-            .then(res => {
+            .then(_ => {
 
             })
             .catch(error => {
+                toast.error(error + " - Попробуйте позже", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                });
                 this.setState({
                     auth: false,
                     load: true
