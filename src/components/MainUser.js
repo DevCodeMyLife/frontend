@@ -1077,17 +1077,16 @@ class MainUsers extends Component {
                                         {
                                             mainFeed?.length > 0 ?
                                                 mainFeed?.map(data =>
-                                                    <div>
-                                                        {
-                                                            data.cover_path !== "" ?
-                                                                <img className="cover-feed" src={data.cover_path}
-                                                                     alt={data.title} />
-                                                            :
-                                                                null
-                                                        }
-                                                        <div key={data?.ID} className="feed-wrapper-item">
+                                                    <div key={data?.ID} className="feed-wrapper-item">
                                                             <Link style={{textDecoration: "none"}}
                                                                   href={`/post?uuid=${data?.ID}`}>
+                                                                {
+                                                                    data?.cover_path !== "" ?
+                                                                        <img className="cover-feed" src={data.cover_path}
+                                                                             alt={data.title} />
+                                                                        :
+                                                                        null
+                                                                }
                                                                 <div className="feed-item-value">
                                                                     <div key="asldk" className="wrapper-data">
                                                                         <Link href={`/user/${data?.uid}`}>
@@ -1285,8 +1284,6 @@ class MainUsers extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
                                                 )
                                                 :
                                                 Number(this.state.id) === store.auth.user.data.id ?
