@@ -640,7 +640,7 @@ class MainUsers extends Component {
             this.setState({
                 file: file,
                 src_cover: reader.result,
-                imageRef: reader.result,
+                imageRef: file,
                 imageCropCover: true
             });
         }
