@@ -53,7 +53,6 @@ class People extends Component {
 
         if (window.scrollY >= (scrollHeight - 100) - innerHeight) {
             if (!this.state.scrollDown) {
-
                 this.setState({
                     scrollDown: true
                 })
