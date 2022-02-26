@@ -225,7 +225,7 @@ class MainUsers extends Component {
         })
     }
 
-    rewriteFeed(uuid, value, title, close) {
+    rewriteFeed(uuid, value, title, close, cover) {
         this.setState({
             rewriteUUID: uuid,
             rewriteValue: value,
@@ -234,7 +234,8 @@ class MainUsers extends Component {
             clicked_new_post: true,
             show_textarea: true,
             close: close,
-            showPreview: true
+            showPreview: true,
+            coverUpload: cover
         })
     }
 
@@ -312,6 +313,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            cover_path: this.state.coverUpload,
             close: this.state.close
         }
 
@@ -1253,7 +1255,7 @@ class MainUsers extends Component {
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
                                                                             <div className="like" onClick={() => {
-                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close)
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path)
                                                                             }}>
                                                                                 <div className="like-text">
                                                                     <span className="like-count">
