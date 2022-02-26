@@ -923,7 +923,10 @@ class MainUsers extends Component {
 
                                                                             {
                                                                                 this.state.coverUpload ?
-                                                                                    <span>Обложка загружена</span>
+                                                                                    <img src={this.state.coverUpload}
+                                                                                         alt={store.auth.user.data.login}
+                                                                                         onClick={() => this.uploadClick()}
+                                                                                         style={{cursor: "pointer"}}/>
                                                                                 :
                                                                                         <>
                                                                                             <input type="file" name="file" id="upload_file_input_cover"
@@ -1040,15 +1043,6 @@ class MainUsers extends Component {
                                                         {
                                                             this.state.showPreview ?
                                                                 <>
-                                                                    {
-                                                                        this.state.coverUpload ?
-                                                                            <img className="cover-feed" src={this.state.coverUpload}
-                                                                                 alt={store.auth.user.data.login}
-                                                                                 onClick={() => this.uploadClick()}
-                                                                                 style={{cursor: "pointer"}}/>
-                                                                            :
-                                                                            null
-                                                                    }
                                                                     <div className="preview-news preview_swap">
 
                                                                         <div className="feed-wrapper-item">
