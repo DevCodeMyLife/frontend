@@ -681,7 +681,7 @@ class MainUsers extends Component {
         data.append('x_', x1)
         data.append('y_', y1)
 
-        console.log(data)
+        console.log(x0, y0, x1, y1)
 
 
         this.cancelCrop()
