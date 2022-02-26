@@ -494,7 +494,7 @@ class MainUsers extends Component {
 
     handleChangeTextarea = (event) => {
         if (event.target.value === "") {
-            this.setState({textNews: "Текст статьи"})
+            this.setState({textNews: "..."})
         } else {
             this.setState({textNews: event.target.value})
         }
