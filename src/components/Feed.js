@@ -291,6 +291,36 @@ class Feed extends Component {
     }
 
     handlerBlur = (event) => {
+
+        fetch("api/feed/top", {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(res => {
+
+                this.setState({
+                    isLoaded: "access",
+                    result: res.data.sort(function (x, y) {
+                        return x.look_count > y.look_count ? -1 : 1;
+                    })
+                });
+
+                // for (data of res.data) {
+                //     console.log(this.state.likeType)
+                //     this.state.likeType[data.ID] = data.is_like !== ""
+                // }
+                // this.setState({
+                //     likeType:  this.state.likeType
+                // })
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    isLoaded: "error",
+                    result: {}
+                });
+            });
         this.popular.current.classList.add('button-select')
         this.setState({
             isLoaded: "access"
