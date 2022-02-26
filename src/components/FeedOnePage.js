@@ -276,6 +276,13 @@ class FeedOnePage extends Component {
                                         {/*    О нас*/}
                                         {/*</div>*/}
                                         <div className="feed-item-value">
+                                            {
+                                                data?.cover_path !== "" ?
+                                                    <img className="cover-feed" src={data.cover_path}
+                                                         alt={data.title} />
+                                                    :
+                                                    null
+                                            }
                                             <div key="asldk" className="wrapper-data">
                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                     {
