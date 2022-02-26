@@ -149,7 +149,9 @@ class Feed extends Component {
                     if (res.status.code === 0 && res.data != null) {
                         this.setState({
                             isLoaded: "access",
-                            result: res.data
+                            result: res.data.sort(function (x, y) {
+                                return x.look_count > y.look_count ? -1 : 1;
+                            })
                         });
                         //.sort(function (x, y) {
                         //                                 return x.count_like > y.count_like ? -1 : 1;
@@ -226,7 +228,9 @@ class Feed extends Component {
 
                 this.setState({
                     isLoaded: "access",
-                    result: res.data
+                    result: res.data.sort(function (x, y) {
+                        return x.look_count > y.look_count ? -1 : 1;
+                    })
                 });
 
                 // for (data of res.data) {
