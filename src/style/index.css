@@ -538,6 +538,8 @@ code {
 .menu-nav-item {
   display: inline-block;
   text-decoration: underline;
+  font-size: 11px;
+  margin-right: 7px;
 }
 
 .button-default-tag:active {
