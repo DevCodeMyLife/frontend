@@ -243,6 +243,13 @@ class FeedOnePage extends Component {
                                 </div>
                                 {feed.map(data =>
                                     <div className="place-items" id="place_feed" uuid={data?.ID}>
+                                        {
+                                            data?.cover_path !== "" ?
+                                                <img className="cover-feed" src={data.cover_path}
+                                                     alt={data.title} />
+                                                :
+                                                null
+                                        }
                                         <JsonLd item={{
                                             "@context": "https://schema.org",
                                             "@type": "BreadcrumbList",
@@ -276,13 +283,6 @@ class FeedOnePage extends Component {
                                         {/*    О нас*/}
                                         {/*</div>*/}
                                         <div className="feed-item-value">
-                                            {
-                                                data?.cover_path !== "" ?
-                                                    <img className="cover-feed" src={data.cover_path}
-                                                         alt={data.title} />
-                                                    :
-                                                    null
-                                            }
                                             <div key="asldk" className="wrapper-data">
                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                     {
