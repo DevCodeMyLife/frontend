@@ -649,6 +649,8 @@ class MainUsers extends Component {
         const id = toast.loading("Подождите, фотография обрабатывается")
         const data = new FormData();
         data.append('data', file)
+        data.append('width', "275")
+        data.append('height', "200")
 
         this.cancelCrop()
         toast.update(id, {render: "Фотография отправлена на сервер", type: "default", isLoading: true});
