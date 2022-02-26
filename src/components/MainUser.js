@@ -302,7 +302,8 @@ class MainUsers extends Component {
             rewriteValue: null,
             showPreview: false,
             rewriteMode: false,
-            textNews: "..."
+            textNews: "...",
+            coverUpload: null
         })
     }
 
