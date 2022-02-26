@@ -888,7 +888,7 @@ class MainUsers extends Component {
                                                     :
                                                     <div>
                                                         <ReactCrop
-                                                            circularCrop={true}
+                                                            circularCrop={false}
                                                             keepSelection={true}
                                                             minWidth={300}
                                                             minHeight={300}
