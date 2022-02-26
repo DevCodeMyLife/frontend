@@ -1517,7 +1517,8 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: dotted 5px var(--grey);
+  border: dotted 7px var(--grey);
+  cursor: pointer;
 }
 
 .position-call {
