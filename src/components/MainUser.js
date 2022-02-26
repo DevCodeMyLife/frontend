@@ -634,6 +634,8 @@ class MainUsers extends Component {
         reader.readAsDataURL(file)
 
         const data = new FormData();
+        const id = toast.loading("Подождите, обложка обрабатывается")
+
 
         toast.update(id, {render: "Обложка отправлена на сервер", type: "default", isLoading: true});
 
