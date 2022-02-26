@@ -331,7 +331,8 @@ class MainUsers extends Component {
             body: JSON.stringify({
                 value: data.value,
                 close: data.close,
-                title: data.title
+                title: data.title,
+                cover_path: data.cover_path
             })
         })
             .then(response => response.json())
