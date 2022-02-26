@@ -922,11 +922,8 @@ class MainUsers extends Component {
 
                                                                             {
                                                                                 this.state.coverUpload ?
-                                                                                    <img src={this.state.coverUpload}
-                                                                                         alt={store.auth.user.data.login}
-                                                                                         onClick={() => this.uploadClick()}
-                                                                                         style={{cursor: "pointer"}}/>
-                                                                                    :
+                                                                                    <span>Обложка загружена</span>
+                                                                                :
                                                                                         <>
                                                                                             <input type="file" name="file" id="upload_file_input_cover"
                                                                                                    onChange={(e) => this.uploadCoverAction(e)}
