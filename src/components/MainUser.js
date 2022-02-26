@@ -62,7 +62,8 @@ class MainUsers extends Component {
             idPage: this.props.id,
             loadImage: false,
             clickCreateDialog: false,
-            isCall: false
+            isCall: false,
+            coverUpload: null
         }
 
 
@@ -597,6 +598,11 @@ class MainUsers extends Component {
         elem.click()
     }
 
+    uploadClickCover() {
+        let elem = document.getElementById("upload_file_input_cover")
+        elem.click()
+    }
+
     uploadPhotoAction = (event) => {
         event.preventDefault();
 
@@ -612,34 +618,23 @@ class MainUsers extends Component {
         reader.readAsDataURL(file)
 
         console.log(file)
+    }
 
-        // this.setState({
-        //     src: reader.result,
-        //     showCrop: true
-        // })
-        //
-        // event.preventDefault();
-        // const data = new FormData();
-        //
-        // data.append('data', event.target.files[0]);
-        //
-        // fetch("/api/upload_main_photo", {
-        //     method: "POST",
-        //     body: data
-        // })
-        //     .then(response => response.json())
-        //     .then(res => {
-        //         console.log(res)
-        //
-        //         this.setState({
-        //             imagePreviewUrl: res?.data[0].url_preview
-        //         })
-        //
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
+    uploadCoverAction = (event) => {
+        event.preventDefault();
 
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                src: reader.result,
+                coverUpload: reader.result
+            });
+        }
+        reader.readAsDataURL(file)
+
+        console.log(file)
     }
 
     makeUpload() {
@@ -859,9 +854,25 @@ class MainUsers extends Component {
                                                                 {
                                                                     this.state.clicked_new_post ?
                                                                         <div className="textarea-hide">
-                                                                            <div className="palace-upload-photo-liable">
-                                                                                Нажмите что бы добавить обложку
-                                                                            </div>
+
+                                                                            {
+                                                                                this.state.coverUpload ?
+                                                                                    <img src={this.state.coverUpload}
+                                                                                         alt={store.auth.user.data.login}
+                                                                                         onClick={() => this.uploadClick()}
+                                                                                         style={{cursor: "pointer"}}/>
+                                                                                    :
+                                                                                        <>
+                                                                                            <input type="file" name="file" id="upload_file_input_cover"
+                                                                                                   onChange={(e) => this.uploadCoverAction(e)}
+                                                                                                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>
+                                                                                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>
+                                                                                                Нажмите что бы добавить обложку
+                                                                                            </div>
+                                                                                        </>
+
+                                                                            }
+
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
