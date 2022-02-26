@@ -110,7 +110,7 @@ class App extends React.Component {
 
                     let this_ = this
                     centrifuge.subscribe(`${res?.data[0].id}`, function (message) {
-                        console.log("[ Event pushStorage ]")
+                        // console.log("[ Event pushStorage ]")
 
                         const state = store.getState()
 
