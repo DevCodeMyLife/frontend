@@ -183,7 +183,9 @@ class Feed extends Component {
                 .then(res => {
                     this.setState({
                         isLoaded: "access",
-                        result: res.data
+                        result: res.data.sort(function (x, y) {
+                        return x.date_time > y.date_time ? -1 : 1;
+                    })
                     });
                 })
                 .catch(error => {
