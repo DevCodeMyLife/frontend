@@ -445,6 +445,13 @@ class Feed extends Component {
                                                         <div key={data?.ID} className="feed-wrapper-item">
                                                             <Link style={{textDecoration: "none"}}
                                                                   href={`/post?uuid=${data?.ID}`}>
+                                                                {
+                                                                    data?.cover_path !== "" ?
+                                                                        <img className="cover-feed" src={data.cover_path}
+                                                                             alt={data.title} />
+                                                                        :
+                                                                        null
+                                                                }
                                                                 <div className="feed-item-value">
                                                                     <div key="asldk" className="wrapper-data">
                                                                         <Link href={`/user/${data?.uid}`}>
