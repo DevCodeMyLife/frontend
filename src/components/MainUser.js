@@ -629,10 +629,63 @@ class MainUsers extends Component {
             this.setState({
                 file: file,
                 src: reader.result,
-                coverUpload: reader.result
             });
         }
         reader.readAsDataURL(file)
+
+        const data = new FormData();
+
+        toast.update(id, {render: "Обложка отправлена на сервер", type: "default", isLoading: true});
+
+        data.append('data', file);
+
+
+        fetch("/api/upload_image", {
+            method: "POST",
+            body: data
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                if (res.status.code === 0) {
+                    this.setState({
+                        coverUpload: res?.data[0].url_preview
+                    })
+
+                    toast.update(id, {
+                        render: "Обложка успешно обновлена",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+
+
+                } else {
+                    toast.update(id, {
+                        render: "Сервер не смог обработать обложку",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+                }
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    loadImage: false
+                })
+                toast.update(id, {
+                    render: error,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 5000,
+                    hideProgressBar: true
+                });
+
+            });
 
         console.log(file)
     }
