@@ -656,7 +656,8 @@ class MainUsers extends Component {
         const scaleX = file.naturalWidth
         const scaleY = file.naturalHeight
 
-        console.log(event.target.files)
+        console.log(scaleX, scaleY)
+
 
         let center_x = scaleX / 2
         let center_y = scaleY / 2
