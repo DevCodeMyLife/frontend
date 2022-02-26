@@ -637,55 +637,18 @@ class MainUsers extends Component {
         let reader = new FileReader();
         let file = event.target.files[0];
         reader.onloadend = () => {
-            this.setState({
-                file: file,
-                src_cover: reader.result,
-                imageRef: file,
-                imageCropCover: true
-            });
+            // this.setState({
+            //     file: file,
+            //     src_cover: reader.result,
+            //     imageRef: file,
+            //     imageCropCover: true
+            // });
         }
         reader.readAsDataURL(file)
 
         const id = toast.loading("Подождите, фотография обрабатывается")
         const data = new FormData();
-
-
-
-        // console.log(this.state.imageRef)
-
-        const wrapper_cover_w = 725
-        const wrapper_cover_h = 200
-
-        let scaleX = file.width
-        let scaleY = file.height
-
-        console.log(scaleX, scaleY)
-
-        let center_x = scaleX / 2
-        let center_y = scaleY / 2
-
-        let wrapper_cover_left_w = center_x - (wrapper_cover_w / 2)
-        let wrapper_cover_right_w = center_x + (wrapper_cover_w / 2)
-
-        let wrapper_cover_left_h = center_y - (wrapper_cover_h / 2)
-        let wrapper_cover_right_h = center_y + (wrapper_cover_h / 2)
-
-        let x0 = wrapper_cover_left_w
-        let x1 = wrapper_cover_right_w
-
-        let y0_ = wrapper_cover_left_h
-        let y1 = wrapper_cover_right_h
-
-        console.log(x0, y0_, x1, y1)
-
         data.append('data', file)
-        data.append('x', x0)
-        data.append('y', y0)
-        data.append('x_', x1)
-        data.append('y_', y1)
-
-
-
 
         this.cancelCrop()
         toast.update(id, {render: "Фотография отправлена на сервер", type: "default", isLoading: true});
