@@ -15,6 +15,7 @@ import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
 import {toast} from 'react-toastify';
 import error from "./Error";
+import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
 
@@ -56,13 +57,24 @@ class MainUsers extends Component {
                 height: 300,
                 aspect: 300 / 300
             },
+            cropCover: {
+                unit: "px",
+                x: 0,
+                y: 0,
+                width: 735,
+                height: 200,
+                aspect: 735 / 200
+            },
             cropImage: null,
             showCrop: false,
             imageRef: null,
             idPage: this.props.id,
             loadImage: false,
             clickCreateDialog: false,
-            isCall: false
+            isCall: false,
+            coverUpload: null,
+            src_cover: null,
+            imageCropCover: false
         }
 
 
@@ -213,7 +225,7 @@ class MainUsers extends Component {
         })
     }
 
-    rewriteFeed(uuid, value, title, close) {
+    rewriteFeed(uuid, value, title, close, cover) {
         this.setState({
             rewriteUUID: uuid,
             rewriteValue: value,
@@ -222,7 +234,8 @@ class MainUsers extends Component {
             clicked_new_post: true,
             show_textarea: true,
             close: close,
-            showPreview: true
+            showPreview: true,
+            coverUpload: cover
         })
     }
 
@@ -290,7 +303,8 @@ class MainUsers extends Component {
             rewriteValue: null,
             showPreview: false,
             rewriteMode: false,
-            textNews: "..."
+            textNews: "...",
+            coverUpload: null
         })
     }
 
@@ -299,6 +313,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            cover_path: this.state.coverUpload,
             close: this.state.close
         }
 
@@ -316,7 +331,8 @@ class MainUsers extends Component {
             body: JSON.stringify({
                 value: data.value,
                 close: data.close,
-                title: data.title
+                title: data.title,
+                cover_path: data.cover_path
             })
         })
             .then(response => response.json())
@@ -371,6 +387,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            cover_path: this.state.coverUpload,
             close: this.state.close
         }
 
@@ -597,6 +614,11 @@ class MainUsers extends Component {
         elem.click()
     }
 
+    uploadClickCover() {
+        let elem = document.getElementById("upload_file_input_cover")
+        elem.click()
+    }
+
     uploadPhotoAction = (event) => {
         event.preventDefault();
 
@@ -612,34 +634,77 @@ class MainUsers extends Component {
         reader.readAsDataURL(file)
 
         console.log(file)
+    }
 
-        // this.setState({
-        //     src: reader.result,
-        //     showCrop: true
-        // })
-        //
-        // event.preventDefault();
-        // const data = new FormData();
-        //
-        // data.append('data', event.target.files[0]);
-        //
-        // fetch("/api/upload_main_photo", {
-        //     method: "POST",
-        //     body: data
-        // })
-        //     .then(response => response.json())
-        //     .then(res => {
-        //         console.log(res)
-        //
-        //         this.setState({
-        //             imagePreviewUrl: res?.data[0].url_preview
-        //         })
-        //
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
+    uploadCoverAction = (event) => {
+        event.preventDefault();
 
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        reader.onloadend = () => {
+            // this.setState({
+            //     file: file,
+            //     src_cover: reader.result,
+            //     imageRef: file,
+            //     imageCropCover: true
+            // });
+        }
+        reader.readAsDataURL(file)
+
+        const id = toast.loading("Подождите, фотография обрабатывается")
+        const data = new FormData();
+        data.append('data', file)
+        data.append('width', "1000")
+        data.append('height', "420")
+
+        this.cancelCrop()
+        toast.update(id, {render: "Фотография отправлена на сервер", type: "default", isLoading: true});
+        fetch("/api/upload_image", {
+            method: "POST",
+            body: data
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                if (res.status.code === 0) {
+                    this.setState({
+                        coverUpload: res?.data[0].url_preview
+                    })
+
+                    toast.update(id, {
+                        render: "Фотография успешно обновлена",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+
+
+                } else {
+                    toast.update(id, {
+                        render: "Сервер не смог обработать фотографию",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+                }
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    loadImage: false
+                })
+                toast.update(id, {
+                    render: error,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 5000,
+                    hideProgressBar: true
+                });
+
+            });
     }
 
     makeUpload() {
@@ -817,7 +882,7 @@ class MainUsers extends Component {
                                         }
                                     </div>
                                 </div>
-                                :
+                            :
                                 null
                         }
 
@@ -859,6 +924,24 @@ class MainUsers extends Component {
                                                                 {
                                                                     this.state.clicked_new_post ?
                                                                         <div className="textarea-hide">
+                                                                            <input type="file" name="file" id="upload_file_input_cover"
+                                                                                   onChange={(e) => this.uploadCoverAction(e)}
+                                                                                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>
+                                                                            {
+                                                                                this.state.coverUpload ?
+                                                                                    <img src={this.state.coverUpload}
+                                                                                         alt={store.auth.user.data.login}
+                                                                                         onClick={() => this.uploadClickCover()}
+                                                                                         style={{cursor: "pointer", maxWidth: "634px"}}/>
+                                                                                :
+                                                                                        <>
+                                                                                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>
+                                                                                                Нажмите что бы добавить обложку
+                                                                                            </div>
+                                                                                        </>
+
+                                                                            }
+
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
@@ -877,8 +960,7 @@ class MainUsers extends Component {
                                                                         </div>
 
                                                                         :
-                                                                        <div className="fake-textarea">Что у Вас
-                                                                            нового?</div>
+                                                                        <div className="fake-textarea">Что у Вас нового?</div>
                                                                 }
                                                             </div>
                                                         </div>
@@ -963,22 +1045,24 @@ class MainUsers extends Component {
                                                         }
                                                         {
                                                             this.state.showPreview ?
-                                                                <div className="preview-news preview_swap">
+                                                                <>
+                                                                    <div className="preview-news preview_swap">
 
-                                                                    <div className="feed-wrapper-item">
-                                                                        <div className="feed-item-value">
-                                                                            <div className="wrapper-data">
-                                                                                <ReactMarkdown className="value-post"
-                                                                                               remarkPlugins={[gfm]}
-                                                                                               components={this.components}>
-                                                                                    {textNews}
-                                                                                </ReactMarkdown>
+                                                                        <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
+                                                                            <div className="feed-item-value">
+                                                                                <div className="wrapper-data">
+                                                                                    <ReactMarkdown className="value-post"
+                                                                                                   remarkPlugins={[gfm]}
+                                                                                                   components={this.components}>
+                                                                                        {textNews}
+                                                                                    </ReactMarkdown>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 
-                                                                </div>
-                                                                :
+                                                                    </div>
+                                                                </>
+                                                            :
                                                                 null
                                                         }
 
@@ -991,205 +1075,212 @@ class MainUsers extends Component {
                                             mainFeed?.length > 0 ?
                                                 mainFeed?.map(data =>
                                                     <div key={data?.ID} className="feed-wrapper-item">
-                                                        <Link style={{textDecoration: "none"}}
-                                                              href={`/post?uuid=${data?.ID}`}>
-                                                            <div className="feed-item-value">
-                                                                <div key="asldk" className="wrapper-data">
-                                                                    <Link href={`/user/${data?.uid}`}>
-                                                                        <div key="aksdlkasd" className="photo-wrapper">
-                                                                            {
-                                                                                store.auth.user.data.id === Number(this.state.id) ?
-                                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                                                                        null
+                                                            <Link style={{textDecoration: "none"}}
+                                                                  href={`/post?uuid=${data?.ID}`}>
+                                                                {
+                                                                    data?.cover_path !== "" ?
+                                                                        <img className="cover-feed" src={data.cover_path}
+                                                                             alt={data.title} />
+                                                                        :
+                                                                        null
+                                                                }
+                                                                <div className="feed-item-value">
+                                                                    <div key="asldk" className="wrapper-data">
+                                                                        <Link href={`/user/${data?.uid}`}>
+                                                                            <div key="aksdlkasd" className="photo-wrapper">
+                                                                                {
+                                                                                    store.auth.user.data.id === Number(this.state.id) ?
+                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                                                            null
+                                                                                            :
+                                                                                            <div className="online_user"/>
                                                                                         :
-                                                                                        <div className="online_user"/>
-                                                                                    :
-                                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
-                                                                                        null
-                                                                                        :
-                                                                                        <div className="online_user"/>
-                                                                            }
+                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                                                                            null
+                                                                                            :
+                                                                                            <div className="online_user"/>
+                                                                                }
 
-                                                                            <img key="asdmmmmasd" src={data?.photo}
-                                                                                 alt={data?.user}/>
+                                                                                <img key="asdmmmmasd" src={data?.photo}
+                                                                                     alt={data?.user}/>
 
-                                                                        </div>
-                                                                    </Link>
-                                                                    <div className="value-post">
-                                                                        <div className="feed-item-title">
-                                                                            <Link href={`/user/${data?.uid}`}>
-                                                                                <div className="link-user">
-                                                                                    {data?.user}
-                                                                                </div>
-                                                                            </Link>
-                                                                            <div className="feed-item-datetime">
-                                                                                {this.unixToDateTime(data?.date_time)}
                                                                             </div>
+                                                                        </Link>
+                                                                        <div className="value-post">
+                                                                            <div className="feed-item-title">
+                                                                                <Link href={`/user/${data?.uid}`}>
+                                                                                    <div className="link-user">
+                                                                                        {data?.user}
+                                                                                    </div>
+                                                                                </Link>
+                                                                                <div className="feed-item-datetime">
+                                                                                    {this.unixToDateTime(data?.date_time)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {
+                                                                            Number(this.state.id) === store.auth.user.data.id ?
+                                                                                <div
+                                                                                    className="button-default-icon-disable hide-border">
+                                                                                    {
+                                                                                        data?.close ?
+                                                                                            <svg className="svg-close-view"
+                                                                                                 fill="#000000"
+                                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                                 viewBox="0 0 50 50"
+                                                                                                 width="50px" height="50px">
+                                                                                                <path fill="none"
+                                                                                                      className="svg-close"
+                                                                                                      stroke="#000000"
+                                                                                                      strokeLinecap="round"
+                                                                                                      strokeMiterlimit="10"
+                                                                                                      strokeWidth="2"
+                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                                                                <path
+                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                            </svg>
+                                                                                            :
+                                                                                            <svg className="svg-close-view"
+                                                                                                 fill="#000000"
+                                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                                 viewBox="0 0 50 50"
+                                                                                                 width="50px" height="50px">
+                                                                                                <path fill="none"
+                                                                                                      className="svg-close"
+                                                                                                      stroke="#000000"
+                                                                                                      strokeLinecap="round"
+                                                                                                      strokeMiterlimit="10"
+                                                                                                      strokeWidth="2"
+                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                                                                <path
+                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                            </svg>
+                                                                                    }
+
+                                                                                </div>
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                    </div>
+                                                                    <div key="asldk" className="wrapper-data">
+                                                                        <div className="title-feed">
+                                                                            {data?.title}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </Link>
+                                                            <div className="wrapper-bottom">
+                                                                {/*/!*<div className="wrapper-flex-start">*!/*/}
+                                                                {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
+                                                                {/*        <div className="button-default">Подробнее</div>*/}
+                                                                {/*    </Link>*/}
+                                                                {/*    {*/}
+                                                                {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
+                                                                {/*            <div className="button-default"*/}
+                                                                {/*                 onClick={() => {*/}
+                                                                {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
+                                                                {/*                 }}*/}
+                                                                {/*            >*/}
+                                                                {/*                Изменить*/}
+                                                                {/*            </div>*/}
+
+                                                                {/*            :*/}
+                                                                {/*            null*/}
+                                                                {/*    }*/}
+                                                                {/*</div>*/}
+                                                                {/*<div className="like_wrapper wrapper-flex-end">*/}
+                                                                {/*    <div className="like">*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*            {*/}
+                                                                {/*                this.state.isDark === "light" ?*/}
+                                                                {/*                    <img src={look}  alt="like"/>*/}
+                                                                {/*                    :*/}
+                                                                {/*                    <img src={look_dark}  alt="like"/>*/}
+                                                                {/*            }*/}
+                                                                {/*        </div>*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*            <span className="like-count">*/}
+                                                                {/*                {data?.look_count}*/}
+                                                                {/*            </span>*/}
+                                                                {/*        </div>*/}
+                                                                {/*    </div>*/}
+                                                                {/*    <div className="like">*/}
+
+                                                                {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
+                                                                {/*            {*/}
+                                                                {/*                this.state.isDark === "light" ?*/}
+                                                                {/*                    <img src={like}  alt="like"/>*/}
+                                                                {/*                    :*/}
+                                                                {/*                    <img src={like_dark}  alt="like"/>*/}
+                                                                {/*            }*/}
+                                                                {/*        </div>*/}
+                                                                {/*        <div className="like-item">*/}
+                                                                {/*          <span className="like-count" id={data?.ID}>*/}
+                                                                {/*              {data?.count_like}*/}
+                                                                {/*          </span>*/}
+                                                                {/*        </div>*/}
+                                                                {/*    </div>*/}
+                                                                {/*</div>*/}
+                                                                <div className="like_wrapper wrapper-flex-start">
+                                                                    <div className="like"
+                                                                         onClick={() => this.like(data?.ID)}>
+                                                                        <div className="like-item">
+                                                                            {
+                                                                                this.state.isDark === "light" ?
+                                                                                    <img src={like} alt="like"/>
+                                                                                    :
+                                                                                    <img src={like_dark} alt="like"/>
+                                                                            }
+                                                                        </div>
+                                                                        <div className="like-text">
+                                                            <span className="like-count" id={data?.ID}>
+                                                                {data?.count_like}
+                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="like">
+                                                                        <div className="like-item">
+                                                                            {
+                                                                                this.state.isDark === "light" ?
+                                                                                    <img src={look} alt="like"/>
+                                                                                    :
+                                                                                    <img src={look_dark} alt="like"/>
+                                                                            }
+                                                                        </div>
+                                                                        <div className="like-text">
+                                                            <span className="like-count">
+                                                                {data?.look_count}
+                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
-                                                                            <div
-                                                                                className="button-default-icon-disable hide-border">
-                                                                                {
-                                                                                    data?.close ?
-                                                                                        <svg className="svg-close-view"
-                                                                                             fill="#000000"
-                                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                                             viewBox="0 0 50 50"
-                                                                                             width="50px" height="50px">
-                                                                                            <path fill="none"
-                                                                                                  className="svg-close"
-                                                                                                  stroke="#000000"
-                                                                                                  strokeLinecap="round"
-                                                                                                  strokeMiterlimit="10"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
-                                                                                            <path
-                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                        </svg>
-                                                                                        :
-                                                                                        <svg className="svg-close-view"
-                                                                                             fill="#000000"
-                                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                                             viewBox="0 0 50 50"
-                                                                                             width="50px" height="50px">
-                                                                                            <path fill="none"
-                                                                                                  className="svg-close"
-                                                                                                  stroke="#000000"
-                                                                                                  strokeLinecap="round"
-                                                                                                  strokeMiterlimit="10"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
-                                                                                            <path
-                                                                                                d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                        </svg>
-                                                                                }
+                                                                            <div className="like" onClick={() => {
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path)
+                                                                            }}>
+                                                                                <div className="like-text">
+                                                                    <span className="like-count">
+                                                                        Изменить
+                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            :
+                                                                            null
+                                                                    }
 
+                                                                </div>
+                                                                <div className="like_wrapper wrapper-flex-end">
+                                                                    {
+                                                                        data?.tag ?
+                                                                            <div className="tags-type">
+                                                                                #{data?.tag}
                                                                             </div>
                                                                             :
                                                                             null
                                                                     }
                                                                 </div>
-                                                                <div key="asldk" className="wrapper-data">
-                                                                    <div className="title-feed">
-                                                                        {data?.title}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Link>
-                                                        <div className="wrapper-bottom">
-                                                            {/*/!*<div className="wrapper-flex-start">*!/*/}
-                                                            {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
-                                                            {/*        <div className="button-default">Подробнее</div>*/}
-                                                            {/*    </Link>*/}
-                                                            {/*    {*/}
-                                                            {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
-                                                            {/*            <div className="button-default"*/}
-                                                            {/*                 onClick={() => {*/}
-                                                            {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
-                                                            {/*                 }}*/}
-                                                            {/*            >*/}
-                                                            {/*                Изменить*/}
-                                                            {/*            </div>*/}
-
-                                                            {/*            :*/}
-                                                            {/*            null*/}
-                                                            {/*    }*/}
-                                                            {/*</div>*/}
-                                                            {/*<div className="like_wrapper wrapper-flex-end">*/}
-                                                            {/*    <div className="like">*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*            {*/}
-                                                            {/*                this.state.isDark === "light" ?*/}
-                                                            {/*                    <img src={look}  alt="like"/>*/}
-                                                            {/*                    :*/}
-                                                            {/*                    <img src={look_dark}  alt="like"/>*/}
-                                                            {/*            }*/}
-                                                            {/*        </div>*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*            <span className="like-count">*/}
-                                                            {/*                {data?.look_count}*/}
-                                                            {/*            </span>*/}
-                                                            {/*        </div>*/}
-                                                            {/*    </div>*/}
-                                                            {/*    <div className="like">*/}
-
-                                                            {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
-                                                            {/*            {*/}
-                                                            {/*                this.state.isDark === "light" ?*/}
-                                                            {/*                    <img src={like}  alt="like"/>*/}
-                                                            {/*                    :*/}
-                                                            {/*                    <img src={like_dark}  alt="like"/>*/}
-                                                            {/*            }*/}
-                                                            {/*        </div>*/}
-                                                            {/*        <div className="like-item">*/}
-                                                            {/*          <span className="like-count" id={data?.ID}>*/}
-                                                            {/*              {data?.count_like}*/}
-                                                            {/*          </span>*/}
-                                                            {/*        </div>*/}
-                                                            {/*    </div>*/}
-                                                            {/*</div>*/}
-                                                            <div className="like_wrapper wrapper-flex-start">
-                                                                <div className="like"
-                                                                     onClick={() => this.like(data?.ID)}>
-                                                                    <div className="like-item">
-                                                                        {
-                                                                            this.state.isDark === "light" ?
-                                                                                <img src={like} alt="like"/>
-                                                                                :
-                                                                                <img src={like_dark} alt="like"/>
-                                                                        }
-                                                                    </div>
-                                                                    <div className="like-text">
-                                                            <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like}
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="like">
-                                                                    <div className="like-item">
-                                                                        {
-                                                                            this.state.isDark === "light" ?
-                                                                                <img src={look} alt="like"/>
-                                                                                :
-                                                                                <img src={look_dark} alt="like"/>
-                                                                        }
-                                                                    </div>
-                                                                    <div className="like-text">
-                                                            <span className="like-count">
-                                                                {data?.look_count}
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                                {
-                                                                    Number(this.state.id) === store.auth.user.data.id ?
-                                                                        <div className="like" onClick={() => {
-                                                                            this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close)
-                                                                        }}>
-                                                                            <div className="like-text">
-                                                                    <span className="like-count">
-                                                                        Изменить
-                                                                    </span>
-                                                                            </div>
-                                                                        </div>
-                                                                        :
-                                                                        null
-                                                                }
-
-                                                            </div>
-                                                            <div className="like_wrapper wrapper-flex-end">
-                                                                {
-                                                                    data?.tag ?
-                                                                        <div className="tags-type">
-                                                                            #{data?.tag}
-                                                                        </div>
-                                                                        :
-                                                                        null
-                                                                }
                                                             </div>
                                                         </div>
-                                                    </div>
                                                 )
                                                 :
                                                 Number(this.state.id) === store.auth.user.data.id ?

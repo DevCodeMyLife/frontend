@@ -33,7 +33,10 @@ class Feed extends Component {
         this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
         })
+
     }
+
+    popular = React.createRef()
 
     getPreferredColorScheme = () => {
         if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -288,6 +291,40 @@ class Feed extends Component {
     }
 
     handlerBlur = (event) => {
+        if (event.target.value.length !== 0){
+            return
+        }
+
+        fetch("api/feed/top", {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(res => {
+
+                this.setState({
+                    isLoaded: "access",
+                    result: res.data.sort(function (x, y) {
+                        return x.look_count > y.look_count ? -1 : 1;
+                    })
+                });
+
+                // for (data of res.data) {
+                //     console.log(this.state.likeType)
+                //     this.state.likeType[data.ID] = data.is_like !== ""
+                // }
+                // this.setState({
+                //     likeType:  this.state.likeType
+                // })
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    isLoaded: "error",
+                    result: {}
+                });
+            });
+        this.popular.current.classList.add('button-select')
         this.setState({
             isLoaded: "access"
         })
@@ -359,11 +396,11 @@ class Feed extends Component {
                             <div className="wrapper-search wrapper-inline-block unselectable">
                                 <div>
                                     <input placeholder="Например имя автора" onKeyPress={this.handleKeyPress}
-                                           onFocus={this.handlerFocus} />
+                                           onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
                                     <div className="button-default-tag tags-item unselectable button-select" id="top"
-                                         action="top" onClick={this.handleClickTag}>
+                                         action="top" onClick={this.handleClickTag} ref={this.popular}>
                                         Популярные
                                     </div>
                                     <div className="button-default-tag tags-item unselectable" action="all"
@@ -408,6 +445,13 @@ class Feed extends Component {
                                                         <div key={data?.ID} className="feed-wrapper-item">
                                                             <Link style={{textDecoration: "none"}}
                                                                   href={`/post?uuid=${data?.ID}`}>
+                                                                {
+                                                                    data?.cover_path !== "" ?
+                                                                        <img className="cover-feed" src={data.cover_path}
+                                                                             alt={data.title} />
+                                                                        :
+                                                                        null
+                                                                }
                                                                 <div className="feed-item-value">
                                                                     <div key="asldk" className="wrapper-data">
                                                                         <Link href={`/user/${data?.uid}`}>
