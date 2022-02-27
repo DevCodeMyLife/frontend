@@ -313,7 +313,7 @@ class FeedOnePage extends Component {
                                                 </div>
                                             </div>
                                             <div className="title-feed">
-                                                {data?.title}
+                                                <h1>{data?.title}</h1>
                                             </div>
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
