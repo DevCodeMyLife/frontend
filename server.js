@@ -5,8 +5,8 @@ const resolve = require('path').resolve;
 
 app.use(serveStatic(resolve('./build')));
 app.get('/', (req, res) => res.sendFile(resolve('./build/index.html')))
-app.get('/feeds', (req, res) => res.sendFile(resolve('./build/feeds.html')))
-app.get('/post', (req, res) => res.sendFile(resolve('./build/feeds.html')))
+app.get('/feeds*', (req, res) => res.sendFile(resolve('./build/feeds.html')))
+app.get('/post*', (req, res) => res.sendFile(resolve('./build/post.html')))
 
 
 // app.get('/about', (req, res) => res.sendFile(resolve('./build/about.html')));
