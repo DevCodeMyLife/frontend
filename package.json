@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "centrifuge": "^2.7.6",
     "chroma-js": "^2.1.2",
+    "express": "^4.17.3",
     "jssha": "^3.2.0",
     "navi": "^0.14.0",
     "prerender-spa-plugin": "^3.4.0",
@@ -28,18 +29,21 @@
     "react-navi-helmet-async": "^0.14.4",
     "react-scripts": "^4.0.3",
     "react-select": "^4.3.1",
+    "react-spa-prerender": "^1.0.14",
     "react-syntax-highlighter": "^15.4.3",
     "react-textarea-autosize": "^8.3.3",
     "redux": "^4.1.1",
     "remark-gfm": "^1.0.0",
+    "serve-static": "^1.14.2",
     "use-sound": "^4.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postbuild": "react-spa-prerender"
   },
   "browserslist": {
     "production": [

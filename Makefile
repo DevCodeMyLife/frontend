@@ -2,6 +2,7 @@
 main:
 	yarn install
 	yarn run build
+	yarn run postbuild
 
 staging:
 	yarn install
