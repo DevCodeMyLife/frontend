@@ -7,7 +7,7 @@ import '@emotion/react'
 // import gfm from "remark-gfm";
 // import ReactMarkdown from "react-markdown";
 import {PrismAsync as SyntaxHighlighter} from "react-syntax-highlighter";
-import {tomorrow as style} from "react-syntax-highlighter/dist/cjs/styles/prism";
+// import {tomorrow as style} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import {Link} from "react-navi";
 
 const options = [

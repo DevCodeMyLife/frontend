@@ -33,7 +33,7 @@ const initialState = {
     status_call: "connecting",
     call: {
         state: false,
-        audio: new Audio()
+        audio: null
     },
     stream: null,
     am: false,

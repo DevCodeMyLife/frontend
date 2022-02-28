@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 // import ReactMarkdown from 'react-markdown'
 import {PrismAsync as SyntaxHighlighter} from 'react-syntax-highlighter'
-import {tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism"
+// import {tomorrow as style} from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
 import look from "../icon/look.png";
 import look_dark from "../icon/look_dark.png";

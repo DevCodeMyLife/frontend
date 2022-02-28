@@ -8,7 +8,7 @@ import song from "../sound/pop.mp3"
 import gfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
-import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
+// import {tomorrow} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import code from "../icon/code.png";
 import answer from "../icon/answer.png";
 import answer_dark from "../icon/answer_dark.png";
@@ -264,7 +264,7 @@ class Messages extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter style={tomorrow} wrapLongLines={false} language={match[1]} PreTag="div"
+                <SyntaxHighlighter wrapLongLines={false} language={match[1]} PreTag="div"
                                    children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
