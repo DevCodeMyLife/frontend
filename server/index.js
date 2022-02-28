@@ -12,7 +12,7 @@ const PORT = 80;
 const app = express();
 
 
-app.get(['/', '/feeds', '/post', '/user/*', '/settings'], (req, res) => {
+app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification'], (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
 
 
@@ -22,11 +22,19 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings'], (req, res) => {
             console.error('Something went wrong:', err);
             return res.status(500).send('Oops, better luck next time!');
         }
+        let title;
 
-        console.log(req.url)
+        switch (req.path){
+            case "/feeds":
+                title = "Новости"
+            default:
+                title = "DevCodeMyLife"
+        }
+
+        console.log(req.path)
         return res.send(
             data.replace('<div id="root"></div>', `<div id="root">${app}</div>`).replace(
-                '<title></title>', '<title>test</title>'));
+                '<title></title>', `<title>${title}</title>`));
     });
 });
 
