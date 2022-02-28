@@ -27,6 +27,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
         switch (req.path){
             case "/feeds":
                 title = "Новости"
+                break
             default:
                 title = "DevCodeMyLife"
         }
