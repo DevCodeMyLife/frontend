@@ -9,8 +9,7 @@ COPY . ./app
 
 WORKDIR ./app
 
-RUN yarn install
-RUN yarn run build
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn run build
 
 EXPOSE 8000
 
