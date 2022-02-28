@@ -20,22 +20,26 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
-            return res.status(500).send('Oops, better luck next time!');
+            return res.status(500).send('Сейчас мы что то делаем');
         }
         let title;
+        let keywords;
 
         switch (req.path){
             case "/feeds":
-                title = "Новости"
+                title = "Новости | DevCodeMyLife"
+                keywords = "новости, заметки, код, программирование, golang, python2, python3, python"
                 break
             default:
-                title = "DevCodeMyLife"
+                title = "Добро пожаловать | DevCodeMyLife"
+                keywords = "заметки, код, программирование, golang, python2, python3, python, bash, linux"
         }
 
         console.log(req.path)
         return res.send(
             data.replace('<div id="root"></div>', `<div id="root">${app}</div>`).replace(
-                '<title></title>', `<title>${title}</title>`));
+                '<title></title>', `<title>${title}</title>`)).replace(
+                    '<meta name="keywords" content=""/>', `<meta name="keywords" content="${keywords}"/>`);
     });
 });
 
