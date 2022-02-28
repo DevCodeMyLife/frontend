@@ -12,7 +12,7 @@ const PORT = 80;
 const app = express();
 
 
-app.get(['/', '/feeds'], (req, res) => {
+app.get(['/', '/feeds', '/post', '/user/*'], (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
 
 
