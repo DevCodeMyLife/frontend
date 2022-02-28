@@ -11,7 +11,7 @@ const PORT = 80;
 const app = express();
 
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App />);
 
     const indexFile = path.resolve('./build/index.html');
