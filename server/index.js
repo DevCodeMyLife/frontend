@@ -12,7 +12,7 @@ const PORT = 80;
 const app = express();
 
 
-app.get(['/', '/feeds', '/post', '/user/*'], (req, res) => {
+app.get(['/', '/feeds', '/post', '/user/*', '/settings'], (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
 
 
@@ -23,7 +23,7 @@ app.get(['/', '/feeds', '/post', '/user/*'], (req, res) => {
             return res.status(500).send('Oops, better luck next time!');
         }
 
-        console.log(req.path)
+        console.log(req.url)
         return res.send(
             data.replace('<div id="root"></div>', `<div id="root">${app}</div>`).replace(
                 '<title></title>', '<title>test</title>'));
