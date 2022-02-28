@@ -11,6 +11,6 @@ WORKDIR ./app
 
 RUN NODE_OPTIONS=--openssl-legacy-provider yarn run build
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["yarn", "dev:start"]
