@@ -11,8 +11,12 @@ import App from '../src/components/Index';
 const PORT = 80;
 const app = express();
 
+const main = '<div id="root"></div>'
+const title = '<title></title>'
+const keywords = '<meta name="keywords" content=""/>'
 
-app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification'], (req, res) => {
+
+app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
 
 
@@ -22,24 +26,25 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
         }
-        let title;
+        let title_render;
         let keywords;
 
-        switch (req.path){
+        switch (req.path) {
             case "/feeds":
-                title = "Новости | DevCodeMyLife"
+                title_render = "Новости | DevCodeMyLife"
                 keywords = "новости, заметки, код, программирование, golang, python2, python3, python"
                 break
             default:
-                title = "Добро пожаловать | DevCodeMyLife"
+                title_render = "Добро пожаловать | DevCodeMyLife"
                 keywords = "заметки, код, программирование, golang, python2, python3, python, bash, linux"
         }
 
+        data = data.replace(main, `<div id="root">${app}</div>`)
+        data = data.replace(title, `<title>${title_render}</title>`)
+        data = data.replace(keywords, `<meta name="keywords" content="${keywords}"/>`)
+
         console.log(req.path)
-        return res.send(
-            data.replace('<div id="root"></div>', `<div id="root">${app}</div>`).replace(
-                '<title></title>', `<title>${title}</title>`)).replace(
-                    '<meta name="keywords" content=""/>', `<meta name="keywords" content="${keywords}"/>`);
+        return res.send(data);
     });
 });
 
