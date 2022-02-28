@@ -10,7 +10,7 @@ COPY . ./app
 WORKDIR ./app
 
 RUN NODE_OPTIONS=--openssl-legacy-provider yarn run build
-RUN yarn dev:build-server
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn dev:build-server
 
 EXPOSE 80
 
