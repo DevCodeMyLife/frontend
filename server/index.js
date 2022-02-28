@@ -7,13 +7,13 @@ import React from 'react';
 import express from 'express';
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/components/Index';
+
 const PORT = 80;
 const app = express();
 
 
 app.get(['/', '/feeds'], (req, res) => {
-    const app = ReactDOMServer.renderToNodeStream(<App />);
-
+    const app = ReactDOMServer.renderToNodeStream(<App/>);
 
 
     const indexFile = path.resolve('./build/index.html');
@@ -25,8 +25,8 @@ app.get(['/', '/feeds'], (req, res) => {
 
         console.log(req.path)
         return res.send(
-            data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-        );
+            data.replace('<div id="root"></div>', `<div id="root">${app}</div>`).replace(
+                '<title></title>', '<title>test</title>'));
     });
 });
 
