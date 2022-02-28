@@ -1,5 +1,6 @@
 import 'css-ssr'
 
+const https = require('https')
 import path from 'path';
 import fs from 'fs';
 
@@ -30,6 +31,28 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
         let keywords;
 
         switch (req.path) {
+            case "/post":
+                const options = {
+                    hostname: 'devcodemylife.tech',
+                    port: 443,
+                    path: `/api/feed/${req.params.uuid}`,
+                    method: 'GET'
+                }
+
+                const reqs = https.request(options, res => {
+                    console.log(`statusCode: ${res.statusCode}`)
+
+                    reqs.on('data', d => {
+                        console.log(d)
+                    })
+                })
+
+                req.on('error', error => {
+                    console.error(error)
+                })
+
+                req.end()
+                break
             case "/feeds":
                 title_render = "Новости | DevCodeMyLife"
                 keywords = "новости, заметки, код, программирование, golang, python2, python3, python"
