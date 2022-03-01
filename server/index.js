@@ -39,19 +39,21 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     method: 'GET'
                 }
 
-                const reqs = https.request(options, res => {
-                    console.log(`statusCode: ${res.statusCode}`)
+                console.log(req.params)
 
-                    reqs.on('data', d => {
-                        console.log(d)
-                    })
-                })
-
-                reqs.on('error', error => {
-                    console.error(error)
-                })
-
-                reqs.end()
+                // const reqs = https.request(options, res => {
+                //     console.log(`statusCode: ${res.statusCode}`)
+                //
+                //     reqs.on('data', d => {
+                //         console.log(d)
+                //     })
+                // })
+                //
+                // reqs.on('error', error => {
+                //     console.error(error)
+                // })
+                //
+                // reqs.end()
                 break
             case "/feeds":
                 title_render = "Новости | DevCodeMyLife"
