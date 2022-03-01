@@ -1,7 +1,8 @@
 
+
 main:
 	yarn install
-	yarn run build
+	#yarn run build
 
 staging:
 	yarn install
