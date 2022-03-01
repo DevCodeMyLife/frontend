@@ -47,7 +47,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     })
                 })
 
-                req.on('error', error => {
+                reqs.on('error', error => {
                     console.error(error)
                 })
 
