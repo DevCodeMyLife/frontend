@@ -70,7 +70,7 @@ class FeedOnePage extends Component {
                 if (res.status.code === 0) {
                     console.log(res)
 
-                    document.getElementById(uuid).innerHTML = res.data.count + " Нравиться"
+                    document.getElementById(uuid).innerHTML = res.data.count
                 }
                 console.log(res)
                 // this.setState({
@@ -367,7 +367,7 @@ class FeedOnePage extends Component {
                                                     </div>
                                                     <div className="like-text">
                                                             <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like} Нравиться
+                                                                {data?.count_like}
                                                             </span>
                                                     </div>
                                                 </div>
@@ -382,7 +382,7 @@ class FeedOnePage extends Component {
                                                     </div>
                                                     <div className="like-text">
                                                             <span className="like-count">
-                                                                {counter} Просмотров
+                                                                {counter}
                                                             </span>
                                                     </div>
                                                 </div>

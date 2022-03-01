@@ -15,6 +15,7 @@ const app = express();
 const main = '<div id="root"></div>'
 const title = '<title></title>'
 const keywords = '<meta name="keywords" content=""/>'
+const description = '<meta name="description" content=""/>'
 
 
 app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
@@ -28,7 +29,8 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
             return res.status(500).send('Сейчас мы что то делаем');
         }
         let title_render;
-        let keywords;
+        let keywords_render;
+        let description_render;
 
         switch (req.path) {
             case "/post":
@@ -54,19 +56,24 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 // })
                 //
                 // reqs.end()
+                keywords_render = "новости, заметки, код, программирование, golang, python2, python3, python"
+                description_render = ""
                 break
             case "/feeds":
                 title_render = "Новости | DevCodeMyLife"
-                keywords = "новости, заметки, код, программирование, golang, python2, python3, python"
+                keywords_render = "devcodemylife, добро, пожаловать"
+                description_render = ""
                 break
             default:
-                title_render = "Добро пожаловать | DevCodeMyLife"
-                keywords = "заметки, код, программирование, golang, python2, python3, python, bash, linux"
+                title_render = "Добро пожаловать | devcodemylife"
+                keywords_render = "devcodemylife, добро, пожаловать"
+                description_render = "Социальная сеть для программистов."
         }
 
         data = data.replace(main, `<div id="root">${app}</div>`)
         data = data.replace(title, `<title>${title_render}</title>`)
         data = data.replace(keywords, `<meta name="keywords" content="${keywords}"/>`)
+        data = data.replace(description, `<meta name="description" content="${description}"/>`)
 
         console.log(req.path)
         return res.send(data);
