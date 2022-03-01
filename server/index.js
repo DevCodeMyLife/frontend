@@ -51,7 +51,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     console.error(error)
                 })
 
-                req.end()
+                reqs.end()
                 break
             case "/feeds":
                 title_render = "Новости | DevCodeMyLife"
