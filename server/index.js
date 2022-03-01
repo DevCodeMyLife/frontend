@@ -73,7 +73,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
         data = data.replace(main, `<div id="root">${app}</div>`)
         data = data.replace(title, `<title>${title_render}</title>`)
         data = data.replace(keywords, `<meta name="keywords" content="${keywords}"/>`)
-        data = data.replace(description, `<meta name="description" content="${description}"/>`)
+        // data = data.replace(description, `<meta name="description" content="${description}"/>`)
 
         console.log(req.path)
         return res.send(data);
