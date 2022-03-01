@@ -992,6 +992,7 @@ a {
 
 .hide-typing {
   display: none;
+  height: 15px;
 }
 
 .settings-user-item {
