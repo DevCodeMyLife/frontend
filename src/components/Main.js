@@ -99,7 +99,7 @@ class Main extends Component {
                     <div className="view-status">
                         <div className="wrapper-status">
                             <div className="auth-box-title">
-                                <h1>Социальная сеть, DevCodeMyLIfe</h1>
+                                <h1>DevCodeMyLIfe</h1>
                             </div>
                             <div className="about-text">
                                 <p>
