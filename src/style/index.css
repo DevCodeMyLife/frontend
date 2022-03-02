@@ -1643,7 +1643,7 @@ p {
 .center {
     text-align: center;
     /*background: #f3f3f3;*/
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     color: var(--font-color);
 }
 
