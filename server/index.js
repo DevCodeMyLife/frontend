@@ -69,7 +69,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     `${dataPost.data[0].title.substring(0, 30)}`
                 )
 
-                res.send(data)
+                await res.send(data)
                 break
             case "/feeds":
                 data = preData(
