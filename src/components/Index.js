@@ -46,33 +46,9 @@ class App extends React.Component {
         }
 
         this.routes = mount({
-            '/': route({
-                title: 'Добро пожаловать | DevCodeMyLife', head: <>
-                    <meta name="description" content="Социальная сеть для разработчиков"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Main/>
-            }), '/people': route({
-                title: 'Люди | DevCodeMyLife', head: <>
-                    <meta name="description" content="Социальная сеть для разработчиков"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <People store={store}/>
-            }), '/messages': route({
-                title: 'Мессенджер | DevCodeMyLife', head: <>
-                    <meta name="description" content="Мессенджер"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Messages store={store}/>
+            '/': route({ view: <Main/>
+            }), '/people': route({ view: <People store={store}/>
+            }), '/messages': route({ view: <Messages store={store}/>
             }), '/user/:id': route(async req => {
                 let user;
                 let id = req.params.id
@@ -96,67 +72,16 @@ class App extends React.Component {
                         console.log(error)
                     });
 
-                return {
-                    title: `${user?.name} | DevCodeMyLife`, head: <>
-                        <meta name="description" content={`Страница пользователя ${user?.title}`}/>
-                        <meta name="Keywords"
-                              content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                        <script>
-                            console.log('[ app start ]')
-                        </script>
-                    </>, view: <MainUser store={store} id={id}/>
-                }
-            }), '/feeds': route({
-                title: 'Новости | DevCodeMyLife', head: <>
-                    <meta name="description" content="Новости, у нас есть все, чего нет напиши сам."/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Feed store={store}/>
-            }), '/post': route({view: <FeedOnePage store={store}/>
-            }), '/agreement': route({view: <Agreement store={store}/>
+                return {view: <MainUser store={store} id={id}/>}
+            }), '/feeds': route({ view: <Feed store={store}/>
+            }), '/post': route({ view: <FeedOnePage store={store}/>
+            }), '/agreement': route({ view: <Agreement store={store}/>
             }), '/settings': route({ view: <Settings store={store}/>
-            }), '/freelances': route({
-                title: 'Фриланс | DevCodeMyLife', head: <>
-                    <meta name="description" content="Фриланс"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Freelances store={store}/>
-            }), '/notification': route({
-                title: 'События | DevCodeMyLife', head: <>
-                    <meta name="description" content="Оповещения"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Notification store={store}/>
-            }), '/teams': route({
-                title: 'Команды | DevCodeMyLife', head: <>
-                    <meta name="description" content="Команды"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Teams store={store}/>
-            }), '/how_to_use': route({
-                title: 'Привет! | DevCodeMyLife', head: <>
-                    <meta name="description" content=""/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <HowToUse store={store}/>
-            }), '/task': route({
-                title: 'Задача | DevCodeMyLife', head: <>
-                    <meta name="description" content="Задача"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Task store={store}/>
+            }), '/freelances': route({ view: <Freelances store={store}/>
+            }), '/notification': route({ view: <Notification store={store}/>
+            }), '/teams': route({view: <Teams store={store}/>
+            }), '/how_to_use': route({ view: <HowToUse store={store}/>
+            }), '/task': route({ view: <Task store={store}/>
             }),
         })
     }
