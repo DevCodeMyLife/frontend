@@ -46,7 +46,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     console.log(`statusCode: ${resq.statusCode}`)
 
                     resq.on('data', d => {
-                        console.log(d)
+                        console.log(JSON.parse(d))
                     })
                 })
 
