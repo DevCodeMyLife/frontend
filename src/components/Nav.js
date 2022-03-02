@@ -146,48 +146,25 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            {state.auth.user.data.testing ? <div>
-                                <div className="nav-item">
-                                    <Link className="nav-value" href="/freelances">
-                                        <div className="icon-image">
-                                            {this.state.isDark === "light" ? <img src={code} alt="Задачи"/> :
-                                                <img src={code_dark} alt="Задачи"/>}
+                            {
+                                state.auth.user.data.testing ?
+                                    <div>
+                                        <div className="nav-item">
+                                            <Link className="nav-value" href="/freelances">
+                                                <div className="icon-image">
+                                                    {this.state.isDark === "light" ? <img src={code} alt="Задачи"/> :
+                                                        <img src={code_dark} alt="Задачи"/>}
+                                                </div>
+                                                <div className="nav-value">
+                                                    Фриланс
+                                                </div>
+                                            </Link>
                                         </div>
-                                        <div className="nav-value">
-                                            Фриланс
-                                        </div>
-                                    </Link>
-                                </div>
-                                {/*<div className="nav-item">*/}
-                                {/*    <Link className="nav-value" href="/teams">*/}
-                                {/*        <div  className="icon-image" >*/}
-                                {/*            {*/}
-                                {/*                this.state.isDark === "light" ?*/}
-                                {/*                    <img  src={team} alt="Команды" />*/}
-                                {/*                    :*/}
-                                {/*                    <img  src={team_dark} alt="Команды" />*/}
-                                {/*            }*/}
-                                {/*        </div>*/}
-                                {/*        <div className="nav-value">*/}
-                                {/*            Команды*/}
-                                {/*        </div>*/}
-                                {/*    </Link>*/}
-                                {/*</div>*/}
-                            </div> : null}
-
+                                    </div>
+                                :
+                                    null
+                            }
                         </div>
-                        // :
-                        // <div className="nav-item">
-                        //     <Link className="nav-value" href={`/`}>
-                        //         <div  className="icon-image" >
-                        //             <img src={sing} alt="messages" />
-                        //         </div>
-                        //         <div className="nav-value">
-                        //             Войти
-                        //         </div>
-                        //     </Link>
-                        // </div>
-
                     }
                 </div>
                 :
@@ -211,20 +188,22 @@ class Nav extends Component {
                                     </div>
 
                             }
-                    </div>
-                :
+                        </div>
+                    :
                         window.location.pathname === "/" ?
-                            <div>
-                                <div className="nav-item">
-                                    <Link className="nav-value" href="/feeds">
-                                        <div className="icon-image">
-                                            {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
-                                                <img src={notes_dark} alt="Заметки"/>}
-                                        </div>
-                                        <div className="nav-value">
-                                            Новости
-                                        </div>
-                                    </Link>
+                            <div className="wrapper-vertical-nav">
+                                <div>
+                                    <div className="nav-item">
+                                        <Link className="nav-value" href="/feeds">
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
+                                                    <img src={notes_dark} alt="Заметки"/>}
+                                            </div>
+                                            <div className="nav-value">
+                                                Новости
+                                            </div>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         :
