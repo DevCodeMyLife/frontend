@@ -25,7 +25,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
     const app = ReactDOMServer.renderToNodeStream(<App/>);
     const indexFile = path.resolve('./build/index.html');
 
-    fs.readFile(indexFile, 'utf8',  (err, data) => {
+    fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
@@ -57,7 +57,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     data,
                     app,
                     "Лента Новости | DevCodeMyLife",
-                    "DevCodeMyLIfe, добро, пожаловать",
+                    "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Лента новостей"
                 )
 
@@ -67,9 +67,9 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 data = preData(
                     data,
                     app,
-                    "DevCodeMyLIfe",
+                    "Социальная сеть для разработчиков | DevCodeMyLIfe",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
-                    "Социальная сеть для программистов",
+                    "Социальная сеть для разработчиков, для любого уровня. Здесь Вы найдете интересные статьи, и полезные заметки.",
                 )
 
                 res.send(data)
