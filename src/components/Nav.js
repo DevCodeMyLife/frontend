@@ -192,18 +192,16 @@ class Nav extends Component {
                     :
                         window.location.pathname === "/" ?
                             <div className="wrapper-vertical-nav">
-                                <div>
-                                    <div className="nav-item">
-                                        <Link className="nav-value" href="/feeds">
-                                            <div className="icon-image">
-                                                {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
-                                                    <img src={notes_dark} alt="Заметки"/>}
-                                            </div>
-                                            <div className="nav-value">
-                                                Новости
-                                            </div>
-                                        </Link>
-                                    </div>
+                                <div className="nav-item">
+                                    <Link className="nav-value" href="/feeds">
+                                        <div className="icon-image">
+                                            {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
+                                                <img src={notes_dark} alt="Заметки"/>}
+                                        </div>
+                                        <div className="nav-value">
+                                            Новости
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         :
