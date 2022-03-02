@@ -125,7 +125,7 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Вход через сторонние сервисы</div>
+                                    <h2 className="title-span-auth">Вход через сторонние сервисы</h2>
                                     {/*<div className="title-span-auth-small">Пройдите легкую регистрацию</div>*/}
                                 </div>
                                 <div className="auths-list">
@@ -153,7 +153,7 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Вход</div>
+                                    <h2 className="title-span-auth">Вход</h2>
                                 </div>
                                 <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Логин" type="text" id="auth_login"/>
@@ -175,8 +175,8 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Если Вы у нас впервые</div>
-                                    <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
+                                    <h2 className="title-span-auth">Если Вы у нас впервые</h2>
+                                    <h4 className="title-span-auth-small">Пройдите легкую регистрацию</h4>
                                 </div>
                                 <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={28} placeholder="Логин" type="text"
@@ -210,9 +210,9 @@ class Main extends Component {
                         this.state.loadData ?
                             <div className="view-status">
                                 <div className="wrapper-status">
-                                    <div className="auth-box-title">
+                                    <h2 className="auth-box-title">
                                         Статистика платформы
-                                    </div>
+                                    </h2>
                                     <div className="auths-list">
                                         <p>
                                             <span className="test-stat">Событий сегодня:</span> <span
