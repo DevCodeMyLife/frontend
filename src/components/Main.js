@@ -131,10 +131,12 @@ class Main extends Component {
                                 </div>
                             </div>
                             :
-                            <div className="auth-wrapper">
-                                <div className="auth-view-box"
-                                     style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                    <div className="loader"/>
+                            <div className="view-status">
+                                <div className="wrapper-status">
+                                    <div className="auth-view-box"
+                                         style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        <div className="loader"/>
+                                    </div>
                                 </div>
                             </div>
                     }
