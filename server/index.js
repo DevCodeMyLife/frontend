@@ -61,31 +61,32 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
                 preData(
                     data,
+                    res,
                     app,
                     "Лента Новости | DevCodeMyLife",
                     "новости, заметки, код, программирование, golang, python2, python3, python",
-                    "Лента новостей",
-                    res
+                    "Лента новостей"
                 )
                 break
             case "/feeds":
                 preData(
                     data,
+                    res,
                     app,
                     "Лента Новости | DevCodeMyLife",
                     "DevCodeMyLIfe, добро, пожаловать",
-                    "Лента новостей",
-                    res
+                    "Лента новостей"
+
                 )
                 break
             default:
                 preData(
                     data,
+                    res,
                     app,
                     "Добро пожаловать | DevCodeMyLIfe",
                     "DevCodeMyLIfe, добро, пожаловать",
                     "Социальная сеть для программистов",
-                    res
                 )
         }
     });
