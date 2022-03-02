@@ -1652,7 +1652,7 @@ p {
     text-align: center;
     /*background: #f3f3f3;*/
     /*margin-top: 20px;*/
-    color: var(--font-color);
+    /*color: var(--font-color);*/
 }
 
 .img-ad {
@@ -1661,6 +1661,7 @@ p {
 
 .error-wrapper {
     /*padding: 20px*/
+    font-size: 13px;
 }
 
 .login-logo {
