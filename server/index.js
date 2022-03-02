@@ -42,23 +42,22 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     method: 'GET'
                 }
 
-                console.log(options)
+                const reqs = https.request(options, resq => {
+                    console.log(`statusCode: ${resq.statusCode}`)
 
-                // const reqs = https.request(options, res => {
-                //     console.log(`statusCode: ${res.statusCode}`)
-                //
-                //     reqs.on('data', d => {
-                //         console.log(d)
-                //     })
-                // })
-                //
-                // reqs.on('error', error => {
-                //     console.error(error)
-                // })
-                //
-                // reqs.end()
+                    reqs.on('data', d => {
+                        console.log(d)
+                    })
+                })
+
+                reqs.on('error', error => {
+                    console.error(error)
+                })
+
+                reqs.end()
                 keywords_render = "новости, заметки, код, программирование, golang, python2, python3, python"
                 description_render = ""
+
                 break
             case "/feeds":
                 title_render = "Новости | DevCodeMyLife"
