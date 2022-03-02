@@ -96,14 +96,12 @@ class Main extends Component {
         return (
             <div style={{display: "flex"}}>
                 <div className="content-wall-views">
-                    <div className="wrapper-page-about">
-                        {/*<div className="title-page">*/}
-                        {/*    О нас*/}
-                        {/*</div>*/}
-                        <div className="wrapper-about">
-
-                            <div className="about-text">
+                    <div className="view-status">
+                        <div className="wrapper-status">
+                            <div className="auth-box-title">
                                 <h1>Социальная сеть, DevCodeMyLIfe</h1>
+                            </div>
+                            <div className="about-text">
                                 <p>
                                     Этот проект для разработчиков, для любого уровня.<br/>
                                     Здесь Вы найдете интересные статьи, полезные заметки, мессенджер для общения.<br/>
