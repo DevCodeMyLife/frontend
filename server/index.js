@@ -43,7 +43,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     data = preData(
                         data,
                         app,
-                        `${body.data.title}| DevCodeMyLife`,
+                        `${body?.body?.data[0].title}| DevCodeMyLife`,
                     )
 
                     res.send(data)
