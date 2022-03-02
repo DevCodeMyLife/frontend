@@ -1,6 +1,6 @@
 import 'css-ssr'
 
-const https = require('https')
+import fetch from "node-fetch";
 import path from 'path';
 import fs from 'fs';
 
@@ -33,30 +33,6 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
         switch (req.path) {
             case "/post":
-                // const options = {
-                //     hostname: 'devcodemylife.tech',
-                //     port: 443,
-                //     path: `/api/feed/${req.query.uuid}/null`,
-                //     method: 'GET'
-                // }
-                //
-                // let reqs = await https.request(options)
-                // reqs.on('data', d => {
-                //
-                //     console.log(JSON.parse(d).data[0])
-                //
-                //     data = preData(
-                //         data,
-                //         app,
-                //         `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
-                //         `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
-                //         `${JSON.parse(d).data[0].title.substring(0, 30)}`
-                //     )
-                //
-                //     res.send(data)
-                // })
-                // reqs.end()
-
                 const resq = await fetch(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`);
                 console.log('Status Code:', resq.status);
                 const dataPost = await resq.json();
