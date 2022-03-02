@@ -37,13 +37,20 @@ const CONFIG = {
 class App extends React.Component {
 
     constructor(props) {
-
-        let AudioContext = window.AudioContext || window.webkitAudioContext
-
         super(props);
-        this.state = {
-            load: false, context: new AudioContext(), audio: new Audio(song), channel: null
+        if (typeof window !== 'undefined') {
+            let AudioContext = window.AudioContext || window.webkitAudioContext
+
+            this.state = {
+                load: false, context: new AudioContext(), audio: new Audio(song), channel: null
+            }
+        }else{
+
+            this.state = {
+                load: false, context: {}, audio: {}, channel: null
+            }
         }
+
 
         this.routes = mount({
             '/': route({ view: <Main/>

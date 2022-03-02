@@ -1,5 +1,6 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+// const nodeExternals = require('webpack-node-externals');
+const webpackNodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
@@ -9,9 +10,10 @@ module.exports = {
 
   target: 'node',
 
-  externals: [nodeExternals()],
+  externals: [webpackNodeExternals()],
 
   output: {
+    globalObject: "this",
     path: path.resolve('server-build'),
     filename: 'index.js'
   },
