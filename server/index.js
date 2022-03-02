@@ -19,7 +19,7 @@ const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 
 
-app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
+app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], async (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
     const indexFile = path.resolve('./build/index.html');
 
@@ -45,7 +45,8 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     `${dataPost.data[0].title.substring(0, 30)}`
                 )
 
-                await res.send(data)
+                 await res.send(data)
+
                 break
             case "/feeds":
                 data = preData(
@@ -56,7 +57,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Лента новостей"
                 )
 
-                res.send(data)
+                await res.send(data)
                 break
             default:
                 data = preData(
@@ -67,7 +68,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Социальная сеть для программистов",
                 )
 
-                res.send(data)
+                await res.send(data)
         }
     });
 });
