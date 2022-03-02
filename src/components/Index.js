@@ -71,7 +71,6 @@ class App extends React.Component {
                     .catch(error => {
                         console.log(error)
                     });
-
                 return {view: <MainUser store={store} id={id}/>}
             }), '/feeds': route({ view: <Feed store={store}/>
             }), '/post': route({ view: <FeedOnePage store={store}/>
