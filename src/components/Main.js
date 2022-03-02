@@ -167,9 +167,7 @@ class Main extends Component {
                 <div className="auth-box-list">
                     <div className="view-status" style={{paddingLeft: 0}}>
                         <div className="wrapper-status">
-                            <div className="auth-box-title">
-                                <h2 className="title-span-auth">Вход</h2>
-                            </div>
+                            <h2 className="title-span-auth">Вход</h2>
                             <div className="wrapper-input fix_wrapper">
                                 <input className="input-default" placeholder="Логин" type="text" id="auth_login"/>
                             </div>
@@ -189,10 +187,7 @@ class Main extends Component {
                     </div>
                     <div className="view-status" style={{paddingLeft: 0}}>
                         <div className="wrapper-status">
-                            <div className="auth-box-title">
-                                <h2 className="title-span-auth">Если Вы у нас впервые</h2>
-                                <h3 className="title-span-auth-small">Пройдите легкую регистрацию</h3>
-                            </div>
+                            <h2 className="title-span-auth">Регистрация</h2>
                             <div className="wrapper-input fix_wrapper">
                                 <input className="input-default" maxLength={28} placeholder="Логин" type="text"
                                        id="registration_login"/>
