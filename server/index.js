@@ -40,6 +40,16 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                     console.log('body:', JSON.parse(body).data); // Print the HTML for the Google homepage.
 
+                    if (error !== null){
+                        data = preData(
+                            data,
+                            app,
+                            `Такой заметки нет | DevCodeMyLife`,
+                            `golang, python, c, c#, css, js, node, nginx, proxy`,
+                            `Такой заметки нет`
+                        )
+                    }
+
                     data = preData(
                         data,
                         app,
