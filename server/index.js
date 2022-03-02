@@ -29,9 +29,6 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
         }
-        let title_render;
-        let keywords_render;
-        let description_render;
 
         switch (req.path) {
             case "/post":
@@ -46,42 +43,63 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     console.log(`statusCode: ${resq.statusCode}`)
 
                     resq.on('data', d => {
-                        console.log(`${JSON.parse(d).data[0].title} | DevCodeMyLife`)
-                        title_render = `${JSON.parse(d).data[0].title} | DevCodeMyLife`
+                        preData(
+                            data,
+                            res,
+                            app,
+                            `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
+                            `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
+                            `${JSON.parse(d).data[0].title.substring(0, 30)}`
+                        )
                     })
                 })
 
                 reqs.on('error', error => {
                     console.error(error)
                 })
-
                 reqs.end()
-                keywords_render = "новости, заметки, код, программирование, golang, python2, python3, python"
-                description_render = ""
 
+                preData(
+                    data,
+                    app,
+                    "Лента Новости | DevCodeMyLife",
+                    "новости, заметки, код, программирование, golang, python2, python3, python",
+                    "Лента новостей",
+                    res
+                )
                 break
             case "/feeds":
-                title_render = "Новости | DevCodeMyLife"
-                keywords_render = "devcodemylife, добро, пожаловать"
-                description_render = ""
+                preData(
+                    data,
+                    app,
+                    "Лента Новости | DevCodeMyLife",
+                    "DevCodeMyLIfe, добро, пожаловать",
+                    "Лента новостей",
+                    res
+                )
                 break
             default:
-                title_render = "Добро пожаловать | devcodemylife"
-                keywords_render = "devcodemylife, добро, пожаловать"
-                description_render = "Социальная сеть для программистов."
+                preData(
+                    data,
+                    app,
+                    "Добро пожаловать | DevCodeMyLIfe",
+                    "DevCodeMyLIfe, добро, пожаловать",
+                    "Социальная сеть для программистов",
+                    res
+                )
         }
-
-        data = data.replace(main, `<div id="root">${app}</div>`)
-        data = data.replace(title, `<title>${title_render}</title>`)
-        data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
-        data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
-        data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
-
-
-        console.log(req.path)
-        return res.send(data);
     });
 });
+
+function preData(data, res, app, title_render, keywords_render, description_render) {
+    data = data.replace(main, `<div id="root">${app}</div>`)
+    data = data.replace(title, `<title>${title_render}</title>`)
+    data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
+    data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
+    data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
+
+    return res.send(data);
+}
 
 
 app.use(express.static('./build'));
