@@ -23,7 +23,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
     const app = ReactDOMServer.renderToNodeStream(<App/>);
     const indexFile = path.resolve('./build/index.html');
 
-    fs.readFile(indexFile, 'utf8', (err, data) => {
+    fs.readFile(indexFile, 'utf8', async (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
@@ -40,37 +40,24 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     method: 'GET'
                 }
 
-                const reqs = https.request(options, resq => {
-                    console.log(`statusCode: ${resq.statusCode}`)
+                let reqs = await https.request(options)
+                reqs.on('data', d => {
 
-                    resq.on('data', d => {
+                    console.log(JSON.parse(d).data[0])
 
-                        console.log(JSON.parse(d).data[0])
+                    data = preData(
+                        data,
+                        app,
+                        `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
+                        `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
+                        `${JSON.parse(d).data[0].title.substring(0, 30)}`
+                    )
 
-                        data = preData(
-                            data,
-                            app,
-                            `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
-                            `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
-                            `${JSON.parse(d).data[0].title.substring(0, 30)}`
-                        )
-
-                        res.send(data)
-                    })
-                })
-
-                reqs.on('error', error => {
-                    console.error(error)
+                    res.send(data)
                 })
                 reqs.end()
 
-                data = preData(
-                    data,
-                    app,
-                    "Лента Новости | DevCodeMyLife",
-                    "новости, заметки, код, программирование, golang, python2, python3, python",
-                    "Лента новостей"
-                )
+
                 res.send(data)
                 break
             case "/feeds":
@@ -80,7 +67,6 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Лента Новости | DevCodeMyLife",
                     "DevCodeMyLIfe, добро, пожаловать",
                     "Лента новостей"
-
                 )
 
                 res.send(data)
