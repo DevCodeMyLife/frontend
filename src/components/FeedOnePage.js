@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import ReactMarkdown from "react-markdown";
 import {JsonLd} from "react-schemaorg";
-import {Helmet} from 'react-helmet';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 // import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import like from "../icon/like.png"
@@ -274,11 +273,6 @@ class FeedOnePage extends Component {
                                                 }
                                             ]
                                         }}/>
-                                        <Helmet>
-                                            <title>{data.title || data?.value?.substring(0, 30)} | DevCodeMyLife</title>
-                                            <meta name="Keywords"
-                                                  content={"dev, code, life, messenger, социальная сеть, для разработчиков, " + data.title}/>
-                                        </Helmet>
                                         {/*<div className="title-page">*/}
                                         {/*    О нас*/}
                                         {/*</div>*/}
@@ -312,9 +306,9 @@ class FeedOnePage extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="title-feed">
+                                            <h1 className="title-feed">
                                                 {data?.title}
-                                            </div>
+                                            </h1>
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                components={this.components}>
