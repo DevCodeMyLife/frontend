@@ -165,8 +165,8 @@ class Main extends Component {
                     }
                 </div>
                 <div className="auth-box-list">
-                    <div className="auth-wrapper wrapper-status">
-                        <div className="auth-view-box">
+                    <div className="view-status">
+                        <div className="wrapper-status">
                             <div className="auth-box-title">
                                 <h2 className="title-span-auth">Вход</h2>
                             </div>
@@ -187,8 +187,8 @@ class Main extends Component {
                             <div className="error-wrapper center red" id="error_auth"/>
                         </div>
                     </div>
-                    <div className="auth-wrapper wrapper-status">
-                        <div className="auth-view-box">
+                    <div className="view-status">
+                        <div className="wrapper-status">
                             <div className="auth-box-title">
                                 <h2 className="title-span-auth">Если Вы у нас впервые</h2>
                                 <h3 className="title-span-auth-small">Пройдите легкую регистрацию</h3>
