@@ -1363,11 +1363,12 @@ p {
   align-items: center;
   border-radius: 10px;
   height: 26px;
-}
-
-.like:hover {
   background: var(--bg-hover);
 }
+
+/*.like:hover {*/
+/*  */
+/*}*/
 
 .not_news {
   padding: 20px;
