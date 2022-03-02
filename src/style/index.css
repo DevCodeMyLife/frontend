@@ -2389,301 +2389,301 @@ textarea {
 /*  }*/
 /*}*/
 
-@media (max-width: 1280px) {
-    html {
-        height: 100%;
-    }
+/*@media (max-width: 1280px) {*/
+/*    html {*/
+/*        height: 100%;*/
+/*    }*/
 
-    /*.nav-hidden {*/
-    /*  display: block;*/
-    /*}*/
-    .wrapper-items {
-        height: 75vh;
-    }
+/*    !*.nav-hidden {*!*/
+/*    !*  display: block;*!*/
+/*    !*}*!*/
+/*    .wrapper-items {*/
+/*        height: 75vh;*/
+/*    }*/
 
-    .left-view {
-        width: 100%;
-    }
+/*    .left-view {*/
+/*        width: 100%;*/
+/*    }*/
 
-    /*.content-wall-views {*/
-    /*  width: 100%;*/
-    /*  margin-left: 0px;*/
-    /*}*/
-    .rectangle-head {
-        width: 100%;
-    }
+/*    !*.content-wall-views {*!*/
+/*    !*  width: 100%;*!*/
+/*    !*  margin-left: 0px;*!*/
+/*    !*}*!*/
+/*    .rectangle-head {*/
+/*        width: 100%;*/
+/*    }*/
 
-    .to-top {
-        display: none;
-    }
+/*    .to-top {*/
+/*        display: none;*/
+/*    }*/
 
-    .wrapper-accept-personal-data {
-        width: 100%;
-        margin: 0;
-    }
+/*    .wrapper-accept-personal-data {*/
+/*        width: 100%;*/
+/*        margin: 0;*/
+/*    }*/
 
-    .content {
-        width: auto;
-    }
+/*    .content {*/
+/*        width: auto;*/
+/*    }*/
 
-    .footer {
-        width: auto;
-    }
+/*    .footer {*/
+/*        width: auto;*/
+/*    }*/
 
-    .author-card {
-        display: none;
-    }
+/*    .author-card {*/
+/*        display: none;*/
+/*    }*/
 
-    .button-open-menu {
-        display: block;
-    }
+/*    .button-open-menu {*/
+/*        display: block;*/
+/*    }*/
 
-    /*.wrapper-search {*/
-    /*  display: none;*/
-    /*}*/
-    /*.reviews-menu {*/
-    /*  display: none;*/
-    /*}*/
-    body {
-        font-size: 14px;
-    }
+/*    !*.wrapper-search {*!*/
+/*    !*  display: none;*!*/
+/*    !*}*!*/
+/*    !*.reviews-menu {*!*/
+/*    !*  display: none;*!*/
+/*    !*}*!*/
+/*    body {*/
+/*        font-size: 14px;*/
+/*    }*/
 
-    .wrapper-comments {
-        padding: 0 10px;
-    }
+/*    .wrapper-comments {*/
+/*        padding: 0 10px;*/
+/*    }*/
 
-    .value-post {
-        font-size: 14px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+/*    .value-post {*/
+/*        font-size: 14px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
 
-    .value-post > pre > * {
-        font-size: 12px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-}
-
-
-@media (max-width: 768px) {
-
-    html {
-        height: 100%;
-    }
-
-    .nav-hidden {
-        display: block;
-    }
-
-    /*.mob-view {*/
-    /*  display: block;*/
-    /*}*/
-    /*.desk-view {*/
-    /*  display: flex;*/
-    /*}*/
-    .wrapper-items {
-        height: 75vh;
-    }
-
-    .main-place-photo-column > img {
-        max-width: 50%;
-        max-height: 50%;
-        border-radius: 50%;
-    }
-
-    .wrapper-accept-personal-data {
-        width: 100%;
-        margin: 0;
-    }
-
-    .rectangle-head {
-        width: 100%;
-    }
-
-    .left-view {
-        width: 100%;
-    }
-
-    .to-top {
-        display: none;
-    }
-
-    .main-place-wrapper {
-        flex-direction: row;
-    }
-
-    .child + .child {
-        margin-top: 20px;
-        margin-left: 0;
-    }
-
-    .wrapper-content-default {
-        padding: 0;
-    }
+/*    .value-post > pre > * {*/
+/*        font-size: 12px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+/*}*/
 
 
-    .content-wall-views {
-        width: 100%;
-        margin-left: 0px;
-    }
+/*@media (max-width: 768px) {*/
 
-    .content {
-        width: auto;
-        display: flex;
-        flex-direction: column-reverse;
-    }
+/*    html {*/
+/*        height: 100%;*/
+/*    }*/
 
-    .footer {
-        width: auto;
-        display: none;
-    }
+/*    .nav-hidden {*/
+/*        display: block;*/
+/*    }*/
 
-    .author-card {
-        display: none;
-    }
+/*    !*.mob-view {*!*/
+/*    !*  display: block;*!*/
+/*    !*}*!*/
+/*    !*.desk-view {*!*/
+/*    !*  display: flex;*!*/
+/*    !*}*!*/
+/*    .wrapper-items {*/
+/*        height: 75vh;*/
+/*    }*/
 
-    .button-open-menu {
-        display: block;
-    }
+/*    .main-place-photo-column > img {*/
+/*        max-width: 50%;*/
+/*        max-height: 50%;*/
+/*        border-radius: 50%;*/
+/*    }*/
 
-    /*.wrapper-search {*/
-    /*  display: none;*/
-    /*}*/
-    .reviews-menu {
-        display: none;
-    }
+/*    .wrapper-accept-personal-data {*/
+/*        width: 100%;*/
+/*        margin: 0;*/
+/*    }*/
 
-    body {
-        font-size: 14px;
-    }
+/*    .rectangle-head {*/
+/*        width: 100%;*/
+/*    }*/
 
-    .wrapper-comments {
-        padding: 0 10px;
-    }
+/*    .left-view {*/
+/*        width: 100%;*/
+/*    }*/
 
-    .value-post {
-        font-size: 14px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+/*    .to-top {*/
+/*        display: none;*/
+/*    }*/
 
-    .value-post > pre > * {
-        font-size: 12px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-}
+/*    .main-place-wrapper {*/
+/*        flex-direction: row;*/
+/*    }*/
 
-@media (max-width: 576px) {
-    html {
-        height: 100%;
-    }
+/*    .child + .child {*/
+/*        margin-top: 20px;*/
+/*        margin-left: 0;*/
+/*    }*/
 
-    .nav-hidden {
-        display: block;
-    }
-
-    /*.mob-view {*/
-    /*  display: block;*/
-    /*}*/
-    /*.desk-view {*/
-    /*  display: none;*/
-    /*}*/
-    .wrapper-items {
-        height: 100%;
-    }
-
-    .main-place-photo-column > img {
-        max-width: 50%;
-        max-height: 50%;
-        border-radius: 50%;
-    }
-
-    .wrapper-accept-personal-data {
-        width: 100%;
-        margin: 0;
-    }
-
-    .rectangle-head {
-        width: 100%;
-    }
-
-    .main-place-wrapper {
-        flex-direction: column;
-    }
-
-    .child + .child {
-        margin-top: 20px;
-        margin-left: 0;
-    }
-
-    .to-top {
-        display: none;
-    }
-
-    .left-view {
-        width: 100%;
-    }
-
-    .wrapper-content-default {
-        padding: 0;
-    }
-
-    .content-wall-views {
-        width: 100%;
-        margin-left: 0px;
-    }
-
-    .content {
-        width: auto;
-        display: flex;
-        flex-direction: column-reverse;
-    }
-
-    .footer {
-        width: auto;
-        display: none;
-    }
-
-    .author-card {
-        display: none;
-    }
-
-    .button-open-menu {
-        display: block;
-    }
-
-    /*.wrapper-search {*/
-    /*  display: none;*/
-    /*}*/
-    .reviews-menu {
-        display: none;
-    }
-
-    body {
-        font-size: 14px;
-    }
-
-    .wrapper-comments {
-        padding: 0 10px;
-    }
-
-    .value-post {
-        font-size: 14px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .value-post > pre > * {
-        font-size: 12px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+/*    .wrapper-content-default {*/
+/*        padding: 0;*/
+/*    }*/
 
 
-    /* и так далее... */
-}
+/*    .content-wall-views {*/
+/*        width: 100%;*/
+/*        margin-left: 0px;*/
+/*    }*/
+
+/*    .content {*/
+/*        width: auto;*/
+/*        display: flex;*/
+/*        flex-direction: column-reverse;*/
+/*    }*/
+
+/*    .footer {*/
+/*        width: auto;*/
+/*        display: none;*/
+/*    }*/
+
+/*    .author-card {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .button-open-menu {*/
+/*        display: block;*/
+/*    }*/
+
+/*    !*.wrapper-search {*!*/
+/*    !*  display: none;*!*/
+/*    !*}*!*/
+/*    .reviews-menu {*/
+/*        display: none;*/
+/*    }*/
+
+/*    body {*/
+/*        font-size: 14px;*/
+/*    }*/
+
+/*    .wrapper-comments {*/
+/*        padding: 0 10px;*/
+/*    }*/
+
+/*    .value-post {*/
+/*        font-size: 14px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+
+/*    .value-post > pre > * {*/
+/*        font-size: 12px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 576px) {*/
+/*    html {*/
+/*        height: 100%;*/
+/*    }*/
+
+/*    .nav-hidden {*/
+/*        display: block;*/
+/*    }*/
+
+/*    !*.mob-view {*!*/
+/*    !*  display: block;*!*/
+/*    !*}*!*/
+/*    !*.desk-view {*!*/
+/*    !*  display: none;*!*/
+/*    !*}*!*/
+/*    .wrapper-items {*/
+/*        height: 100%;*/
+/*    }*/
+
+/*    .main-place-photo-column > img {*/
+/*        max-width: 50%;*/
+/*        max-height: 50%;*/
+/*        border-radius: 50%;*/
+/*    }*/
+
+/*    .wrapper-accept-personal-data {*/
+/*        width: 100%;*/
+/*        margin: 0;*/
+/*    }*/
+
+/*    .rectangle-head {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .main-place-wrapper {*/
+/*        flex-direction: column;*/
+/*    }*/
+
+/*    .child + .child {*/
+/*        margin-top: 20px;*/
+/*        margin-left: 0;*/
+/*    }*/
+
+/*    .to-top {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .left-view {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .wrapper-content-default {*/
+/*        padding: 0;*/
+/*    }*/
+
+/*    .content-wall-views {*/
+/*        width: 100%;*/
+/*        margin-left: 0px;*/
+/*    }*/
+
+/*    .content {*/
+/*        width: auto;*/
+/*        display: flex;*/
+/*        flex-direction: column-reverse;*/
+/*    }*/
+
+/*    .footer {*/
+/*        width: auto;*/
+/*        display: none;*/
+/*    }*/
+
+/*    .author-card {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .button-open-menu {*/
+/*        display: block;*/
+/*    }*/
+
+/*    !*.wrapper-search {*!*/
+/*    !*  display: none;*!*/
+/*    !*}*!*/
+/*    .reviews-menu {*/
+/*        display: none;*/
+/*    }*/
+
+/*    body {*/
+/*        font-size: 14px;*/
+/*    }*/
+
+/*    .wrapper-comments {*/
+/*        padding: 0 10px;*/
+/*    }*/
+
+/*    .value-post {*/
+/*        font-size: 14px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+
+/*    .value-post > pre > * {*/
+/*        font-size: 12px;*/
+/*        width: 100%;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+
+
+/*    !* и так далее... *!*/
+/*}*/
 
 .hide-border {
     border: none;
