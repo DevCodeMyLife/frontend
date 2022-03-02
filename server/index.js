@@ -16,6 +16,7 @@ const main = '<div id="root"></div>'
 const title = '<title></title>'
 const keywords = '<meta name="keywords" content=""/>'
 const description = '<meta name="description" content=""/>'
+const description_any_site_og = '<meta property="og:title" content="">'
 
 
 app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
@@ -37,11 +38,11 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 const options = {
                     hostname: 'devcodemylife.tech',
                     port: 443,
-                    path: `/api/feed/${req.params.uuid}`,
+                    path: `/api/feed/${req.query('uuid')}`,
                     method: 'GET'
                 }
 
-                console.log(req.params)
+                console.log(options)
 
                 // const reqs = https.request(options, res => {
                 //     console.log(`statusCode: ${res.statusCode}`)
@@ -74,6 +75,8 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
         data = data.replace(title, `<title>${title_render}</title>`)
         data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
         data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
+        data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
+
 
         console.log(req.path)
         return res.send(data);
