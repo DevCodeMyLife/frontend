@@ -373,6 +373,14 @@ code {
     border: none;
     background: #0072fc;
     color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*font-size: 14px;*/
 }
 
 .button-open-menu {
