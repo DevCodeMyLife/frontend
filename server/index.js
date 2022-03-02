@@ -33,9 +33,9 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
         switch (req.path) {
             case "/post":
-                const resq = await fetch(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`);
-                console.log('Status Code:', resq.status);
-                const dataPost = await resq.json();
+                // const resq = await fetch(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`);
+                // console.log('Status Code:', resq.status);
+                // const dataPost = await resq.json();
 
                 data = preData(
                     data,
