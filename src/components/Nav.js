@@ -72,10 +72,12 @@ class Nav extends Component {
     render() {
         const state = this.state.store.getState()
         return (state.auth.user.isAuth ? <div className="wrapper-vertical-nav">
-            {!this.state.load ? <div className="loader-flex">
+            {
+                !this.state.load ?
+                <div className="loader-flex">
                     <div className="loader-small"/>
-                </div> :
-
+                </div>
+                :
                 <div>
                     <div className="nav-item">
                         <Link className="nav-value" href={`/user/${state.auth.user.data.id}`}>
