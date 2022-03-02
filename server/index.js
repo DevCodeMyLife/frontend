@@ -21,11 +21,11 @@ const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 
 
-app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], async (req, res) => {
+app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToNodeStream(<App/>);
     const indexFile = path.resolve('./build/index.html');
 
-    fs.readFile(indexFile, 'utf8', async (err, data) => {
+    fs.readFile(indexFile, 'utf8',  (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
@@ -39,15 +39,17 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     console.error('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                     console.log('body:', body); // Print the HTML for the Google homepage.
+
+                    data = preData(
+                        data,
+                        app,
+                        `${dataPost.data[0].title} | DevCodeMyLife`,
+                    )
+
+                    res.send(data)
                 });
 
-                data = preData(
-                    data,
-                    app,
-                    `${dataPost.data[0].title} | DevCodeMyLife`,
-                )
 
-                 await res.send(data)
 
                 break
             case "/feeds":
@@ -59,7 +61,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Лента новостей"
                 )
 
-                await res.send(data)
+                res.send(data)
                 break
             default:
                 data = preData(
@@ -70,7 +72,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Социальная сеть для программистов",
                 )
 
-                await res.send(data)
+                res.send(data)
         }
     });
 });
