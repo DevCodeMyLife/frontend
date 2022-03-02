@@ -68,7 +68,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     data,
                     app,
                     "DevCodeMyLIfe",
-                    "DevCodeMyLIfe, добро, пожаловать",
+                    "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Социальная сеть для программистов",
                 )
 
