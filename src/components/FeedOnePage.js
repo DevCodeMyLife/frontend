@@ -651,11 +651,7 @@ class FeedOnePage extends Component {
                                 }
                             </div>
                             :
-                            <div className="loader-wrapper feed-wrapper">
-                                <div className="loader-small">
-
-                                </div>
-                            </div>
+                                null
                     }
                 </div>
             </div>
