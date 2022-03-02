@@ -245,8 +245,9 @@ class Main extends Component {
                             <div className="wrapper-about">
 
                                 <div className="about-text">
+                                    <h1>DevCodeMyLife</h1>
                                     <p>
-                                        <b>DevCodeMyLife</b> - это проект для разработчиков, которым периодически
+                                        Это проект для разработчиков, которым периодически
                                         приходится искать код в интернете, чтобы решить какую-либо проблему. Просмотрев
                                         бесконечное число форумов, ты наконец-то находишь то, что тебе нужно, внедряешь
                                         и забываешь, где ты это находил.<br/>
@@ -266,9 +267,9 @@ class Main extends Component {
                             this.state.loadData ?
                                 <div className="view-status">
                                     <div className="wrapper-status">
-                                        <div className="auth-box-title">
+                                        <h3 className="auth-box-title">
                                             Статистика платформы
-                                        </div>
+                                        </h3>
                                         <div className="auths-list">
                                             <p>
                                                 <span className="test-stat">Событий сегодня:</span> <span
@@ -292,7 +293,7 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Вход через сторонние сервисы</div>
+                                    <h2 className="title-span-auth">Вход через сторонние сервисы</h2>
                                     {/*<div className="title-span-auth-small">Пройдите легкую регистрацию</div>*/}
                                 </div>
                                 <div className="auths-list">
@@ -320,7 +321,7 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Вход</div>
+                                    <h2 className="title-span-auth">Вход</h2>
                                 </div>
                                 <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" placeholder="Логин" type="text" id="auth_login"/>
@@ -342,8 +343,8 @@ class Main extends Component {
                         <div className="auth-wrapper">
                             <div className="auth-view-box">
                                 <div className="auth-box-title">
-                                    <div className="title-span-auth">Если Вы у нас впервые</div>
-                                    <div className="title-span-auth-small">Пройдите легкую регистрацию</div>
+                                    <h2 className="title-span-auth">Если Вы у нас впервые</h2>
+                                    <h3 className="title-span-auth-small">Пройдите легкую регистрацию</h3>
                                 </div>
                                 <div className="wrapper-input fix_wrapper">
                                     <input className="input-default" maxLength={28} placeholder="Логин" type="text"
