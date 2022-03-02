@@ -115,29 +115,9 @@ class App extends React.Component {
                         console.log('[ app start ]')
                     </script>
                 </>, view: <Feed store={store}/>
-            }), '/post': route({
-                title: 'Заметка | DevCodeMyLife', head: <>
-                    <meta name="description" content="Заметка"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <FeedOnePage store={store}/>
-            }), '/agreement': route({
-                title: 'Пользовательское соглашение | DevCodeMyLife', head: <>
-                    <meta name="description" content="Пользовательское соглашение"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Agreement store={store}/>
-            }), '/settings': route({
-                title: 'Настройки | DevCodeMyLife', head: <>
-                    <meta name="description" content="Настройки"/>
-                    <meta name="Keywords"
-                          content="dev, code, life, messenger, социальная сеть, для разработчиков, devcode"/>
-                    <script>
-                        console.log('[ app start ]')
-                    </script>
-                </>, view: <Settings store={store}/>
+            }), '/post': route({view: <FeedOnePage store={store}/>
+            }), '/agreement': route({view: <Agreement store={store}/>
+            }), '/settings': route({ view: <Settings store={store}/>
             }), '/freelances': route({
                 title: 'Фриланс | DevCodeMyLife', head: <>
                     <meta name="description" content="Фриланс"/>
