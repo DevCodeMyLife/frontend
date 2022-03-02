@@ -1,11 +1,13 @@
 import 'css-ssr'
 
-import fetch from "node-fetch";
 import path from 'path';
 import fs from 'fs';
 
 import React from 'react';
+import request from 'request';
+
 import express from 'express';
+
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/components/Index';
 
@@ -33,9 +35,11 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
         switch (req.path) {
             case "/post":
-                const resq = await fetch(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`);
-                console.log('Status Code:', resq.status);
-                const dataPost = await resq.json();
+                request(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`, function (error, response, body) {
+                    console.error('error:', error); // Print the error if one occurred
+                    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                    console.log('body:', body); // Print the HTML for the Google homepage.
+                });
 
                 data = preData(
                     data,

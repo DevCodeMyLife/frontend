@@ -47,6 +47,7 @@
     "react-textarea-autosize": "^8.3.3",
     "redux": "^4.1.1",
     "remark-gfm": "^1.0.0",
+    "request": "^2.88.2",
     "standardized-audio-context": "^25.3.21",
     "style-loader": "^3.3.1",
     "use-sound": "^4.0.1",
