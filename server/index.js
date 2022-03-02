@@ -47,15 +47,15 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
                         console.log(JSON.parse(d).data[0])
 
-                        // data = preData(
-                        //     data,
-                        //     app,
-                        //     `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
-                        //     `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
-                        //     `${JSON.parse(d).data[0].title.substring(0, 30)}`
-                        // )
-                        //
-                        // res.send(data)
+                        data = preData(
+                            data,
+                            app,
+                            `${JSON.parse(d).data[0].title} | DevCodeMyLife`,
+                            `${JSON.parse(d).data[0].tag}, ${JSON.parse(d).data[0].value.split(' ').join(', ')}`,
+                            `${JSON.parse(d).data[0].title.substring(0, 30)}`
+                        )
+
+                        res.send(data)
                     })
                 })
 
