@@ -178,7 +178,7 @@ class Main extends Component {
                                        id="auth_password"/>
                             </div>
                             <div className="wrapper-input fix_wrapper">
-                                <div className="button-default" onClick={() => {
+                                <div className="button-default button-general-page" onClick={() => {
                                     this.auth()
                                 }}>
                                     Войти
@@ -210,7 +210,7 @@ class Main extends Component {
                                        id="registration_two_password"/>
                             </div>
                             <div className="wrapper-input fix_wrapper">
-                                <div className="button-default" onClick={() => {
+                                <div className="button-default button-general-page" onClick={() => {
                                     this.registration()
                                 }}>
                                     Зарегистрироваться
