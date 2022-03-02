@@ -38,7 +38,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 const options = {
                     hostname: 'devcodemylife.tech',
                     port: 443,
-                    path: `/api/feed/${req.query.uuid}`,
+                    path: `/api/feed/${req.query.uuid}/null`,
                     method: 'GET'
                 }
 
