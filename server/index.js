@@ -45,7 +45,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 const reqs = https.request(options, resq => {
                     console.log(`statusCode: ${resq.statusCode}`)
 
-                    reqs.on('data', d => {
+                    resq.on('data', d => {
                         console.log(d)
                     })
                 })
