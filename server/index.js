@@ -67,7 +67,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 data = preData(
                     data,
                     app,
-                    "Добро пожаловать | DevCodeMyLIfe",
+                    "DevCodeMyLIfe",
                     "DevCodeMyLIfe, добро, пожаловать",
                     "Социальная сеть для программистов",
                 )
