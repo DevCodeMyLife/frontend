@@ -43,13 +43,11 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     data = preData(
                         data,
                         app,
-                        `${body?.body?.data[0].title}| DevCodeMyLife`,
+                        `${body?.data[0].title} | DevCodeMyLife`,
                     )
 
                     res.send(data)
                 });
-
-
 
                 break
             case "/feeds":
