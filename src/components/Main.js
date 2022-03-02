@@ -101,7 +101,7 @@ class Main extends Component {
                             <div className="auth-box-title">
                                 <h1>DevCodeMyLIfe</h1>
                             </div>
-                            <p>
+                            <p className="test-stat">
                                 Этот проект для разработчиков, любого уровня.<br/>
                                 Здесь Вы найдете интересные статьи, полезные заметки, мессенджер для общения.<br/>
                                 Создавайте заметки с кодом чтобы ни чего не потерять.
