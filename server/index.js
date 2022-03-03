@@ -38,7 +38,6 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                 request(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`, function (error, response, body) {
                     console.error('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                    console.log('body:', JSON.parse(body).data); // Print the HTML for the Google homepage.
 
                     if (error !== null || response && response.statusCode !== 404){
                         data = preData(
