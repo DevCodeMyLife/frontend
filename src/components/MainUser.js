@@ -380,6 +380,7 @@ class MainUsers extends Component {
                 value: data.value,
                 close: data.close,
                 title: data.title,
+                use_tags: data.use_tags,
                 cover_path: data.cover_path
             })
         })
