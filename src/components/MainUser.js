@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import ReactMarkdown from 'react-markdown'
 import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import SelectSearch from "react-select-search";
-
+import Select from 'react-select';
 // import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import {Link} from "react-navi";
 // import { route } from 'navi';
@@ -19,6 +18,15 @@ import {toast} from 'react-toastify';
 import error from "./Error";
 
 const gfm = require('remark-gfm')
+
+const aquaticCreatures = [
+    { label: 'Shark', value: 'Shark' },
+    { label: 'Dolphin', value: 'Dolphin' },
+    { label: 'Whale', value: 'Whale' },
+    { label: 'Octopus', value: 'Octopus' },
+    { label: 'Crab', value: 'Crab' },
+    { label: 'Lobster', value: 'Lobster' },
+];
 
 class MainUsers extends Component {
     constructor(props) {
@@ -86,8 +94,10 @@ class MainUsers extends Component {
 
         this.searchInput = React.useRef();
 
-        this.options = [
-            {
+    }
+
+    options = () => {
+        return {
                 items: [
                     { name: "Workshop One", value: "1" },
                     { name: "Workshop Two", value: "2" },
@@ -96,7 +106,7 @@ class MainUsers extends Component {
                     { name: "Workshop Five", value: "5" }
                 ]
             }
-        ];
+
     }
 
     updateStateUser() {
@@ -977,15 +987,10 @@ class MainUsers extends Component {
                                                                                         </>
 
                                                                             }
-                                                                            <SelectSearch
-                                                                                ref={this.searchInput}
-                                                                                options={this.options}
-                                                                                filterOptions={this.handleFilter}
-                                                                                value=""
-                                                                                name="Workshop"
-                                                                                placeholder="Choose a workshop"
-                                                                                search
-                                                                                onChange={this.handleChange}
+                                                                            <Select
+                                                                                options={aquaticCreatures}
+                                                                                isMulti
+                                                                                onChange={opt => console.log(opt)}
                                                                             />
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
