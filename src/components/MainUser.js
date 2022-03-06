@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import ReactMarkdown from 'react-markdown'
 import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import SelectSearch from "react-select-search";
+
 // import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import {Link} from "react-navi";
 // import { route } from 'navi';
@@ -15,7 +17,6 @@ import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
 import {toast} from 'react-toastify';
 import error from "./Error";
-import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
 
@@ -82,6 +83,33 @@ class MainUsers extends Component {
             this.setState(this.state.store.getState())
             this.updateStateUser()
         })
+
+        this.searchInput = React.useRef();
+
+        this.options = [
+            {
+                type: "group",
+                name: "Atlanta",
+                items: [
+                    { name: "Workshop One", value: "1" },
+                    { name: "Workshop Two", value: "2" }
+                ]
+            },
+            {
+                type: "group",
+                name: "Charleston",
+                items: [
+                    { name: "Workshop Three", value: "3" },
+                    { name: "Workshop Four", value: "4" },
+                    { name: "Workshop Five", value: "5" }
+                ]
+            },
+            {
+                type: "group",
+                name: "Inactive",
+                items: [{ name: "Inactive Workshop", value: "100" }]
+            }
+        ];
     }
 
     updateStateUser() {
@@ -531,6 +559,20 @@ class MainUsers extends Component {
         return Math.floor(d / 60)
     }
 
+    handleFilter = (items) => {
+        return (searchValue) => {
+            if (searchValue.length === 0) {
+                return options;
+            }
+            return items.map((list) => {
+                const newItems = list.items.filter((item) => {
+                    return item.name.toLowerCase().includes(searchValue.toLowerCase());
+                });
+                return {...list, items: newItems};
+            });
+        };
+    };
+
     createChat = event => {
         this.setState({
             clickCreateDialog: true
@@ -820,6 +862,13 @@ class MainUsers extends Component {
         })
     }
 
+    handleChange = (...args) => {
+        // searchInput.current.querySelector("input").value = "";
+        console.log("ARGS:", args);
+
+        console.log("CHANGE:");
+    };
+
     render() {
         let {isLoaded, textNews, mainFeed, clicked_new_post} = this.state;
 
@@ -941,7 +990,16 @@ class MainUsers extends Component {
                                                                                         </>
 
                                                                             }
-
+                                                                            <SelectSearch
+                                                                                ref={this.searchInput}
+                                                                                options={this.options}
+                                                                                filterOptions={this.handleFilter}
+                                                                                value=""
+                                                                                name="Workshop"
+                                                                                placeholder="Choose a workshop"
+                                                                                search
+                                                                                onChange={this.handleChange}
+                                                                            />
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
