@@ -231,6 +231,8 @@ class MainUsers extends Component {
 
     rewriteFeed(uuid, value, title, close, cover, tag) {
 
+        this.cancel()
+
         let result = []
 
         for (let i = 0; i < tag.length; i++) {
