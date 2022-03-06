@@ -88,26 +88,13 @@ class MainUsers extends Component {
 
         this.options = [
             {
-                type: "group",
-                name: "Atlanta",
                 items: [
                     { name: "Workshop One", value: "1" },
-                    { name: "Workshop Two", value: "2" }
-                ]
-            },
-            {
-                type: "group",
-                name: "Charleston",
-                items: [
+                    { name: "Workshop Two", value: "2" },
                     { name: "Workshop Three", value: "3" },
                     { name: "Workshop Four", value: "4" },
                     { name: "Workshop Five", value: "5" }
                 ]
-            },
-            {
-                type: "group",
-                name: "Inactive",
-                items: [{ name: "Inactive Workshop", value: "100" }]
             }
         ];
     }
