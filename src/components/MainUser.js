@@ -1002,7 +1002,6 @@ class MainUsers extends Component {
                                                                                 onChange={opt => this.setState({
                                                                                     useTags: this.state.useTags.pop(opt)
                                                                                 })}
-                                                                                defaultInputValue={this.state.useTags}
                                                                                 placeholder="Подберите тег..."
                                                                             />
                                                                             <div className="title-view">
