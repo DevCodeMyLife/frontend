@@ -608,7 +608,7 @@ code {
     border-radius: 5px;
     padding: 20px;
     width: 225px;
-    position: fixed;
+    /*position: fixed;*/
 }
 
 .title-box {
