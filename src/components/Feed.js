@@ -491,9 +491,12 @@ class Feed extends Component {
                                                                 <div className="like_wrapper wrapper-flex-end">
                                                                     {
                                                                         data?.tag ?
-                                                                            <div className="tags-type">
-                                                                                #{data?.tag}
-                                                                            </div>
+                                                                            data.tag?.map(tag =>
+                                                                                <div className="tags-type">
+                                                                                    #{tag?.value}
+                                                                                </div>
+                                                                            )
+
                                                                             :
                                                                             null
                                                                     }
