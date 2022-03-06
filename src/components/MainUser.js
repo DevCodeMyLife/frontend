@@ -999,6 +999,7 @@ class MainUsers extends Component {
                                                                                 options={this.state.aquaticCreatures}
                                                                                 isMulti
                                                                                 maxMenuHeight={300}
+                                                                                defaultValue={this.state.useTags}
                                                                                 onChange={opt => this.setState({
                                                                                     useTags: this.state.useTags.push(opt)
                                                                                 })}
