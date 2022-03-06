@@ -276,6 +276,7 @@ class MainUsers extends Component {
                             let result = []
 
                             for (let i = res.data.length; i <= res.data.length; i++) {
+                                console.log(i)
                                 let row = {label: res.data[i].value, value: res.data[i].tid}
 
                                 result.append(row)
