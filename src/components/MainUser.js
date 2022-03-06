@@ -77,7 +77,8 @@ class MainUsers extends Component {
             coverUpload: null,
             src_cover: null,
             imageCropCover: false,
-            aquaticCreatures: []
+            aquaticCreatures: [],
+            useTags: []
         }
 
 
@@ -228,7 +229,7 @@ class MainUsers extends Component {
         })
     }
 
-    rewriteFeed(uuid, value, title, close, cover) {
+    rewriteFeed(uuid, value, title, close, cover, tag) {
         this.setState({
             rewriteUUID: uuid,
             rewriteValue: value,
@@ -238,7 +239,8 @@ class MainUsers extends Component {
             show_textarea: true,
             close: close,
             showPreview: true,
-            coverUpload: cover
+            coverUpload: cover,
+            useTags: tag
         })
     }
 
@@ -336,7 +338,8 @@ class MainUsers extends Component {
             showPreview: false,
             rewriteMode: false,
             textNews: "...",
-            coverUpload: null
+            coverUpload: null,
+            useTags: []
         })
     }
 
@@ -344,6 +347,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
             close: this.state.close
         }
@@ -418,6 +422,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
             close: this.state.close
         }
@@ -983,7 +988,10 @@ class MainUsers extends Component {
                                                                                 options={this.state.aquaticCreatures}
                                                                                 isMulti
                                                                                 maxMenuHeight={300}
-                                                                                onChange={opt => console.log(opt)}
+                                                                                onChange={opt => this.setState({
+                                                                                    useTags: this.state.useTags.pop(opt)
+                                                                                })}
+                                                                                defaultInputValue={this.state.useTags}
                                                                                 placeholder="Подберите тег..."
                                                                             />
                                                                             <div className="title-view">
@@ -1300,7 +1308,7 @@ class MainUsers extends Component {
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
                                                                             <div className="like" onClick={() => {
-                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path)
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag)
                                                                             }}>
                                                                                 <div className="like-text">
                                                                     <span className="like-count">
