@@ -270,7 +270,7 @@ class MainUsers extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
-                            if (res.status.code === 0 && res.data.length > 0) {
+                            if (res.status.code === "0" && res.data.length > 0) {
 
                                 let result = []
 
