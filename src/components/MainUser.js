@@ -982,8 +982,9 @@ class MainUsers extends Component {
                                                                             <Select
                                                                                 options={this.state.aquaticCreatures}
                                                                                 isMulti
-                                                                                maxMenuHeight={100}
+                                                                                maxMenuHeight={300}
                                                                                 onChange={opt => console.log(opt)}
+                                                                                placeholder="Подберите тег..."
                                                                             />
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
