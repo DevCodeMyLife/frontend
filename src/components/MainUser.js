@@ -270,27 +270,19 @@ class MainUsers extends Component {
                     })
                         .then(response => response.json())
                         .then(res => {
-                            if (res.status.code === "0" && res.data.length > 0) {
 
-                                let result = []
+                            let result = []
 
-                                for (let i = res.data.length; i <= res.data.length; i++) {
-                                    let row = {label: res.data[i].value, value: res.data[i].tid}
+                            for (let i = res.data.length; i <= res.data.length; i++) {
+                                let row = {label: res.data[i].value, value: res.data[i].tid}
 
-                                    result.append(row)
-                                }
-
-                                this.setState({
-                                    aquaticCreatures: result
-                                });
-                            } else {
-                                this.setState({
-                                    isLoaded: false,
-                                    result: {},
-                                    notUser: true,
-                                    error: true
-                                });
+                                result.append(row)
                             }
+
+                            this.setState({
+                                aquaticCreatures: result
+                            });
+
                         })
                         .catch(error => {
                             this.setState({
