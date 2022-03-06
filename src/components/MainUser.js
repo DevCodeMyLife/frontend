@@ -982,7 +982,7 @@ class MainUsers extends Component {
                                                                             <Select
                                                                                 options={this.state.aquaticCreatures}
                                                                                 isMulti
-                                                                                maxMenuHeight={5}
+                                                                                maxMenuHeight={100}
                                                                                 onChange={opt => console.log(opt)}
                                                                             />
                                                                             <div className="title-view">
