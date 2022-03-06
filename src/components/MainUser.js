@@ -230,6 +230,15 @@ class MainUsers extends Component {
     }
 
     rewriteFeed(uuid, value, title, close, cover, tag) {
+
+        let result = []
+
+        for (let i = 0; i < tag.length; i++) {
+            let row = {label: tag[i].value, value: tag[i].tid}
+
+            result.push(row)
+        }
+
         this.setState({
             rewriteUUID: uuid,
             rewriteValue: value,
@@ -240,7 +249,7 @@ class MainUsers extends Component {
             close: close,
             showPreview: true,
             coverUpload: cover,
-            useTags: tag
+            useTags: result
         })
     }
 
