@@ -551,8 +551,9 @@ class MainUsers extends Component {
 
     }
 
-    updateUseTags(opt) {
-        this.setState({ useTags: opt})
+    updateUseTags = (newValue, actionMeta) => {
+        console.log(newValue, actionMeta)
+        // this.setState({ useTags: newValue})
     }
 
     handleChangeInput = (event) => {
@@ -1004,8 +1005,9 @@ class MainUsers extends Component {
                                                                                 isMulti
                                                                                 maxMenuHeight={300}
                                                                                 defaultValue={this.state.useTags}
-                                                                                onChange={opt => this.updateUseTags(opt)}
+                                                                                onChange={this.updateUseTags}
                                                                                 placeholder="Подберите тег..."
+                                                                                OnPop-value
                                                                             />
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
