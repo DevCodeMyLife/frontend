@@ -97,6 +97,7 @@ class Feed extends Component {
                         });
                     }else{
                         this.setState({
+                            result: null,
                             isLoaded: "access"
                         });
                     }
