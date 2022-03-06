@@ -271,6 +271,8 @@ class MainUsers extends Component {
                         .then(response => response.json())
                         .then(res => {
 
+                            console.log(res.data)
+
                             let result = []
 
                             for (let i = res.data.length; i <= res.data.length; i++) {
