@@ -552,8 +552,9 @@ class MainUsers extends Component {
     }
 
     updateUseTags(opt) {
+        let state = this.state.useTags
         this.setState({
-            useTags: this.state.useTags.push(opt)
+            useTags: state.push(opt)
         })
     }
 
