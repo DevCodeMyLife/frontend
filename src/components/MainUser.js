@@ -16,6 +16,7 @@ import {Helmet} from "react-helmet";
 import "react-image-crop/dist/ReactCrop.css";
 import {toast} from 'react-toastify';
 import error from "./Error";
+import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
 
@@ -275,7 +276,7 @@ class MainUsers extends Component {
 
                             let result = []
 
-                            for (let i = res.data.length; i <= res.data.length; i++) {
+                            for (let i = 0; i <= res.data.length; i++) {
                                 console.log(i)
                                 let row = {label: res.data[i].value, value: res.data[i].tid}
 
