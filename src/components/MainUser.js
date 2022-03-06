@@ -91,22 +91,6 @@ class MainUsers extends Component {
             this.setState(this.state.store.getState())
             this.updateStateUser()
         })
-
-        this.searchInput = React.useRef();
-
-    }
-
-    options = () => {
-        return {
-                items: [
-                    { name: "Workshop One", value: "1" },
-                    { name: "Workshop Two", value: "2" },
-                    { name: "Workshop Three", value: "3" },
-                    { name: "Workshop Four", value: "4" },
-                    { name: "Workshop Five", value: "5" }
-                ]
-            }
-
     }
 
     updateStateUser() {
