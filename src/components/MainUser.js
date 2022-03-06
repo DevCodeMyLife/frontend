@@ -235,7 +235,7 @@ class MainUsers extends Component {
 
         let result = []
 
-        if (tag !== null ) {
+        if (tag !== null) {
             for (let i = 0; i < tag.length; i++) {
                 let row = {label: tag[i].value, value: tag[i].tid}
 
@@ -333,7 +333,7 @@ class MainUsers extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter  wrapLongLines={false} language={match[1]} PreTag="div"
+                <SyntaxHighlighter wrapLongLines={false} language={match[1]} PreTag="div"
                                    children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
@@ -558,7 +558,7 @@ class MainUsers extends Component {
 
     updateUseTags = (newValue, actionMeta) => {
         console.log(newValue, actionMeta)
-        this.setState({ useTags: newValue})
+        this.setState({useTags: newValue})
     }
 
     handleChangeInput = (event) => {
@@ -604,7 +604,7 @@ class MainUsers extends Component {
                 console.log(res)
                 if (res.status.code === 0) {
                     window.location.href = `/messages?cid=${res.data}`
-                }else{
+                } else {
                     toast.error(res.status?.message + " - Попробуйте позже", {
                         position: "top-center",
                         autoClose: 5000,
@@ -855,6 +855,10 @@ class MainUsers extends Component {
         console.log(crop)
     }
 
+    isValidNewOption = (inputValue, selectValue) => {
+        return !(inputValue.length > 0 && selectValue.length < 6);
+    }
+
     onImageLoaded = (image) => {
         this.setState({imageRef: image})
     };
@@ -1013,7 +1017,7 @@ class MainUsers extends Component {
                                                                                     defaultValue={this.state.useTags}
                                                                                     onChange={this.updateUseTags}
                                                                                     placeholder="Подберите тег..."
-                                                                                    OnPop-value
+                                                                                    isValidNewOption={this.isValidNewOption}
                                                                                 />
                                                                             </div>
                                                                             <div className="title-view">
