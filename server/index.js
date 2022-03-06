@@ -55,7 +55,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                         data,
                         app,
                         `${JSON.parse(body).data[0].title} | DevCodeMyLife`,
-                        `${JSON.parse(body).data[0].value.split(' ').join(', ')}`,
+                        `${JSON.parse(body).data[0].title.split(' ').join(', ')}`,
                         `${JSON.parse(body).data[0].title}`
                     )
 

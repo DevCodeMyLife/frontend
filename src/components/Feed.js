@@ -88,12 +88,19 @@ class Feed extends Component {
             })
                 .then(response => response.json())
                 .then(res => {
-                    this.setState({
-                        isLoaded: "access",
-                        result: res.data.sort(function (x, y) {
-                            return x.count_like > y.count_like ? -1 : 1;
-                        })
-                    });
+                    if (res.data !== null) {
+                        this.setState({
+                            isLoaded: "access",
+                            result: res.data.sort(function (x, y) {
+                                return x.count_like > y.count_like ? -1 : 1;
+                            })
+                        });
+                    }else{
+                        this.setState({
+                            result: null,
+                            isLoaded: "access"
+                        });
+                    }
                 })
                 .catch(error => {
                     this.setState({
@@ -395,7 +402,7 @@ class Feed extends Component {
                                                 </div>
                                             </div>
                                             :
-                                            result.length === null ?
+                                            result === null ?
                                                 <div className="feed-wrapper">
                                                     <div className="not_news">
                                                         К сожалению показать нечего 🙁
@@ -491,9 +498,12 @@ class Feed extends Component {
                                                                 <div className="like_wrapper wrapper-flex-end">
                                                                     {
                                                                         data?.tag ?
-                                                                            <div className="tags-type">
-                                                                                #{data?.tag}
-                                                                            </div>
+                                                                            data.tag?.map(tag =>
+                                                                                <div className="tags-type">
+                                                                                    #{tag?.value}
+                                                                                </div>
+                                                                            )
+
                                                                             :
                                                                             null
                                                                     }

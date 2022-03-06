@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import ReactMarkdown from 'react-markdown'
 import ReactCrop from "react-image-crop";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import Select from 'react-select';
 // import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
 import {Link} from "react-navi";
 // import { route } from 'navi';
@@ -18,6 +19,7 @@ import error from "./Error";
 import {number} from "prop-types";
 
 const gfm = require('remark-gfm')
+
 
 class MainUsers extends Component {
     constructor(props) {
@@ -74,7 +76,9 @@ class MainUsers extends Component {
             isCall: false,
             coverUpload: null,
             src_cover: null,
-            imageCropCover: false
+            imageCropCover: false,
+            aquaticCreatures: [],
+            useTags: []
         }
 
 
@@ -225,7 +229,20 @@ class MainUsers extends Component {
         })
     }
 
-    rewriteFeed(uuid, value, title, close, cover) {
+    rewriteFeed(uuid, value, title, close, cover, tag) {
+
+        this.cancel()
+
+        let result = []
+
+        if (tag !== null) {
+            for (let i = 0; i < tag.length; i++) {
+                let row = {label: tag[i].value, value: tag[i].tid}
+
+                result.push(row)
+            }
+        }
+
         this.setState({
             rewriteUUID: uuid,
             rewriteValue: value,
@@ -235,7 +252,8 @@ class MainUsers extends Component {
             show_textarea: true,
             close: close,
             showPreview: true,
-            coverUpload: cover
+            coverUpload: cover,
+            useTags: result
         })
     }
 
@@ -262,6 +280,35 @@ class MainUsers extends Component {
                         mainFeed: res.feed,
                         notUser: false
                     });
+
+                    fetch("/api/tags", {
+                        method: "GET"
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+
+                            let result = []
+
+                            for (let i = 0; i < res.data.length; i++) {
+                                let row = {label: res.data[i].value, value: res.data[i].tid}
+
+                                result.push(row)
+                            }
+
+                            this.setState({
+                                aquaticCreatures: result
+                            });
+
+                        })
+                        .catch(error => {
+                            this.setState({
+                                isLoaded: false,
+                                error: true,
+                                result: {},
+                                notUser: true
+                            });
+                            console.log(error)
+                        });
                 } else {
                     this.setState({
                         isLoaded: false,
@@ -286,7 +333,7 @@ class MainUsers extends Component {
         code({node, inline, className, children, ...props}) {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-                <SyntaxHighlighter  wrapLongLines={false} language={match[1]} PreTag="div"
+                <SyntaxHighlighter wrapLongLines={false} language={match[1]} PreTag="div"
                                    children={String(children).replace(/\n$/, '')} {...props} />
             ) : (
                 <code className={className} {...props}>
@@ -304,15 +351,16 @@ class MainUsers extends Component {
             showPreview: false,
             rewriteMode: false,
             textNews: "...",
-            coverUpload: null
+            coverUpload: null,
+            useTags: []
         })
     }
-
 
     saveFeed() {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
             close: this.state.close
         }
@@ -332,6 +380,7 @@ class MainUsers extends Component {
                 value: data.value,
                 close: data.close,
                 title: data.title,
+                use_tags: data.use_tags,
                 cover_path: data.cover_path
             })
         })
@@ -387,6 +436,7 @@ class MainUsers extends Component {
         let data = {
             title: document.getElementById("text_title").value,
             value: document.getElementById("text_news").value,
+            use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
             close: this.state.close
         }
@@ -506,6 +556,11 @@ class MainUsers extends Component {
 
     }
 
+    updateUseTags = (newValue, actionMeta) => {
+        console.log(newValue, actionMeta)
+        this.setState({useTags: newValue})
+    }
+
     handleChangeInput = (event) => {
         if (event.target.value === "") {
             this.setState({heading: "Текст заголовка"})
@@ -549,7 +604,7 @@ class MainUsers extends Component {
                 console.log(res)
                 if (res.status.code === 0) {
                     window.location.href = `/messages?cid=${res.data}`
-                }else{
+                } else {
                     toast.error(res.status?.message + " - Попробуйте позже", {
                         position: "top-center",
                         autoClose: 5000,
@@ -800,6 +855,10 @@ class MainUsers extends Component {
         console.log(crop)
     }
 
+    isValidNewOption = (inputValue, selectValue) => {
+        return !(inputValue.length > 0 && selectValue.length < 6);
+    }
+
     onImageLoaded = (image) => {
         this.setState({imageRef: image})
     };
@@ -819,6 +878,13 @@ class MainUsers extends Component {
             imageRef: null
         })
     }
+
+    handleChange = (...args) => {
+        // searchInput.current.querySelector("input").value = "";
+        console.log("ARGS:", args);
+
+        console.log("CHANGE:");
+    };
 
     render() {
         let {isLoaded, textNews, mainFeed, clicked_new_post} = this.state;
@@ -924,6 +990,7 @@ class MainUsers extends Component {
                                                                 {
                                                                     this.state.clicked_new_post ?
                                                                         <div className="textarea-hide">
+                                                                            <div style={{marginBottom: "20px"}}>
                                                                             <input type="file" name="file" id="upload_file_input_cover"
                                                                                    onChange={(e) => this.uploadCoverAction(e)}
                                                                                    accept="image/x-png,image/jpeg" style={{display: "none"}}/>
@@ -941,7 +1008,18 @@ class MainUsers extends Component {
                                                                                         </>
 
                                                                             }
-
+                                                                            </div>
+                                                                            <div className="title-view">
+                                                                                <Select
+                                                                                    options={this.state.aquaticCreatures}
+                                                                                    isMulti
+                                                                                    maxMenuHeight={300}
+                                                                                    defaultValue={this.state.useTags}
+                                                                                    onChange={this.updateUseTags}
+                                                                                    placeholder="Подберите тег..."
+                                                                                    isValidNewOption={this.isValidNewOption}
+                                                                                />
+                                                                            </div>
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
@@ -1248,20 +1326,20 @@ class MainUsers extends Component {
                                                                             }
                                                                         </div>
                                                                         <div className="like-text">
-                                                            <span className="like-count">
-                                                                {data?.look_count}
-                                                            </span>
+                                                                            <span className="like-count">
+                                                                                {data?.look_count}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
                                                                             <div className="like" onClick={() => {
-                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path)
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag)
                                                                             }}>
                                                                                 <div className="like-text">
-                                                                    <span className="like-count">
-                                                                        Изменить
-                                                                    </span>
+                                                                                    <span className="like-count">
+                                                                                        Изменить
+                                                                                    </span>
                                                                                 </div>
                                                                             </div>
                                                                             :
@@ -1272,9 +1350,12 @@ class MainUsers extends Component {
                                                                 <div className="like_wrapper wrapper-flex-end">
                                                                     {
                                                                         data?.tag ?
-                                                                            <div className="tags-type">
-                                                                                #{data?.tag}
-                                                                            </div>
+                                                                            data.tag?.map(tag =>
+                                                                                <div className="tags-type">
+                                                                                    #{tag?.value}
+                                                                                </div>
+                                                                            )
+
                                                                             :
                                                                             null
                                                                     }
