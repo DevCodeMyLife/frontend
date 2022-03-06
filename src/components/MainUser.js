@@ -573,7 +573,7 @@ class MainUsers extends Component {
 
     updateUseTags = (newValue, actionMeta) => {
         console.log(newValue, actionMeta)
-        // this.setState({ useTags: newValue})
+        this.setState({ useTags: newValue})
     }
 
     handleChangeInput = (event) => {
