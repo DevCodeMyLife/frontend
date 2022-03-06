@@ -235,10 +235,12 @@ class MainUsers extends Component {
 
         let result = []
 
-        for (let i = 0; i < tag.length; i++) {
-            let row = {label: tag[i].value, value: tag[i].tid}
+        if (tag != null ) {
+            for (let i = 0; i < tag.length; i++) {
+                let row = {label: tag[i].value, value: tag[i].tid}
 
-            result.push(row)
+                result.push(row)
+            }
         }
 
         this.setState({
@@ -1319,9 +1321,9 @@ class MainUsers extends Component {
                                                                             }
                                                                         </div>
                                                                         <div className="like-text">
-                                                            <span className="like-count">
-                                                                {data?.look_count}
-                                                            </span>
+                                                                            <span className="like-count">
+                                                                                {data?.look_count}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     {
@@ -1330,9 +1332,9 @@ class MainUsers extends Component {
                                                                                 this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag)
                                                                             }}>
                                                                                 <div className="like-text">
-                                                                    <span className="like-count">
-                                                                        Изменить
-                                                                    </span>
+                                                                                    <span className="like-count">
+                                                                                        Изменить
+                                                                                    </span>
                                                                                 </div>
                                                                             </div>
                                                                             :
@@ -1341,14 +1343,17 @@ class MainUsers extends Component {
 
                                                                 </div>
                                                                 <div className="like_wrapper wrapper-flex-end">
-                                                                    {/*{*/}
-                                                                    {/*    data?.tag ?*/}
-                                                                    {/*        <div className="tags-type">*/}
-                                                                    {/*            #{data?.tag}*/}
-                                                                    {/*        </div>*/}
-                                                                    {/*        :*/}
-                                                                    {/*        null*/}
-                                                                    {/*}*/}
+                                                                    {
+                                                                        data?.tag ?
+                                                                            data.tag?.map(tag =>
+                                                                                <div className="tags-type">
+                                                                                    #{tag?.value}
+                                                                                </div>
+                                                                            )
+
+                                                                            :
+                                                                            null
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         </div>
