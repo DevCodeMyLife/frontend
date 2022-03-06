@@ -272,15 +272,13 @@ class MainUsers extends Component {
                         .then(response => response.json())
                         .then(res => {
 
-                            console.log(res.data)
-
                             let result = []
 
                             for (let i = 0; i <= res.data.length; i++) {
                                 console.log(i)
                                 let row = {label: res.data[i].value, value: res.data[i].tid}
 
-                                result.append(row)
+                                result.push(row)
                             }
 
                             this.setState({
