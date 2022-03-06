@@ -517,7 +517,7 @@ class Feed extends Component {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable" action={data.value}
                                          onClick={this.handleClickTag}>
-                                        <span style={{color: () => {this.randomColor()}}}>#</span>{data.value}
+                                        <span style={{color: this.randomColor()}}>#</span>{data.value}
                                     </div>
                                 )
                             }
