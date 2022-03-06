@@ -19,14 +19,6 @@ import error from "./Error";
 
 const gfm = require('remark-gfm')
 
-const aquaticCreatures = [
-    { label: 'Shark', value: 'Shark' },
-    { label: 'Dolphin', value: 'Dolphin' },
-    { label: 'Whale', value: 'Whale' },
-    { label: 'Octopus', value: 'Octopus' },
-    { label: 'Crab', value: 'Crab' },
-    { label: 'Lobster', value: 'Lobster' },
-];
 
 class MainUsers extends Component {
     constructor(props) {
@@ -83,7 +75,8 @@ class MainUsers extends Component {
             isCall: false,
             coverUpload: null,
             src_cover: null,
-            imageCropCover: false
+            imageCropCover: false,
+            aquaticCreatures: []
         }
 
 
@@ -271,6 +264,43 @@ class MainUsers extends Component {
                         mainFeed: res.feed,
                         notUser: false
                     });
+
+                    fetch("/api/tags", {
+                        method: "GET"
+                    })
+                        .then(response => response.json())
+                        .then(res => {
+                            if (res.status.code === 0 && res.data.length > 0) {
+
+                                let result = []
+
+                                for (let i = res.data.length; i <= res.data.length; i++) {
+                                    let row = {label: res.data[i].value, value: res.data[i].tid}
+
+                                    result.append(row)
+                                }
+
+                                this.setState({
+                                    aquaticCreatures: result
+                                });
+                            } else {
+                                this.setState({
+                                    isLoaded: false,
+                                    result: {},
+                                    notUser: true,
+                                    error: true
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            this.setState({
+                                isLoaded: false,
+                                error: true,
+                                result: {},
+                                notUser: true
+                            });
+                            console.log(error)
+                        });
                 } else {
                     this.setState({
                         isLoaded: false,
@@ -316,7 +346,6 @@ class MainUsers extends Component {
             coverUpload: null
         })
     }
-
 
     saveFeed() {
         let data = {
@@ -539,20 +568,6 @@ class MainUsers extends Component {
     getLastVisit = (d) => {
         return Math.floor(d / 60)
     }
-
-    handleFilter = (items) => {
-        return (searchValue) => {
-            if (searchValue.length === 0) {
-                return options;
-            }
-            return items.map((list) => {
-                const newItems = list.items.filter((item) => {
-                    return item.name.toLowerCase().includes(searchValue.toLowerCase());
-                });
-                return {...list, items: newItems};
-            });
-        };
-    };
 
     createChat = event => {
         this.setState({
@@ -972,7 +987,7 @@ class MainUsers extends Component {
 
                                                                             }
                                                                             <Select
-                                                                                options={aquaticCreatures}
+                                                                                options={this.state.aquaticCreatures}
                                                                                 isMulti
                                                                                 onChange={opt => console.log(opt)}
                                                                             />
