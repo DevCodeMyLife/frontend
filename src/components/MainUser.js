@@ -1000,8 +1000,9 @@ class MainUsers extends Component {
                                                                                 isMulti
                                                                                 maxMenuHeight={300}
                                                                                 onChange={opt => this.setState({
-                                                                                    useTags: this.state.useTags.pop(opt)
+                                                                                    useTags: this.state.useTags.push(opt)
                                                                                 })}
+
                                                                                 placeholder="Подберите тег..."
                                                                             />
                                                                             <div className="title-view">
