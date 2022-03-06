@@ -552,6 +552,7 @@ class MainUsers extends Component {
     }
 
     updateUseTags(opt) {
+        console.log(this.state.useTags)
         this.setState({ useTags: this.state.useTags.concat(opt) })
     }
 
