@@ -235,7 +235,7 @@ class MainUsers extends Component {
 
         let result = []
 
-        if (tag != null ) {
+        if (tag !== null ) {
             for (let i = 0; i < tag.length; i++) {
                 let row = {label: tag[i].value, value: tag[i].tid}
 
