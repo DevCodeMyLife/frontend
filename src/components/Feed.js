@@ -88,12 +88,18 @@ class Feed extends Component {
             })
                 .then(response => response.json())
                 .then(res => {
-                    this.setState({
-                        isLoaded: "access",
-                        result: res.data.sort(function (x, y) {
-                            return x.count_like > y.count_like ? -1 : 1;
-                        })
-                    });
+                    if (res.data !== null) {
+                        this.setState({
+                            isLoaded: "access",
+                            result: res.data.sort(function (x, y) {
+                                return x.count_like > y.count_like ? -1 : 1;
+                            })
+                        });
+                    }else{
+                        this.setState({
+                            isLoaded: "access"
+                        });
+                    }
                 })
                 .catch(error => {
                     this.setState({
