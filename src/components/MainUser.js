@@ -1002,15 +1002,17 @@ class MainUsers extends Component {
 
                                                                             }
                                                                             </div>
-                                                                            <Select
-                                                                                options={this.state.aquaticCreatures}
-                                                                                isMulti
-                                                                                maxMenuHeight={300}
-                                                                                defaultValue={this.state.useTags}
-                                                                                onChange={this.updateUseTags}
-                                                                                placeholder="Подберите тег..."
-                                                                                OnPop-value
-                                                                            />
+                                                                            <div className="title-view">
+                                                                                <Select
+                                                                                    options={this.state.aquaticCreatures}
+                                                                                    isMulti
+                                                                                    maxMenuHeight={300}
+                                                                                    defaultValue={this.state.useTags}
+                                                                                    onChange={this.updateUseTags}
+                                                                                    placeholder="Подберите тег..."
+                                                                                    OnPop-value
+                                                                                />
+                                                                            </div>
                                                                             <div className="title-view">
                                                                                 <input className="feed-textarea"
                                                                                        autoFocus={true} type="text"
@@ -1339,14 +1341,14 @@ class MainUsers extends Component {
 
                                                                 </div>
                                                                 <div className="like_wrapper wrapper-flex-end">
-                                                                    {
-                                                                        data?.tag ?
-                                                                            <div className="tags-type">
-                                                                                #{data?.tag}
-                                                                            </div>
-                                                                            :
-                                                                            null
-                                                                    }
+                                                                    {/*{*/}
+                                                                    {/*    data?.tag ?*/}
+                                                                    {/*        <div className="tags-type">*/}
+                                                                    {/*            #{data?.tag}*/}
+                                                                    {/*        </div>*/}
+                                                                    {/*        :*/}
+                                                                    {/*        null*/}
+                                                                    {/*}*/}
                                                                 </div>
                                                             </div>
                                                         </div>
