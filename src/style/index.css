@@ -1779,7 +1779,7 @@ p {
     align-items: center;
     border: dotted 7px var(--grey);
     cursor: pointer;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .cover-feed {
