@@ -551,6 +551,12 @@ class MainUsers extends Component {
 
     }
 
+    updateUseTags(opt) {
+        this.setState({
+            useTags: this.state.useTags.push(opt)
+        })
+    }
+
     handleChangeInput = (event) => {
         if (event.target.value === "") {
             this.setState({heading: "Текст заголовка"})
@@ -1000,10 +1006,7 @@ class MainUsers extends Component {
                                                                                 isMulti
                                                                                 maxMenuHeight={300}
                                                                                 defaultValue={this.state.useTags}
-                                                                                onChange={opt => this.setState({
-                                                                                    useTags: this.state.useTags.push(opt)
-                                                                                })}
-
+                                                                                onChange={opt => this.updateUseTags(opt)}
                                                                                 placeholder="Подберите тег..."
                                                                             />
                                                                             <div className="title-view">
