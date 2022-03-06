@@ -552,10 +552,7 @@ class MainUsers extends Component {
     }
 
     updateUseTags(opt) {
-        let state = this.state.useTags
-        this.setState({
-            useTags: state.push(opt)
-        })
+        this.setState({ useTags: this.state.useTags.concat(opt) })
     }
 
     handleChangeInput = (event) => {
