@@ -50,10 +50,6 @@ class Feed extends Component {
         }
     }
 
-    randomColor() {
-        return "#" + Math.floor(Math.random()*16777215).toString(16);
-    }
-
     like(uuid) {
         let data = {
             feeds_uuid: uuid
@@ -517,7 +513,7 @@ class Feed extends Component {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable" action={data.value}
                                          onClick={this.handleClickTag}>
-                                        <span style={{color: this.randomColor()}}>#</span>{data.value}
+                                        <span style={{color: data.color}}>#</span>{data.value}
                                     </div>
                                 )
                             }
