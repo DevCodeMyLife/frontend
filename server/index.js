@@ -33,9 +33,9 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
         }
 
         console.log(req.path)
-        console.log(req.path.split("/")[0])
+        console.log(req.path.split("/")[1])
 
-        switch (req.path.split("/")[0]) {
+        switch (req.path.split("/")[1]) {
             case "post":
                 let url_parts = req.path.split("/")[req.path.split("/").length - 1]
                 request(`https://devcodemylife.tech/api/feed/${url_parts}/null`, {"set-cookie": req.cookies},  function (error, response, body) {
