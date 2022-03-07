@@ -59,7 +59,7 @@ class FeedOnePage extends Component {
         let data = {
             feeds_uuid: uuid
         }
-        fetch("api/like", {
+        fetch("/api/like", {
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -140,7 +140,7 @@ class FeedOnePage extends Component {
             this.getPreferredColorScheme()
         });
 
-        fetch("api/authentication", {
+        fetch("/api/authentication", {
             method: "POST"
         })
             .then(response => response.json())
