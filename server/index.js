@@ -33,6 +33,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
         }
 
         console.log(req.path)
+        console.log(req.path.split("/")[0])
 
         switch (req.path.split("/")[0]) {
             case "post":
