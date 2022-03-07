@@ -438,8 +438,8 @@ class App extends React.Component {
 
     render() {
         if (this.state.load) {
-            if (true) {
-                return (<HelmetProvider>
+            return (
+                <HelmetProvider>
                     <div className="wrapper">
                         <BrowserRouter>
                             <Switch>
@@ -506,42 +506,8 @@ class App extends React.Component {
                         </BrowserRouter>
                         {/*<Footer/>*/}
                     </div>
-                </HelmetProvider>);
-            } else {
-                return (<div>
-                    <Head
-                        store={store}
-                        load={true}
-                    />
-                    {/*<div className="personal_data_accept-block full-width">*/}
-                    {/*    <div className="wrapper-accept-personal-data">*/}
-                    {/*        <div className="text-info-accept">*/}
-                    {/*            Продолжая пользоваться сайтом, Вы даете согласие на обработку Ваших персональных данных.*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div className="wrapper-content">
-                        <div className="content">
-
-                            <div id="vertical_menu" className="reviews-menu">
-                                <div className="wrapper-ad" onClick={() => {
-                                    window.location.href = "https://mcs.mail.ru/"
-                                }}>
-                                    <div className="image-ad">
-                                        <img className="image-ad-tag" src={vk} alt="vk"/>
-                                    </div>
-                                    <div className="ad-text">
-                                        Сайт работает в облаках
-                                    </div>
-                                    {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
-                                </div>
-                            </div>
-                            <Main/>
-                        </div>
-                    </div>
-                    <Footer/>
-                </div>);
-            }
+                </HelmetProvider>
+            );
         } else {
             return (<div style={{
                 position: "fixed",
