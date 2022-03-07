@@ -400,8 +400,31 @@ class FeedOnePage extends Component {
                                                 result.map(res =>
                                                     <div className="feed-comments-wrapper-item background-white">
                                                         <div className="wrapper-comments">
-                                                            <div className="comments-title bottom-line">Комментарии
+                                                            <div className="wrapper-data">
+                                                                <div key="aksdlkasd" className="photo-wrapper">
+                                                                    <img key="asdmmmmasd" src={res?.avatar_url}
+                                                                         alt={res?.login}/>
+                                                                </div>
+                                                                <div className="value-post placeholder-main-feed">
+                                                                    <TextareaAutosize
+                                                                        className="feed-textarea"
+                                                                        onChange={this.handleChangeTextarea}
+                                                                        autoFocus={false}
+                                                                        placeholder="Напишите Ваш комментарий"
+                                                                        id="text_comments"
+                                                                        onKeyPress={this.handleKeyPress}
+                                                                    >
+
+                                                                    </TextareaAutosize>
+                                                                </div>
                                                             </div>
+                                                            <div
+                                                                className="wrapper-flex-end create-feed-wrapper-button">
+                                                                <div className="button-default"
+                                                                     onClick={() => this.sendComments()}>Отправить
+                                                                </div>
+                                                            </div>
+                                                            <div className="comments-title bottom-line">Комментарии</div>
                                                             <div className="wall-comments">
                                                                 {
                                                                     this.state.comments.length ?
@@ -459,30 +482,6 @@ class FeedOnePage extends Component {
                                                                         <div className="no-comments">Новых комментариев
                                                                             нет.</div>
                                                                 }
-                                                            </div>
-                                                            <div className="wrapper-data">
-                                                                <div key="aksdlkasd" className="photo-wrapper">
-                                                                    <img key="asdmmmmasd" src={res?.avatar_url}
-                                                                         alt={res?.login}/>
-                                                                </div>
-                                                                <div className="value-post placeholder-main-feed">
-                                                                    <TextareaAutosize
-                                                                        className="feed-textarea"
-                                                                        onChange={this.handleChangeTextarea}
-                                                                        autoFocus={false}
-                                                                        placeholder="Напишите Ваш комментарий"
-                                                                        id="text_comments"
-                                                                        onKeyPress={this.handleKeyPress}
-                                                                    >
-
-                                                                    </TextareaAutosize>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                className="wrapper-flex-end create-feed-wrapper-button">
-                                                                <div className="button-default"
-                                                                     onClick={() => this.sendComments()}>Отправить
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
