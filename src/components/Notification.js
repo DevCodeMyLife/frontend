@@ -49,7 +49,7 @@ class Notification extends Component {
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 0) {
-                    window.location.href = `/post?uuid=${uuid}`
+                    window.location.href = `/post/${uuid}`
                 }
 
             })

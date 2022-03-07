@@ -1154,7 +1154,7 @@ class MainUsers extends Component {
                                                 mainFeed?.map(data =>
                                                     <div key={data?.ID} className="feed-wrapper-item">
                                                             <Link style={{textDecoration: "none"}}
-                                                                  href={`/post?uuid=${data?.ID}`}>
+                                                                  href={`/post/${data?.ID}`}>
                                                                 {
                                                                     data?.cover_path !== "" ?
                                                                         <img className="cover-feed" src={data.cover_path}

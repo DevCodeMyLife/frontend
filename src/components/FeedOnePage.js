@@ -34,7 +34,8 @@ class FeedOnePage extends Component {
             data: null,
             notFeed: false,
             isDark: "light",
-            user: null
+            user: null,
+            uuid: this.props.uuid
         }
     }
 
@@ -50,17 +51,15 @@ class FeedOnePage extends Component {
         }
     }
 
-
     handleKeyPress = () => {
         document.getElementById('comments_view').scrollTop = document.getElementById('comments_view').scrollHeight
     }
-
 
     like(uuid) {
         let data = {
             feeds_uuid: uuid
         }
-        fetch("api/like", {
+        fetch("/api/like", {
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -85,7 +84,6 @@ class FeedOnePage extends Component {
                 console.log(error)
             });
     }
-
 
     components = {
         code({node, inline, className, children, ...props}) {
@@ -114,7 +112,7 @@ class FeedOnePage extends Component {
         }
 
         if (data.value !== "") {
-            fetch("api/comments", {
+            fetch("/api/comments", {
                 method: "POST",
                 body: JSON.stringify(data)
             })
@@ -134,7 +132,6 @@ class FeedOnePage extends Component {
         }
     }
 
-
     componentWillMount() {
         this.getPreferredColorScheme()
 
@@ -143,7 +140,7 @@ class FeedOnePage extends Component {
             this.getPreferredColorScheme()
         });
 
-        fetch("api/authentication", {
+        fetch("/api/authentication", {
             method: "POST"
         })
             .then(response => response.json())
@@ -174,10 +171,13 @@ class FeedOnePage extends Component {
     }
 
     getFeed() {
-        let url = new URL(window.location.href);
-        let uuid = url.searchParams.get("uuid");
+        let uuid = this.state.uuid
 
-        let path = `api/feed/${uuid}/${window.localStorage.getItem('finger')}`
+        if (uuid === "") {
+            window.location.href = "/feeds"
+        }
+
+        let path = `/api/feed/${uuid}/${window.localStorage.getItem('finger')}`
 
         if (uuid !== "") {
             fetch(path, {
@@ -269,7 +269,7 @@ class FeedOnePage extends Component {
                                                     "@type": "ListItem",
                                                     "position": 3,
                                                     "name": data?.title || data?.value?.substring(0, 30),
-                                                    "item": `https://devcodemylife.tech/post?uuid=${data?.ID}`
+                                                    "item": `https://devcodemylife.tech/post/${data?.ID}`
                                                 }
                                             ]
                                         }}/>
