@@ -1009,7 +1009,7 @@ class MainUsers extends Component {
 
                                                                             }
                                                                             </div>
-                                                                            <div className="title-view">
+                                                                            <div className="title-view" style={{marginBottom: "10px"}}>
                                                                                 <Select
                                                                                     options={this.state.aquaticCreatures}
                                                                                     isMulti
