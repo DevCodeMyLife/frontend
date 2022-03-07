@@ -22,6 +22,9 @@ const description_any_site_og = '<meta property="og:title" content="">'
 const meta_title = '<meta name="title" content=""/>'
 const canonical = '<link rel="canonical" href=""/>'
 
+// meta graph
+const meta_google = '<meta property="og:image" content="/main.jpg">'
+
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
     const indexFile = path.resolve('./build/index.html');
@@ -56,13 +59,14 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                         return
                     }
 
-                    data = preData(
+                    data = preDataFeed(
                         data,
                         app,
                         `${JSON.parse(body).data[0].title} | DevCodeMyLife`,
                         `${JSON.parse(body).data[0].title.split(' ').join(', ')}`,
                         `${JSON.parse(body).data[0].title}`,
-                        req.path
+                        req.path,
+                        JSON.parse(body).data[0].cover_path
                     )
                     res.status(200)
                     res.send(data)
@@ -99,6 +103,22 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
 });
 
 function preData(data, app, title_render, keywords_render, description_render, url) {
+    data = data.replace(main, `<div id="root">${app}</div>`)
+    data = data.replace(title, `<title>${title_render}</title>`)
+    data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
+    data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
+    data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
+    data = data.replace(meta_title, `<meta name="title" content="${title_render}"/>`)
+    data = data.replace(canonical, `<link rel="canonical" href="https://devcodemylife.tech${url}"/>`)
+
+    return data
+}
+
+function preDataFeed(data, app, title_render, keywords_render, description_render, url, cover_feed) {
+    if (cover_feed !== ""){
+        data = data.replace(meta_google, `<meta property="og:image" content="https://devcodemylife.tech${cover_feed}">`)
+    }
+
     data = data.replace(main, `<div id="root">${app}</div>`)
     data = data.replace(title, `<title>${title_render}</title>`)
     data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
