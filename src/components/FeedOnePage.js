@@ -112,7 +112,7 @@ class FeedOnePage extends Component {
         }
 
         if (data.value !== "") {
-            fetch("api/comments", {
+            fetch("/api/comments", {
                 method: "POST",
                 body: JSON.stringify(data)
             })
