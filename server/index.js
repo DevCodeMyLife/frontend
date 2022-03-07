@@ -21,6 +21,13 @@ const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 
 
+app.use(function(req, res, next) {
+    const indexFile = path.resolve('./public/400.html');
+    fs.readFile(indexFile, 'utf8', (err, data) => {
+        res.status(404).send(data);
+    })
+});
+
 app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
     const indexFile = path.resolve('./build/index.html');
