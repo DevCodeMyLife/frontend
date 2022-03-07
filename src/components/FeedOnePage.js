@@ -420,7 +420,7 @@ class FeedOnePage extends Component {
                                                             </div>
                                                             <div
                                                                 className="wrapper-flex-end create-feed-wrapper-button">
-                                                                <div className="button-default"
+                                                                <div className="button-default" style={{height: "15px"}}
                                                                      onClick={() => this.sendComments()}>Отправить
                                                                 </div>
                                                             </div>
