@@ -20,7 +20,7 @@ const keywords = '<meta name="keywords" content=""/>'
 const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 const meta_title = '<meta name="title" content=""/>'
-const canonical = '<link rel="canonical" href="" />'
+const canonical = '<link rel="canonical" href=""/>'
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
@@ -105,7 +105,7 @@ function preData(data, app, title_render, keywords_render, description_render, u
     data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
     data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
     data = data.replace(meta_title, `<meta name="title" content="${title_render}"/>`)
-    data = data.replace(canonical, `<link rel="canonical" href="https://devcodemylife.tech${url}" />`)
+    data = data.replace(canonical, `<link rel="canonical" href="https://devcodemylife.tech${url}"/>`)
 
     return data
 }
