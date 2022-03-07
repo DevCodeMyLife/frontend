@@ -177,7 +177,7 @@ class FeedOnePage extends Component {
             window.location.href = "/feeds"
         }
 
-        let path = `api/feed/${uuid}/${window.localStorage.getItem('finger')}`
+        let path = `/api/feed/${uuid}/${window.localStorage.getItem('finger')}`
 
         if (uuid !== "") {
             fetch(path, {
