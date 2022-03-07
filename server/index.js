@@ -21,7 +21,7 @@ const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 const meta_title = '<meta name="title" content=""/>'
 
-app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
+app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
     const indexFile = path.resolve('./build/index.html');
 
