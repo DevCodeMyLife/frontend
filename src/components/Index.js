@@ -80,7 +80,11 @@ class App extends React.Component {
                     });
                 return {view: <MainUser store={store} id={id}/>}
             }), '/feeds': route({ view: <Feed store={store}/>
-            }), '/post': route({ view: <FeedOnePage store={store}/>
+            }), '/post/:uuid': route(async req => {
+
+                let id = req.params.uuid
+
+                return { view: <FeedOnePage store={store} uuid={id}/> }
             }), '/agreement': route({ view: <Agreement store={store}/>
             }), '/settings': route({ view: <Settings store={store}/>
             }), '/freelances': route({ view: <Freelances store={store}/>

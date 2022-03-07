@@ -34,7 +34,8 @@ class FeedOnePage extends Component {
             data: null,
             notFeed: false,
             isDark: "light",
-            user: null
+            user: null,
+            uuid: this.props.uuid
         }
     }
 
@@ -50,11 +51,9 @@ class FeedOnePage extends Component {
         }
     }
 
-
     handleKeyPress = () => {
         document.getElementById('comments_view').scrollTop = document.getElementById('comments_view').scrollHeight
     }
-
 
     like(uuid) {
         let data = {
@@ -85,7 +84,6 @@ class FeedOnePage extends Component {
                 console.log(error)
             });
     }
-
 
     components = {
         code({node, inline, className, children, ...props}) {
@@ -134,7 +132,6 @@ class FeedOnePage extends Component {
         }
     }
 
-
     componentWillMount() {
         this.getPreferredColorScheme()
 
@@ -174,8 +171,11 @@ class FeedOnePage extends Component {
     }
 
     getFeed() {
-        let url = new URL(window.location.href);
-        let uuid = url.searchParams.get("uuid");
+        let uuid = this.state.uuid
+
+        if (uuid === "") {
+            window.location.href = "/feeds"
+        }
 
         let path = `api/feed/${uuid}/${window.localStorage.getItem('finger')}`
 
