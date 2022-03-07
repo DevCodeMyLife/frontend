@@ -2145,7 +2145,7 @@ link-user {
 .feed-comments-wrapper-item {
     /*border: 1px solid var(--logo);*/
     box-shadow: var(--view-shadow);
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     /*padding: 10px;*/
     margin-bottom: 20px;
     background: var(--white);
