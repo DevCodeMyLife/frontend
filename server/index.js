@@ -47,6 +47,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                             `golang, python, c, c#, css, js, node, nginx, proxy`,
                             `Такой заметки нет`
                         )
+                        res.status(200)
                         res.send(data)
                         return
                     }
@@ -58,7 +59,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                         `${JSON.parse(body).data[0].title.split(' ').join(', ')}`,
                         `${JSON.parse(body).data[0].title}`
                     )
-
+                    res.status(200)
                     res.send(data)
                 });
 
@@ -72,6 +73,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Лента новостей"
                 )
 
+                res.status(200)
                 res.send(data)
                 break
             default:
@@ -83,6 +85,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
                     "Социальная сеть для разработчиков, для любого уровня. Здесь Вы найдете интересные статьи, и полезные заметки.",
                 )
 
+                res.status(200)
                 res.send(data)
         }
     });
