@@ -417,11 +417,10 @@ class FeedOnePage extends Component {
 
                                                                     </TextareaAutosize>
                                                                 </div>
-                                                            </div>
-                                                            <div
-                                                                className="wrapper-flex-end create-feed-wrapper-button">
-                                                                <div className="button-default" style={{height: "15px"}}
-                                                                     onClick={() => this.sendComments()}>Отправить
+                                                                <div className="wrapper-flex-end create-feed-wrapper-button">
+                                                                    <div className="button-default" style={{height: "15px"}}
+                                                                         onClick={() => this.sendComments()}>Отправить
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div className="comments-title bottom-line">Комментарии</div>
