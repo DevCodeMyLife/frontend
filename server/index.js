@@ -35,8 +35,9 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
         console.log(req.path)
 
         switch (req.path) {
-            case "/post":
-                request(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`, {"set-cookie": req.cookies},  function (error, response, body) {
+            case req.path.match('/post.'):
+                let url_parts = req.path.split("/")[req.path.split("/").length - 1]
+                request(`https://devcodemylife.tech/api/feed/${url_parts}/null`, {"set-cookie": req.cookies},  function (error, response, body) {
                     console.error('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 
@@ -47,7 +48,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                             `Такой заметки нет | DevCodeMyLife`,
                             `golang, python, c, c#, css, js, node, nginx, proxy`,
                             `Такой заметки нет`,
-                            req.url
+                            req.path
                         )
                         res.status(200)
                         res.send(data)
@@ -60,7 +61,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                         `${JSON.parse(body).data[0].title} | DevCodeMyLife`,
                         `${JSON.parse(body).data[0].title.split(' ').join(', ')}`,
                         `${JSON.parse(body).data[0].title}`,
-                        req.url
+                        req.path
                     )
                     res.status(200)
                     res.send(data)
@@ -74,7 +75,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                     "Лента Новости | DevCodeMyLife",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Лента новостей",
-                    req.url
+                    req.path
                 )
 
                 res.status(200)
@@ -87,7 +88,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                     "Социальная сеть для разработчиков | DevCodeMyLIfe",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Социальная сеть для разработчиков, для любого уровня. Здесь Вы найдете интересные статьи, и полезные заметки.",
-                    req.url
+                    req.path
                 )
 
                 res.status(200)
