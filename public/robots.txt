@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /feeds
+Allow: /post?uuid=*
 Disallow: /settings*
 Disallow: /user*
 Disallow: /freelances*
