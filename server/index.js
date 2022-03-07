@@ -19,6 +19,7 @@ const title = '<title></title>'
 const keywords = '<meta name="keywords" content=""/>'
 const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
+const meta_title = '<meta name="title" content=""/>'
 
 app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
@@ -96,6 +97,7 @@ function preData(data, app, title_render, keywords_render, description_render) {
     data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
     data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
     data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
+    data = data.replace(meta_title, `<meta name="title" content="${title_render}"/>`)
 
     return data
 }
