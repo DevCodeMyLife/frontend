@@ -400,7 +400,7 @@ class FeedOnePage extends Component {
                                                 result.map(res =>
                                                     <div className="feed-comments-wrapper-item background-white">
                                                         <div className="wrapper-comments">
-                                                            <div className="wrapper-data">
+                                                            <div className="feed-item-value" style={{display: "flex"}}>
                                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                                     <img key="asdmmmmasd" src={res?.avatar_url}
                                                                          alt={res?.login}/>
