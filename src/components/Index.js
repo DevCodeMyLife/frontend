@@ -483,6 +483,9 @@ class App extends React.Component {
                                                            <div className="menu-nav-item">
                                                                <Link href="https://t.me/devcodemylife" target="_blank">Мы в Telegram</Link>
                                                            </div>
+                                                           <div className="menu-nav-item">
+                                                               <Link href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ" target="_blank">Мы на YouTube</Link>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                    <NotFoundBoundary
