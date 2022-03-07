@@ -20,6 +20,7 @@ const keywords = '<meta name="keywords" content=""/>'
 const description = '<meta name="description" content=""/>'
 const description_any_site_og = '<meta property="og:title" content="">'
 const meta_title = '<meta name="title" content=""/>'
+const canonical = '<link rel="canonical" href="" />'
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
@@ -45,7 +46,8 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                             app,
                             `Такой заметки нет | DevCodeMyLife`,
                             `golang, python, c, c#, css, js, node, nginx, proxy`,
-                            `Такой заметки нет`
+                            `Такой заметки нет`,
+                            req.url
                         )
                         res.status(200)
                         res.send(data)
@@ -57,7 +59,8 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                         app,
                         `${JSON.parse(body).data[0].title} | DevCodeMyLife`,
                         `${JSON.parse(body).data[0].title.split(' ').join(', ')}`,
-                        `${JSON.parse(body).data[0].title}`
+                        `${JSON.parse(body).data[0].title}`,
+                        req.url
                     )
                     res.status(200)
                     res.send(data)
@@ -70,7 +73,8 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                     app,
                     "Лента Новости | DevCodeMyLife",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
-                    "Лента новостей"
+                    "Лента новостей",
+                    req.url
                 )
 
                 res.status(200)
@@ -83,6 +87,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                     "Социальная сеть для разработчиков | DevCodeMyLIfe",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Социальная сеть для разработчиков, для любого уровня. Здесь Вы найдете интересные статьи, и полезные заметки.",
+                    req.url
                 )
 
                 res.status(200)
@@ -91,13 +96,14 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
     });
 });
 
-function preData(data, app, title_render, keywords_render, description_render) {
+function preData(data, app, title_render, keywords_render, description_render, url) {
     data = data.replace(main, `<div id="root">${app}</div>`)
     data = data.replace(title, `<title>${title_render}</title>`)
     data = data.replace(keywords, `<meta name="keywords" content="${keywords_render}"/>`)
     data = data.replace(description, `<meta name="description" content="${description_render}"/>`)
     data = data.replace(description_any_site_og, `<meta property="og:title" content="${description_render}">`)
     data = data.replace(meta_title, `<meta name="title" content="${title_render}"/>`)
+    data = data.replace(canonical, `<link rel="canonical" href="https://devcodemylife.tech${url}" />`)
 
     return data
 }
