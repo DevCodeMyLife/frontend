@@ -24,6 +24,8 @@ const canonical = '<link rel="canonical" href=""/>'
 
 // meta graph
 const meta_google = '<meta property="og:image" content="/main.jpg">'
+const meta_google_url = '<meta property="og:url" content="https://devcodemylife.tech/">'
+
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
@@ -117,6 +119,8 @@ function preData(data, app, title_render, keywords_render, description_render, u
 function preDataFeed(data, app, title_render, keywords_render, description_render, url, cover_feed) {
     if (cover_feed !== ""){
         data = data.replace(meta_google, `<meta property="og:image" content="https://devcodemylife.tech${cover_feed}">`)
+        data = data.replace(meta_google_url, `<meta property="og:url" content="https://devcodemylife.tech${url}">`)
+
     }
 
     data = data.replace(main, `<div id="root">${app}</div>`)
