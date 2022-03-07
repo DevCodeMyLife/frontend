@@ -34,8 +34,8 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
 
         console.log(req.path)
 
-        switch (req.path) {
-            case req.path.match('/post.'):
+        switch (req.path.split("/")[0]) {
+            case "post":
                 let url_parts = req.path.split("/")[req.path.split("/").length - 1]
                 request(`https://devcodemylife.tech/api/feed/${url_parts}/null`, {"set-cookie": req.cookies},  function (error, response, body) {
                     console.error('error:', error); // Print the error if one occurred
@@ -68,7 +68,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                 });
 
                 break
-            case "/feeds":
+            case "feeds":
                 data = preData(
                     data,
                     app,
