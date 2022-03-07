@@ -400,7 +400,7 @@ class FeedOnePage extends Component {
                                                 result.map(res =>
                                                     <div className="feed-comments-wrapper-item background-white">
                                                         <div className="wrapper-comments">
-                                                            <div className="feed-item-value" style={{display: "flex", padding: "10px", borderBottom: "1px solid var(--button_border)", borderRadius: "none"}}>
+                                                            <div className="feed-item-value" style={{display: "flex", padding: "10px", borderBottom: "1px solid var(--button_border)", borderRadius: "0px"}}>
                                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                                     <img key="asdmmmmasd" src={res?.avatar_url}
                                                                          alt={res?.login}/>
@@ -414,9 +414,7 @@ class FeedOnePage extends Component {
                                                                         id="text_comments"
                                                                         onKeyPress={this.handleKeyPress}
                                                                         minRows={4}
-                                                                    >
-
-                                                                    </TextareaAutosize>
+                                                                    />
                                                                 </div>
                                                                 <div className="wrapper-flex-end create-feed-wrapper-button">
                                                                     <div className="button-default" style={{height: "15px"}}
