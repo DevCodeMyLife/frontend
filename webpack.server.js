@@ -1,5 +1,4 @@
 const path = require('path');
-// const nodeExternals = require('webpack-node-externals');
 const webpackNodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 

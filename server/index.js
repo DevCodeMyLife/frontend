@@ -35,7 +35,7 @@ app.get(['/', '/feeds', '/post', '/user/*', '/settings', '/messages', '/notifica
 
         switch (req.path) {
             case "/post":
-                request(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`, function (error, response, body) {
+                request(`https://devcodemylife.tech/api/feed/${req.query.uuid}/null`, {"set-cookie": req.cookies},  function (error, response, body) {
                     console.error('error:', error); // Print the error if one occurred
                     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 
