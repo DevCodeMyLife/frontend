@@ -413,6 +413,7 @@ class FeedOnePage extends Component {
                                                                         placeholder="Напишите Ваш комментарий"
                                                                         id="text_comments"
                                                                         onKeyPress={this.handleKeyPress}
+                                                                        minRows={4}
                                                                     >
 
                                                                     </TextareaAutosize>
