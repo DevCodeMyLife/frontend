@@ -12,14 +12,17 @@ class Header extends Component {
     }
 
     render() {
-        const state = this.state.store.getState()
+
+        const state = this.state.store?.getState()
+
+
         return (
             <header className="head">
                 <div className="rectangle-head">
                     <div className="wrapper-logo unselectable">
                         <div className="place-logo wrapper-inline-block" onClick={(e) => {
                             e.preventDefault();
-                            if (state.auth.user.isAuth) {
+                            if (state?.auth?.user?.isAuth) {
                                 window.location.href = '/feeds'
                             } else {
                                 window.location.href = '/'

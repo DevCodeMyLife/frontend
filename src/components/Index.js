@@ -441,7 +441,7 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.load) {
+        // if (this.state.load) {
             return (
                 <HelmetProvider>
                     <div className="wrapper">
@@ -450,10 +450,19 @@ class App extends React.Component {
                                 <Route path="/"
                                        render={({history, match}) => <Router routes={this.routes} history={history}
                                                                              basename={match.url}>
-                                           <Head
-                                               store={store}
-                                               load={true}
-                                           />
+                                           {
+                                               this.state.load ?
+                                                   <Head
+                                                       store={store}
+                                                       load={true}
+                                                   />
+                                               :
+                                                   <Head
+                                                       store={null}
+                                                       load={false}
+                                                   />
+                                           }
+
                                            <ToastContainer
                                                position="bottom-right"
                                                autoClose={2000}
@@ -468,7 +477,13 @@ class App extends React.Component {
                                            <div className="wrapper-content">
                                                <div className="content">
                                                    <div id="vertical_menu" className="reviews-menu">
-                                                       <Nav song={song} store={store}/>
+                                                       {
+                                                           this.state.load ?
+                                                               <Nav song={song} store={store}/>
+                                                           :
+                                                               null
+                                                       }
+
                                                        <div className="wrapper-ad" onClick={() => {
                                                            window.location.href = "https://mcs.mail.ru/"
                                                        }}>
@@ -514,18 +529,18 @@ class App extends React.Component {
                     </div>
                 </HelmetProvider>
             );
-        } else {
-            return (<div style={{
-                position: "fixed",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                <div className="loader"/>
-            </div>)
-        }
+        // } else {
+        //     return (<div style={{
+        //         position: "fixed",
+        //         width: "100%",
+        //         height: "100%",
+        //         display: "flex",
+        //         justifyContent: "center",
+        //         alignItems: "center"
+        //     }}>
+        //         <div className="loader"/>
+        //     </div>)
+        // }
 
     }
 }

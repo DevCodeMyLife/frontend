@@ -345,6 +345,8 @@ class Feed extends Component {
 
     render() {
         let {isLoaded, result, tags} = this.state;
+        console.log(tags)
+
         const store = this.state.store.getState()
         if (!store.components.settings.feed) {
             return (
@@ -410,107 +412,112 @@ class Feed extends Component {
                                                 </div>
                                                 :
                                                 <div className="feed-wrapper">
-                                                    {result.map(data =>
+                                                    {
+                                                        result.length > 0 ?
 
-                                                        <div key={data?.ID} className="feed-wrapper-item">
-                                                            <Link style={{textDecoration: "none"}}
-                                                                  href={`/post/${data?.ID}`}>
-                                                                {
-                                                                    data?.cover_path !== "" ?
-                                                                        <img className="cover-feed" src={data.cover_path}
-                                                                             alt={data.title} />
-                                                                        :
-                                                                        null
-                                                                }
-                                                                <div className="feed-item-value">
-                                                                    <div key="asldk" className="wrapper-data">
-                                                                        <Link href={`/user/${data?.uid}`}>
-                                                                            <div key="aksdlkasd"
-                                                                                 className="photo-wrapper">
-
-                                                                                {
-                                                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
-                                                                                        null
-                                                                                        :
-                                                                                        <div className="online_user"/>
-                                                                                }
-
-                                                                                <img key="asdmmmmasd" src={data?.photo}
-                                                                                     alt={data?.id}/>
-
-                                                                            </div>
-                                                                        </Link>
-                                                                        <div className="value-post">
-                                                                            <div className="feed-item-title">
+                                                            result.map(data =>
+                                                                <div key={data?.ID} className="feed-wrapper-item">
+                                                                    <Link style={{textDecoration: "none"}}
+                                                                          href={`/post/${data?.ID}`}>
+                                                                        {
+                                                                            data?.cover_path !== "" ?
+                                                                                <img className="cover-feed" src={data.cover_path}
+                                                                                     alt={data.title} />
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                        <div className="feed-item-value">
+                                                                            <div key="asldk" className="wrapper-data">
                                                                                 <Link href={`/user/${data?.uid}`}>
-                                                                                    <div className="link-user">
-                                                                                        {data?.user}
+                                                                                    <div key="aksdlkasd"
+                                                                                         className="photo-wrapper">
+
+                                                                                        {
+                                                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(data?.last_active_at).getTime() / 1000))) > 120 ?
+                                                                                                null
+                                                                                                :
+                                                                                                <div className="online_user"/>
+                                                                                        }
+
+                                                                                        <img key="asdmmmmasd" src={data?.photo}
+                                                                                             alt={data?.id}/>
+
                                                                                     </div>
                                                                                 </Link>
-                                                                                <div className="feed-item-datetime">
-                                                                                    {this.unixToDateTime(data?.date_time)}
+                                                                                <div className="value-post">
+                                                                                    <div className="feed-item-title">
+                                                                                        <Link href={`/user/${data?.uid}`}>
+                                                                                            <div className="link-user">
+                                                                                                {data?.user}
+                                                                                            </div>
+                                                                                        </Link>
+                                                                                        <div className="feed-item-datetime">
+                                                                                            {this.unixToDateTime(data?.date_time)}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div key="asldkasd" className="wrapper-data">
+                                                                                <div className="title-feed">
+                                                                                    {data?.title}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div key="asldkasd" className="wrapper-data">
-                                                                        <div className="title-feed">
-                                                                            {data?.title}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </Link>
-                                                            <div className="wrapper-bottom">
-                                                                <div className="like_wrapper wrapper-flex-start">
-                                                                    <div className="like"
-                                                                         onClick={() => this.like(data?.ID)}>
-                                                                        <div className="like-item">
-                                                                            {
-                                                                                this.state.isDark === "light" ?
-                                                                                    <img src={like} alt="like"/>
-                                                                                :
-                                                                                    <img src={like_dark} alt="like"/>
-                                                                            }
-                                                                        </div>
-                                                                        <div className="like-text">
-                                                                                <span className="like-count"
-                                                                                      id={data?.ID}>
-                                                                                    {data?.count_like}
-                                                                                </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="like">
-                                                                        <div className="like-item">
-                                                                            {
-                                                                                this.state.isDark === "light" ?
-                                                                                    <img src={look} alt="like"/>
-                                                                                    :
-                                                                                    <img src={look_dark} alt="like"/>
-                                                                            }
-                                                                        </div>
-                                                                        <div className="like-text">
-                                                                                <span className="like-count">
-                                                                                    {data?.look_count}
-                                                                                </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="like_wrapper wrapper-flex-end">
-                                                                    {
-                                                                        data?.tag ?
-                                                                            data.tag?.map(tag =>
-                                                                                <div className="tags-type">
-                                                                                    #{tag?.value}
+                                                                    </Link>
+                                                                    <div className="wrapper-bottom">
+                                                                        <div className="like_wrapper wrapper-flex-start">
+                                                                            <div className="like"
+                                                                                 onClick={() => this.like(data?.ID)}>
+                                                                                <div className="like-item">
+                                                                                    {
+                                                                                        this.state.isDark === "light" ?
+                                                                                            <img src={like} alt="like"/>
+                                                                                        :
+                                                                                            <img src={like_dark} alt="like"/>
+                                                                                    }
                                                                                 </div>
-                                                                            )
+                                                                                <div className="like-text">
+                                                                                        <span className="like-count"
+                                                                                              id={data?.ID}>
+                                                                                            {data?.count_like}
+                                                                                        </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="like">
+                                                                                <div className="like-item">
+                                                                                    {
+                                                                                        this.state.isDark === "light" ?
+                                                                                            <img src={look} alt="like"/>
+                                                                                            :
+                                                                                            <img src={look_dark} alt="like"/>
+                                                                                    }
+                                                                                </div>
+                                                                                <div className="like-text">
+                                                                                        <span className="like-count">
+                                                                                            {data?.look_count}
+                                                                                        </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="like_wrapper wrapper-flex-end">
+                                                                            {
+                                                                                data?.tag ?
+                                                                                    data.tag?.map(tag =>
+                                                                                        <div className="tags-type">
+                                                                                            #{tag?.value}
+                                                                                        </div>
+                                                                                    )
 
-                                                                            :
-                                                                            null
-                                                                    }
+                                                                                    :
+                                                                                    null
+                                                                            }
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                                            )
+                                                        :
+                                                            null
+                                                    }
                                                 </div>
                             }
 
@@ -520,12 +527,16 @@ class Feed extends Component {
                         <div className="tags-box">
                             <div className="title-box" id="tags-wrapper-all-tags">Теги</div>
                             {
-                                tags?.map(data =>
-                                    <div className="button-default-tag tags-item unselectable" action={data.value}
-                                         onClick={this.handleClickTag}>
-                                        <span style={{color: data.color}}>#</span>{data.value}
-                                    </div>
-                                )
+                                tags.length > 0 ?
+
+                                    tags?.map(data =>
+                                        <div className="button-default-tag tags-item unselectable" action={data.value}
+                                             onClick={this.handleClickTag}>
+                                            <span style={{color: data.color}}>#</span>{data.value}
+                                        </div>
+                                    )
+                                :
+                                    null
                             }
                         </div>
                     </div>
