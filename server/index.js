@@ -10,6 +10,7 @@ import express from 'express';
 
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/components/Index';
+import {StaticRouter} from "react-router-dom";
 
 const PORT = 80;
 const app = express();
@@ -31,7 +32,12 @@ const meta_twitter_url = '<meta property="twitter:url" content="https://devcodem
 
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
-    const app = ReactDOMServer.renderToString(<App/>);
+    let context = {}
+    const app = ReactDOMServer.renderToString(
+        <StaticRouter location={req.url} context={context}>
+            <App/>
+        </StaticRouter>
+    );
     const indexFile = path.resolve('./build/index.html');
 
     fs.readFile(indexFile, 'utf8', (err, data) => {

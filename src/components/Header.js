@@ -12,7 +12,7 @@ class Header extends Component {
     }
 
     render() {
-        const state = this.state.store.getState()
+        const state = this.state.store?.getState()
         return (
             <header className="head">
                 <div className="rectangle-head">
