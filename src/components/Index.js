@@ -441,90 +441,90 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.load) {
-            return (
-                <HelmetProvider>
-                    <div className="wrapper">
-
-                            <Switch>
-                                <Route path="/"
-                                       render={({history, match}) => <Router routes={this.routes} history={history}
-                                                                             basename={match.url}>
+        return (
+            <HelmetProvider>
+                <div className="wrapper">
+                    <Switch>
+                        <Route path="/"
+                               render={({history, match}) => <Router routes={this.routes} history={history}
+                                                                     basename={match.url}>
+                                   {
+                                       this.state.load ?
                                            <Head
                                                store={store}
                                                load={true}
                                            />
-                                           <ToastContainer
-                                               position="bottom-right"
-                                               autoClose={2000}
-                                               hideProgressBar={false}
-                                               newestOnTop={false}
-                                               closeOnClick
-                                               rtl={false}
-                                               pauseOnFocusLoss
-                                               draggable
-                                               pauseOnHover
+                                       :
+                                           <Head
+                                               store={null}
+                                               load={false}
                                            />
-                                           <div className="wrapper-content">
-                                               <div className="content">
-                                                   <div id="vertical_menu" className="reviews-menu">
+                                   }
+
+                                   <ToastContainer
+                                       position="bottom-right"
+                                       autoClose={2000}
+                                       hideProgressBar={false}
+                                       newestOnTop={false}
+                                       closeOnClick
+                                       rtl={false}
+                                       pauseOnFocusLoss
+                                       draggable
+                                       pauseOnHover
+                                   />
+                                   <div className="wrapper-content">
+                                       <div className="content">
+                                           <div id="vertical_menu" className="reviews-menu">
+                                               {
+                                                   this.state.load ?
                                                        <Nav song={song} store={store}/>
-                                                       <div className="wrapper-ad" onClick={() => {
-                                                           window.location.href = "https://mcs.mail.ru/"
-                                                       }}>
-                                                           <div className="image-ad">
-                                                               <img className="image-ad-tag" src={vk} alt="vk"/>
-                                                           </div>
-                                                           <div className="ad-text">
-                                                               Сайт работает в облаках
-                                                           </div>
-                                                           {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
-                                                       </div>
-                                                       <div className="menu-nav">
-                                                           <div className="menu-nav-item">
-                                                               <Link href="/user/6">Поддержка</Link>
-                                                           </div>
-                                                           <div className="menu-nav-item">
-                                                               <Link href="https://t.me/devcodemylife" target="_blank">Мы в Telegram</Link>
-                                                           </div>
-                                                           <div className="menu-nav-item">
-                                                               <Link href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ" target="_blank">Мы на YouTube</Link>
-                                                           </div>
-                                                       </div>
+                                                   :
+                                                       null
+                                               }
+                                               <div className="wrapper-ad" onClick={() => {
+                                                   window.location.href = "https://mcs.mail.ru/"
+                                               }}>
+                                                   <div className="image-ad">
+                                                       <img className="image-ad-tag" src={vk} alt="vk"/>
                                                    </div>
-                                                   <NotFoundBoundary
-                                                       render={() => <div className="content-wall-views">
-                                                           <div className="error-wrapper">
-                                                               <div className="error-page">
-                                                                   Такой страницы не существует.
-                                                               </div>
-                                                           </div>
-                                                       </div>}>
-                                                       <Suspense fallback={true}>
-                                                           <View store={store}/>
-                                                       </Suspense>
-                                                   </NotFoundBoundary>
+                                                   <div className="ad-text">
+                                                       Сайт работает в облаках
+                                                   </div>
+                                                   {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                               </div>
+                                               <div className="menu-nav">
+                                                   <div className="menu-nav-item">
+                                                       <Link href="/user/6">Поддержка</Link>
+                                                   </div>
+                                                   <div className="menu-nav-item">
+                                                       <Link href="https://t.me/devcodemylife" target="_blank">Мы в Telegram</Link>
+                                                   </div>
+                                                   <div className="menu-nav-item">
+                                                       <Link href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ" target="_blank">Мы на YouTube</Link>
+                                                   </div>
                                                </div>
                                            </div>
-                                       </Router>
+                                           <NotFoundBoundary
+                                               render={() => <div className="content-wall-views">
+                                                   <div className="error-wrapper">
+                                                       <div className="error-page">
+                                                           Такой страницы не существует.
+                                                       </div>
+                                                   </div>
+                                               </div>}>
+                                               <Suspense fallback={true}>
+                                                   <View store={store}/>
+                                               </Suspense>
+                                           </NotFoundBoundary>
+                                       </div>
+                                   </div>
+                               </Router>
 
-                                       }/>
-                            </Switch>
-                    </div>
-                </HelmetProvider>
-            );
-        } else {
-            return (<div style={{
-                position: "fixed",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                <div className="loader"/>
-            </div>)
-        }
+                               }/>
+                    </Switch>
+                </div>
+            </HelmetProvider>
+        );
 
     }
 }
