@@ -14,6 +14,8 @@ import video from "../icon/video.png"
 import video_dark from "../icon/video_dark.png"
 import music from "../icon/music.png"
 import music_dark from "../icon/music_dark.png"
+import jobs from "../icon/jobs.png"
+import jobs_dark from "../icon/jobs_dark.png"
 
 
 // import team from "../icon/team.png"
@@ -149,8 +151,8 @@ class Nav extends Component {
                             <div className="nav-item">
                                 <Link className="nav-value" href="/jobs">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notes} alt="Работа"/> :
-                                            <img src={notes_dark} alt="Работа"/>}
+                                        {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :
+                                            <img src={jobs_dark} alt="Работа"/>}
                                     </div>
                                     <div className="nav-value">
                                         Работа
@@ -160,11 +162,11 @@ class Nav extends Component {
                             <div className="nav-item">
                                 <Link className="nav-value" href="/people">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={people} alt="Найти друзей"/> :
-                                            <img src={people_dark} alt="Найти друзей"/>}
+                                        {this.state.isDark === "light" ? <img src={people} alt="Пользователи"/> :
+                                            <img src={people_dark} alt="Пользователи"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Найти друзей
+                                        Пользователи
                                     </div>
                                 </Link>
                             </div>
