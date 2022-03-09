@@ -10,6 +10,15 @@ import code_dark from "../icon/code_dark.png";
 import user from "../icon/user.png";
 import messages from "../icon/messages.png";
 import messages_dark from "../icon/messages_dark.png";
+import video from "../icon/video.png"
+import video_dark from "../icon/video_dark.png"
+import music from "../icon/music.png"
+import music_dark from "../icon/music_dark.png"
+import jobs from "../icon/jobs.png"
+import jobs_dark from "../icon/jobs_dark.png"
+import market from "../icon/market.png"
+import market_dark from "../icon/market_dark.png"
+
 
 // import team from "../icon/team.png"
 // import team_dark from "../icon/team_dark.png"
@@ -108,25 +117,58 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/video">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={video} alt="Видеозаписи"/> :*/}
+                            {/*                <img src={video_dark} alt="Видеозаписи"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Видеозаписи*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/audio">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :*/}
+                            {/*                <img src={music_dark} alt="Аудиозаписи"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Аудиозаписи*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             <div className="nav-item">
                                 <Link className="nav-value" href="/feeds">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
-                                            <img src={notes_dark} alt="Заметки"/>}
+                                        {this.state.isDark === "light" ? <img src={notes} alt="Лента"/> :
+                                            <img src={notes_dark} alt="Лента"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Новости
+                                        Лента
                                     </div>
                                 </Link>
                             </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/jobs">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :*/}
+                            {/*                <img src={jobs_dark} alt="Работа"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Найти работу*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             <div className="nav-item">
                                 <Link className="nav-value" href="/people">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={people} alt="Люди"/> :
-                                            <img src={people_dark} alt="Люди"/>}
+                                        {this.state.isDark === "light" ? <img src={people} alt="Пользователи"/> :
+                                            <img src={people_dark} alt="Пользователи"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Люди
+                                        Пользователи
                                     </div>
                                 </Link>
                             </div>
@@ -157,6 +199,17 @@ class Nav extends Component {
                                                 </div>
                                                 <div className="nav-value">
                                                     Фриланс
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <div className="nav-item">
+                                            <Link className="nav-value" href="/market">
+                                                <div className="icon-image">
+                                                    {this.state.isDark === "light" ? <img src={market} alt="Магазин"/> :
+                                                        <img src={market_dark} alt="Магазин"/>}
+                                                </div>
+                                                <div className="nav-value">
+                                                    Магазин
                                                 </div>
                                             </Link>
                                         </div>
