@@ -7,7 +7,7 @@ import Select from 'react-select';
 import {Link} from "react-navi";
 // import { route } from 'navi';
 import TextareaAutosize from 'react-textarea-autosize';
-import like from "../icon/like.png";
+import like from "../icon/_like.png";
 import look from "../icon/look.png";
 import like_dark from "../icon/like_dark.png";
 import look_dark from "../icon/look_dark.png";
