@@ -127,11 +127,11 @@ class Nav extends Component {
                             <div className="nav-item">
                                 <Link className="nav-value" href="/audio">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={music} alt="Музыка"/> :
-                                            <img src={music_dark} alt="Музыка"/>}
+                                        {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :
+                                            <img src={music_dark} alt="Аудиозаписи"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Музыка
+                                        Аудиозаписи
                                     </div>
                                 </Link>
                             </div>
