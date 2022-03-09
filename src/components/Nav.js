@@ -172,22 +172,22 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            {/*<div className="nav-item">*/}
-                            {/*    {state.auth.user.notificationCount ?*/}
-                            {/*        <div className="counter-notification" id="counter_notification"*/}
-                            {/*             path="/notification">*/}
-                            {/*            {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}*/}
-                            {/*        </div> : null}*/}
-                            {/*    <Link className="nav-value" href="/notification">*/}
-                            {/*        <div className="icon-image">*/}
-                            {/*            {this.state.isDark === "light" ? <img src={notification} alt="События"/> :*/}
-                            {/*                <img src={notification_dark} alt="События"/>}*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Уведомления*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
+                            <div className="nav-item">
+                                {state.auth.user.notificationCount ?
+                                    <div className="counter-notification" id="counter_notification"
+                                         path="/notification">
+                                        {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}
+                                    </div> : null}
+                                <Link className="nav-value" href="/notification">
+                                    <div className="icon-image">
+                                        {this.state.isDark === "light" ? <img src={notification} alt="События"/> :
+                                            <img src={notification_dark} alt="События"/>}
+                                    </div>
+                                    <div className="nav-value">
+                                        Уведомления
+                                    </div>
+                                </Link>
+                            </div>
                             {
                                 state.auth.user.data.testing ?
                                     <div>
