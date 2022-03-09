@@ -33,7 +33,7 @@ const meta_twitter_url = '<meta property="twitter:url" content="https://devcodem
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     let context = {}
-    const app = ReactDOMServer.renderToStaticNodeStream(
+    const app = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={context}>
             <App/>
         </StaticRouter>
@@ -147,7 +147,7 @@ function preDataFeed(data, app, title_render, keywords_render, description_rende
 }
 
 
-app.use(express.static('./build'));
+app.use(express.static(path.resolve(__dirname, '../build')));
 app.use(function(req, res, next) {
     const indexFile = path.resolve('./public/400.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {

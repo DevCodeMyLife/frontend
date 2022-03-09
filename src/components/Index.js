@@ -460,6 +460,7 @@ class App extends React.Component {
     }
 
     render() {
+        if (typeof window === 'undefined') { return (<div/>) }
         return (
             <div className="wrapper">
                 <Switch>
