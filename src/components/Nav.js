@@ -117,28 +117,28 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/video">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={video} alt="Видеозаписи"/> :
-                                            <img src={video_dark} alt="Видеозаписи"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Видеозаписи
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/audio">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :
-                                            <img src={music_dark} alt="Аудиозаписи"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Аудиозаписи
-                                    </div>
-                                </Link>
-                            </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/video">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={video} alt="Видеозаписи"/> :*/}
+                            {/*                <img src={video_dark} alt="Видеозаписи"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Видеозаписи*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/audio">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :*/}
+                            {/*                <img src={music_dark} alt="Аудиозаписи"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Аудиозаписи*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             <div className="nav-item">
                                 <Link className="nav-value" href="/feeds">
                                     <div className="icon-image">
@@ -150,17 +150,17 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/jobs">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :
-                                            <img src={jobs_dark} alt="Работа"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Найти работу
-                                    </div>
-                                </Link>
-                            </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/jobs">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :*/}
+                            {/*                <img src={jobs_dark} alt="Работа"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Найти работу*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             <div className="nav-item">
                                 <Link className="nav-value" href="/people">
                                     <div className="icon-image">
