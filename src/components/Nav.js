@@ -120,6 +120,28 @@ class Nav extends Component {
                                 </Link>
                             </div>
                             <div className="nav-item">
+                                <Link className="nav-value" href="/video">
+                                    <div className="icon-image">
+                                        {this.state.isDark === "light" ? <img src={notes} alt="Видео"/> :
+                                            <img src={notes_dark} alt="Видео"/>}
+                                    </div>
+                                    <div className="nav-value">
+                                        Видео
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="nav-item">
+                                <Link className="nav-value" href="/audio">
+                                    <div className="icon-image">
+                                        {this.state.isDark === "light" ? <img src={notes} alt="Музыка"/> :
+                                            <img src={notes_dark} alt="Музыка"/>}
+                                    </div>
+                                    <div className="nav-value">
+                                        Музыка
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="nav-item">
                                 <Link className="nav-value" href="/people">
                                     <div className="icon-image">
                                         {this.state.isDark === "light" ? <img src={people} alt="Люди"/> :
@@ -130,22 +152,22 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="nav-item">
-                                {state.auth.user.notificationCount ?
-                                    <div className="counter-notification" id="counter_notification"
-                                         path="/notification">
-                                        {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}
-                                    </div> : null}
-                                <Link className="nav-value" href="/notification">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notification} alt="События"/> :
-                                            <img src={notification_dark} alt="События"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Уведомления
-                                    </div>
-                                </Link>
-                            </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    {state.auth.user.notificationCount ?*/}
+                            {/*        <div className="counter-notification" id="counter_notification"*/}
+                            {/*             path="/notification">*/}
+                            {/*            {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}*/}
+                            {/*        </div> : null}*/}
+                            {/*    <Link className="nav-value" href="/notification">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={notification} alt="События"/> :*/}
+                            {/*                <img src={notification_dark} alt="События"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Уведомления*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             {
                                 state.auth.user.data.testing ?
                                     <div>
@@ -157,6 +179,17 @@ class Nav extends Component {
                                                 </div>
                                                 <div className="nav-value">
                                                     Фриланс
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <div className="nav-item">
+                                            <Link className="nav-value" href="/market">
+                                                <div className="icon-image">
+                                                    {this.state.isDark === "light" ? <img src={code} alt="Магазин"/> :
+                                                        <img src={code_dark} alt="Магазин"/>}
+                                                </div>
+                                                <div className="nav-value">
+                                                    Магазин
                                                 </div>
                                             </Link>
                                         </div>
