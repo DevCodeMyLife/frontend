@@ -157,7 +157,7 @@ class Nav extends Component {
                                             <img src={jobs_dark} alt="Работа"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Работа
+                                        Найти работу
                                     </div>
                                 </Link>
                             </div>
