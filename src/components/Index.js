@@ -53,10 +53,10 @@ class App extends React.Component {
 
 
         this.routes = mount({
-            '/': route({ view: <Main/>
-            }), '/people': route({ view: <People store={store}/>
-            }), '/messages': route({ view: <Messages store={store}/>
-            }), '/user/:id': route(async req => {
+            '/': route({ view: <Main/>}),
+            '/people': route({ view: <People store={store}/>}),
+            '/messages': route({ view: <Messages store={store}/>}),
+            '/user/:id': route(async req => {
                 let user;
                 let id = req.params.id
 
@@ -79,20 +79,21 @@ class App extends React.Component {
                         console.log(error)
                     });
                 return {view: <MainUser store={store} id={id}/>}
-            }), '/feeds': route({ view: <Feed store={store}/>
-            }), '/post/:uuid': route(async req => {
+            }),
+            '/feeds': route({ view: <Feed store={store}/>}),
+            '/post/:uuid': route(async req => {
 
                 let id = req.params.uuid
 
                 return { view: <FeedOnePage store={store} uuid={id}/> }
-            }), '/agreement': route({ view: <Agreement store={store}/>
-            }), '/settings': route({ view: <Settings store={store}/>
-            }), '/freelances': route({ view: <Freelances store={store}/>
-            }), '/notification': route({ view: <Notification store={store}/>
-            }), '/teams': route({view: <Teams store={store}/>
-            }), '/how_to_use': route({ view: <HowToUse store={store}/>
-            }), '/task': route({ view: <Task store={store}/>
             }),
+            '/agreement': route({ view: <Agreement store={store}/>}),
+            '/settings': route({ view: <Settings store={store}/>}),
+            '/freelances': route({ view: <Freelances store={store}/>}),
+            '/notification': route({ view: <Notification store={store}/>}),
+            '/teams': route({view: <Teams store={store}/>}),
+            '/how_to_use': route({ view: <HowToUse store={store}/>}),
+            '/task': route({ view: <Task store={store}/>}),
         })
     }
 
