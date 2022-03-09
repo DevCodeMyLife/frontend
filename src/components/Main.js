@@ -26,7 +26,7 @@ class Main extends Component {
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 200) {
-                    window.location.href = res.data.location
+                    window.location.replace(res.data.location)
                 } else if (res.status.code === 404) {
                     document.getElementById("error_auth").innerHTML = "Неверный логин или пароль"
                 } else if (res.status.code === 7182) {
@@ -59,7 +59,7 @@ class Main extends Component {
             .then(response => response.json())
             .then(res => {
                 if (res.status.code === 200) {
-                    window.location.href = res.data.location
+                    window.location.replace( res.data.location)
                 } else if (res.status.code === 3002) {
                     document.getElementById("error_registration").innerHTML = "Такой логин или эл. почта уже есть"
                 } else if (res.status.code === 3003) {
