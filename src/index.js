@@ -4,8 +4,6 @@ import './style/index.css'
 import App from './components/Index'
 import {BrowserRouter} from "react-router-dom";
 
-
-//<StaticRouter location={req.url} context={context}>
 ReactDOM.hydrate(
     <BrowserRouter>
         <App/>

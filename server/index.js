@@ -33,7 +33,7 @@ const meta_twitter_url = '<meta property="twitter:url" content="https://devcodem
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
     let context = {}
-    const app = ReactDOMServer.renderToString(
+    const app = ReactDOMServer.renderToStaticNodeStream(
         <StaticRouter location={req.url} context={context}>
             <App/>
         </StaticRouter>

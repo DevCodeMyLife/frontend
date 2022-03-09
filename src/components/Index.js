@@ -28,8 +28,6 @@ import Task from "./Task";
 
 const store = createStore(AppReducer);
 
-
-
 const CONFIG = {
     url: `wss://devcodemylife.tech/cent/connection/websocket`
 };
@@ -44,7 +42,7 @@ class App extends React.Component {
             this.state = {
                 load: false, context: new AudioContext(), audio: new Audio(song), channel: null
             }
-        }else{
+        } else {
 
             this.state = {
                 load: false, context: {}, audio: {}, channel: null
@@ -53,9 +51,12 @@ class App extends React.Component {
 
 
         this.routes = mount({
-            '/': route({ view: <Main/>
-            }), '/people': route({ view: <People store={store}/>
-            }), '/messages': route({ view: <Messages store={store}/>
+            '/': route({
+                view: <Main/>
+            }), '/people': route({
+                view: <People store={store}/>
+            }), '/messages': route({
+                view: <Messages store={store}/>
             }), '/user/:id': route(async req => {
                 let user;
                 let id = req.params.id
@@ -79,19 +80,27 @@ class App extends React.Component {
                         console.log(error)
                     });
                 return {view: <MainUser store={store} id={id}/>}
-            }), '/feeds': route({ view: <Feed store={store}/>
+            }), '/feeds': route({
+                view: <Feed store={store}/>
             }), '/post/:uuid': route(async req => {
 
                 let id = req.params.uuid
 
-                return { view: <FeedOnePage store={store} uuid={id}/> }
-            }), '/agreement': route({ view: <Agreement store={store}/>
-            }), '/settings': route({ view: <Settings store={store}/>
-            }), '/freelances': route({ view: <Freelances store={store}/>
-            }), '/notification': route({ view: <Notification store={store}/>
-            }), '/teams': route({view: <Teams store={store}/>
-            }), '/how_to_use': route({ view: <HowToUse store={store}/>
-            }), '/task': route({ view: <Task store={store}/>
+                return {view: <FeedOnePage store={store} uuid={id}/>}
+            }), '/agreement': route({
+                view: <Agreement store={store}/>
+            }), '/settings': route({
+                view: <Settings store={store}/>
+            }), '/freelances': route({
+                view: <Freelances store={store}/>
+            }), '/notification': route({
+                view: <Notification store={store}/>
+            }), '/teams': route({
+                view: <Teams store={store}/>
+            }), '/how_to_use': route({
+                view: <HowToUse store={store}/>
+            }), '/task': route({
+                view: <Task store={store}/>
             }),
         })
     }
@@ -196,7 +205,9 @@ class App extends React.Component {
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
-                                    onClick: ()=>{ location.href = "/notification"}
+                                    onClick: () => {
+                                        location.href = "/notification"
+                                    }
                                 });
                                 break;
                             case "task_win":
@@ -250,7 +261,9 @@ class App extends React.Component {
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
-                                    onClick: ()=>{ location.href = "/notification"}
+                                    onClick: () => {
+                                        location.href = "/notification"
+                                    }
                                 });
                                 break;
                             case "task_lose":
@@ -304,7 +317,9 @@ class App extends React.Component {
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
-                                    onClick: ()=>{ location.href = "/notification"}
+                                    onClick: () => {
+                                        location.href = "/notification"
+                                    }
                                 });
                                 break;
                             case "comment":
@@ -335,7 +350,9 @@ class App extends React.Component {
                                     pauseOnHover: true,
                                     draggable: true,
                                     progress: undefined,
-                                    onClick: ()=>{ location.href = "/notification"}
+                                    onClick: () => {
+                                        location.href = "/notification"
+                                    }
                                 });
                                 break;
                             case "message":
@@ -365,7 +382,9 @@ class App extends React.Component {
                                         pauseOnHover: true,
                                         draggable: true,
                                         progress: undefined,
-                                        onClick: ()=>{ location.href = "/messages"}
+                                        onClick: () => {
+                                            location.href = "/messages"
+                                        }
                                     });
                                 }
                                 break;
@@ -442,68 +461,75 @@ class App extends React.Component {
 
     render() {
         return (
-            <HelmetProvider>
-                <div className="wrapper">
-                    {
-                        this.state.load ?
-                            <Head
-                                store={store}
-                                load={true}
-                            />
-                            :
-                            <Head
-                                store={null}
-                                load={false}
-                            />
-                    }
-                    <div className="wrapper-content">
-                        <div className="content">
-                            <div id="vertical_menu" className="reviews-menu">
-                                {
-                                    this.state.load ?
-                                        <Nav song={song} store={store}/>
-                                        : null
-                                }
-                                <div className="wrapper-ad" onClick={() => {
-                                    window.location.href = "https://mcs.mail.ru/"
-                                }}>
-                                    <div className="image-ad">
-                                        <img className="image-ad-tag" src={vk} alt="vk"/>
-                                    </div>
-                                    <div className="ad-text">
-                                        Сайт работает в облаках
-                                    </div>
-                                    {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
-                                </div>
-                                <div className="menu-nav">
-                                    <div className="menu-nav-item">
-                                        <Link href="/user/6">Поддержка</Link>
-                                    </div>
-                                    <div className="menu-nav-item">
-                                        <Link href="https://t.me/devcodemylife" target="_blank">Мы в Telegram</Link>
-                                    </div>
-                                    <div className="menu-nav-item">
-                                        <Link href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ" target="_blank">Мы на YouTube</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <Switch>
-                                <Route path="/" render={
-                                    ({history, match}) => {
-                                        console.log(history.location.pathname)
-                                        switch (history.location.pathname) {
-                                            case "/":
-                                                return <Main/>
-                                            case "/feeds":
-                                                return <Feed store={store}/>
-                                        }
-                                    }
-                                } />
-                            </Switch>
-                        </div>
-                    </div>
-                </div>
-            </HelmetProvider>
+            <div className="wrapper">
+                <Switch>
+                    <Route path="/"
+                           render={({history, match}) =>
+                               <Router routes={this.routes} history={history} basename={match.url}>
+                                   <Head
+                                       store={store}
+                                       load={true}
+                                   />
+                                   <ToastContainer
+                                       position="bottom-right"
+                                       autoClose={2000}
+                                       hideProgressBar={false}
+                                       newestOnTop={false}
+                                       closeOnClick
+                                       rtl={false}
+                                       pauseOnFocusLoss
+                                       draggable
+                                       pauseOnHover
+                                   />
+                                   <div className="wrapper-content">
+                                       <div className="content">
+                                           <div id="vertical_menu" className="reviews-menu">
+                                               <Nav song={song} store={store}/>
+                                               <div className="wrapper-ad" onClick={() => {
+                                                   window.location.href = "https://mcs.mail.ru/"
+                                               }}>
+                                                   <div className="image-ad">
+                                                       <img className="image-ad-tag" src={vk} alt="vk"/>
+                                                   </div>
+                                                   <div className="ad-text">
+                                                       Сайт работает в облаках
+                                                   </div>
+                                                   {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
+                                               </div>
+                                               <div className="menu-nav">
+                                                   <div className="menu-nav-item">
+                                                       <Link href="/user/6">Поддержка</Link>
+                                                   </div>
+                                                   <div className="menu-nav-item">
+                                                       <Link href="https://t.me/devcodemylife" target="_blank">Мы в
+                                                           Telegram</Link>
+                                                   </div>
+                                                   <div className="menu-nav-item">
+                                                       <Link
+                                                           href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ"
+                                                           target="_blank">Мы на YouTube</Link>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <NotFoundBoundary
+                                               render={() => <div className="content-wall-views">
+                                                   <div className="error-wrapper">
+                                                       <div className="error-page">
+                                                           Такой страницы не существует.
+                                                       </div>
+                                                   </div>
+                                               </div>}>
+                                               <Suspense fallback={true}>
+                                                   <View store={store}/>
+                                               </Suspense>
+                                           </NotFoundBoundary>
+                                       </div>
+                                   </div>
+                               </Router>
+
+                           }/>
+                </Switch>
+            </div>
         );
     }
 }

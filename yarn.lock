@@ -2821,6 +2821,18 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@simple-contacts/react-router-async-routes@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@simple-contacts/react-router-async-routes/-/react-router-async-routes-0.6.0.tgz#33987e5a9512b7be9314b3873d1cfe20fe34341a"
+  integrity sha512-a316sJCP+Mr6saJOf6iB/IlrtLS4kiocEPS9WFENJKmBZ/5XU2Em692l0+CU65DhXkQk0TmUCHsuK3a+hg5SNQ==
+  dependencies:
+    "@simple-contacts/react-traverse" "2.0.4"
+
+"@simple-contacts/react-traverse@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@simple-contacts/react-traverse/-/react-traverse-2.0.4.tgz#ff2d3ca2f66d3afe4afbf6f89c5b9f6f323f2759"
+  integrity sha512-FbhYfxt3a214xfJ1JPKQmAZ+Jv1Edvw+cxW7kPPX8lzmgEfNM6nUAGa0BrYnP4MrxniPeKwLVHrniw6MNVkfBQ==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
