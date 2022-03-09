@@ -109,17 +109,6 @@ class Nav extends Component {
                                 </Link>
                             </div>
                             <div className="nav-item">
-                                <Link className="nav-value" href="/feeds">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notes} alt="Заметки"/> :
-                                            <img src={notes_dark} alt="Заметки"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Новости
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="nav-item">
                                 <Link className="nav-value" href="/video">
                                     <div className="icon-image">
                                         {this.state.isDark === "light" ? <img src={notes} alt="Видео"/> :
@@ -142,13 +131,35 @@ class Nav extends Component {
                                 </Link>
                             </div>
                             <div className="nav-item">
-                                <Link className="nav-value" href="/people">
+                                <Link className="nav-value" href="/feeds">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={people} alt="Люди"/> :
-                                            <img src={people_dark} alt="Люди"/>}
+                                        {this.state.isDark === "light" ? <img src={notes} alt="Лента"/> :
+                                            <img src={notes_dark} alt="Лента"/>}
                                     </div>
                                     <div className="nav-value">
-                                        Люди
+                                        Лента
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="nav-item">
+                                <Link className="nav-value" href="/jobs">
+                                    <div className="icon-image">
+                                        {this.state.isDark === "light" ? <img src={notes} alt="Работа"/> :
+                                            <img src={notes_dark} alt="Работа"/>}
+                                    </div>
+                                    <div className="nav-value">
+                                        Работа
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="nav-item">
+                                <Link className="nav-value" href="/people">
+                                    <div className="icon-image">
+                                        {this.state.isDark === "light" ? <img src={people} alt="Найти друзей"/> :
+                                            <img src={people_dark} alt="Найти друзей"/>}
+                                    </div>
+                                    <div className="nav-value">
+                                        Найти друзей
                                     </div>
                                 </Link>
                             </div>
