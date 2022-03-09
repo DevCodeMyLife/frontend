@@ -4,7 +4,7 @@ import {JsonLd} from "react-schemaorg";
 import {Helmet} from 'react-helmet';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 // import {tomorrow} from "react-syntax-highlighter/dist/esm/styles/prism"
-import like from "../icon/_like.png"
+import like from "../icon/like.png"
 import look from "../icon/look.png"
 import like_dark from "../icon/like_dark.png";
 import look_dark from "../icon/look_dark.png";
