@@ -12,6 +12,8 @@ import messages from "../icon/messages.png";
 import messages_dark from "../icon/messages_dark.png";
 import video from "../icon/video.png"
 import video_dark from "../icon/video_dark.png"
+import music from "../icon/music.png"
+import music_dark from "../icon/music_dark.png"
 
 
 // import team from "../icon/team.png"
@@ -125,8 +127,8 @@ class Nav extends Component {
                             <div className="nav-item">
                                 <Link className="nav-value" href="/audio">
                                     <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notes} alt="Музыка"/> :
-                                            <img src={notes_dark} alt="Музыка"/>}
+                                        {this.state.isDark === "light" ? <img src={music} alt="Музыка"/> :
+                                            <img src={music_dark} alt="Музыка"/>}
                                     </div>
                                     <div className="nav-value">
                                         Музыка
