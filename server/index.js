@@ -82,7 +82,7 @@ app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notifi
                 data = preData(
                     data,
                     app,
-                    "Лента Новости | DevCodeMyLife",
+                    "Лента новостей | DevCodeMyLife",
                     "DevCodeMyLIfe, golang, python, c, c#, css, js, node, nginx, proxy",
                     "Лента новостей",
                     req.path
