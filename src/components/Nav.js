@@ -16,6 +16,8 @@ import music from "../icon/music.png"
 import music_dark from "../icon/music_dark.png"
 import jobs from "../icon/jobs.png"
 import jobs_dark from "../icon/jobs_dark.png"
+import market from "../icon/market.png"
+import market_dark from "../icon/market_dark.png"
 
 
 // import team from "../icon/team.png"
@@ -203,8 +205,8 @@ class Nav extends Component {
                                         <div className="nav-item">
                                             <Link className="nav-value" href="/market">
                                                 <div className="icon-image">
-                                                    {this.state.isDark === "light" ? <img src={code} alt="Магазин"/> :
-                                                        <img src={code_dark} alt="Магазин"/>}
+                                                    {this.state.isDark === "light" ? <img src={market} alt="Магазин"/> :
+                                                        <img src={market_dark} alt="Магазин"/>}
                                                 </div>
                                                 <div className="nav-value">
                                                     Магазин
