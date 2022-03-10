@@ -34,7 +34,7 @@ class Header extends Component {
                                 <div className="balans-block">
                                     <div className="balans-place">
                                         <span>
-                                            {state.auth.user.data[0].balance}
+                                            {state.auth.user.data.balance}
                                         </span>
                                         <span> монет</span>
                                     </div>
