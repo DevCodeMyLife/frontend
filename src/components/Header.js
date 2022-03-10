@@ -34,9 +34,7 @@ class Header extends Component {
                                 <div className="balance-block">
                                     <div className="balance-place">
                                         <Link href="/balance">
-                                            <div>
                                                 {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')}
-                                            </div>
                                         </Link>
                                     </div>
                                 </div>
