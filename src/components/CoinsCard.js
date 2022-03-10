@@ -13,7 +13,7 @@ class Balance extends Component {
         return (
             <div className="coins-item">
                 <div className="coins-item-title">20 coins</div>
-                <div className="coins-item-descriptions">
+                <div className="coins-item-descriptions item-about">
                     <p>
                         Пакет 20 coins
                     </p>
