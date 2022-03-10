@@ -41,7 +41,7 @@ class CoinsCards extends Component {
                     </p>
                 </div>
 
-                <div onClick={()=>{this.buy(this.state.price)}} className="button-default">Купить за {this.state.price}₽</div>
+                <div onClick={()=>{this.buy(this.state.price)}} className="button-general-page">Купить за {this.state.price}₽</div>
             </div>
         )
     }
