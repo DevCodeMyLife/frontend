@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import CoinsCards from "./CoinsCard";
 
 class Balance extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class Balance extends Component {
                                         </div>
                                         <div className="auth-box-title">Пакеты монет</div>
                                         <div className="content-pack-coins">
-                                            <Balance/>
+                                            <CoinsCards/>
                                         </div>
                                     </div>
                                 </div>
