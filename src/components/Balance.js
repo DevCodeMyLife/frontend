@@ -34,7 +34,6 @@ class Balance extends Component {
                                         <div className="wrapper-balance-count auth-box-title">
                                             <span className="balance-count">Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} coins.</span>
                                         </div>
-                                        <div className="auth-box-title">Пакеты монет</div>
                                         <div className="content-pack-coins">
                                             <CoinsCards price={20}/>
                                             <CoinsCards price={200}/>
