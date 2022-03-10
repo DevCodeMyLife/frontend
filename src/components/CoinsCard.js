@@ -11,6 +11,22 @@ class CoinsCards extends Component {
 
     buy(price){
         console.log(price)
+
+        let data = {
+            price: price
+        }
+
+        fetch("api/balance", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
     render() {
