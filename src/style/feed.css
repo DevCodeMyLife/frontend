@@ -49,6 +49,20 @@
     resize: none;
 }
 
+.component-new-feed__control-panel {
+    padding: 10px;
+}
+
+.component-new-feed__button {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.component-new-feed__button-image {
+    max-width: 15px;
+    cursor: pointer;
+}
+
 .component-new-feed__header {
     font-size: 29px;
     font-weight: 700;

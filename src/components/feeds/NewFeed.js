@@ -1,5 +1,10 @@
 import { Component } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import photo_button from "../../icon/photo_button.png"
+import photo_button_dark from "../../icon/photo_button_dark.png"
+import video_button from "../../icon/video_button.png"
+import video_button_dark from "../../icon/video_button_dark.png"
+
 
 class NewFeed extends Component {
     constructor(props) {
@@ -53,6 +58,14 @@ class NewFeed extends Component {
                                     className="component-new-feed__input"
                                 >
                                     Что у Вас нового?
+                                </div>
+                                <div className="component-new-feed__control-panel">
+                                    <div className="component-new-feed__button">
+                                        <img className="component-new-feed__button-image" src={photo_button} alt="photo" />
+                                    </div>
+                                    <div className="component-new-feed__button">
+                                        <img className="component-new-feed__button-image" src={video_button} alt="video" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
