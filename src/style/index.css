@@ -1660,6 +1660,7 @@ p {
 
 .balance-count {
     font-size: 12px;
+    color: var(--font-color);
 }
 
 .balance-count:hover {
