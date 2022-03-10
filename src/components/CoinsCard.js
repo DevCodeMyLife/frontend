@@ -19,7 +19,7 @@ class CoinsCards extends Component {
                     </p>
                 </div>
 
-                <div className="button-default">Оплатить {this.state.price}₽</div>
+                <div className="button-default">Купить за {this.state.price}₽</div>
             </div>
         )
     }
