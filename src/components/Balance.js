@@ -13,17 +13,21 @@ class Balance extends Component {
         })
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+    }
 
     render() {
         const state = this.state.store.getState()
         return (
             <>
                 <div className="content-wall-views">
-                    <div className="main-place-wrapper">
-                        <p>
-                            <b>Coin - </b> это внутренняя валюты, на нее можно приобрести мерч или потратить на что-то в приложениях.
-                        </p>
+                    <div className="feed-wrapper">
+                        <div className="main-place-wrapper">
+                            <p>
+                                <b>Coin - </b> это внутренняя валюты, на нее можно приобрести мерч или потратить на
+                                что-то в приложениях.
+                            </p>
+                        </div>
                     </div>
                     <div className="feed-wrapper">
                         {
@@ -37,7 +41,8 @@ class Balance extends Component {
                                 <div className="wrapper-balance">
                                     <div className="balance-content-block feed-wrapper-item background-white">
                                         <div className="wrapper-balance-count auth-box-title">
-                                            <span className="balance-count">Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} coins.</span>
+                                            <span
+                                                className="balance-count">Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} coins.</span>
                                         </div>
                                         <div className="content-pack-coins">
                                             <CoinsCards price={1}/>
@@ -50,7 +55,7 @@ class Balance extends Component {
                         }
                     </div>
                 </div>
-                <div className="tags-view" >
+                <div className="tags-view">
                     <div className="tags-box"/>
                 </div>
             </>
