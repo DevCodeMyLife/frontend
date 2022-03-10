@@ -17,22 +17,24 @@ class Balance extends Component {
         return (
             <>
                 <div className="content-wall-views">
-                    {
-                        !store.auth.user.isAuth ?
-                            <div className="loader-wrapper feed-wrapper">
-                                <div className="loader">
+                    <div className="feed-wrapper">
+                        {
+                            !store.auth.user.isAuth ?
+                                <div className="loader-wrapper feed-wrapper">
+                                    <div className="loader">
 
-                                </div>
-                            </div>
-                            :
-                            <div className="wrapper-balance">
-                                <div className="balance-content-block">
-                                    <div className="balance-count">
-                                        <span>Ваш баланс: {(parseInt(store.auth.user.data.balance)).toLocaleString('ru')}</span>
                                     </div>
                                 </div>
-                            </div>
-                    }
+                                :
+                                <div className="wrapper-balance">
+                                    <div className="balance-content-block">
+                                        <div className="balance-count">
+                                            <span>Ваш баланс: {(parseInt(store.auth.user.data.balance)).toLocaleString('ru')}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                    </div>
                 </div>
                 <div className="tags-view" >
                     <div className="tags-box"/>
