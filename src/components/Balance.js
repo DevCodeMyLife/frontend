@@ -3,9 +3,6 @@ import React, {Component} from "react";
 class Balance extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: "React"
-        };
 
         this.state = {
             store: this.props.store
