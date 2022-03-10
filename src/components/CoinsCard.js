@@ -9,6 +9,10 @@ class CoinsCards extends Component {
         }
     }
 
+    buy(price){
+        console.log(price)
+    }
+
     render() {
         return (
             <div className="coins-item">
@@ -19,7 +23,7 @@ class CoinsCards extends Component {
                     </p>
                 </div>
 
-                <div className="button-default">Купить за {this.state.price}₽</div>
+                <div onClick={()=>{this.buy(this.state.price)}} className="button-default">Купить за {this.state.price}₽</div>
             </div>
         )
     }
