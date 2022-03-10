@@ -29,6 +29,19 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className="wrapper-user">
+                        {
+                            state.auth.user.isAuth ?
+                                <div className="balans-block">
+                                    <div className="balans-place">
+                                        <span>
+                                            {state.auth.user?.data[0].balance}
+                                        </span>
+                                        <span> монет</span>
+                                    </div>
+                                </div>
+                            :
+                                null
+                        }
                         <div className="wrapper-auth">
                             {
                                 !this.state.load ?
