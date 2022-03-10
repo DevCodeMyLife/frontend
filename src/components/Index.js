@@ -451,8 +451,8 @@ class App extends React.Component {
     }
 
     render() {
-        // if (this.state.load) {
-        if (true) {
+        if (this.state.load) {
+        // if (true) {
 
             return (
                 <HelmetProvider>

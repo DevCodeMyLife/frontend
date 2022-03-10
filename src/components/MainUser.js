@@ -993,7 +993,7 @@ class MainUsers extends Component {
                                                 //                 {/*    this.state.clicked_new_post ?*/}
                                                 //                 {/*        <div className="textarea-hide">*/}
                                                 //                 {/*            <div style={{marginBottom: "20px"}}>*/}
-                                                //                 {/*            <input type="file" name="file" id="upload_file_input_cover"*/}
+                                                //                 {/*            <_input type="file" name="file" id="upload_file_inputcover"*/}
                                                 //                 {/*                   onChange={(e) => this.uploadCoverAction(e)}*/}
                                                 //                 {/*                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>*/}
                                                 //                 {/*            {*/}
