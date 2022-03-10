@@ -1658,6 +1658,14 @@ p {
 
 }
 
+.balance-count {
+    font-size: 12px;
+}
+
+.balance-count:hover {
+    text-decoration: underline;
+}
+
 .messages-control-nav {
     /* border-bottom: 1px solid var(--button_border); */
     background: var(--bg-grey);
