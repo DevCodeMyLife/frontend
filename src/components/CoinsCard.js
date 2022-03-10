@@ -22,7 +22,9 @@ class CoinsCards extends Component {
         })
             .then(response => response.json())
             .then(res => {
-                console.log(res)
+                if (res.status.code === 0) {
+                    document.location.replace(res?.data?.url_redirect)
+                }
             })
             .catch(error => {
                 console.log(error)
