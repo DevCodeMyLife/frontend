@@ -1,16 +1,18 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import photo_button from "../../icon/photo_button.png"
 import photo_button_dark from "../../icon/photo_button_dark.png"
 import video_button from "../../icon/video_button.png"
 import video_button_dark from "../../icon/video_button_dark.png"
+import menu_button from "../../icon/menu-button.png"
 
 
 class NewFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickComponent: false
+            clickComponent: false,
+            clickDot: false
         };
     }
 
@@ -20,6 +22,12 @@ class NewFeed extends Component {
     onClickNewFeed = (event) => {
         this.setState({
             clickComponent: !this.state.clickComponent
+        });
+    };
+
+    onClickMenu = (event) => {
+        this.setState({
+            clickDot: !this.state.clickDot
         });
     };
 
@@ -49,22 +57,28 @@ class NewFeed extends Component {
                                 />
                             </div>
                         </div>
+                        <div className="component-new-feed__wrapper-article component-new-feed__flex-just-end">
+                            <div className="component-new-feed__action-buttons">
+                                <div className="button-default component-new-feed__margin-left">Превью</div>
+                                <div className="button-default component-new-feed__margin-left">Опубликовать</div>
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div className="component-new-feed">
                         <div className="component-new-feed__wrapper-input">
                             <div className="component-new-feed__wrapper-article">
+                                <div className="component-new-feed__wrapper-image">
+                                    <img
+                                        className="component-new-feed__wrapper-image-img"
+                                        src="https://devcodemylife.tech/api/storage?file_key=6183477ffa1496e2b6c7923a7d2debefc35deb125844087eda043546c2278f0e"
+                                    />
+                                </div>
                                 <div
                                     onClick={this.onClickNewFeed}
-                                    className="component-new-feed__input"
+                                    className="component-new-feed__input component-new-feed__flex-just-item"
                                 >
                                     Что у Вас нового?
-                                </div>
-                                <div className="component-new-feed__control-panel">
-                                    <img className="component-new-feed__button-image" src={photo_button}
-                                         alt="photo"/>
-                                    <img className="component-new-feed__button-image" src={video_button}
-                                         alt="video"/>
                                 </div>
                             </div>
                         </div>

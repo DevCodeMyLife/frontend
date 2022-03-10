@@ -28,6 +28,7 @@ import Task from "./Task";
 import Apps from "./Apps";
 import Balance from "./Balance";
 import UpBalance from "./UpBalans";
+import NewFeed from "./feeds/NewFeed";
 
 const store = createStore(AppReducer);
 
@@ -100,6 +101,8 @@ class App extends React.Component {
             '/apps': route({ view: <Apps store={store}/>}),
             '/balance': route({ view: <Balance store={store}/>}),
             '/up_balance': route({ view: <UpBalance />}),
+            '/test': route({ view: <NewFeed />}),
+
         })
     }
 
@@ -448,7 +451,9 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.load) {
+        // if (this.state.load) {
+        if (true) {
+
             return (
                 <HelmetProvider>
                     <div className="wrapper">
