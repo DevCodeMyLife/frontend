@@ -1647,6 +1647,16 @@ p {
     /*padding: 20px;*/
 }
 
+.balance-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.balance-place {
+
+}
+
 .messages-control-nav {
     /* border-bottom: 1px solid var(--button_border); */
     background: var(--bg-grey);
