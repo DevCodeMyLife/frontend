@@ -32,7 +32,7 @@ class Balance extends Component {
                                 <div className="wrapper-balance">
                                     <div className="balance-content-block feed-wrapper-item background-white">
                                         <div className="wrapper-balance-count">
-                                            <span className="balance-count">Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} монет</span>
+                                            <span className="balance-count">Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} coins.</span>
                                         </div>
                                         <div className="auth-box-title">Пакеты монет</div>
                                         <div className="content-pack-coins">
