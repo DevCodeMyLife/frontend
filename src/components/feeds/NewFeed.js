@@ -371,7 +371,7 @@ class NewFeed extends Component {
                                         </>
                                     ) : (
                                         <>
-                                            <div className="title-view" style={{marginBottom: "10px"}}>*/}
+                                            <div className="title-view" style={{marginBottom: "10px"}}>
                                                 <Select
                                                     options={this.state.aquaticCreatures}
                                                     isMulti
