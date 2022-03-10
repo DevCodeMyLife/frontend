@@ -7,6 +7,9 @@ class Balance extends Component {
             store: this.props.store
         }
     }
+    componentDidMount() {
+
+    }
 
     render() {
         const state = this.state.store.getState()
