@@ -10,6 +10,7 @@ import gfm from "remark-gfm";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import code from "../../icon/code.png";
 import {toast} from "react-toastify";
+import Select from "react-select";
 
 
 class NewFeed extends Component {
@@ -21,7 +22,9 @@ class NewFeed extends Component {
             valueTitle: null,
             valuePost: null,
             showPreview: false,
-            coverUpload: null
+            coverUpload: null,
+            useTags: [],
+            aquaticCreatures: [],
         };
 
         this.components = {
@@ -40,6 +43,34 @@ class NewFeed extends Component {
     }
 
     componentDidMount() {
+        fetch("/api/tags", {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(res => {
+
+                let result = []
+
+                for (let i = 0; i < res.data.length; i++) {
+                    let row = {label: res.data[i].value, value: res.data[i].tid}
+
+                    result.push(row)
+                }
+
+                this.setState({
+                    aquaticCreatures: result
+                });
+
+            })
+            .catch(error => {
+                this.setState({
+                    isLoaded: false,
+                    error: true,
+                    result: {},
+                    notUser: true
+                });
+                console.log(error)
+            });
     }
 
     onClickNewFeed = (event) => {
@@ -162,6 +193,130 @@ class NewFeed extends Component {
         elem.click()
     }
 
+    feedNew() {
+        let data = {
+            title: this.state.valueTitle,
+            value: this.state.valuePost,
+            use_tags: this.state.useTags,
+            cover_path: this.state.coverUpload,
+            close: this.state.privatePost
+        }
+
+
+        if (data.value.length > 1) {
+
+            this.setState({
+                clicked_new_post: false,
+                show_textarea: false,
+                rewriteValue: null,
+                showPreview: false
+            })
+            fetch("/api/feed", {
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status.code === 0) {
+                        fetch("/api/authentication", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                "finger": window.localStorage.getItem("finger")
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(res => {
+                                // if (res.status.code === 0) {
+                                //     this.setState({
+                                //         auth: true,
+                                //         data: res.data,
+                                //         feed: res.feed,
+                                //         load: true,
+                                //
+                                //         token: res.token,
+                                //     });
+                                //
+                                //
+                                // } else {
+                                //     this.sendLogs(res.status.message)
+                                //     this.delete_cookie("access_token")
+                                // }
+
+                                // const state = this.state.store.getState()
+                                // const urlParams = state.history.path
+                                // const id = urlParams.get('id');
+
+                                // let path = `/api/user/${state.history.id}`
+                                //
+                                // fetch(path, {
+                                //     method: "GET"
+                                // })
+                                //     .then(response => response.json())
+                                //     .then(res => {
+                                //         if (res.status.code === 0 && res.data.length > 0) {
+                                //             this.setState({
+                                //                 isLoaded: true,
+                                //                 id: state.history.id,
+                                //                 result: res.data,
+                                //                 mainFeed: res.feed,
+                                //                 notUser: false
+                                //             });
+                                //         } else {
+                                //             this.setState({
+                                //                 isLoaded: false,
+                                //                 result: {},
+                                //                 notUser: true,
+                                //                 error: true
+                                //             });
+                                //         }
+                                //     })
+                                //     .catch(error => {
+                                //         this.setState({
+                                //             isLoaded: false,
+                                //             error: true,
+                                //             result: {},
+                                //             notUser: true
+                                //         });
+                                //         console.log(error)
+                                //     });
+
+                            })
+                            .catch(error => {
+                                this.setState({
+                                    auth: false,
+                                    load: true,
+                                });
+                            });
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
+    }
+
+    cancel() {
+        this.setState({
+            clickComponent: false,
+            privatePost: false,
+            valueTitle: null,
+            valuePost: null,
+            showPreview: false,
+            coverUpload: null,
+            useTags: []
+        })
+    }
+
+    updateUseTags = (newValue, actionMeta) => {
+        console.log(newValue, actionMeta)
+        this.setState({useTags: newValue})
+    }
+
+    isValidNewOption = (inputValue, selectValue) => {
+        return !(inputValue.length > 0 && selectValue.length < 6);
+    }
+
     //
     render() {
         return (
@@ -209,7 +364,17 @@ class NewFeed extends Component {
                                         </>
                                     ) : (
                                         <>
-
+                                            <div className="title-view" style={{marginBottom: "10px"}}>*/}
+                                                <Select
+                                                    options={this.state.aquaticCreatures}
+                                                    isMulti
+                                                    maxMenuHeight={300}
+                                                    defaultValue={this.state.useTags}
+                                                    onChange={this.updateUseTags}
+                                                    placeholder="Подберите тег..."
+                                                    isValidNewOption={this.isValidNewOption}
+                                                />
+                                            </div>
                                             <input
                                                 className="component-new-feed__input component-new-feed__header"
                                                 placeholder="Заголовок"
