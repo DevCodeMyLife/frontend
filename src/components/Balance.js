@@ -36,7 +36,8 @@ class Balance extends Component {
                                         </div>
                                         <div className="auth-box-title">Пакеты монет</div>
                                         <div className="content-pack-coins">
-                                            <CoinsCards/>
+                                            <CoinsCards price={20}/>
+                                            <CoinsCards price={200}/>
                                         </div>
                                     </div>
                                 </div>
