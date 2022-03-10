@@ -333,7 +333,8 @@ class NewFeed extends Component {
                         <input type="file" name="file" id="upload_file_input_cover"
                                onChange={(e) => this.uploadCoverAction(e)}
                                accept="image/jpeg" style={{display: "none"}}/>
-                        <div className="component-new-feed__place-upload-cover-image" onClick={() => this.uploadClickCover()}>
+                        <div className="component-new-feed__place-upload-cover-image"
+                             onClick={() => this.uploadClickCover()}>
                             {
                                 this.state.coverUpload ? (
                                     <img src={this.state.coverUpload}
@@ -441,9 +442,14 @@ class NewFeed extends Component {
 
                                 </div>
                                 <div className="button-default component-new-feed__margin-left"
+                                     onClick={() => this.cancel()}>>Отмена
+                                </div>
+                                <div className="button-default component-new-feed__margin-left"
                                      onClick={this.onClickPreview}>Превью
                                 </div>
-                                <div className="button-default component-new-feed__margin-left">Опубликовать</div>
+                                <div className="button-default component-new-feed__margin-left"
+                                     onClick={() => this.feedNew()}>Опубликовать
+                                </div>
                             </div>
                         </div>
                     </div>
