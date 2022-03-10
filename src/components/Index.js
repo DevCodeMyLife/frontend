@@ -27,6 +27,7 @@ import Agreement from "./Agreement";
 import Task from "./Task";
 import Apps from "./Apps";
 import Balance from "./Balance";
+import UpBalance from "./UpBalans";
 
 const store = createStore(AppReducer);
 
@@ -98,6 +99,7 @@ class App extends React.Component {
             '/task': route({ view: <Task store={store}/>}),
             '/apps': route({ view: <Apps store={store}/>}),
             '/balance': route({ view: <Balance store={store}/>}),
+            '/up_balance': route({ view: <UpBalance />}),
         })
     }
 
