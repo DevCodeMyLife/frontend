@@ -6,6 +6,10 @@ class Balance extends Component {
         this.state = {
             store: this.props.store
         }
+
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
     componentDidMount() {
 
