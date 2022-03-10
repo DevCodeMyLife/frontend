@@ -11,7 +11,7 @@ class NewFeed extends Component {
 
     componentDidMount() {}
 
-    OnClickNewFeed = (event) => {
+    onClickNewFeed = (event) => {
         this.setState({
             clickComponent: !this.state.clickComponent
         });
@@ -22,7 +22,7 @@ class NewFeed extends Component {
             <>
                 {this.state.clickComponent ? (
                     <div className="component-new-feed">
-                        <div class="component-new-feed__place-upload-cover-image">
+                        <div className="component-new-feed__place-upload-cover-image">
                             <div className="component-new-feed__small-full-text">
                                 <span>Нажмите чтобы добавить обложку</span>
                                 <div className="component-new-feed__small-info-text">
@@ -49,7 +49,7 @@ class NewFeed extends Component {
                         <div className="component-new-feed__wrapper-input">
                             <div className="component-new-feed__wrapper-article">
                                 <div
-                                    onClick={this.OnClickNewFeed}
+                                    onClick={this.onClickNewFeed}
                                     className="component-new-feed__input"
                                 >
                                     Что у Вас нового?
