@@ -39,7 +39,9 @@ class Apps extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="tags-view" />
+                <div className="tags-view" >
+                    <div className="tags-box"/>
+                </div>
             </>
         )
     }
