@@ -1,4 +1,4 @@
-import { Component } from "react";
+import {Component} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import photo_button from "../../icon/photo_button.png"
 import photo_button_dark from "../../icon/photo_button_dark.png"
@@ -14,7 +14,8 @@ class NewFeed extends Component {
         };
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+    }
 
     onClickNewFeed = (event) => {
         this.setState({
@@ -61,10 +62,12 @@ class NewFeed extends Component {
                                 </div>
                                 <div className="component-new-feed__control-panel">
                                     <div className="component-new-feed__button">
-                                        <img className="component-new-feed__button-image" src={photo_button} alt="photo" />
+                                        <img className="component-new-feed__button-image" src={photo_button}
+                                             alt="photo"/>
                                     </div>
                                     <div className="component-new-feed__button">
-                                        <img className="component-new-feed__button-image" src={video_button} alt="video" />
+                                        <img className="component-new-feed__button-image" src={video_button}
+                                             alt="video"/>
                                     </div>
                                 </div>
                             </div>
