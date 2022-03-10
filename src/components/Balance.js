@@ -28,8 +28,6 @@ class Balance extends Component {
                                 что-то в приложениях а так же вывести на QIWI кошелек.
                             </p>
                         </div>
-                    </div>
-                    <div className="feed-wrapper">
                         {
                             !state.auth.user.isAuth ?
                                 <div className="loader-wrapper feed-wrapper">
