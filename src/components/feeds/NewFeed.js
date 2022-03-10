@@ -241,6 +241,7 @@ class NewFeed extends Component {
                                         },
                                     }
                                 })
+                                this.cancel()
                                 //
                                 //
                                 // } else {
