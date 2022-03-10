@@ -1,0 +1,49 @@
+.component-new-feed__place-upload-cover-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #8f948f;
+    cursor: pointer;
+    font-size: 13px;
+    background: #fafafa;
+    border-radius: 5px 5px 0 0;
+}
+
+.component-new-feed {
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+    margin-bottom: 20px;
+}
+
+.component-new-feed__small-full-text {
+    text-align: center;
+}
+
+.component-new-feed__small-info-text {
+    font-size: 11px;
+}
+
+.component-new-feed__wrapper-article {
+    display: flex;
+    padding: 15px;
+}
+
+.component-new-feed__input {
+    /* color: #8f948f; */
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 13px;
+    margin: 0;
+    resize: none;
+}
+
+.component-new-feed__header {
+    font-size: 29px;
+}
