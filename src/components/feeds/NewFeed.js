@@ -5,7 +5,7 @@ class NewFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickComponent: true
+            clickComponent: false
         };
     }
 
@@ -26,7 +26,7 @@ class NewFeed extends Component {
                             <div className="component-new-feed__small-full-text">
                                 <span>Нажмите чтобы добавить обложку</span>
                                 <div className="component-new-feed__small-info-text">
-                                    <span>Минимальный размер изображения 1000х420px</span>
+                                    <span>Минимальный размер изображения 1000х420 пикселей</span>
                                 </div>
                             </div>
                         </div>
