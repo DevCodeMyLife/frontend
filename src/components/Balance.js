@@ -23,27 +23,12 @@ class Balance extends Component {
 
                             </div>
                         </div>
-                    :
+                        :
                         <div className="wrapper-balance">
-                            <div className="apps-title-block">
-                                <h3>Приложения</h3>
-                            </div>
-                            <div className="apps-search-block">
-                                <input className="input-default"/>
-                            </div>
-                            <div className="apps-nav-block">
-                                <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select" id="top"
-                                         action="main">
-                                        Мои приложения
-                                    </div>
-                                    <div className="button-default-tag tags-item unselectable" action="all">
-                                        Все
-                                    </div>
+                            <div className="balance-content-block">
+                                <div className="balance-count">
+                                    <span>Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')}</span>
                                 </div>
-                            </div>
-                            <div className="apps-content-block">
-
                             </div>
                         </div>
                 }
