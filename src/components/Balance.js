@@ -27,7 +27,7 @@ class Balance extends Component {
                                 </div>
                                 :
                                 <div className="wrapper-balance">
-                                    <div className="balance-content-block">
+                                    <div className="balance-content-block feed-wrapper-item background-white">
                                         <div className="balance-count">
                                             <span>Ваш баланс: {(parseInt(store.auth.user.data.balance)).toLocaleString('ru')}</span>
                                         </div>
