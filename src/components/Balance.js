@@ -11,9 +11,8 @@ class Balance extends Component {
             this.setState(this.state.store.getState())
         })
     }
-    componentDidMount() {
 
-    }
+    componentDidMount() {}
 
     render() {
         const state = this.state.store.getState()
