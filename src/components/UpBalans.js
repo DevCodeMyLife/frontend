@@ -5,7 +5,8 @@ class UpBalance extends Component {
         super(props);
 
         this.state = {
-            count: 0
+            count: 0,
+            error: null
         }
     }
 
@@ -13,8 +14,10 @@ class UpBalance extends Component {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
+
         this.setState({
-            count: urlParams.get('count')
+            count: urlParams.get('count'),
+            error: urlParams.get('error')
         })
     }
 
@@ -23,10 +26,18 @@ class UpBalance extends Component {
             <div className="content-wall-views">
                 <div className="feed-wrapper">
                     <div className="loader-wrapper feed-wrapper" style={{fontSize: "22px"}}>
-                        <span>
-                            Вы успешно купили пакет на
-                            <span style={{color: "green"}}> {this.state.count} coins</span>
-                        </span>
+                        {
+                            this.state.error !== null ?
+                                <span>
+                                    Вы успешно купили пакет на
+                                    <span style={{color: "green"}}> {this.state.count} coins</span>
+                                </span>
+                            :
+                                <span>
+                                    Произошла ошибка, обратитесь в поддержку
+                                </span>
+                        }
+
                     </div>
                 </div>
             </div>
