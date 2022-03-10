@@ -17,7 +17,7 @@ class Apps extends Component {
             <div className="content-wall-views">
                 <div className="wrapper-apps">
                     <div className="apps-title-block">
-                        <h1>Приложения</h1>
+                        <h3>Приложения</h3>
                     </div>
                     <div className="apps-search-block">
                         <input className="input-default"/>
