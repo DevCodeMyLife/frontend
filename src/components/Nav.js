@@ -191,7 +191,7 @@ class Nav extends Component {
                                 </Link>
                             </div>
                             <div className="nav-item">
-                                <Link className="nav-value" href="/app">
+                                <Link className="nav-value" href="/apps">
                                     <div className="icon-image">
                                         {this.state.isDark === "light" ? <img src={app} alt="Приложения"/> :
                                             <img src={app_dark} alt="Приложения"/>}
