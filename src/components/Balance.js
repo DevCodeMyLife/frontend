@@ -28,7 +28,7 @@ class Balance extends Component {
                             <div className="wrapper-balance">
                                 <div className="balance-content-block">
                                     <div className="balance-count">
-                                        <span>Ваш баланс: {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')}</span>
+                                        <span>Ваш баланс: {(parseInt(store.auth.user.data.balance)).toLocaleString('ru')}</span>
                                     </div>
                                 </div>
                             </div>
