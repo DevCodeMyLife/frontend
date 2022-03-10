@@ -33,11 +33,11 @@ class Header extends Component {
                             state.auth.user.isAuth ?
                                 <div className="balance-block">
                                     <div className="balance-place">
-                                        <link href="/balance">
+                                        <Link href="/balance">
                                             <div>
                                                 {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')}
                                             </div>
-                                        </link>
+                                        </Link>
                                     </div>
                                 </div>
                             :
