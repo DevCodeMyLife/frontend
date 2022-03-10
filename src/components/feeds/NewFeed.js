@@ -176,7 +176,7 @@ class NewFeed extends Component {
                                 this.state.coverUpload ? (
                                     <img src={this.state.coverUpload}
                                          onClick={() => this.uploadClickCover()}
-                                         style={{cursor: "pointer", maxWidth: "634px"}}/>
+                                         style={{cursor: "pointer", maxWidth: "735px", borderRadius: "5px 5px 0 0"}}/>
                                 ) : (
                                     <div className="component-new-feed__small-full-text"
                                          onClick={() => this.uploadClickCover()}>
