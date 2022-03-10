@@ -13,7 +13,7 @@ class CoinsCards extends Component {
         console.log(price)
 
         let data = {
-            price: price
+            count: price
         }
 
         fetch("api/balance", {
