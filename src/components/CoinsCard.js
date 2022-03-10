@@ -23,6 +23,7 @@ class Balance extends Component {
 
                     <li className="coins-list-items"><span>Итог</span><span>1 ₽</span></li>
                 </ul>
+                <div className="button-default">Оплатить</div>
             </div>
         )
     }
