@@ -18,12 +18,8 @@ class CoinsCards extends Component {
                         Пакет {this.state.price} coins
                     </p>
                 </div>
-                <ul className="coins-values">
-                    <li className="coins-list-items"><span>1 шт</span><span>1 ₽</span></li>
 
-                    <li className="coins-list-items"><span>Итог</span><span>1 ₽</span></li>
-                </ul>
-                <div className="button-default">Оплатить</div>
+                <div className="button-default">Оплатить {this.state.price}₽</div>
             </div>
         )
     }
