@@ -20,7 +20,7 @@ class Apps extends Component {
                         <h3>Приложения</h3>
                     </div>
                     <div className="apps-search-block">
-                        <input className="input-default"/>
+                        <input className="input-default" placeholder="Начните вводить название"/>
                     </div>
                     <div className="apps-nav-block">
                         <div className="tags-wrapper" id="tags-wrapper-default">
