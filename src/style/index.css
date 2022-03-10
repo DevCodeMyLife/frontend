@@ -1706,9 +1706,10 @@ p {
 }
 
 .coins-item {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid var(--button_border);
     border-radius: 5px;
+    margin-right: 10px;
 }
 
 .messages-control-nav {
