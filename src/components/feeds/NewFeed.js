@@ -61,14 +61,10 @@ class NewFeed extends Component {
                                     Что у Вас нового?
                                 </div>
                                 <div className="component-new-feed__control-panel">
-                                    <div className="component-new-feed__button">
-                                        <img className="component-new-feed__button-image" src={photo_button}
-                                             alt="photo"/>
-                                    </div>
-                                    <div className="component-new-feed__button">
-                                        <img className="component-new-feed__button-image" src={video_button}
-                                             alt="video"/>
-                                    </div>
+                                    <img className="component-new-feed__button-image" src={photo_button}
+                                         alt="photo"/>
+                                    <img className="component-new-feed__button-image" src={video_button}
+                                         alt="video"/>
                                 </div>
                             </div>
                         </div>

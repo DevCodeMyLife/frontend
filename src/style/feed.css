@@ -50,7 +50,9 @@
 }
 
 .component-new-feed__control-panel {
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .component-new-feed__button {
@@ -59,7 +61,8 @@
 }
 
 .component-new-feed__button-image {
-    max-width: 15px;
+    max-width: 19px;
+    margin: 0 10px;
     cursor: pointer;
 }
 
