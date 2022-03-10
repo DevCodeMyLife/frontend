@@ -23,8 +23,10 @@ class UpBalance extends Component {
             <div className="content-wall-views">
                 <div className="feed-wrapper">
                     <div className="loader-wrapper feed-wrapper" style={{fontSize: "22px"}}>
-                        <span>Вы успешно купили пакет на </span>
-                        <span style={{color: "green"}}> {this.state.count} coins</span>
+                        <span>
+                            Вы успешно купили пакет на
+                            <span style={{color: "green"}}> {this.state.count} coins</span>
+                        </span>
                     </div>
                 </div>
             </div>
