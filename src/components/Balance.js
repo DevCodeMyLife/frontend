@@ -43,6 +43,7 @@ class Balance extends Component {
                                             <CoinsCards price={1}/>
                                             <CoinsCards price={20}/>
                                             <CoinsCards price={200}/>
+                                            <CoinsCards price={500}/>
                                         </div>
                                     </div>
                                 </div>
