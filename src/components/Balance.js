@@ -24,8 +24,8 @@ class Balance extends Component {
                     <div className="feed-wrapper">
                         <div className="main-place-wrapper">
                             <p>
-                                <b>Coin - </b> это внутренняя валюты, на нее можно приобрести мерч или потратить на
-                                что-то в приложениях.
+                                <b>Coin - </b> это внутренняя валюта, на нее можно приобрести мерч или потратить на
+                                что-то в приложениях а так же вывести на QIWI кошелек.
                             </p>
                         </div>
                     </div>
