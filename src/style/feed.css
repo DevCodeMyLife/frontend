@@ -31,6 +31,10 @@
     padding: 15px;
 }
 
+.component-new-feed__wrapper-content {
+    width: 100%;
+}
+
 .component-new-feed__input {
     /* color: #8f948f; */
     padding: 10px;
