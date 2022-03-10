@@ -20,6 +20,14 @@ class Balance extends Component {
         return (
             <>
                 <div className="content-wall-views">
+                    <div className="main-place-wrapper">
+                        <p>
+                            <b>Тестирование - </b> включив режим готовности тестирования, Вы
+                            подтверждаете что готовы,
+                            в случайном порядке, в любой момент времени, получить доступ к функционалу
+                            что может работать не стабильно.
+                        </p>
+                    </div>
                     <div className="feed-wrapper">
                         {
                             !state.auth.user.isAuth ?
