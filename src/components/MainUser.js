@@ -967,7 +967,7 @@ class MainUsers extends Component {
                                     <div className="feed-wrapper">
                                         {
                                             Number(this.state.id) === store.auth.user.data.id ?
-                                                <NewFeed/>
+                                                <NewFeed store={this.state.store}/>
                                                 // <div className="feed-wrapper-item background-white">
                                                 //     <div className="feed-item-value">
                                                 //

@@ -25,6 +25,8 @@ class NewFeed extends Component {
             coverUpload: null,
             useTags: [],
             aquaticCreatures: [],
+
+            store: this.props.store
         };
 
         this.components = {
@@ -226,15 +228,19 @@ class NewFeed extends Component {
                         })
                             .then(response => response.json())
                             .then(res => {
-                                // if (res.status.code === 0) {
-                                //     this.setState({
-                                //         auth: true,
-                                //         data: res.data,
-                                //         feed: res.feed,
-                                //         load: true,
-                                //
-                                //         token: res.token,
-                                //     });
+                                this.state.store.dispatch({
+                                    type: "ACTION_CHECK_AUTH", value: {
+                                        user: {
+                                            isAuth: true,
+                                            data: res?.data[0],
+                                            feeds: res?.feed,
+                                            notificationCount: res?.notification_count,
+                                            messagesCount: res?.count_message,
+                                            notifications: res?.notification,
+                                            token: res?.token
+                                        },
+                                    }
+                                })
                                 //
                                 //
                                 // } else {
