@@ -1,6 +1,5 @@
 import { Component } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import "./feed.css";
 
 class NewFeed extends Component {
     constructor(props) {
