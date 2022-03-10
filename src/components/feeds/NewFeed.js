@@ -122,7 +122,7 @@ class NewFeed extends Component {
                     })
 
                     toast.update(id, {
-                        render: "Фотография успешно обновлена",
+                        render: "Фотография успешно загружена",
                         type: "success",
                         isLoading: false,
                         autoClose: 5000,
