@@ -435,10 +435,10 @@ class NewFeed extends Component {
 
     //
     render() {
-        // const store = this.state.store.getState()
+        const store = this.state.store.getState()
         return (
             <>
-                {this.state.clickComponent ? (
+                {this.state.clickComponent || store.feed_rewrite.rewriteMode ? (
                     <div className="component-new-feed__wrapper_all">
                         <div className="component-new-feed">
                             <input type="file" name="file" id="upload_file_input_cover"
@@ -569,7 +569,7 @@ class NewFeed extends Component {
                         <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
                                 {/*{*/}
-                                {/*    store.feed_rewrite.rewriteMode ?*/}
+                                {/*     ?*/}
 
                                 {/*}*/}
                                 <div className="button-default component-new-feed__margin-left"
