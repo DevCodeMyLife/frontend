@@ -45,33 +45,33 @@ const colourStyles = {
         color: '#a9a9a9'
     }),
 
-    option: (styles, {data, isDisabled, isFocused, isSelected}) => {
-        const color = chroma(data.color);
-        return {
-            ...styles,
-            // backgroundColor: isDisabled
-            //     ? null
-            //     : isSelected
-            //         ? data.color
-            //         : isFocused
-            //             ? color.alpha(0.1).css()
-            //             : null,
-            color: isDisabled
-                ? "#ccc"
-                : isSelected
-                    ? chroma.contrast(color, "white") > 2
-                        ? "white"
-                        : "black"
-                    : data.color,
-            cursor: isDisabled ? "not-allowed" : "default",
-
-            ":active": {
-                ...styles[":active"],
-                backgroundColor:
-                    !isDisabled && (isSelected ? data.color : color.alpha(0.3).css())
-            }
-        };
-    },
+    // option: (styles, {data, isDisabled, isFocused, isSelected}) => {
+    //     const color = chroma(data.color);
+    //     return {
+    //         ...styles,
+    //         // backgroundColor: isDisabled
+    //         //     ? null
+    //         //     : isSelected
+    //         //         ? data.color
+    //         //         : isFocused
+    //         //             ? color.alpha(0.1).css()
+    //         //             : null,
+    //         color: isDisabled
+    //             ? "#ccc"
+    //             : isSelected
+    //                 ? chroma.contrast(color, "white") > 2
+    //                     ? "white"
+    //                     : "black"
+    //                 : data.color,
+    //         cursor: isDisabled ? "not-allowed" : "default",
+    //
+    //         ":active": {
+    //             ...styles[":active"],
+    //             backgroundColor:
+    //                 !isDisabled && (isSelected ? data.color : color.alpha(0.3).css())
+    //         }
+    //     };
+    // },
     multiValue: (styles, {data}) => {
         const color = chroma(data.color);
         return {
@@ -478,6 +478,11 @@ class NewFeed extends Component {
                                    accept="image/jpeg" style={{display: "none"}}/>
                             <div className="component-new-feed__place-upload-cover-image"
                                  onClick={() => this.uploadClickCover()}>
+                                <div className="button-close">
+                                    <div className="button-default component-new-feed__margin-left"
+                                         onClick={() => this.cancel()}>Отмена
+                                    </div>
+                                </div>
                                 {
                                     this.state.coverUpload ? (
                                         <img src={this.state.coverUpload}
@@ -594,9 +599,6 @@ class NewFeed extends Component {
                         </div>
                         <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
-                                <div className="button-default component-new-feed__margin-left"
-                                     onClick={() => this.cancel()}>Отмена
-                                </div>
                                 {/*{*/}
                                 {/*    store.feed_rewrite.rewriteMode ?*/}
 

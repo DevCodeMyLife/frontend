@@ -491,6 +491,12 @@ code {
     transition: .1s;
 }
 
+.button-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
 .button-default-feed {
     display: flex;
     justify-content: center;

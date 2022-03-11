@@ -8,6 +8,7 @@
     font-size: 13px;
     background: #fafafa;
     border-radius: 5px 5px 0 0;
+    position: relative;
 }
 
 .component-new-feed {
