@@ -14,6 +14,7 @@ import chroma from 'chroma-js';
 import Select  from 'react-select';
 
 
+
 const colourStyles = {
     // control: (styles) => ({ ...styles, backgroundColor: 'white', border: '#fafafa 1px solid' }),
     indicatorsContainer: (styles) => ({
@@ -75,13 +76,13 @@ const colourStyles = {
     //     //     },
     //     // };
     // },
-    // multiValue: (styles, { data }) => {
-    //     return {
-    //         ...styles,
-    //         backgroundColor: color.alpha(0.1).css(),
-    //         color: '#A9A9A9D9',
-    //     };
-    // },
+    multiValue: (styles, { data }) => {
+        const color = chroma(data.color);
+        return {
+            ...styles,
+            backgroundColor: color.alpha(0.1).css(),
+        };
+    },
     // multiValueLabel: (styles, { data }) => ({
     //     ...styles,
     //     color: '#A9A9A9D9',
