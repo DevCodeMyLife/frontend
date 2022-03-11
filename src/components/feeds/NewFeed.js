@@ -45,7 +45,7 @@ const colourStyles = {
         color: '#a9a9a9'
     }),
 
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    option: (styles, {data, isDisabled, isFocused, isSelected}) => {
         const color = chroma(data.color);
         return {
             ...styles,
@@ -72,18 +72,18 @@ const colourStyles = {
             }
         };
     },
-    multiValue: (styles, { data }) => {
+    multiValue: (styles, {data}) => {
         const color = chroma(data.color);
         return {
             ...styles,
             backgroundColor: color.alpha(0.1).css()
         };
     },
-    multiValueLabel: (styles, { data }) => ({
+    multiValueLabel: (styles, {data}) => ({
         ...styles,
         color: data.color
     }),
-    multiValueRemove: (styles, { data }) => ({
+    multiValueRemove: (styles, {data}) => ({
         ...styles,
         color: data.color,
         ":hover": {
@@ -609,20 +609,22 @@ class NewFeed extends Component {
                         </div>
                     </div>
                 ) : (
-                    <div className="component-new-feed">
-                        <div className="component-new-feed__wrapper-input">
-                            <div className="component-new-feed__wrapper-article">
-                                <div className="component-new-feed__wrapper-image">
-                                    <img
-                                        className="component-new-feed__wrapper-image-img"
-                                        src="https://devcodemylife.tech/api/storage?file_key=6183477ffa1496e2b6c7923a7d2debefc35deb125844087eda043546c2278f0e"
-                                    />
-                                </div>
-                                <div
-                                    onClick={this.onClickNewFeed}
-                                    className="component-new-feed__input component-new-feed__flex-just-item"
-                                >
-                                    Что у Вас нового?
+                    <div className="component-new-feed__wrapper_all">
+                        <div className="component-new-feed">
+                            <div className="component-new-feed__wrapper-input">
+                                <div className="component-new-feed__wrapper-article">
+                                    <div className="component-new-feed__wrapper-image">
+                                        <img
+                                            className="component-new-feed__wrapper-image-img"
+                                            src="https://devcodemylife.tech/api/storage?file_key=6183477ffa1496e2b6c7923a7d2debefc35deb125844087eda043546c2278f0e"
+                                        />
+                                    </div>
+                                    <div
+                                        onClick={this.onClickNewFeed}
+                                        className="component-new-feed__input component-new-feed__flex-just-item"
+                                    >
+                                        Что у Вас нового?
+                                    </div>
                                 </div>
                             </div>
                         </div>
