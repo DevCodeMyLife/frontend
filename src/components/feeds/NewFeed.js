@@ -107,6 +107,7 @@ class NewFeed extends Component {
             useTags: [],
             aquaticCreatures: [],
             callNewFeed: false,
+            callNewSave: false,
             rewriteUUID: null,
 
             store: this.props.store
@@ -466,6 +467,10 @@ class NewFeed extends Component {
             close: this.state.privatePost
         }
 
+        this.setState({
+            callNewSave: true
+        })
+
         fetch(`/api/feed/${this.state.rewriteUUID}`, {
             method: "PUT",
             body: JSON.stringify({
@@ -504,7 +509,7 @@ class NewFeed extends Component {
                         this.cancel()
 
                         this.setState({
-                            callNewFeed: false
+                            callNewSave: false
                         })
 
                     })
