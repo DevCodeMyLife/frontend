@@ -106,6 +106,7 @@ class NewFeed extends Component {
             coverUpload: null,
             useTags: [],
             aquaticCreatures: [],
+            callNewFeed: false,
 
             store: this.props.store
         };
@@ -296,7 +297,8 @@ class NewFeed extends Component {
                 clicked_new_post: false,
                 show_textarea: false,
                 rewriteValue: null,
-                showPreview: false
+                showPreview: false,
+                callNewFeed: true
             })
             fetch("/api/feed", {
                 method: "POST",
@@ -327,50 +329,10 @@ class NewFeed extends Component {
                                     }
                                 })
                                 this.cancel()
-                                //
-                                //
-                                // } else {
-                                //     this.sendLogs(res.status.message)
-                                //     this.delete_cookie("access_token")
-                                // }
 
-                                // const state = this.state.store.getState()
-                                // const urlParams = state.history.path
-                                // const id = urlParams.get('id');
-
-                                // let path = `/api/user/${state.history.id}`
-                                //
-                                // fetch(path, {
-                                //     method: "GET"
-                                // })
-                                //     .then(response => response.json())
-                                //     .then(res => {
-                                //         if (res.status.code === 0 && res.data.length > 0) {
-                                //             this.setState({
-                                //                 isLoaded: true,
-                                //                 id: state.history.id,
-                                //                 result: res.data,
-                                //                 mainFeed: res.feed,
-                                //                 notUser: false
-                                //             });
-                                //         } else {
-                                //             this.setState({
-                                //                 isLoaded: false,
-                                //                 result: {},
-                                //                 notUser: true,
-                                //                 error: true
-                                //             });
-                                //         }
-                                //     })
-                                //     .catch(error => {
-                                //         this.setState({
-                                //             isLoaded: false,
-                                //             error: true,
-                                //             result: {},
-                                //             notUser: true
-                                //         });
-                                //         console.log(error)
-                                //     });
+                                this.setState({
+                                    callNewFeed: false
+                                })
 
                             })
                             .catch(error => {
