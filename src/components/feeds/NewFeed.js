@@ -521,7 +521,7 @@ class NewFeed extends Component {
                                                 onChange={this.onChangeTitle}
                                                 value={this.state.valueTitle}
                                             />
-                                            <div className="title-view" style={{marginBottom: "10px"}}>
+                                            <div className="title-view">
                                                 <Select
                                                     options={this.state.aquaticCreatures}
                                                     isMulti
