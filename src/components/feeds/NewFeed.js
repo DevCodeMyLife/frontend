@@ -550,8 +550,8 @@ class NewFeed extends Component {
 
                                 </div>
                             </div>
-                            <div className="component-new-feed__wrapper-article-buttons">
-                                <div className="button-default-icon" onClick={this.onClickPrivate}>
+                            <div className="component-new-feed__wrapper-article">
+                                <div className="button-default-icon-feed" onClick={this.onClickPrivate}>
                                     {
                                         this.state.privatePost ? (
                                             <svg className="svg-close-view"

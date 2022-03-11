@@ -491,6 +491,18 @@ code {
     transition: .1s;
 }
 
+.button-default-feed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: var(--white);*/
+    /*border: 1px solid var(--button_border);*/
+    padding: 10px;
+    /*border-radius: 5px;*/
+    cursor: pointer;
+    transition: .1s;
+}
+
 .button-default-icon-disable {
     display: flex;
     justify-content: center;
@@ -1912,6 +1924,11 @@ p {
 
 .button-default-icon:active {
     transform: scale(.9);
+}
+
+.button-default-icon-feed:active {
+    transform: scale(.9);
+
 }
 
 .create-feed-wrapper-button {
