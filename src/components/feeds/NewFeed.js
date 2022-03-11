@@ -107,6 +107,7 @@ class NewFeed extends Component {
             useTags: [],
             aquaticCreatures: [],
             callNewFeed: false,
+            rewriteUUID: null,
 
             store: this.props.store
         };
@@ -161,6 +162,26 @@ class NewFeed extends Component {
             });
 
         let store = this.state.store.getState()
+
+        // rewriteUUID: uuid,
+        //     rewriteValue: value,
+        //     rewriteTitle: title,
+        //     rewriteMode: true,
+        //     privatePost: close,
+        //     showPreview: true,
+        //     coverUpload: cover,
+        //     useTags: result
+
+        if (store.feed_rewrite.rewriteMode) {
+            this.setState({
+                rewriteUUID: store.feed_rewrite.rewriteUUID,
+                privatePost: store.feed_rewrite.privatePost,
+                valueTitle: store.feed_rewrite.rewriteTitle,
+                valuePost: store.feed_rewrite.rewriteValue,
+                coverUpload: store.feed_rewrite.coverUpload,
+                useTags: store.feed_rewrite.useTags,
+            })
+        }
 
         this.setState({
             privatePost: store.auth.user.data.privat_post
@@ -433,6 +454,82 @@ class NewFeed extends Component {
         })
     }
 
+    saveFeed() {
+        let data = {
+            title: this.state.valueTitle,
+            value: this.state.valuePost,
+            use_tags: this.state.useTags,
+            cover_path: this.state.coverUpload,
+            close: this.state.privatePost
+        }
+
+        this.setState({
+            clicked_new_post: false,
+            show_textarea: false,
+            rewriteValue: null,
+            showPreview: false,
+            rewriteMode: false,
+            textNews: "..."
+        })
+
+        fetch(`/api/feed/${this.state.rewriteUUID}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                value: data.value,
+                close: data.close,
+                title: data.title,
+                use_tags: data.use_tags,
+                cover_path: data.cover_path
+            })
+        })
+            .then(response => response.json())
+            .then(_ => {
+
+
+                const state = this.state.store.getState()
+                // const urlParams = state.history.path
+                // const id = urlParams.get('id');
+
+                let path = `/api/user/${state.history.id}`
+
+                fetch(path, {
+                    method: "GET"
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        if (res.status.code === 0 && res.data.length > 0) {
+                            this.setState({
+                                isLoaded: true,
+                                id: state.history.id,
+                                result: res.data,
+                                mainFeed: res.feed,
+                                notUser: false
+                            });
+                        } else {
+                            this.setState({
+                                isLoaded: false,
+                                result: {},
+                                notUser: true,
+                                error: true
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        this.setState({
+                            isLoaded: false,
+                            error: true,
+                            result: {},
+                            notUser: true
+                        });
+                        console.log(error)
+                    });
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
     //
     render() {
         const store = this.state.store.getState()
@@ -581,9 +678,33 @@ class NewFeed extends Component {
                                             <div className="loader-small"/>
                                         </div>
                                     ) : (
-                                        <div className="button-default component-new-feed__margin-left"
-                                             onClick={() => this.feedNew()}>Опубликовать
-                                        </div>
+                                        store.feed_rewrite.rewriteMode ? (
+                                            <>
+                                                <div className="button-default component-new-feed__margin-left"
+                                                     onClick={() => {
+                                                         this.deleteFeed(this.state.rewriteUUID)
+                                                     }}
+                                                >
+                                                    Удалить
+                                                </div>
+                                                {
+                                                    this.state.callNewSave ? (
+                                                        <div className="button-default component-new-feed__margin-left">
+                                                            <div className="loader-small"/>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="button-default component-new-feed__margin-left"
+                                                             onClick={() => this.saveFeed()}>Сохранить</div>
+                                                    )
+                                                }
+
+
+                                            </>
+                                        ) : (
+                                            <div className="button-default component-new-feed__margin-left"
+                                                 onClick={() => this.feedNew()}>Опубликовать
+                                            </div>
+                                        )
                                     )
                                 }
 
