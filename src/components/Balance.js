@@ -52,7 +52,19 @@ class Balance extends Component {
                         }
                     </div>
                 </div>
-                <div className="tags-view" />
+                <div className="tags-view">
+                    {/*<div className="tags-box">*/}
+                    {/*    <div className="title-box">Теги</div>*/}
+                    {/*    {*/}
+                    {/*        tags?.map(data =>*/}
+                    {/*            <div className="button-default-tag tags-item unselectable" action={data.value}*/}
+                    {/*                 onClick={this.handleClickTag}>*/}
+                    {/*                #{data.value}*/}
+                    {/*            </div>*/}
+                    {/*        )*/}
+                    {/*    }*/}
+                    {/*</div>*/}
+                </div>
             </>
         )
     }
