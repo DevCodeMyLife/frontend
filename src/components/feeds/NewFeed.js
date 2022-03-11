@@ -12,7 +12,6 @@ import code from "../../icon/code.png";
 import {toast} from "react-toastify";
 import chroma from 'chroma-js';
 import Select from 'react-select';
-import { colourOptions } from '../colorData/data';
 
 
 const colourStyles = {
