@@ -438,8 +438,7 @@ class NewFeed extends Component {
                             <input type="file" name="file" id="upload_file_input_cover"
                                    onChange={(e) => this.uploadCoverAction(e)}
                                    accept="image/jpeg" style={{display: "none"}}/>
-                            <div className="component-new-feed__place-upload-cover-image"
-                                 onClick={() => this.uploadClickCover()}>
+                            <div className="component-new-feed__place-upload-cover-image">
                                 <div className="button-close">
                                     <div className="button-default component-new-feed__margin-left"
                                          onClick={() => this.cancel()}>Отмена
@@ -452,9 +451,9 @@ class NewFeed extends Component {
                                                  cursor: "pointer",
                                                  maxWidth: "735px",
                                                  borderRadius: "5px 5px 0 0"
-                                             }}/>
+                                             }} onClick={() => this.uploadClickCover()}/>
                                     ) : (
-                                        <div className="component-new-feed__small-full-text">
+                                        <div className="component-new-feed__small-full-text" onClick={() => this.uploadClickCover()}>
                                             <span>Нажмите cюда чтобы добавить обложку</span>
                                             <div className="component-new-feed__small-info-text">
                                                 <span>Минимальный размер изображения 1000х420 пикселей</span>
