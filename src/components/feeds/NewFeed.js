@@ -550,9 +550,7 @@ class NewFeed extends Component {
 
                                 </div>
                             </div>
-                        </div>
-                        <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
-                            <div className="component-new-feed__action-buttons">
+                            <div className="component-new-feed__wrapper-article-buttons">
                                 <div className="button-default-icon" onClick={this.onClickPrivate}>
                                     {
                                         this.state.privatePost ? (
@@ -592,6 +590,10 @@ class NewFeed extends Component {
                                     }
 
                                 </div>
+                            </div>
+                        </div>
+                        <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
+                            <div className="component-new-feed__action-buttons">
                                 <div className="button-default component-new-feed__margin-left"
                                      onClick={() => this.cancel()}>Отмена
                                 </div>
