@@ -49,13 +49,13 @@ const colourStyles = {
         const color = chroma(data.color);
         return {
             ...styles,
-            backgroundColor: isDisabled
-                ? null
-                : isSelected
-                    ? data.color
-                    : isFocused
-                        ? color.alpha(0.1).css()
-                        : null,
+            // backgroundColor: isDisabled
+            //     ? null
+            //     : isSelected
+            //         ? data.color
+            //         : isFocused
+            //             ? color.alpha(0.1).css()
+            //             : null,
             color: isDisabled
                 ? "#ccc"
                 : isSelected
