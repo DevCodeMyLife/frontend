@@ -480,44 +480,39 @@ class NewFeed extends Component {
             .then(_ => {
 
 
-                const state = this.state.store.getState()
-                // const urlParams = state.history.path
-                // const id = urlParams.get('id');
-
-                let path = `/api/user/${state.history.id}`
-
-                fetch(path, {
-                    method: "GET"
+                fetch("/api/authentication", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "finger": window.localStorage.getItem("finger")
+                    })
                 })
                     .then(response => response.json())
                     .then(res => {
-                        if (res.status.code === 0 && res.data.length > 0) {
-                            this.setState({
-                                isLoaded: true,
-                                id: state.history.id,
-                                result: res.data,
-                                mainFeed: res.feed,
-                                notUser: false
-                            });
-                        } else {
-                            this.setState({
-                                isLoaded: false,
-                                result: {},
-                                notUser: true,
-                                error: true
-                            });
-                        }
-
+                        this.state.store.dispatch({
+                            type: "ACTION_CHECK_AUTH", value: {
+                                user: {
+                                    isAuth: true,
+                                    data: res?.data[0],
+                                    feeds: res?.feed,
+                                    notificationCount: res?.notification_count,
+                                    messagesCount: res?.count_message,
+                                    notifications: res?.notification,
+                                    token: res?.token
+                                },
+                            }
+                        })
                         this.cancel()
+
+                        this.setState({
+                            callNewFeed: false
+                        })
+
                     })
                     .catch(error => {
                         this.setState({
-                            isLoaded: false,
-                            error: true,
-                            result: {},
-                            notUser: true
+                            auth: false,
+                            load: true,
                         });
-                        console.log(error)
                     });
 
             })
