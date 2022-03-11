@@ -190,17 +190,17 @@ class Nav extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/apps">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={app} alt="Приложения"/> :
-                                            <img src={app_dark} alt="Приложения"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Приложения
-                                    </div>
-                                </Link>
-                            </div>
+                            {/*<div className="nav-item">*/}
+                            {/*    <Link className="nav-value" href="/apps">*/}
+                            {/*        <div className="icon-image">*/}
+                            {/*            {this.state.isDark === "light" ? <img src={app} alt="Приложения"/> :*/}
+                            {/*                <img src={app_dark} alt="Приложения"/>}*/}
+                            {/*        </div>*/}
+                            {/*        <div className="nav-value">*/}
+                            {/*            Приложения*/}
+                            {/*        </div>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             {
                                 state.auth.user.data.testing ?
                                     <div>
