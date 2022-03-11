@@ -44,56 +44,54 @@ const colourStyles = {
         ...styles,
         color: '#a9a9a9'
     }),
-    // option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    //     ...styles,
-    //     // const color = chroma(data.color);
-    //     // return {
-    //     //     ...styles,
-    //     //     backgroundColor: isDisabled
-    //     //         ? undefined
-    //     //         : isSelected
-    //     //             ? data.color
-    //     //             : isFocused
-    //     //                 ? color.alpha(0.1).css()
-    //     //                 : undefined,
-    //     //     color: isDisabled
-    //     //         ? '#ccc'
-    //     //         : isSelected
-    //     //             ? chroma.contrast(color, 'white') > 2
-    //     //                 ? 'white'
-    //     //                 : 'black'
-    //     //             : data.color,
-    //     //     cursor: isDisabled ? 'not-allowed' : 'default',
-    //     //
-    //     //     ':active': {
-    //     //         ...styles[':active'],
-    //     //         backgroundColor: !isDisabled
-    //     //             ? isSelected
-    //     //                 ? data.color
-    //     //                 : color.alpha(0.3).css()
-    //     //             : undefined,
-    //     //     },
-    //     // };
-    // },
-    multiValue: (styles, {data}) => {
+
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         const color = chroma(data.color);
         return {
             ...styles,
-            backgroundColor: color.alpha(0.1).css(),
+            backgroundColor: isDisabled
+                ? null
+                : isSelected
+                    ? data.color
+                    : isFocused
+                        ? color.alpha(0.1).css()
+                        : null,
+            color: isDisabled
+                ? "#ccc"
+                : isSelected
+                    ? chroma.contrast(color, "white") > 2
+                        ? "white"
+                        : "black"
+                    : data.color,
+            cursor: isDisabled ? "not-allowed" : "default",
+
+            ":active": {
+                ...styles[":active"],
+                backgroundColor:
+                    !isDisabled && (isSelected ? data.color : color.alpha(0.3).css())
+            }
         };
     },
-    // multiValueLabel: (styles, { data }) => ({
-    //     ...styles,
-    //     color: '#A9A9A9D9',
-    // }),
-    multiValueRemove: (styles, {data}) => ({
+    multiValue: (styles, { data }) => {
+        const color = chroma(data.color);
+        return {
+            ...styles,
+            backgroundColor: color.alpha(0.1).css()
+        };
+    },
+    multiValueLabel: (styles, { data }) => ({
+        ...styles,
+        color: data.color
+    }),
+    multiValueRemove: (styles, { data }) => ({
         ...styles,
         color: data.color,
-        ':hover': {
+        ":hover": {
             backgroundColor: data.color,
-            color: 'white',
-        },
-    }),
+            color: "white"
+        }
+    })
+
 };
 
 class NewFeed extends Component {
