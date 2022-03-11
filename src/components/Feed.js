@@ -139,6 +139,8 @@ class Feed extends Component {
             sibling.classList.remove('button-select-tag');
         }
 
+        console.log(event.target.parentNode)
+
         for (let sibling of event.target.parentNode) {
             sibling.classList.remove('button-select-tag');
         }
