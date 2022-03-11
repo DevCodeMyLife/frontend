@@ -1724,13 +1724,16 @@ p {
 .content-pack-coins {
     padding: 0 10px 10px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .coins-item {
     padding: 10px;
     border: 1px solid var(--button_border);
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     margin-right: 10px;
+    flex-grow: 1;
 }
 
 .messages-control-nav {
