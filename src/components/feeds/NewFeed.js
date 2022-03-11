@@ -125,9 +125,9 @@ class NewFeed extends Component {
             }
         }
 
-        // this.state.store.subscribe(() => {
-        //     this.setState(this.state.store.getState())
-        // })
+        this.state.store.subscribe(() => {
+            this.setState(this.state.store.getState())
+        })
     }
 
     componentDidMount() {
@@ -557,6 +557,7 @@ class NewFeed extends Component {
                                                     placeholder="Текст"
                                                     onChange={this.onChangeValue}
                                                     value={this.state.valuePost}
+                                                    minRows={5}
                                                 />
                                             </>
                                         )
