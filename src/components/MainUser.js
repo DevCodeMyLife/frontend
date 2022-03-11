@@ -1366,8 +1366,11 @@ class MainUsers extends Component {
                                                                     {
                                                                         data?.tag ?
                                                                             data.tag?.map(tag =>
-                                                                                <div className="tags-type">
-                                                                                    #{tag?.value}
+                                                                                <div
+                                                                                    className="default-tag tags-item unselectable"
+                                                                                    style={{background: `${tag?.color}17`}}>
+                                                                                    <span
+                                                                                        style={{color: tag?.color}}>{tag?.value}</span>
                                                                                 </div>
                                                                             )
 
