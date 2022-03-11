@@ -238,7 +238,7 @@ class MainUsers extends Component {
 
         if (tag !== null) {
             for (let i = 0; i < tag.length; i++) {
-                let row = {label: tag[i].value, value: tag[i].tid}
+                let row = {label: tag[i].value, value: tag[i].tid, color: tag[i].color}
 
                 result.push(row)
             }
