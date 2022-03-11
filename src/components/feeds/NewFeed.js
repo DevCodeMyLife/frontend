@@ -12,6 +12,7 @@ import code from "../../icon/code.png";
 import {toast} from "react-toastify";
 import chroma from 'chroma-js';
 import Select from 'react-select';
+import { colourOptions } from '../colorData/data';
 
 
 const colourStyles = {
@@ -76,7 +77,7 @@ const colourStyles = {
     //     // };
     // },
     multiValue: (styles, {data}) => {
-        const color = chroma(data.color ?? '#fafafa');
+        const color = chroma(data.color);
         return {
             ...styles,
             backgroundColor: color.alpha(0.1).css(),
@@ -141,7 +142,7 @@ class NewFeed extends Component {
                 let result = []
 
                 for (let i = 0; i < res.data.length; i++) {
-                    let row = {label: res.data[i].value, value: res.data[i].tid}
+                    let row = {label: res.data[i].value, value: res.data[i].tid, color: res.data[i].color}
 
                     result.push(row)
                 }
