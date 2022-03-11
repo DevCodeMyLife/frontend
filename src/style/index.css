@@ -572,7 +572,7 @@ code {
 }
 
 .button-default-tag {
-    padding: 3px 6px;
+    padding: 6px 9px;
     /*background: var(--bg-grey);*/
     cursor: pointer;
     font-size: 12px;
@@ -580,6 +580,7 @@ code {
     /*border: 1px solid var(--button_border);*/
     border-radius: 5px;
     transition: 9ms;
+    flex-grow: 1;
 }
 
 .menu-nav {
@@ -628,6 +629,11 @@ code {
     border-radius: 5px;
     padding: 20px;
     width: 240px;
+
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 6px;
+    gap: 6px;
     /*position: fixed;*/
 }
 
