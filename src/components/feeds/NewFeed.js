@@ -76,7 +76,7 @@ const colourStyles = {
     //     // };
     // },
     multiValue: (styles, {data}) => {
-        const color = chroma(data.color);
+        const color = chroma(data.color ?? '#fafafa');
         return {
             ...styles,
             backgroundColor: color.alpha(0.1).css(),
