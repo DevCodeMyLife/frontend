@@ -131,16 +131,16 @@ class Feed extends Component {
     handleClickTag = event => {
 
 
-        for (let sibling of document.getElementById("tags-wrapper-all-tags").parentNode.children) {
-            sibling.classList.remove('button-select');
+        for (let sibling of document.getElementById("tags-wrapper-all-tags")) {
+            sibling.classList.remove('button-select-tag');
         }
 
-        for (let sibling of document.getElementById("tags-wrapper-default").children) {
-            sibling.classList.remove('button-select');
+        for (let sibling of document.getElementById("tags-wrapper-default")) {
+            sibling.classList.remove('button-select-tag');
         }
 
-        for (let sibling of event.target.parentNode.children) {
-            sibling.classList.remove('button-select');
+        for (let sibling of event.target) {
+            sibling.classList.remove('button-select-tag');
         }
 
         this.setState({
@@ -517,8 +517,8 @@ class Feed extends Component {
                         </div>
                     </div>
                     <div className="tags-view">
-                        <div className="title-box" id="tags-wrapper-all-tags">Теги</div>
-                        <div className="tags-box">
+                        <div className="title-box" >Теги</div>
+                        <div className="tags-box" id="tags-wrapper-all-tags">
                             {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable" style={{background: `${data.color}17`}} action={data.value}
