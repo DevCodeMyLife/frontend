@@ -159,6 +159,12 @@ class NewFeed extends Component {
                 });
                 console.log(error)
             });
+
+        let store = this.state.store.getState()
+
+        this.setState({
+            privatePost: store.auth.user.data.privat_post
+        })
     }
 
     onClickNewFeed = (event) => {
