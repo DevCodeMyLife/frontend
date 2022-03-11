@@ -128,6 +128,18 @@ class NewFeed extends Component {
 
         this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
+
+            let store = this.state.store.getState()
+            if (store.feed_rewrite.rewriteMode) {
+                this.setState({
+                    rewriteUUID: store.feed_rewrite.rewriteUUID,
+                    privatePost: store.feed_rewrite.privatePost,
+                    valueTitle: store.feed_rewrite.rewriteTitle,
+                    valuePost: store.feed_rewrite.rewriteValue,
+                    coverUpload: store.feed_rewrite.coverUpload,
+                    useTags: store.feed_rewrite.useTags,
+                })
+            }
         })
     }
 
@@ -172,16 +184,7 @@ class NewFeed extends Component {
         //     coverUpload: cover,
         //     useTags: result
 
-        if (store.feed_rewrite.rewriteMode) {
-            this.setState({
-                rewriteUUID: store.feed_rewrite.rewriteUUID,
-                privatePost: store.feed_rewrite.privatePost,
-                valueTitle: store.feed_rewrite.rewriteTitle,
-                valuePost: store.feed_rewrite.rewriteValue,
-                coverUpload: store.feed_rewrite.coverUpload,
-                useTags: store.feed_rewrite.useTags,
-            })
-        }
+
 
         this.setState({
             privatePost: store.auth.user.data.privat_post
