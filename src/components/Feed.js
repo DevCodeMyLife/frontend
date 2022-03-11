@@ -139,8 +139,6 @@ class Feed extends Component {
             sibling.classList.remove('button-select-tag');
         }
 
-        console.log(event.target.parentNode.children)
-
         for (let sibling of event.target.parentNode.children) {
             sibling.classList.remove('button-select-tag');
         }
@@ -371,7 +369,7 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select" id="top"
+                                    <div className="button-default-tag tags-item unselectable button-select-tag" id="top"
                                          action="top" onClick={this.handleClickTag} ref={this.popular}>
                                         Популярные
                                     </div>
@@ -528,9 +526,10 @@ class Feed extends Component {
                             {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable"
-                                         style={{background: `${data.color}17`}} action={data.value}
+                                         style={{background: `${data.color}17`, color: "color: data.color"}}
+                                         action={data.value}
                                          onClick={this.handleClickTag}>
-                                        <span style={{color: data.color}}>{data.value}</span>
+                                        {data.value}
                                     </div>
                                 )
                             }

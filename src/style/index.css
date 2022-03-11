@@ -577,7 +577,7 @@ code {
 
 .button-default-tag {
     padding: 6px 9px;
-    /*background: var(--bg-grey);*/
+    background: var(--bg-grey);
     cursor: pointer;
     font-size: 12px;
     /*color: var(--font-color);*/
