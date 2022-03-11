@@ -11,8 +11,7 @@ import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import code from "../../icon/code.png";
 import {toast} from "react-toastify";
 import chroma from 'chroma-js';
-import Select  from 'react-select';
-
+import Select from 'react-select';
 
 
 const colourStyles = {
@@ -76,7 +75,7 @@ const colourStyles = {
     //     //     },
     //     // };
     // },
-    multiValue: (styles, { data }) => {
+    multiValue: (styles, {data}) => {
         const color = chroma(data.color);
         return {
             ...styles,
@@ -87,7 +86,7 @@ const colourStyles = {
     //     ...styles,
     //     color: '#A9A9A9D9',
     // }),
-    multiValueRemove: (styles, { data }) => ({
+    multiValueRemove: (styles, {data}) => ({
         ...styles,
         color: data.color,
         ':hover': {
@@ -474,80 +473,87 @@ class NewFeed extends Component {
         return (
             <>
                 {this.state.clickComponent ? (
-                    <div className="component-new-feed">
-                        <input type="file" name="file" id="upload_file_input_cover"
-                               onChange={(e) => this.uploadCoverAction(e)}
-                               accept="image/jpeg" style={{display: "none"}}/>
-                        <div className="component-new-feed__place-upload-cover-image"
-                             onClick={() => this.uploadClickCover()}>
-                            {
-                                this.state.coverUpload ? (
-                                    <img src={this.state.coverUpload}
-                                         style={{cursor: "pointer", maxWidth: "735px", borderRadius: "5px 5px 0 0"}}/>
-                                ) : (
-                                    <div className="component-new-feed__small-full-text">
-                                        <span>Нажмите cюда чтобы добавить обложку</span>
-                                        <div className="component-new-feed__small-info-text">
-                                            <span>Минимальный размер изображения 1000х420 пикселей</span>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                        </div>
-                        <div className="component-new-feed__wrapper-article">
-                            <div className="component-new-feed__wrapper-content">
+                    <div className="component-new-feed__wrapper_all">
+                        <div className="component-new-feed">
+                            <input type="file" name="file" id="upload_file_input_cover"
+                                   onChange={(e) => this.uploadCoverAction(e)}
+                                   accept="image/jpeg" style={{display: "none"}}/>
+                            <div className="component-new-feed__place-upload-cover-image"
+                                 onClick={() => this.uploadClickCover()}>
                                 {
-                                    this.state.showPreview ? (
-                                        <>
-                                            <h1 className="title-feed">
-                                                {
-                                                    this.state.valueTitle
-                                                }
-                                            </h1>
-                                            <div className="wrapper-data">
-                                                <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
-                                                               components={this.components}>
-                                                    {
-                                                        this.state.valuePost
-                                                    }
-                                                </ReactMarkdown>
-                                            </div>
-                                        </>
+                                    this.state.coverUpload ? (
+                                        <img src={this.state.coverUpload}
+                                             style={{
+                                                 cursor: "pointer",
+                                                 maxWidth: "735px",
+                                                 borderRadius: "5px 5px 0 0"
+                                             }}/>
                                     ) : (
-                                        <>
-                                            <input
-                                                className="component-new-feed__input component-new-feed__header"
-                                                placeholder="Заголовок"
-                                                autoFocus={true}
-                                                onChange={this.onChangeTitle}
-                                                value={this.state.valueTitle}
-                                            />
-                                            <div className="title-view" style={{paddingBottom: "10px", borderBottom: "1px solid #dcdcdc"}}>
-                                                <Select
-                                                    options={this.state.aquaticCreatures}
-                                                    isMulti
-                                                    maxMenuHeight={300}
-                                                    defaultValue={this.state.useTags}
-                                                    onChange={this.updateUseTags}
-                                                    placeholder="Добавить теги"
-                                                    isValidNewOption={this.isValidNewOption}
-                                                    styles={colourStyles}
-                                                />
+                                        <div className="component-new-feed__small-full-text">
+                                            <span>Нажмите cюда чтобы добавить обложку</span>
+                                            <div className="component-new-feed__small-info-text">
+                                                <span>Минимальный размер изображения 1000х420 пикселей</span>
                                             </div>
-
-                                            <TextareaAutosize
-                                                className="component-new-feed__input"
-                                                placeholder="Текст"
-                                                onChange={this.onChangeValue}
-                                                value={this.state.valuePost}
-                                            />
-                                        </>
+                                        </div>
                                     )
                                 }
+                            </div>
+                            <div className="component-new-feed__wrapper-article">
+                                <div className="component-new-feed__wrapper-content">
+                                    {
+                                        this.state.showPreview ? (
+                                            <>
+                                                <h1 className="title-feed">
+                                                    {
+                                                        this.state.valueTitle
+                                                    }
+                                                </h1>
+                                                <div className="wrapper-data">
+                                                    <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
+                                                                   components={this.components}>
+                                                        {
+                                                            this.state.valuePost
+                                                        }
+                                                    </ReactMarkdown>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <input
+                                                    className="component-new-feed__input component-new-feed__header"
+                                                    placeholder="Заголовок"
+                                                    autoFocus={true}
+                                                    onChange={this.onChangeTitle}
+                                                    value={this.state.valueTitle}
+                                                />
+                                                <div className="title-view"
+                                                     style={{paddingBottom: "10px", borderBottom: "1px solid #dcdcdc"}}>
+                                                    <Select
+                                                        options={this.state.aquaticCreatures}
+                                                        isMulti
+                                                        maxMenuHeight={300}
+                                                        defaultValue={this.state.useTags}
+                                                        onChange={this.updateUseTags}
+                                                        placeholder="Добавить теги"
+                                                        isValidNewOption={this.isValidNewOption}
+                                                        styles={colourStyles}
+                                                    />
+                                                </div>
 
+                                                <TextareaAutosize
+                                                    className="component-new-feed__input"
+                                                    placeholder="Текст"
+                                                    onChange={this.onChangeValue}
+                                                    value={this.state.valuePost}
+                                                />
+                                            </>
+                                        )
+                                    }
+
+                                </div>
                             </div>
                         </div>
-                        <div className="component-new-feed__wrapper-article component-new-feed__flex-just-end">
+                        <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
                                 <div className="button-default-icon" onClick={this.onClickPrivate}>
                                     {

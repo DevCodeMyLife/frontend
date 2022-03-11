@@ -43,6 +43,11 @@
     padding: 15px;
 }
 
+.component-new-feed__wrapper-article-buttons {
+    display: flex;
+    padding: 15px 0;
+}
+
 .component-new-feed__wrapper-content {
     width: 100%;
 }
