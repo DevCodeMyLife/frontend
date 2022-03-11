@@ -572,12 +572,12 @@ code {
 }
 
 .button-default-tag {
-    padding: 10px;
-    background: var(--bg-grey);
+    padding: 3px 6px;
+    /*background: var(--bg-grey);*/
     cursor: pointer;
     font-size: 12px;
-    color: var(--font-color);
-    border: 1px solid var(--button_border);
+    /*color: var(--font-color);*/
+    /*border: 1px solid var(--button_border);*/
     border-radius: 5px;
     transition: 9ms;
 }

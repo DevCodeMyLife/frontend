@@ -521,9 +521,9 @@ class Feed extends Component {
                             <div className="title-box" id="tags-wrapper-all-tags">Теги</div>
                             {
                                 tags?.map(data =>
-                                    <div className="button-default-tag tags-item unselectable" action={data.value}
+                                    <div className="button-default-tag tags-item unselectable" style={{background: `${data.color}8C`}} action={data.value}
                                          onClick={this.handleClickTag}>
-                                        <span style={{color: data.color}}>#</span>{data.value}
+                                        <span style={{color: data.color}}>{data.value}</span>
                                     </div>
                                 )
                             }
