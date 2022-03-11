@@ -75,18 +75,17 @@ const colourStyles = {
     //     //     },
     //     // };
     // },
-    multiValue: (styles, { data }) => {
-        const color = chroma(data.color);
-        return {
-            ...styles,
-            backgroundColor: color.alpha(0.1).css(),
-            color: '#A9A9A9D9',
-        };
-    },
-    multiValueLabel: (styles, { data }) => ({
-        ...styles,
-        color: '#A9A9A9D9',
-    }),
+    // multiValue: (styles, { data }) => {
+    //     return {
+    //         ...styles,
+    //         backgroundColor: color.alpha(0.1).css(),
+    //         color: '#A9A9A9D9',
+    //     };
+    // },
+    // multiValueLabel: (styles, { data }) => ({
+    //     ...styles,
+    //     color: '#A9A9A9D9',
+    // }),
     multiValueRemove: (styles, { data }) => ({
         ...styles,
         color: data.color,
