@@ -724,7 +724,7 @@ class NewFeed extends Component {
                                 </div>
                                 {
                                     this.state.callNewFeed ? (
-                                        <div className="button-default component-new-feed__margin-left">
+                                        <div className="button-general-page component-new-feed__margin-left">
                                             <div className="loader-small"/>
                                         </div>
                                     ) : (
@@ -739,11 +739,11 @@ class NewFeed extends Component {
                                                 </div>
                                                 {
                                                     this.state.callNewSave ? (
-                                                        <div className="button-default component-new-feed__margin-left">
+                                                        <div className="button-general-page component-new-feed__margin-left">
                                                             <div className="loader-small"/>
                                                         </div>
                                                     ) : (
-                                                        <div className="button-default component-new-feed__margin-left"
+                                                        <div className="button-general-page component-new-feed__margin-left"
                                                              onClick={() => this.saveFeed()}>Сохранить</div>
                                                     )
                                                 }
@@ -751,7 +751,7 @@ class NewFeed extends Component {
 
                                             </>
                                         ) : (
-                                            <div className="button-default component-new-feed__margin-left"
+                                            <div className="button-general-page component-new-feed__margin-left"
                                                  onClick={() => this.feedNew()}>Опубликовать
                                             </div>
                                         )
