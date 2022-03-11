@@ -4,11 +4,15 @@
     align-items: center;
     height: 310px;
     color: #8f948f;
-    cursor: pointer;
     font-size: 13px;
     background: #fafafa;
     border-radius: 5px 5px 0 0;
     position: relative;
+}
+
+.upload_click_cover:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .component-new-feed {
