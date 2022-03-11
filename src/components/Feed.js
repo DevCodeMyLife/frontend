@@ -530,7 +530,7 @@ class Feed extends Component {
                             {
                                 tags?.map(data =>
                                     <div className="button-default-tag tags-item unselectable"
-                                         style={{background: `${data.color}17`, color: "color: data.color"}}
+                                         style={{background: `${data.color}17`, color: data.color}}
                                          action={data.value}
                                          onClick={this.handleClickTag}>
                                         {data.value}
