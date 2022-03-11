@@ -521,6 +521,60 @@ class NewFeed extends Component {
             });
     }
 
+    deleteFeed(uuid) {
+        fetch(`/api/feed/${uuid}`, {
+            method: "DELETE",
+            body: JSON.stringify({})
+        })
+            .then(response => response.json())
+            .then(_ => {
+                // const state = this.state.store.getState()
+                // const urlParams = state.history.path
+                // const id = urlParams.get('id');
+                fetch("/api/authentication", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "finger": window.localStorage.getItem("finger")
+                    })
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        this.state.store.dispatch({
+                            type: "ACTION_CHECK_AUTH", value: {
+                                user: {
+                                    isAuth: true,
+                                    data: res?.data[0],
+                                    feeds: res?.feed,
+                                    notificationCount: res?.notification_count,
+                                    messagesCount: res?.count_message,
+                                    notifications: res?.notification,
+                                    token: res?.token
+                                },
+                            }
+                        })
+                        this.cancel()
+
+                        this.setState({
+                            callNewFeed: false
+                        })
+
+                    })
+                    .catch(error => {
+                        this.setState({
+                            auth: false,
+                            load: true,
+                        });
+                    });
+
+            })
+            .catch(error => {
+                this.setState({
+                    auth: false,
+                    load: true,
+                });
+            });
+    }
+
     //
     render() {
         const store = this.state.store.getState()
