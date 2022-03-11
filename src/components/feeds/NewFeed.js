@@ -466,15 +466,6 @@ class NewFeed extends Component {
             close: this.state.privatePost
         }
 
-        this.setState({
-            clicked_new_post: false,
-            show_textarea: false,
-            rewriteValue: null,
-            showPreview: false,
-            rewriteMode: false,
-            textNews: "..."
-        })
-
         fetch(`/api/feed/${this.state.rewriteUUID}`, {
             method: "PUT",
             body: JSON.stringify({
@@ -516,6 +507,8 @@ class NewFeed extends Component {
                                 error: true
                             });
                         }
+
+                        this.cancel()
                     })
                     .catch(error => {
                         this.setState({
