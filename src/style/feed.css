@@ -23,6 +23,9 @@
     justify-items: center;
 }
 
+.component-new-feed__wrapper_all {
+    margin-bottom: 30px;
+}
 
 .component-new-feed__wrapper-image-img {
     max-width: 38px;
