@@ -504,8 +504,7 @@ class Feed extends Component {
                                                                             data.tag?.map(tag =>
                                                                                 <div
                                                                                     className="button-default-tag tags-item unselectable"
-                                                                                    style={{background: `${data.color}17`}}
-                                                                                    action={data.value}>
+                                                                                    style={{background: `${tag?.color}17`}}>
                                                                                     <span
                                                                                         style={{color: tag?.color}}>{tag?.value}</span>
                                                                                 </div>
