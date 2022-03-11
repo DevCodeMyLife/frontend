@@ -19,7 +19,7 @@ class Balance extends Component {
     render() {
         const state = this.state.store.getState()
         return (
-            <>
+            <div>
                 <div className="content-wall-views">
                     <div className="feed-wrapper">
                         {/*<div className="main-place-wrapper">*/}
@@ -65,7 +65,7 @@ class Balance extends Component {
                     {/*    }*/}
                     {/*</div>*/}
                 </div>
-            </>
+            </div>
         )
     }
 }
