@@ -453,8 +453,9 @@ class NewFeed extends Component {
                                                  borderRadius: "5px 5px 0 0"
                                              }} onClick={() => this.uploadClickCover()}/>
                                     ) : (
-                                        <div className="component-new-feed__small-full-text" onClick={() => this.uploadClickCover()}>
-                                            <span className="upload_click_cover">Нажмите cюда чтобы добавить обложку</span>
+                                        <div className="component-new-feed__small-full-text">
+                                            <span className="upload_click_cover"
+                                                  onClick={() => this.uploadClickCover()}>Нажмите cюда чтобы добавить обложку</span>
                                             <div className="component-new-feed__small-info-text">
                                                 <span>Минимальный размер изображения 1000х420 пикселей</span>
                                             </div>
