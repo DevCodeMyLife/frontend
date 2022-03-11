@@ -64,7 +64,7 @@ class Feed extends Component {
                     document.getElementById(uuid).innerHTML = res.data.count
                     this.state.likeType[uuid] = !this.state.likeType[uuid]
                     this.setState({
-                        likeType:  this.state.likeType
+                        likeType: this.state.likeType
                     })
                 }
             })
@@ -95,7 +95,7 @@ class Feed extends Component {
                                 return x.count_like > y.count_like ? -1 : 1;
                             })
                         });
-                    }else{
+                    } else {
                         this.setState({
                             result: null,
                             isLoaded: "access"
@@ -183,8 +183,8 @@ class Feed extends Component {
                     this.setState({
                         isLoaded: "access",
                         result: res.data.sort(function (x, y) {
-                        return x.date_time > y.date_time ? -1 : 1;
-                    })
+                            return x.date_time > y.date_time ? -1 : 1;
+                        })
                     });
                 })
                 .catch(error => {
@@ -274,7 +274,7 @@ class Feed extends Component {
     }
 
     handlerBlur = (event) => {
-        if (event.target.value.length !== 0){
+        if (event.target.value.length !== 0) {
             return
         }
 
@@ -417,8 +417,9 @@ class Feed extends Component {
                                                                   href={`/post/${data?.ID}`}>
                                                                 {
                                                                     data?.cover_path !== "" ?
-                                                                        <img className="cover-feed" src={data.cover_path}
-                                                                             alt={data.title} />
+                                                                        <img className="cover-feed"
+                                                                             src={data.cover_path}
+                                                                             alt={data.title}/>
                                                                         :
                                                                         null
                                                                 }
@@ -468,7 +469,7 @@ class Feed extends Component {
                                                                             {
                                                                                 this.state.isDark === "light" ?
                                                                                     <img src={like} alt="like"/>
-                                                                                :
+                                                                                    :
                                                                                     <img src={like_dark} alt="like"/>
                                                                             }
                                                                         </div>
@@ -499,8 +500,12 @@ class Feed extends Component {
                                                                     {
                                                                         data?.tag ?
                                                                             data.tag?.map(tag =>
-                                                                                <div className="tags-type">
-                                                                                    #{tag?.value}
+                                                                                <div
+                                                                                    className="button-default-tag tags-item unselectable"
+                                                                                    style={{background: `${data.color}17`}}
+                                                                                    action={data.value}>
+                                                                                    <span
+                                                                                        style={{color: tag?.color}}>{tag?.value}</span>
                                                                                 </div>
                                                                             )
 
@@ -517,11 +522,12 @@ class Feed extends Component {
                         </div>
                     </div>
                     <div className="tags-view">
-                        <div className="title-box" >Теги</div>
+                        <div className="title-box">Теги</div>
                         <div className="tags-box" id="tags-wrapper-all-tags">
                             {
                                 tags?.map(data =>
-                                    <div className="button-default-tag tags-item unselectable" style={{background: `${data.color}17`}} action={data.value}
+                                    <div className="button-default-tag tags-item unselectable"
+                                         style={{background: `${data.color}17`}} action={data.value}
                                          onClick={this.handleClickTag}>
                                         <span style={{color: data.color}}>{data.value}</span>
                                     </div>
