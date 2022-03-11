@@ -381,6 +381,7 @@ code {
     justify-content: center;
     align-items: center;
     /*font-size: 14px;*/
+    box-sizing: border-box;
 }
 
 .button-open-menu {
@@ -486,6 +487,24 @@ code {
     border: 1px solid var(--button_border);
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: .1s;
+}
+
+.button-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.button-default-feed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: var(--white);*/
+    /*border: 1px solid var(--button_border);*/
+    padding: 10px;
+    /*border-radius: 5px;*/
     cursor: pointer;
     transition: .1s;
 }
@@ -1559,6 +1578,15 @@ p {
 
 .value-post > p {
     white-space: pre-line;
+
+}
+
+.value-post > p > a {
+    color: #4356ee;
+}
+
+.value-post > p > a:hover {
+    text-decoration: underline;
 }
 
 .view-flex {
@@ -1645,6 +1673,67 @@ p {
 
 .wrapper-chats {
     /*padding: 20px;*/
+}
+
+.balance-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.balance-place {
+
+}
+
+.balance-count {
+    font-size: 12px;
+    color: var(--font-color);
+}
+
+.balance-count:hover {
+    text-decoration: underline;
+}
+
+.item-about {
+    margin: 0 0 29px;
+    padding: 0;
+    max-width: 340px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.25;
+    text-align: left;
+    color: #9b9b9b;
+}
+
+.coins-values {
+    max-width: 332px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+
+.wrapper-balance-count {
+    padding: 10px;
+}
+
+.content-pack-coins {
+    padding: 0 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.coins-item {
+    padding: 10px;
+    border: 1px solid var(--button_border);
+    /*border-radius: 5px;*/
+    /*margin-right: 10px;*/
+    flex-grow: 1;
 }
 
 .messages-control-nav {
@@ -1844,6 +1933,11 @@ p {
 
 .button-default-icon:active {
     transform: scale(.9);
+}
+
+.button-default-icon-feed:active {
+    transform: scale(.9);
+
 }
 
 .create-feed-wrapper-button {

@@ -29,6 +29,20 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className="wrapper-user">
+                        {
+                            state.auth.user.isAuth ?
+                                <div className="balance-block">
+                                    <div className="balance-place">
+                                        <Link href="/balance">
+                                            <span className="balance-count">
+                                                {(parseInt(state.auth.user.data.balance)).toLocaleString('ru')} tokens
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            :
+                                null
+                        }
                         <div className="wrapper-auth">
                             {
                                 !this.state.load ?

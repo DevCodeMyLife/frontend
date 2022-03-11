@@ -30,7 +30,7 @@ const meta_twitter = '<meta property="twitter:image" content="/main.jpg">'
 const meta_twitter_url = '<meta property="twitter:url" content="https://devcodemylife.tech/">'
 
 
-app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people'], (req, res) => {
+app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people', '/apps', '/balance', '/up_balance'], (req, res) => {
     const app = ReactDOMServer.renderToString(<App/>);
     const indexFile = path.resolve('./build/index.html');
 

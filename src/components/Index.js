@@ -25,6 +25,10 @@ import People from "./People";
 import AppReducer from "./reducers/common"
 import Agreement from "./Agreement";
 import Task from "./Task";
+import Apps from "./Apps";
+import Balance from "./Balance";
+import UpBalance from "./UpBalans";
+import NewFeed from "./feeds/NewFeed";
 
 const store = createStore(AppReducer);
 
@@ -94,6 +98,11 @@ class App extends React.Component {
             '/teams': route({view: <Teams store={store}/>}),
             '/how_to_use': route({ view: <HowToUse store={store}/>}),
             '/task': route({ view: <Task store={store}/>}),
+            '/apps': route({ view: <Apps store={store}/>}),
+            '/balance': route({ view: <Balance store={store}/>}),
+            '/up_balance': route({ view: <UpBalance />}),
+            '/test': route({ view: <NewFeed />}),
+
         })
     }
 
@@ -443,6 +452,8 @@ class App extends React.Component {
 
     render() {
         if (this.state.load) {
+        // if (true) {
+
             return (
                 <HelmetProvider>
                     <div className="wrapper">

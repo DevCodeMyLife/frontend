@@ -17,6 +17,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import {toast} from 'react-toastify';
 import error from "./Error";
 import {number} from "prop-types";
+import NewFeed from "./feeds/NewFeed";
 
 const gfm = require('remark-gfm')
 
@@ -237,24 +238,37 @@ class MainUsers extends Component {
 
         if (tag !== null) {
             for (let i = 0; i < tag.length; i++) {
-                let row = {label: tag[i].value, value: tag[i].tid}
+                let row = {label: tag[i].value, value: tag[i].tid, color: tag[i].color}
 
                 result.push(row)
             }
         }
 
-        this.setState({
-            rewriteUUID: uuid,
-            rewriteValue: value,
-            rewriteTitle: title,
-            rewriteMode: true,
-            clicked_new_post: true,
-            show_textarea: true,
-            close: close,
-            showPreview: true,
-            coverUpload: cover,
-            useTags: result
+        this.state.store.dispatch({
+            type: "ACTION_UPDATE_FEED_REWRITE", value: {
+                rewriteUUID: uuid,
+                rewriteValue: value,
+                rewriteTitle: title,
+                rewriteMode: true,
+                privatePost: close,
+                showPreview: true,
+                coverUpload: cover,
+                useTags: result
+            }
         })
+
+        // this.setState({
+        //     rewriteUUID: uuid,
+        //     rewriteValue: value,
+        //     rewriteTitle: title,
+        //     rewriteMode: true,
+        //     clicked_new_post: true,
+        //     show_textarea: true,
+        //     close: close,
+        //     showPreview: true,
+        //     coverUpload: cover,
+        //     useTags: result
+        // })
     }
 
     componentDidMount() {
@@ -966,186 +980,187 @@ class MainUsers extends Component {
                                     <div className="feed-wrapper">
                                         {
                                             Number(this.state.id) === store.auth.user.data.id ?
-                                                <div className="feed-wrapper-item background-white">
-                                                    <div className="feed-item-value">
-
-                                                        <div key={store.auth.user.data.avatar_url}
-                                                             className="wrapper-data">
-                                                            <div key="aksdlkasd" className="photo-wrapper">
-                                                                <img key="asdmmmmasd"
-                                                                     src={store.auth.user.data?.avatar_url}
-                                                                     alt={store.auth.user.data?.login}
-                                                                     onClick={(e) => {
-                                                                         e.preventDefault();
-                                                                         window.location.href = `/user/${store.auth.user.data.id}`
-                                                                     }}
-                                                                />
-                                                            </div>
-
-                                                            <div className="value-post placeholder-main-feed"
-                                                                 id="main_input" onClick={
-                                                                !clicked_new_post ? this.newInputText : null
-                                                            }>
-
-                                                                {
-                                                                    this.state.clicked_new_post ?
-                                                                        <div className="textarea-hide">
-                                                                            <div style={{marginBottom: "20px"}}>
-                                                                            <input type="file" name="file" id="upload_file_input_cover"
-                                                                                   onChange={(e) => this.uploadCoverAction(e)}
-                                                                                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>
-                                                                            {
-                                                                                this.state.coverUpload ?
-                                                                                    <img src={this.state.coverUpload}
-                                                                                         alt={store.auth.user.data.login}
-                                                                                         onClick={() => this.uploadClickCover()}
-                                                                                         style={{cursor: "pointer", maxWidth: "634px"}}/>
-                                                                                :
-                                                                                        <>
-                                                                                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>
-                                                                                                Нажмите что бы добавить обложку
-                                                                                            </div>
-                                                                                        </>
-
-                                                                            }
-                                                                            </div>
-                                                                            <div className="title-view" style={{marginBottom: "10px"}}>
-                                                                                <Select
-                                                                                    options={this.state.aquaticCreatures}
-                                                                                    isMulti
-                                                                                    maxMenuHeight={300}
-                                                                                    defaultValue={this.state.useTags}
-                                                                                    onChange={this.updateUseTags}
-                                                                                    placeholder="Подберите тег..."
-                                                                                    isValidNewOption={this.isValidNewOption}
-                                                                                />
-                                                                            </div>
-                                                                            <div className="title-view">
-                                                                                <input className="feed-textarea"
-                                                                                       autoFocus={true} type="text"
-                                                                                       id="text_title"
-                                                                                       onChange={this.handleChangeTitle}
-                                                                                       placeholder="Заголовок"
-                                                                                       style={{margin: "0 0 10px 0"}}
-                                                                                       value={this.state.rewriteTitle}/>
-                                                                            </div>
-                                                                            <TextareaAutosize className="feed-textarea"
-                                                                                              onChange={this.handleChangeTextarea}
-                                                                                              placeholder="Что у Вас нового?"
-                                                                                              id="text_news">
-                                                                                {this.state.rewriteMode ? this.state.rewriteValue : ""}
-                                                                            </TextareaAutosize>
-                                                                        </div>
-
-                                                                        :
-                                                                        <div className="fake-textarea">Что у Вас нового?</div>
-                                                                }
-                                                            </div>
-                                                        </div>
-
-                                                        {
-                                                            this.state.clicked_new_post ?
-                                                                <div
-                                                                    className="wrapper-flex-end create-feed-wrapper-button">
-                                                                    <div className="button-default-icon"
-                                                                         onClick={() => {
-                                                                             this.setState(prevState => ({
-                                                                                 close: !prevState.close
-                                                                             }));
-                                                                         }}>
-
-                                                                        {
-                                                                            store.auth.user.data.privat_post || this.state.close ?
-                                                                                <svg className="svg-close-view"
-                                                                                     fill="#000000"
-                                                                                     xmlns="http://www.w3.org/2000/svg"
-                                                                                     viewBox="0 0 50 50" width="50px"
-                                                                                     height="50px">
-                                                                                    <path fill="none"
-                                                                                          className="svg-close"
-                                                                                          stroke="#000000"
-                                                                                          strokeLinecap="round"
-                                                                                          strokeMiterlimit="10"
-                                                                                          strokeWidth="2"
-                                                                                          d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
-                                                                                    <path
-                                                                                        d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                </svg>
-                                                                                :
-                                                                                <svg className="svg-close-view"
-                                                                                     fill="#000000"
-                                                                                     xmlns="http://www.w3.org/2000/svg"
-                                                                                     viewBox="0 0 50 50" width="50px"
-                                                                                     height="50px">
-                                                                                    <path fill="none"
-                                                                                          className="svg-close"
-                                                                                          stroke="#000000"
-                                                                                          strokeLinecap="round"
-                                                                                          strokeMiterlimit="10"
-                                                                                          strokeWidth="2"
-                                                                                          d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
-                                                                                    <path
-                                                                                        d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                </svg>
-                                                                        }
-
-                                                                    </div>
-                                                                    {/*<div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>*/}
-                                                                    <div className="button-default"
-                                                                         onClick={() => this.cancel()}>Отмена
-                                                                    </div>
-                                                                    {
-                                                                        this.state.rewriteMode ?
-                                                                            <div className="button-default"
-                                                                                 onClick={() => {
-                                                                                     this.deleteFeed(this.state.rewriteUUID)
-                                                                                 }}
-                                                                            >
-                                                                                Удалить
-                                                                            </div>
-                                                                            :
-                                                                            null
-                                                                    }
-                                                                    {
-                                                                        this.state.rewriteMode ?
-
-                                                                            <div className="button-default"
-                                                                                 onClick={() => this.saveFeed()}>Сохранить</div>
-                                                                            :
-                                                                            <div className="button-default"
-                                                                                 onClick={() => this.feedNew()}>Опубликовать</div>
-                                                                    }
-
-
-                                                                </div>
-                                                                :
-                                                                null
-                                                        }
-                                                        {
-                                                            this.state.showPreview ?
-                                                                <>
-                                                                    <div className="preview-news preview_swap">
-
-                                                                        <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
-                                                                            <div className="feed-item-value">
-                                                                                <div className="wrapper-data">
-                                                                                    <ReactMarkdown className="value-post"
-                                                                                                   remarkPlugins={[gfm]}
-                                                                                                   components={this.components}>
-                                                                                        {textNews}
-                                                                                    </ReactMarkdown>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </>
-                                                            :
-                                                                null
-                                                        }
-
-                                                    </div>
-                                                </div>
+                                                <NewFeed store={this.state.store}/>
+                                                // <div className="feed-wrapper-item background-white">
+                                                //     <div className="feed-item-value">
+                                                //
+                                                //         <div key={store.auth.user.data.avatar_url}
+                                                //              className="wrapper-data">
+                                                //             <div key="aksdlkasd" className="photo-wrapper">
+                                                //                 <img key="asdmmmmasd"
+                                                //                      src={store.auth.user.data?.avatar_url}
+                                                //                      alt={store.auth.user.data?.login}
+                                                //                      onClick={(e) => {
+                                                //                          e.preventDefault();
+                                                //                          window.location.href = `/user/${store.auth.user.data.id}`
+                                                //                      }}
+                                                //                 />
+                                                //             </div>
+                                                //
+                                                //             <div className="value-post placeholder-main-feed"
+                                                //                  id="main_input" onClick={
+                                                //                 !clicked_new_post ? this.newInputText : null
+                                                //             }>
+                                                //
+                                                //                 {/*{*/}
+                                                //                 {/*    this.state.clicked_new_post ?*/}
+                                                //                 {/*        <div className="textarea-hide">*/}
+                                                //                 {/*            <div style={{marginBottom: "20px"}}>*/}
+                                                //                 {/*            <_input type="file" name="file" id="upload_file_inputcover"*/}
+                                                //                 {/*                   onChange={(e) => this.uploadCoverAction(e)}*/}
+                                                //                 {/*                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>*/}
+                                                //                 {/*            {*/}
+                                                //                 {/*                this.state.coverUpload ?*/}
+                                                //                 {/*                    <img src={this.state.coverUpload}*/}
+                                                //                 {/*                         alt={store.auth.user.data.login}*/}
+                                                //                 {/*                         onClick={() => this.uploadClickCover()}*/}
+                                                //                 {/*                         style={{cursor: "pointer", maxWidth: "634px"}}/>*/}
+                                                //                 {/*                :*/}
+                                                //                 {/*                        <>*/}
+                                                //                 {/*                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>*/}
+                                                //                 {/*                                Нажмите что бы добавить обложку*/}
+                                                //                 {/*                            </div>*/}
+                                                //                 {/*                        </>*/}
+                                                //
+                                                //                 {/*            }*/}
+                                                //                 {/*            </div>*/}
+                                                //                 {/*            <div className="title-view" style={{marginBottom: "10px"}}>*/}
+                                                //                 {/*                <Select*/}
+                                                //                 {/*                    options={this.state.aquaticCreatures}*/}
+                                                //                 {/*                    isMulti*/}
+                                                //                 {/*                    maxMenuHeight={300}*/}
+                                                //                 {/*                    defaultValue={this.state.useTags}*/}
+                                                //                 {/*                    onChange={this.updateUseTags}*/}
+                                                //                 {/*                    placeholder="Подберите тег..."*/}
+                                                //                 {/*                    isValidNewOption={this.isValidNewOption}*/}
+                                                //                 {/*                />*/}
+                                                //                 {/*            </div>*/}
+                                                //                 {/*            <div className="title-view">*/}
+                                                //                 {/*                <input className="feed-textarea"*/}
+                                                //                 {/*                       autoFocus={true} type="text"*/}
+                                                //                 {/*                       id="text_title"*/}
+                                                //                 {/*                       onChange={this.handleChangeTitle}*/}
+                                                //                 {/*                       placeholder="Заголовок"*/}
+                                                //                 {/*                       style={{margin: "0 0 10px 0"}}*/}
+                                                //                 {/*                       value={this.state.rewriteTitle}/>*/}
+                                                //                 {/*            </div>*/}
+                                                //                 {/*            <TextareaAutosize className="feed-textarea"*/}
+                                                //                 {/*                              onChange={this.handleChangeTextarea}*/}
+                                                //                 {/*                              placeholder="Что у Вас нового?"*/}
+                                                //                 {/*                              id="text_news">*/}
+                                                //                 {/*                {this.state.rewriteMode ? this.state.rewriteValue : ""}*/}
+                                                //                 {/*            </TextareaAutosize>*/}
+                                                //                 {/*        </div>*/}
+                                                //
+                                                //                 {/*        :*/}
+                                                //                 {/*        <div className="fake-textarea">Что у Вас нового?</div>*/}
+                                                //                 {/*}*/}
+                                                //             </div>
+                                                //         </div>
+                                                //
+                                                //         {
+                                                //             this.state.clicked_new_post ?
+                                                //                 <div
+                                                //                     className="wrapper-flex-end create-feed-wrapper-button">
+                                                //                     <div className="button-default-icon"
+                                                //                          onClick={() => {
+                                                //                              this.setState(prevState => ({
+                                                //                                  close: !prevState.close
+                                                //                              }));
+                                                //                          }}>
+                                                //
+                                                //                         {
+                                                //                             store.auth.user.data.privat_post || this.state.close ?
+                                                //                                 <svg className="svg-close-view"
+                                                //                                      fill="#000000"
+                                                //                                      xmlns="http://www.w3.org/2000/svg"
+                                                //                                      viewBox="0 0 50 50" width="50px"
+                                                //                                      height="50px">
+                                                //                                     <path fill="none"
+                                                //                                           className="svg-close"
+                                                //                                           stroke="#000000"
+                                                //                                           strokeLinecap="round"
+                                                //                                           strokeMiterlimit="10"
+                                                //                                           strokeWidth="2"
+                                                //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                //                                     <path
+                                                //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                //                                 </svg>
+                                                //                                 :
+                                                //                                 <svg className="svg-close-view"
+                                                //                                      fill="#000000"
+                                                //                                      xmlns="http://www.w3.org/2000/svg"
+                                                //                                      viewBox="0 0 50 50" width="50px"
+                                                //                                      height="50px">
+                                                //                                     <path fill="none"
+                                                //                                           className="svg-close"
+                                                //                                           stroke="#000000"
+                                                //                                           strokeLinecap="round"
+                                                //                                           strokeMiterlimit="10"
+                                                //                                           strokeWidth="2"
+                                                //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                //                                     <path
+                                                //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                //                                 </svg>
+                                                //                         }
+                                                //
+                                                //                     </div>
+                                                //                     {/*<div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>*/}
+                                                //                     <div className="button-default"
+                                                //                          onClick={() => this.cancel()}>Отмена
+                                                //                     </div>
+                                                //                     {
+                                                //                         this.state.rewriteMode ?
+                                                //                             <div className="button-default"
+                                                //                                  onClick={() => {
+                                                //                                      this.deleteFeed(this.state.rewriteUUID)
+                                                //                                  }}
+                                                //                             >
+                                                //                                 Удалить
+                                                //                             </div>
+                                                //                             :
+                                                //                             null
+                                                //                     }
+                                                //                     {
+                                                //                         this.state.rewriteMode ?
+                                                //
+                                                //                             <div className="button-default"
+                                                //                                  onClick={() => this.saveFeed()}>Сохранить</div>
+                                                //                             :
+                                                //                             <div className="button-default"
+                                                //                                  onClick={() => this.feedNew()}>Опубликовать</div>
+                                                //                     }
+                                                //
+                                                //
+                                                //                 </div>
+                                                //                 :
+                                                //                 null
+                                                //         }
+                                                //         {
+                                                //             this.state.showPreview ?
+                                                //                 <>
+                                                //                     <div className="preview-news preview_swap">
+                                                //
+                                                //                         <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
+                                                //                             <div className="feed-item-value">
+                                                //                                 <div className="wrapper-data">
+                                                //                                     <ReactMarkdown className="value-post"
+                                                //                                                    remarkPlugins={[gfm]}
+                                                //                                                    components={this.components}>
+                                                //                                         {textNews}
+                                                //                                     </ReactMarkdown>
+                                                //                                 </div>
+                                                //                             </div>
+                                                //                         </div>
+                                                //
+                                                //                     </div>
+                                                //                 </>
+                                                //             :
+                                                //                 null
+                                                //         }
+                                                //
+                                                //     </div>
+                                                // </div>
                                                 :
                                                 null
                                         }

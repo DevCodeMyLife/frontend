@@ -38,7 +38,17 @@ const initialState = {
     stream: null,
     am: false,
     people: [],
-    notification_user: {}
+    notification_user: {},
+    feed_rewrite: {
+        rewriteUUID: null,
+        rewriteValue: null,
+        rewriteTitle: null,
+        rewriteMode: false,
+        privatePost: false,
+        showPreview: false,
+        coverUpload: null,
+        useTags: []
+    }
 }
 
 export default function AppReducer(state = initialState, action) {
@@ -76,6 +86,9 @@ export default function AppReducer(state = initialState, action) {
             return state
         case "ACTION_UPDATE_NOTIFICATION_USER":
             state.notification_user = action.value
+            return state
+        case "ACTION_UPDATE_FEED_REWRITE":
+            state.feed_rewrite = action.value
             return state
         default:
             return state

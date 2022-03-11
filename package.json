@@ -24,7 +24,7 @@
     "file-loader": "^6.2.0",
     "jsdom": "^19.0.0",
     "jssha": "^3.2.0",
-    "mini-css-extract-plugin": "^2.5.3",
+    "mini-css-extract-plugin": "^2.6.0",
     "navi": "^0.14.0",
     "node-fetch": "^3.2.1",
     "nodemon": "^2.0.15",
@@ -60,7 +60,8 @@
     "dev:build-server": "NODE_ENV=production webpack --config webpack.server.js --mode=production",
     "dev:start": "nodemon ./server-build/index.js",
     "dev": "npm-run-all --parallel build dev:*",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "start": "react-scripts start"
   },
   "config": {
     "css-ssr": {
