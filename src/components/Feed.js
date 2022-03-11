@@ -261,12 +261,16 @@ class Feed extends Component {
     }
 
     handlerFocus = (event) => {
-        for (let sibling of document.getElementById("tags-wrapper-all-tags").parentNode.children) {
-            sibling.classList.remove('button-select');
+        for (let sibling of document.getElementById("tags-wrapper-all-tags").children) {
+            sibling.classList.remove('button-select-tag');
         }
 
         for (let sibling of document.getElementById("tags-wrapper-default").children) {
-            sibling.classList.remove('button-select');
+            sibling.classList.remove('button-select-tag');
+        }
+
+        for (let sibling of event.target.parentNode.children) {
+            sibling.classList.remove('button-select-tag');
         }
         this.setState({
             isLoaded: "OnFocusSearch"
@@ -294,7 +298,7 @@ class Feed extends Component {
                     result: {}
                 });
             });
-        this.popular.current.classList.add('button-select')
+        this.popular.current.classList.add('button-select-tag')
         this.setState({
             isLoaded: "access"
         })
