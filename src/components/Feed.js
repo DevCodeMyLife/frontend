@@ -131,15 +131,15 @@ class Feed extends Component {
     handleClickTag = event => {
 
 
-        for (let sibling of document.getElementById("tags-wrapper-all-tags")) {
+        for (let sibling of document.getElementById("tags-wrapper-all-tags").children) {
             sibling.classList.remove('button-select-tag');
         }
 
-        for (let sibling of document.getElementById("tags-wrapper-default")) {
+        for (let sibling of document.getElementById("tags-wrapper-default").parentNode) {
             sibling.classList.remove('button-select-tag');
         }
 
-        for (let sibling of event.target) {
+        for (let sibling of event.target.parentNode) {
             sibling.classList.remove('button-select-tag');
         }
 
