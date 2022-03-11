@@ -10,8 +10,91 @@ import gfm from "remark-gfm";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import code from "../../icon/code.png";
 import {toast} from "react-toastify";
-import Select from "react-select";
+import chroma from 'chroma-js';
+import Select  from 'react-select';
 
+
+const colourStyles = {
+    // control: (styles) => ({ ...styles, backgroundColor: 'white', border: '#fafafa 1px solid' }),
+    indicatorsContainer: (styles) => ({
+        ...styles,
+        display: 'none'
+    }),
+    control: (styles) => ({
+        ...styles,
+        // none of react-select's styles are passed to <Control />
+        backgroundColor: 'white',
+        border: 'none',
+        boxShadow: 'none',
+        fontFamily: 'system-ui',
+        ':hover': {
+            ...styles[':active'],
+            outline: 'none',
+            border: 'none',
+            cursor: 'text'
+        },
+        ':active': {
+            ...styles[':active'],
+            outline: 'none',
+            border: 'none',
+            cursor: 'text'
+        },
+    }),
+    placeholder: (styles) => ({
+        ...styles,
+        color: '#a9a9a9'
+    }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        const color = chroma(data.color);
+        return {
+            ...styles,
+            backgroundColor: isDisabled
+                ? undefined
+                : isSelected
+                    ? data.color
+                    : isFocused
+                        ? color.alpha(0.1).css()
+                        : undefined,
+            color: isDisabled
+                ? '#ccc'
+                : isSelected
+                    ? chroma.contrast(color, 'white') > 2
+                        ? 'white'
+                        : 'black'
+                    : data.color,
+            cursor: isDisabled ? 'not-allowed' : 'default',
+
+            ':active': {
+                ...styles[':active'],
+                backgroundColor: !isDisabled
+                    ? isSelected
+                        ? data.color
+                        : color.alpha(0.3).css()
+                    : undefined,
+            },
+        };
+    },
+    multiValue: (styles, { data }) => {
+        const color = chroma(data.color);
+        return {
+            ...styles,
+            backgroundColor: color.alpha(0.1).css(),
+            color: '#A9A9A9D9',
+        };
+    },
+    multiValueLabel: (styles, { data }) => ({
+        ...styles,
+        color: '#A9A9A9D9',
+    }),
+    multiValueRemove: (styles, { data }) => ({
+        ...styles,
+        color: data.color,
+        ':hover': {
+            backgroundColor: data.color,
+            color: 'white',
+        },
+    }),
+};
 
 class NewFeed extends Component {
     constructor(props) {
@@ -42,6 +125,10 @@ class NewFeed extends Component {
                 )
             }
         }
+
+        // this.state.store.subscribe(() => {
+        //     this.setState(this.state.store.getState())
+        // })
     }
 
     componentDidMount() {
@@ -304,6 +391,20 @@ class NewFeed extends Component {
     }
 
     cancel() {
+
+        this.state.store.dispatch({
+            type: "ACTION_UPDATE_FEED_REWRITE", value: {
+                rewriteUUID: null,
+                rewriteValue: null,
+                rewriteTitle: null,
+                rewriteMode: false,
+                privatePost: false,
+                showPreview: false,
+                coverUpload: null,
+                useTags: []
+            }
+        })
+
         this.setState({
             clickComponent: false,
             privatePost: false,
@@ -324,8 +425,51 @@ class NewFeed extends Component {
         return !(inputValue.length > 0 && selectValue.length < 6);
     }
 
+    rewriteFeed(uuid, value, title, close, cover, tag) {
+
+        this.cancel()
+
+        let result = []
+
+        if (tag !== null) {
+            for (let i = 0; i < tag.length; i++) {
+                let row = {label: tag[i].value, value: tag[i].tid}
+
+                result.push(row)
+            }
+        }
+
+        this.state.store.dispatch({
+            type: "ACTION_CHECK_AUTH", value: {
+                user: {
+                    isAuth: true,
+                    data: res?.data[0],
+                    feeds: res?.feed,
+                    notificationCount: res?.notification_count,
+                    messagesCount: res?.count_message,
+                    notifications: res?.notification,
+                    token: res?.token
+                },
+            }
+        })
+
+        this.setState({
+            rewriteUUID: uuid,
+            rewriteValue: value,
+            rewriteTitle: title,
+            rewriteMode: true,
+            clicked_new_post: true,
+            show_textarea: true,
+            close: close,
+            showPreview: true,
+            coverUpload: cover,
+            useTags: result
+        })
+    }
+
     //
     render() {
+        // const store = this.state.store.getState()
         return (
             <>
                 {this.state.clickComponent ? (
@@ -370,17 +514,6 @@ class NewFeed extends Component {
                                         </>
                                     ) : (
                                         <>
-                                            <div className="title-view" style={{marginBottom: "10px"}}>
-                                                <Select
-                                                    options={this.state.aquaticCreatures}
-                                                    isMulti
-                                                    maxMenuHeight={300}
-                                                    defaultValue={this.state.useTags}
-                                                    onChange={this.updateUseTags}
-                                                    placeholder="Подберите тег..."
-                                                    isValidNewOption={this.isValidNewOption}
-                                                />
-                                            </div>
                                             <input
                                                 className="component-new-feed__input component-new-feed__header"
                                                 placeholder="Заголовок"
@@ -388,6 +521,19 @@ class NewFeed extends Component {
                                                 onChange={this.onChangeTitle}
                                                 value={this.state.valueTitle}
                                             />
+                                            <div className="title-view" style={{marginBottom: "10px"}}>
+                                                <Select
+                                                    options={this.state.aquaticCreatures}
+                                                    isMulti
+                                                    maxMenuHeight={300}
+                                                    defaultValue={this.state.useTags}
+                                                    onChange={this.updateUseTags}
+                                                    placeholder="Добавить теги"
+                                                    isValidNewOption={this.isValidNewOption}
+                                                    styles={colourStyles}
+                                                />
+                                            </div>
+
                                             <TextareaAutosize
                                                 className="component-new-feed__input"
                                                 placeholder="Текст"
@@ -442,8 +588,12 @@ class NewFeed extends Component {
 
                                 </div>
                                 <div className="button-default component-new-feed__margin-left"
-                                     onClick={() => this.cancel()}>>Отмена
+                                     onClick={() => this.cancel()}>Отмена
                                 </div>
+                                {/*{*/}
+                                {/*    store.feed_rewrite.rewriteMode ?*/}
+
+                                {/*}*/}
                                 <div className="button-default component-new-feed__margin-left"
                                      onClick={this.onClickPreview}>Превью
                                 </div>

@@ -244,18 +244,31 @@ class MainUsers extends Component {
             }
         }
 
-        this.setState({
-            rewriteUUID: uuid,
-            rewriteValue: value,
-            rewriteTitle: title,
-            rewriteMode: true,
-            clicked_new_post: true,
-            show_textarea: true,
-            close: close,
-            showPreview: true,
-            coverUpload: cover,
-            useTags: result
+        this.state.store.dispatch({
+            type: "ACTION_UPDATE_FEED_REWRITE", value: {
+                rewriteUUID: uuid,
+                rewriteValue: value,
+                rewriteTitle: title,
+                rewriteMode: true,
+                privatePost: close,
+                showPreview: true,
+                coverUpload: cover,
+                useTags: result
+            }
         })
+
+        // this.setState({
+        //     rewriteUUID: uuid,
+        //     rewriteValue: value,
+        //     rewriteTitle: title,
+        //     rewriteMode: true,
+        //     clicked_new_post: true,
+        //     show_textarea: true,
+        //     close: close,
+        //     showPreview: true,
+        //     coverUpload: cover,
+        //     useTags: result
+        // })
     }
 
     componentDidMount() {
