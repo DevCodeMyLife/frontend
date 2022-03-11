@@ -149,7 +149,7 @@ class Feed extends Component {
             isLoaded: "load",
         })
 
-        event.target.classList.add('button-select')
+        event.target.classList.add('button-select-tag')
         let attr = event.target.getAttribute('action')
 
         if (attr === "top") {
