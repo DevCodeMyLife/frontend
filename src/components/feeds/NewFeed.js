@@ -384,6 +384,7 @@ class NewFeed extends Component {
             value: this.state.valuePost,
             use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
+            video_path: this.state.videoUpload,
             close: this.state.privatePost
         }
 
