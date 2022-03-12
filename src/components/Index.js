@@ -492,8 +492,8 @@ class App extends React.Component {
                                                            </div>
                                                            {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
                                                        </div>
-                                                       <div className="wrapper-ad">
-                                                           <ins className="mrg-tag"
+                                                       <div className="wrapper-ad top-my-target">
+                                                           <ins className="top-my-target"
                                                                 style="display:inline-block;text-decoration: none;"
                                                                 data-ad-client="ad-1006790"
                                                                 data-ad-slot="1006790"/>
