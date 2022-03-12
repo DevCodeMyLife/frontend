@@ -30,7 +30,7 @@ class UpBalance extends Component {
                             this.state.error !== null ?
                                 <span>
                                     Вы успешно купили пакет на
-                                    <span style={{color: "green"}}> {this.state.count} coins</span>
+                                    <span style={{color: "green"}}> {this.state.count} tokens</span>
                                 </span>
                             :
                                 <span>
