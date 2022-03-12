@@ -2606,6 +2606,11 @@ link-user {
     box-shadow: var(--view-shadow);
 }
 
+.top-my-target {
+    padding: 20px;
+    width: 175px;
+}
+
 .photo-wrapper {
     position: relative;
     display: inline-block;
