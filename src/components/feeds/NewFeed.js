@@ -104,6 +104,7 @@ class NewFeed extends Component {
             valuePost: null,
             showPreview: false,
             coverUpload: null,
+            videoUpload: null,
             useTags: [],
             aquaticCreatures: [],
             callNewFeed: false,
@@ -186,7 +187,6 @@ class NewFeed extends Component {
         //     useTags: result
 
 
-
         this.setState({
             privatePost: store.auth.user.data.privat_post
         })
@@ -241,6 +241,67 @@ class NewFeed extends Component {
             showCrop: false,
             imageRef: null
         })
+    }
+
+    uploadVideoAction = (event) => {
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let file = event.target.files[0];
+
+        reader.readAsDataURL(file)
+
+        const id = toast.loading("Подождите, видео обрабатывается")
+        const data = new FormData();
+        data.append('data', file)
+
+        toast.update(id, {render: "Видео отправлено на сервер", type: "default", isLoading: true});
+        fetch("/api/upload/file", {
+            method: "POST",
+            body: data
+        })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+                if (res.status.code === 0) {
+                    this.setState({
+                        videoUpload: res?.data[0].url_preview
+                    })
+
+                    toast.update(id, {
+                        render: "Видео успешно загружено",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+
+
+                } else {
+                    toast.update(id, {
+                        render: "Сервер не смог обработать видео",
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    });
+                }
+
+
+            })
+            .catch(error => {
+                this.setState({
+                    loadImage: false
+                })
+                toast.update(id, {
+                    render: error,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 5000,
+                    hideProgressBar: true
+                });
+
+            });
     }
 
     uploadCoverAction = (event) => {
@@ -309,6 +370,11 @@ class NewFeed extends Component {
 
     uploadClickCover() {
         let elem = document.getElementById("upload_file_input_cover")
+        elem.click()
+    }
+
+    uploadClickVideo() {
+        let elem = document.getElementById("upload_file_input_video")
         elem.click()
     }
 
@@ -591,6 +657,9 @@ class NewFeed extends Component {
                             <input type="file" name="file" id="upload_file_input_cover"
                                    onChange={(e) => this.uploadCoverAction(e)}
                                    accept="image/jpeg" style={{display: "none"}}/>
+                            <input type="file" name="file" id="upload_file_input_video"
+                                   onChange={(e) => this.uploadVideoAction(e)}
+                                   accept="video/mp4,video/x-m4v,video/*" style={{display: "none"}}/>
                             <div className="component-new-feed__place-upload-cover-image">
                                 <div className="button-close">
                                     <div className="button-default component-new-feed__margin-left"
@@ -617,6 +686,9 @@ class NewFeed extends Component {
                                 }
                             </div>
                             <div className="component-new-feed__wrapper-article component-new-feed__flex-just-end">
+                                <div className="button-default-icon-feed" onClick={() => this.uploadClickVideo()}>
+                                    <img src={video_button} alt="test"/>
+                                </div>
                                 <div className="button-default-icon-feed" onClick={this.onClickPrivate}>
                                     {
                                         this.state.privatePost ? (
@@ -713,6 +785,13 @@ class NewFeed extends Component {
                                 </div>
                             </div>
                         </div>
+                        {
+                            this.state.videoUpload ? (
+                                <div className="component-new-feed__wrapper-article">
+                                    <video src={this.state.videoUpload}/>
+                                </div>
+                            ) : null
+                        }
                         <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
                                 {/*{*/}
@@ -739,12 +818,14 @@ class NewFeed extends Component {
                                                 </div>
                                                 {
                                                     this.state.callNewSave ? (
-                                                        <div className="button-general-page component-new-feed__margin-left">
+                                                        <div
+                                                            className="button-general-page component-new-feed__margin-left">
                                                             <div className="loader-small"/>
                                                         </div>
                                                     ) : (
-                                                        <div className="button-general-page component-new-feed__margin-left"
-                                                             onClick={() => this.saveFeed()}>Сохранить</div>
+                                                        <div
+                                                            className="button-general-page component-new-feed__margin-left"
+                                                            onClick={() => this.saveFeed()}>Сохранить</div>
                                                     )
                                                 }
 
