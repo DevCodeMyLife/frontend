@@ -256,7 +256,7 @@ class NewFeed extends Component {
         const data = new FormData();
         data.append('data', file)
 
-        toast.update(id, {render: "Видео отправлено на сервер", type: "default", isLoading: true});
+        toast.update(id, {render: "Видео загружается на сервер", type: "default", isLoading: true});
         fetch("/api/upload/file", {
             method: "POST",
             body: data
