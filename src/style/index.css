@@ -1609,11 +1609,11 @@ p {
 
 }
 
-.value-post > p > a {
+.value-post * a {
     color: #4356ee;
 }
 
-.value-post > p > a:hover {
+.value-post * a:hover {
     text-decoration: underline;
 }
 
