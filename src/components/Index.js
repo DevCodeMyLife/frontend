@@ -492,7 +492,7 @@ class App extends React.Component {
                                                        {/*    </div>*/}
                                                        {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
                                                        {/*</div>*/}
-                                                       <div className="top-my-target">
+                                                       <div className="top-my-target" id="1085654">
 
                                                        </div>
                                                        <div className="menu-nav">
