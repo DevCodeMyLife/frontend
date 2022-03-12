@@ -723,9 +723,17 @@ code {
     box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
 }
 
-/**
-* Options
-*/
+.button-upload-any {
+    padding: 3px 10px;
+}
+
+.button-upload-any:hover {
+    text-decoration: underline;
+}
+
+    /**
+    * Options
+    */
 .select-search__options {
     list-style: none;
     padding: 0;

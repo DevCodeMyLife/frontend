@@ -688,8 +688,8 @@ class NewFeed extends Component {
                                 }
                             </div>
                             <div className="component-new-feed__wrapper-article component-new-feed__flex-just-end">
-                                <div className="button-default-icon-feed" onClick={() => this.uploadClickVideo()}>
-                                    <img src={video_button} alt="test"/>
+                                <div className="button-upload-any" onClick={() => this.uploadClickVideo()}>
+                                    Прикрепить видео
                                 </div>
                                 <div className="button-default-icon-feed" onClick={this.onClickPrivate}>
                                     {
