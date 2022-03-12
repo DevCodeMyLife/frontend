@@ -732,7 +732,7 @@ class NewFeed extends Component {
                             {
                                 this.state.videoUpload ? (
                                     <div className="component-new-feed__wrapper-article">
-                                        <video style={{width: "100%", borderRadius: "5px"}} >
+                                        <video style={{width: "100%", borderRadius: "5px"}} controls={true}>
                                             <source src={this.state.videoUpload}/>
                                         </video>
                                     </div>
