@@ -532,6 +532,7 @@ class NewFeed extends Component {
             value: this.state.valuePost,
             use_tags: this.state.useTags,
             cover_path: this.state.coverUpload,
+            video_path: this.state.videoUpload
             close: this.state.privatePost
         }
 
@@ -546,7 +547,8 @@ class NewFeed extends Component {
                 close: data.close,
                 title: data.title,
                 use_tags: data.use_tags,
-                cover_path: data.cover_path
+                cover_path: data.cover_path,
+                video_path: data.video_path
             })
         })
             .then(response => response.json())
