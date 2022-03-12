@@ -501,16 +501,6 @@ class App extends React.Component {
                                                        {/*    </div>*/}
                                                        {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
                                                        {/*</div>*/}
-                                                       <div className="top-my-target">
-                                                           <ins className="mrg-tag"
-                                                                style={{
-                                                                    display: "inline-block",
-                                                                    textDecoration: "none"
-                                                                }}
-                                                                data-ad-client="ad-1006790"
-                                                                data-ad-slot="1006790"/>
-                                                           <script>(MRGtag = window.MRGtag || []).push({})</script>
-                                                       </div>
                                                        <div className="menu-nav">
                                                            <div className="menu-nav-item">
                                                                <Link href="/user/6">Поддержка</Link>
