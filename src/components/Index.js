@@ -502,6 +502,7 @@ class App extends React.Component {
                                                        {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
                                                        {/*</div>*/}
                                                        <div className="top-my-target">
+                                                           <script async src="https://ad.mail.ru/static/ads-async.js"/>
                                                            <ins className="mrg-tag"
                                                                 style={{
                                                                     display: "inline-block",
