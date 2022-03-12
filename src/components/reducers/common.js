@@ -47,6 +47,7 @@ const initialState = {
         privatePost: false,
         showPreview: false,
         coverUpload: null,
+        videoUpload: null,
         useTags: []
     }
 }

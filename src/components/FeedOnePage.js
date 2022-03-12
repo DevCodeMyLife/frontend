@@ -309,6 +309,15 @@ class FeedOnePage extends Component {
                                             <h1 className="title-feed">
                                                 {data?.title}
                                             </h1>
+                                            {
+                                                data?.video_path ? (
+                                                    <div className="component-new-feed__wrapper-article">
+                                                        <video style={{width: "100%", borderRadius: "5px"}} controls={true}>
+                                                            <source src={data?.video_path}/>
+                                                        </video>
+                                                    </div>
+                                                ) : null
+                                            }
                                             <div key="asldk" className="wrapper-data">
                                                 <ReactMarkdown className="value-post" remarkPlugins={[gfm]}
                                                                components={this.components}>

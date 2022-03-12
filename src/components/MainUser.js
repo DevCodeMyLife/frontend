@@ -230,7 +230,7 @@ class MainUsers extends Component {
         })
     }
 
-    rewriteFeed(uuid, value, title, close, cover, tag) {
+    rewriteFeed(uuid, value, title, close, cover, tag, video) {
 
         this.cancel()
 
@@ -253,6 +253,7 @@ class MainUsers extends Component {
                 privatePost: close,
                 showPreview: true,
                 coverUpload: cover,
+                videoUpload: video,
                 useTags: result
             }
         })
@@ -1349,7 +1350,7 @@ class MainUsers extends Component {
                                                                     {
                                                                         Number(this.state.id) === store.auth.user.data.id ?
                                                                             <div className="like" onClick={() => {
-                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag)
+                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag, data.video_path)
                                                                             }}>
                                                                                 <div className="like-text">
                                                                                     <span className="like-count">
