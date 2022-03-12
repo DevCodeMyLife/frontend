@@ -245,7 +245,7 @@ class FeedOnePage extends Component {
                                         {
                                             data?.cover_path !== "" ?
                                                 <img className="cover-feed" src={data.cover_path}
-                                                     alt={data.title} />
+                                                     alt={data.title}/>
                                                 :
                                                 null
                                         }
@@ -312,7 +312,8 @@ class FeedOnePage extends Component {
                                             {
                                                 data?.video_path ? (
                                                     <div className="component-new-feed__wrapper-article">
-                                                        <video style={{width: "100%", borderRadius: "5px"}} controls={true}>
+                                                        <video style={{width: "100%", borderRadius: "5px"}}
+                                                               controls={true}>
                                                             <source src={data?.video_path}/>
                                                         </video>
                                                     </div>
@@ -395,8 +396,8 @@ class FeedOnePage extends Component {
                                                     data?.tag ?
                                                         data.tag?.map(tag =>
                                                             <div className="default-tag tags-item unselectable"
-                                                                style={{background: `${tag?.color}17`}}>
-                                                                    <span style={{color: tag?.color}}>{tag?.value}</span>
+                                                                 style={{background: `${tag?.color}17`}}>
+                                                                <span style={{color: tag?.color}}>{tag?.value}</span>
                                                             </div>
                                                         )
 
@@ -410,7 +411,12 @@ class FeedOnePage extends Component {
                                                 result.map(res =>
                                                     <div className="feed-comments-wrapper-item background-white">
                                                         <div className="wrapper-comments">
-                                                            <div className="feed-item-value" style={{display: "flex", padding: "10px", borderBottom: "1px solid var(--button_border)", borderRadius: "0px"}}>
+                                                            <div className="feed-item-value" style={{
+                                                                display: "flex",
+                                                                padding: "10px",
+                                                                borderBottom: "1px solid var(--button_border)",
+                                                                borderRadius: "0px"
+                                                            }}>
                                                                 <div key="aksdlkasd" className="photo-wrapper">
                                                                     <img key="asdmmmmasd" src={res?.avatar_url}
                                                                          alt={res?.login}/>
@@ -426,13 +432,16 @@ class FeedOnePage extends Component {
                                                                         minRows={4}
                                                                     />
                                                                 </div>
-                                                                <div className="wrapper-flex-end create-feed-wrapper-button">
-                                                                    <div className="button-default" style={{height: "15px"}}
+                                                                <div
+                                                                    className="wrapper-flex-end create-feed-wrapper-button">
+                                                                    <div className="button-default"
+                                                                         style={{height: "15px"}}
                                                                          onClick={() => this.sendComments()}>Отправить
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="comments-title bottom-line">Комментарии</div>
+                                                            <div className="comments-title bottom-line">Комментарии
+                                                            </div>
                                                             <div className="wall-comments">
                                                                 {
                                                                     this.state.comments.length ?
@@ -661,8 +670,20 @@ class FeedOnePage extends Component {
                                 }
                             </div>
                             :
-                                null
+                            null
                     }
+                    <div className="top-my-target">
+                        <script async src="https://ad.mail.ru/static/ads-async.js"/>
+                        <ins className="mrg-tag"
+                             style={{
+                                 display: "inline-block",
+                                 textDecoration: "none",
+                                 width: "240px", height: "400px"
+                             }}
+                             data-ad-client="ad-1006790"
+                             data-ad-slot="1006790"/>
+                        <script>(MRGtag = window.MRGtag || []).push({})</script>
+                    </div>
                 </div>
             </div>
         )
