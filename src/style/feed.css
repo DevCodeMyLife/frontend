@@ -47,6 +47,7 @@
 }
 
 .component-new-feed__wrapper-article {
+    position: relative;
     display: flex;
     padding: 15px;
 }

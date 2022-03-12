@@ -736,6 +736,13 @@ class NewFeed extends Component {
                             {
                                 this.state.videoUpload ? (
                                     <div className="component-new-feed__wrapper-article">
+                                        <div className="button-close">
+                                            <div className="button-default component-new-feed__margin-left"
+                                                 onClick={() => this.setState({
+                                                     videoUpload: null
+                                                 })}>удалить
+                                            </div>
+                                        </div>
                                         <video style={{width: "100%", borderRadius: "5px"}} controls={true}>
                                             <source src={this.state.videoUpload}/>
                                         </video>
