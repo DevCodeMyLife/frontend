@@ -729,6 +729,15 @@ class NewFeed extends Component {
 
                                 </div>
                             </div>
+                            {
+                                this.state.videoUpload ? (
+                                    <div className="component-new-feed__wrapper-article">
+                                        <video style={{width: "100%", borderRadius: "5px"}} >
+                                            <source src={this.state.videoUpload}/>
+                                        </video>
+                                    </div>
+                                ) : null
+                            }
                             <div className="component-new-feed__wrapper-article">
                                 <div className="component-new-feed__wrapper-content">
                                     {
@@ -785,13 +794,6 @@ class NewFeed extends Component {
                                 </div>
                             </div>
                         </div>
-                        {
-                            this.state.videoUpload ? (
-                                <div className="component-new-feed__wrapper-article">
-                                    <video src={this.state.videoUpload}/>
-                                </div>
-                            ) : null
-                        }
                         <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
                                 {/*{*/}
