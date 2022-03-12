@@ -139,6 +139,7 @@ class NewFeed extends Component {
                     valueTitle: store.feed_rewrite.rewriteTitle,
                     valuePost: store.feed_rewrite.rewriteValue,
                     coverUpload: store.feed_rewrite.coverUpload,
+                    videoUpload: store.feed_rewrite.videoUpload,
                     useTags: store.feed_rewrite.useTags,
                 })
             }
