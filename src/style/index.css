@@ -726,6 +726,7 @@ code {
 .button-upload-any {
     padding: 4px 10px;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .button-upload-any:hover {
