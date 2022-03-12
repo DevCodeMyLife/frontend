@@ -481,17 +481,17 @@ class App extends React.Component {
                                                <div className="content">
                                                    <div id="vertical_menu" className="reviews-menu">
                                                        <Nav song={song} store={store}/>
-                                                       <div className="wrapper-ad" onClick={() => {
-                                                           window.location.href = "https://mcs.mail.ru/"
-                                                       }}>
-                                                           <div className="image-ad">
-                                                               <img className="image-ad-tag" src={vk} alt="vk"/>
-                                                           </div>
-                                                           <div className="ad-text">
-                                                               Сайт работает в облаках
-                                                           </div>
-                                                           {/*<div className="title-span-auth-small">Скидка 5%</div>*/}
-                                                       </div>
+                                                       {/*<div className="wrapper-ad" onClick={() => {*/}
+                                                       {/*    window.location.href = "https://mcs.mail.ru/"*/}
+                                                       {/*}}>*/}
+                                                       {/*    <div className="image-ad">*/}
+                                                       {/*        <img className="image-ad-tag" src={vk} alt="vk"/>*/}
+                                                       {/*    </div>*/}
+                                                       {/*    <div className="ad-text">*/}
+                                                       {/*        Сайт работает в облаках*/}
+                                                       {/*    </div>*/}
+                                                       {/*    /!*<div className="title-span-auth-small">Скидка 5%</div>*!/*/}
+                                                       {/*</div>*/}
                                                        <div className="top-my-target">
 
                                                        </div>
