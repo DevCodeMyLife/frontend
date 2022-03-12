@@ -506,7 +506,8 @@ class App extends React.Component {
                                                            <ins className="mrg-tag"
                                                                 style={{
                                                                     display: "inline-block",
-                                                                    textDecoration: "none"
+                                                                    textDecoration: "none",
+                                                                    width: "175px", height: "400px"
                                                                 }}
                                                                 data-ad-client="ad-1006790"
                                                                 data-ad-slot="1006790"/>
