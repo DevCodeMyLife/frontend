@@ -351,7 +351,6 @@ class Feed extends Component {
     render() {
         let {isLoaded, result, tags} = this.state;
         const store = this.state.store.getState()
-        console.log(tags, "asdasdasd")
         if (!store.components.settings.feed) {
             return (
                 <div className="content-wall-views">
