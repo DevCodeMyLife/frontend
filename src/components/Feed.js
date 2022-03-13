@@ -553,14 +553,14 @@ class Feed extends Component {
                             <script>(MRGtag = window.MRGtag || []).push({})</script>
                         </div>
                         <div className="top-my-target">
-                            <script>window.yaContextCb = window.yaContextCb || []</script>
-                            <div id="yandex_rtb_R-A-1591597-1" />
-                            <script>window.yaContextCb.push(()=>{
-                                Ya.Context.AdvManager.render({
-                                    renderTo: 'yandex_rtb_R-A-1591597-1',
-                                    blockId: 'R-A-1591597-1'
-                                })
-                            })</script>
+                            {/*<script>window.yaContextCb = window.yaContextCb || []</script>*/}
+                            {/*<div id="yandex_rtb_R-A-1591597-1" />*/}
+                            {/*<script>window.yaContextCb.push(()=>{*/}
+                            {/*    Ya.Context.AdvManager.render({*/}
+                            {/*        renderTo: 'yandex_rtb_R-A-1591597-1',*/}
+                            {/*        blockId: 'R-A-1591597-1'*/}
+                            {/*    })*/}
+                            {/*})</script>*/}
                         </div>
                     </div>
                 </div>
