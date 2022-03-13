@@ -531,7 +531,7 @@ class Feed extends Component {
                         <div className="title-box">Теги</div>
                         <div className="tags-box" id="tags-wrapper-all-tags">
                             {
-                                tags.length < 0 ? (
+                                tags.length > 0 ? (
                                     tags?.map(data =>
                                         <div className="button-default-tag tags-item unselectable"
                                              style={{background: `${data.color}17`, color: data.color}}
