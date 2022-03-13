@@ -12,7 +12,7 @@ import like_red from "../icon/like_red.png";
 import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
 
-import Ya from "https://yandex.ru/ads/system/context.js"
+// import Ya from "https://yandex.ru/ads/system/context.js"
 
 // const gfm = require('remark-gfm')
 
