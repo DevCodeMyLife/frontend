@@ -922,7 +922,16 @@ class MainUsers extends Component {
             return (
                     !store.auth.isLoaded ? (
                         <div style={{display: "flex"}}>
-                            <div className="loader" />
+                            <div className="content-wall-views" >
+                                <div className="feed-wrapper" style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    height: "100%"
+                                }}>
+                                    <div className="loader"/>
+                                </div>
+                            </div>
                         </div>
                     ):(
                         <div style={{display: "flex"}}>
