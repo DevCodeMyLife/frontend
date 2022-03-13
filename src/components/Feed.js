@@ -12,6 +12,8 @@ import like_red from "../icon/like_red.png";
 import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
 
+import Ya from "https://yandex.ru/ads/system/context.js"
+
 // const gfm = require('remark-gfm')
 
 
@@ -552,7 +554,6 @@ class Feed extends Component {
                         </div>
                         <div className="top-my-target">
                             <script>window.yaContextCb = window.yaContextCb || []</script>
-                            <script src="https://yandex.ru/ads/system/context.js" />
                             <div id="yandex_rtb_R-A-1591597-1" />
                             <script>window.yaContextCb.push(()=>{
                                 Ya.Context.AdvManager.render({
