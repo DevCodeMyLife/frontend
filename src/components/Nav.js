@@ -286,7 +286,7 @@ class Nav extends Component {
                         alignItems: "center",
                         height: "100%"
                     }}>
-                        <div className="loader"/>
+                        <div className="loader-small"/>
                     </div>
                 )
         )
