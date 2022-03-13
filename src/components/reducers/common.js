@@ -13,6 +13,7 @@ const initialState = {
             error: null
         },
         isLoaded: false,
+        error: false,
     },
     centrifuge: {
         object: null

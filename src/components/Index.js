@@ -125,6 +125,7 @@ class App extends React.Component {
                                 error: null
                             },
                             isLoaded: true,
+                            error: false
                         }
                     })
 
@@ -437,6 +438,7 @@ class App extends React.Component {
                             user: {
                                 isAuth: false, data: null, feeds: null, error: res?.status?.message
                             },
+                            error: true
                         }
                     })
 
