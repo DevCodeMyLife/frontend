@@ -684,6 +684,9 @@ class FeedOnePage extends Component {
                              data-ad-slot="1006790"/>
                         <script>(MRGtag = window.MRGtag || []).push({})</script>
                     </div>
+                    <div className="top-my-target">
+                        <div id="yandex_rtb_R-A-1591597-1" />
+                    </div>
                 </div>
             </div>
         )
