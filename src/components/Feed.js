@@ -551,6 +551,7 @@ class Feed extends Component {
                             <script>(MRGtag = window.MRGtag || []).push({})</script>
                         </div>
                         <div className="top-my-target">
+                            <script>window.yaContextCb = window.yaContextCb || []</script>
                             <script src="https://yandex.ru/ads/system/context.js" async />
                             <div id="yandex_rtb_R-A-1591597-1" />
                             <script>window.yaContextCb.push(()=>{
