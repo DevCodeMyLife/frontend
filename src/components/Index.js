@@ -124,6 +124,7 @@ class App extends React.Component {
                                 token: res?.token,
                                 error: null
                             },
+                            isLoaded: true,
                         }
                     })
 
