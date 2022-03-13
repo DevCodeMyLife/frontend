@@ -1880,7 +1880,7 @@ p {
     position: fixed;
     color: var(--font-color);
     /* background: #0072fc; */
-    z-index: 2;
+    z-index: 9999;
     /* background: rgba(0,0,0,0.8); */
     /*-webkit-backdrop-filter: saturate(180%) blur(20px);*/
     backdrop-filter: saturate(180%) blur(20px);
@@ -2616,7 +2616,7 @@ link-user {
 
 .top-my-target {
     /*padding: 20px;*/
-    width: 240px;
+    width: 280px;
     margin: 10px 5px;
 }
 
