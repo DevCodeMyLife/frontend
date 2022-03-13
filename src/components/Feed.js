@@ -12,8 +12,6 @@ import like_red from "../icon/like_red.png";
 import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
 
-// import Ya from "https://yandex.ru/ads/system/context.js"
-
 // const gfm = require('remark-gfm')
 
 
@@ -375,7 +373,8 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select-tag" id="top"
+                                    <div className="button-default-tag tags-item unselectable button-select-tag"
+                                         id="top"
                                          action="top" onClick={this.handleClickTag} ref={this.popular}>
                                         Популярные
                                     </div>
@@ -530,18 +529,26 @@ class Feed extends Component {
                         <div className="title-box">Теги</div>
                         <div className="tags-box" id="tags-wrapper-all-tags">
                             {
-                                tags?.map(data =>
-                                    <div className="button-default-tag tags-item unselectable"
-                                         style={{background: `${data.color}17`, color: data.color}}
-                                         action={data.value}
-                                         onClick={this.handleClickTag}>
-                                        {data.value}
-                                    </div>
-                                )
+                                tags.length > 0 ? (
+                                    tags?.map(data =>
+                                        <div className="button-default-tag tags-item unselectable"
+                                             style={{background: `${data.color}17`, color: data.color}}
+                                             action={data.value}
+                                             onClick={this.handleClickTag}>
+                                            {data.value}
+                                        </div>
+                                    )
+                                ) : null
+
                             }
                         </div>
                         <div className="top-my-target">
-                            <script src="https://ad.mail.ru/static/ads-async.js" />
+                            <div id="yandex_rtb_R-A-1591597-1" />
+                        </div>
+                        <div className="top-my-target">
+                            <div id="yandex_rtb_R-A-1591597-2" />
+                        </div>
+                        <div className="top-my-target">
                             <ins className="mrg-tag"
                                  style={{
                                      display: "inline-block",
@@ -550,17 +557,6 @@ class Feed extends Component {
                                  }}
                                  data-ad-client="ad-1006790"
                                  data-ad-slot="1006790"/>
-                            <script>(MRGtag = window.MRGtag || []).push({})</script>
-                        </div>
-                        <div className="top-my-target">
-                            {/*<script>window.yaContextCb = window.yaContextCb || []</script>*/}
-                            {/*<div id="yandex_rtb_R-A-1591597-1" />*/}
-                            {/*<script>window.yaContextCb.push(()=>{*/}
-                            {/*    Ya.Context.AdvManager.render({*/}
-                            {/*        renderTo: 'yandex_rtb_R-A-1591597-1',*/}
-                            {/*        blockId: 'R-A-1591597-1'*/}
-                            {/*    })*/}
-                            {/*})</script>*/}
                         </div>
                     </div>
                 </div>

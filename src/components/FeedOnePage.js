@@ -673,7 +673,6 @@ class FeedOnePage extends Component {
                             null
                     }
                     <div className="top-my-target">
-                        <script async src="https://ad.mail.ru/static/ads-async.js"/>
                         <ins className="mrg-tag"
                              style={{
                                  display: "inline-block",
@@ -682,7 +681,12 @@ class FeedOnePage extends Component {
                              }}
                              data-ad-client="ad-1006790"
                              data-ad-slot="1006790"/>
-                        <script>(MRGtag = window.MRGtag || []).push({})</script>
+                    </div>
+                    <div className="top-my-target">
+                        <div id="yandex_rtb_R-A-1591597-1" />
+                    </div>
+                    <div className="top-my-target">
+                        <div id="yandex_rtb_R-A-1591597-2" />
                     </div>
                 </div>
             </div>

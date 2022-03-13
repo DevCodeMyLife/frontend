@@ -45,7 +45,7 @@ class Header extends Component {
                         }
                         <div className="wrapper-auth">
                             {
-                                !this.state.load ?
+                                !state.auth.isLoaded ?
                                     <div className="loader-small"/>
                                     :
                                     state.auth.user.isAuth ?

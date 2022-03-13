@@ -124,6 +124,8 @@ class App extends React.Component {
                                 token: res?.token,
                                 error: null
                             },
+                            isLoaded: true,
+                            error: false
                         }
                     })
 
@@ -436,6 +438,8 @@ class App extends React.Component {
                             user: {
                                 isAuth: false, data: null, feeds: null, error: res?.status?.message
                             },
+                            isLoaded: true,
+                            error: true,
                         }
                     })
 
@@ -460,8 +464,9 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.load) {
-            // if (true) {
+        if (typeof window === 'undefined') {return null }
+            // if (this.state.load) {
+        //     // if (true) {
 
             return (
                 <HelmetProvider>
@@ -541,19 +546,21 @@ class App extends React.Component {
                         </BrowserRouter>
                     </div>
                 </HelmetProvider>
+
+
             );
-        } else {
-            return (<div style={{
-                position: "fixed",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                <div className="loader"/>
-            </div>)
-        }
+        // } else {
+        //     return (<div style={{
+        //         position: "fixed",
+        //         width: "100%",
+        //         height: "100%",
+        //         display: "flex",
+        //         justifyContent: "center",
+        //         alignItems: "center"
+        //     }}>
+        //         <div className="loader"/>
+        //     </div>)
+        // }
 
     }
 }
