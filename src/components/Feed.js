@@ -544,7 +544,6 @@ class Feed extends Component {
                             }
                         </div>
                         <div className="top-my-target">
-
                             <ins className="mrg-tag"
                                  style={{
                                      display: "inline-block",
