@@ -11,7 +11,6 @@ import like_red from "../icon/like_red.png";
 // import Head from "./Header";
 import {Link} from "react-navi";
 import like_dark from "../icon/like_dark.png";
-import Ya from "jest-runtime";
 
 // const gfm = require('remark-gfm')
 
