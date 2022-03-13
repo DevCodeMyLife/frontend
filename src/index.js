@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import './style/index.css'
 import './style/feed.css'
 
+
 import App from './components/Index'
 
 

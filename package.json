@@ -18,6 +18,7 @@
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
     "css-ssr": "^0.0.3",
+    "dotenv": "^16.0.0",
     "exports-loader": "^3.1.0",
     "express": "^4.17.3",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -71,7 +72,6 @@
       ]
     }
   },
-
   "browserslist": {
     "production": [
       ">0.2%",

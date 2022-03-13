@@ -73,7 +73,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        fetch("/api/status_platform", {
+        fetch(process.env.REACT_APP_STATUS, {
             method: "GET"
         })
             .then(response => response.json())

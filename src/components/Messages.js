@@ -340,7 +340,7 @@ class Messages extends Component {
 
         window.history.pushState({urlPath: `/messages?cid=${cid}`}, "", `/messages?cid=${cid}`)
 
-        let cent_channel_ = store.centrifuge.object.subscribe(cid, async function (message) {
+        let cent_channel_ = store?.centrifuge.object.subscribe(cid, async function (message) {
             let data = _this.state.messages
 
             if (message.data?.input?.typing !== store.auth.user.data.login) {

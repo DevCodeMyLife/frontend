@@ -1659,12 +1659,12 @@ class MainUsers extends Component {
                                 {/*        )*/}
                                 {/*    }*/}
                                 {/*</div>*/}
-                                <div className="top-my-target">
-                                    <div id="yandex_rtb_R-A-1591597-1" />
-                                </div>
-                                <div className="top-my-target">
-                                    <div id="yandex_rtb_R-A-1591597-2" />
-                                </div>
+                                {/*<div className="top-my-target">*/}
+                                {/*    <div id="yandex_rtb_R-A-1591597-1" />*/}
+                                {/*</div>*/}
+                                {/*<div className="top-my-target">*/}
+                                {/*    <div id="yandex_rtb_R-A-1591597-2" />*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     )

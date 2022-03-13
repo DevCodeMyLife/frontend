@@ -1,16 +1,25 @@
+FROM node:alpine as Builder
+MAINTAINER @AndreySHSH <laptev.andrey@icloud.com>
+
+WORKDIR /app
+
+COPY src ./src
+COPY babel.config.js ./
+COPY package.json ./
+COPY yarn.lock ./
+COPY webpack.server.js ./
+COPY public ./public
+COPY server ./server
+COPY deploy/.env ./
+
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn install
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn build
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn dev:build-server
+
 FROM node:alpine
 
-MAINTAINER @AndreySHSH <laptev.andrey@icloud.com>
-#
-#COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-#COPY build /usr/share/nginx/html
-
-COPY . ./app
-
-WORKDIR ./app
-
-RUN NODE_OPTIONS=--openssl-legacy-provider yarn run build
-RUN NODE_OPTIONS=--openssl-legacy-provider yarn dev:build-server
+WORKDIR /app
+COPY --from=Builder /app ./
 
 EXPOSE 80
 

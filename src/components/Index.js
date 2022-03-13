@@ -32,11 +32,6 @@ import NewFeed from "./feeds/NewFeed";
 
 const store = createStore(AppReducer);
 
-
-const CONFIG = {
-    url: `wss://devcodemylife.tech/cent/connection/websocket`
-};
-
 class App extends React.Component {
 
     constructor(props) {
@@ -106,7 +101,7 @@ class App extends React.Component {
     }
 
     checkAuth() {
-        fetch("/api/authentication", {
+        fetch(process.env.REACT_APP_AUTH, {
             method: "POST", body: JSON.stringify({})
         })
             .then(response => response.json())
@@ -139,7 +134,7 @@ class App extends React.Component {
                         }
                     })
 
-                    fetch("/api/app/components", {
+                    fetch(process.env.REACT_APP_COMPONENTS, {
                         method: "GET"
                     })
                         .then(response => response.json())
@@ -154,7 +149,7 @@ class App extends React.Component {
                         })
 
 
-                    let centrifuge = new Centrifuge(CONFIG.url, {
+                    let centrifuge = new Centrifuge(process.env.REACT_APP_CENTRIFUGE, {
                         subscribeEndpoint: "/api/subscribe", onPrivateSubscribe: (e) => {
                             console.log(e)
                         }
@@ -232,7 +227,7 @@ class App extends React.Component {
                                 //     }
                                 // })
 
-                                fetch("/api/authentication", {
+                                fetch(process.env.REACT_APP_AUTH, {
                                     method: "POST", body: JSON.stringify({})
                                 })
                                     .then(response => response.json())
@@ -288,7 +283,7 @@ class App extends React.Component {
                                 //     }
                                 // })
 
-                                fetch("/api/authentication", {
+                                fetch(process.env.REACT_APP_AUTH, {
                                     method: "POST", body: JSON.stringify({})
                                 })
                                     .then(response => response.json())
@@ -391,7 +386,7 @@ class App extends React.Component {
                                 }
                                 break;
                             case "update":
-                                fetch("/api/authentication", {
+                                fetch(process.env.REACT_APP_AUTH, {
                                     method: "POST", body: JSON.stringify({})
                                 })
                                     .then(response => response.json())
@@ -467,7 +462,7 @@ class App extends React.Component {
         if (typeof window === 'undefined') {return null }
             // if (this.state.load) {
         //     // if (true) {
-
+            console.log(process.env)
             return (
                 <HelmetProvider>
                     <div className="wrapper">
@@ -523,6 +518,9 @@ class App extends React.Component {
                                                                <Link href="https://my.qiwi.com/Andrei-ShQU6cQ2pop"
                                                                      target="_blank">Помочь проекту</Link>
                                                            </div>
+                                                       </div>
+                                                       <div style={{width: "225px"}}>
+                                                           <div id="yandex_rtb_R-A-1591597-2" />
                                                        </div>
                                                    </div>
                                                    <NotFoundBoundary
