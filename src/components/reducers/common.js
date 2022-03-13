@@ -11,7 +11,8 @@ const initialState = {
             notifications: null,
             token: null,
             error: null
-        }
+        },
+        isLoaded: false,
     },
     centrifuge: {
         object: null

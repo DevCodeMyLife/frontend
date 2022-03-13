@@ -920,725 +920,731 @@ class MainUsers extends Component {
             )
         } else {
             return (
-                <div style={{display: "flex"}}>
-                    <div className="content-wall-views">
-                        {
-                            this.state.showCrop ?
-                                <div className="pop-up">
-                                    <div className="center-view">
-                                        {
-                                            this.state.loadImage ?
-                                                <div className="loader"/>
-                                                :
-                                                <div>
-                                                    <ReactCrop
-                                                        circularCrop={true}
-                                                        keepSelection={true}
-                                                        minWidth={300}
-                                                        minHeight={300}
-                                                        src={this.state.src}
-                                                        crop={this.state.crop}
-                                                        ruleOfThirds
-                                                        onImageLoaded={this.onImageLoaded}
-                                                        onComplete={this.onCropComplete}
-                                                        onChange={this.onCropChange}
-                                                    />
-                                                    <div className="wrapper-bottom" style={{
-                                                        width: "100%",
-                                                        boxSizing: "border-box",
-                                                        padding: "20px 0"
-                                                    }}>
-                                                        <div className="wrapper-flex-start">
-                                                            <div className="button-default"
-                                                                 onClick={() => this.cancelCrop()}>Отмена
+                    !store.user.isLoaded ? (
+                        <div style={{display: "flex"}}>
+                            <div className="loader" />
+                        </div>
+                    ):(
+                        <div style={{display: "flex"}}>
+                            <div className="content-wall-views">
+                                {
+                                    this.state.showCrop ?
+                                        <div className="pop-up">
+                                            <div className="center-view">
+                                                {
+                                                    this.state.loadImage ?
+                                                        <div className="loader"/>
+                                                        :
+                                                        <div>
+                                                            <ReactCrop
+                                                                circularCrop={true}
+                                                                keepSelection={true}
+                                                                minWidth={300}
+                                                                minHeight={300}
+                                                                src={this.state.src}
+                                                                crop={this.state.crop}
+                                                                ruleOfThirds
+                                                                onImageLoaded={this.onImageLoaded}
+                                                                onComplete={this.onCropComplete}
+                                                                onChange={this.onCropChange}
+                                                            />
+                                                            <div className="wrapper-bottom" style={{
+                                                                width: "100%",
+                                                                boxSizing: "border-box",
+                                                                padding: "20px 0"
+                                                            }}>
+                                                                <div className="wrapper-flex-start">
+                                                                    <div className="button-default"
+                                                                         onClick={() => this.cancelCrop()}>Отмена
+                                                                    </div>
+                                                                </div>
+                                                                <div className="wrapper-flex-end">
+                                                                    <div className="button-default"
+                                                                         onClick={() => this.makeUpload()}>Сохранить
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div className="wrapper-flex-end">
-                                                            <div className="button-default"
-                                                                 onClick={() => this.makeUpload()}>Сохранить
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        }
-                                    </div>
-                                </div>
-                            :
-                                null
-                        }
-
-                        {
-                            isLoaded ?
-                                this.state.result[0].is_block ?
-                                    <div>
-                                        <div className="error-wrapper">
-                                            <div className="error-page">
-                                                Страница была заблокирована администрацией сайта.
+                                                }
                                             </div>
                                         </div>
-                                    </div>
-                                    :
-                                    <div className="feed-wrapper">
-                                        {
-                                            Number(this.state.id) === store.auth.user.data.id ?
-                                                <NewFeed store={this.state.store}/>
-                                                // <div className="feed-wrapper-item background-white">
-                                                //     <div className="feed-item-value">
-                                                //
-                                                //         <div key={store.auth.user.data.avatar_url}
-                                                //              className="wrapper-data">
-                                                //             <div key="aksdlkasd" className="photo-wrapper">
-                                                //                 <img key="asdmmmmasd"
-                                                //                      src={store.auth.user.data?.avatar_url}
-                                                //                      alt={store.auth.user.data?.login}
-                                                //                      onClick={(e) => {
-                                                //                          e.preventDefault();
-                                                //                          window.location.href = `/user/${store.auth.user.data.id}`
-                                                //                      }}
-                                                //                 />
-                                                //             </div>
-                                                //
-                                                //             <div className="value-post placeholder-main-feed"
-                                                //                  id="main_input" onClick={
-                                                //                 !clicked_new_post ? this.newInputText : null
-                                                //             }>
-                                                //
-                                                //                 {/*{*/}
-                                                //                 {/*    this.state.clicked_new_post ?*/}
-                                                //                 {/*        <div className="textarea-hide">*/}
-                                                //                 {/*            <div style={{marginBottom: "20px"}}>*/}
-                                                //                 {/*            <_input type="file" name="file" id="upload_file_inputcover"*/}
-                                                //                 {/*                   onChange={(e) => this.uploadCoverAction(e)}*/}
-                                                //                 {/*                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>*/}
-                                                //                 {/*            {*/}
-                                                //                 {/*                this.state.coverUpload ?*/}
-                                                //                 {/*                    <img src={this.state.coverUpload}*/}
-                                                //                 {/*                         alt={store.auth.user.data.login}*/}
-                                                //                 {/*                         onClick={() => this.uploadClickCover()}*/}
-                                                //                 {/*                         style={{cursor: "pointer", maxWidth: "634px"}}/>*/}
-                                                //                 {/*                :*/}
-                                                //                 {/*                        <>*/}
-                                                //                 {/*                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>*/}
-                                                //                 {/*                                Нажмите что бы добавить обложку*/}
-                                                //                 {/*                            </div>*/}
-                                                //                 {/*                        </>*/}
-                                                //
-                                                //                 {/*            }*/}
-                                                //                 {/*            </div>*/}
-                                                //                 {/*            <div className="title-view" style={{marginBottom: "10px"}}>*/}
-                                                //                 {/*                <Select*/}
-                                                //                 {/*                    options={this.state.aquaticCreatures}*/}
-                                                //                 {/*                    isMulti*/}
-                                                //                 {/*                    maxMenuHeight={300}*/}
-                                                //                 {/*                    defaultValue={this.state.useTags}*/}
-                                                //                 {/*                    onChange={this.updateUseTags}*/}
-                                                //                 {/*                    placeholder="Подберите тег..."*/}
-                                                //                 {/*                    isValidNewOption={this.isValidNewOption}*/}
-                                                //                 {/*                />*/}
-                                                //                 {/*            </div>*/}
-                                                //                 {/*            <div className="title-view">*/}
-                                                //                 {/*                <input className="feed-textarea"*/}
-                                                //                 {/*                       autoFocus={true} type="text"*/}
-                                                //                 {/*                       id="text_title"*/}
-                                                //                 {/*                       onChange={this.handleChangeTitle}*/}
-                                                //                 {/*                       placeholder="Заголовок"*/}
-                                                //                 {/*                       style={{margin: "0 0 10px 0"}}*/}
-                                                //                 {/*                       value={this.state.rewriteTitle}/>*/}
-                                                //                 {/*            </div>*/}
-                                                //                 {/*            <TextareaAutosize className="feed-textarea"*/}
-                                                //                 {/*                              onChange={this.handleChangeTextarea}*/}
-                                                //                 {/*                              placeholder="Что у Вас нового?"*/}
-                                                //                 {/*                              id="text_news">*/}
-                                                //                 {/*                {this.state.rewriteMode ? this.state.rewriteValue : ""}*/}
-                                                //                 {/*            </TextareaAutosize>*/}
-                                                //                 {/*        </div>*/}
-                                                //
-                                                //                 {/*        :*/}
-                                                //                 {/*        <div className="fake-textarea">Что у Вас нового?</div>*/}
-                                                //                 {/*}*/}
-                                                //             </div>
-                                                //         </div>
-                                                //
-                                                //         {
-                                                //             this.state.clicked_new_post ?
-                                                //                 <div
-                                                //                     className="wrapper-flex-end create-feed-wrapper-button">
-                                                //                     <div className="button-default-icon"
-                                                //                          onClick={() => {
-                                                //                              this.setState(prevState => ({
-                                                //                                  close: !prevState.close
-                                                //                              }));
-                                                //                          }}>
-                                                //
-                                                //                         {
-                                                //                             store.auth.user.data.privat_post || this.state.close ?
-                                                //                                 <svg className="svg-close-view"
-                                                //                                      fill="#000000"
-                                                //                                      xmlns="http://www.w3.org/2000/svg"
-                                                //                                      viewBox="0 0 50 50" width="50px"
-                                                //                                      height="50px">
-                                                //                                     <path fill="none"
-                                                //                                           className="svg-close"
-                                                //                                           stroke="#000000"
-                                                //                                           strokeLinecap="round"
-                                                //                                           strokeMiterlimit="10"
-                                                //                                           strokeWidth="2"
-                                                //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
-                                                //                                     <path
-                                                //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                //                                 </svg>
-                                                //                                 :
-                                                //                                 <svg className="svg-close-view"
-                                                //                                      fill="#000000"
-                                                //                                      xmlns="http://www.w3.org/2000/svg"
-                                                //                                      viewBox="0 0 50 50" width="50px"
-                                                //                                      height="50px">
-                                                //                                     <path fill="none"
-                                                //                                           className="svg-close"
-                                                //                                           stroke="#000000"
-                                                //                                           strokeLinecap="round"
-                                                //                                           strokeMiterlimit="10"
-                                                //                                           strokeWidth="2"
-                                                //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
-                                                //                                     <path
-                                                //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                //                                 </svg>
-                                                //                         }
-                                                //
-                                                //                     </div>
-                                                //                     {/*<div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>*/}
-                                                //                     <div className="button-default"
-                                                //                          onClick={() => this.cancel()}>Отмена
-                                                //                     </div>
-                                                //                     {
-                                                //                         this.state.rewriteMode ?
-                                                //                             <div className="button-default"
-                                                //                                  onClick={() => {
-                                                //                                      this.deleteFeed(this.state.rewriteUUID)
-                                                //                                  }}
-                                                //                             >
-                                                //                                 Удалить
-                                                //                             </div>
-                                                //                             :
-                                                //                             null
-                                                //                     }
-                                                //                     {
-                                                //                         this.state.rewriteMode ?
-                                                //
-                                                //                             <div className="button-default"
-                                                //                                  onClick={() => this.saveFeed()}>Сохранить</div>
-                                                //                             :
-                                                //                             <div className="button-default"
-                                                //                                  onClick={() => this.feedNew()}>Опубликовать</div>
-                                                //                     }
-                                                //
-                                                //
-                                                //                 </div>
-                                                //                 :
-                                                //                 null
-                                                //         }
-                                                //         {
-                                                //             this.state.showPreview ?
-                                                //                 <>
-                                                //                     <div className="preview-news preview_swap">
-                                                //
-                                                //                         <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
-                                                //                             <div className="feed-item-value">
-                                                //                                 <div className="wrapper-data">
-                                                //                                     <ReactMarkdown className="value-post"
-                                                //                                                    remarkPlugins={[gfm]}
-                                                //                                                    components={this.components}>
-                                                //                                         {textNews}
-                                                //                                     </ReactMarkdown>
-                                                //                                 </div>
-                                                //                             </div>
-                                                //                         </div>
-                                                //
-                                                //                     </div>
-                                                //                 </>
-                                                //             :
-                                                //                 null
-                                                //         }
-                                                //
-                                                //     </div>
-                                                // </div>
-                                                :
-                                                null
-                                        }
-                                        {
-                                            mainFeed?.length > 0 ?
-                                                mainFeed?.map(data =>
-                                                    <div key={data?.ID} className="feed-wrapper-item">
-                                                            <Link style={{textDecoration: "none"}}
-                                                                  href={`/post/${data?.ID}`}>
-                                                                {
-                                                                    data?.cover_path !== "" ?
-                                                                        <img className="cover-feed" src={data.cover_path}
-                                                                             alt={data.title} />
-                                                                        :
-                                                                        null
-                                                                }
-                                                                <div className="feed-item-value">
-                                                                    <div key="asldk" className="wrapper-data">
-                                                                        <Link href={`/user/${data?.uid}`}>
-                                                                            <div key="aksdlkasd" className="photo-wrapper">
-                                                                                {
-                                                                                    store.auth.user.data.id === Number(this.state.id) ?
-                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                                                                            null
-                                                                                            :
-                                                                                            <div className="online_user"/>
-                                                                                        :
-                                                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
-                                                                                            null
-                                                                                            :
-                                                                                            <div className="online_user"/>
-                                                                                }
+                                        :
+                                        null
+                                }
 
-                                                                                <img key="asdmmmmasd" src={data?.photo}
-                                                                                     alt={data?.user}/>
+                                {
+                                    isLoaded ?
+                                        this.state.result[0].is_block ?
+                                            <div>
+                                                <div className="error-wrapper">
+                                                    <div className="error-page">
+                                                        Страница была заблокирована администрацией сайта.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className="feed-wrapper">
+                                                {
+                                                    Number(this.state.id) === store.auth.user.data.id ?
+                                                        <NewFeed store={this.state.store}/>
+                                                        // <div className="feed-wrapper-item background-white">
+                                                        //     <div className="feed-item-value">
+                                                        //
+                                                        //         <div key={store.auth.user.data.avatar_url}
+                                                        //              className="wrapper-data">
+                                                        //             <div key="aksdlkasd" className="photo-wrapper">
+                                                        //                 <img key="asdmmmmasd"
+                                                        //                      src={store.auth.user.data?.avatar_url}
+                                                        //                      alt={store.auth.user.data?.login}
+                                                        //                      onClick={(e) => {
+                                                        //                          e.preventDefault();
+                                                        //                          window.location.href = `/user/${store.auth.user.data.id}`
+                                                        //                      }}
+                                                        //                 />
+                                                        //             </div>
+                                                        //
+                                                        //             <div className="value-post placeholder-main-feed"
+                                                        //                  id="main_input" onClick={
+                                                        //                 !clicked_new_post ? this.newInputText : null
+                                                        //             }>
+                                                        //
+                                                        //                 {/*{*/}
+                                                        //                 {/*    this.state.clicked_new_post ?*/}
+                                                        //                 {/*        <div className="textarea-hide">*/}
+                                                        //                 {/*            <div style={{marginBottom: "20px"}}>*/}
+                                                        //                 {/*            <_input type="file" name="file" id="upload_file_inputcover"*/}
+                                                        //                 {/*                   onChange={(e) => this.uploadCoverAction(e)}*/}
+                                                        //                 {/*                   accept="image/x-png,image/jpeg" style={{display: "none"}}/>*/}
+                                                        //                 {/*            {*/}
+                                                        //                 {/*                this.state.coverUpload ?*/}
+                                                        //                 {/*                    <img src={this.state.coverUpload}*/}
+                                                        //                 {/*                         alt={store.auth.user.data.login}*/}
+                                                        //                 {/*                         onClick={() => this.uploadClickCover()}*/}
+                                                        //                 {/*                         style={{cursor: "pointer", maxWidth: "634px"}}/>*/}
+                                                        //                 {/*                :*/}
+                                                        //                 {/*                        <>*/}
+                                                        //                 {/*                            <div className="palace-upload-photo-liable" onClick={() => this.uploadClickCover()}>*/}
+                                                        //                 {/*                                Нажмите что бы добавить обложку*/}
+                                                        //                 {/*                            </div>*/}
+                                                        //                 {/*                        </>*/}
+                                                        //
+                                                        //                 {/*            }*/}
+                                                        //                 {/*            </div>*/}
+                                                        //                 {/*            <div className="title-view" style={{marginBottom: "10px"}}>*/}
+                                                        //                 {/*                <Select*/}
+                                                        //                 {/*                    options={this.state.aquaticCreatures}*/}
+                                                        //                 {/*                    isMulti*/}
+                                                        //                 {/*                    maxMenuHeight={300}*/}
+                                                        //                 {/*                    defaultValue={this.state.useTags}*/}
+                                                        //                 {/*                    onChange={this.updateUseTags}*/}
+                                                        //                 {/*                    placeholder="Подберите тег..."*/}
+                                                        //                 {/*                    isValidNewOption={this.isValidNewOption}*/}
+                                                        //                 {/*                />*/}
+                                                        //                 {/*            </div>*/}
+                                                        //                 {/*            <div className="title-view">*/}
+                                                        //                 {/*                <input className="feed-textarea"*/}
+                                                        //                 {/*                       autoFocus={true} type="text"*/}
+                                                        //                 {/*                       id="text_title"*/}
+                                                        //                 {/*                       onChange={this.handleChangeTitle}*/}
+                                                        //                 {/*                       placeholder="Заголовок"*/}
+                                                        //                 {/*                       style={{margin: "0 0 10px 0"}}*/}
+                                                        //                 {/*                       value={this.state.rewriteTitle}/>*/}
+                                                        //                 {/*            </div>*/}
+                                                        //                 {/*            <TextareaAutosize className="feed-textarea"*/}
+                                                        //                 {/*                              onChange={this.handleChangeTextarea}*/}
+                                                        //                 {/*                              placeholder="Что у Вас нового?"*/}
+                                                        //                 {/*                              id="text_news">*/}
+                                                        //                 {/*                {this.state.rewriteMode ? this.state.rewriteValue : ""}*/}
+                                                        //                 {/*            </TextareaAutosize>*/}
+                                                        //                 {/*        </div>*/}
+                                                        //
+                                                        //                 {/*        :*/}
+                                                        //                 {/*        <div className="fake-textarea">Что у Вас нового?</div>*/}
+                                                        //                 {/*}*/}
+                                                        //             </div>
+                                                        //         </div>
+                                                        //
+                                                        //         {
+                                                        //             this.state.clicked_new_post ?
+                                                        //                 <div
+                                                        //                     className="wrapper-flex-end create-feed-wrapper-button">
+                                                        //                     <div className="button-default-icon"
+                                                        //                          onClick={() => {
+                                                        //                              this.setState(prevState => ({
+                                                        //                                  close: !prevState.close
+                                                        //                              }));
+                                                        //                          }}>
+                                                        //
+                                                        //                         {
+                                                        //                             store.auth.user.data.privat_post || this.state.close ?
+                                                        //                                 <svg className="svg-close-view"
+                                                        //                                      fill="#000000"
+                                                        //                                      xmlns="http://www.w3.org/2000/svg"
+                                                        //                                      viewBox="0 0 50 50" width="50px"
+                                                        //                                      height="50px">
+                                                        //                                     <path fill="none"
+                                                        //                                           className="svg-close"
+                                                        //                                           stroke="#000000"
+                                                        //                                           strokeLinecap="round"
+                                                        //                                           strokeMiterlimit="10"
+                                                        //                                           strokeWidth="2"
+                                                        //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                        //                                     <path
+                                                        //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                        //                                 </svg>
+                                                        //                                 :
+                                                        //                                 <svg className="svg-close-view"
+                                                        //                                      fill="#000000"
+                                                        //                                      xmlns="http://www.w3.org/2000/svg"
+                                                        //                                      viewBox="0 0 50 50" width="50px"
+                                                        //                                      height="50px">
+                                                        //                                     <path fill="none"
+                                                        //                                           className="svg-close"
+                                                        //                                           stroke="#000000"
+                                                        //                                           strokeLinecap="round"
+                                                        //                                           strokeMiterlimit="10"
+                                                        //                                           strokeWidth="2"
+                                                        //                                           d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                        //                                     <path
+                                                        //                                         d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                        //                                 </svg>
+                                                        //                         }
+                                                        //
+                                                        //                     </div>
+                                                        //                     {/*<div className="button-default" onClick={() => this.previewClick()}>Показать что получилось</div>*/}
+                                                        //                     <div className="button-default"
+                                                        //                          onClick={() => this.cancel()}>Отмена
+                                                        //                     </div>
+                                                        //                     {
+                                                        //                         this.state.rewriteMode ?
+                                                        //                             <div className="button-default"
+                                                        //                                  onClick={() => {
+                                                        //                                      this.deleteFeed(this.state.rewriteUUID)
+                                                        //                                  }}
+                                                        //                             >
+                                                        //                                 Удалить
+                                                        //                             </div>
+                                                        //                             :
+                                                        //                             null
+                                                        //                     }
+                                                        //                     {
+                                                        //                         this.state.rewriteMode ?
+                                                        //
+                                                        //                             <div className="button-default"
+                                                        //                                  onClick={() => this.saveFeed()}>Сохранить</div>
+                                                        //                             :
+                                                        //                             <div className="button-default"
+                                                        //                                  onClick={() => this.feedNew()}>Опубликовать</div>
+                                                        //                     }
+                                                        //
+                                                        //
+                                                        //                 </div>
+                                                        //                 :
+                                                        //                 null
+                                                        //         }
+                                                        //         {
+                                                        //             this.state.showPreview ?
+                                                        //                 <>
+                                                        //                     <div className="preview-news preview_swap">
+                                                        //
+                                                        //                         <div className="feed-wrapper-item" style={{boxShadow: "none"}}>
+                                                        //                             <div className="feed-item-value">
+                                                        //                                 <div className="wrapper-data">
+                                                        //                                     <ReactMarkdown className="value-post"
+                                                        //                                                    remarkPlugins={[gfm]}
+                                                        //                                                    components={this.components}>
+                                                        //                                         {textNews}
+                                                        //                                     </ReactMarkdown>
+                                                        //                                 </div>
+                                                        //                             </div>
+                                                        //                         </div>
+                                                        //
+                                                        //                     </div>
+                                                        //                 </>
+                                                        //             :
+                                                        //                 null
+                                                        //         }
+                                                        //
+                                                        //     </div>
+                                                        // </div>
+                                                        :
+                                                        null
+                                                }
+                                                {
+                                                    mainFeed?.length > 0 ?
+                                                        mainFeed?.map(data =>
+                                                            <div key={data?.ID} className="feed-wrapper-item">
+                                                                <Link style={{textDecoration: "none"}}
+                                                                      href={`/post/${data?.ID}`}>
+                                                                    {
+                                                                        data?.cover_path !== "" ?
+                                                                            <img className="cover-feed" src={data.cover_path}
+                                                                                 alt={data.title} />
+                                                                            :
+                                                                            null
+                                                                    }
+                                                                    <div className="feed-item-value">
+                                                                        <div key="asldk" className="wrapper-data">
+                                                                            <Link href={`/user/${data?.uid}`}>
+                                                                                <div key="aksdlkasd" className="photo-wrapper">
+                                                                                    {
+                                                                                        store.auth.user.data.id === Number(this.state.id) ?
+                                                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                                                                null
+                                                                                                :
+                                                                                                <div className="online_user"/>
+                                                                                            :
+                                                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                                                                                null
+                                                                                                :
+                                                                                                <div className="online_user"/>
+                                                                                    }
 
-                                                                            </div>
-                                                                        </Link>
-                                                                        <div className="value-post">
-                                                                            <div className="feed-item-title">
-                                                                                <Link href={`/user/${data?.uid}`}>
-                                                                                    <div className="link-user">
-                                                                                        {data?.user}
-                                                                                    </div>
-                                                                                </Link>
-                                                                                <div className="feed-item-datetime">
-                                                                                    {this.unixToDateTime(data?.date_time)}
+                                                                                    <img key="asdmmmmasd" src={data?.photo}
+                                                                                         alt={data?.user}/>
+
                                                                                 </div>
+                                                                            </Link>
+                                                                            <div className="value-post">
+                                                                                <div className="feed-item-title">
+                                                                                    <Link href={`/user/${data?.uid}`}>
+                                                                                        <div className="link-user">
+                                                                                            {data?.user}
+                                                                                        </div>
+                                                                                    </Link>
+                                                                                    <div className="feed-item-datetime">
+                                                                                        {this.unixToDateTime(data?.date_time)}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            {
+                                                                                Number(this.state.id) === store.auth.user.data.id ?
+                                                                                    <div
+                                                                                        className="button-default-icon-disable hide-border">
+                                                                                        {
+                                                                                            data?.close ?
+                                                                                                <svg className="svg-close-view"
+                                                                                                     fill="#000000"
+                                                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                                                     viewBox="0 0 50 50"
+                                                                                                     width="50px" height="50px">
+                                                                                                    <path fill="none"
+                                                                                                          className="svg-close"
+                                                                                                          stroke="#000000"
+                                                                                                          strokeLinecap="round"
+                                                                                                          strokeMiterlimit="10"
+                                                                                                          strokeWidth="2"
+                                                                                                          d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
+                                                                                                    <path
+                                                                                                        d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                                </svg>
+                                                                                                :
+                                                                                                <svg className="svg-close-view"
+                                                                                                     fill="#000000"
+                                                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                                                     viewBox="0 0 50 50"
+                                                                                                     width="50px" height="50px">
+                                                                                                    <path fill="none"
+                                                                                                          className="svg-close"
+                                                                                                          stroke="#000000"
+                                                                                                          strokeLinecap="round"
+                                                                                                          strokeMiterlimit="10"
+                                                                                                          strokeWidth="2"
+                                                                                                          d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
+                                                                                                    <path
+                                                                                                        d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
+                                                                                                </svg>
+                                                                                        }
+
+                                                                                    </div>
+                                                                                    :
+                                                                                    null
+                                                                            }
+                                                                        </div>
+                                                                        <div key="asldk" className="wrapper-data">
+                                                                            <div className="title-feed">
+                                                                                {data?.title}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Link>
+                                                                <div className="wrapper-bottom">
+                                                                    {/*/!*<div className="wrapper-flex-start">*!/*/}
+                                                                    {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
+                                                                    {/*        <div className="button-default">Подробнее</div>*/}
+                                                                    {/*    </Link>*/}
+                                                                    {/*    {*/}
+                                                                    {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
+                                                                    {/*            <div className="button-default"*/}
+                                                                    {/*                 onClick={() => {*/}
+                                                                    {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
+                                                                    {/*                 }}*/}
+                                                                    {/*            >*/}
+                                                                    {/*                Изменить*/}
+                                                                    {/*            </div>*/}
+
+                                                                    {/*            :*/}
+                                                                    {/*            null*/}
+                                                                    {/*    }*/}
+                                                                    {/*</div>*/}
+                                                                    {/*<div className="like_wrapper wrapper-flex-end">*/}
+                                                                    {/*    <div className="like">*/}
+                                                                    {/*        <div className="like-item">*/}
+                                                                    {/*            {*/}
+                                                                    {/*                this.state.isDark === "light" ?*/}
+                                                                    {/*                    <img src={look}  alt="like"/>*/}
+                                                                    {/*                    :*/}
+                                                                    {/*                    <img src={look_dark}  alt="like"/>*/}
+                                                                    {/*            }*/}
+                                                                    {/*        </div>*/}
+                                                                    {/*        <div className="like-item">*/}
+                                                                    {/*            <span className="like-count">*/}
+                                                                    {/*                {data?.look_count}*/}
+                                                                    {/*            </span>*/}
+                                                                    {/*        </div>*/}
+                                                                    {/*    </div>*/}
+                                                                    {/*    <div className="like">*/}
+
+                                                                    {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
+                                                                    {/*            {*/}
+                                                                    {/*                this.state.isDark === "light" ?*/}
+                                                                    {/*                    <img src={like}  alt="like"/>*/}
+                                                                    {/*                    :*/}
+                                                                    {/*                    <img src={like_dark}  alt="like"/>*/}
+                                                                    {/*            }*/}
+                                                                    {/*        </div>*/}
+                                                                    {/*        <div className="like-item">*/}
+                                                                    {/*          <span className="like-count" id={data?.ID}>*/}
+                                                                    {/*              {data?.count_like}*/}
+                                                                    {/*          </span>*/}
+                                                                    {/*        </div>*/}
+                                                                    {/*    </div>*/}
+                                                                    {/*</div>*/}
+                                                                    <div className="like_wrapper wrapper-flex-start">
+                                                                        <div className="like"
+                                                                             onClick={() => this.like(data?.ID)}>
+                                                                            <div className="like-item">
+                                                                                {
+                                                                                    this.state.isDark === "light" ?
+                                                                                        <img src={like} alt="like"/>
+                                                                                        :
+                                                                                        <img src={like_dark} alt="like"/>
+                                                                                }
+                                                                            </div>
+                                                                            <div className="like-text">
+                                                            <span className="like-count" id={data?.ID}>
+                                                                {data?.count_like}
+                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="like">
+                                                                            <div className="like-item">
+                                                                                {
+                                                                                    this.state.isDark === "light" ?
+                                                                                        <img src={look} alt="like"/>
+                                                                                        :
+                                                                                        <img src={look_dark} alt="like"/>
+                                                                                }
+                                                                            </div>
+                                                                            <div className="like-text">
+                                                                            <span className="like-count">
+                                                                                {data?.look_count}
+                                                                            </span>
                                                                             </div>
                                                                         </div>
                                                                         {
                                                                             Number(this.state.id) === store.auth.user.data.id ?
-                                                                                <div
-                                                                                    className="button-default-icon-disable hide-border">
-                                                                                    {
-                                                                                        data?.close ?
-                                                                                            <svg className="svg-close-view"
-                                                                                                 fill="#000000"
-                                                                                                 xmlns="http://www.w3.org/2000/svg"
-                                                                                                 viewBox="0 0 50 50"
-                                                                                                 width="50px" height="50px">
-                                                                                                <path fill="none"
-                                                                                                      className="svg-close"
-                                                                                                      stroke="#000000"
-                                                                                                      strokeLinecap="round"
-                                                                                                      strokeMiterlimit="10"
-                                                                                                      strokeWidth="2"
-                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM36 21c0 0 0-4.9 0-6 0-6.1-4.9-11-11-11-6.1 0-11 4.9-11 11 0 1.1 0 6 0 6"/>
-                                                                                                <path
-                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                            </svg>
-                                                                                            :
-                                                                                            <svg className="svg-close-view"
-                                                                                                 fill="#000000"
-                                                                                                 xmlns="http://www.w3.org/2000/svg"
-                                                                                                 viewBox="0 0 50 50"
-                                                                                                 width="50px" height="50px">
-                                                                                                <path fill="none"
-                                                                                                      className="svg-close"
-                                                                                                      stroke="#000000"
-                                                                                                      strokeLinecap="round"
-                                                                                                      strokeMiterlimit="10"
-                                                                                                      strokeWidth="2"
-                                                                                                      d="M9 49c-1.1 0-2-.9-2-2V23c0-1.1.9-2 2-2h32c1.1 0 2 .9 2 2v24c0 1.1-.9 2-2 2H9zM34.6 13.1c0 0-1.1-3.6-1.3-4.3-1.8-5.8-8-9.1-13.8-7.3-5.8 1.8-9.1 8-7.3 13.8C12.6 16.4 14 21 14 21"/>
-                                                                                                <path
-                                                                                                    d="M28,33c0-1.7-1.3-3-3-3c-1.7,0-3,1.3-3,3c0,0.9,0.4,1.7,1,2.2V38c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2v-2.8C27.6,34.7,28,33.9,28,33z"/>
-                                                                                            </svg>
-                                                                                    }
-
+                                                                                <div className="like" onClick={() => {
+                                                                                    this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag, data.video_path)
+                                                                                }}>
+                                                                                    <div className="like-text">
+                                                                                    <span className="like-count">
+                                                                                        Изменить
+                                                                                    </span>
+                                                                                    </div>
                                                                                 </div>
                                                                                 :
                                                                                 null
                                                                         }
-                                                                    </div>
-                                                                    <div key="asldk" className="wrapper-data">
-                                                                        <div className="title-feed">
-                                                                            {data?.title}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </Link>
-                                                            <div className="wrapper-bottom">
-                                                                {/*/!*<div className="wrapper-flex-start">*!/*/}
-                                                                {/*    <Link href={`/post?uuid=${data?.ID}`}>*/}
-                                                                {/*        <div className="button-default">Подробнее</div>*/}
-                                                                {/*    </Link>*/}
-                                                                {/*    {*/}
-                                                                {/*        Number(this.state.id) === store.auth.user.data.id ?*/}
-                                                                {/*            <div className="button-default"*/}
-                                                                {/*                 onClick={() => {*/}
-                                                                {/*                     this.rewriteFeed(data?.ID, data?.value, data?.close)*/}
-                                                                {/*                 }}*/}
-                                                                {/*            >*/}
-                                                                {/*                Изменить*/}
-                                                                {/*            </div>*/}
 
-                                                                {/*            :*/}
-                                                                {/*            null*/}
-                                                                {/*    }*/}
-                                                                {/*</div>*/}
-                                                                {/*<div className="like_wrapper wrapper-flex-end">*/}
-                                                                {/*    <div className="like">*/}
-                                                                {/*        <div className="like-item">*/}
-                                                                {/*            {*/}
-                                                                {/*                this.state.isDark === "light" ?*/}
-                                                                {/*                    <img src={look}  alt="like"/>*/}
-                                                                {/*                    :*/}
-                                                                {/*                    <img src={look_dark}  alt="like"/>*/}
-                                                                {/*            }*/}
-                                                                {/*        </div>*/}
-                                                                {/*        <div className="like-item">*/}
-                                                                {/*            <span className="like-count">*/}
-                                                                {/*                {data?.look_count}*/}
-                                                                {/*            </span>*/}
-                                                                {/*        </div>*/}
-                                                                {/*    </div>*/}
-                                                                {/*    <div className="like">*/}
-
-                                                                {/*        <div className="like-item" onClick={() => this.like(data?.ID)}>*/}
-                                                                {/*            {*/}
-                                                                {/*                this.state.isDark === "light" ?*/}
-                                                                {/*                    <img src={like}  alt="like"/>*/}
-                                                                {/*                    :*/}
-                                                                {/*                    <img src={like_dark}  alt="like"/>*/}
-                                                                {/*            }*/}
-                                                                {/*        </div>*/}
-                                                                {/*        <div className="like-item">*/}
-                                                                {/*          <span className="like-count" id={data?.ID}>*/}
-                                                                {/*              {data?.count_like}*/}
-                                                                {/*          </span>*/}
-                                                                {/*        </div>*/}
-                                                                {/*    </div>*/}
-                                                                {/*</div>*/}
-                                                                <div className="like_wrapper wrapper-flex-start">
-                                                                    <div className="like"
-                                                                         onClick={() => this.like(data?.ID)}>
-                                                                        <div className="like-item">
-                                                                            {
-                                                                                this.state.isDark === "light" ?
-                                                                                    <img src={like} alt="like"/>
-                                                                                    :
-                                                                                    <img src={like_dark} alt="like"/>
-                                                                            }
-                                                                        </div>
-                                                                        <div className="like-text">
-                                                            <span className="like-count" id={data?.ID}>
-                                                                {data?.count_like}
-                                                            </span>
-                                                                        </div>
                                                                     </div>
-                                                                    <div className="like">
-                                                                        <div className="like-item">
-                                                                            {
-                                                                                this.state.isDark === "light" ?
-                                                                                    <img src={look} alt="like"/>
-                                                                                    :
-                                                                                    <img src={look_dark} alt="like"/>
-                                                                            }
-                                                                        </div>
-                                                                        <div className="like-text">
-                                                                            <span className="like-count">
-                                                                                {data?.look_count}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    {
-                                                                        Number(this.state.id) === store.auth.user.data.id ?
-                                                                            <div className="like" onClick={() => {
-                                                                                this.rewriteFeed(data?.ID, data?.value, data?.title, data?.close, data.cover_path, data.tag, data.video_path)
-                                                                            }}>
-                                                                                <div className="like-text">
-                                                                                    <span className="like-count">
-                                                                                        Изменить
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            :
-                                                                            null
-                                                                    }
-
-                                                                </div>
-                                                                <div className="like_wrapper wrapper-flex-end">
-                                                                    {
-                                                                        data?.tag ?
-                                                                            data.tag?.map(tag =>
-                                                                                <div
-                                                                                    className="default-tag tags-item unselectable"
-                                                                                    style={{background: `${tag?.color}17`}}>
+                                                                    <div className="like_wrapper wrapper-flex-end">
+                                                                        {
+                                                                            data?.tag ?
+                                                                                data.tag?.map(tag =>
+                                                                                    <div
+                                                                                        className="default-tag tags-item unselectable"
+                                                                                        style={{background: `${tag?.color}17`}}>
                                                                                     <span
                                                                                         style={{color: tag?.color}}>{tag?.value}</span>
-                                                                                </div>
-                                                                            )
+                                                                                    </div>
+                                                                                )
 
-                                                                            :
-                                                                            null
-                                                                    }
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                )
-                                                :
-                                                Number(this.state.id) === store.auth.user.data.id ?
+                                                        )
+                                                        :
+                                                        Number(this.state.id) === store.auth.user.data.id ?
 
-                                                    <div className="error-wrapper">
-                                                        <div className="error-page">
-                                                            Напишите что-нибудь полезное для сообщества или для себя.
-                                                        </div>
-                                                    </div>
-                                                    :
-                                                    <div className="error-wrapper">
-                                                        <div className="error-page">
-                                                            {this.state.result[0].login} пока ничего не написал.
-                                                        </div>
-                                                    </div>
-                                        }
+                                                            <div className="error-wrapper">
+                                                                <div className="error-page">
+                                                                    Напишите что-нибудь полезное для сообщества или для себя.
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <div className="error-wrapper">
+                                                                <div className="error-page">
+                                                                    {this.state.result[0].login} пока ничего не написал.
+                                                                </div>
+                                                            </div>
+                                                }
 
-                                    </div>
-                                :
-                                this.state.notUser && store.auth.user.isAuth ?
-                                    <div>
-                                        {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
-                                        {/*  Ошибка*/}
-                                        {/*</div>*/}
-                                        <div className="error-wrapper">
-
-                                            <div className="error-page">
-                                                Такого пользователя не существует
                                             </div>
-                                        </div>
-                                    </div>
-                                    :
-                                    !store.auth.user.isAuth ?
-                                        <div>
-                                            {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
-                                            {/*  Ошибка*/}
-                                            {/*</div>*/}
-                                            <div className="error-wrapper">
-                                                <div className="error-page">
-                                                    Авторизуйтесь чтобы просматривать профили пользователей.
+                                        :
+                                        this.state.notUser && store.auth.user.isAuth ?
+                                            <div>
+                                                {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
+                                                {/*  Ошибка*/}
+                                                {/*</div>*/}
+                                                <div className="error-wrapper">
+
+                                                    <div className="error-page">
+                                                        Такого пользователя не существует
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            :
+                                            !store.auth.user.isAuth ?
+                                                <div>
+                                                    {/*<div style={{"background": "#FF9898"}} className="title-page">*/}
+                                                    {/*  Ошибка*/}
+                                                    {/*</div>*/}
+                                                    <div className="error-wrapper">
+                                                        <div className="error-page">
+                                                            Авторизуйтесь чтобы просматривать профили пользователей.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                :
+                                                <div className="feed-wrapper" style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    height: "100%"
+                                                }}>
+                                                    <div className="loader"/>
+                                                </div>
+                                }
+                            </div>
+                            <div className="tags-view">
+                                {
+                                    isLoaded ?
+                                        <div className="tags-box">
+                                            <div className="main-place-photo-column ">
+                                                <input type="file" name="file" id="upload_file_input"
+                                                       onChange={(e) => this.uploadPhotoAction(e)}
+                                                       accept="image/x-png,image/jpeg" style={{display: "none"}}/>
+                                                {
+                                                    Number(this.state.id) === store.auth.user.data.id ?
+                                                        this.state.imagePreviewUrl ?
+                                                            <img src={this.state.imagePreviewUrl}
+                                                                 alt={store.auth.user.data.login}
+                                                                 onClick={() => this.uploadClick()}
+                                                                 style={{cursor: "pointer"}}/>
+                                                            :
+                                                            <img src={store.auth.user.data.avatar_url}
+                                                                 alt={store.auth.user.data.login}
+                                                                 onClick={() => this.uploadClick()}
+                                                                 style={{cursor: "pointer"}}/>
+                                                        :
+                                                        <img src={this.state.result[0].avatar_url}
+                                                             alt={this.state.result[0].login} style={{cursor: "default"}}/>
+                                                }
+                                            </div>
+                                            <div className="main-place-info-column ">
+                                                <div className="main-place date_active">
+                                                    {
+                                                        store.auth.user.data.id === Number(this.state.id) ?
+                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
+                                                                (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
+                                                                    <span
+                                                                        className="info_status">Последняя активность была {new Date(store.auth.user.data.last_active_at).toLocaleString()}</span>
+                                                                    :
+                                                                    <span
+                                                                        className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))))} минут назад.</span>
+                                                                :
+                                                                <span className="info_status">Сейчас на сайте</span>
+                                                            :
+                                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
+                                                                (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 60 ?
+                                                                    <span
+                                                                        className="info_status">Последняя активность была {new Date(this.state.result[0].last_active_at).toLocaleString()}</span>
+                                                                    :
+                                                                    <span
+                                                                        className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))))} минут назад.</span>
+                                                                :
+                                                                <span className="info_status">Сейчас на сайте</span>
+                                                    }
+                                                </div>
+                                                <Helmet>
+                                                    {
+                                                        store.auth.user.data.id === Number(this.state.id) ?
+                                                            <title>{store.auth.user.data.login} | DevCodeMyLife</title>
+
+                                                            :
+                                                            <title>{this.state.result[0].login} | DevCodeMyLife</title>
+                                                    }
+
+                                                </Helmet>
+                                                <div className="main-place name">
+                                                    {
+                                                        store.auth.user.data.id === Number(this.state.id) ?
+                                                            store.auth.user.data?.name ?
+                                                                " " + store.auth.user.data.name + " " + store.auth.user.data.last_name
+                                                                :
+                                                                " " + store.auth.user.data.login
+                                                            :
+                                                            this.state.result[0]?.name ?
+                                                                " " + this.state.result[0].name + " " + this.state.result[0].last_name
+                                                                :
+                                                                " " + this.state.result[0].login
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+                                                    Email:
+                                                    {
+                                                        Number(this.state.id) === store.auth.user.data.id ?
+                                                            store.auth.user.data?.email ?
+                                                                " " + store.auth.user.data.email
+                                                                :
+                                                                " нет"
+                                                            :
+                                                            " Скрыт либо не задан"
+
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+                                                    Компания:
+                                                    {
+                                                        Number(this.state.id) === store.auth.user.data.id ?
+                                                            store.auth.user.data?.company ?
+                                                                " " + store.auth.user.data.company
+                                                                :
+                                                                " нет"
+                                                            :
+                                                            this.state.result[0]?.company ?
+                                                                " " + this.state.result[0].company
+                                                                :
+                                                                " нет"
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+                                                    Локация:
+                                                    {
+                                                        Number(this.state.id) === store.auth.user.data.id ?
+
+                                                            store.auth.user.data?.location ?
+                                                                " " + store.auth.user.data.location
+                                                                :
+                                                                " нет"
+                                                            :
+                                                            this.state.result[0]?.location ?
+                                                                " " + this.state.result[0].location
+                                                                :
+                                                                " нет"
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+                                                    Профиль GitHub:
+                                                    {
+                                                        Number(this.state.id) === store.auth.user.data.id ?
+                                                            store.auth.user.data?.html_url ?
+                                                                <a className="link_github" target="_blank"
+                                                                   href={store.auth.user.data.html_url}
+                                                                   rel="noreferrer"> {store.auth.user.data.login}</a>
+                                                                :
+                                                                " нет"
+                                                            :
+                                                            this.state.result[0]?.html_url ?
+                                                                <a className="link_github" target="_blank"
+                                                                   href={this.state.result[0].html_url}
+                                                                   rel="noreferrer"> {this.state.result[0].login}</a>
+                                                                :
+                                                                " нет"
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+                                                    Ссылка на резюме:
+                                                    {
+                                                        Number(this.state.id) === store.auth.user.data.id ?
+                                                            store.auth.user.data?.link_summary ?
+                                                                <a className="link_github" target="_blank"
+                                                                   href={store.auth.user.data.link_summary}
+                                                                   rel="noreferrer"> {store.auth.user.data.login}</a>
+                                                                :
+                                                                " нет"
+                                                            :
+                                                            this.state.result[0]?.link_summary ?
+                                                                <a className="link_github" target="_blank"
+                                                                   href={this.state.result[0].link_summary}
+                                                                   rel="noreferrer"> {this.state.result[0].login}</a>
+                                                                :
+                                                                " нет"
+                                                    }
+                                                </div>
+                                                <div className="main-place">
+
+                                                    {
+                                                        Number(this.state.id) !== store.auth.user.data.id ?
+
+                                                            this.state.clickCreateDialog ?
+                                                                <div>
+                                                                    <div className="loader-small"/>
+                                                                </div>
+                                                                :
+                                                                <div className="button-default"
+                                                                     style={{width: "100%", boxSizing: "border-box"}}
+                                                                     onClick={this.createChat}>
+                                                                    Написать сообщение
+                                                                </div>
+                                                            :
+                                                            null
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
                                         :
-                                        <div className="feed-wrapper" style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            height: "100%"
-                                        }}>
-                                            <div className="loader"/>
-                                        </div>
-                        }
-                    </div>
-                    <div className="tags-view">
-                        {
-                            isLoaded ?
-                                <div className="tags-box">
-                                    <div className="main-place-photo-column ">
-                                        <input type="file" name="file" id="upload_file_input"
-                                               onChange={(e) => this.uploadPhotoAction(e)}
-                                               accept="image/x-png,image/jpeg" style={{display: "none"}}/>
-                                        {
-                                            Number(this.state.id) === store.auth.user.data.id ?
-                                                this.state.imagePreviewUrl ?
-                                                    <img src={this.state.imagePreviewUrl}
-                                                         alt={store.auth.user.data.login}
-                                                         onClick={() => this.uploadClick()}
-                                                         style={{cursor: "pointer"}}/>
-                                                    :
-                                                    <img src={store.auth.user.data.avatar_url}
-                                                         alt={store.auth.user.data.login}
-                                                         onClick={() => this.uploadClick()}
-                                                         style={{cursor: "pointer"}}/>
+                                        this.state.notUser && store.auth.user.isAuth ?
+                                            null
+                                            :
+                                            !store.auth.user.isAuth ?
+                                                null
                                                 :
-                                                <img src={this.state.result[0].avatar_url}
-                                                     alt={this.state.result[0].login} style={{cursor: "default"}}/>
-                                        }
-                                    </div>
-                                    <div className="main-place-info-column ">
-                                        <div className="main-place date_active">
-                                            {
-                                                store.auth.user.data.id === Number(this.state.id) ?
-                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 120 ?
-                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))) > 60 ?
-                                                            <span
-                                                                className="info_status">Последняя активность была {new Date(store.auth.user.data.last_active_at).toLocaleString()}</span>
-                                                            :
-                                                            <span
-                                                                className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(store.auth.user.data.last_active_at).getTime() / 1000))))} минут назад.</span>
-                                                        :
-                                                        <span className="info_status">Сейчас на сайте</span>
-                                                    :
-                                                    (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 120 ?
-                                                        (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))) > 60 ?
-                                                            <span
-                                                                className="info_status">Последняя активность была {new Date(this.state.result[0].last_active_at).toLocaleString()}</span>
-                                                            :
-                                                            <span
-                                                                className="info_status">Последняя активность была {this.getLastVisit((Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(this.state.result[0].last_active_at).getTime() / 1000))))} минут назад.</span>
-                                                        :
-                                                        <span className="info_status">Сейчас на сайте</span>
-                                            }
-                                        </div>
-                                        <Helmet>
-                                            {
-                                                store.auth.user.data.id === Number(this.state.id) ?
-                                                    <title>{store.auth.user.data.login} | DevCodeMyLife</title>
+                                                <div className="loader-wrapper feed-wrapper">
+                                                    <div className="loader-small">
 
-                                                    :
-                                                    <title>{this.state.result[0].login} | DevCodeMyLife</title>
-                                            }
+                                                    </div>
+                                                </div>
+                                }
 
-                                        </Helmet>
-                                        <div className="main-place name">
-                                            {
-                                                store.auth.user.data.id === Number(this.state.id) ?
-                                                    store.auth.user.data?.name ?
-                                                        " " + store.auth.user.data.name + " " + store.auth.user.data.last_name
-                                                        :
-                                                        " " + store.auth.user.data.login
-                                                    :
-                                                    this.state.result[0]?.name ?
-                                                        " " + this.state.result[0].name + " " + this.state.result[0].last_name
-                                                        :
-                                                        " " + this.state.result[0].login
-                                            }
-                                        </div>
-                                        <div className="main-place">
-                                            Email:
-                                            {
-                                                Number(this.state.id) === store.auth.user.data.id ?
-                                                    store.auth.user.data?.email ?
-                                                        " " + store.auth.user.data.email
-                                                        :
-                                                        " нет"
-                                                    :
-                                                    " Скрыт либо не задан"
-
-                                            }
-                                        </div>
-                                        <div className="main-place">
-                                            Компания:
-                                            {
-                                                Number(this.state.id) === store.auth.user.data.id ?
-                                                    store.auth.user.data?.company ?
-                                                        " " + store.auth.user.data.company
-                                                        :
-                                                        " нет"
-                                                    :
-                                                    this.state.result[0]?.company ?
-                                                        " " + this.state.result[0].company
-                                                        :
-                                                        " нет"
-                                            }
-                                        </div>
-                                        <div className="main-place">
-                                            Локация:
-                                            {
-                                                Number(this.state.id) === store.auth.user.data.id ?
-
-                                                    store.auth.user.data?.location ?
-                                                        " " + store.auth.user.data.location
-                                                        :
-                                                        " нет"
-                                                    :
-                                                    this.state.result[0]?.location ?
-                                                        " " + this.state.result[0].location
-                                                        :
-                                                        " нет"
-                                            }
-                                        </div>
-                                        <div className="main-place">
-                                            Профиль GitHub:
-                                            {
-                                                Number(this.state.id) === store.auth.user.data.id ?
-                                                    store.auth.user.data?.html_url ?
-                                                        <a className="link_github" target="_blank"
-                                                           href={store.auth.user.data.html_url}
-                                                           rel="noreferrer"> {store.auth.user.data.login}</a>
-                                                        :
-                                                        " нет"
-                                                    :
-                                                    this.state.result[0]?.html_url ?
-                                                        <a className="link_github" target="_blank"
-                                                           href={this.state.result[0].html_url}
-                                                           rel="noreferrer"> {this.state.result[0].login}</a>
-                                                        :
-                                                        " нет"
-                                            }
-                                        </div>
-                                        <div className="main-place">
-                                            Ссылка на резюме:
-                                            {
-                                                Number(this.state.id) === store.auth.user.data.id ?
-                                                    store.auth.user.data?.link_summary ?
-                                                        <a className="link_github" target="_blank"
-                                                           href={store.auth.user.data.link_summary}
-                                                           rel="noreferrer"> {store.auth.user.data.login}</a>
-                                                        :
-                                                        " нет"
-                                                    :
-                                                    this.state.result[0]?.link_summary ?
-                                                        <a className="link_github" target="_blank"
-                                                           href={this.state.result[0].link_summary}
-                                                           rel="noreferrer"> {this.state.result[0].login}</a>
-                                                        :
-                                                        " нет"
-                                            }
-                                        </div>
-                                        <div className="main-place">
-
-                                            {
-                                                Number(this.state.id) !== store.auth.user.data.id ?
-
-                                                    this.state.clickCreateDialog ?
-                                                        <div>
-                                                            <div className="loader-small"/>
-                                                        </div>
-                                                        :
-                                                        <div className="button-default"
-                                                             style={{width: "100%", boxSizing: "border-box"}}
-                                                             onClick={this.createChat}>
-                                                            Написать сообщение
-                                                        </div>
-                                                    :
-                                                    null
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                :
-                                this.state.notUser && store.auth.user.isAuth ?
-                                    null
-                                    :
-                                    !store.auth.user.isAuth ?
-                                        null
-                                        :
-                                        <div className="loader-wrapper feed-wrapper">
-                                            <div className="loader-small">
-
-                                            </div>
-                                        </div>
-                        }
-
-                        {/*<div className="tags-box">*/}
-                        {/*    <div className="title-box">Теги</div>*/}
-                        {/*    {*/}
-                        {/*        tags?.map(data =>*/}
-                        {/*            <div className="button-default-tag tags-item unselectable" action={data.value}*/}
-                        {/*                 onClick={this.handleClickTag}>*/}
-                        {/*                #{data.value}*/}
-                        {/*            </div>*/}
-                        {/*        )*/}
-                        {/*    }*/}
-                        {/*</div>*/}
-                    </div>
-                </div>
+                                {/*<div className="tags-box">*/}
+                                {/*    <div className="title-box">Теги</div>*/}
+                                {/*    {*/}
+                                {/*        tags?.map(data =>*/}
+                                {/*            <div className="button-default-tag tags-item unselectable" action={data.value}*/}
+                                {/*                 onClick={this.handleClickTag}>*/}
+                                {/*                #{data.value}*/}
+                                {/*            </div>*/}
+                                {/*        )*/}
+                                {/*    }*/}
+                                {/*</div>*/}
+                            </div>
+                        </div>
+                    )
             )
         }
 
