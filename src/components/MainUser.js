@@ -932,6 +932,9 @@ class MainUsers extends Component {
                                     <div className="loader"/>
                                 </div>
                             </div>
+                            <div className="top-my-target">
+                                <div id="yandex_rtb_R-A-1591597-1" />
+                            </div>
                         </div>
                     ):(
                         <div style={{display: "flex"}}>
