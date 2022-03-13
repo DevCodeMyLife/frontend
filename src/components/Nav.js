@@ -83,157 +83,164 @@ class Nav extends Component {
     render() {
         const state = this.state.store.getState()
         return (
-            state.auth.user.isAuth ?
-                <div className="wrapper-vertical-nav">
-                    {
-                        !this.state.load ?
-                        <div className="loader-flex">
-                            <div className="loader-small"/>
-                        </div>
-                        :
-                        <div>
-                            <div className="nav-item">
-                                <Link className="nav-value" href={`/user/${state.auth.user.data.id}`}>
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={user} alt="Ваша страница"/> :
-                                            <img src={user_dark} alt="Ваша страница"/>}
-
-                                    </div>
-                                    <div className="nav-value">
-                                        Моя страница
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="nav-item">
-                                {state.auth.user.messagesCount ? <div className="counter-notification" id="counter_notification"
-                                                                      path="/messages">
-                                    {state.auth.user.messagesCount > 10 ? "10+" : state.auth.user.messagesCount}
-                                </div> : null}
-                                <Link className="nav-value" href="/messages">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={messages} alt="Мессенджер"/> :
-                                            <img src={messages_dark} alt="Мессенджер"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Мессенджер
-                                    </div>
-                                </Link>
-                            </div>
-                            {/*<div className="nav-item">*/}
-                            {/*    <Link className="nav-value" href="/video">*/}
-                            {/*        <div className="icon-image">*/}
-                            {/*            {this.state.isDark === "light" ? <img src={video} alt="Видеозаписи"/> :*/}
-                            {/*                <img src={video_dark} alt="Видеозаписи"/>}*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Видеозаписи*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
-                            {/*<div className="nav-item">*/}
-                            {/*    <Link className="nav-value" href="/audio">*/}
-                            {/*        <div className="icon-image">*/}
-                            {/*            {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :*/}
-                            {/*                <img src={music_dark} alt="Аудиозаписи"/>}*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Аудиозаписи*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/feeds">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notes} alt="Лента"/> :
-                                            <img src={notes_dark} alt="Лента"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Лента
-                                    </div>
-                                </Link>
-                            </div>
-                            {/*<div className="nav-item">*/}
-                            {/*    <Link className="nav-value" href="/jobs">*/}
-                            {/*        <div className="icon-image">*/}
-                            {/*            {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :*/}
-                            {/*                <img src={jobs_dark} alt="Работа"/>}*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Найти работу*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
-                            <div className="nav-item">
-                                <Link className="nav-value" href="/people">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={people} alt="Пользователи"/> :
-                                            <img src={people_dark} alt="Пользователи"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Пользователи
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="nav-item">
-                                {state.auth.user.notificationCount ?
-                                    <div className="counter-notification" id="counter_notification"
-                                         path="/notification">
-                                        {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}
-                                    </div> : null}
-                                <Link className="nav-value" href="/notification">
-                                    <div className="icon-image">
-                                        {this.state.isDark === "light" ? <img src={notification} alt="События"/> :
-                                            <img src={notification_dark} alt="События"/>}
-                                    </div>
-                                    <div className="nav-value">
-                                        Уведомления
-                                    </div>
-                                </Link>
-                            </div>
-                            {/*<div className="nav-item">*/}
-                            {/*    <Link className="nav-value" href="/apps">*/}
-                            {/*        <div className="icon-image">*/}
-                            {/*            {this.state.isDark === "light" ? <img src={app} alt="Приложения"/> :*/}
-                            {/*                <img src={app_dark} alt="Приложения"/>}*/}
-                            {/*        </div>*/}
-                            {/*        <div className="nav-value">*/}
-                            {/*            Приложения*/}
-                            {/*        </div>*/}
-                            {/*    </Link>*/}
-                            {/*</div>*/}
-                            {
-                                state.auth.user.data.testing ?
-                                    <div>
-                                        <div className="nav-item">
-                                            <Link className="nav-value" href="/freelances">
-                                                <div className="icon-image">
-                                                    {this.state.isDark === "light" ? <img src={code} alt="Задачи"/> :
-                                                        <img src={code_dark} alt="Задачи"/>}
-                                                </div>
-                                                <div className="nav-value">
-                                                    Фриланс
-                                                </div>
-                                            </Link>
-                                        </div>
-                                        <div className="nav-item">
-                                            <Link className="nav-value" href="/market">
-                                                <div className="icon-image">
-                                                    {this.state.isDark === "light" ? <img src={market} alt="Магазин"/> :
-                                                        <img src={market_dark} alt="Магазин"/>}
-                                                </div>
-                                                <div className="nav-value">
-                                                    Магазин
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </div>
+            state.auth.isLoaded ?
+                state.auth.user.isAuth ?
+                    <div className="wrapper-vertical-nav">
+                        {
+                            !this.state.load ?
+                                <div className="loader-flex">
+                                    <div className="loader-small"/>
+                                </div>
                                 :
-                                    null
-                            }
-                        </div>
-                    }
-                </div>
-                :
+                                <div>
+                                    <div className="nav-item">
+                                        <Link className="nav-value" href={`/user/${state.auth.user.data.id}`}>
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ? <img src={user} alt="Ваша страница"/> :
+                                                    <img src={user_dark} alt="Ваша страница"/>}
+
+                                            </div>
+                                            <div className="nav-value">
+                                                Моя страница
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="nav-item">
+                                        {state.auth.user.messagesCount ?
+                                            <div className="counter-notification" id="counter_notification"
+                                                 path="/messages">
+                                                {state.auth.user.messagesCount > 10 ? "10+" : state.auth.user.messagesCount}
+                                            </div> : null}
+                                        <Link className="nav-value" href="/messages">
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ?
+                                                    <img src={messages} alt="Мессенджер"/> :
+                                                    <img src={messages_dark} alt="Мессенджер"/>}
+                                            </div>
+                                            <div className="nav-value">
+                                                Мессенджер
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/video">*/}
+                                    {/*        <div className="icon-image">*/}
+                                    {/*            {this.state.isDark === "light" ? <img src={video} alt="Видеозаписи"/> :*/}
+                                    {/*                <img src={video_dark} alt="Видеозаписи"/>}*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Видеозаписи*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/audio">*/}
+                                    {/*        <div className="icon-image">*/}
+                                    {/*            {this.state.isDark === "light" ? <img src={music} alt="Аудиозаписи"/> :*/}
+                                    {/*                <img src={music_dark} alt="Аудиозаписи"/>}*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Аудиозаписи*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                    <div className="nav-item">
+                                        <Link className="nav-value" href="/feeds">
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ? <img src={notes} alt="Лента"/> :
+                                                    <img src={notes_dark} alt="Лента"/>}
+                                            </div>
+                                            <div className="nav-value">
+                                                Лента
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/jobs">*/}
+                                    {/*        <div className="icon-image">*/}
+                                    {/*            {this.state.isDark === "light" ? <img src={jobs} alt="Работа"/> :*/}
+                                    {/*                <img src={jobs_dark} alt="Работа"/>}*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Найти работу*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                    <div className="nav-item">
+                                        <Link className="nav-value" href="/people">
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ?
+                                                    <img src={people} alt="Пользователи"/> :
+                                                    <img src={people_dark} alt="Пользователи"/>}
+                                            </div>
+                                            <div className="nav-value">
+                                                Пользователи
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="nav-item">
+                                        {state.auth.user.notificationCount ?
+                                            <div className="counter-notification" id="counter_notification"
+                                                 path="/notification">
+                                                {state.auth.user.notificationCount > 10 ? "10+" : state.auth.user.notificationCount}
+                                            </div> : null}
+                                        <Link className="nav-value" href="/notification">
+                                            <div className="icon-image">
+                                                {this.state.isDark === "light" ?
+                                                    <img src={notification} alt="События"/> :
+                                                    <img src={notification_dark} alt="События"/>}
+                                            </div>
+                                            <div className="nav-value">
+                                                Уведомления
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    {/*<div className="nav-item">*/}
+                                    {/*    <Link className="nav-value" href="/apps">*/}
+                                    {/*        <div className="icon-image">*/}
+                                    {/*            {this.state.isDark === "light" ? <img src={app} alt="Приложения"/> :*/}
+                                    {/*                <img src={app_dark} alt="Приложения"/>}*/}
+                                    {/*        </div>*/}
+                                    {/*        <div className="nav-value">*/}
+                                    {/*            Приложения*/}
+                                    {/*        </div>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                    {
+                                        state.auth.user.data.testing ?
+                                            <div>
+                                                <div className="nav-item">
+                                                    <Link className="nav-value" href="/freelances">
+                                                        <div className="icon-image">
+                                                            {this.state.isDark === "light" ?
+                                                                <img src={code} alt="Задачи"/> :
+                                                                <img src={code_dark} alt="Задачи"/>}
+                                                        </div>
+                                                        <div className="nav-value">
+                                                            Фриланс
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                                <div className="nav-item">
+                                                    <Link className="nav-value" href="/market">
+                                                        <div className="icon-image">
+                                                            {this.state.isDark === "light" ?
+                                                                <img src={market} alt="Магазин"/> :
+                                                                <img src={market_dark} alt="Магазин"/>}
+                                                        </div>
+                                                        <div className="nav-value">
+                                                            Магазин
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                </div>
+                        }
+                    </div>
+                    :
                     window.location.pathname !== "/" ?
                         <div className="wrapper-vertical-nav">
                             {
@@ -241,7 +248,7 @@ class Nav extends Component {
                                     <div className="loader-flex">
                                         <div className="loader-small"/>
                                     </div>
-                                :
+                                    :
                                     <div className="nav-item">
                                         <Link className="nav-value" href={`/`}>
                                             <div className="icon-image">
@@ -255,7 +262,7 @@ class Nav extends Component {
 
                             }
                         </div>
-                    :
+                        :
                         window.location.pathname === "/" ?
                             <div className="wrapper-vertical-nav">
                                 <div className="nav-item">
@@ -270,8 +277,18 @@ class Nav extends Component {
                                     </Link>
                                 </div>
                             </div>
-                        :
+                            :
                             null
+                : (
+                    <div className="feed-wrapper" style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100%"
+                    }}>
+                        <div className="loader"/>
+                    </div>
+                )
         )
     }
 }
