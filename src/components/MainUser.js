@@ -920,7 +920,7 @@ class MainUsers extends Component {
             )
         } else {
             return (
-                    !store.user.isLoaded ? (
+                    !store.auth.isLoaded ? (
                         <div style={{display: "flex"}}>
                             <div className="loader" />
                         </div>
