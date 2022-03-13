@@ -932,8 +932,13 @@ class MainUsers extends Component {
                                     <div className="loader"/>
                                 </div>
                             </div>
-                            <div className="top-my-target">
-                                <div id="yandex_rtb_R-A-1591597-1" />
+                            <div className="tags-view">
+                                <div className="top-my-target">
+                                    <div id="yandex_rtb_R-A-1591597-1" />
+                                </div>
+                                <div className="top-my-target">
+                                    <div id="yandex_rtb_R-A-1591597-2" />
+                                </div>
                             </div>
                         </div>
                     ):(
@@ -1654,9 +1659,12 @@ class MainUsers extends Component {
                                 {/*        )*/}
                                 {/*    }*/}
                                 {/*</div>*/}
-                            </div>
-                            <div className="top-my-target">
-                                <div id="yandex_rtb_R-A-1591597-1" />
+                                <div className="top-my-target">
+                                    <div id="yandex_rtb_R-A-1591597-1" />
+                                </div>
+                                <div className="top-my-target">
+                                    <div id="yandex_rtb_R-A-1591597-2" />
+                                </div>
                             </div>
                         </div>
                     )
