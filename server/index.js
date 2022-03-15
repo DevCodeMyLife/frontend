@@ -8,6 +8,8 @@ import request from 'request';
 
 import express from 'express';
 
+const mobile = require('is-mobile');
+
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/components/Index';
 
@@ -31,14 +33,27 @@ const meta_twitter_url = '<meta property="twitter:url" content="https://devcodem
 
 
 app.get(['/', '/feeds', '/post/*', '/user/*', '/settings', '/messages', '/notification', '/people', '/apps', '/balance', '/up_balance'], (req, res) => {
+    if (mobile({ ua: req })) {
+        const indexFile = path.resolve('./public/no_mobile.html');
+        fs.readFile(indexFile, 'utf8', (err, data) => {
+
+            return res.status(404).send(data);
+        })
+        return
+    }
+
     const app = ReactDOMServer.renderToString(<App/>);
     const indexFile = path.resolve('./build/index.html');
+
+
 
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
             return res.status(500).send('Сейчас мы что то делаем');
         }
+
+
 
         console.log(req.path)
         console.log(req.path.split("/")[1])
