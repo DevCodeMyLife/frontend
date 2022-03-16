@@ -373,7 +373,7 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="tags-box">
+                                    <div className="tags-flex">
                                         <div className="button-default-tag tags-item unselectable button-select-tag"
                                              id="top"
                                              action="top" onClick={this.handleClickTag} ref={this.popular}>

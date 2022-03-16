@@ -653,6 +653,13 @@ code {
     font-size: 13px;
 }
 
+.tags-flex {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 7px;
+    gap: 7px;
+}
+
 /**
  * Main wrapper
  */

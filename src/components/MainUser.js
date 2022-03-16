@@ -1386,6 +1386,7 @@ class MainUsers extends Component {
 
                                                                     </div>
                                                                     <div className="like_wrapper wrapper-flex-end">
+                                                                        <div className="tags-flex">
                                                                         {
                                                                             data?.tag ?
                                                                                 data.tag?.map(tag =>
@@ -1400,6 +1401,7 @@ class MainUsers extends Component {
                                                                                 :
                                                                                 null
                                                                         }
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
