@@ -567,9 +567,9 @@ code {
 .content-wall-views {
     flex-grow: 10;
     position: relative;
-    width: 775px;
+    width: 550px;
     min-height: 500px;
-    margin-left: 220px;
+    margin-left: 164px;
 }
 
 .button-select-tag {
