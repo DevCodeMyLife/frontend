@@ -229,8 +229,6 @@ class FeedOnePage extends Component {
         return (
             <div style={{display: "flex"}}>
                 <div className="content-wall-views" style={{width: "810px"}}>
-
-
                     {
                         isLoadedFeed ?
                             <div className="comments-view" id="comments_view">
