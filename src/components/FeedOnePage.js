@@ -672,16 +672,16 @@ class FeedOnePage extends Component {
                             :
                             null
                     }
-                    <div className="top-my-target">
-                        <ins className="mrg-tag"
-                             style={{
-                                 display: "inline-block",
-                                 textDecoration: "none",
-                                 width: "240px", height: "400px"
-                             }}
-                             data-ad-client="ad-1006790"
-                             data-ad-slot="1006790"/>
-                    </div>
+                    {/*<div className="top-my-target">*/}
+                    {/*    <ins className="mrg-tag"*/}
+                    {/*         style={{*/}
+                    {/*             display: "inline-block",*/}
+                    {/*             textDecoration: "none",*/}
+                    {/*             width: "240px", height: "400px"*/}
+                    {/*         }}*/}
+                    {/*         data-ad-client="ad-1006790"*/}
+                    {/*         data-ad-slot="1006790"/>*/}
+                    {/*</div>*/}
                     <div className="top-my-target">
                         <div id="yandex_rtb_R-A-1591597-1" />
                     </div>
