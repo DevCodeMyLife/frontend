@@ -374,12 +374,12 @@ class Feed extends Component {
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
                                     <div className="tags-flex">
-                                        <div className="button-default-tag tags-item unselectable button-select-tag"
+                                        <div className="button-default tags-item unselectable button-select-tag"
                                              id="top"
                                              action="top" onClick={this.handleClickTag} ref={this.popular}>
                                             Популярные
                                         </div>
-                                        <div className="button-default-tag tags-item unselectable" action="all"
+                                        <div className="button-default tags-item unselectable" action="all"
                                              onClick={this.handleClickTag}>
                                             Новые
                                         </div>
@@ -543,12 +543,6 @@ class Feed extends Component {
                                 ) : null
 
                             }
-                        </div>
-                        <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-1"/>
-                        </div>
-                        <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-2"/>
                         </div>
                     </div>
                 </div>
