@@ -1610,6 +1610,8 @@ p {
     -webkit-hyphens: auto;
     hyphens: auto;
     /*white-space: pre;*/
+
+    font-size: 13px;
 }
 
 .value-post > p {
