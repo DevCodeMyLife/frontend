@@ -2655,7 +2655,7 @@ textarea {
 .value-post {
     flex-grow: 50;
     padding: 10px;
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
     box-sizing: border-box;
     word-wrap: break-word;
