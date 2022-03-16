@@ -648,6 +648,7 @@ code {
     grid-gap: 1px;
     gap: 1px;
     /*position: fixed;*/
+    font-size: 13px;
 }
 
 /**
