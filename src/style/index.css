@@ -295,7 +295,7 @@ code {
 }
 
 .content {
-    width: 1280px;
+    width: 990px;
     /*margin: 0 auto;*/
     /*background: #000000;*/
     margin: 0 auto;
@@ -303,7 +303,7 @@ code {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    padding-top: 50px;
+    padding: 50px 15px 0 15px;
     position: relative;
 }
 
