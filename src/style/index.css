@@ -641,7 +641,7 @@ code {
     box-shadow: var(--view-shadow);
     border-radius: 5px;
     padding: 20px;
-    width: 250px;
+    width: 205px;
 
     display: flex;
     flex-wrap: wrap;

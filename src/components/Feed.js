@@ -526,7 +526,7 @@ class Feed extends Component {
                         </div>
                     </div>
                     <div className="tags-view">
-                        <div className="title-box">Теги</div>
+                        {/*<div className="title-box">Теги</div>*/}
                         <div className="tags-box" id="tags-wrapper-all-tags">
                             {
                                 tags.length > 0 ? (
