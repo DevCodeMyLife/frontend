@@ -347,7 +347,7 @@ code {
     color: var(--logo);
     transition: .1s;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 18px;
     width: max-content;
     font-weight: 800;
 }
@@ -1910,7 +1910,7 @@ p {
 }
 
 .cover-feed {
-    max-width: 735px;
+    max-width: 510px;
     border-radius: 5px 5px 0 0;
 }
 
