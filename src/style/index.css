@@ -2452,6 +2452,7 @@ link-user {
     align-items: center;
     padding-right: 20px;
     color: var(--font-color);
+    font-size: 12px;
 }
 
 .nav-item {
