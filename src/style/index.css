@@ -2484,7 +2484,7 @@ link-user {
 }
 
 .nav-item:hover {
-    background: var(--hover);
+    background: var(--button_border);
 }
 
 .nav-item-active {
