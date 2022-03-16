@@ -647,8 +647,8 @@ code {
 
     display: flex;
     flex-wrap: wrap;
-    grid-gap: 1px;
-    gap: 1px;
+    grid-gap: 7px;
+    gap: 7px;
     /*position: fixed;*/
     font-size: 13px;
 }
@@ -2137,7 +2137,7 @@ p {
 
 .tags-item {
     display: inline-block;
-    margin: 0 10px 10px 0;
+    /*margin: 0 10px 10px 0;*/
 }
 
 .button-select {
