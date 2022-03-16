@@ -538,7 +538,7 @@ code {
 }
 
 .reviews-menu {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     position: fixed;
     z-index: 3;
 
@@ -597,8 +597,8 @@ code {
 }
 
 .menu-nav {
-    padding: 10px;
-    width: 205px;
+    padding: 10px 0;
+    width: 164px;
 }
 
 .menu-nav-item {
@@ -2540,14 +2540,12 @@ link-user {
 }
 
 .wrapper-vertical-nav {
-    width: 195px;
+    width: 164px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    /*background: var(--white);*/
-    margin: 10px 5px 20px 5px;
+    padding: 10px 0;
+    /* margin: 10px 5px 20px; */
     border-radius: 5px;
-    /*box-shadow: var(--view-shadow);*/
 }
 
 
