@@ -382,6 +382,7 @@ code {
     align-items: center;
     /*font-size: 14px;*/
     box-sizing: border-box;
+    font-size: 13px;
 }
 
 .button-open-menu {
@@ -478,6 +479,7 @@ code {
     align-items: center;
     /*font-size: 14px;*/
     width: max-content;
+    font-size: 13px;
 }
 
 .button-default-icon {
@@ -1361,7 +1363,7 @@ a {
 }
 
 .auth-logo {
-    max-width: 100px;
+    max-width: 50px;
 }
 
 .online_user {
