@@ -1467,7 +1467,7 @@ a {
 }
 
 .input-default {
-    padding: 15px;
+    padding: 10px;
     background: var(--bg-grey);
     border: 1px solid var(--button_border);
     color: var(--font-color);
