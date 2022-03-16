@@ -373,14 +373,16 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select-tag"
-                                         id="top"
-                                         action="top" onClick={this.handleClickTag} ref={this.popular} style={{marginRight: "10px"}}>
-                                        Популярные
-                                    </div>
-                                    <div className="button-default-tag tags-item unselectable" action="all"
-                                         onClick={this.handleClickTag}>
-                                        Новые
+                                    <div className="tags-box">
+                                        <div className="button-default-tag tags-item unselectable button-select-tag"
+                                             id="top"
+                                             action="top" onClick={this.handleClickTag} ref={this.popular}>
+                                            Популярные
+                                        </div>
+                                        <div className="button-default-tag tags-item unselectable" action="all"
+                                             onClick={this.handleClickTag}>
+                                            Новые
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -543,10 +545,10 @@ class Feed extends Component {
                             }
                         </div>
                         <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-1" />
+                            <div id="yandex_rtb_R-A-1591597-1"/>
                         </div>
                         <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-2" />
+                            <div id="yandex_rtb_R-A-1591597-2"/>
                         </div>
                     </div>
                 </div>
