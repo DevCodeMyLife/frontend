@@ -228,7 +228,8 @@ class FeedOnePage extends Component {
         let {isLoadedFeed, feed, result, comments, counter, user} = this.state;
         return (
             <div style={{display: "flex"}}>
-                <div className="content-wall-views">
+                <div className="content-wall-views" style={{width: "810px"}}>
+
 
                     {
                         isLoadedFeed ?
@@ -245,7 +246,7 @@ class FeedOnePage extends Component {
                                         {
                                             data?.cover_path !== "" ?
                                                 <img className="cover-feed" src={data.cover_path}
-                                                     alt={data.title}/>
+                                                     alt={data.title} style={{maxWidth: "770px"}}/>
                                                 :
                                                 null
                                         }
@@ -585,107 +586,88 @@ class FeedOnePage extends Component {
                                 </div>
                     }
                 </div>
-                <div className="tags-view">
-                    {
-                        isLoadedFeed ?
-                            <div className="tags-box">
-                                {/*<div className="title-box">{user?.login}</div>*/}
-                                {/*/!*{*!/*/}
-                                {/*/!*    tags?.map(data =>*!/*/}
-                                {/*/!*        <div className="button-default-tag tags-item unselectable" action={data.value}*!/*/}
-                                {/*/!*             onClick={this.handleClickTag}>*!/*/}
-                                {/*/!*            #{data.value}*!/*/}
-                                {/*/!*        </div>*!/*/}
-                                {/*/!*    )*!/*/}
-                                {/*/!*}*!/*/}
-                                <div className="wrapper-data">
-                                    <div className="photo-wrapper">
-                                        {
-                                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(user?.last_active_at).getTime() / 1000))) > 120 ?
-                                                null
-                                                :
-                                                <div className="online_user"/>
-                                        }
-                                        <img src={user?.avatar_url} alt={user?.login}
-                                             onClick={(e) => {
-                                                 e.preventDefault();
-                                                 window.location.href = `/user/${user?.id}`
-                                             }}
-                                        />
-                                    </div>
-                                    <div className="value-post">
-                                        <div className="feed-item-title">
-                                            <div className="link-user" onClick={(e) => {
-                                                e.preventDefault();
-                                                window.location.href = `/user/${user?.id}`
-                                            }}>
-                                                {user?.login}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {
-                                    user?.location ?
-                                        <div className="main-place">
-                                            Локация:
-                                            {
-                                                " " + user?.location
-                                            }
-                                        </div>
-                                        :
-                                        null
-                                }
-                                {
-                                    user?.company ?
-                                        <div className="main-place">
-                                            Компания:
-                                            {
-                                                " " + user?.company
-                                            }
-                                        </div>
-                                        :
-                                        null
-                                }
-                                {
-                                    user?.count_feeds ?
-                                        <div className="main-place">
-                                            Количество постов:
-                                            {
-                                                " " + user?.count_feeds
-                                            }
-                                        </div>
-                                        :
-                                        null
-                                }
-                                {
-                                    user?.count_tasks ?
-                                        <div className="main-place">
-                                            Создал задач:
-                                            {
-                                                " " + user?.count_tasks
-                                            }
-                                        </div>
-                                        :
-                                        null
-                                }
-                            </div>
-                            :
-                            null
-                    }
-                    {/*<div className="top-my-target">*/}
-                    {/*    <ins className="mrg-tag"*/}
-                    {/*         style={{*/}
-                    {/*             display: "inline-block",*/}
-                    {/*             textDecoration: "none",*/}
-                    {/*             width: "240px", height: "400px"*/}
-                    {/*         }}*/}
-                    {/*         data-ad-client="ad-1006790"*/}
-                    {/*         data-ad-slot="1006790"/>*/}
-                    {/*</div>*/}
-                    <div className="top-my-target">
-                        <div id="yandex_rtb_R-A-1591597-1" />
-                    </div>
-                </div>
+                {/*<div className="tags-view">*/}
+                {/*    {*/}
+                {/*        isLoadedFeed ?*/}
+                {/*            <div className="tags-box">*/}
+                {/*                <div className="wrapper-data">*/}
+                {/*                    <div className="photo-wrapper">*/}
+                {/*                        {*/}
+                {/*                            (Math.floor((new Date().getTime() / 1000)) - Math.floor((new Date(user?.last_active_at).getTime() / 1000))) > 120 ?*/}
+                {/*                                null*/}
+                {/*                                :*/}
+                {/*                                <div className="online_user"/>*/}
+                {/*                        }*/}
+                {/*                        <img src={user?.avatar_url} alt={user?.login}*/}
+                {/*                             onClick={(e) => {*/}
+                {/*                                 e.preventDefault();*/}
+                {/*                                 window.location.href = `/user/${user?.id}`*/}
+                {/*                             }}*/}
+                {/*                        />*/}
+                {/*                    </div>*/}
+                {/*                    <div className="value-post">*/}
+                {/*                        <div className="feed-item-title">*/}
+                {/*                            <div className="link-user" onClick={(e) => {*/}
+                {/*                                e.preventDefault();*/}
+                {/*                                window.location.href = `/user/${user?.id}`*/}
+                {/*                            }}>*/}
+                {/*                                {user?.login}*/}
+                {/*                            </div>*/}
+                {/*                        </div>*/}
+                {/*                    </div>*/}
+                {/*                </div>*/}
+                {/*                {*/}
+                {/*                    user?.location ?*/}
+                {/*                        <div className="main-place">*/}
+                {/*                            Локация:*/}
+                {/*                            {*/}
+                {/*                                " " + user?.location*/}
+                {/*                            }*/}
+                {/*                        </div>*/}
+                {/*                        :*/}
+                {/*                        null*/}
+                {/*                }*/}
+                {/*                {*/}
+                {/*                    user?.company ?*/}
+                {/*                        <div className="main-place">*/}
+                {/*                            Компания:*/}
+                {/*                            {*/}
+                {/*                                " " + user?.company*/}
+                {/*                            }*/}
+                {/*                        </div>*/}
+                {/*                        :*/}
+                {/*                        null*/}
+                {/*                }*/}
+                {/*                {*/}
+                {/*                    user?.count_feeds ?*/}
+                {/*                        <div className="main-place">*/}
+                {/*                            Количество постов:*/}
+                {/*                            {*/}
+                {/*                                " " + user?.count_feeds*/}
+                {/*                            }*/}
+                {/*                        </div>*/}
+                {/*                        :*/}
+                {/*                        null*/}
+                {/*                }*/}
+                {/*                {*/}
+                {/*                    user?.count_tasks ?*/}
+                {/*                        <div className="main-place">*/}
+                {/*                            Создал задач:*/}
+                {/*                            {*/}
+                {/*                                " " + user?.count_tasks*/}
+                {/*                            }*/}
+                {/*                        </div>*/}
+                {/*                        :*/}
+                {/*                        null*/}
+                {/*                }*/}
+                {/*            </div>*/}
+                {/*            :*/}
+                {/*            null*/}
+                {/*    }*/}
+                {/*    <div className="top-my-target">*/}
+                {/*        <div id="yandex_rtb_R-A-1591597-1" />*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         )
     }

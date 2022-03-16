@@ -295,7 +295,7 @@ code {
 }
 
 .content {
-    width: 1280px;
+    width: 990px;
     /*margin: 0 auto;*/
     /*background: #000000;*/
     margin: 0 auto;
@@ -303,7 +303,7 @@ code {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    padding-top: 50px;
+    padding: 50px 15px 0 15px;
     position: relative;
 }
 
@@ -347,7 +347,7 @@ code {
     color: var(--logo);
     transition: .1s;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 18px;
     width: max-content;
     font-weight: 800;
 }
@@ -382,6 +382,7 @@ code {
     align-items: center;
     /*font-size: 14px;*/
     box-sizing: border-box;
+    font-size: 13px;
 }
 
 .button-open-menu {
@@ -458,10 +459,11 @@ code {
 }
 
 .rectangle-head {
-    width: 1280px;
+    width: 990px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    padding: 0 15px;
 }
 
 .button-default {
@@ -477,6 +479,7 @@ code {
     align-items: center;
     /*font-size: 14px;*/
     width: max-content;
+    font-size: 13px;
 }
 
 .button-default-icon {
@@ -537,7 +540,7 @@ code {
 }
 
 .reviews-menu {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     position: fixed;
     z-index: 3;
 
@@ -566,9 +569,9 @@ code {
 .content-wall-views {
     flex-grow: 10;
     position: relative;
-    width: 775px;
+    width: 550px;
     min-height: 500px;
-    margin-left: 220px;
+    margin-left: 164px;
 }
 
 .button-select-tag {
@@ -596,8 +599,8 @@ code {
 }
 
 .menu-nav {
-    padding: 10px;
-    width: 205px;
+    padding: 10px 0 10px 10px;
+    width: 154px;
 }
 
 .menu-nav-item {
@@ -640,13 +643,21 @@ code {
     box-shadow: var(--view-shadow);
     border-radius: 5px;
     padding: 20px;
-    width: 250px;
+    width: 205px;
 
     display: flex;
     flex-wrap: wrap;
-    grid-gap: 1px;
-    gap: 1px;
+    grid-gap: 7px;
+    gap: 7px;
     /*position: fixed;*/
+    font-size: 13px;
+}
+
+.tags-flex {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 7px;
+    gap: 7px;
 }
 
 /**
@@ -1359,7 +1370,7 @@ a {
 }
 
 .auth-logo {
-    max-width: 100px;
+    max-width: 50px;
 }
 
 .online_user {
@@ -1606,6 +1617,8 @@ p {
     -webkit-hyphens: auto;
     hyphens: auto;
     /*white-space: pre;*/
+
+    font-size: 13px;
 }
 
 .value-post > p {
@@ -1909,7 +1922,7 @@ p {
 }
 
 .cover-feed {
-    max-width: 735px;
+    max-width: 510px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -2056,7 +2069,7 @@ p {
 .title-span-auth {
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 14px;
     color: var(--font-color);
 }
 
@@ -2131,7 +2144,7 @@ p {
 
 .tags-item {
     display: inline-block;
-    margin: 0 10px 10px 0;
+    /*margin: 0 10px 10px 0;*/
 }
 
 .button-select {
@@ -2451,6 +2464,7 @@ link-user {
     align-items: center;
     padding-right: 20px;
     color: var(--font-color);
+    font-size: 12px;
 }
 
 .nav-item {
@@ -2481,7 +2495,7 @@ link-user {
 }
 
 .nav-item:hover {
-    background: var(--hover);
+    background: var(--button_border);
 }
 
 .nav-item-active {
@@ -2539,14 +2553,12 @@ link-user {
 }
 
 .wrapper-vertical-nav {
-    width: 195px;
+    width: 164px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    /*background: var(--white);*/
-    margin: 10px 5px 20px 5px;
-    border-radius: 5px;
-    /*box-shadow: var(--view-shadow);*/
+    padding: 10px 0;
+    /* border-radius: 5px; */
+    border-bottom: 1px solid var(--button_border);
 }
 
 
@@ -2616,7 +2628,7 @@ link-user {
 
 .top-my-target {
     /*padding: 20px;*/
-    width: 280px;
+    width: 145px;
     margin: 10px 5px;
 }
 
@@ -2643,7 +2655,7 @@ textarea {
 .value-post {
     flex-grow: 50;
     padding: 10px;
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
     box-sizing: border-box;
     word-wrap: break-word;

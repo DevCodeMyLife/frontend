@@ -518,18 +518,23 @@ class App extends React.Component {
                                                                <Link href="/user/6">Поддержка</Link>
                                                            </div>
                                                            <div className="menu-nav-item">
-                                                               <Link href="https://t.me/devcodemylife" target="_blank">Мы
-                                                                   в Telegram</Link>
+                                                               <Link href="https://t.me/devcodemylife" target="_blank">Telegram</Link>
                                                            </div>
                                                            <div className="menu-nav-item">
                                                                <Link
                                                                    href="https://www.youtube.com/channel/UC6DGlIbofPsqhTddIzGM5RQ"
-                                                                   target="_blank">Мы на YouTube</Link>
+                                                                   target="_blank">YouTube</Link>
                                                            </div>
                                                            <div className="menu-nav-item">
                                                                <Link href="https://my.qiwi.com/Andrei-ShQU6cQ2pop"
                                                                      target="_blank">Помочь проекту</Link>
                                                            </div>
+                                                       </div>
+                                                       <div className="top-my-target">
+                                                           <div id="yandex_rtb_R-A-1591597-1"/>
+                                                       </div>
+                                                       <div className="top-my-target">
+                                                           <div id="yandex_rtb_R-A-1591597-2"/>
                                                        </div>
                                                    </div>
                                                    <NotFoundBoundary

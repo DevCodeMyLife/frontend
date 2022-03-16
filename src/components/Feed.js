@@ -373,14 +373,16 @@ class Feed extends Component {
                                            onFocus={this.handlerFocus} onBlur={this.handlerBlur}/>
                                 </div>
                                 <div className="tags-wrapper" id="tags-wrapper-default">
-                                    <div className="button-default-tag tags-item unselectable button-select-tag"
-                                         id="top"
-                                         action="top" onClick={this.handleClickTag} ref={this.popular}>
-                                        Популярные
-                                    </div>
-                                    <div className="button-default-tag tags-item unselectable" action="all"
-                                         onClick={this.handleClickTag}>
-                                        Новые
+                                    <div className="tags-flex">
+                                        <div className="button-default tags-item unselectable button-select-tag"
+                                             id="top"
+                                             action="top" onClick={this.handleClickTag} ref={this.popular}>
+                                            Популярные
+                                        </div>
+                                        <div className="button-default tags-item unselectable" action="all"
+                                             onClick={this.handleClickTag}>
+                                            Новые
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -526,7 +528,7 @@ class Feed extends Component {
                         </div>
                     </div>
                     <div className="tags-view">
-                        <div className="title-box">Теги</div>
+                        {/*<div className="title-box">Теги</div>*/}
                         <div className="tags-box" id="tags-wrapper-all-tags">
                             {
                                 tags.length > 0 ? (
@@ -541,12 +543,6 @@ class Feed extends Component {
                                 ) : null
 
                             }
-                        </div>
-                        <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-1" />
-                        </div>
-                        <div className="top-my-target">
-                            <div id="yandex_rtb_R-A-1591597-2" />
                         </div>
                     </div>
                 </div>
