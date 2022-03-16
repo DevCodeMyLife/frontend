@@ -597,8 +597,8 @@ code {
 }
 
 .menu-nav {
-    padding: 10px 0;
-    width: 164px;
+    padding: 10px 0 10px 10px;
+    width: 154px;
 }
 
 .menu-nav-item {
