@@ -583,7 +583,6 @@ class FeedOnePage extends Component {
                                     </div>
                                 </div>
                     }
-                    <div id="id-C-A-1591597-3" />
                 </div>
                 {/*<div className="tags-view">*/}
                 {/*    {*/}
@@ -667,6 +666,7 @@ class FeedOnePage extends Component {
                 {/*        <div id="yandex_rtb_R-A-1591597-1" />*/}
                 {/*    </div>*/}
                 {/*</div>*/}
+                <div id="id-C-A-1591597-3" />
             </div>
         )
     }
