@@ -85,8 +85,8 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
 
     <!-- Mail.RTB   -->
-<!--    <script async src="https://ad.mail.ru/static/ads-async.js"></script>-->
-<!--    <script>(MRGtag = window.MRGtag || []).push({})</script>-->
+    <!--    <script async src="https://ad.mail.ru/static/ads-async.js"></script>-->
+    <!--    <script>(MRGtag = window.MRGtag || []).push({})</script>-->
 
     <!-- Yandex.RTB -->
     <script>window.yaContextCb = window.yaContextCb || []</script>
@@ -105,6 +105,14 @@
             Ya.Context.AdvManager.render({
                 renderTo: 'yandex_rtb_R-A-1591597-2',
                 blockId: 'R-A-1591597-2'
+            })
+        })</script>
+
+    <script>
+        window.yaContextCb.push(() => {
+            Ya.Context.AdvManager.renderWidget({
+                renderTo: 'id-C-A-1591597-3',
+                blockId: 'C-A-1591597-3'
             })
         })</script>
 
