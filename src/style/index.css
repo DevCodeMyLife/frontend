@@ -2494,9 +2494,9 @@ link-user {
     opacity: 1;
 }
 
-.nav-item:hover {
-    background: var(--button_border);
-}
+/*.nav-item:hover {*/
+/*    background: var(--button_border);*/
+/*}*/
 
 .nav-item-active {
     background: var(--hover);
