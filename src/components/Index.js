@@ -111,8 +111,12 @@ class App extends React.Component {
                         type: "ACTION_CHECK_AUTH", value: {
                             user: {
                                 isAuth: true,
-                                data: res.data,
-                                token: res.token,
+                                data: res?.data[0],
+                                feeds: res?.feed,
+                                notificationCount: res?.notification_count,
+                                messagesCount: res?.count_message,
+                                notifications: res?.notification,
+                                token: res?.token,
                                 error: null
                             },
                             isLoaded: true,
