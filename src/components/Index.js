@@ -102,7 +102,7 @@ class App extends React.Component {
 
     checkAuth() {
         fetch(process.env.REACT_APP_AUTH, {
-            method: "POST", body: JSON.stringify({})
+            method: "GET"
         })
             .then(response => response.json())
             .then(res => {
@@ -111,26 +111,12 @@ class App extends React.Component {
                         type: "ACTION_CHECK_AUTH", value: {
                             user: {
                                 isAuth: true,
-                                data: res?.data[0],
-                                feeds: res?.feed,
-                                notificationCount: res?.notification_count,
-                                messagesCount: res?.count_message,
-                                notifications: res?.notification,
-                                token: res?.token,
+                                data: res.data,
+                                token: res.token,
                                 error: null
                             },
                             isLoaded: true,
                             error: false
-                        }
-                    })
-
-                    store.dispatch({
-                        type: "ACTION_SET_WEBRTC", value: {
-                            pc: new RTCPeerConnection({
-                                iceServers: [{
-                                    urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-                                },]
-                            })
                         }
                     })
 

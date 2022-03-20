@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import github from '../icon/logo_github.png'
+import gitlab from '../icon/gitlab.png'
+
 
 class Main extends Component {
     constructor(props) {
@@ -110,10 +112,6 @@ class Main extends Component {
                     </div>
                     <div className="view-status">
                         <div className="wrapper-status">
-                            <div className="auth-box-title">
-                                <h2 className="title-span-auth">Вход через сторонние сервисы</h2>
-                                {/*<div className="title-span-auth-small">Пройдите легкую регистрацию</div>*/}
-                            </div>
                             <div className="auths-list">
                                 <div className="button-auth github"
                                      onClick={
@@ -124,15 +122,15 @@ class Main extends Component {
                                 >
                                     <img className="auth-logo" src={github} alt="github"/>
                                 </div>
-                                {/*<div className="button-auth gitlab"*/}
-                                {/*     onClick={*/}
-                                {/*         () => {*/}
-                                {/*             window.location.href = "https://gitlab.com/oauth/authorize?client_id=f60720800a4eaafcb6edf0a1df659b19e081f4069ca6fdf741a5f445049ac40a&redirect_uri=https://devcodemylife.tech/api/oauth/gitlab/redirect&response_type=code&scope=api+read_user&state=fca1dfacc51f49c2b7f9246264c46d40&code_challenge=kUta11xlQkPRg4PmL4XbW1sbohklCzg5UxLl9ymMxyU&code_challenge_method=S256"*/}
-                                {/*         }*/}
-                                {/*     }*/}
-                                {/*>*/}
-                                {/*    <img className="auth-logo" src={gitlab} alt="gitlab" />*/}
-                                {/*</div>*/}
+                                <div className="button-auth gitlab"
+                                     onClick={
+                                         () => {
+                                             window.location.href = "https://gitlab.com/oauth/authorize?client_id=f60720800a4eaafcb6edf0a1df659b19e081f4069ca6fdf741a5f445049ac40a&redirect_uri=https://devcodemylife.tech/api/oauth/gitlab/redirect&response_type=code&scope=api+read_user&state=fca1dfacc51f49c2b7f9246264c46d40&code_challenge=kUta11xlQkPRg4PmL4XbW1sbohklCzg5UxLl9ymMxyU&code_challenge_method=S256"
+                                         }
+                                     }
+                                >
+                                    <img className="auth-logo" src={gitlab} alt="gitlab" />
+                                </div>
                             </div>
                         </div>
                     </div>

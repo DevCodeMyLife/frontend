@@ -73,6 +73,7 @@
     font-size: 13px;
     margin: 0;
     resize: none;
+    color: var(--font-color);
 }
 
 .component-new-feed__button {

@@ -1341,7 +1341,7 @@ a {
 }
 
 .auths-list {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     display: flex;
 }
 
