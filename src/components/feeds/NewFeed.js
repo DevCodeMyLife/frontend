@@ -23,7 +23,7 @@ const colourStyles = {
     control: (styles) => ({
         ...styles,
         // none of react-select's styles are passed to <Control />
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-grey)',
         border: 'none',
         boxShadow: 'none',
         fontFamily: 'system-ui',
@@ -44,34 +44,6 @@ const colourStyles = {
         ...styles,
         color: '#a9a9a9'
     }),
-
-    // option: (styles, {data, isDisabled, isFocused, isSelected}) => {
-    //     const color = chroma(data.color);
-    //     return {
-    //         ...styles,
-    //         // backgroundColor: isDisabled
-    //         //     ? null
-    //         //     : isSelected
-    //         //         ? data.color
-    //         //         : isFocused
-    //         //             ? color.alpha(0.1).css()
-    //         //             : null,
-    //         color: isDisabled
-    //             ? "#ccc"
-    //             : isSelected
-    //                 ? chroma.contrast(color, "white") > 2
-    //                     ? "white"
-    //                     : "black"
-    //                 : data.color,
-    //         cursor: isDisabled ? "not-allowed" : "default",
-    //
-    //         ":active": {
-    //             ...styles[":active"],
-    //             backgroundColor:
-    //                 !isDisabled && (isSelected ? data.color : color.alpha(0.3).css())
-    //         }
-    //     };
-    // },
     multiValue: (styles, {data}) => {
         const color = chroma(data.color);
         return {
@@ -81,14 +53,14 @@ const colourStyles = {
     },
     multiValueLabel: (styles, {data}) => ({
         ...styles,
-        color: data.color
+        color: 'var(--font-color)'
     }),
     multiValueRemove: (styles, {data}) => ({
         ...styles,
-        color: data.color,
+        color: 'var(--font-color)',
         ":hover": {
             backgroundColor: data.color,
-            color: "white"
+            color: 'var(--font-color)'
         }
     })
 
