@@ -102,7 +102,7 @@ class App extends React.Component {
 
     checkAuth() {
         fetch(process.env.REACT_APP_AUTH, {
-            method: "GET"
+            method: "POST"
         })
             .then(response => response.json())
             .then(res => {
