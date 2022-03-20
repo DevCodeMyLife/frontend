@@ -51,6 +51,7 @@ class Messages extends Component {
         this.state.store.subscribe(() => {
             this.setState(this.state.store.getState())
             this.updateState()
+            this.changerPage()
         })
 
         this.pc1 = null
@@ -339,6 +340,8 @@ class Messages extends Component {
         let path = `/api/message/${cid}`
 
         window.history.pushState({urlPath: `/messages?cid=${cid}`}, "", `/messages?cid=${cid}`)
+
+        if (store?.centrifuge.object === null) {return}
 
         let cent_channel_ = store?.centrifuge.object.subscribe(cid, async function (message) {
             let data = _this.state.messages
