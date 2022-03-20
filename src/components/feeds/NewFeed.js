@@ -425,6 +425,7 @@ class NewFeed extends Component {
                                             notifications: res?.notification,
                                             token: res?.token
                                         },
+                                        isLoaded: true,
                                     }
                                 })
                                 this.cancel()
@@ -509,6 +510,7 @@ class NewFeed extends Component {
                     notifications: res?.notification,
                     token: res?.token
                 },
+                isLoaded: true
             }
         })
 
@@ -574,6 +576,7 @@ class NewFeed extends Component {
                                     notifications: res?.notification,
                                     token: res?.token
                                 },
+                                isLoaded: true
                             }
                         })
                         this.cancel()
@@ -625,6 +628,7 @@ class NewFeed extends Component {
                                     notifications: res?.notification,
                                     token: res?.token
                                 },
+                                isLoaded: true,
                             }
                         })
                         this.cancel()
@@ -740,7 +744,7 @@ class NewFeed extends Component {
                                             <div className="button-default component-new-feed__margin-left"
                                                  onClick={() => this.setState({
                                                      videoUpload: null
-                                                 })}>удалить
+                                                 })}>Удалить
                                             </div>
                                         </div>
                                         <video style={{width: "100%", borderRadius: "5px"}} controls={true}>
@@ -807,10 +811,6 @@ class NewFeed extends Component {
                         </div>
                         <div className="component-new-feed__wrapper-article-buttons component-new-feed__flex-just-end">
                             <div className="component-new-feed__action-buttons">
-                                {/*{*/}
-                                {/*     ?*/}
-
-                                {/*}*/}
                                 <div className="button-default component-new-feed__margin-left"
                                      onClick={this.onClickPreview}>Превью
                                 </div>
