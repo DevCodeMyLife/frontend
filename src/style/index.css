@@ -83,6 +83,13 @@
     box-sizing: border-box;
 }
 
+.feed-tag-item {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 5px;
+}
+
 .personal_data_accept-block-wrapper {
     flex-direction: row;
 }
