@@ -87,7 +87,8 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    padding: 5px;
+    padding: 8px;
+    font-size: 12px;
 }
 
 .personal_data_accept-block-wrapper {
